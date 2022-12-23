@@ -29,7 +29,7 @@ image: https://images.unsplash.com/photo-1580265862291-4251b8c7e836?ixlib=rb-1.2
 
 I opened the repository in the browser and GitHub and was provided with a warning that said
 
-[![protect your branch](/assets/uploads/2022/07/protectbranch.png)](/assets/uploads/2022/07/protectbranch.png)
+[![protect your branch](assets/uploads/2022/07/protectbranch.png)](assets/uploads/2022/07/protectbranch.png)
 
 Clicking on the protect this branch button gave the reasoning.
 
@@ -38,7 +38,7 @@ Branch protection rules define whether collaborators can delete or force push to
 
 So I changed the settings so that a Pull Request is required and needs to be reviewed.
 
-[![all protected](/assets/uploads/2022/07/branchprotected.png)](/assets/uploads/2022/07/branchprotected.png)
+[![all protected](assets/uploads/2022/07/branchprotected.png)](assets/uploads/2022/07/branchprotected.png)
 
 # Breaks the workflow
 
@@ -62,7 +62,7 @@ Then it failed :-(.
 The error message could be seen in the codespaces with the extension [cschleiden.vscode-github-actions](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions)  
 
 
-[![no can do](/assets/uploads/2022/07/pushdenied.png)](/assets/uploads/2022/07/pushdenied.png)
+[![no can do](assets/uploads/2022/07/pushdenied.png)](assets/uploads/2022/07/pushdenied.png)
 
 This is the error message
 
@@ -125,7 +125,7 @@ I remembered to do for both workflows!!
 
 I then created a PR to test it and this time it was able to successfully push changes to the main branch
 
-[![its pushed](/assets/uploads/2022/07/pushcompleted.png)](/assets/uploads/2022/07/pushcompleted.png)
+[![its pushed](assets/uploads/2022/07/pushcompleted.png)](assets/uploads/2022/07/pushcompleted.png)
 
 and you can see [the commit here](https://github.com/dataplat/DataSpeakers/commit/80d585ff1de15db22744ad5e7295294260b8fc98) or [the PR](https://github.com/dataplat/DataSpeakers/commit/7046d51de7b1d9e9b9f188879a4981a76f35c3c4) if you wish.
 
@@ -135,7 +135,7 @@ This will work correctly for a PR and it will work for the initial workflow that
 
 It ***will not work*** for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. [In that scenario we get this error](https://github.com/dataplat/DataSpeakers/actions/runs/2659979920)
 
-[![Greg Broke it](/assets/uploads/2022/07/gregbrokeit.png)](/assets/uploads/2022/07/gregbrokeit.png)
+[![Greg Broke it](assets/uploads/2022/07/gregbrokeit.png)](assets/uploads/2022/07/gregbrokeit.png)
 
 > Input required and not supplied: token
 

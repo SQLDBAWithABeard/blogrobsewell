@@ -43,7 +43,7 @@ To be able to use these (and any PowerShell) commands, your first step should al
 
 Get-Help Send-DbcMailMessage
 
-[![](/assets/uploads/2018/02/01a-get-help.png)](/assets/uploads/2018/02/01a-get-help.png)
+[![](assets/uploads/2018/02/01a-get-help.png)](assets/uploads/2018/02/01a-get-help.png)
 
 80 Checks
 ---------
@@ -156,7 +156,7 @@ Get-DbcConfig
 
 which will show you the name of the config, the value it is currently set and the description
 
-[![](/assets/uploads/2018/02/01-configs.png)](/assets/uploads/2018/02/01-configs.png)
+[![](assets/uploads/2018/02/01-configs.png)](assets/uploads/2018/02/01-configs.png)
 
 You can see all of the configs and their descriptions here
  **Name** | **Description** 
@@ -277,13 +277,13 @@ You can quickly run a single check by calling Invoke-DbcCheck.
 
 Invoke-DbcCheck -SqlInstance localhost -Check FailedJob
 
-[![](/assets/uploads/2018/02/02-failed-jobs.png)](/assets/uploads/2018/02/02-failed-jobs.png)
+[![](assets/uploads/2018/02/02-failed-jobs.png)](assets/uploads/2018/02/02-failed-jobs.png)
 
 Excellent, my agent jobs have not failed 🙂
 
 Invoke-DbcCheck -SqlInstance localhost -Check LastGoodCheckDb
 
-[![](/assets/uploads/2018/02/03-dbcc-check.png)](/assets/uploads/2018/02/03-dbcc-check.png)
+[![](assets/uploads/2018/02/03-dbcc-check.png)](assets/uploads/2018/02/03-dbcc-check.png)
 
 Thats good, all of my databases have had a successful DBCC CHECKDB within the last 7 days.
 
@@ -294,7 +294,7 @@ To save me from having to specify the instance I want to run my tests against I 
 
 Set-DbcConfig -Name app.sqlinstance -Value localhost, 'localhost\\PROD1'
 
-[![](/assets/uploads/2018/02/04-setting-instances-config.png)](/assets/uploads/2018/02/04-setting-instances-config.png)
+[![](assets/uploads/2018/02/04-setting-instances-config.png)](assets/uploads/2018/02/04-setting-instances-config.png)
 
 Then whenever I call Invoke-DbcCheck it will run against those instances for the SQL checks
 
@@ -304,7 +304,7 @@ Invoke-DbcCheck -Check LastDiffBackup
 
 I can see that I dont have a diff backup for the databases on both instances. Better stop writing this and deal with that !!
 
-[![](/assets/uploads/2018/02/05-last-backup.png)](/assets/uploads/2018/02/05-last-backup.png)
+[![](assets/uploads/2018/02/05-last-backup.png)](assets/uploads/2018/02/05-last-backup.png)
 
 The configurations are stored in the registry but you can export them and then import them for re-use easily. I have written another blog post about that.
 
@@ -315,7 +315,7 @@ Getting the results of the tests on the screen is cool but if you are running a 
 
 dbachecks supports the Pester Show parameter enabling you to filter the output of the results to the screen. The available values are Summary, None, Fails, Inconclusive, Passed, Pending and Skipped
 
-[![](/assets/uploads/2018/02/06-show.png)](/assets/uploads/2018/02/06-show.png)
+[![](assets/uploads/2018/02/06-show.png)](assets/uploads/2018/02/06-show.png)
 
 in my opinion by far the most useful one is Fails as this will show you only the failed tests with the context to enable you to see which tests have failed
 
@@ -323,7 +323,7 @@ Invoke-DbcCheck -Check Agent -Show Fails
 
 If we check all of the checks tagged as Agent we can easily see that most passed but The Job That Fails (surprisingly) failed. All of the other tests that were run for the agent service, operators, failsafe operator, database mail and all other agent jobs all passed in the example below
 
-[![](/assets/uploads/2018/02/07-Jobs-that-filed.png)](/assets/uploads/2018/02/07-Jobs-that-filed.png)
+[![](assets/uploads/2018/02/07-Jobs-that-filed.png)](assets/uploads/2018/02/07-Jobs-that-filed.png)
 
 Test Results are for other People as well
 -----------------------------------------
@@ -344,7 +344,7 @@ Invoke-DbcCheck -AllChecks -Show Fails -PassThru |Update-DbcPowerBiDataSource -E
 
 it will run all of the dbachecks using your configuration for your Development environment, output only the failed tests to the screen and save the results in your windows\\temp\\dbachecks folder with a suffix of Development and you would end up with two files in the folder
 
-[![](/assets/uploads/2018/02/08-test-results.png)](/assets/uploads/2018/02/08-test-results.png)
+[![](assets/uploads/2018/02/08-test-results.png)](assets/uploads/2018/02/08-test-results.png)
 
 You can then simply run
 
@@ -352,7 +352,7 @@ Start-DbcPowerBi
 
 and as long as you have the (free) Powerbi Desktop then you will see this. You will need to refresh the data to get your test results
 
-[![](/assets/uploads/2018/02/09-PowerBi.png)](/assets/uploads/2018/02/09-PowerBi.png)
+[![](assets/uploads/2018/02/09-PowerBi.png)](assets/uploads/2018/02/09-PowerBi.png)
 
 Of course it is Powerbi so you can publish this report. Here it is so that you can click around and see what it looks like
 

@@ -11,7 +11,7 @@ tags:
 image: assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg
 
 ---
-![farrel-nobel-97504-unsplash](/assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg)
+![farrel-nobel-97504-unsplash](assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg)
 Photo by [Farrel Nobel](https://unsplash.com/photos/G9neENK1Z5I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/walk-around-wall?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 Welcome to another edition of T-SQL Tuesday!

@@ -185,7 +185,7 @@ $type="ComputerName"
 ```
 and now `Get-DbcCheck` is returning the right results and the checks are a little faster
 
-[![](/assets/uploads/2018/08/server.png)](/assets/uploads/2018/08/server.png)
+[![](assets/uploads/2018/08/server.png)](assets/uploads/2018/08/server.png)
 
 You can find [dbachecks on the PowerShell Gallery](http://powershellgallery.com/packages/dbachecks) or install it using
 

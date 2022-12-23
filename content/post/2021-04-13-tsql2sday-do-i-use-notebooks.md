@@ -57,5 +57,5 @@ I am thoroughly looking forward to seeing what other people do with notebooks. I
 
 # All this and
 
-[![nodatascientist](/assets/uploads/2021/nodatascientist.png)](https://www.advancinganalytics.co.uk/)  
+[![nodatascientist](assets/uploads/2021/nodatascientist.png)](https://www.advancinganalytics.co.uk/)  
 Thank you - [https://www.advancinganalytics.co.uk/](https://www.advancinganalytics.co.uk/)

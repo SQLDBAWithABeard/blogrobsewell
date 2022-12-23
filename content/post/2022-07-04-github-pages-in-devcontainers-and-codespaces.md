@@ -25,7 +25,7 @@ image: https://images.unsplash.com/photo-1494961104209-3c223057bd26?ixlib=rb-1.2
 
 It started with a message from Mikey Bronowski ( [Blog](https://www.bronowski.it/blog/)  [Twitter](https://twitter.com/@MikeyBronowski) )  
 
-![message from Mikey](/assets/uploads/2022/07/mikey-dm.png)
+![message from Mikey](assets/uploads/2022/07/mikey-dm.png)
 
 Now this means that you get to see my awesome [404 page ](https://blog.robsewell.com/justsomethingsad) which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.  
 
@@ -47,13 +47,13 @@ It's super super easy. Surprisingly easy.
 
 First I went to the repository for my website and opened a codespace by clicking on the green code button and creating a codespace
 
-![the create codespace button](/assets/uploads/2022/07/create-codespace.png)
+![the create codespace button](assets/uploads/2022/07/create-codespace.png)
 
 ## Add the development container configuration
 
 Using `CTRL SHIFT + P` to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files
 
-![Add the configuration](/assets/uploads/2022/07/add-config.png)
+![Add the configuration](assets/uploads/2022/07/add-config.png)
 
 and follow the prompts
 
@@ -83,13 +83,13 @@ to the end of the post-create.sh file. This will automatically start the website
 
 You can watch the logs of the regeneration with View Creation Log from the command palette - Use `CTRL SHIFT + P` to open it. Then you can see the log output in real-time.
 
-![look at the logs](/assets/uploads/2022/07/view-creation-log.png)
+![look at the logs](assets/uploads/2022/07/view-creation-log.png)
 
 ## Open the website "locally"
 
 To open the website from inside the devcontainers the ports are exposed via the configuration. In the browser in codepaces there is a port tab and a button to press to open the website and show the updates that you have written.
 
-![the ports get forwarded](/assets/uploads/2022/07/port-forwards.png)
+![the ports get forwarded](assets/uploads/2022/07/port-forwards.png)
 
 If you click that you get a live view of the website so that you can validate that it works.
 
@@ -99,7 +99,7 @@ This showed it being created in codespaces in the browser, you can have the same
 
 The rest is pretty much the same except the url!
 
-![running in vs code](/assets/uploads/2022/07/vscode.png)
+![running in vs code](assets/uploads/2022/07/vscode.png)
 
 # Rather Have Video ?
 

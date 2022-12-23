@@ -41,7 +41,7 @@ Once you have installed dbachecks you will need to set some configuration so tha
 
 Get-DbcConfig | Out-GridView
 
-[![get-config.png](/assets/uploads/2018/04/get-config.png)](/assets/uploads/2018/04/get-config.png)
+[![get-config.png](assets/uploads/2018/04/get-config.png)](assets/uploads/2018/04/get-config.png)
 
 You can set the values with the Set-DbcConfig command. It has intellisense to make things easier 🙂 To set the values for the HADR tests
 
@@ -62,13 +62,13 @@ NOTE – You can find all the configuration items that can skip tests by running
 
 Get-DbcConfig -Name skip*
 
-[![skips.png](/assets/uploads/2018/04/skips.png)](/assets/uploads/2018/04/skips.png)
+[![skips.png](assets/uploads/2018/04/skips.png)](assets/uploads/2018/04/skips.png)
 
 Now we have set the configuration (For the HADR checks – There are many more configurations for other checks that you can set) you can run the checks with
 
 Invoke-DbcCheck -Check HADR
 
-[![check results.png](/assets/uploads/2018/04/check-results.png)](/assets/uploads/2018/04/check-results.png)
+[![check results.png](assets/uploads/2018/04/check-results.png)](assets/uploads/2018/04/check-results.png)
 
 This runs the following checks
 
@@ -100,11 +100,11 @@ We can export the results and display them with PowerBi. Note we need to add -Pa
 Invoke-DbcCheck -Check HADR -Show Fails -PassThru | Update-DbcPowerBiDataSource -Environment HADR-Test
 Start-DbcPowerBi
 
-[![results.png](/assets/uploads/2018/04/results.png)](/assets/uploads/2018/04/results.png)
+[![results.png](assets/uploads/2018/04/results.png)](assets/uploads/2018/04/results.png)
 
 This will create a file at C:\\Windows\\Temp\\dbachecks and open the PowerBi report. You will need to refresh the data in the report and then you will see
 
-[![dbachecks.png](/assets/uploads/2018/04/dbachecks.png)](/assets/uploads/2018/04/dbachecks.png)
+[![dbachecks.png](assets/uploads/2018/04/dbachecks.png)](assets/uploads/2018/04/dbachecks.png)
 
 Excellent, everything passed 🙂
 
@@ -129,7 +129,7 @@ Invoke-DbcCheck-AllChecks -OutputFile PesterTestResultsdbachecks.xml -OutputForm
 
 in my build step and then use the publish test results task and VSTS does the rest 🙂
 
-[![VSTS results.png](/assets/uploads/2018/04/VSTS-results.png)](/assets/uploads/2018/04/VSTS-results.png)
+[![VSTS results.png](assets/uploads/2018/04/VSTS-results.png)](assets/uploads/2018/04/VSTS-results.png)
 
 
 

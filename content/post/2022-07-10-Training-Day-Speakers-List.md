@@ -81,7 +81,7 @@ Click on a speaker and you will be directed to their Sessionize profile page.
 
 Here is a quick look at the demo page after I had some test data in there!
 
-![PreConSpeakers](/assets/uploads/2022/07/callfordataprecons.png)
+![PreConSpeakers](assets/uploads/2022/07/callfordataprecons.png)
 
 # What else can I do?
 

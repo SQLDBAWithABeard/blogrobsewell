@@ -35,15 +35,15 @@ If you are using [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=DP
 
 You can press `CTRL+SHIFT+P` and search for screencast
 
-[![screencast](/assets/uploads/2022/07/screencast.png)](/assets/uploads/2022/07/screencast.png)
+[![screencast](assets/uploads/2022/07/screencast.png)](assets/uploads/2022/07/screencast.png)
 
 if you toggle this on then the keystrokes are displayed on the screen as you type
 
-[![displaying the keystrokes](/assets/uploads/2022/07/display.png)](/assets/uploads/2022/07/display.png)
+[![displaying the keystrokes](assets/uploads/2022/07/display.png)](assets/uploads/2022/07/display.png)
 
 If you `CTRL+,` or click on the cog and then settings, you can search for screencast and there are a number of options available. In the screenshot below you can see that the mouse click is highlighted as well.
 
-[![screencast settings with mouse](/assets/uploads/2022/07/withmouse.png)](/assets/uploads/2022/07/withmouse.png)
+[![screencast settings with mouse](assets/uploads/2022/07/withmouse.png)](assets/uploads/2022/07/withmouse.png)
 
 ## Something else
 
@@ -51,13 +51,13 @@ If you are wanting to demonstrate in a different application or when switching a
 
 Download the latest release and then run setup.exe and there will be a beautiful purple icon in the taskbar which if you click it will open the settings screen.
 
-[![carnac settings](/assets/uploads/2022/07/carnacsettings.png)](/assets/uploads/2022/07/carnacsettings.png)
+[![carnac settings](assets/uploads/2022/07/carnacsettings.png)](assets/uploads/2022/07/carnacsettings.png)
 
 You can click in any of the squares to decide where you would like the key presses to be displayed and as you can see it works with multiple monitors (although I had some issues with that). You can use the sliders to offset in any direction from the box as well and change the appearance.
 
 You can even change the colour of the text as well.
 
-[![change colour](/assets/uploads/2022/07/carnacdisplays.png)](/assets/uploads/2022/07/carnacdisplays.png)
+[![change colour](assets/uploads/2022/07/carnacdisplays.png)](assets/uploads/2022/07/carnacdisplays.png)
 
 To leave the application simple right click on the icon in the task bar and click Exit.
 

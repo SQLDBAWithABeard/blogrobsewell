@@ -55,7 +55,7 @@ I also added two more for this repository as we are using GitHub Actions
 - [me-dutour-mathieu.vscode-github-actions](https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions) - for intellisense for GitHub Action files
 - [cschleiden.vscode-github-action](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions) - to be able to start/stop/monitor GitHub Actions from the workspace
 
-![the view in codespaces of the GitHub Actions](/assets/uploads/2022/07/githubactionsview.png)  
+![the view in codespaces of the GitHub Actions](assets/uploads/2022/07/githubactionsview.png)  
 
 
 # Gather the Information
@@ -79,7 +79,7 @@ body:
 
 There are a number of `-type` entries. [You can find the definitions in the docs](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema) or you can use the intellisense from the extensions. The types are checkboxes, dropdown, input, markdown, textarea
 
-![The intellisense showing the type options](/assets/uploads/2022/07/intellisense-ghactions.png)
+![The intellisense showing the type options](assets/uploads/2022/07/intellisense-ghactions.png)
 
 I used the intellisense to build a quick simple form to gather 5 pieces of information 
 
@@ -311,10 +311,10 @@ closeIssue:
 
 You can [take a look at the repo](https://github.com/dataplat/DataSpeakers) there are a [number of issues](https://github.com/dataplat/DataSpeakers/issues?q=is%3Aissue+is%3Aclosed) like [this one from Monica Rathbun](https://github.com/dataplat/DataSpeakers/issues/36) ([Twitter](https://twitter.com/SQLEspresso) - [Blog](https://sqlespresso.com/))
 
-[![Monicas Image](/assets/uploads/2022/07/monissue.png)](/assets/uploads/2022/07/monissue.png)
+[![Monicas Image](assets/uploads/2022/07/monissue.png)](assets/uploads/2022/07/monissue.png)
 
 you can see the workflows [running here](https://github.com/dataplat/DataSpeakers/actions)
 
-[![workflow run](/assets/uploads/2022/07/workflowrun.png)](/assets/uploads/2022/07/workflowrun.png)
+[![workflow run](assets/uploads/2022/07/workflowrun.png)](assets/uploads/2022/07/workflowrun.png)
 
 Happy Automating!

@@ -90,7 +90,7 @@ Import-DbcConfig -Path Git:\\Production.Json
 Invoke-DbcCheck
 ```
 
-[![01 - Invoke-DbcCheck](/assets/uploads/2018/05/01-Invoke-DbcCheck.png)](/assets/uploads/2018/05/01-Invoke-DbcCheck.png)
+[![01 - Invoke-DbcCheck](assets/uploads/2018/05/01-Invoke-DbcCheck.png)](assets/uploads/2018/05/01-Invoke-DbcCheck.png)
 
 I would use one of the Show parameter values here if I was running it at the command line, probably fails to make reading the information easier
 
@@ -108,11 +108,11 @@ $Testresults.TestResult | Write-DbaDataTable -SqlInstance $sql0 -Database tempdb
 ```
 and I get two tables one for the summary
 
-[![02 - summary](/assets/uploads/2018/05/02-summary.png)](/assets/uploads/2018/05/02-summary.png)
+[![02 - summary](assets/uploads/2018/05/02-summary.png)](assets/uploads/2018/05/02-summary.png)
 
 and one for the details
 
-[![03 - detail](/assets/uploads/2018/05/03-detail.png)](/assets/uploads/2018/05/03-detail.png)
+[![03 - detail](assets/uploads/2018/05/03-detail.png)](assets/uploads/2018/05/03-detail.png)
 
 This works absolutely fine and I could continue to add test results in this fashion but it has no date property so it is not so useful for reporting.
 
@@ -263,7 +263,7 @@ Then I can use `Write-DbaDatatable` with a couple of extra parameters, `FireTrig
 $Testresults | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_summary_stage -FireTriggers -Truncate -Confirm:$False
 $Testresults.TestResult | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_detail_stage -FireTriggers -Truncate -Confirm:$False
 ```
-[![detail with stage](/assets/uploads/2018/05/detail-with-stage.png)](/assets/uploads/2018/05/detail-with-stage.png)
+[![detail with stage](assets/uploads/2018/05/detail-with-stage.png)](assets/uploads/2018/05/detail-with-stage.png)
 
 Which means that I can now query some of this data and also create PowerBi reports for it.
 
@@ -297,21 +297,21 @@ Click Data Source Settings
 Click Change Source  
 Change the Instance and Database names
 
-[![09 - PowerBi](/assets/uploads/2018/05/09-PowerBi.png)](/assets/uploads/2018/05/09-PowerBi.png)
+[![09 - PowerBi](assets/uploads/2018/05/09-PowerBi.png)](assets/uploads/2018/05/09-PowerBi.png)
 
 Then have an interactive report like this. Feel free to click around and see how it works. Use the arrows at the bottom right to go full-screen. NOTE – it filters by “today” so if I haven’t run the check and the import then click on one of the groups under “Today’s Checks by Group”
 
 This enables me to filter the results and see what has happened in the past so I can filter by one instance
 
-[![05 - filter by instance](/assets/uploads/2018/05/05-filter-by-instance.png)](/assets/uploads/2018/05/05-filter-by-instance.png)
+[![05 - filter by instance](assets/uploads/2018/05/05-filter-by-instance.png)](assets/uploads/2018/05/05-filter-by-instance.png)
 
 or I can filter by a group of tests
 
-[![07 - filter by instance](/assets/uploads/2018/05/07-filter-by-instance.png)](/assets/uploads/2018/05/07-filter-by-instance.png)
+[![07 - filter by instance](assets/uploads/2018/05/07-filter-by-instance.png)](assets/uploads/2018/05/07-filter-by-instance.png)
 
 or even by a group of tests for an instance
 
-[![08 - filter by instance and insance](/assets/uploads/2018/05/08-filter-by-instance-and-insance.png)](/assets/uploads/2018/05/08-filter-by-instance-and-insance.png)
+[![08 - filter by instance and insance](assets/uploads/2018/05/08-filter-by-instance-and-insance.png)](assets/uploads/2018/05/08-filter-by-instance-and-insance.png)
 
 Hopefully, this will give you some ideas of what you can do with your dbachecks results. [You can find all of the code and the PowerBi in my GitHub](https://github.com/SQLDBAWithABeard/dbachecks-expanded)
 

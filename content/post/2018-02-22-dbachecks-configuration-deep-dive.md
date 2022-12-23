@@ -31,7 +31,7 @@ There are 108 configuration items at present. You can see the current configurat
 Get-DbcConfig
 
 which will show you the name of the config, the value it is currently set and the description
-![](/assets/uploads/2018/02/01-configs.png)
+![](assets/uploads/2018/02/01-configs.png)
 
 You can see all of the configs and their descriptions here  
 
@@ -151,7 +151,7 @@ So there are a lot of configurations that you can use. A lot are already set by 
 
 The configurations are stored in the registry at HKCU:\Software\Microsoft\WindowsPowerShell\PSFramework\
 
-![](/assets/uploads/2018/02/01-registry.png)
+![](assets/uploads/2018/02/01-registry.png)
 
 First Configurations
 --------------------
@@ -166,17 +166,17 @@ You can get the value of the configuration item using
 
     Get-DbcConfigValue -Name app.sqlinstance
 
-![](/assets/uploads/2018/02/02-config.png)
+![](assets/uploads/2018/02/02-config.png)
 
 as you can see in the image, nothing is returned so we have no instances configured at present. We have added tab completion to the name parameter so that you can easily find the right one  
 
-![](/assets/uploads/2018/02/03-autocomplete.png)
+![](assets/uploads/2018/02/03-autocomplete.png)
 
 If you want to look at more information about the configuration item you can use
 
     Get-DbcConfig -Name app.sqlinstance
 
-![](/assets/uploads/2018/02/04-config.png)
+![](assets/uploads/2018/02/04-config.png)
 
 which shows you the name, current value and the description
 
@@ -186,7 +186,7 @@ So lets set our first configuration for our SQL instance to localhost. I have in
 
 This configuration will be used for any SQL based checks but not for any windows based ones like Services, PowerPlan, SPN, DiskSpace, Cluster so lets set the app.computername configuration as well
 
-![](/assets/uploads/2018/02/05-windows-config.png)
+![](assets/uploads/2018/02/05-windows-config.png)
 
 This means that when we run invoke-DbcCheck with AllChecks or by specifying a check, it will run against the local machine and default instance unless we specify a sqlinstance when calling Invoke-DbcCheck. So the code below will not use the configuration for app.sqlinstance.
 
@@ -267,7 +267,7 @@ Get-Dbcconfig | ogv
 ```
 When I run this I get
 
-![](/assets/uploads/2018/02/08-configuration.png)
+![](assets/uploads/2018/02/08-configuration.png)
 
 I can then export this to disk (to store in source control) using
 
@@ -275,13 +275,13 @@ I can then export this to disk (to store in source control) using
 
 and I have a configuration file
 
-![](/assets/uploads/2018/02/09-configuration-json.png)
+![](assets/uploads/2018/02/09-configuration-json.png)
 
 which I can use any time to set the configuration for dbachecks using the Import-DbcConfig command (But this doesn’t work in VS Codes integrated terminal – which occasionally does odd things, this appears to be one of them)
 
     Import-DbcConfig -Path C:\Users\dbachecks\Desktop\production_config.json
 
-![](/assets/uploads/2018/02/10-import-configuration.png)
+![](assets/uploads/2018/02/10-import-configuration.png)
 
 So I can import this configuration and run my checks with it any time I like. This means that I can create many different test configurations for my many different environment or estate configurations.
 
@@ -302,7 +302,7 @@ To set the  SQL Authentication run
 
 This will give a prompt for you to enter the credential
 
-![](/assets/uploads/2018/02/11-prompt-for-credenial.png)
+![](assets/uploads/2018/02/11-prompt-for-credenial.png)
 
 Development Environment Configuration
 -------------------------------------

@@ -72,7 +72,7 @@ Help Yourself and Others
 
 If you want to attend a PowerShell conference in book form, want 30 chapters of fabulous PowerShell material and want to help grow and diversify our industry then look no further [you can get the book here](https://leanpub.com/powershell-conference-book)
 
-[![book](/assets/uploads/2018/08/book.jpeg)](https://leanpub.com/powershell-conference-book)
+[![book](assets/uploads/2018/08/book.jpeg)](https://leanpub.com/powershell-conference-book)
 
 You can also find all of the authors twitters and websites below, You should go and see what they are sharing there as well.
 

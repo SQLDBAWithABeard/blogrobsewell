@@ -35,41 +35,41 @@ Create Project and link to GitHub
 
 First you need to create a VSTS project by going to [https://www.visualstudio.com/](https://www.visualstudio.com/) This is free for up to 5 users with 1 concurrent CI/CD queue limited to a maximum of 60 minutes run time which should be more than enough for your PowerShell module.
 
-[![01 - sign up.png](/assets/uploads/2018/05/01-sign-up-1.png)](/assets/uploads/2018/05/01-sign-up-1.png)
+[![01 - sign up.png](assets/uploads/2018/05/01-sign-up-1.png)](assets/uploads/2018/05/01-sign-up-1.png)
 
 Click on Get Started for free under Visual Studio Team Services and fill in the required information. Then on the front page click new project
 
-[![02 - New Project.png](/assets/uploads/2018/05/02-New-Project.png)](/assets/uploads/2018/05/02-New-Project.png)
+[![02 - New Project.png](assets/uploads/2018/05/02-New-Project.png)](assets/uploads/2018/05/02-New-Project.png)
 
 Fill in the details and click create
 
-[![03 - create project.png](/assets/uploads/2018/05/03-create-project.png)](/assets/uploads/2018/05/03-create-project.png)
+[![03 - create project.png](assets/uploads/2018/05/03-create-project.png)](assets/uploads/2018/05/03-create-project.png)
 
 Click on builds and then new definition
 
-[![04- builds.png](/assets/uploads/2018/05/04-builds.png)](/assets/uploads/2018/05/04-builds.png)
+[![04- builds.png](assets/uploads/2018/05/04-builds.png)](assets/uploads/2018/05/04-builds.png)
 
 next you need to link your project to your GitHub (or other source control providers) repository
 
-[![05 - github auth.png](/assets/uploads/2018/05/05-github-auth.png)](/assets/uploads/2018/05/05-github-auth.png)
+[![05 - github auth.png](assets/uploads/2018/05/05-github-auth.png)](assets/uploads/2018/05/05-github-auth.png)
 
 You can either authorise with OAuth or you can [provide a PAT token following the instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/). Once that is complete choose your repo. Save the PAT as you will need it later in the process!
 
-[![06 - choose repo.png](/assets/uploads/2018/05/06-choose-repo.png)](/assets/uploads/2018/05/06-choose-repo.png)
+[![06 - choose repo.png](assets/uploads/2018/05/06-choose-repo.png)](assets/uploads/2018/05/06-choose-repo.png)
 
 and choose the branch that you want this build definition to run against.
 
-[![07 branch.png](/assets/uploads/2018/05/07-branch.png)](/assets/uploads/2018/05/07-branch.png)
+[![07 branch.png](assets/uploads/2018/05/07-branch.png)](assets/uploads/2018/05/07-branch.png)
 
 I chose to run the Unit Tests when a PR was merged into the development branch. I will then create another build definition for the master branch to sign the code and update module version. This enables us to push several PRs into the development branch and create a single release for the gallery.
 
 Then I start with an empty process
 
-[![08 - empty process.png](/assets/uploads/2018/05/08-empty-process.png)](/assets/uploads/2018/05/08-empty-process.png)
+[![08 - empty process.png](assets/uploads/2018/05/08-empty-process.png)](assets/uploads/2018/05/08-empty-process.png)
 
 and give it a suitable name
 
-[![09 - name it.png](/assets/uploads/2018/05/09-name-it.png)](/assets/uploads/2018/05/09-name-it.png)
+[![09 - name it.png](assets/uploads/2018/05/09-name-it.png)](assets/uploads/2018/05/09-name-it.png)
 
 i chose the hosted queue but you can download an agent to your build server if you need to do more or your integration tests require access to other resources not available on the hosted agent.
 
@@ -80,7 +80,7 @@ We have a number of Unit tests in our [tests folder in dbachecks](https://github
 
 You can use the [Pester Test Runner Build Task](https://marketplace.visualstudio.com/items?itemName=richardfennellBM.BM-VSTS-PesterRunner-Task) from the folk at [Black Marble](http://blackmarble.com/) by clicking on the + sign next to Phase 1 and searching for Pester
 
-[![10 - Pester task runner.png](/assets/uploads/2018/05/10-Pester-task-runner.png)](/assets/uploads/2018/05/10-Pester-task-runner.png)
+[![10 - Pester task runner.png](assets/uploads/2018/05/10-Pester-task-runner.png)](assets/uploads/2018/05/10-Pester-task-runner.png)
 
 You will need to click Get It Free to install it and then click add to add the task to your build definition. You can pretty much leave it as default if you wish and Pester will run all of the *.Tests.ps1 files that it finds in the directory where it downloads the GitHub repo which is referred to using the variable $(Build.SourcesDirectory). It will then output the results to a json file called Test-Pester.XML ready for publishing.
 
@@ -175,22 +175,22 @@ Whether you use the task or PowerShell the next step is to Publish the test resu
 
 Click on the + sign next to Phase 1 and search for Publish
 
-[![12 - publish test results.png](/assets/uploads/2018/05/12-publish-test-results.png)](/assets/uploads/2018/05/12-publish-test-results.png)
+[![12 - publish test results.png](assets/uploads/2018/05/12-publish-test-results.png)](assets/uploads/2018/05/12-publish-test-results.png)
 
 Choose the Publish Test Results task and leave everything as default unless you have renamed the xml file. This means that on the summary page you will see some test results
 
-[![13 - Test on sumary page.png](/assets/uploads/2018/05/13-Test-on-sumary-page.png)](/assets/uploads/2018/05/13-Test-on-sumary-page.png)
+[![13 - Test on sumary page.png](assets/uploads/2018/05/13-Test-on-sumary-page.png)](assets/uploads/2018/05/13-Test-on-sumary-page.png)
 
 and on the tests tab you can see more detailed information and drill down into the tests
 
-[![14 - detailed test report.png](/assets/uploads/2018/05/14-detailed-test-report.png)](/assets/uploads/2018/05/14-detailed-test-report.png)
+[![14 - detailed test report.png](assets/uploads/2018/05/14-detailed-test-report.png)](assets/uploads/2018/05/14-detailed-test-report.png)
 
 Trigger
 -------
 
 The next step is to trigger a build when a commit is pushed to the development branch. Click on Triggers and tick enable continuous integration
 
-[![15 Trigger.png](/assets/uploads/2018/05/15-Trigger.png)](/assets/uploads/2018/05/15-Trigger.png)
+[![15 Trigger.png](assets/uploads/2018/05/15-Trigger.png)](assets/uploads/2018/05/15-Trigger.png)
 
 Saving the Build Definition
 ---------------------------
@@ -199,11 +199,11 @@ I would normally save the build definition regularly and ensure that there is a 
 
 You can see the history on the edit tab of the build definition
 
-[![16 - build history.png](/assets/uploads/2018/05/16-build-history.png)](/assets/uploads/2018/05/16-build-history.png)
+[![16 - build history.png](assets/uploads/2018/05/16-build-history.png)](assets/uploads/2018/05/16-build-history.png)
 
 If you want to compare or revert the build definition this can be done using the hamburger menu as shown below.
 
-[![17 - build history compare revert.png](/assets/uploads/2018/05/17-build-history-compare-revert.png)](/assets/uploads/2018/05/17-build-history-compare-revert.png)
+[![17 - build history compare revert.png](assets/uploads/2018/05/17-build-history-compare-revert.png)](assets/uploads/2018/05/17-build-history-compare-revert.png)
 
 Update the Module Version
 -------------------------
@@ -212,11 +212,11 @@ Now we need to create a build definition for the master branch to update the mod
 
 Create a new build definition as above but this time choose the master branch
 
-[![18 - master build.png](/assets/uploads/2018/05/18-master-build.png)](/assets/uploads/2018/05/18-master-build.png)
+[![18 - master build.png](assets/uploads/2018/05/18-master-build.png)](assets/uploads/2018/05/18-master-build.png)
 
 Again choose an empty process and name it sensibly, click the + sign next to Phase 1 and search for PowerShell
 
-[![19 - PowerShell task.png](/assets/uploads/2018/05/19-PowerShell-task.png)](/assets/uploads/2018/05/19-PowerShell-task.png)
+[![19 - PowerShell task.png](assets/uploads/2018/05/19-PowerShell-task.png)](assets/uploads/2018/05/19-PowerShell-task.png)
 
 I change the version to 2 and use this code. Note that the commit message has \*\*\*NO_CI\*\*\* in it. Putting this in a commit message tells VSTS not to trigger a build for this commit.
 
@@ -262,24 +262,24 @@ Update-ModuleManifest -Path $ModulePath\\$ModuleName.psd1 -ModuleVersion $newVer
 
 You can commit your change by adding your PAT token as a variable under the variables tab. Don’t forget to tick the padlock to make it a secret so it is not displayed in the logs
 
-[![20 - variables.png](/assets/uploads/2018/05/20-variables.png)](/assets/uploads/2018/05/20-variables.png)
+[![20 - variables.png](assets/uploads/2018/05/20-variables.png)](assets/uploads/2018/05/20-variables.png)
 
 Sign the code with a certificate
 --------------------------------
 
 The SQL Collaborative uses a code signing certificate from [DigiCert](https://digicert.com/) who allow MVPs to use one for free to sign their code for open source projects, Thank You. We had to upload the certificate to the secure files store in the VSTS library. Click on library, secure files and the blue +Secure File button
 
-[![21 - secure file store.png](/assets/uploads/2018/05/21-secure-file-store.png)](/assets/uploads/2018/05/21-secure-file-store.png)
+[![21 - secure file store.png](assets/uploads/2018/05/21-secure-file-store.png)](assets/uploads/2018/05/21-secure-file-store.png)
 
 You also need to add the password as a variable under the variables tab as above. Again don’t forget to tick the padlock to make it a secret so it is not displayed in the logs
 
 Then you need to add a task to download the secure file. Click on the + sign next to Phase 1 and search for secure
 
-[![22 download secure file.png](/assets/uploads/2018/05/22-download-secure-file.png)](/assets/uploads/2018/05/22-download-secure-file.png)
+[![22 download secure file.png](assets/uploads/2018/05/22-download-secure-file.png)](assets/uploads/2018/05/22-download-secure-file.png)
 
 choose the file from the drop down
 
-[![23 - download secure file.png](/assets/uploads/2018/05/23-download-secure-file.png)](/assets/uploads/2018/05/23-download-secure-file.png)
+[![23 - download secure file.png](assets/uploads/2018/05/23-download-secure-file.png)](assets/uploads/2018/05/23-download-secure-file.png)
 
 Next we need to import the certificate and sign the code. I use a PowerShell task for this with the following code
 
@@ -314,7 +314,7 @@ Publish your artifact
 
 The last step of the master branch build publishes the artifact (your signed module) to VSTS ready for the release task. Again, click the + sign next to Phase one and choose the Publish Artifact task not the deprecated copy and publish artifact task and give the artifact a useful name
 
-[![24 - publish artifact.png](/assets/uploads/2018/05/24-publish-artifact.png)](/assets/uploads/2018/05/24-publish-artifact.png)
+[![24 - publish artifact.png](assets/uploads/2018/05/24-publish-artifact.png)](assets/uploads/2018/05/24-publish-artifact.png)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Don’t forget to set the trigger for the master build as well following the same steps as the development build above
@@ -326,35 +326,35 @@ Next we create a release to trigger when there is an artifact ready and publish 
 
 Click the Releases tab and New Definition
 
-[![25 - Reelase creation](/assets/uploads/2018/05/25-Reelase-creation.png)](/assets/uploads/2018/05/25-Reelase-creation.png)
+[![25 - Reelase creation](assets/uploads/2018/05/25-Reelase-creation.png)](assets/uploads/2018/05/25-Reelase-creation.png)
 
 Choose an empty process and name the release definition appropriately
 
-[![26 Release name empty process.png](/assets/uploads/2018/05/26-Release-name-empty-process.png)](/assets/uploads/2018/05/26-Release-name-empty-process.png)
+[![26 Release name empty process.png](assets/uploads/2018/05/26-Release-name-empty-process.png)](assets/uploads/2018/05/26-Release-name-empty-process.png)
 
 Now click on the artifact and choose the master build definition. If you have not run a build you will get an error like below but dont worry click add.
 
-[![27 - add artifact.png](/assets/uploads/2018/05/27-add-artifact.png)](/assets/uploads/2018/05/27-add-artifact.png)
+[![27 - add artifact.png](assets/uploads/2018/05/27-add-artifact.png)](assets/uploads/2018/05/27-add-artifact.png)
 
 Click on the lightning bolt next to the artifact to open the continuous deployment trigger
 
-[![28 - Choose lightning bolt](/assets/uploads/2018/05/28-Choose-lightning-bolt.png)](/assets/uploads/2018/05/28-Choose-lightning-bolt.png)
+[![28 - Choose lightning bolt](assets/uploads/2018/05/28-Choose-lightning-bolt.png)](assets/uploads/2018/05/28-Choose-lightning-bolt.png)
 
 and turn on Continuous Deployment so that when an artifact has been created with an updated module version and signed code it is published to the gallery
 
-[![28 - Continuous deployment trigger](/assets/uploads/2018/05/28-Continuous-deployment-trigger.png)](/assets/uploads/2018/05/28-Continuous-deployment-trigger.png)
+[![28 - Continuous deployment trigger](assets/uploads/2018/05/28-Continuous-deployment-trigger.png)](assets/uploads/2018/05/28-Continuous-deployment-trigger.png)
 
 Next, click on the environment and name it appropriately and then click on the + sign next to Agent Phase and choose a PowerShell step
 
-[![29 - PowerShell Publish step](/assets/uploads/2018/05/29-PowerShell-Publish-step.png)](/assets/uploads/2018/05/29-PowerShell-Publish-step.png)
+[![29 - PowerShell Publish step](assets/uploads/2018/05/29-PowerShell-Publish-step.png)](assets/uploads/2018/05/29-PowerShell-Publish-step.png)
 
 You may wonder why I dont choose the PowerShell Gallery Packager task. There are two reasons. First I need to install the required modules for dbachecks (dbatools, PSFramework, Pester) prior to publishing and second it appears that the API Key is stored in plain text
 
-[![30 - PowerShell Gallery Publisher](/assets/uploads/2018/05/30-PowerShell-Gallery-Publisher.png)](/assets/uploads/2018/05/30-PowerShell-Gallery-Publisher.png)
+[![30 - PowerShell Gallery Publisher](assets/uploads/2018/05/30-PowerShell-Gallery-Publisher.png)](assets/uploads/2018/05/30-PowerShell-Gallery-Publisher.png)
 
 I save my API key for the PowerShell Gallery as a variable again making sure to tick the padlock to make it a secret
 
-[![31 - API Key variable.png](/assets/uploads/2018/05/31-API-Key-variable.png)](/assets/uploads/2018/05/31-API-Key-variable.png)
+[![31 - API Key variable.png](assets/uploads/2018/05/31-API-Key-variable.png)](assets/uploads/2018/05/31-API-Key-variable.png)
 
 and then use the following code to install the required modules and publish the module to the gallery
 
@@ -373,22 +373,22 @@ Added Extra – Dashboard
 
 I like to create dashboards in VSTS to show the progress of the various definitions. You can do this under the dashboard tab. Click edit and choose or search for widgets and add them to the dashboard
 
-[![32 - Dashboard.png](/assets/uploads/2018/05/32-Dashboard.png)](/assets/uploads/2018/05/32-Dashboard.png)
+[![32 - Dashboard.png](assets/uploads/2018/05/32-Dashboard.png)](assets/uploads/2018/05/32-Dashboard.png)
 
 Added Extra – Badges
 --------------------
 
 You can also enable badges for displaying on your readme in GitHub (or VSTS). For the build defintions this is under the options tab.
 
-[![33 - Build badges](/assets/uploads/2018/05/33-Build-badges.png)](/assets/uploads/2018/05/33-Build-badges.png)
+[![33 - Build badges](assets/uploads/2018/05/33-Build-badges.png)](assets/uploads/2018/05/33-Build-badges.png)
 
 for the release definitions, click the environment and then options and integrations
 
-[![34 - Release Badge](/assets/uploads/2018/05/34-Release-Badge.png)](/assets/uploads/2018/05/34-Release-Badge.png)
+[![34 - Release Badge](assets/uploads/2018/05/34-Release-Badge.png)](assets/uploads/2018/05/34-Release-Badge.png)
 
 You can then copy the URL and use it in your readme [like this on dbachecks](https://github.com/sqlcollaborative/dbachecks)
 
-[![35 - dbachecks readme badges.png](/assets/uploads/2018/05/35-dbachecks-readme-badges.png)](/assets/uploads/2018/05/35-dbachecks-readme-badges.png)
+[![35 - dbachecks readme badges.png](assets/uploads/2018/05/35-dbachecks-readme-badges.png)](assets/uploads/2018/05/35-dbachecks-readme-badges.png)
 
 The SQL Collaborative has joined the preview of enabling public access to VSTS projects as [detailed in this blog post](https://blogs.msdn.microsoft.com/devops/2018/04/27/vsts-public-projects-limited-preview/) So you can [see the dbachecks build and release without the need to log in](https://sqlcollaborative.visualstudio.com/dbachecks/dbachecks%20Team/_build) and soon [the dbatools process as well](https://sqlcollaborative.visualstudio.com/dbatools/_build)
 

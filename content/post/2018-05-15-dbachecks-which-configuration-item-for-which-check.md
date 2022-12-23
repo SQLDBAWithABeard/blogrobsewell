@@ -24,7 +24,7 @@ OK you just need to run
 
 and it will show you
 
-[![01 - get-dbcchecks.png](/assets/uploads/2018/05/01-get-dbcchecks.png)](/assets/uploads/2018/05/01-get-dbcchecks.png)
+[![01 - get-dbcchecks.png](assets/uploads/2018/05/01-get-dbcchecks.png)](assets/uploads/2018/05/01-get-dbcchecks.png)
 
 It will show you the group, the type (does it need a computer name or an instance name), The description, the unique tag for running just that check and all the tags that will run that check
 
@@ -39,7 +39,7 @@ So to do that you just need to run
 
 and it will show you
 
-[![02 - dbcconfig.png](/assets/uploads/2018/05/02-dbcconfig.png)](/assets/uploads/2018/05/02-dbcconfig.png)
+[![02 - dbcconfig.png](assets/uploads/2018/05/02-dbcconfig.png)](assets/uploads/2018/05/02-dbcconfig.png)
 
 You can see the name, the current value and the description
 
@@ -64,7 +64,7 @@ It is easier to see (and sort or search) if you use Out-GridView
 
     Get-DbcCheck | Out-GridView
 
-[![03 - New dbccheck.png](/assets/uploads/2018/05/03-New-dbccheck.png)](/assets/uploads/2018/05/03-New-dbccheck.png)
+[![03 - New dbccheck.png](assets/uploads/2018/05/03-New-dbccheck.png)](assets/uploads/2018/05/03-New-dbccheck.png)
 
 So now you can see which configuration can be set for each check!
 

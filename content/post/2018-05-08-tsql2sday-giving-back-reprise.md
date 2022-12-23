@@ -13,7 +13,7 @@ tags:
 image: assets/uploads/2017/08/tsql2sday.jpg
 
 ---
-[![tsql2sday](/assets/uploads/2017/08/tsql2sday.jpg)](https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/)  
+[![tsql2sday](assets/uploads/2017/08/tsql2sday.jpg)](https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/)  
 
 It’s TSQL Tuesday again! This month our host is Riley Major ([b](https://scribnasium.com/about-me/)/[t](https://twitter.com/RileyMajor)) and the subject is _Giving Back_. He’s given us two options here (as well as the side option of _your favorite 2017 improvement_). Pick a way that you’d like to give back to the community and talk about it, or if you already give back,  tell us how and why you started.
 
