@@ -10,7 +10,7 @@ tags:
   - volumes
 
 
-  teaser /assets/uploads/2019/03/image-27.png
+image: assets/uploads/2019/03/image-27.png
 
 ---
 With all things containers I refer to my good friend Andrew Pruski. Known as [dbafromthecold on twitter](https://twitter.com/dbafromthecold) he blogs at [https://dbafromthecold.com](https://dbafromthecold.com/)

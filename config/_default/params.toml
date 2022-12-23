@@ -4,7 +4,7 @@ mainSections = ["post"]
 rssFullContent = true
 
 [footer]
-since = 2020
+since = 2014
 customText = ""
 
 [dateFormat]
@@ -36,7 +36,7 @@ type = "search"
 type = "archives"
 
 [widgets.homepage.params]
-limit = 5
+limit = 20
 
 [[widgets.homepage]]
 type = "categories"
