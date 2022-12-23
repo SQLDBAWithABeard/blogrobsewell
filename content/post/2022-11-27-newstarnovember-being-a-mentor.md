@@ -1,5 +1,6 @@
 ---
-title: 'NewStarNovember - Being a mentor'
+title: '#NewStarNovember - Being a mentor'
+slug: 'NewStarNovember - Being a mentor'
 
 date: "2022-11-27" 
 categories:
@@ -17,7 +18,7 @@ tags:
 
 
 
-thumbnail: https://images.unsplash.com/photo-1593132517397-ceb31d77194a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80
+image: https://images.unsplash.com/photo-1593132517397-ceb31d77194a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80
 ---
 
 Thank you to the ever wonderful Ben [for the suggestion to blog](https://www.newstarsofdata.com/tell-us-your-story/). Check out #NewStarNovember for more blog posts.
