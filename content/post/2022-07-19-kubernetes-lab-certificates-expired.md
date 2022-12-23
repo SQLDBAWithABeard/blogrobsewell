@@ -103,7 +103,7 @@ You can check your certificates using
 
 which resulted in  
 
-![expired-certs](/assets/uploads/2022/07/expired-certs.png)
+![expired-certs](assets/uploads/2022/07/expired-certs.png)
 
 ## And renewing them
 
