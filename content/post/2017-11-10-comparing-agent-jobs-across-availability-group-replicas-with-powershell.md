@@ -1,5 +1,6 @@
 ---
 title: "Comparing Agent Jobs across Availability Group Replicas with PowerShell"
+date: "2017-11-10" 
 categories:
   - Blog
 

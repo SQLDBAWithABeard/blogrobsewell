@@ -1,6 +1,7 @@
 ---
 title: "Installing and upgrading default scripts automation - part one - Introduction"
 date: "2015-06-08"
+date: "2015-06-08" 
 categories: 
   - PowerShell
   - SQL Server

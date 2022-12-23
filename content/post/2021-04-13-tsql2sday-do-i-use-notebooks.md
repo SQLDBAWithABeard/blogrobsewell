@@ -1,5 +1,6 @@
 ---
 title: "TSQL2sDay - Do I use Notebooks?"
+date: "2021-04-13" 
 categories:
   - Blog
   - Tools

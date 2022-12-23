@@ -1,5 +1,6 @@
 ---
 title: "Test your Sqlserver backups on Linux with PowerShell and dbatools"
+date: "2017-03-27" 
 categories:
   - Blog
 

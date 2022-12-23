@@ -1,5 +1,6 @@
 ---
 title: "Searching for Installed Windows Update With PowerShell"
+date: "2013-09-30" 
 categories:
   - Blog
 

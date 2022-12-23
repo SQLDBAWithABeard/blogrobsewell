@@ -1,5 +1,6 @@
 ---
 title: "Writing Dynamic and Random Tests Cases for Pester"
+date: "2017-07-06" 
 categories:
   - Blog
 

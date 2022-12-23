@@ -1,5 +1,6 @@
 ---
 title: "Enable CLR with Powershell"
+date: "2014-05-05" 
 categories:
   - Blog
 

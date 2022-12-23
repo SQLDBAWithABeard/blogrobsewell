@@ -1,5 +1,6 @@
 ---
 title: "Backing up SQL Server on Linux using Ola Hallengrens Maintenance Solution"
+date: "2017-03-22" 
 categories:
   - Blog
 

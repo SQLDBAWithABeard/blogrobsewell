@@ -1,5 +1,6 @@
 ---
 title: "Building Azure SQL Db with Terraform with Visual Studio Code"
+date: "2019-04-17" 
 categories:
   - Blog
 

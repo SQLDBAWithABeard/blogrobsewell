@@ -1,5 +1,6 @@
 ---
 title: "Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools"
+date: "2017-03-06" 
 categories:
   - Blog
 

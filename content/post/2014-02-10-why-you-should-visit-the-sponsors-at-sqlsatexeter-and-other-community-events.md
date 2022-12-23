@@ -1,5 +1,6 @@
 ---
 title: "Why You Should Visit the Sponsors at #SQLSatExeter and Other Community Events"
+date: "2014-02-10" 
 categories:
   - Blog
 

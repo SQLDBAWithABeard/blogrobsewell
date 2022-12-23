@@ -1,5 +1,6 @@
 ---
 title: "Checking for SQL Server logins with PowerShell"
+date: "2013-08-31" 
 categories:
   - Blog
 

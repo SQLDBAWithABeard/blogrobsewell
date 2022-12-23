@@ -1,5 +1,6 @@
 ---
 title: "Checking Drive Sizes with PowerShell"
+date: "2013-09-06" 
 categories:
   - Blog
 

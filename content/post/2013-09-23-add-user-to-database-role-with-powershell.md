@@ -1,5 +1,6 @@
 ---
 title: "Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users"
+date: "2013-09-23" 
 categories:
   - Blog
   - dbatools

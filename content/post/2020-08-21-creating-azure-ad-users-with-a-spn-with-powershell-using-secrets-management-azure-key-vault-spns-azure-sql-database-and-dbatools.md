@@ -1,5 +1,6 @@
 ---
 title: "Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools"
+date: "2020-08-21" 
 categories:
   - Blog
   - dbatools

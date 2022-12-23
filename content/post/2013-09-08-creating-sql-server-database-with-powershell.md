@@ -1,5 +1,6 @@
 ---
 title: "Creating SQL Server Database with PowerShell"
+date: "2013-09-08" 
 categories:
   - Blog
 

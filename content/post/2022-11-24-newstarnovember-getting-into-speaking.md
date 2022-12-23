@@ -1,6 +1,7 @@
 ---
 title: '#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits'
 
+date: "2022-11-24" 
 categories:
   - Blog
   - NewStarNovember

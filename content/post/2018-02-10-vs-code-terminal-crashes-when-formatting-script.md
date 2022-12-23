@@ -1,5 +1,6 @@
 ---
 title: "VS Code – Terminal crashes when formatting script"
+date: "2018-02-10" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "When you REALLY want to see your Azure DevOps Secret Variable Values"
+date: "2021-08-10" 
 categories:
   - Blog
   - Azure DevOps

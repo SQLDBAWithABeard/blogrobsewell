@@ -1,5 +1,6 @@
 ---
 title: "Getting the SQL Version from a backup using dbatools ………. on PowerShell Core"
+date: "2018-11-26" 
 categories:
   - Blog
 

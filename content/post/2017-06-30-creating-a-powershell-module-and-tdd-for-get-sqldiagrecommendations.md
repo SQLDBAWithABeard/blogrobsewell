@@ -1,5 +1,6 @@
 ---
 title: "Creating a PowerShell Module and TDD for Get-SQLDiagRecommendations"
+date: "2017-06-30" 
 categories:
   - Blog
 

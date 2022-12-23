@@ -1,5 +1,6 @@
 ---
 title: "Converting a Datarow to a JSON object with PowerShell"
+date: "2017-12-18" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "How to write a PowerShell function to use Confirm, Verbose and WhatIf"
+date: "2018-01-25" 
 categories:
   - Blog
   - PowerShell

@@ -1,5 +1,6 @@
 ---
 title: "Automatically updating the version number in a PowerShell Module – How I do regex"
+date: "2017-09-09" 
 categories:
   - Blog
 

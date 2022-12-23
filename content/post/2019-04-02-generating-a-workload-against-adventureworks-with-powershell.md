@@ -1,5 +1,6 @@
 ---
 title: "Generating a Workload against AdventureWorks with PowerShell"
+date: "2019-04-02" 
 categories:
   - Blog
   - dbatools

@@ -1,5 +1,6 @@
 ---
 title: "Pester for Presentations – Ensuring it goes ok"
+date: "2017-05-16" 
 categories:
   - Blog
 

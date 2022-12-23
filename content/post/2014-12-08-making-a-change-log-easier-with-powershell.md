@@ -1,5 +1,6 @@
 ---
 title: "Making a Change Log Easier With PowerShell"
+date: "2014-12-08" 
 categories:
   - Blog
 

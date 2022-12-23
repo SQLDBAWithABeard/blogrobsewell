@@ -1,5 +1,6 @@
 ---
 title: "Launching Azure VM After Starting With PowerShell"
+date: "2013-10-26" 
 categories:
   - azure
   - Blog

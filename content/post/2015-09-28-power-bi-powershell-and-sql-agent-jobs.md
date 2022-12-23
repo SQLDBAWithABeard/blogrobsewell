@@ -1,6 +1,7 @@
 ---
 title: "Power Bi, PowerShell and SQL Agent Jobs"
 date: "2015-09-28"
+date: "2015-09-28" 
 categories: 
   - Power Bi
   - PowerShell

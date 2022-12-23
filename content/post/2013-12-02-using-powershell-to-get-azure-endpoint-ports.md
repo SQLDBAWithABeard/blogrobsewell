@@ -1,5 +1,6 @@
 ---
 title: "Using PowerShell to get Azure Endpoint Ports"
+date: "2013-12-02" 
 categories:
   - azure
   - Blog

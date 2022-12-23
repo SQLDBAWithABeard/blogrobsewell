@@ -1,5 +1,6 @@
 ---
 title: "Visual Studio Code Live Sharing Set-Up"
+date: "2018-05-08" 
 categories:
   - Blog
 

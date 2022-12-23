@@ -1,6 +1,7 @@
 ---
 title: "Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month"
 date: "2015-03-17"
+date: "2015-03-17" 
 categories: 
   - SQL Server
   - Community

@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Values The Community"
+date: "2021-02-17" 
 categories:
   - Blog
   - Community

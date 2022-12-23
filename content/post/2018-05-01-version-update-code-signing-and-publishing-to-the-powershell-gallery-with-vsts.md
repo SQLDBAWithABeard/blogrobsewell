@@ -1,5 +1,6 @@
 ---
 title: "Version Update, Code Signing and publishing to the PowerShell Gallery with VSTS"
+date: "2018-05-01" 
 categories:
   - Blog
 

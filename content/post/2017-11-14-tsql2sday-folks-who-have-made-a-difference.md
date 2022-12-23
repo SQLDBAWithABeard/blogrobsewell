@@ -1,5 +1,6 @@
 ---
 title: "TSQL2sDay – Folks Who Have Made a Difference"
+date: "2017-11-14" 
 categories:
   - Blog
 

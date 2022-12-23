@@ -1,5 +1,6 @@
 ---
 title: "Altering a Job Step on Hundreds of SQL Servers with PowerShell"
+date: "2017-02-13" 
 categories:
   - Blog
   - dbatools

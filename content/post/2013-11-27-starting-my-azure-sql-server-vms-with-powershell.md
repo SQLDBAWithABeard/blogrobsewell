@@ -1,5 +1,6 @@
 ---
 title: "Starting My Azure SQL Server VMs with PowerShell"
+date: "2013-11-27" 
 categories:
   - azure
   - Blog

@@ -1,5 +1,6 @@
 ---
 title: "Using the AST in Pester for dbachecks"
+date: "2018-01-15" 
 categories:
   - dbatools
   - dbachecks

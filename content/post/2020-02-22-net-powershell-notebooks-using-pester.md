@@ -1,5 +1,6 @@
 ---
 title: ".NET PowerShell Notebooks – Using Pester"
+date: "2020-02-22" 
 categories:
   - Blog
   - Jupyter Notebooks

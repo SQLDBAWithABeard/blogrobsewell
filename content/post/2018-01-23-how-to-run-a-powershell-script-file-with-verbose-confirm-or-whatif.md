@@ -1,5 +1,6 @@
 ---
 title: "How to run a PowerShell script file with Verbose, Confirm or WhatIf"
+date: "2018-01-23" 
 categories:
   - dbatools
   - dbachecks

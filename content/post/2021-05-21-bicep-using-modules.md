@@ -1,5 +1,6 @@
 ---
 title: "Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server"
+date: "2021-05-21" 
 categories:
   - Blog
   - Bicep

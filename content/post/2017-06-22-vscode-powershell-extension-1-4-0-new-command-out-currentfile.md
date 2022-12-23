@@ -1,5 +1,6 @@
 ---
 title: "VSCode – PowerShell extension 1.4.0 new command Out-CurrentFile"
+date: "2017-06-22" 
 categories:
   - Blog
 

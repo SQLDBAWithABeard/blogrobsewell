@@ -1,5 +1,6 @@
 ---
 title: "A Whole Day of PowerShell and SQL – Join Chrissy LeMaire & I at #sqlsatvienna"
+date: "2017-01-09" 
 categories:
   - Blog
 

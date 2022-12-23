@@ -1,5 +1,6 @@
 ---
 title: "SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram"
+date: "2013-09-05" 
 categories:
   - Blog
 

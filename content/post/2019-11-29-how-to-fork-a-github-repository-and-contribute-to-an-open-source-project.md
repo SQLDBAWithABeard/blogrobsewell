@@ -1,5 +1,6 @@
 ---
 title: "How to fork a GitHub repository and contribute to an open source project"
+date: "2019-11-29" 
 categories:
   - Blog
   - Source Control

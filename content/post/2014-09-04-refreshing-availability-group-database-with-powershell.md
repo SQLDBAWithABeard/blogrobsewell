@@ -1,5 +1,6 @@
 ---
 title: "Refreshing Availability Group Database with PowerShell"
+date: "2014-09-04" 
 categories:
   - Blog
 

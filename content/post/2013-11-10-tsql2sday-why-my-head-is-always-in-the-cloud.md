@@ -1,5 +1,6 @@
 ---
 title: "#TSQL2sDay Why My Head is Always in The Cloud"
+date: "2013-11-10" 
 categories:
   - Blog
 

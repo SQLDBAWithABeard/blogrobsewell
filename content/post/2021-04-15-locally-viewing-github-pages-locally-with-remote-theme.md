@@ -1,5 +1,6 @@
 ---
 title: "Viewing GitHub Pages Locally With a Remote Theme"
+date: "2021-04-15" 
 categories:
   - Blog
   - Community

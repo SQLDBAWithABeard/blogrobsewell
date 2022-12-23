@@ -1,5 +1,6 @@
 ---
 title: "Add Adventure Works Database to Windows Azure VM"
+date: "2013-05-19" 
 categories:
   - azure
   - Blog

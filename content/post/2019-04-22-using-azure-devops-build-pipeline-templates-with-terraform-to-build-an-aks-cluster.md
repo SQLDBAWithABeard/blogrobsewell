@@ -1,5 +1,6 @@
 ---
 title: "Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster"
+date: "2019-04-22" 
 categories:
   - azure
   - Blog

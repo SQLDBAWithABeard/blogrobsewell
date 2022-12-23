@@ -1,5 +1,6 @@
 ---
 title: "Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user"
+date: "2020-07-20" 
 categories:
   - Blog
   - Jupyter Notebooks

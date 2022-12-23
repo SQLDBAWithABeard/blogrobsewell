@@ -1,5 +1,6 @@
 ---
 title: "Getting SQLServers Last Known Good DBCC Checkdb with PowerShell and dbatools"
+date: "2017-04-05" 
 categories:
   - Blog
 

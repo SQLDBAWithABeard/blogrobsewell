@@ -1,5 +1,6 @@
 ---
 title: "New .NET Notebooks are here – PowerShell 7 notebooks are here."
+date: "2020-02-07" 
 categories:
   - Blog
   - Jupyter Notebooks

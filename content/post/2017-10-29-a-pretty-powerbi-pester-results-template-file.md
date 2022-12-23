@@ -1,5 +1,6 @@
 ---
 title: "A Pretty PowerBi Pester Results Template File"
+date: "2017-10-29" 
 categories:
   - Blog
 

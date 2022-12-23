@@ -1,5 +1,6 @@
 ---
 title: "Easily Splatting PowerShell with VS Code"
+date: "2018-03-11" 
 categories:
   - Blog
 

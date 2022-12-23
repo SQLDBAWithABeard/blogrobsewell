@@ -1,5 +1,6 @@
 ---
 title: "Emailing Disk Space Alerting With Powershell"
+date: "2014-11-04" 
 categories:
   - Blog
 

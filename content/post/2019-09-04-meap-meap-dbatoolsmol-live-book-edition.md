@@ -1,5 +1,6 @@
 ---
 title: "MEAP MEAP – #dbatoolsMoL – Live Book edition"
+date: "2019-09-04" 
 categories:
   - Blog
   - dbatools

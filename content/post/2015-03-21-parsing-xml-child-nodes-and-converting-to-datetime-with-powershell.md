@@ -1,6 +1,7 @@
 ---
 title: "Parsing XML Child Nodes and Converting to DateTime with PowerShell"
 date: "2015-03-21"
+date: "2015-03-21" 
 categories: 
   - Community
   - PowerShell

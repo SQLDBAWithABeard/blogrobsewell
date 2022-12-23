@@ -1,5 +1,6 @@
 ---
 title: "Testing the Identity Column usage in SQL Server with PowerShell and dbatools"
+date: "2017-04-07" 
 categories:
   - Blog
 

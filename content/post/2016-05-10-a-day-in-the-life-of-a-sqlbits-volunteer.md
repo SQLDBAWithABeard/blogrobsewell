@@ -1,5 +1,6 @@
 ---
 title: "A Day In The Life of a SQLBits Volunteer"
+date: "2016-05-10" 
 categories:
   - Blog
   - Community

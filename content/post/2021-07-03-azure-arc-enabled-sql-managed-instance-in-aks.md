@@ -1,5 +1,6 @@
 ---
 title: "How to deploy an Azure Arc Enabled SQL Managed Instance in AKS"
+date: "2021-07-03" 
 categories:
   - Blog
   - Bicep

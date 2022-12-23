@@ -1,5 +1,6 @@
 ---
 title: "Running SQL Queries with Visual Studio Code"
+date: "2017-01-05" 
 categories:
   - Blog
   - Developing

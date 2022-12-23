@@ -1,5 +1,6 @@
 ---
 title: "Creating A Training Day Speakers List with GitHub Action from a GitHub Issue"
+date: "2022-07-11" 
 categories:
   - Blog
   - Community

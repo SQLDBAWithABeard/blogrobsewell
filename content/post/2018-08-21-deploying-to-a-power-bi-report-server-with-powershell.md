@@ -1,5 +1,6 @@
 ---
 title: "Deploying To a Power Bi Report Server with PowerShell"
+date: "2018-08-21" 
 categories:
   - Blog
 

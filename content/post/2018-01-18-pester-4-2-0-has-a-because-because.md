@@ -1,5 +1,6 @@
 ---
 title: "Pester 4.2.0 has a Because…… because :-)"
+date: "2018-01-18" 
 categories:
   - dbatools
   - dbachecks

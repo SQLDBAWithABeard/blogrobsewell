@@ -1,5 +1,6 @@
 ---
 title: "Adding a Folder of Scripts to GitHub with Azure Data Studio"
+date: "2019-04-07" 
 categories:
   - Blog
 

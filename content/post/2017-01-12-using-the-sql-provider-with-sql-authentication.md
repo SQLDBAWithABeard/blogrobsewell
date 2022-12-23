@@ -1,5 +1,6 @@
 ---
 title: "Using the PowerShell SQL Provider with SQL Authentication"
+date: "2017-01-12" 
 categories:
   - Blog
 

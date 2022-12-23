@@ -1,5 +1,6 @@
 ---
 title: "Using PowerShell to find a database amongst hundreds"
+date: "2013-09-07" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Checking For A Database Backup with PowerShell"
+date: "2013-09-14" 
 categories:
   - Blog
 

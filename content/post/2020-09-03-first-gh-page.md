@@ -1,5 +1,6 @@
 ---
 title: "The first page with GitHub Pages"
+date: "2020-09-03" 
 categories:
   - Blog
 tags:

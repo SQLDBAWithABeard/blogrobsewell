@@ -1,5 +1,6 @@
 ---
 title: "Gathering all the Logs and Running the Availability Group Failover Detection Utility with PowerShell"
+date: "2018-11-28" 
 categories:
   - Blog
 

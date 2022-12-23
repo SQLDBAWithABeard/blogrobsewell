@@ -1,5 +1,6 @@
 ---
 title: "Using the PowerShell AST to find a ForEach Method"
+date: "2018-08-16" 
 categories:
   - Blog
 

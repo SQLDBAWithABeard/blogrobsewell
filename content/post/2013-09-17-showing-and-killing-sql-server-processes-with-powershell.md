@@ -1,5 +1,6 @@
 ---
 title: "Showing and Killing SQL Server Processes with PowerShell"
+date: "2013-09-17" 
 categories:
   - Blog
 

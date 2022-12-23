@@ -1,6 +1,7 @@
 ---
 title: "Triggering a System Center Configuration Manager deployment task"
 date: "2015-02-18"
+date: "2015-02-18" 
 categories: 
   - PowerShell
 tags: 

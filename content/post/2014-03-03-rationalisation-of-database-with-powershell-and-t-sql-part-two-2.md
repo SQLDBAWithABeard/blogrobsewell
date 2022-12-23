@@ -1,5 +1,6 @@
 ---
 title: "Rationalisation of Database with Powershell and T-SQL part two"
+date: "2014-03-03" 
 categories:
   - Blog
 

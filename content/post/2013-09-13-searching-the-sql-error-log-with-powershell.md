@@ -1,5 +1,6 @@
 ---
 title: "Searching the SQL Error Log with PowerShell"
+date: "2013-09-13" 
 categories:
   - Blog
 

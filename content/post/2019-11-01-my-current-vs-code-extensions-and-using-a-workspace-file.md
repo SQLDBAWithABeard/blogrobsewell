@@ -1,5 +1,6 @@
 ---
 title: "My current VS Code Extensions and using a workspace file"
+date: "2019-11-01" 
 categories:
   - Blog
   - dbatools

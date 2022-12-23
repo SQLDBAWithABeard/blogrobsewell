@@ -1,5 +1,6 @@
 ---
 title: "Handling Missing Instances when Looping with Pester"
+date: "2017-11-30" 
 categories:
   - Blog
 

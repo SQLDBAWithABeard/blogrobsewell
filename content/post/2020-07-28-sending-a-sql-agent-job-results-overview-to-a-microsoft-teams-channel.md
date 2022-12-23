@@ -1,5 +1,6 @@
 ---
 title: "Sending a SQL Agent Job results overview to a Microsoft Teams Channel"
+date: "2020-07-28" 
 categories:
   - Blog
   - dbatools

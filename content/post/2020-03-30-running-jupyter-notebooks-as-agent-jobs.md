@@ -1,5 +1,6 @@
 ---
 title: "Running Jupyter Notebooks as Agent Jobs"
+date: "2020-03-30" 
 categories:
   - Blog
   - Jupyter Notebooks

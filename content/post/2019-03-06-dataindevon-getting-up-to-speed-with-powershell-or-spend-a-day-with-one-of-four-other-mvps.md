@@ -1,5 +1,6 @@
 ---
 title: "#DataInDevon – Getting up to speed with PowerShell or spend a day with one of four other MVPs :-)"
+date: "2019-03-06" 
 categories:
   - Blog
   - PowerShell

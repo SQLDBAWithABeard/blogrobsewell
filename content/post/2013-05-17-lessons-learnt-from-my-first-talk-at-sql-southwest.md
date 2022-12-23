@@ -1,5 +1,6 @@
 ---
 title: "Lessons Learnt from my first talk at SQL SouthWest"
+date: "2013-05-17" 
 categories:
   - Blog
 

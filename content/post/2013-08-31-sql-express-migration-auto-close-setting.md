@@ -1,5 +1,6 @@
 ---
 title: "SQL Express Migration Auto Close Setting"
+date: "2013-08-31" 
 categories:
   - Blog
 

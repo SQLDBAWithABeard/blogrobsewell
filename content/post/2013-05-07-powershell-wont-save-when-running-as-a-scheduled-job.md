@@ -1,5 +1,6 @@
 ---
 title: "Powershell won’t save when running as a scheduled job"
+date: "2013-05-07" 
 categories:
   - Blog
 

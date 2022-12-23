@@ -1,5 +1,6 @@
 ---
 title: "PSDay.UK Tickets are on sale"
+date: "2017-08-13" 
 categories:
   - Blog
 

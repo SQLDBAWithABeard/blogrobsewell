@@ -1,5 +1,6 @@
 ---
 title: "Adding a PowerShell Job Step to an existing SQL Agent Job Step with PowerShell"
+date: "2017-03-13" 
 categories:
   - Blog
 

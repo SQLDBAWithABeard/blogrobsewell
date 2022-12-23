@@ -1,5 +1,6 @@
 ---
 title: "Checking Trace Flags with dbachecks, online docs and PSPowerHour"
+date: "2018-09-29" 
 categories:
   - dbachecks
   - Blog

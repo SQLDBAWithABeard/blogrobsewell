@@ -1,6 +1,7 @@
 ---
 title: "Setting Up and Using Azure VM SQL Automated Backup (and Restore)"
 date: "2015-07-24"
+date: "2015-07-24" 
 categories: 
   - Azure
   - PowerShell

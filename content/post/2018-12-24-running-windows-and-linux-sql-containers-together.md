@@ -1,5 +1,6 @@
 ---
 title: "Running Windows and Linux SQL Containers together"
+date: "2018-12-24" 
 categories:
   - Blog
 

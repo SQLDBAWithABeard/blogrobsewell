@@ -1,5 +1,6 @@
 ---
 title: "Using Pester with dbatools Test-DbaLastBackup"
+date: "2017-03-25" 
 categories:
   - Blog
 

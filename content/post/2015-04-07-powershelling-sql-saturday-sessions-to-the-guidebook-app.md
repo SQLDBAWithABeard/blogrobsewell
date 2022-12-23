@@ -1,6 +1,7 @@
 ---
 title: "PowerShelling SQL Saturday Sessions to the Guidebook app"
 date: "2015-04-07"
+date: "2015-04-07" 
 categories: 
   - PowerShell
   - SQL Saturday Exeter

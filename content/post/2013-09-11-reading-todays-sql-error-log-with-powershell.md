@@ -1,5 +1,6 @@
 ---
 title: "Reading Todays SQL Error Log With PowerShell"
+date: "2013-09-11" 
 categories:
   - Blog
 

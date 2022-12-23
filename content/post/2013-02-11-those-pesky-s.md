@@ -1,5 +1,6 @@
 ---
 title: "Those Pesky ‘s"
+date: "2013-02-11" 
 categories:
   - Blog
 

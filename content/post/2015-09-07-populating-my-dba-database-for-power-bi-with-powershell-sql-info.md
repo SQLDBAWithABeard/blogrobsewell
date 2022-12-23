@@ -1,6 +1,7 @@
 ---
 title: "Populating My DBA Database for Power Bi with PowerShell - SQL Info"
 date: "2015-09-07"
+date: "2015-09-07" 
 categories: 
   - Power Bi
   - PowerShell

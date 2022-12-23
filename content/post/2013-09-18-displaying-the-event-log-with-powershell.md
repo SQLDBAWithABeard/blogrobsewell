@@ -1,5 +1,6 @@
 ---
 title: "Displaying the Windows Event Log with PowerShell"
+date: "2013-09-18" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "A look at the SQL Assessment Intelligence Pack in Operational Insights"
+date: "2014-11-24" 
 categories:
   - azure
   - Blog

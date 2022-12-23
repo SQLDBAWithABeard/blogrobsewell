@@ -1,5 +1,6 @@
 ---
 title: "Invalid Template Deployment with my Bicep"
+date: "2021-05-21" 
 categories:
   - Blog
   - Bicep

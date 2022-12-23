@@ -1,5 +1,6 @@
 ---
 title: "Training Day Speakers List"
+date: "2022-07-10" 
 categories:
   - Blog
   - Community

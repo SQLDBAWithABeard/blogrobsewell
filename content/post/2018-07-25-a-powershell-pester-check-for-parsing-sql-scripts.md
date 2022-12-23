@@ -1,5 +1,6 @@
 ---
 title: "A PowerShell Pester Check for parsing SQL scripts"
+date: "2018-07-25" 
 categories:
   - Blog
 

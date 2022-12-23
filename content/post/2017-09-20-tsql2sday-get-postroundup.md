@@ -1,5 +1,6 @@
 ---
 title: "TSQL2sDay – Get-PostRoundup"
+date: "2017-09-20" 
 categories:
   - Blog
 

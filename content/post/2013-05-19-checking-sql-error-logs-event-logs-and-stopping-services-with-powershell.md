@@ -1,5 +1,6 @@
 ---
 title: "Checking SQL Error Logs, Event Logs and Stopping Services with Powershell"
+date: "2013-05-19" 
 categories:
   - Blog
 

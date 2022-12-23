@@ -1,5 +1,6 @@
 ---
 title: "Using Plaster To Create a New PowerShell Module"
+date: "2017-11-09" 
 categories:
   - Blog
 

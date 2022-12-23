@@ -1,5 +1,6 @@
 ---
 title: "PowerShell Notebooks in Azure Data Studio"
+date: "2019-10-17" 
 categories:
   - Blog
   - Jupyter Notebooks

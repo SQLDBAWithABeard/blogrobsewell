@@ -1,5 +1,6 @@
 ---
 title: "dbatools at #SQLSatDublin"
+date: "2017-06-21" 
 categories:
   - Blog
 

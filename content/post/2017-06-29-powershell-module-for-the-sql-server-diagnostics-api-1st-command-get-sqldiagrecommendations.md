@@ -1,5 +1,6 @@
 ---
 title: "PowerShell Module for the SQL Server Diagnostics API – 1st Command Get-SQLDiagRecommendations"
+date: "2017-06-29" 
 categories:
   - Blog
 

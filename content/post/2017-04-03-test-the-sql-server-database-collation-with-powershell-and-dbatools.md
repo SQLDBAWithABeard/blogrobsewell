@@ -1,5 +1,6 @@
 ---
 title: "Test the SQL Server database collation with PowerShell and dbatools"
+date: "2017-04-03" 
 categories:
   - Blog
 

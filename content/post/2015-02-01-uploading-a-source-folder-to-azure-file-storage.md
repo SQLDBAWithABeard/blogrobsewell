@@ -1,6 +1,7 @@
 ---
 title: "Uploading a Source Folder to Azure File Storage"
 date: "2015-02-01"
+date: "2015-02-01" 
 categories: 
   - Blog
   - Azure

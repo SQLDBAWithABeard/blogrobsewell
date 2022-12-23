@@ -1,5 +1,6 @@
 ---
 title: "Using Get-SQLDiagFix to get information from the SQL Server Diagnostic API with PowerShell"
+date: "2017-07-04" 
 categories:
   - Blog
 

@@ -1,6 +1,7 @@
 ---
 title: "Enterprise Strategies - A #TSQL2sDay post"
 date: "2015-09-08"
+date: "2015-09-08" 
 categories: 
   - PowerShell
   - SQL Server

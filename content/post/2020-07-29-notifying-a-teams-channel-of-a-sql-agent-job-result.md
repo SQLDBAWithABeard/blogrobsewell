@@ -1,5 +1,6 @@
 ---
 title: "Notifying a Teams Channel of a SQL Agent Job result"
+date: "2020-07-29" 
 categories:
   - Blog
   - dbatools

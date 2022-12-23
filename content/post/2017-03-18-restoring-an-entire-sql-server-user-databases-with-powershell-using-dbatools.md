@@ -1,5 +1,6 @@
 ---
 title: "Restoring an entire SQL Server user databases with PowerShell using dbatools"
+date: "2017-03-18" 
 categories:
   - Blog
 

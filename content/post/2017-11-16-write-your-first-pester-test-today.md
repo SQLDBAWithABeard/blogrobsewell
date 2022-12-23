@@ -1,5 +1,6 @@
 ---
 title: "Write Your first Pester Test Today"
+date: "2017-11-16" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Getting SQL Server installation date with PowerShell using dbatools"
+date: "2019-10-11" 
 categories:
   - Blog
   - dbatools

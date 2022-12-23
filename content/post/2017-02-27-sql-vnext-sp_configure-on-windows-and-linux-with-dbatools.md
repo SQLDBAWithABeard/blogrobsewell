@@ -1,5 +1,6 @@
 ---
 title: "SQL VNext sp_configure on Windows and Linux with dbatools"
+date: "2017-02-27" 
 categories:
   - Blog
 

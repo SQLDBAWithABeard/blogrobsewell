@@ -1,5 +1,6 @@
 ---
 title: "Documenting SQL Server the easy way with Power Doc"
+date: "2013-05-09" 
 categories:
   - Blog
 

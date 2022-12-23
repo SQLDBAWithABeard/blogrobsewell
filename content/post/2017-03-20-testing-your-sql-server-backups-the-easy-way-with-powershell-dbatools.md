@@ -1,5 +1,6 @@
 ---
 title: "Testing Your SQL Server Backups the Easy Way with PowerShell & dbatools"
+date: "2017-03-20" 
 categories:
   - Blog
 

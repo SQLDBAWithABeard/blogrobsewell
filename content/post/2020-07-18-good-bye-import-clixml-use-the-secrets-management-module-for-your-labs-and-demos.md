@@ -1,5 +1,6 @@
 ---
 title: "Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos"
+date: "2020-07-18" 
 categories:
   - Blog
   - Jupyter Notebooks

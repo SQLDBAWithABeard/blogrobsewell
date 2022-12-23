@@ -1,5 +1,6 @@
 ---
 title: "Professional and Proficient PowerShell: From Writing Scripts to Developing Solutions at PASS Summit"
+date: "2018-04-11" 
 categories:
   - Blog
 

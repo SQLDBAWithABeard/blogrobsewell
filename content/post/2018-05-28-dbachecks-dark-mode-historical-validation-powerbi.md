@@ -1,5 +1,6 @@
 ---
 title: "dbachecks – Dark Mode Historical Validation PowerBi"
+date: "2018-05-28" 
 categories:
   - dbachecks
   - Blog

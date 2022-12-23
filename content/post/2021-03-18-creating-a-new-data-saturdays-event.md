@@ -1,5 +1,6 @@
 ---
 title: "Creating a New Data Saturdays event"
+date: "2021-03-18" 
 categories:
   - Blog
   - Community

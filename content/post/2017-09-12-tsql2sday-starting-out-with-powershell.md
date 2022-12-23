@@ -1,5 +1,6 @@
 ---
 title: "#TSQL2sDay – Starting Out with PowerShell"
+date: "2017-09-12" 
 categories:
   - Blog
 

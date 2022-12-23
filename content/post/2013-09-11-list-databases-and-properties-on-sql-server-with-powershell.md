@@ -1,5 +1,6 @@
 ---
 title: "List Databases (and Properties) on SQL Server with PowerShell"
+date: "2013-09-11" 
 categories:
   - Blog
 

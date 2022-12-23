@@ -1,5 +1,6 @@
 ---
 title: "Alter SQL Mirroring Endpoint Owner with Powershell"
+date: "2013-09-08" 
 categories:
   - Blog
 

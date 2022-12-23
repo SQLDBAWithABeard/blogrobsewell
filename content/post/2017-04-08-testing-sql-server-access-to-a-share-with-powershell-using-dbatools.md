@@ -1,5 +1,6 @@
 ---
 title: "Testing SQL Server Access to a share with PowerShell using dbatools"
+date: "2017-04-08" 
 categories:
   - Blog
 

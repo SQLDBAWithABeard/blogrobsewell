@@ -1,5 +1,6 @@
 ---
 title: "I Hate Interviews – TSQL2sDay"
+date: "2017-08-08" 
 categories:
   - Blog
 

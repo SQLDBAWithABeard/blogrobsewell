@@ -1,5 +1,6 @@
 ---
 title: "Azure DevOps Pipeline Template Job Names and single quotes"
+date: "2022-01-28" 
 categories:
   - Blog
   - Azure DevOps

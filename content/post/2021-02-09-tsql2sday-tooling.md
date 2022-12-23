@@ -1,5 +1,6 @@
 ---
 title: "Tooling for TSql2sDay"
+date: "2021-02-09" 
 categories:
   - Blog
   - Tools

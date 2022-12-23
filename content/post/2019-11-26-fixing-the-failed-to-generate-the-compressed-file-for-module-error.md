@@ -1,5 +1,6 @@
 ---
 title: "Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps"
+date: "2019-11-26" 
 categories:
   - dbachecks
   - Blog

@@ -1,5 +1,6 @@
 ---
 title: "Dropping SQL Users with PowerShell"
+date: "2013-09-10" 
 categories:
   - Blog
 

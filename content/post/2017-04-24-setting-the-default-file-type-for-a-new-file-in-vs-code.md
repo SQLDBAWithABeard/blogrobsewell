@@ -1,5 +1,6 @@
 ---
 title: "Setting the default file type for a new file in VS Code"
+date: "2017-04-24" 
 categories:
   - Blog
 

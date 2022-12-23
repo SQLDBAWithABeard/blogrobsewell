@@ -1,5 +1,6 @@
 ---
 title: "How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services & PowerBi"
+date: "2018-02-03" 
 categories:
   - azure
   - Blog

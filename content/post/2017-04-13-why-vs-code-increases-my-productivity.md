@@ -1,5 +1,6 @@
 ---
 title: "Why VS Code Increases my Productivity"
+date: "2017-04-13" 
 categories:
   - Blog
 

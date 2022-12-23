@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes lab certificates expired"
+date: "2022-07-19" 
 categories:
   - Blog
   - Kubernetes

@@ -1,5 +1,6 @@
 ---
 title: "Create Azure Data Studio SQL Notebooks with PowerShell"
+date: "2019-11-07" 
 categories:
   - Blog
   - Jupyter Notebooks

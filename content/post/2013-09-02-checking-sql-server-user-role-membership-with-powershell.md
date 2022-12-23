@@ -1,5 +1,6 @@
 ---
 title: "Checking SQL Server User Role Membership with PowerShell"
+date: "2013-09-02" 
 categories:
   - Blog
 

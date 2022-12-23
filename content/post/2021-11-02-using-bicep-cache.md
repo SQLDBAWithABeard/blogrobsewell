@@ -1,5 +1,6 @@
 ---
 title: "Deploying a Bicep Module from a private repository without a connection to the repository"
+date: "2021-11-02" 
 categories:
   - Blog
   - Bicep

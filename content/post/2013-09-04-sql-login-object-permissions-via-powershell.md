@@ -1,5 +1,6 @@
 ---
 title: "SQL login object permissions via PowerShell"
+date: "2013-09-04" 
 categories:
   - Blog
 

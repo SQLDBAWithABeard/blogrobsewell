@@ -1,5 +1,6 @@
 ---
 title: "Creating SQL User and adding to Server Role with PowerShell"
+date: "2013-09-21" 
 categories:
   - Blog
 

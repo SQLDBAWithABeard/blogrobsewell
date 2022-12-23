@@ -1,5 +1,6 @@
 ---
 title: "dbachecks – Configuration Deep Dive"
+date: "2018-02-22" 
 categories:
   - dbachecks
   - Blog

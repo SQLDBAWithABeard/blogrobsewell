@@ -1,5 +1,6 @@
 ---
 title: "#tsql2sday #60 – Something New Learned – Problem Step Recorder"
+date: "2014-11-11" 
 categories:
   - Blog
   - TSql2sDay

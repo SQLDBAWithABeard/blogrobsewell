@@ -1,5 +1,6 @@
 ---
 title: "The PowerShell Box Of Tricks GUI"
+date: "2013-09-24" 
 categories:
   - Blog
 

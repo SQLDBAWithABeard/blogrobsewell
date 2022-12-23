@@ -1,5 +1,6 @@
 ---
 title: "Getting SQL Server File Sizes and Space Used with dbatools"
+date: "2017-03-29" 
 categories:
   - Blog
 

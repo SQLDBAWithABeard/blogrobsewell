@@ -1,5 +1,6 @@
 ---
 title: "GitHub Pages in Dev Containers and Codespaces"
+date: "2022-07-04" 
 categories:
   - Blog
   - Community

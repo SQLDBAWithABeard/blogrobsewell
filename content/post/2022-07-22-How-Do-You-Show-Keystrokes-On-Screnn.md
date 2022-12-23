@@ -1,5 +1,6 @@
 ---
 title: "How Do You Show Keystrokes On Screen"
+date: "2022-07-22" 
 categories:
   - Blog
   - Community

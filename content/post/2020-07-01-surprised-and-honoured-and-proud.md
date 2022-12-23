@@ -1,5 +1,6 @@
 ---
 title: "Surprised and Honoured and Proud"
+date: "2020-07-01" 
 categories:
   - Blog
 

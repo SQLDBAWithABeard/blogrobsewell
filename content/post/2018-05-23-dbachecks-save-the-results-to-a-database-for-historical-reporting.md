@@ -1,5 +1,6 @@
 ---
 title: "dbachecks – Save the results to a database for historical reporting"
+date: "2018-05-23" 
 categories:
   - dbachecks
   - Blog

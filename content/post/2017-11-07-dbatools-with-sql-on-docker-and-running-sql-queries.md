@@ -1,5 +1,6 @@
 ---
 title: "dbatools with SQL on Docker and running SQL queries"
+date: "2017-11-07" 
 categories:
   - Blog
 

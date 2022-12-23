@@ -1,5 +1,6 @@
 ---
 title: "Using PowerShell to Automate StreamLabs OBS and Show Your Webcam in PowerPoint"
+date: "2020-09-21" 
 categories:
   - Blog
   - PowerShell

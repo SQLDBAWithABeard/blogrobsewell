@@ -1,5 +1,6 @@
 ---
 title: "Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook"
+date: "2019-11-21" 
 categories:
   - Blog
   - Jupyter Notebooks

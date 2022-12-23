@@ -1,5 +1,6 @@
 ---
 title: "Dropping All Tables From A SQL Database with PowerShell"
+date: "2013-11-30" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Checking Availability Groups with dbachecks"
+date: "2018-04-08" 
 categories:
   - dbachecks
   - Blog

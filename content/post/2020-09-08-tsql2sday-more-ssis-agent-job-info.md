@@ -1,5 +1,6 @@
 ---
 title: "#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information"
+date: "2020-09-08" 
 categories:
   - Blog
   - TSql2sDay

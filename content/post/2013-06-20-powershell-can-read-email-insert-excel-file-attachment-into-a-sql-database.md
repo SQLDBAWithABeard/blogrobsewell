@@ -1,5 +1,6 @@
 ---
 title: "Powershell can read email & insert excel file attachment into a SQL Database"
+date: "2013-06-20" 
 categories:
   - Blog
 

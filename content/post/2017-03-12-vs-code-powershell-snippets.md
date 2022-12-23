@@ -1,5 +1,6 @@
 ---
 title: "VS Code PowerShell Snippets"
+date: "2017-03-12" 
 categories:
   - Blog
 

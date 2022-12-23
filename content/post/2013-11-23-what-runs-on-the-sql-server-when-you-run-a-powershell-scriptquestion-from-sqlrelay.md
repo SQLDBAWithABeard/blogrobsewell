@@ -1,5 +1,6 @@
 ---
 title: "What Runs on the SQL Server when you run a PowerShell script?–Question from #SQLRelay"
+date: "2013-11-23" 
 categories:
   - Blog
 

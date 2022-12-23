@@ -1,5 +1,6 @@
 ---
 title: "A PowerShell Conference In A Book"
+date: "2018-08-01" 
 categories:
   - Blog
 

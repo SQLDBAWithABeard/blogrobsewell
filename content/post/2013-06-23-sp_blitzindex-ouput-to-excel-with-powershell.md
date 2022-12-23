@@ -1,5 +1,6 @@
 ---
 title: "sp_BlitzIndex™ ouput to Excel with Powershell"
+date: "2013-06-23" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Announcing PSDay.UK – Whats a PSDay?"
+date: "2017-07-24" 
 categories:
   - Blog
 

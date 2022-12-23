@@ -1,5 +1,6 @@
 ---
 title: "SQL Server Availability Group FailoverDetection Utility PowerShell Function Improvements – Named Instances, Archiving Data, Speed"
+date: "2018-12-01" 
 categories:
   - Blog
 

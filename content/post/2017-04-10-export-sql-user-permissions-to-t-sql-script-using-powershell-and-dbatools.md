@@ -1,5 +1,6 @@
 ---
 title: "Export SQL User Permissions to T-SQL script using PowerShell and dbatools"
+date: "2017-04-10" 
 categories:
   - Blog
 

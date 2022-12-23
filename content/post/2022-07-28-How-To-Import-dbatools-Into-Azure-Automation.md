@@ -1,5 +1,6 @@
 ---
 title: "How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error"
+date: "2022-07-28" 
 categories:
   - Blog
   - PowerShell

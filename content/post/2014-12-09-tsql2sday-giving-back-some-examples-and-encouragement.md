@@ -1,5 +1,6 @@
 ---
 title: "Giving Back – #TSQL2sday"
+date: "2014-12-09" 
 categories:
   - Blog
   - TSql2sDay

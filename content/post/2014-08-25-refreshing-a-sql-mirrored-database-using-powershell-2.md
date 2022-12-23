@@ -1,5 +1,6 @@
 ---
 title: "Refreshing A SQL Mirrored Database Using Powershell"
+date: "2014-08-25" 
 categories:
   - Blog
   - dbatools

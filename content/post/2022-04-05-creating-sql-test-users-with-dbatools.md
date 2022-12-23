@@ -1,5 +1,6 @@
 ---
 title: "Quickly Creating Test Users in SQL Server using dbatools"
+date: "2022-04-05" 
 categories:
   - Blog
   - dbatools

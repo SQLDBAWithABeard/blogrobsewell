@@ -1,5 +1,6 @@
 ---
 title: "Announcing dbachecks – Configurable PowerShell Validation For Your SQL Instances"
+date: "2018-02-22" 
 categories:
   - dbachecks
   - Blog

@@ -1,5 +1,6 @@
 ---
 title: "Spinning up and shutting down Windows Azure Lab with Powershell"
+date: "2013-05-14" 
 categories:
   - azure
 

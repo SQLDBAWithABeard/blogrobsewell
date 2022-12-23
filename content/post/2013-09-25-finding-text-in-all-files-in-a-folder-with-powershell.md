@@ -1,5 +1,6 @@
 ---
 title: "Finding Text In All Files In A Folder With PowerShell"
+date: "2013-09-25" 
 categories:
   - Blog
 

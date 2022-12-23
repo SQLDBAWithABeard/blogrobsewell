@@ -1,5 +1,6 @@
 ---
 title: "12 Things I learnt at SQLBits XI"
+date: "2013-05-07" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Using Docker to run Integration Tests for dbachecks"
+date: "2019-01-19" 
 categories:
   - dbachecks
   - Blog

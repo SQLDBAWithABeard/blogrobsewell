@@ -1,5 +1,6 @@
 ---
 title: "Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC"
+date: "2021-05-20" 
 categories:
   - Blog
   - Bicep

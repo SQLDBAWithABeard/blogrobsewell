@@ -1,5 +1,6 @@
 ---
 title: "#TSQL2sDay – NomNomNomNomNom"
+date: "2019-03-12" 
 categories:
   - Blog
   - PowerShell

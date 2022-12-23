@@ -1,5 +1,6 @@
 ---
 title: "Max Length of a column in a DataTable in PowerShell"
+date: "2017-04-01" 
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Building Azure SQL Db with Terraform using Azure DevOps"
+date: "2019-04-20" 
 categories:
   - azure
   - Blog

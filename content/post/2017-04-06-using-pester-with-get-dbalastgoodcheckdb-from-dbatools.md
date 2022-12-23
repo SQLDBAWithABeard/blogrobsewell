@@ -1,5 +1,6 @@
 ---
 title: "Using Pester with Get-DbaLastGoodCheckDb from dbatools"
+date: "2017-04-06" 
 categories:
   - Blog
 

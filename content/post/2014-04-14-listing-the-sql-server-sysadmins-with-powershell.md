@@ -1,5 +1,6 @@
 ---
 title: "Listing the SQL Server SysAdmins With PowerShell"
+date: "2014-04-14" 
 categories:
   - Blog
 

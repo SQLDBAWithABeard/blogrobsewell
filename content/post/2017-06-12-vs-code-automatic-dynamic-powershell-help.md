@@ -1,5 +1,6 @@
 ---
 title: "VS Code – Automatic Dynamic PowerShell Help"
+date: "2017-06-12" 
 categories:
   - Blog
 

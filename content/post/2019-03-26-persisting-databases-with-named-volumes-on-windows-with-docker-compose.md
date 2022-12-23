@@ -1,5 +1,6 @@
 ---
 title: "Persisting databases with named volumes on Windows with docker compose"
+date: "2019-03-26" 
 categories:
   - Blog
 

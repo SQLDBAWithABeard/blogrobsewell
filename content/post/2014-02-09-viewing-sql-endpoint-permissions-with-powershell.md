@@ -1,5 +1,6 @@
 ---
 title: "Viewing SQL Endpoint Permissions with PowerShell"
+date: "2014-02-09" 
 categories:
   - Blog
 

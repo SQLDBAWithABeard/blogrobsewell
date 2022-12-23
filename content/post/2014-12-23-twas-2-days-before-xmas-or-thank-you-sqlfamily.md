@@ -1,5 +1,6 @@
 ---
 title: "Twas 2 Days Before Xmas or Thank you SQLFamily"
+date: "2014-12-23" 
 categories:
   - Blog
 

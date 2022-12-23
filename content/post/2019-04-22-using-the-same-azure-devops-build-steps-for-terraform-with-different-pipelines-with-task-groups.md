@@ -1,5 +1,6 @@
 ---
 title: "Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM"
+date: "2019-04-22" 
 categories:
   - azure
   - Blog
