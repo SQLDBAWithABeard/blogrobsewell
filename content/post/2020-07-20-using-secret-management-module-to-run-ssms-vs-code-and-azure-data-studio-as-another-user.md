@@ -22,7 +22,7 @@ tags:
 
 
 
-image: /assets/uploads/2020/07/runas.png
+image: assets/uploads/2020/07/runas.png
 
 ---
 Following on from [my last post about the Secret Management module](https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/). I was asked another question.  

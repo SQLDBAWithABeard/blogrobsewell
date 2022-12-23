@@ -15,7 +15,7 @@ tags:
   - Installation
 
 
-image: /assets/uploads/2019/10/image-7.png
+image: assets/uploads/2019/10/image-7.png
 
 ---
 Most of my writing time at the moment is devoted to  _[Learn dbatools in a Month of Lunches](https://dbatools.io/book)_ which is now available but here is a short post following a question someone asked me.

@@ -9,7 +9,7 @@ tags:
   - PowerShell
 
 
-image: /assets/uploads/2018/08/book.jpeg
+image: assets/uploads/2018/08/book.jpeg
 
 ---
 A Question

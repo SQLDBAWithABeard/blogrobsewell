@@ -15,7 +15,7 @@ tags:
   - Auto Growth
 
 
-image: /assets/uploads/2014/10/image_thumb.png
+image: assets/uploads/2014/10/image_thumb.png
 ---
 So you have read up on VLFs
 

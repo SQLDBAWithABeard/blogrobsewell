@@ -13,7 +13,7 @@ tags:
   - community
 
 
-image: /assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg
+image: assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg
 ---
 [![](https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg)](https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/)
 

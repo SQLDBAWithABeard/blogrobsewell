@@ -15,7 +15,7 @@ tags:
 
 
 
-image: /assets/uploads/2014/03/033114_2017_howicheckhu6.png
+image: assets/uploads/2014/03/033114_2017_howicheckhu6.png
 
 ---
 ## Editors Note

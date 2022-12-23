@@ -10,7 +10,7 @@ tags:
   - Source Control
 
 teaser:
-   /assets/uploads/2019/04/image-37.png
+   assets/uploads/2019/04/image-37.png
 
 ---
 In my last post I showed how to [add a folder of scripts to GitHub](https://blog.robsewell.com/10501/) using Visual Studio Code.

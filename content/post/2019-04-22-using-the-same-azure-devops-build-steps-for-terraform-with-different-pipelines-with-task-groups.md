@@ -15,7 +15,7 @@ tags:
   - Linux
 
 
-image: /assets/uploads/2019/04/image-107.png
+image: assets/uploads/2019/04/image-107.png
 
 ---
 In my [last post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) I showed how to build an Azure DevOps Pipeline for a Terraform build of an Azure SQLDB. This will take the terraform code and build the required infrastructure.

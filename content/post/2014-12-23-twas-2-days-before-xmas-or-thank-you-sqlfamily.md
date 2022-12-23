@@ -11,7 +11,7 @@ tags:
   - sqlfamily
 
 
-image: /assets/uploads/2014/12/beard.png
+image: assets/uploads/2014/12/beard.png
 
 ---
 Twas 2 days before Xmas & all through the office,  

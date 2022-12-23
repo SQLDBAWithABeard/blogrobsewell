@@ -18,7 +18,7 @@ tags:
   - regex
 
 
-image: /assets/uploads/2020/02/image-16.png
+image: assets/uploads/2020/02/image-16.png
 
 ---
 I am sat in the PowerShell Saturday in Hamburg. You can see me on the right of this picture writing [my previous blog post!](https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/pester/net-powershell-notebooks-using-pester/)

@@ -17,7 +17,7 @@ tags:
   - Azure Data Studio
 
 
-image: /assets/uploads/2019/11/image-40.png
+image: assets/uploads/2019/11/image-40.png
 
 ---
 

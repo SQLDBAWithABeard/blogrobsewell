@@ -11,7 +11,7 @@ tags:
   - restore
 
 
-image: /assets/uploads/2014/03/030314_2100_rationalisa1.png
+image: assets/uploads/2014/03/030314_2100_rationalisa1.png
 
 ---
 In the [previous post](https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-one/) I showed the script to create an Excel Workbook, colour coded showing the last used date for all of the databases on servers in my sqlservers.txt file. After gathering that information over several months, there is then a requirement for someone to make a decision as to which databases can be removed.

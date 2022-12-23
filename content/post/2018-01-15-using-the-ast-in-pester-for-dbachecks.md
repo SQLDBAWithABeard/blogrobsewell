@@ -15,7 +15,7 @@ tags:
   - SQLBits
 
 
-image: /assets/uploads/2018/01/02-Pester-results-1.png
+image: assets/uploads/2018/01/02-Pester-results-1.png
 ---
 TagLine – My goal – Chrissy will appreciate Unit Tests one day 🙂
 

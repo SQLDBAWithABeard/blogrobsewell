@@ -25,7 +25,7 @@ tags:
 
 
 
-image: /assets/uploads/2020/02/image-13.png
+image: assets/uploads/2020/02/image-13.png
 
 
 ---

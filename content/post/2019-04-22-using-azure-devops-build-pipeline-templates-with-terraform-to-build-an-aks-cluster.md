@@ -17,7 +17,7 @@ tags:
   - Azure DevOps
 
 
-image: /assets/uploads/2019/04/image-151.png
+image: assets/uploads/2019/04/image-151.png
 
 ---
 In the last few posts I have moved from [building an Azure SQL DB with Terraform using VS Code](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/) to [automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) to [using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/). This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.

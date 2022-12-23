@@ -12,7 +12,7 @@ tags:
   - PowerShell
 
 
-image: /assets/uploads/2018/02/09-PowerBi.png
+image: assets/uploads/2018/02/09-PowerBi.png
 
 ---
 For the last couple of months members of the [dbatools](http://dbatools.io) team have been working on a new PowerShell module called [dbachecks](http://dbachecks.io). This open source PowerShell module will enable you to validate your SQL Instances. Today it is released for you all to start to use 🙂

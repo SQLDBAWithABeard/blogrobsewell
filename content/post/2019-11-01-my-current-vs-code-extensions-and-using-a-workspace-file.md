@@ -16,7 +16,7 @@ tags:
   - workspace
 
 
-image: /assets/uploads/2019/11/image-26.png
+image: assets/uploads/2019/11/image-26.png
 
 ---
 I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them

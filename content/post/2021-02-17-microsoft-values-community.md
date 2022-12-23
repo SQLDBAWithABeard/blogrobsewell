@@ -11,7 +11,7 @@ tags:
  - Meetup
 
 
-image: /assets/uploads/2021/MSCommunity.png
+image: assets/uploads/2021/MSCommunity.png
 ---
 
 # What Happens Next?

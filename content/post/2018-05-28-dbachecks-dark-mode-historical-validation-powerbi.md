@@ -10,7 +10,7 @@ tags:
   - dbatool
   
 
-image: /assets/uploads/2018/05/dark-mode.png
+image: assets/uploads/2018/05/dark-mode.png
 
 ---
 in [my last post](/dbachecks-save-the-results-to-a-database-for-historical-reporting/) I showed how you can save the results of dbachecks to a database and created a PowerBi report. Inspired by Frank Henninger in the #dbachecks slack channel and [Shawn Melton](https://twitter.com/wsmelton) who explained the difficulties with red/green colour blind I then created this one 🙂

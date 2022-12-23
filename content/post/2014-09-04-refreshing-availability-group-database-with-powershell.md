@@ -15,7 +15,7 @@ tags:
   - refresh
 
 
-image: /assets/uploads/2014/09/image1.png
+image: assets/uploads/2014/09/image1.png
 
 ---
 Following last weeks post on [Refreshing A Mirrored Database with PowerShell](https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2/) I thought I would write the script to refresh an Availability Group Database.

@@ -16,7 +16,7 @@ tags:
   - streaming
 
 
-image: /assets/uploads/2020/09/scottwitter.png
+image: assets/uploads/2020/09/scottwitter.png
 ---
 
 ## It started with a tweet

@@ -11,7 +11,7 @@ tags:
   - pester
   - PowerShell
 
-image: /assets/uploads/2018/01/01-Because-1.png
+image: assets/uploads/2018/01/01-Because-1.png
 ---
 I was going through my demo for the [South Coast User Group meeting](http://meetu.ps/e/DdYV6/gHMdv/g) tonight and decided to add some details about the Because parameter available in the Pester pre-release version 4.2.0.
 

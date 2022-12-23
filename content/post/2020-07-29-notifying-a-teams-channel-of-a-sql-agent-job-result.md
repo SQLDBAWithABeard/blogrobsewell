@@ -13,7 +13,7 @@ tags:
   - SQL Agent
 
 
-image: /assets/uploads/2020/07/image-18.png
+image: assets/uploads/2020/07/image-18.png
 
 ---
 Following on from [yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel](https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/), I was given another challenge

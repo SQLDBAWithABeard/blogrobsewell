@@ -10,7 +10,7 @@ tags:
   - community
 
 
-image: /assets/uploads/2017/08/tsql2sday.jpg
+image: assets/uploads/2017/08/tsql2sday.jpg
 
 ---
 [![tsql2sday](/assets/uploads/2017/08/tsql2sday.jpg)](https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/)  

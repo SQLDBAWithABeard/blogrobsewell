@@ -18,7 +18,7 @@ tags:
   - Open Source
 
 
-image: /assets/uploads/2019/11/CreatePR.png
+image: assets/uploads/2019/11/CreatePR.png
 
 ---
 I enjoy maintaining open source GitHub repositories such as [dbachecks](https://github.com/sqlcollaborative/dbachecks) and [ADSNotebook](https://github.com/sqlcollaborative/ADSNotebook). I absolutely love it when people add more functionality to them.

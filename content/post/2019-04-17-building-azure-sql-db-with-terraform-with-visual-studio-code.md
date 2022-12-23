@@ -12,7 +12,7 @@ tags:
   - IaaC
 
 
-image: /assets/uploads/2019/04/image-42.png
+image: assets/uploads/2019/04/image-42.png
 
 ---
 I have been using [Terraform](https://www.terraform.io/) for the last week or so to create some infrastructure and decided to bring that knowledge back to a problem that I and others suffer from – building environments for presentations, all for the sake of doing some learning.

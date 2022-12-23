@@ -10,7 +10,7 @@ tags:
   - GitHub 
 
 
-image: /assets/uploads/2018/05/03-New-dbccheck.png
+image: assets/uploads/2018/05/03-New-dbccheck.png
 
 ---
 I love showing [dbachecks](http://dbachecks.io) to people. It’s really cool seeing how people will use it and listening to their experiences. I was showing it to a production DBA a month or so ago and he said

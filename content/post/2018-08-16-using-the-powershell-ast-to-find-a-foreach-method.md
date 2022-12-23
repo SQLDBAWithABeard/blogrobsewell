@@ -12,7 +12,7 @@ tags:
   - PowerShell
 
 
-image: /assets/uploads/2018/08/server.png
+image: assets/uploads/2018/08/server.png
 
 ---
 In [dbachecks](http://dbachecks.io) we enable people to see what checks are available by running Get-DbcCheck. This gives a number of properties including the ‘type’ of check. This refers to the configuration item or parameter that is required to have a value for this check to run.

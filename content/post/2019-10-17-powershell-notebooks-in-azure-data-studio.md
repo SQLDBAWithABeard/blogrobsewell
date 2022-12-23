@@ -17,7 +17,7 @@ tags:
   - Notebooks
 
 
-image: /assets/uploads/2019/10/image-8.png
+image: assets/uploads/2019/10/image-8.png
 
 ---
 The latest release of the [insiders edition of Azure Data Studio](https://github.com/microsoft/azuredatastudio#try-out-the-latest-insiders-build-from-master) brings the first edition of PowerShell Notebooks!

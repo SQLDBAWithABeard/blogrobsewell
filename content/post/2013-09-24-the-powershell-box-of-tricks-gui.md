@@ -14,7 +14,7 @@ tags:
   - box-of-tricks
 
 
-image: /assets/uploads/2013/09/image86.png
+image: assets/uploads/2013/09/image86.png
   
 
 ---

@@ -11,7 +11,7 @@ tags:
   - PowerShell
 
 
-image: /assets/uploads/2018/04/VSTS-results.png
+image: assets/uploads/2018/04/VSTS-results.png
 
 ---
 It’s been 45 days since we released dbachecks

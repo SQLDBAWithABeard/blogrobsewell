@@ -15,7 +15,7 @@ tags:
   - verbose
 
 
-image: /assets/uploads/2018/01/02-Showing-the-results.png
+image: assets/uploads/2018/01/02-Showing-the-results.png
 ---
 Before you run a PowerShell command that makes a change to something you should check that it is going to do what you expect. You can do this by using the WhatIf parameter for commands that support it. For example, if you wanted to create a New SQL Agent Job Category you would use the [awesome dbatools module](http://dbatools.io) and write some code like this
 
