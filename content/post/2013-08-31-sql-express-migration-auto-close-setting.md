@@ -9,8 +9,8 @@ tags:
   - migration
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2013/08/image_thumb.png
+
+image: /assets/uploads/2013/08/image_thumb.png
 
 ---
 With over 700 databases to look after at MyWork automation is high on my list of priorities. I have two PowerShell scripts which run regularly checking SQL Error logs. One checks for the output from DBCC CHECKDB and one for errors. They then email the results to the DBA team.

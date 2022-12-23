@@ -14,8 +14,8 @@ tags:
  - Secrets
  
 
-header:
-  teaser: https://blog.robsewell.com/assets/uploads/2021/michael-dziedzic-1bjsASjhfkE-unsplash.jpg
+
+image: https://blog.robsewell.com/assets/uploads/2021/michael-dziedzic-1bjsASjhfkE-unsplash.jpg
 ---
 
 # I REALLY needed to see the values

@@ -18,8 +18,8 @@ tags:
   - TSql2sDay
   - Jupyter Notebooks
 
-header:
-  teaser: /assets/images/TSQL2sDay150x150.jpg
+
+image: /assets/images/TSQL2sDay150x150.jpg
 
 ---
 # Automation

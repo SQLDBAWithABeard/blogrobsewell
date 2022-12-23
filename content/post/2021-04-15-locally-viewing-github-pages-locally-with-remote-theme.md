@@ -17,8 +17,8 @@ tags:
  - jekyll
  - GitHub Pages
 
-header:
-  teaser: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png
+
+image: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png
 ---
 
 # A different method for my own site

@@ -14,8 +14,8 @@ tags:
  - Automation
  - YAML
 
-header:
-  teaser: /assets/uploads/2021/datasaturdays.png
+
+image: /assets/uploads/2021/datasaturdays.png
 ---
 
 # Creating a New Data Saturdays Event

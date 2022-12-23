@@ -11,8 +11,8 @@ tags:
   - pester
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2018/02/03-autocomplete.png
+
+image: /assets/uploads/2018/02/03-autocomplete.png
 
 ---
 Today is the day that [we have announced dbachecks](/?p=8997)  a PowerShell module enabling you to validate your SQL Instances. You can read more about it [here where you can learn how to install it and see some simple use cases](/?p=8997)

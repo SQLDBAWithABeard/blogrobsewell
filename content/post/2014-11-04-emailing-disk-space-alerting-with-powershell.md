@@ -12,8 +12,8 @@ tags:
   - disk space
   - alerting
 
-header:
-  teaser: /assets/uploads/2014/11/image_thumb.png
+
+image: /assets/uploads/2014/11/image_thumb.png
 
 ---
 A DBA doesn’t want to run out of space on their servers, even in their labs! To avoid this happening I wrote a Powershell script to provide some alerts by email.

@@ -15,8 +15,8 @@ tags:
   - Azure Data Studio
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2020/03/image-22.png
+
+image: /assets/uploads/2020/03/image-22.png
 
 ---
 [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693) is a great tool for connecting with your data platform whether it is in Azure or on your hardware. [Jupyter Notebooks](https://blog.robsewell.com/?s=notebooks) are fantastic, you can have words, pictures, code and code results all saved in one document.

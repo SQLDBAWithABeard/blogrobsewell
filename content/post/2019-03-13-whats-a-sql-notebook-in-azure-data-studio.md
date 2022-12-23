@@ -17,8 +17,8 @@ tags:
   - Jupyter Notebooks
   - Azure Data Studio
 
-header:
-  teaser: /assets/uploads/2019/03/image-7.png
+
+image: /assets/uploads/2019/03/image-7.png
 ---
 [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017?WT.mc_id=DP-MVP-5002693) is a cross-platform database tool for data professionals using the Microsoft family of on-premises and cloud data platforms on Windows, MacOS, and Linux.
 

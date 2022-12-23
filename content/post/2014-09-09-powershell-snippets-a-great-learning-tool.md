@@ -11,8 +11,8 @@ tags:
   - SMO
   - data table
 
-header:
-  teaser: /assets/uploads/2014/09/image9.png
+
+image: /assets/uploads/2014/09/image9.png
 
 ---
 When I talk to people about Powershell they often ask how can they easily learn the syntax. Here’s a good tip

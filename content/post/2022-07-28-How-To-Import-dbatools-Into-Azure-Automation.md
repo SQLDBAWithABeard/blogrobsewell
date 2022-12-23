@@ -15,8 +15,8 @@ tags:
   - Azure
   - pwsh
 
-header:
-  teaser: https://images.unsplash.com/photo-1614791962365-7590111b1b1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80
+
+image: https://images.unsplash.com/photo-1614791962365-7590111b1b1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80
 ---
 There are a number of methods to import PowerShell modules into Azure automation [as described in the documentation here](https://docs.microsoft.com/en-us/azure/automation/shared-resources/modules?WT.mc_id=DP-MVP-5002693)
 

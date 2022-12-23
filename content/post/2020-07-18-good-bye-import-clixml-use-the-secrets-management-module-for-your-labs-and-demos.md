@@ -22,8 +22,8 @@ tags:
   - Microsoft
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2020/07/image-1.png
+
+image: /assets/uploads/2020/07/image-1.png
 ---
 Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.  
   

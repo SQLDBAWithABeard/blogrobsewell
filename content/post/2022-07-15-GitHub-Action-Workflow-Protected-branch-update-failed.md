@@ -19,8 +19,8 @@ tags:
  - PowerShell
  - Dev Containers
 
-header:
-  teaser: https://images.unsplash.com/photo-1580265862291-4251b8c7e836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 
+
+image: https://images.unsplash.com/photo-1580265862291-4251b8c7e836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 
 ---
 
 [The last post](/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/) showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.

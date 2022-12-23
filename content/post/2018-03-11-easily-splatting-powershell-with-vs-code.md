@@ -10,8 +10,8 @@ tags:
   - splat
   - splatting
 
-header:
-  teaser: https://pbs.twimg.com/media/DX8UjepX0AYnDMS?format=jpg&name=large
+
+image: https://pbs.twimg.com/media/DX8UjepX0AYnDMS?format=jpg&name=large
 
 ---
 So I always like to show splatting PowerShell commands when I am presenting sessions or workshops and realised that I had not really blogged about it. (This blog is for [@dbafromthecold](https://twitter.com/dbafromthecold) who asked me to 🙂 )

@@ -13,8 +13,8 @@ tags:
   - VS Code
   - Live Share
 
-header:
-  teaser: /assets/uploads/2018/05/07-sign-in.png
+
+image: /assets/uploads/2018/05/07-sign-in.png
 
 ---
 There was an [announcement on the Visual Studio Code blog](https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview) about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.

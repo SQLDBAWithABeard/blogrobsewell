@@ -16,8 +16,8 @@ tags:
   - Terraform
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2019/04/image-125.png
+
+image: /assets/uploads/2019/04/image-125.png
 
 ---
 In my posts about using Azure Devops to build Azure resources with Terraform, [I built a Linux SQL VM.](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/) I used the [Terraform in this GitHub](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM) repository and created this

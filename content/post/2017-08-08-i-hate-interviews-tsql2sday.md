@@ -8,8 +8,8 @@ tags:
   - TSql2sDay
   - interview
 
-header:
-  teaser: https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg
+
+image: https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg
 ---
 [![tsql2sday](https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg)](https://littlekendra.com/2017/08/01/tsql-tuesday-93-interviewing-patterns-anti-patterns/)
 

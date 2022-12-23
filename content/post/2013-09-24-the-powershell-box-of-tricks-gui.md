@@ -13,8 +13,8 @@ tags:
   - SQL Server
   - box-of-tricks
 
-header:
-  teaser: /assets/uploads/2013/09/image86.png
+
+image: /assets/uploads/2013/09/image86.png
   
 
 ---

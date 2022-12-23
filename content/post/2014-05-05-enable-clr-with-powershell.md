@@ -9,8 +9,8 @@ tags:
   - Invoke-SqlCmd2
   - Configuration
 
-header:
-  teaser: /assets/uploads/2014/05/050514_0904_enableclrwi2.png
+
+image: /assets/uploads/2014/05/050514_0904_enableclrwi2.png
 
 ---
 I had an email last night from someone who attended my PowerShell Box of Tricks session at [SQL Saturday Exeter](http://sqlsouthwest.co.uk/sqlsat269/)

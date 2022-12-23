@@ -14,8 +14,8 @@ tags:
   - SQL Server
   - SQLBrit
 
-header:
-  teaser: /assets/uploads/2013/02/medium_33194896_thumb.jpg
+
+image: /assets/uploads/2013/02/medium_33194896_thumb.jpg
 ---
 
 ![medium_33194896]({{ "/assets/uploads/2013/02/medium_33194896_thumb.jpg" | relative_url }})

@@ -7,8 +7,8 @@ categories:
 tags:
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2014/02/ps1.jpg
+
+image: /assets/uploads/2014/02/ps1.jpg
 
 ---
 A quick and simple post today as I have been very busy. I needed to list the users with permissions on mirroring endpoints today so I wrote this script and figured it was worth sharing.

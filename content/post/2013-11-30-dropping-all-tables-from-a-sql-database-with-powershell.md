@@ -12,8 +12,8 @@ tags:
   - sql
   - SQL Server
 
-header:
-  teaser: /assets/uploads/2013/11/image7.png
+
+image: /assets/uploads/2013/11/image7.png
 
 ---
 This post could also have been titled confusion with `foreach` or `For-EachObject`

@@ -13,8 +13,8 @@ tags:
   - smo
   - snippet
 
-header:
-  teaser: assets/uploads/2017/02/remove-them-all.png
+
+image: assets/uploads/2017/02/remove-them-all.png
 ---
 One of the most visited posts on my blog is nearly two and half years old now – <A href="https://blog.robsewell.com/blog/dbatools/powershell/sql%20server/add-user-to-database-role-with-powershell/" target=_blank>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</A>.&nbsp;I thought it was time to update it and use the <A href="https://msdn.microsoft.com/en-us/library/hh245198.aspx" target=_blank>latest sqlserver module</A> and the <A href="https://dbatools.io/" target=_blank>dbatools module</A>.
 

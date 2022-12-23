@@ -9,8 +9,8 @@ tags:
   - dbachecks
   - dbatools
 
-header:
-  teaser: /assets/uploads/2018/05/04-get-dbacheck-ogv.png
+
+image: /assets/uploads/2018/05/04-get-dbacheck-ogv.png
 
 ---
 With the latest release of [dbachecks](https://www.powershellgallery.com/packages/dbachecks/1.1.128) we have added a new check for testing that foreign keys and constraints are trusted thanks to Cláudio Silva [b](https://claudioessilva.eu/) | [t](https://twitter.com/ClaudioESSilva)

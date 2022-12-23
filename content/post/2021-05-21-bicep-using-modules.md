@@ -14,8 +14,8 @@ tags:
  - VS Code
 
 
-header:
-  teaser: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png
+
+image: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png
 ---
 
 # Reusable code

@@ -10,8 +10,8 @@ tags:
   - PowerShell
   - POwer Bi
 
-header:
-  teaser: /assets/uploads/2018/05/08-filter-by-instance-and-insance.png
+
+image: /assets/uploads/2018/05/08-filter-by-instance-and-insance.png
 
 ---
 I gave a presentation at [SQL Day](https://sqlday.pl/en/) in Poland last week on [dbachecks](http://dbachecks.io) and one of the questions I got asked was will you write a command to put the results of the checks into a database for historical reporting.

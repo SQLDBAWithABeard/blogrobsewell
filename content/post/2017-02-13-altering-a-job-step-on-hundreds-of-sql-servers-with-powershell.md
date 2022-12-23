@@ -13,8 +13,8 @@ tags:
   - PowerShell
   - script
 
-header:
-  teaser: https://dbatools.io/wp-content/uploads/2016/05/dbatools-logo-1.png
+
+image: https://dbatools.io/wp-content/uploads/2016/05/dbatools-logo-1.png
 
 ---
 I flew to Utrecht last week to present with <A href="https://twitter.com/cl" target=_blank>Chrissy LeMaire</A> and <A href="https://twitter.com/SQLStad" target=_blank>Sander Stad</A> for the joint Dutch SQL and PowerShell User Groups. Whilst I was sat at the airport I got a phone call from my current client. 

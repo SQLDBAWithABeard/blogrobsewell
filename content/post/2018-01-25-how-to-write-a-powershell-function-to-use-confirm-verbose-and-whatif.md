@@ -10,8 +10,8 @@ tags:
   - PowerShell
   - verbose
 
-header:
-  teaser: /assets/uploads/2018/01/03-confirm.png
+
+image: /assets/uploads/2018/01/03-confirm.png
 ---
 In [my last blog post](https://blog.robsewell.com/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/) I showed how to run a script with the WhatIf parameter. This assumes that the commands within the script have been written to use the common parameters Confirm, Verbose and WhatIf.
 

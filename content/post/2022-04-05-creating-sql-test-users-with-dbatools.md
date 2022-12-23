@@ -14,6 +14,6 @@ tags:
   - smo
   - snippet
 
-header:
-  teaser: assets/uploads/2017/02/remove-them-all.png
+
+image: assets/uploads/2017/02/remove-them-all.png
 ---

@@ -15,8 +15,8 @@ tags:
   - presenting
   - streaming
 
-header:
-  teaser: /assets/uploads/2020/09/scottwitter.png
+
+image: /assets/uploads/2020/09/scottwitter.png
 ---
 
 ## It started with a tweet

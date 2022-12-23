@@ -21,8 +21,8 @@ tags:
  - PowerShell
  - Dev Containers
 
-header:
-  teaser: https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80
+
+image: https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80
 ---
 
 [The last post](/blog/community/Training-Day-Speakers-List) showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.

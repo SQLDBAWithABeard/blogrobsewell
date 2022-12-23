@@ -12,8 +12,8 @@ tags:
   - Azure DevOps
   - automation
 
-header:
-  teaser: /assets/uploads/2019/04/image-49.png
+
+image: /assets/uploads/2019/04/image-49.png
 ---
 In [my last post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/) I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.
 

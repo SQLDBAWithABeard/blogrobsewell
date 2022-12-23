@@ -17,8 +17,8 @@ tags:
   - Notebooks
   - Azure Dev Ops
 
-header:
-  teaser: /assets/uploads/2019/11/image-39.png
+
+image: /assets/uploads/2019/11/image-39.png
 ---
 Now that [Azure Data Studio](https://aka.ms/azuredatastudio) has [PowerShell Notebooks](https://docs.microsoft.com/en-us/sql/azure-data-studio/release-notes-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693) and there is a [PowerShell Module for creating notebooks](https://blog.robsewell.com/create-a-powershell-notebook-for-azure-data-studio-with-powershell/). I have been asked, more than once, what is the point? What is the use case? How does this help. I hope that this post will spark some ideas of one particular use-case.
 

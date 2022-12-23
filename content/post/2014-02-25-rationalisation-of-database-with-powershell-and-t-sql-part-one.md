@@ -11,8 +11,8 @@ tags:
   - PowerShell
   - rationalise
 
-header:
-  teaser: /assets/uploads/2014/02/usage-excel.jpg
+
+image: /assets/uploads/2014/02/usage-excel.jpg
 
 ---
 I have recently been involved in a project to rationalise databases. It is easy in a large organisation for database numbers to rapidly increase and sometimes the DBA may not be aware of or be able to control the rise if they don’t have knowledge of all of the database servers on the estate.

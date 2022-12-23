@@ -14,8 +14,8 @@ tags:
   - Teams
   - SQL Agent
 
-header:
-  teaser: /assets/uploads/2020/07/image-11.png
+
+image: /assets/uploads/2020/07/image-11.png
 
 ---
 Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.

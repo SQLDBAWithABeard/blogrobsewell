@@ -13,8 +13,8 @@ tags:
   - indexes
   - file groups
 
-header:
-  teaser: /assets/uploads/2014/09/image8.png
+
+image: /assets/uploads/2014/09/image8.png
 
 ---
 A short post today to pass on a script I wrote to fulfil a requirement I had.

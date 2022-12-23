@@ -14,8 +14,8 @@ tags:
  - dbachecks
  - dbatools
 
-header:
-  teaser: /assets/images/TSQL2sDay150x150.jpg
+
+image: /assets/images/TSQL2sDay150x150.jpg
 ---
 
 # Do I use Notebooks?

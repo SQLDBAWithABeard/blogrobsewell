@@ -13,8 +13,8 @@ tags:
  - pipeline
 
 
-header:
-  teaser: /assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg
+
+image: /assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg
 ---
 
 # Can\'t find loc string for key: JS_InvalidFilePath

@@ -9,7 +9,7 @@ tags:
   - docker
   - volumes
 
-header:
+
   teaser /assets/uploads/2019/03/image-27.png
 
 ---

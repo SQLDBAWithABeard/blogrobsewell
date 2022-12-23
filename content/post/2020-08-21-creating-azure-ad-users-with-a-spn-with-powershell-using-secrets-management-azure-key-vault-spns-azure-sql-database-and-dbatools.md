@@ -19,8 +19,8 @@ tags:
   - Azure SQL Database
   - Key Vault
 
-header:
-  teaser: /assets/uploads/2020/08/image-16.png
+
+image: /assets/uploads/2020/08/image-16.png
 
 ---
 Following on from my posts about using Secret Management [Good bye Import-CliXml](https://blog.robsewell.com/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/) and [running programmes as a different user](https://blog.robsewell.com/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/), I have another use case.

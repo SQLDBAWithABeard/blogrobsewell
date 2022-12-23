@@ -16,8 +16,8 @@ tags:
   - Testing
   - dbatools
 
-header:
-  teaser: /assets/uploads/2019/04/image-51.png
+
+image: /assets/uploads/2019/04/image-51.png
 
 ---
 For a later blog post I have been trying to generate some workload against an AdventureWorks database.

@@ -7,8 +7,8 @@ categories:
 tags:
   - TSql2sDay
 
-header:
-  teaser: /assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg
+
+image: /assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg
 
 ---
 ![farrel-nobel-97504-unsplash](/assets/uploads/2018/08/farrel-nobel-97504-unsplash.jpg)

@@ -10,8 +10,8 @@ tags:
   - PowerShell
   - PSScriptAnalyzer
 
-header:
-  teaser: /assets/uploads/2018/02/formatting.gif
+
+image: /assets/uploads/2018/02/formatting.gif
 
 ---
 I love VS Code. I love being able to press ALT + SHIFT + F and format my code.

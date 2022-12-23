@@ -19,8 +19,8 @@ tags:
  - Log Analytics
  - AKS
 
-header:
-  teaser: https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/connecteddc.png
+
+image: https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/connecteddc.png
 ---
 
 # Want to play before GA ?

@@ -12,8 +12,8 @@ tags:
   - PowerShell
   - psconfeu
 
-header:
-  teaser: /assets/uploads/2018/05/32-Dashboard.png
+
+image: /assets/uploads/2018/05/32-Dashboard.png
 
 ---
 At the fabulous [PowerShell Conference EU](http://psconf.eu) I presented about Continuous Delivery to the PowerShell Gallery with VSTS and explained how we use VSTS to enable CD for [dbachecks](http://dbachecks.io). We even released a new version during the session 🙂 

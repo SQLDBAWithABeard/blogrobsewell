@@ -21,8 +21,8 @@ tags:
   - Glenn Berry
   - Diagnostic Notebooks
 
-header:
-  teaser: /assets/uploads/2019/07/image-4.png
+
+image: /assets/uploads/2019/07/image-4.png
 
 ---
 I have done a lot of writing in the last few months but you see no blog posts! My wonderful friend Chrissy and I are writing “dbatools in a Month of Lunches” to be published by Manning. That has taken up a lot of my writing mojo. We have hit a little break whilst we have some reviews done ready for the [MEAP](https://www.manning.com/meap-program) (For everyone who asks, the answer is the unfulfilling ‘soon’) so it’s time for a blog post!

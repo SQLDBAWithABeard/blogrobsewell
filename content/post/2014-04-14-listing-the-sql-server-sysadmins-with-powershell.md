@@ -9,8 +9,8 @@ tags:
   - permissions
   - PowerShell
 
-header:
-  teaser: /assets/uploads/2014/04/2014-04-12_152433.jpg
+
+image: /assets/uploads/2014/04/2014-04-12_152433.jpg
 
 
 ---

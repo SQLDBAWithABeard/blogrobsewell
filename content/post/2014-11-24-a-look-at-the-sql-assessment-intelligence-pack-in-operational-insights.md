@@ -11,8 +11,8 @@ tags:
   - Operational Insights
   - SCOM
 
-header:
-  teaser: /assets/uploads/2014/11/opsman1.jpg
+
+image: /assets/uploads/2014/11/opsman1.jpg
 ---
 Operational Insights is a service that has been added in preview to Azure. It enables you to collect, combine, correlate and visualize all your machine data in one place. It can collect data from all of your machines either via SCOM or by using an agent. Once the data is collected Operational Insights has a number of Intelligence Packs which have pre-configured rules and algorithms to provide analysis in various areas including for SQL Server
 

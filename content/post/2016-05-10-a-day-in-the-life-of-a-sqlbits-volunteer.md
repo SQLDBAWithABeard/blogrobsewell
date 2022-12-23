@@ -11,8 +11,8 @@ tags:
   - Volunteering
   - Orange Shirts
 
-header:
-  teaser: /assets/uploads/2016/05/dscn0286-3.jpg
+
+image: /assets/uploads/2016/05/dscn0286-3.jpg
 
 ---
 [![image](https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg)](https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg) 
