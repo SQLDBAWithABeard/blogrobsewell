@@ -1,5 +1,5 @@
 ---
-title: '#NewStarNovember - Being a mentor'
+title: 'NewStarNovember - Being a mentor'
 
 date: "2022-11-27" 
 categories:
