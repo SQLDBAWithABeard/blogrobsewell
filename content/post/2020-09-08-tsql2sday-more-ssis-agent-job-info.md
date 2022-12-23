@@ -1,5 +1,6 @@
 ---
 title: "#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information"
+slug: "tsql2sday 130 - Automate your stress away - Getting more SSIS Agent Job information"
 date: "2020-09-08" 
 categories:
   - Blog
@@ -19,7 +20,7 @@ tags:
   - Jupyter Notebooks
 
 
-image: /assets/images/TSQL2sDay150x150.jpg
+image: assets/images/TSQL2sDay150x150.jpg
 
 ---
 # Automation

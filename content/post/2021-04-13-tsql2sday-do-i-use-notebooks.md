@@ -15,7 +15,7 @@ tags:
  - dbatools
 
 
-image: /assets/images/TSQL2sDay150x150.jpg
+image: assets/images/TSQL2sDay150x150.jpg
 ---
 
 # Do I use Notebooks?
@@ -27,7 +27,7 @@ This month’s T-SQL Tuesday is hosted by Steve. Steve says:
 >I want you to write about how you have used, or would like to use, a Jupyter notebook. This seemed to be exciting for many people at first, but I haven’t seen a lot of uptake from users in general. So I’m curious if you are using them.
 
 [The original post is here.](https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day)  
-[![tsql2sday](/assets/images/TSQL2sDay150x150.jpg)](https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day)  
+[![tsql2sday](assets/images/TSQL2sDay150x150.jpg)](https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day)  
 
 # Am I using Notebooks ?
 

@@ -11,7 +11,7 @@ tags:
  - tools
 
 
-image: /assets/images/TSQL2sDay150x150.jpg
+image: assets/images/TSQL2sDay150x150.jpg
 ---
 
 # Tooling for TSQL2sDay
