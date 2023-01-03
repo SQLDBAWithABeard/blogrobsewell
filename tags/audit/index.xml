@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>audit on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/audit/</link><description>Recent content in audit on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 14 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/audit/index.xml" rel="self" type="application/rss+xml"/><item><title>Listing the SQL Server SysAdmins With PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/listing-the-sql-server-sysadmins-with-powershell/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/listing-the-sql-server-sysadmins-with-powershell/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/04/2014-04-12_152433.jpg" alt="Featured image of post Listing the SQL Server SysAdmins With PowerShell" />&lt;p>A very short blog today just to pass on this little script.&lt;/p>
+&lt;p>I was required to list all of the SysAdmins across a large estate. Obviously I turned to PowerShell 🙂&lt;/p>
+&lt;p>I iterated through my server list collection and then created a server SMO object and used the EnumServerRoleMembers method to display all of the sysadmin members&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg"
+loading="lazy"
+alt="2014-04-12_152433"
+>&lt;/a>&lt;/p>
+&lt;p>This will work on SQL2000 – SQL2012. You can see how you can easily change the rolename in the script to enumerate other server roles.&lt;/p>
+&lt;p>Another way you could do it is to use the query&lt;/p>
+&lt;pre>&lt;code>SELECT c.name AS Sysadmin_Server_Role_Members
+FROM sys.server_principals a
+INNER JOIN sys.server_role_members b
+ON a.principal_id = b.role_principal_id AND a.type = 'R' AND a.name ='sysadmin'
+INNER JOIN sys.server_principals c
+ON b.member_principal_id = c.principal_id
+&lt;/code>&lt;/pre>
+&lt;p>and pass that with &lt;code>Invoke-SQLCMD&lt;/code> through to every server (if you had to use Powershell 🙂 ). That query won’t work with SQL 2000 though&lt;/p></description></item></channel></rss>

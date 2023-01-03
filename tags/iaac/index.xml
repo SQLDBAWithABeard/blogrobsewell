@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>IaaC on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/iaac/</link><description>Recent content in IaaC on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 17 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/iaac/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Azure SQL Db with Terraform with Visual Studio Code</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</link><pubDate>Wed, 17 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-42.png" alt="Featured image of post Building Azure SQL Db with Terraform with Visual Studio Code" />&lt;p>I have been using &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>Terraform&lt;/a> for the last week or so to create some infrastructure and decided to bring that knowledge back to a problem that I and others suffer from – building environments for presentations, all for the sake of doing some learning.&lt;/p>
+&lt;h2 id="what-is-terraform">What is Terraform?&lt;/h2>
+&lt;p>According to the website&lt;/p>
+&lt;blockquote>
+&lt;p>HashiCorp Terraform enables you to safely and predictably create, change, and improve infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>https://www.terraform.io/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>This means that I can define my infrastructure as code. If I can do that then I can reliably do the same thing again and again, at work to create environments that have the same configuration or outside of work to repeatedly build the environment I need.&lt;/p>
+&lt;h2 id="building-an-azure-sql-database-with-terraform">Building an Azure SQL Database with Terraform&lt;/h2>
+&lt;p>To understand how to build a thing the best place to start is the documentation &lt;a class="link" href="https://www.terraform.io/docs" target="_blank" rel="noopener"
+>https://www.terraform.io/docs&lt;/a> . For an &lt;a class="link" href="https://www.terraform.io/docs/providers/azurerm/r/sql_database.html" target="_blank" rel="noopener"
+>Azure SQL Db in the docs&lt;/a> you will find a block of code that looks like this&lt;/p>
+&lt;pre>&lt;code> resource &amp;quot;azurerm_resource_group&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;acceptanceTestResourceGroup1&amp;quot;
+location = &amp;quot;West US&amp;quot;
+}
+resource &amp;quot;azurerm_sql_server&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;mysqlserver&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group.test.name}&amp;quot;
+location = &amp;quot;West US&amp;quot;
+version = &amp;quot;12.0&amp;quot;
+administrator_login = &amp;quot;4dm1n157r470r&amp;quot;
+administrator_login_password = &amp;quot;4-v3ry-53cr37-p455w0rd&amp;quot;
+}
+resource &amp;quot;azurerm_sql_database&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;mysqldatabase&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group.test.name}&amp;quot;
+location = &amp;quot;West US&amp;quot;
+server_name = &amp;quot;${azurerm_sql_server.test.name}&amp;quot;
+tags = {
+environment = &amp;quot;production&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>If you read the code, you can see that there are key value pairs defining information about the resource that is being created. Anything inside a ${} is a dynamic reference. So&lt;/p>
+&lt;p>resource_group_name = &amp;ldquo;${azurerm_resource_group.test.name}&amp;rdquo;
+refers to the name property in the azure_resource_group block called test (or the name of the resource group 🙂 )&lt;/p>
+&lt;h2 id="infrastructure-as-code">Infrastructure As Code&lt;/h2>
+&lt;p>So I can put that code into a file (name it main.tf) and alter it with the values and “run Terraform” and what I want will be created. Lets take it a step further though because I want to be able to reuse this code. Instead of hard-coding all of the values I am going to use variables. I can do this by creating another file called variables.tf which looks like&lt;/p>
+&lt;pre>&lt;code> variable &amp;quot;presentation&amp;quot; {
+description = &amp;quot;The name of the presentation - used for tagging Azure resources so I know what they belong to&amp;quot;
+default = &amp;quot;dataindevon&amp;quot;
+}
+variable &amp;quot;ResourceGroupName&amp;quot; {
+description = &amp;quot;The Resource Group Name&amp;quot;
+default = &amp;quot;beardrules&amp;quot;
+}
+variable &amp;quot;location&amp;quot; {
+description = &amp;quot;The Azure Region in which the resources in this example should exist&amp;quot;
+default = &amp;quot;uksouth&amp;quot;
+}
+variable &amp;quot;SqlServerName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;jeremy&amp;quot;
+}
+variable &amp;quot;SQLServerAdminUser&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server Admin user for the Azure SQL Database&amp;quot;
+default = &amp;quot;Beard&amp;quot;
+}
+variable &amp;quot;SQLServerAdminPassword&amp;quot; {
+description = &amp;quot;The Azure SQL Database users password&amp;quot;
+default = &amp;quot;JonathanlovesR3ge%&amp;quot;
+}
+variable &amp;quot;SqlDatabaseName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;jsdb&amp;quot;
+}
+variable &amp;quot;Edition&amp;quot; {
+description = &amp;quot;The Edition of the Database - Basic, Standard, Premium, or DataWarehouse&amp;quot;
+default = &amp;quot;Standard&amp;quot;
+}
+variable &amp;quot;ServiceObjective&amp;quot; {
+description = &amp;quot;The Service Tier S0, S1, S2, S3, P1, P2, P4, P6, P11 and ElasticPool&amp;quot;
+default = &amp;quot;S0&amp;quot;
+}
+&lt;/code>&lt;/pre>
+&lt;p>and my main.tf then looks like this.&lt;/p>
+&lt;pre>&lt;code>provider &amp;quot;azurerm&amp;quot; {
+version = &amp;quot;=1.24.0&amp;quot;
+}
+resource &amp;quot;azurerm_resource_group&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.ResourceGroupName}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_server&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlServerName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group. presentation.name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+version = &amp;quot;12.0&amp;quot;
+administrator_login = &amp;quot;${var.SQLServerAdminUser}&amp;quot;
+administrator_login_password = &amp;quot;${var.SQLServerAdminPassword} &amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_database&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlDatabaseName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_sql_server.presentation. resource_group_name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+server_name = &amp;quot;${azurerm_sql_server.presentation. name}&amp;quot;
+edition = &amp;quot;${var.Edition}&amp;quot;
+requested_service_objective_name = &amp;quot;${var.ServiceObjective}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>You can find these files in my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB/tree/master/Manual" target="_blank" rel="noopener"
+>GitHub Repository&lt;/a> here.&lt;/p>
+&lt;h2 id="alright--deploy-something">Alright – deploy something&lt;/h2>
+&lt;p>To deploy the code that I have written I need to download Terraform from &lt;a class="link" href="https://www.terraform.io/downloads.html" target="_blank" rel="noopener"
+>https://www.terraform.io/downloads.html&lt;/a> and then extract the exe to a folder in my PATH. (I chose C:\Windows). Then in Visual Studio Code I installed two extensions The &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=mauve.terraform" target="_blank" rel="noopener"
+>Terraform Extension by Mikael Olenfalk&lt;/a> which enables syntax highlighting and auto-completion for the tf files and the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform" target="_blank" rel="noopener"
+>Azure Terraform&lt;/a> extension. You will need also need &lt;a class="link" href="https://nodejs.org/en/" target="_blank" rel="noopener"
+>Node.js from here&lt;/a>.&lt;/p>
+&lt;p>With those in place I navigated to the directory holding my files in Visual Studio Code and pressed F1 and started typing azure terraform and chose Azure Terraform Init&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-39.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-39.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I was then prompted to use Cloud Shell and a browser opened to login. Once I had logged in I waited until I saw this&lt;/p>
+&lt;p>&lt;a class="link" href="blob:https://blog.robsewell.com/787b935b-930a-45c4-ac43-18a18193e01f" >&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-40.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I press F1 again and this time choose Azure Terraform plan. This is going to show me what Terraform is going to do if it applies this configuration.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-41.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-41.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can see the what is going to be created. It is going to create 3 things&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have checked that the plan is what you want, press F1 again and choose Azure Terraform Apply&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-43.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-43.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You are then asked to confirm that this is what you want. Only “yes” will be accepted. Then you will see the infrastructure being created&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-44.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and a minute later&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-45.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-45.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and Jeremy exists in the beardrules resource group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then once I have finished with using the sqlinstance. I can press F1 again and choose Azure Terraform Destroy. Again there is a confirmation required.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-47.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-47.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and you will see the progress for 46 seconds&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-50.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and all of the resources have gone.&lt;/p>
+&lt;p>Thats a good start. This enables me to create resources quickly and easily and keep the configuration for them safely in source control and easy to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>In my next post I will create an Azure DevOps pipeline to deploy an AZure SQL Db withTerraform&lt;/a>.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>The post after will show how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/" target="_blank" rel="noopener"
+>The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster&lt;/a>&lt;/p></description></item></channel></rss>

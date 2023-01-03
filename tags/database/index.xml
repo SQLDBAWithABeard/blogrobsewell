@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>database on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/database/</link><description>Recent content in database on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 22 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/database/index.xml" rel="self" type="application/rss+xml"/><item><title>Taking dbatools Test-DbaLastBackup a little further</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/taking-dbatools-test-dbalastbackup-a-little-further/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/taking-dbatools-test-dbalastbackup-a-little-further/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Rationalisation of Database with Powershell and T-SQL part one</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/rationalisation-of-database-with-powershell-and-t-sql-part-one/</link><pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/rationalisation-of-database-with-powershell-and-t-sql-part-one/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/02/usage-excel.jpg" alt="Featured image of post Rationalisation of Database with Powershell and T-SQL part one" />&lt;p>I have recently been involved in a project to rationalise databases. It is easy in a large organisation for database numbers to rapidly increase and sometimes the DBA may not be aware of or be able to control the rise if they don’t have knowledge of all of the database servers on the estate.&lt;/p>
+&lt;p>There are lots of benefits of rationalisation to the business. Reduced cpu usage = reduced heat released = lower air-con bill for the server room and less storage used = quicker backups and less tapes used or better still less requirement for that expensive new SAN. You may be able to consolidate data and provide one version of the truth for the business as well. Removing servers can release licensing costs which could then be diverted elsewhere or pay for other improvements.&lt;/p>
+&lt;p>William Durkin &lt;a class="link" href="http://williamdurkin.com/" target="_blank" rel="noopener"
+>b&lt;/a>  &lt;a class="link" href="https://twitter.com/sql_williamd" target="_blank" rel="noopener"
+>t&lt;/a> presented to the &lt;a class="link" href="http://sqlsouthwest.co.uk" target="_blank" rel="noopener"
+>SQL South West User Group&lt;/a> about this and will be doing the session at SQL Saturday in Exeter in March 2014 Please check out his session for a more detailed view&lt;/p>
+&lt;p>I needed to be able to identify databases that could possibly be deleted and realised that an easy way to achieve this would be to use a script to check for usage of the database.&lt;/p>
+&lt;p>No need to recreate the wheel so I went to Aaron Bertrands blog &lt;a class="link" href="http://sqlblog.com/blogs/aaron_bertrand/archive/2008/05/06/when-was-my-database-table-last-accessed.aspx" target="_blank" rel="noopener"
+>http://sqlblog.com/blogs/aaron_bertrand/archive/2008/05/06/when-was-my-database-table-last-accessed.aspx&lt;/a> and used his script. Instead of using an audit file I decided to use Powershell so that I could output the results to Excel and colour code them. This made it easier to check the results and also easier to show to Managers and Service Owners&lt;/p>
+&lt;pre>&lt;code>#################################################################################
+# NAME: lastdbusage.ps1
+# AUTHOR: Rob Sewell
+# https://blog.robsewell.com
+# DATE:19/10/2013
+#
+# COMMENTS: Fill Excel WorkBook with details fo last access times for each database
+#
+# NOTES : Does NOT work with SQL 2000 boxes
+$FileName = '' # Set a filename for the output
+# Get List of sql servers to check
+$sqlservers = Get-Content '' # serverlist, database query whatever
+# Set SQL Query
+$query = &amp;quot;WITH agg AS
+(
+SELECT
+max(last_user_seek) last_user_seek,
+max(last_user_scan) last_user_scan,
+max(last_user_lookup) last_user_lookup,
+max(last_user_update) last_user_update,
+sd.name dbname
+FROM
+sys.dm_db_index_usage_stats, master..sysdatabases sd
+WHERE
+sd.name not in('master','tempdb','model','msdb')
+AND
+database_id = sd.dbid group by sd.name
+)
+SELECT
+dbname,
+last_read = MAX(last_read),
+last_write = MAX(last_write)
+FROM
+(
+SELECT dbname, last_user_seek, NULL FROM agg
+UNION ALL
+SELECT dbname, last_user_scan, NULL FROM agg
+UNION ALL
+SELECT dbname, last_user_lookup, NULL FROM agg
+UNION ALL
+SELECT dbname, NULL, last_user_update FROM agg
+) AS x (dbname, last_read, last_write)
+GROUP BY
+dbname
+ORDER BY 1;
+&amp;quot;
+#Open Excel
+$xl = new-object -comobject excel.application
+$wb = $xl.Workbooks.Add()
+# Load SMO extension
+[System.Reflection.Assembly]::LoadWithPartialName(&amp;quot;Microsoft.SqlServer.Smo&amp;quot;) | Out-Null;
+# Loop through each sql server from sqlservers.txt
+foreach ($sqlserver in $sqlservers) {
+# Get the time SQL was restarted
+$svr = New-Object 'Microsoft.SQLServer.Management.Smo.Server' $SQLServer
+$db = $svr.Databases['TempDB']
+$CreateDate = $db.CreateDate
+#Run Query against SQL Server
+$Results = Invoke-Sqlcmd -ServerInstance $sqlServer -Query $query -Database master
+# Add a new sheet
+$ws = $wb.Worksheets.Add()
+$name = &amp;quot;$sqlserver&amp;quot;
+# Name the Sheet
+$ws.name = $Name
+$cells = $ws.Cells
+$xl.Visible = $true
+#define some variables to control navigation
+$row = 2
+$col = 2
+$cells.item($row, $col) = $SQLServer + ' Was Rebooted at ' + $CreateDate
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 10
+$row = 3
+$col = 2
+# Set some titles
+$cells.item($row, $col) = &amp;quot;Server&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 10
+$col++
+$cells.item($row, $col) = &amp;quot;Database&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 40
+$col++
+$cells.item($row, $col) = &amp;quot;Last Read&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 20
+$col++
+$cells.item($row, $col) = &amp;quot;Last Write&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 20
+$col++
+foreach ($result in $results) {
+# Check if value is NULL
+$DBNull = [System.DBNull]::Value
+$LastRead = $Result.last_read
+$LastWrite = $Result.last_write
+$row++
+$col = 2
+$cells.item($Row, $col) = $sqlserver
+$col++
+$cells.item($Row, $col) = $Result.dbname
+$col++
+if ($LastRead -eq $DBNull) {
+$LastRead = &amp;quot;Not Since Last Reboot&amp;quot;
+$colour = &amp;quot;46&amp;quot;
+$cells.item($Row, $col).Interior.ColorIndex = $colour
+$cells.item($Row, $col) = $LastRead
+}
+else {
+$cells.item($Row, $col) = $LastRead
+}
+$col++
+if ($LastWrite -eq $DBNull) {
+$LastWrite = &amp;quot;Not Since Last Reboot&amp;quot;
+$colour = &amp;quot;46&amp;quot;
+$cells.item($Row, $col).Interior.ColorIndex = $colour
+$cells.item($Row, $col) = $LastWrite
+}
+else {
+$cells.item($Row, $col) = $LastWrite
+}
+}
+}
+$xl.DisplayAlerts = $false
+$wb.Saveas($FileName)
+$xl.quit()
+Stop-Process -Name *excel*
+&lt;/code>&lt;/pre>
+&lt;p>What it does is place the query in a variable. Get the contents of the SQL Server text file holding all my known SQL Servers and runs the query against each of them storing the results in a variable. It then creates an Excel Workbook and a new sheet for each server and populates the sheet including a bit of colour formatting before saving it. The results look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/02/usage-excel.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/02/usage-excel.jpg"
+loading="lazy"
+alt="usage excel"
+>&lt;/a>&lt;/p>
+&lt;p>The tricky bit was understanding how to match the NULL result from the query. This was done by assigning a variable to &lt;code>[System.DBNull]::Value&lt;/code> and using that.&lt;/p>
+&lt;p>Of course these stats are reset when SQL Server restarts so I also included the SQL server restart time using the create date property  of the TempDB. I gathered these stats for a few months before starting any rationalisation.&lt;/p>
+&lt;p>My next post will be about the next step in the process.&lt;/p></description></item></channel></rss>

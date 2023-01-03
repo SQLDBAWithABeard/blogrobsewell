@@ -1,0 +1,402 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="I gave a presentation at SQL Day in Poland last week on dbachecks and one of the questions I got asked was will you write a command to put the results of the checks into a database for historical reporting.
+The answer is no and here is the reasoning. The capability is already there. Most good PowerShell commands will only return an object and the beauty of an object is that you can do anything you like with it."><title>dbachecks – Save the results to a database for historical reporting</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/dbachecks-save-the-results-to-a-database-for-historical-reporting/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="dbachecks – Save the results to a database for historical reporting"><meta property="og:description" content="I gave a presentation at SQL Day in Poland last week on dbachecks and one of the questions I got asked was will you write a command to put the results of the checks into a database for historical reporting.
+The answer is no and here is the reasoning. The capability is already there. Most good PowerShell commands will only return an object and the beauty of an object is that you can do anything you like with it."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/dbachecks-save-the-results-to-a-database-for-historical-reporting/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="dbachecks"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="POwer Bi"><meta property="article:published_time" content="2018-05-23T00:00:00+00:00"><meta property="article:modified_time" content="2018-05-23T00:00:00+00:00"><meta property="og:image" content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2018/05/08-filter-by-instance-and-insance.png"><meta name=twitter:title content="dbachecks – Save the results to a database for historical reporting"><meta name=twitter:description content="I gave a presentation at SQL Day in Poland last week on dbachecks and one of the questions I got asked was will you write a command to put the results of the checks into a database for historical reporting.
+The answer is no and here is the reasoning. The capability is already there. Most good PowerShell commands will only return an object and the beauty of an object is that you can do anything you like with it."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2018/05/08-filter-by-instance-and-insance.png"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#create-a-configuration-and-save-it>Create a configuration and save it</a></li><li><a href=#add-results-to-a-database>Add results to a database</a></li><li><a href=#create-tables-and-triggers>Create tables and triggers</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/blogrobsewell/blog/dbachecks-save-the-results-to-a-database-for-historical-reporting/><img src=/blogrobsewell/assets/uploads/2018/05/08-filter-by-instance-and-insance.png loading=lazy alt="Featured image of post dbachecks – Save the results to a database for historical reporting"></a></div><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/dbachecks/>dbachecks</a>
+<a href=/blogrobsewell/categories/blog/>Blog</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/dbachecks-save-the-results-to-a-database-for-historical-reporting/>dbachecks – Save the results to a database for historical reporting</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>May 23, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>10 minute read</time></div></footer></div></header><section class=article-content><p>I gave a presentation at <a class=link href=https://sqlday.pl/en/ target=_blank rel=noopener>SQL Day</a> in Poland last week on <a class=link href=http://dbachecks.io target=_blank rel=noopener>dbachecks</a> and one of the questions I got asked was will you write a command to put the results of the checks into a database for historical reporting.</p><p>The answer is no and here is the reasoning. The capability is already there. Most good PowerShell commands will only return an object and the beauty of an object is that you can do anything you like with it. Your only limit is your imagination 🙂 I have written about this before <a class=link href=/taking-dbatools-test-dbalastbackup-a-little-further/>here. </a>The other reason is that it would be very difficult to write something that was easily configurable for the different requirements that people will require. But here is one way of doing it.</p><h2 id=create-a-configuration-and-save-it>Create a configuration and save it</h2><p>Let’s define a configuration and call it production. This is something that I do all of the time so that I can easily run a set of checks with the configuration that I want.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># The computername we will be testing
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name app.computername -Value $sql0,$SQl1
+</span></span><span class=line><span class=cl># The Instances we want to test
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name app.sqlinstance -Value $sql0,$SQl1
+</span></span><span class=line><span class=cl># The database owner we expect
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.validdbowner.name -Value &#39;THEBEARD\\EnterpriseAdmin&#39;
+</span></span><span class=line><span class=cl># the database owner we do NOT expect
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.invaliddbowner.name -Value &#39;sa&#39;
+</span></span><span class=line><span class=cl># Should backups be compressed by default?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.backup.defaultbackupcompression -Value $true
+</span></span><span class=line><span class=cl># Do we allow DAC connections?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.dacallowed -Value $true
+</span></span><span class=line><span class=cl># What recovery model should we have?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.recoverymodel.type -value FULL
+</span></span><span class=line><span class=cl># What should ourt database growth type be?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.database.filegrowthtype -Value kb
+</span></span><span class=line><span class=cl># What authentication scheme are we expecting?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.connection.authscheme -Value &#39;KERBEROS&#39;
+</span></span><span class=line><span class=cl># Which Agent Operator should be defined?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name agent.dbaoperatorname -Value &#39;The DBA Team&#39;
+</span></span><span class=line><span class=cl># Which Agent Operator email should be defined?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name agent.dbaoperatoremail -Value &#39;TheDBATeam@TheBeard.Local&#39;
+</span></span><span class=line><span class=cl># Which failsafe operator shoudl be defined?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name agent.failsafeoperator -Value &#39;The DBA Team&#39;
+</span></span><span class=line><span class=cl>## Set the database mail profile name
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name agent.databasemailprofile -Value &#39;DbaTeam&#39;
+</span></span><span class=line><span class=cl># Where is the whoisactive stored procedure?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.whoisactive.database -Value master
+</span></span><span class=line><span class=cl># What is the maximum time since I took a Full backup?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.backup.fullmaxdays -Value 7
+</span></span><span class=line><span class=cl># What is the maximum time since I took a DIFF backup (in hours) ?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.backup.diffmaxhours -Value 26
+</span></span><span class=line><span class=cl># What is the maximum time since I took a log backup (in minutes)?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.backup.logmaxminutes -Value 30
+</span></span><span class=line><span class=cl># What is my domain name?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name domain.name -Value &#39;TheBeard.Local&#39;
+</span></span><span class=line><span class=cl># Where is my Ola database?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.ola.database -Value master
+</span></span><span class=line><span class=cl># Which database should not be checked for recovery model
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.recoverymodel.excludedb -Value &#39;master&#39;,&#39;msdb&#39;,&#39;tempdb&#39;
+</span></span><span class=line><span class=cl># Should I skip the check for temp files on c?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name skip.tempdbfilesonc -Value $true
+</span></span><span class=line><span class=cl># Should I skip the check for temp files count?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name skip.tempdbfilecount -Value $true
+</span></span><span class=line><span class=cl># Which Checks should be excluded?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name command.invokedbccheck.excludecheck -Value LogShipping,ExtendedEvent, PseudoSimple,SPN, TestLastBackupVerifyOnly,IdentityUsage,SaRenamed
+</span></span><span class=line><span class=cl># How many months before a build is unsupported do I want to fail the test?
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name policy.build.warningwindow -Value 6
+</span></span><span class=line><span class=cl>## I need to set the app.cluster configuration to one of the nodes for the HADR check
+</span></span><span class=line><span class=cl>## and I need to set the domain.name value
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name app.cluster -Value $SQL0
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name domain.name -Value &#39;TheBeard.Local&#39;
+</span></span><span class=line><span class=cl>## I also skip the ping check for the listener as we are in Azure
+</span></span><span class=line><span class=cl>Set-DbcConfig -Name skip.hadr.listener.pingcheck -Value $true
+</span></span></code></pre></td></tr></table></div></div><p>Now I can export that configuration to a json file and store on a file share or in source control using the code below. This makes it easy to embed the checks into an automation solution</p><p><code>Export-DbcConfig -Path Git:\\Production.Json</code></p><p>and then I can use it with</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Import-DbcConfig -Path Git:\\Production.Json
+</span></span><span class=line><span class=cl>Invoke-DbcCheck
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=assets/uploads/2018/05/01-Invoke-DbcCheck.png><img src=/blogrobsewell/assets/uploads/2018/05/01-Invoke-DbcCheck.png loading=lazy alt="01 - Invoke-DbcCheck"></a></p><p>I would use one of the Show parameter values here if I was running it at the command line, probably fails to make reading the information easier</p><h2 id=add-results-to-a-database>Add results to a database</h2><p>This only gets us the test results on the screen, so if we want to save them to a database we have to use the PassThru parameter for Invoke-DbcCheck. I will run the checks again, save them to a variable</p><p><code>$Testresults = Invoke-DbcCheck -PassThru -Show Fails</code></p><p>Then I can use the <a class=link href=http://dbatools.io target=_blank rel=noopener>dbatools</a> <a class=link href=https://dbatools.io/functions/write-dbadatatable/ target=_blank rel=noopener>Write-DbaDatatable</a> command to write the results to a table in a database. I need to do this twice, once for the summary and once for the test results</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$Testresults | Write-DbaDataTable -SqlInstance $sql0 -Database tempdb -Table Prod_dbachecks_summary -AutoCreateTable
+</span></span><span class=line><span class=cl>$Testresults.TestResult | Write-DbaDataTable -SqlInstance $sql0 -Database tempdb -Table Prod_dbachecks_detail -AutoCreateTable
+</span></span></code></pre></td></tr></table></div></div><p>and I get two tables one for the summary</p><p><a class=link href=assets/uploads/2018/05/02-summary.png><img src=/blogrobsewell/assets/uploads/2018/05/02-summary.png loading=lazy alt="02 - summary"></a></p><p>and one for the details</p><p><a class=link href=assets/uploads/2018/05/03-detail.png><img src=/blogrobsewell/assets/uploads/2018/05/03-detail.png loading=lazy alt="03 - detail"></a></p><p>This works absolutely fine and I could continue to add test results in this fashion but it has no date property so it is not so useful for reporting.</p><h2 id=create-tables-and-triggers>Create tables and triggers</h2><p>This is one way of doing it. I am not sure it is the best way but it works! I always look forward to how people take ideas and move them forward so if you have a better/different solution please blog about it and reference it in the comments below</p><p>First I created a staging table for the summary results</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TABLE [dbachecks].[Prod_dbachecks_summary_stage](
+</span></span><span class=line><span class=cl>	[TagFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[ExcludeTagFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[TestNameFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[TotalCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[PassedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[FailedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[SkippedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[PendingCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[InconclusiveCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[Time] [bigint] NULL,
+</span></span><span class=line><span class=cl>	[TestResult] [nvarchar](max) NULL
+</span></span><span class=line><span class=cl>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>and a destination table with a primary key and a date column which defaults to todays date</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TABLE [dbachecks].[Prod_dbachecks_summary](
+</span></span><span class=line><span class=cl>	[SummaryID] [int] IDENTITY(1,1) NOT NULL,
+</span></span><span class=line><span class=cl>	[TestDate] [date] NOT NULL,
+</span></span><span class=line><span class=cl>	[TagFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[ExcludeTagFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[TestNameFilter] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[TotalCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[PassedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[FailedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[SkippedCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[PendingCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[InconclusiveCount] [int] NULL,
+</span></span><span class=line><span class=cl>	[Time] [bigint] NULL,
+</span></span><span class=line><span class=cl>	[TestResult] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl> CONSTRAINT [PK_Prod_dbachecks_summary] PRIMARY KEY CLUSTERED 
+</span></span><span class=line><span class=cl>(
+</span></span><span class=line><span class=cl>	[SummaryID] ASC
+</span></span><span class=line><span class=cl>)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+</span></span><span class=line><span class=cl>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [dbachecks].[Prod_dbachecks_summary] ADD  CONSTRAINT [DF_Prod_dbachecks_summary_TestDate]  DEFAULT (getdate()) FOR [TestDate]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>and added an INSERT trigger to the staging table</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TRIGGER [dbachecks].[Load_Prod_Summary] 
+</span></span><span class=line><span class=cl>   ON   [dbachecks].[Prod_dbachecks_summary_stage]
+</span></span><span class=line><span class=cl>   AFTER INSERT
+</span></span><span class=line><span class=cl>AS 
+</span></span><span class=line><span class=cl>BEGIN
+</span></span><span class=line><span class=cl>	\\ SET NOCOUNT ON added to prevent extra result sets from
+</span></span><span class=line><span class=cl>	\\ interfering with SELECT statements.
+</span></span><span class=line><span class=cl>	SET NOCOUNT ON;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    INSERT INTO [dbachecks].[Prod_dbachecks_summary] 
+</span></span><span class=line><span class=cl>	([TagFilter], [ExcludeTagFilter], [TestNameFilter], [TotalCount], [PassedCount], [FailedCount], [SkippedCount], [PendingCount], [InconclusiveCount], [Time], [TestResult])
+</span></span><span class=line><span class=cl>	SELECT [TagFilter], [ExcludeTagFilter], [TestNameFilter], [TotalCount], [PassedCount], [FailedCount], [SkippedCount], [PendingCount], [InconclusiveCount], [Time], [TestResult] FROM [dbachecks].[Prod_dbachecks_summary_stage]
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>END
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [dbachecks].[Prod_dbachecks_summary_stage] ENABLE TRIGGER [Load_Prod_Summary]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>and for the details I do the same thing. A details table</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TABLE [dbachecks].[Prod_dbachecks_detail](
+</span></span><span class=line><span class=cl>	[DetailID] [int] IDENTITY(1,1) NOT NULL,
+</span></span><span class=line><span class=cl>	[SummaryID] [int] NOT NULL,
+</span></span><span class=line><span class=cl>	[ErrorRecord] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[ParameterizedSuiteName] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Describe] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Parameters] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Passed] [bit] NULL,
+</span></span><span class=line><span class=cl>	[Show] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[FailureMessage] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Time] [bigint] NULL,
+</span></span><span class=line><span class=cl>	[Name] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Result] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Context] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[StackTrace] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl> CONSTRAINT [PK_Prod_dbachecks_detail] PRIMARY KEY CLUSTERED 
+</span></span><span class=line><span class=cl>(
+</span></span><span class=line><span class=cl>	[DetailID] ASC
+</span></span><span class=line><span class=cl>)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+</span></span><span class=line><span class=cl>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [dbachecks].[Prod_dbachecks_detail]  WITH CHECK ADD  CONSTRAINT [FK_Prod_dbachecks_detail_Prod_dbachecks_summary] FOREIGN KEY([SummaryID])
+</span></span><span class=line><span class=cl>REFERENCES [dbachecks].[Prod_dbachecks_summary] ([SummaryID])
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [dbachecks].[Prod_dbachecks_detail] CHECK CONSTRAINT [FK_Prod_dbachecks_detail_Prod_dbachecks_summary]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>A stage table</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TABLE [dbachecks].[Prod_dbachecks_detail_stage](
+</span></span><span class=line><span class=cl>	[ErrorRecord] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[ParameterizedSuiteName] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Describe] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Parameters] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Passed] [bit] NULL,
+</span></span><span class=line><span class=cl>	[Show] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[FailureMessage] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Time] [bigint] NULL,
+</span></span><span class=line><span class=cl>	[Name] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Result] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[Context] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[StackTrace] [nvarchar](max) NULL
+</span></span><span class=line><span class=cl>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>with a trigger</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TRIGGER [dbachecks].[Load_Prod_Detail] 
+</span></span><span class=line><span class=cl>   ON   [dbachecks].[Prod_dbachecks_detail_stage]
+</span></span><span class=line><span class=cl>   AFTER INSERT
+</span></span><span class=line><span class=cl>AS 
+</span></span><span class=line><span class=cl>BEGIN
+</span></span><span class=line><span class=cl>	\\ SET NOCOUNT ON added to prevent extra result sets from
+</span></span><span class=line><span class=cl>	\\ interfering with SELECT statements.
+</span></span><span class=line><span class=cl>	SET NOCOUNT ON;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    INSERT INTO [dbachecks].[Prod_dbachecks_detail] 
+</span></span><span class=line><span class=cl>([SummaryID],[ErrorRecord], [ParameterizedSuiteName], [Describe], [Parameters], [Passed], [Show], [FailureMessage], [Time], [Name], [Result], [Context], [StackTrace])
+</span></span><span class=line><span class=cl>	SELECT 
+</span></span><span class=line><span class=cl>	(SELECT MAX(SummaryID) From [dbachecks].[Prod_dbachecks_summary]),[ErrorRecord], [ParameterizedSuiteName], [Describe], [Parameters], [Passed], [Show], [FailureMessage], [Time], [Name], [Result], [Context], [StackTrace]
+</span></span><span class=line><span class=cl>	FROM [dbachecks].[Prod_dbachecks_detail_stage]
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>END
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [dbachecks].[Prod_dbachecks_detail_stage] ENABLE TRIGGER [Load_Prod_Detail]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>Then I can use <code>Write-DbaDatatable</code> with a couple of extra parameters, <code>FireTriggers</code> to run the trigger, <code>Truncate</code> and <code>Confirm:$false</code> to avoid any confirmation because I want this to run without any interaction and I can get the results into the database.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$Testresults | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_summary_stage -FireTriggers -Truncate -Confirm:$False
+</span></span><span class=line><span class=cl>$Testresults.TestResult | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_detail_stage -FireTriggers -Truncate -Confirm:$False
+</span></span></code></pre></td></tr></table></div></div><p><a class=link href=assets/uploads/2018/05/detail-with-stage.png><img src=/blogrobsewell/assets/uploads/2018/05/detail-with-stage.png loading=lazy alt="detail with stage"></a></p><p>Which means that I can now query some of this data and also create PowerBi reports for it.</p><p>To enable me to have results for the groups in dbachecks I have to do a little bit of extra manipulation. I can add all of the checks to the database using</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Get-DbcCheck | Write-DbaDataTable -SqlInstance $sql0 -Database ValidationResults -Schema dbachecks -Table Checks -Truncate -Confirm:$False -AutoCreateTable
+</span></span></code></pre></td></tr></table></div></div><p>But because the Ola Hallengren Job names are configuration items I need to update the values for those checks which I can do as follows</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$query = &#34;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.systemfull) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$SysFullJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.UserFull) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$UserFullJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.UserDiff) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$UserDiffJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.UserLog) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$UserLogJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.CommandLogCleanup) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$CommandLogJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.SystemIntegrity) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$SysIntegrityJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.UserIntegrity) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$UserIntegrityJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.UserIndex) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$UserIndexJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.OutputFileCleanup) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$OutputFileJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.DeleteBackupHistory) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$DeleteBackupJobName&#39;
+</span></span><span class=line><span class=cl>UPDATE [dbachecks].[Checks] SET [Describe] = &#39;Ola - &#34; + (Get-DbcConfigValue -Name ola.jobname.PurgeBackupHistory) + &#34;&#39; WHERE [Describe] = &#39;Ola - `$PurgeBackupJobName&#39;
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>Invoke-DbaSqlQuery -SqlInstance $SQL0 -Database ValidationResults -Query $query
+</span></span></code></pre></td></tr></table></div></div><p>You can get a sample Power Bi report in <a class=link href=https://github.com/SQLDBAWithABeard/dbachecks-expanded target=_blank rel=noopener>my Github which also has the code from this blog post</a></p><p>Then you just need to open in PowerBi Desktop and</p><p>Click Edit Queries<br>Click Data Source Settings<br>Click Change Source<br>Change the Instance and Database names</p><p><a class=link href=assets/uploads/2018/05/09-PowerBi.png><img src=/blogrobsewell/assets/uploads/2018/05/09-PowerBi.png loading=lazy alt="09 - PowerBi"></a></p><p>Then have an interactive report like this. Feel free to click around and see how it works. Use the arrows at the bottom right to go full-screen. NOTE – it filters by “today” so if I haven’t run the check and the import then click on one of the groups under “Today’s Checks by Group”</p><p>This enables me to filter the results and see what has happened in the past so I can filter by one instance</p><p><a class=link href=assets/uploads/2018/05/05-filter-by-instance.png><img src=/blogrobsewell/assets/uploads/2018/05/05-filter-by-instance.png loading=lazy alt="05 - filter by instance"></a></p><p>or I can filter by a group of tests</p><p><a class=link href=assets/uploads/2018/05/07-filter-by-instance.png><img src=/blogrobsewell/assets/uploads/2018/05/07-filter-by-instance.png loading=lazy alt="07 - filter by instance"></a></p><p>or even by a group of tests for an instance</p><p><a class=link href=assets/uploads/2018/05/08-filter-by-instance-and-insance.png><img src=/blogrobsewell/assets/uploads/2018/05/08-filter-by-instance-and-insance.png loading=lazy alt="08 - filter by instance and insance"></a></p><p>Hopefully, this will give you some ideas of what you can do with your dbachecks results. <a class=link href=https://github.com/SQLDBAWithABeard/dbachecks-expanded target=_blank rel=noopener>You can find all of the code and the PowerBi in my GitHub</a></p><p>Happy Validating!</p></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/dbachecks/>dbachecks</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/power-bi/>Power Bi</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/blogrobsewell/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/02/image-13.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/02/image-13.png></div><div class=article-details><h2 class=article-title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/11/CreatePR.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/11/CreatePR.png></div><div class=article-details><h2 class=article-title>How to fork a GitHub repository and contribute to an open source project</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/11/image-40.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/11/image-40.png></div><div class=article-details><h2 class=article-title>Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/powershell-in-sql-notebooks-in-azure-data-studio/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/07/image-4.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/07/image-4.png></div><div class=article-details><h2 class=article-title>PowerShell in SQL Notebooks in Azure Data Studio</h2></div></a></article><article><a href=/blogrobsewell/blog/using-docker-to-run-integration-tests-for-dbachecks/><div class=article-details><h2 class=article-title>Using Docker to run Integration Tests for dbachecks</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

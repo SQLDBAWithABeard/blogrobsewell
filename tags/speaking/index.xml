@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>speaking on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/speaking/</link><description>Recent content in speaking on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 27 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/speaking/index.xml" rel="self" type="application/rss+xml"/><item><title>#NewStarNovember - Being a mentor</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-being-a-mentor/</link><pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-being-a-mentor/</guid><description>&lt;img src="https://images.unsplash.com/photo-1593132517397-ceb31d77194a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Featured image of post #NewStarNovember - Being a mentor" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="who-was-your-mentor">Who was your mentor?&lt;/h1>
+&lt;p>I have never had an official mentor but I am so very very grateful to all of the people who have helped, supported and inspired me throughout my career.&lt;/p>
+&lt;p>I feel so privileged to be able to reach out to so many wonderful people and ask questions and receive advice.&lt;/p>
+&lt;h2 id="so-rob-why-do-you-mentor-others">So Rob, Why do you mentor others?&lt;/h2>
+&lt;p>I have always been willing to share everything that I know and have been doing so in various formats for many years now. I have officially mentored many people for presentations, through events such as New Stars of Data, Data (née SQL) Grillen, Data Minds, Data Scotland, as well as unofficially because they have asked me.&lt;/p>
+&lt;p>Why do I do this? because I enjoy it, because I believe that anyone can give a good presentation and because the more voices we have giving presentations the better that it is for us all.&lt;/p>
+&lt;h2 id="whats-the-best-thing-about-mentoring">What&amp;rsquo;s the best thing about mentoring?&lt;/h2>
+&lt;p>So many things are fantastic about mentoring.&lt;/p>
+&lt;p>You learn so many things. Getting the opinions of different people or watching how others perform similar tasks to you almost always leads to you learning something new. Whether it is the subject they are talking about, or just the way that they use PowerPoint or VS Code, or even the way they have Windows set up there is always something to learn.&lt;/p>
+&lt;p>I also get such a warm fuzzy feeling from seeing people blossom as they gain confidence and realise that they can do a fantastic presentation and that it is a mainly a case of learning and practicing new skills.&lt;/p>
+&lt;p>I am super proud of the people that I have mentored who have continued to present and have since presented at international conferences.&lt;/p>
+&lt;p>I am also equally proud of those who have decided that it was not for them right now and are currently taking a break from presenting.&lt;/p>
+&lt;p>I am delighted to see people who deserve it, become MVPs, or get promoted or change jobs. I hope that maybe I had a little impact, although I tell everyone I mentor, they are doing all of the hard work I am just listening and commenting.&lt;/p>
+&lt;h2 id="doesnt-it-take-a-lot-of-time">Doesn&amp;rsquo;t it take a lot of time?&lt;/h2>
+&lt;p>There is, of course, a time element to being a mentor but I am always happy to give up a few hours each month to help and I am also careful that I don&amp;rsquo;t take on too much and over burden myself.&lt;/p>
+&lt;p>For me, being a mentor means giving guidance and setting goals and with a bit of careful planning you can be efficient about it.&lt;/p>
+&lt;h2 id="what-else-have-you-learnt">What else have you learnt?&lt;/h2>
+&lt;p>I have learnt that everyone is different and that, as a mentor, some of your tactics and procedures will not work for every person. As an example, I have learnt that some people like to have a script that they can use to memorise or to have as an aide whilst others are much happier just with key words.&lt;/p>
+&lt;p>I have learnt that time zones make it harder. If it is Sunday evening for me, it is Sunday morning on the west coast of the US. This can make it harder to find times that fit well for both parties.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?&lt;/h1>
+&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> CFP are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://images.unsplash.com/photo-1546872006-42c78c0ccb29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="in-the-beginning">In the beginning&lt;/h1>
+&lt;p>It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits Conference&lt;/a> (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don&amp;rsquo;t like it and don&amp;rsquo;t ever do it again. (Narrator - exactly the opposite happened - He loved it and does it &lt;a class="link" href="https://sessionize.com/rob-sewell/" target="_blank" rel="noopener"
+>at every opportunity&lt;/a>)&lt;/p>
+&lt;p>It was not the most brilliant presentation. I learned a lot and blogged about it too &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>as you can read here&lt;/a>. But I enjoyed it and it gave me the confidence to do it again and set me on a path to the wonderful life I have now.&lt;/p>
+&lt;h1 id="should-you-speak-at-your-user-group">Should you speak at your User Group?&lt;/h1>
+&lt;p>Yes&lt;/p>
+&lt;p>OK, you want a bit more?&lt;/p>
+&lt;p>Yes you definitely should.&lt;/p>
+&lt;p>You should try it once.&lt;/p>
+&lt;p>Your user group should be filled with some familiar faces of people who you know will support you and only want the best for you.&lt;br>
+It will usually be a smaller group than at an event like a Data Saturday or other local to your town/city event.&lt;br>
+Your user group leader will be delighted to help and to support you.&lt;br>
+If you don&amp;rsquo;t like it, you don&amp;rsquo;t ever have to do it again.&lt;/p>
+&lt;h1 id="what-is-the-benefit-of-speaking">What is the benefit of speaking?&lt;/h1>
+&lt;p>Why should you put yourself through all of that stress and work to put on a wonderful session? I think there are a number of benefits and most won&amp;rsquo;t come to you from doing a single session.&lt;/p>
+&lt;ul>
+&lt;li>The first one does. You will know your subject more thoroughly. By preparing a session to present, you will definitely research, you will read blogs, you will try things out, you will want to make sure that you know all there is to know. This means that you will be improving your knowledge on the subject.&lt;/li>
+&lt;li>Confidence. Speaking in public will give you more confidence.&lt;/li>
+&lt;li>It will improve your communication skills. You will have to be able to convey your message to others&lt;/li>
+&lt;li>Some people say that a job interview is like a presentation and you can improve that skill. (I am not sure but &lt;a class="link" href="https://blog.robsewell.com/blog/i-hate-interviews-tsql2sday/" target="_blank" rel="noopener"
+>I hate interviews and don&amp;rsquo;t perform well&lt;/a>)&lt;/li>
+&lt;li>It will improve your time management skills. You have to do a presentation on Monday, you need to get everything in place in time for that.&lt;/li>
+&lt;/ul>
+&lt;p>There are plenty of other reasons too.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?&lt;/h1>
+&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> call for papers are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>GitHub Action Workflow Protected branch update failed</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/github-action-workflow-protected-branch-update-failed/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/github-action-workflow-protected-branch-update-failed/</guid><description>&lt;img src="https://images.unsplash.com/photo-1580265862291-4251b8c7e836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Featured image of post GitHub Action Workflow Protected branch update failed" />&lt;p>&lt;a class="link" href="https://sqldbawithabeard.github.io/blogrobsewell/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/" >The last post&lt;/a> showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="protecting-the-repository">Protecting the repository&lt;/h1>
+&lt;p>I opened the repository in the browser and GitHub and was provided with a warning that said&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/protectbranch.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/protectbranch.png"
+loading="lazy"
+alt="protect your branch"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking on the protect this branch button gave the reasoning.&lt;/p>
+&lt;blockquote>
+&lt;p>Protect your most important branches
+Branch protection rules define whether collaborators can delete or force push to the branch and set requirements for any pushes to the branch, such as passing status checks or a linear commit history.&lt;/p>
+&lt;/blockquote>
+&lt;p>So I changed the settings so that a Pull Request is required and needs to be reviewed.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/branchprotected.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/branchprotected.png"
+loading="lazy"
+alt="all protected"
+>&lt;/a>&lt;/p>
+&lt;h1 id="breaks-the-workflow">Breaks the workflow&lt;/h1>
+&lt;p>I had already altered the workflow trigger for the workflow to generate the speaker-list.json so that it would run when changes to the speakers directory were pushed to the main branch by adding&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> paths:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - speakers/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then approved a PR with a change to that directory and saw that the workflow had started.&lt;/p>
+&lt;p>Then it failed :-(.&lt;/p>
+&lt;p>The error message could be seen in the codespaces with the extension &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-actions&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushdenied.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/pushdenied.png"
+loading="lazy"
+alt="no can do"
+>&lt;/a>&lt;/p>
+&lt;p>This is the error message&lt;/p>
+&lt;blockquote>
+&lt;p>Error: To &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+! refs/heads/main:refs/heads/main [remote rejected] (protected branch hook declined)
+Done
+Pushing to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+POST git-receive-pack (604 bytes)
+remote: error: GH006: Protected branch update failed for refs/heads/main. &lt;br>
+remote: error: At least 1 approving review is required by reviewers with write access. &lt;br>
+error: failed to push some refs to &amp;lsquo;&lt;a class="link" href="https://github.com/dataplat/DataSpeakers%27" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers'&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, because I have now protected my branch, I cannot automatically push changes into the main branch.&lt;/p>
+&lt;h1 id="fix-it">Fix it&lt;/h1>
+&lt;p>To fix this, I had to create a new PAT token with &lt;code>public_repo&lt;/code> scope and save it as a secret for the workflow to access and update the checkout to use this token.&lt;/p>
+&lt;h2 id="create-a-new-pat-token">Create a new PAT token&lt;/h2>
+&lt;p>The instructions to do this are found &lt;a class="link" href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" rel="noopener"
+>in the docs here&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>In the upper-right corner of any page, click your profile photo, then click Settings.&lt;/li>
+&lt;li>In the left sidebar, click Developer settings.&lt;/li>
+&lt;li>In the left sidebar, click Personal access tokens.&lt;/li>
+&lt;li>Click Generate new token.&lt;/li>
+&lt;li>Give your token a descriptive name.&lt;/li>
+&lt;li>To give your token an expiration.&lt;/li>
+&lt;li>Select the scopes, or permissions, you&amp;rsquo;d like to grant this token.&lt;br>
+For this scenario just choose &lt;code>public_repo&lt;/code>&lt;/li>
+&lt;li>Click Generate token.&lt;/li>
+&lt;li>Save the generated token somewhere safe like your password manager. ( You &lt;strong>do&lt;/strong> have a password manager? - Our family use 1Password)&lt;/li>
+&lt;/ul>
+&lt;h2 id="save-it-as-a-secret-in-the-repository">Save it as a secret in the repository&lt;/h2>
+&lt;p>You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository &lt;a class="link" href="https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md" target="_blank" rel="noopener"
+>by following this guide&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>navigate to the main page of the repository.&lt;/li>
+&lt;li>Under your repository name, click on the &amp;ldquo;Settings&amp;rdquo; tab.&lt;/li>
+&lt;li>In the left sidebar, click Secrets.&lt;/li>
+&lt;li>On the right bar, click on &amp;ldquo;Add a new secret&amp;rdquo;&lt;/li>
+&lt;li>Type a name for your secret in the &amp;ldquo;Name&amp;rdquo; input box. I used &lt;code>REPO_TOKEN&lt;/code>&lt;/li>
+&lt;li>Type the value for your secret.&lt;/li>
+&lt;li>Click Add secret.&lt;/li>
+&lt;/ul>
+&lt;h2 id="use-it-in-your-workflow">Use it in your workflow&lt;/h2>
+&lt;p>Now that you have saved your secret, you can use it your workflows. To get rid of the protected branch error it is used in the &lt;code>actions/checkout&lt;/code> action like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> token: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I remembered to do for both workflows!!&lt;/p>
+&lt;p>I then created a PR to test it and this time it was able to successfully push changes to the main branch&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushcompleted.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/pushcompleted.png"
+loading="lazy"
+alt="its pushed"
+>&lt;/a>&lt;/p>
+&lt;p>and you can see &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/80d585ff1de15db22744ad5e7295294260b8fc98" target="_blank" rel="noopener"
+>the commit here&lt;/a> or &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/7046d51de7b1d9e9b9f188879a4981a76f35c3c4" target="_blank" rel="noopener"
+>the PR&lt;/a> if you wish.&lt;/p>
+&lt;h1 id="but-thats-not-all-folks">But thats not all folks&lt;/h1>
+&lt;p>This will work correctly for a PR and it will work for the initial workflow that has been called.&lt;/p>
+&lt;p>It &lt;em>&lt;strong>will not work&lt;/strong>&lt;/em> for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions/runs/2659979920" target="_blank" rel="noopener"
+>In that scenario we get this error&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/gregbrokeit.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/gregbrokeit.png"
+loading="lazy"
+alt="Greg Broke it"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Input required and not supplied: token&lt;/p>
+&lt;/blockquote>
+&lt;p>for the &lt;code>actions/checkout@v2&lt;/code> action. This took some tracking down to resolve but finally I found the answer &lt;a class="link" href="https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard" target="_blank" rel="noopener"
+>in a forum post&lt;/a>&lt;/p>
+&lt;p>In the &lt;em>&lt;strong>calling&lt;/strong>&lt;/em> workflow add a &lt;code>secrets&lt;/code> entry and pass in the token secret.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then at the top of the &lt;em>&lt;strong>reusable workflow&lt;/strong>&lt;/em> define the secrets&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> required: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and finally all is well and Dr Greg Low &lt;a class="link" href="https://blog.greglow.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/greglow" target="_blank" rel="noopener"
+>Twitter&lt;/a> can be added ;-)&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" />&lt;p>&lt;a class="link" href="https://sqldbawithabeard.github.io/blogrobsewell/blog/community/Training-Day-Speakers-List" >The last post&lt;/a> showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="what-do-we-need">What do we need?&lt;/h1>
+&lt;p>The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>The web page can be found here&lt;/a>. This page is generated from a JSON file.&lt;/p>
+&lt;h1 id="a-new-repository">A new repository&lt;/h1>
+&lt;p>It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website.&lt;/p>
+&lt;h1 id="create-a-dev-container">Create a dev container&lt;/h1>
+&lt;p>It&amp;rsquo;s a brand new repository &lt;code>.devcontainer&lt;/code> directory was created and the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/main/containers/powershell/.devcontainer" target="_blank" rel="noopener"
+>Microsoft VS Code Remote / GitHub Codespaces Container Definitions repository PowerShell containers&lt;/a> added. This means that whenever I or anyone else wants to work on the repo the development experience will be the same.&lt;/p>
+&lt;h2 id="add-extensions">Add extensions&lt;/h2>
+&lt;p>There are a number of default extensions that I install for PowerShell or generic development&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.powershell" target="_blank" rel="noopener"
+>ms-vscode.powershell&lt;/a> - because I am working with PowerShell&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets" target="_blank" rel="noopener"
+>2gua.rainbow-brackets&lt;/a> - because I like to easily see which opening bracket matches which closing bracket&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow" target="_blank" rel="noopener"
+>oderwat.indent-rainbow&lt;/a> - so that I can quickly see the indentations, invaluable with YAML files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens" target="_blank" rel="noopener"
+>usernamehw.errorlens&lt;/a> - so that linting errors are displayed in the editor alongside the code&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank" rel="noopener"
+>eamodio.gitlens&lt;/a> - to make source control easier&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=TylerLeonhardt.vscode-inline-values-powershell" target="_blank" rel="noopener"
+>TylerLeonhardt.vscode-inline-values-powershell&lt;/a> - so that you can see inline values when debugging&lt;/li>
+&lt;/ul>
+&lt;p>I also added two more for this repository as we are using GitHub Actions&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions" target="_blank" rel="noopener"
+>me-dutour-mathieu.vscode-github-actions&lt;/a> - for intellisense for GitHub Action files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-action&lt;/a> - to be able to start/stop/monitor GitHub Actions from the workspace&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/githubactionsview.png"
+loading="lazy"
+alt="the view in codespaces of the GitHub Actions"
+>&lt;/p>
+&lt;h1 id="gather-the-information">Gather the Information&lt;/h1>
+&lt;p>People can update repositories using Pull Requests but this needed to be a little more guided and it was decided that it was to be done with &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms" target="_blank" rel="noopener"
+>forms via GitHub Issues&lt;/a>&lt;/p>
+&lt;h2 id="where-to-put-it">Where to put it?&lt;/h2>
+&lt;p>You can create custom GitHub Issues using YAML files in the &lt;code>.github/ISSUE_TEMPLATE&lt;/code> directory. An Add Speaker issue template file was created. The name and the description will be seen on the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new/choose" target="_blank" rel="noopener"
+>new issues page&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add Speaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: Add New Speaker information
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">body:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - type: markdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attributes:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> value: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please follow the instructions to create a new speaker entry.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> We wil display this on callfordataspeakers.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a number of &lt;code>-type&lt;/code> entries. &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema" target="_blank" rel="noopener"
+>You can find the definitions in the docs&lt;/a> or you can use the intellisense from the extensions. The types are checkboxes, dropdown, input, markdown, textarea&lt;/p>
+&lt;p>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/intellisense-ghactions.png"
+loading="lazy"
+alt="The intellisense showing the type options"
+>&lt;/p>
+&lt;p>I used the intellisense to build a quick simple form to gather 5 pieces of information&lt;/p>
+&lt;ul>
+&lt;li>full name&lt;/li>
+&lt;li>topics&lt;/li>
+&lt;li>regions&lt;/li>
+&lt;li>sessionize profile URL&lt;/li>
+&lt;li>languages&lt;/li>
+&lt;/ul>
+&lt;p>You can find &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/blob/main/.github/ISSUE_TEMPLATE/Add-Speaker.yml" target="_blank" rel="noopener"
+>the YAML file here&lt;/a> and &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new?assignees=&amp;amp;labels=&amp;amp;template=Add-Speaker.yml" target="_blank" rel="noopener"
+>the issue here&lt;/a>&lt;/p>
+&lt;h1 id="process-the-information">Process the information&lt;/h1>
+&lt;p>Now that we have a method of gathering the information, the next stage is to process it automagically. For this we are going to be &lt;a class="link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener"
+>using GitHub Actions&lt;/a>&lt;/p>
+&lt;h2 id="workflow">Workflow&lt;/h2>
+&lt;p>GitHub Actions is a platform that can run automated processes called workflows that are defined as YAML files and triggered by events in the repository. We create another directory called &lt;code>workflows&lt;/code> also in the &lt;code>.github&lt;/code> directory.&lt;/p>
+&lt;h2 id="triggering-the-workflow">Triggering the workflow&lt;/h2>
+&lt;p>Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.&lt;/p>
+&lt;p>You can automatically add labels, close stale issues and much more. There are a large number of events open to you as &lt;a class="link" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows" target="_blank" rel="noopener"
+>can be seen here &lt;/a>. Even looking at just issues there are a number of activities types that can be used&lt;/p>
+&lt;ul>
+&lt;li>opened&lt;/li>
+&lt;li>edited&lt;/li>
+&lt;li>deleted&lt;/li>
+&lt;li>transferred&lt;/li>
+&lt;li>pinned&lt;/li>
+&lt;li>unpinned&lt;/li>
+&lt;li>closed&lt;/li>
+&lt;li>reopened&lt;/li>
+&lt;li>assigned&lt;/li>
+&lt;li>unassigned&lt;/li>
+&lt;li>labeled&lt;/li>
+&lt;li>unlabeled&lt;/li>
+&lt;li>locked&lt;/li>
+&lt;li>unlocked&lt;/li>
+&lt;li>milestoned&lt;/li>
+&lt;li>demilestoned&lt;/li>
+&lt;/ul>
+&lt;p>(and there are separate ones for issue comments)&lt;/p>
+&lt;p>The beginning of the workflow YAML file has the name and then the trigger. This triggers the workflow when an issue is opened.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add a new speaker json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issues:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> types:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;#34;opened&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-all-the-source">Getting all the source&lt;/h2>
+&lt;p>The workflow consists of &lt;a class="link" href="https://docs.github.com/en/actions/using-jobs" target="_blank" rel="noopener"
+>one or many jobs&lt;/a> that can be run on different runners. The first job is named &lt;code>AddNewSpeaker&lt;/code> and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.&lt;/p>
+&lt;p>We &lt;strong>&lt;em>use&lt;/em>&lt;/strong> a default &lt;strong>&lt;em>action&lt;/em>&lt;/strong> to checkout and because we push changes back to the repository (more on that later) we choose a &lt;code>fetch-depth&lt;/code> of 0 to get all of the history and the &lt;code>ref&lt;/code> main as that is the branch we are working with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addNewSpeaker:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="being-polite">Being polite&lt;/h2>
+&lt;p>costs nothing so this action from Peter Evans can be used to add or update a comment&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hi @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for your Speaker submission.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Action should be running now and adding it to the webpage. It should should update here.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If it doesn&amp;#39;t - get in touch with Rob on Twitter https://twitter.com/sqldbawithbeard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="wait-a-minute-how-did-you-work-that-out">wait a minute, how did you work that out?&lt;/h3>
+&lt;p>The say thank you comment uses &lt;code>github.event.issue.number&lt;/code> and &lt;code>github.event.issue.user.login&lt;/code> to ensure that the comment goes on the issue that triggered the workflow and thanks the user that created it. To work out what is available, I used this PowerShell step to write out the GitHub context to the logs as JSON&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># You also can print the whole GitHub context to the logs to view more details.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: View the GitHub context
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: Write-Host &amp;#34;$GITHUB_CONTEXT&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GITHUB_CONTEXT: ${{ toJson(github) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="get-the-info-into-a-file">Get the info into a file&lt;/h2>
+&lt;p>Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates &lt;code>### &amp;lt;label&amp;gt;&lt;/code> and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a &lt;code>pscustomobject&lt;/code>&lt;/p>
+&lt;p>Then I could convert it to Json and save it to a file. I chose to save each speakers information in their own file in case anything else would be needed in the future and also so that if the process failed it only affected this speakers information.&lt;/p>
+&lt;p>I also add the speaker file name to a text file that I may make use of at some future point.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Get Speaker Information to file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Host &amp;#34;What do we have?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # gci -recurse = this is for troubleshooting because paths are hard
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody = &amp;#34;${{ github.event.issue.body }}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write-Host $IssueBody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody | Out-File speakers/temp.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # get the temp file contents - I do this so I don&amp;#39;t lose anything
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $file = Get-Content ./speakers/temp.txt -Raw
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # parse the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $regexResult = [regex]::Matches($file, &amp;#39;(?ms)fullname\n\n(?&amp;lt;fullname&amp;gt;.*)\n\n### topics\n\n(?&amp;lt;topics&amp;gt;.*)\n\n### regions\n\n(?&amp;lt;regions&amp;gt;.*)\n\n### Sessionize\n\n(?&amp;lt;Sessionize&amp;gt;.*)\n\n### language\n\n(?&amp;lt;language&amp;gt;.*)\n&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # create an object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerObject = [PSCustomObject]@{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name = $regexResult[0].Groups[&amp;#39;fullname&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> topics = $regexResult[0].Groups[&amp;#39;topics&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> regions = $regexResult[0].Groups[&amp;#39;regions&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sessionize = $regexResult[0].Groups[&amp;#39;Sessionize&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> language = $regexResult[0].Groups[&amp;#39;language&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #save it to a file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $filePath = &amp;#39;./speakers/{0}.json&amp;#39; -f $speakerFileName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $SpeakerObject |ConvertTo-Json | Out-FIle -FilePath $filePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName | OUt-File ./speakers/list.txt -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="because-ben-is-a-fantastic-tester">Because Ben is a fantastic tester&lt;/h3>
+&lt;p>All the best testers will do unexpected but valid actions and my wonderful friend Ben Weissman (&lt;a class="link" href="https://twitter.com/bweissman" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://bweissman.azurewebsites.net/" target="_blank" rel="noopener"
+>Blog&lt;/a>) added some characters into the full name option that made the file save fail. He added his pronouns, which is awesome but not what I expected for a full name option. This is totally my fault for not considering either using pronouns or that as a user input field that is used in code the data should be validated. I used a few replaces to ensure the file name is acceptable.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="let-the-user-know-and-commit-the-new-file">Let the user know and commit the new file&lt;/h2>
+&lt;p>Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).&lt;/p>
+&lt;p>I love the &lt;code>EndBug/add-and-commit&lt;/code> action as it enables me to make changes in a workflow and commit those changes safely back to the repository.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Speaker Json has been added https://github.com/dataplat/DataSpeakers/tree/main/speakers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Add &amp;amp; Commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: EndBug/add-and-commit@v8.0.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_name: Beardy McBeardFace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_email: mrrobsewell@outlook.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> message: &amp;#39;The Beard says hooray we have another speaker @${{ github.event.issue.user.login }} - This is an automated message&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dry">DRY&lt;/h2>
+&lt;p>Don&amp;rsquo;t repeat yourself. The idea is to create the JSON file for the web-page from each of the speakers individual json files. People will want to change what they have entered or they will make mistakes, future functionality might require the same steps. With this in mind I created a separate workflow file to create the &lt;code>speaker-list.json&lt;/code> file. This used two different triggers&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>workflow_calls&lt;/code> so that it can be called from another workflow&lt;/li>
+&lt;li>&lt;code>workflow_dispatch&lt;/code> so that it can be run manually&lt;/li>
+&lt;/ul>
+&lt;p>The other workflow cannot be triggered manually as it relies on an issue to create the required file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="only-run-if">Only run if&lt;/h2>
+&lt;p>The second workflow file uses a PowerShell action to combine the individual JSONs into a single one and commits that to the repository. It also comments on the issue but it can only do this if the workflow was triggered from the add speaker job and not manually so some conditional logic was required. There were a number of options that I could choose to decide if to run this step but I decided on using the event issue number &lt;code>if: github.event.issue.number != null&lt;/code> as if there was no issue, there was nothing to comment and this would leave this step open to be used in future coding if required.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if: github.event.issue.number != null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The speaker-list.json file has been recreated ready for the website https://github.com/dataplat/DataSpeakers/blob/main/website/speaker-list.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> https://callfordataspeakers.com/precon should be updated now
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="calling-another-workflow">Calling another workflow&lt;/h2>
+&lt;p>To call another workflow in a job you use the &lt;code>uses:&lt;/code> field and the path to the yaml file and the branch. We also added the &lt;code>needs:&lt;/code> so that this job will run after the &lt;code>addNewSpeaker&lt;/code> has completed.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="close-the-issue">Close the issue&lt;/h2>
+&lt;p>This process needed to be completely automatic and so we use Peter Evans close issue action and tag the speaker and say thankyou as well as closing the issue. We have a &lt;code>needs:&lt;/code> property so that this job will only run following the successful run of the previous two jobs.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">closeIssue:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: [addNewSpeaker,createSpeakerListJson]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Close Issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/close-issue@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> comment: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hey @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Closing this issue now that the Action has run successfully.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for adding your information to the list.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It will be active on callfordataspeakers.com shortly.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please share on social media.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Love and Hugs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Rob and Daniel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @SqlDbaWithABeard @dhmacher
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="show-me-what-it-looks-like">Show me what it looks like&lt;/h1>
+&lt;p>You can &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>take a look at the repo&lt;/a> there are a &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues?q=is%3Aissue&amp;#43;is%3Aclosed" target="_blank" rel="noopener"
+>number of issues&lt;/a> like &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/36" target="_blank" rel="noopener"
+>this one from Monica Rathbun&lt;/a> (&lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>Twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/monissue.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/monissue.png"
+loading="lazy"
+alt="Monicas Image"
+>&lt;/a>&lt;/p>
+&lt;p>you can see the workflows &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions" target="_blank" rel="noopener"
+>running here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/workflowrun.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/workflowrun.png"
+loading="lazy"
+alt="workflow run"
+>&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Training Day Speakers List</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/training-day-speakers-list/</link><pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/training-day-speakers-list/</guid><description>&lt;img src="https://images.unsplash.com/photo-1490127252417-7c393f993ee4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="Featured image of post Training Day Speakers List" />&lt;p>How do data platform events find Training Day/Pre-Con speakers?&lt;/p>
+&lt;p>&lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>So we built a thing for speakers to add themselves and for events to find them&lt;/a>&lt;/p>
+&lt;p>I think event organisers know who the &lt;em>big names&lt;/em> are and the topics that they can deliver for full day training sessions or pre-cons as they are also known. Finding other speakers and finding speakers who can deliver on different topics is a little more difficult.&lt;/p>
+&lt;h1 id="hey-new-speakers">Hey New Speakers&lt;/h1>
+&lt;p>With all the &lt;em>*waves hand at world for the last 2 years&lt;/em> going on, there are a number of new speakers who have taken advantage of virtual events like &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a>, &lt;a class="link" href="https://datagrillen.com/dativerse/" target="_blank" rel="noopener"
+>DatiVerse&lt;/a> and other events that have helped to promote and support new speakers. This is truly awesome and I love seeing the pool of speakers growing and all the new voices enriching our learning.&lt;/p>
+&lt;p>There are undoubtedly speakers who have content and can provide full day seesions that events and attendees will gladly have if only the organisers knew about the content and/or the speakers knew about the events.&lt;/p>
+&lt;h1 id="events-want-your-content">Events want your content&lt;/h1>
+&lt;p>This came up on social media and after a quick conversation with Daniel Hutmacher (&lt;a class="link" href="https://twitter.com/dhmacher" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://sqlsunday.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>) we decided to create a resource page that can be found on &lt;a class="link" href="https://callfordataspeakers.com" target="_blank" rel="noopener"
+>Call For Data Speakers&lt;/a>.&lt;/p>
+&lt;p>Call For Data Speakers enables speakers to sign up to receive an email when a new event is announced. It also enables events to sign up, so that speakers can be notified when there is a call for speakers. So this seemed to be the obvious place to hold a list of speakers that event organisers can contact and show the topics that they can present full day or training day sessions on.&lt;/p>
+&lt;h1 id="yes-even-you-please-join">YES even you. Please join.&lt;/h1>
+&lt;p>I have created some automation that will make adding (and removing) yourself from this list easy to do. You can just go straight to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>the repo&lt;/a> and follow the instructions if you dont want to read any more here.&lt;/p>
+&lt;p>I see this as a resource for everybody, famouse or not, new or old. I absolutely want &lt;strong>you to add yourself&lt;/strong>, if you have content that can be used to provide a full day of training. Please don&amp;rsquo;t let imposter syndrome get in the way. Right now, all you are doing is listing your idea for people to see. Hopefully soon event organisers will get in touch and say hey I see you present on &amp;hellip; please would you submit to our event for a training day.&lt;/p>
+&lt;p>Event organisers - You &lt;strong>do need to reach out to speakers&lt;/strong>. By adding some effort into finding speakers your event will be more rounded and of interest and benefit to a wider numebr of attendees and sponsors. I am talking about pre-con speakers here bu the same applies to general sessions.&lt;/p>
+&lt;h1 id="how-do-i-do-it">How do I do it?&lt;/h1>
+&lt;p>This process is all automated and driven by GitHub Issues.&lt;/p>
+&lt;h2 id="to-add-yourself-as-a-speaker">To add yourself as a speaker&lt;/h2>
+&lt;p>Open the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues" target="_blank" rel="noopener"
+>Issues Page&lt;/a> and click new issue.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/newissue.png"
+loading="lazy"
+alt="open a new issue"
+>&lt;/p>
+&lt;p>Click the get started button next to Add Speaker.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/emptyissue.png"
+loading="lazy"
+alt="empty issue"
+>&lt;/p>
+&lt;p>Fill in the details, the title can be anything that you like -&lt;/p>
+&lt;ul>
+&lt;li>Your full name&lt;/li>
+&lt;li>topics you can provide training days or pre-cons for (dbatools, Index Tuning, DevOps for example) Add as many as you like.&lt;br>
+&lt;strong>Just topics&lt;/strong> not session titles or descriptions, those will be in your sessionize profile then this resource does not need updating so frequently. It is after all just a &amp;ldquo;Here I am, come find me&amp;rdquo; resource.&lt;/li>
+&lt;li>regions that you would be willing to present training days or pre-cons in (these match the regions on callfordataspeakers.com)&lt;/li>
+&lt;li>Your sessionize profile URl which will show the event organisers the precise sessions that you have and also your contact details/methods&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/filledinsessions.png"
+loading="lazy"
+alt="new speaker info"
+>&lt;/p>
+&lt;p>Thats it, then press Submit new issue and the automation will do its thing&lt;/p>
+&lt;h1 id="what-does-it-look-like">What does it look like?&lt;/h1>
+&lt;p>A GitHub Action will run and &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>the web-page&lt;/a> will be updated.&lt;/p>
+&lt;p>You can then search for topics, regions, click on any topic to see all the speakers that are happy to present on that topic.&lt;/p>
+&lt;p>Click on a speaker and you will be directed to their Sessionize profile page.&lt;/p>
+&lt;p>Here is a quick look at the demo page after I had some test data in there!&lt;/p>
+&lt;p>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/callfordataprecons.png"
+loading="lazy"
+alt="PreConSpeakers"
+>&lt;/p>
+&lt;h1 id="what-else-can-i-do">What else can I do?&lt;/h1>
+&lt;p>Please promote this resource. It will have no benefit if speakers do not add themselves and event organisers do not know about it.&lt;/p>
+&lt;p>I would be really happy if you can keep this in mind if you are organising a data platform event, let any speakers know that this exists so that they can add themselves, share it on social media.&lt;/p>
+&lt;p>Many Thanks.&lt;/p></description></item><item><title>Presentation Nerves</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/presentation-nerves/</link><pubDate>Tue, 08 Aug 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/presentation-nerves/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</link><pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</guid><description>&lt;p>Just a quick post to say that I will be speaking at the PowerShell Virtual Chapter meeting this Thursday at 4pm GMT 12pm EDT and also at the Cardiff SQL User Group on Tuesday 31st March&lt;/p>
+&lt;p>I will be giving my Making PowerShell Useful for your Team presentation&lt;/p>
+&lt;p>You have heard about PowerShell and may be spent a little bit of time exploring some of the ways in which it will benefit you at work. You want to be able to perform tasks more specific to your organisation and need to share them with your team. I will show you how you can achieve this by demonstrating&lt;/p>
+&lt;ul>
+&lt;li>An easy way to learn the syntax&lt;/li>
+&lt;li>How to explore SQL Server with PowerShell&lt;/li>
+&lt;li>How to turn your one off scripts into shareable functions&lt;/li>
+&lt;li>How to ensure that your team can easily and quickly make use of and contribute to PowerShell solutions&lt;/li>
+&lt;li>Where else to go for help&lt;/li>
+&lt;/ul>
+&lt;p>You can find out more about the Virtual Chapter here&lt;/p>
+&lt;p>&lt;a class="link" href="http://PowerShell.sqlpass.org/%c2%a0" title="http://PowerShell.sqlpass.org/ "
+target="_blank" rel="noopener"
+>http://PowerShell.sqlpass.org/&lt;/a> &lt;/p>
+&lt;p>and the Cardiff meeting here&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/%c2%a0" title="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/ "
+target="_blank" rel="noopener"
+>http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/&lt;/a> &lt;/p>
+&lt;p>The Cardiff meeting has been named The Battle Of The Beards as it features Tobiasz Koprowski: talking about Windows Azure SQL Database - Tips and Tricks for beginners and Terry McCann with SSRS Inception. I will be giving the same presentation as at the Virtual Chapter&lt;/p>
+&lt;p>I hope to see you at one or both sessions&lt;/p></description></item></channel></rss>

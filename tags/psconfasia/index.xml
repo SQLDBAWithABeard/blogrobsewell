@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>psconfasia on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/psconfasia/</link><description>Recent content in psconfasia on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 24 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/psconfasia/index.xml" rel="self" type="application/rss+xml"/><item><title>Announcing PSDay.UK – Whats a PSDay?</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/announcing-psday.uk-whats-a-psday/</link><pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/announcing-psday.uk-whats-a-psday/</guid><description>&lt;p>On Thursday evening I attended the joint London WinOps and PowerShell User Group. It was an excellent evening with two great sessions by Jaap Brasser and Filip Verloy.&lt;/p>
+&lt;h2 id="psdayuk">PSDay.UK&lt;/h2>
+&lt;p>There was also an exciting announcement about PSDay.UK  &lt;a class="link" href="https://psday.uk" target="_blank" rel="noopener"
+>https://psday.uk&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Look look&lt;br>
+A whole day of PowerShell&lt;br>
+In London&lt;br>
+Just after &lt;a class="link" href="https://twitter.com/WinOpsLDN" target="_blank" rel="noopener"
+>@WinOpsLDN&lt;/a>&lt;br>
+It&amp;rsquo;s going to be awesome&lt;a class="link" href="https://t.co/CAQqoc2cgX" target="_blank" rel="noopener"
+>https://t.co/CAQqoc2cgX&lt;/a>&lt;br>
+Follow &lt;a class="link" href="https://twitter.com/psdayuk" target="_blank" rel="noopener"
+>@psdayuk&lt;/a> &lt;a class="link" href="https://t.co/3RFHpXpRI1" target="_blank" rel="noopener"
+>pic.twitter.com/3RFHpXpRI1&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/888111785022169088" target="_blank" rel="noopener"
+>July 20, 2017&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>PSDay.UK is a one day PowerShell event providing the opportunity for you to spend a whole day learning PowerShell from renowned experts from the UK and international speaking community. It will be held at&lt;/p>
+&lt;p>Skills Matter | CodeNode, 10 South Place, London, EC2M 7EB, GB&lt;/p>
+&lt;p>on&lt;/p>
+&lt;p>Friday 22nd September 2017  &lt;a class="link" href="https://calendar.google.com/calendar/ical/pvrdkbsp8qbkgpt1cg6cethp0o%40group.calendar.google.com/public/basic.ics" target="_blank" rel="noopener"
+>.ics&lt;/a>&lt;/p>
+&lt;p>We will be running two tracks&lt;/p>
+&lt;ul>
+&lt;li>PowerShell Zero to Hero&lt;/li>
+&lt;li>DevOps with PowerShell&lt;/li>
+&lt;/ul>
+&lt;h2 id="register-your-interest">Register your interest&lt;/h2>
+&lt;p>Please go and &lt;a class="link" href="https://psday.uk" target="_blank" rel="noopener"
+>visit the website&lt;/a> and have a look and register your interest to get further notifications about the event.&lt;/p>
+&lt;p>Follow the &lt;a class="link" href="https://twitter.com/@PSDayUK" target="_blank" rel="noopener"
+>@PSDayUK&lt;/a> twitter account and Facebook page &lt;a class="link" href="https://www.facebook.com/PSDayUK/" target="_blank" rel="noopener"
+>https://www.facebook.com/PSDayUK/&lt;/a> and keep yourself informed on this fantastic new event.&lt;/p>
+&lt;h2 id="want-to-speak-at-psdayuk-">Want to Speak at PSDay.UK ?&lt;/h2>
+&lt;p>We already have some fantastic speakers lined up but we would like to invite people to send us submissions for more sessions. If you have a PowerShell talk that will fit into one of the tracks and experience of delivering sessions at events &lt;a class="link" href="https://psday.uk/submit-talk/" target="_blank" rel="noopener"
+>please send us submissions via the website.&lt;/a>&lt;br>
+If you have questions about speaking feel free to contact me via twitter at &lt;a class="link" href="https://twitter.com/sqldbawithbeard" target="_blank" rel="noopener"
+>@sqldbawithbeard&lt;/a>&lt;/p>
+&lt;h2 id="what-is-a-psday-">What is a PSDay ?&lt;/h2>
+&lt;p>The International PowerShell community has three main global events which run over a number of days with top notch international speakers and Microsoft PowerShell team members, delivering in-depth information about the latest PowerShell trends and technologies, and connecting national communities with another.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="http://psconf.eu/" target="_blank" rel="noopener"
+>psconf.eu&lt;/a> covers the European communities, Hannover, Germany April 16-20 2018&lt;/li>
+&lt;li>&lt;a class="link" href="http://psconf.asia" target="_blank" rel="noopener"
+>psconf.asia&lt;/a> targets the Asian communities, Singapore October 27-28 2017&lt;/li>
+&lt;li>&lt;a class="link" href="https://powershell.org/summit/" target="_blank" rel="noopener"
+>PowerShell+DevOps Global Summit&lt;/a> targets the US communities April 9-12 2018&lt;/li>
+&lt;/ul>
+&lt;p>There are a number of other PowerShell events that have been organised by wonderful volunteers in numerous countries and we feel there is an opportunity to create national events which complement the global events and help PowerShell passionates and professionals to get in touch and learn from another with a similar branding of PSDay.&lt;/p>
+&lt;p>We foresee PSDays to be smaller one day national events promoting speakers from the host country supported by other international speakers with the aim of increasing the exposure of national PowerShell user groups as well as providing excellent PowerShell training.&lt;/p>
+&lt;p>There will be a board of PowerShell community folk set up who will approve requests to use the PSDay name and shield logo providing the event is professionally organized and offer help with technical questions, viral marketing, and experience. We hope that this will enable people to set up their own PSDay in their own country and increase the exposure of the PowerShell community as well as PowerShell knowledge whilst sharing resources, knowledge, experience and skills and ensuring a good standard of PowerShell community national events.&lt;/p>
+&lt;p>Further details of this will be forthcoming and we welcome offers of assistance from people with relevant experience&lt;/p></description></item></channel></rss>

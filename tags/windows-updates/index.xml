@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Updates on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/windows-updates/</link><description>Recent content in Windows Updates on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 29 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/windows-updates/index.xml" rel="self" type="application/rss+xml"/><item><title>Show Windows Updates Locally With PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/show-windows-updates-locally-with-powershell/</link><pubDate>Sun, 29 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/show-windows-updates-locally-with-powershell/</guid><description>&lt;p>I wanted to be able to quickly show the Windows Updates on a server. This came about during a discussion about auditing.&lt;/p>
+&lt;p>Of course, there is no point in re-inventing the wheel so I had a quick Google and  found a couple of posts on from  &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2009/03/09/how-can-i-list-all-updates-that-have-been-added-to-a-computer.aspx" target="_blank" rel="noopener"
+>Hey Scripting Guy&lt;/a> blog and one from &lt;a class="link" href="http://blogs.technet.com/b/tmintner/archive/2006/07/07/440729.aspx" target="_blank" rel="noopener"
+>Tim Minter&lt;/a>. Neither quite did what I wanted so I modified them as follows.&lt;/p>
+&lt;p>We start by creating a Update object and find the total number of updates and setting them to a variable &lt;code>$History&lt;/code> which we pass to the &lt;code>QueryHistory&lt;/code> Method. This enables us to show all the updates&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image100.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image100.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Passing this to &lt;code>Get-Member&lt;/code> shows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image101.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image101.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>which doesn’t show the KB so I read a bit more and found &lt;a class="link" href="http://lyncdup.com/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate/?utm_source=rss&amp;amp;utm_medium=rss&amp;amp;utm_campaign=list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed%3A&amp;#43;LyncdUp&amp;#43;%28Lync%27d&amp;#43;Up%29" target="_blank" rel="noopener"
+>Tom Arbuthnot’s Blog Post&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image102.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image102.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>this transforms the &lt;code>ResultCode&lt;/code> Property to something meaningful and places the KB in its own column.&lt;/p>
+&lt;p>I have created a function called &lt;code>Show-WindowsUpdatesLocal&lt;/code> It’s Local because doing it for a remote server takes a different approach but I will show that another day.&lt;/p>
+&lt;p>This means you can call the function and use the results however you like&lt;/p>
+&lt;pre>&lt;code>Show-WindowsUpdatesLocal
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image103.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image103.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>Show-WindowsUpdatesLocal| Select Date, HotfixID, Result|Format-Table -AutoSize
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image104.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image104.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>Show-WindowsUpdatesLocal|Where-Object {$_.Result -eq ‘Failed’} |Select Date, HotfixID, Result,Title|Format-Table -AutoSize
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image105.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image105.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Output to file&lt;/p>
+&lt;pre>&lt;code>Show-WindowsUpdatesLocal|Format-Table -AutoSize|Out-File c:\temp\updates.txt
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image106.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image106.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Output to CSV&lt;/p>
+&lt;pre>&lt;code>Show-WindowsUpdatesLocal|Export-Csv c:\temp\updates.csv
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image107.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image107.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You can get the code here&lt;/p>
+&lt;pre>&lt;code>############################################################# #########
+#
+# NAME: Show-WindowsUpdatesLocal.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:22/09/2013
+#
+# COMMENTS: Load function to show all windows updates locally
+#
+# USAGE: Show-WindowsUpdatesLocal
+# Show-WindowsUpdatesLocal| Select Date, HotfixID, Result|Format-Table -AutoSize
+# Show-WindowsUpdatesLocal|Where-Object {$_.Result -eq 'Failed'} |Select Date, HotfixID, Result,Title| Format-Table -AutoSize
+# Show-WindowsUpdatesLocal|Format-Table -AutoSize| Out-File c:\temp\updates.txt
+# Show-WindowsUpdatesLocal|Export-Csv c:\temp\updates.csv
+#
+Function Show-WindowsUpdatesLocal {
+$Searcher = New-Object -ComObject Microsoft.Update. Searcher
+$History = $Searcher.GetTotalHistoryCount()
+$Updates = $Searcher.QueryHistory(1, $History)
+# Define a new array to gather output
+$OutputCollection = @()
+Foreach ($update in $Updates) {
+$Result = $null
+Switch ($update.ResultCode) {
+0 { $Result = 'NotStarted'}
+1 { $Result = 'InProgress' }
+2 { $Result = 'Succeeded' }
+3 { $Result = 'SucceededWithErrors' }
+4 { $Result = 'Failed' }
+5 { $Result = 'Aborted' }
+default { $Result = $_ }
+}
+$string = $update.title
+$Regex = “KB\d*”
+$KB = $string | Select-String -Pattern $regex | Select-Object { $_.Matches }
+$output = New-Object -TypeName PSobject
+$output | add-member NoteProperty “Date” -value $Update.Date
+$output | add-member NoteProperty “HotFixID” -value $KB.‘ $_.Matches ‘.Value
+$output | Add-Member NoteProperty &amp;quot;Result&amp;quot; -Value $Result
+$output | add-member NoteProperty “Title” -value $string
+$output | add-member NoteProperty “Description” -value $update.Description
+$OutputCollection += $output
+}
+$OutputCollection
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

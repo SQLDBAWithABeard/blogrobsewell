@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Source Control on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/source-control/</link><description>Recent content in Source Control on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/source-control/index.xml" rel="self" type="application/rss+xml"/><item><title>Adding a Folder of Scripts to GitHub with Azure Data Studio</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</link><pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</guid><description>&lt;p>In my last post I showed how to &lt;a class="link" href="https://blog.robsewell.com/10501/" target="_blank" rel="noopener"
+>add a folder of scripts to GitHub&lt;/a> using Visual Studio Code.&lt;/p>
+&lt;p>You can do it with Azure Data Studio as well. It’s exactly the same steps!&lt;/p>
+&lt;p>The blog post could end here but read on for some screen shots 😉&lt;/p>
+&lt;p>Follow the previous post for details of setting up a new GitHub account&lt;/p>
+&lt;p>Create a repository in GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-27.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Open the folder in Azure Data Studio with CTRL K CTRL O (Or File –&amp;gt; Open Folder)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-28.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Click on the Source Control icon or CTRL + SHIFT + G and then Initialize Repository&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-29.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose the folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-30.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Write a commit message&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-31.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Say yes to the prompt. Press CTRL + ‘ to open the terminal&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-32.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Navigate to the scripts folder. (I have a PSDrive set up to my Git folder)&lt;/p>
+&lt;pre>&lt;code>Set-Location GIT:\\ADS-Scripts\
+&lt;/code>&lt;/pre>
+&lt;p>and copy the code from the GitHub page after “…or push an existing repository from the command line”&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-33.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and run it&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-34.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and there are your scripts in GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-35.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Make some changes to a script and it will go muddy brown&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-36.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then write a commit message. If you click on the file name in the source control tab then you can see the changes that have been made, that are not currently tracked&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-37.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Commit the change with CTRL + ENTER and then click the roundy-roundy icon (seriously anyone know its name ?) click yes on the prompt and your changes are in GitHub as well 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-38.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Realistically, you can use the previous post to do this with Azure Data Studio as it is built on top of Visual Studio Code but I thought it was worth showing the steps in Azure Data Studio.&lt;/p>
+&lt;p>Happy Source Controlling&lt;/p></description></item></channel></rss>

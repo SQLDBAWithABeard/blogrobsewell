@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSIS on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/ssis/</link><description>Recent content in SSIS on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/ssis/index.xml" rel="self" type="application/rss+xml"/><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" />&lt;h1 id="automation">Automation&lt;/h1>
+&lt;!-- raw HTML omitted -->
+&lt;p>This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted -->blog&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->twitter&lt;!-- raw HTML omitted -->.&lt;/p>
+&lt;p>Thank you Elizabeth&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/p>
+&lt;p>Elizabeth asks&lt;/p>
+&lt;blockquote>
+&lt;p>My invitation to you is I want to know what you have automated to make your life easier?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="from-the-past">From the Past&lt;/h2>
+&lt;p>I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>You have to start somewhere&lt;/a> In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>The Best Database Administrators Automate Everything&lt;/a> which I am pleased to see is still available nearly a decade later&lt;/p>
+&lt;p>Here is a quote from his blog entry&lt;/p>
+&lt;blockquote>
+&lt;h2 id="automate-everything">Automate Everything&lt;/h2>
+&lt;p>That’s right, I said everything. Just sit back and take the &lt;em>time&lt;/em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word &lt;em>potentially&lt;/em> from your vocabulary and evaluate how you could automate &lt;strong>e-v-e-r-y-t-h-i-n-g&lt;/strong> that you do.&lt;/p>
+&lt;p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important &lt;em>Proactive Mode&lt;/em> tasks/projects to be getting on with&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="i-love-automation">I love Automation&lt;/h2>
+&lt;p>I have tried my best at all times to follow this advice in the last decade and pretty much I am happy that I have managed it.&lt;/p>
+&lt;ul>
+&lt;li>I use PowerShell (a lot!) to automate all sorts of routine tasks including migrating this blog&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://blog.robsewell.com/tags/#jupyter-notebooks" target="_blank" rel="noopener"
+>Jupyter Notebooks&lt;/a> to enable myself and others to automate Run Books, Training, Documentation, Demonstrations, Incident Response. You can find my notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/li>
+&lt;li>I use Azure DevOps to automate infrastructure creation and changes with terraform and delivery of changes to code as well as unit testing.&lt;/li>
+&lt;li>I use GitHub actions to create this blog, publish the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+>ADSNotebook&lt;/a> module&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://chocolatey.org/" target="_blank" rel="noopener"
+>Chocolatey&lt;/a> to install and update software&lt;/li>
+&lt;li>I have used Desired State Configuration to ensure that infrastructure is as it is expected to be&lt;/li>
+&lt;/ul>
+&lt;p>At every point I am looking for a means to automate the thing that I am doing because it is almost guaranteed that there will be a time in the future after you have done a thing that there will be a need to do it again or to do it slightly differently.&lt;/p>
+&lt;h2 id="whats-the-last-thing-that-you-automated">Whats the last thing that you automated?&lt;/h2>
+&lt;p>Following my blog post about &lt;a class="link" href="https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/" target="_blank" rel="noopener"
+>Notifying a Teams Channel about a SQL Agent Job result&lt;/a> I was asked if this could be tweaked to reduce the time spent getting information about SSIS Execution failures.&lt;/p>
+&lt;h3 id="finding-ssis-failures">Finding SSIS failures&lt;/h3>
+&lt;p>When you run an SSIS package in an Agent Job and it fails, the Agent Job History shows something along these lines&lt;/p>
+&lt;blockquote>
+&lt;p>The job failed. The Job was invoked by User MyDomain\MyUserName. The last step to run was step 1 (scheduling ssis package).
+Executed as user: NT Service\SQLSERVERAGENT. Microsoft (R) SQL Server Execute Package Utility Version 11.0.5058.0 for 64-bit Copyright (C) Microsoft Corporation. All rights reserved. Started: 4:17:12 PM Package execution on IS Server failed. &lt;strong>Execution ID: 123456789&lt;/strong>, Execution Status:4. To view the details for the execution, right-click on the Integration Services Catalog, and open the [All Executions] report Started: 4:17:12 PM Finished: 4:17:12 PM Elapsed: 4.493 seconds. The package execution failed. The step failed.&lt;/p>
+&lt;/blockquote>
+&lt;p>The next step is to open SSMS, go to the SSISDb and click through to the SSIS reports and then scroll through to find the package and then the message. This is not particularly efficient and the SSIS reports are not known for their speedy executions!&lt;/p>
+&lt;p>This meant that the team member responsible for checking in the morning, could see which instance and which job had failed from the Teams message but then had to manually follow the above steps to find an error message that they could take action on.&lt;/p>
+&lt;h3 id="automate-it">Automate it&lt;/h3>
+&lt;p>In the SSISDB database there is an &lt;code>event_messages&lt;/code> view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)&lt;/p>
+&lt;p>In the code below, I&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>check if the failure comes from an SSIS instance&lt;br>
+if($Inst -in ($SSISInstances)){&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Execution ID from the Error message&lt;br>
+&lt;code>$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a query for the SSISDB&lt;/p>
+&lt;p>&lt;code>$SSISQuery = @&amp;quot;&lt;/code>&lt;br>
+&lt;code>SELECT * FROM catalog.event_messages em&lt;/code>&lt;br>
+&lt;code>WHERE em.operation_id = $ExecutionId&lt;/code>&lt;br>
+&lt;code>AND (em.event_name = 'OnError')&lt;/code>&lt;br>
+&lt;code>ORDER BY em.event_message_id;&lt;/code>&lt;br>
+&lt;code>&amp;quot;@&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the Error Message and the Execution Path to variables&lt;br>
+&lt;code>$errMessage = $SSISQueryResults.Message&lt;/code>&lt;br>
+&lt;code>$ExecutionPath = $SSISQueryResults.execution_path&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Error Message for none SSIS failures&lt;br>
+&lt;code>}else{&lt;/code>&lt;br>
+&lt;code>$errMessage = $j.group[-1].Message&lt;/code>&lt;br>
+&lt;code>$ExecutionPath = 'the job'&lt;/code>&lt;br>
+&lt;code>}&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Teams message&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>You will see that I used &lt;code>SELECT *&lt;/code> because someone will always ask for some extra information in the future!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/happyrob.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>The full script is below, Happy Automating!&lt;/p>
+&lt;pre>&lt;code>$webhookurl = &amp;quot;https://outlook.office.com/webhook/ the rest of it here&amp;quot;
+$SSISInstances = # to identify SSIS instances
+$ProdInstances = # ALL instances for checking
+$startdate = (Get-Date).AddHours(-1)
+$AllFailedJobs = foreach ($Instance in $ProdInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs # | Where-Object { $Psitem.Job -match '^Beard-\d\d\d\d\d' -or $Psitem.Job -like 'BeardJob*' } # if you need to filter
+$FailedJobs = $jobs | Where-Object { $Psitem.Status -ne 'Succeeded' }
+$FailedJobs | Group-Object Job
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;We have $($AllFailedJobs.Count) Failed Jobs&amp;quot;
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+foreach ($j in $AllFailedJobs) {
+$Inst = $j.group[-1].SqlInstance
+$jName = $j.name
+$sname = $j.group[-1].StepName
+$edate = $j.group[-1].EndDate
+if($Inst -in ($SSISInstances)){
+$BaseerrMessage = $j.group[-1].Message
+$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value
+$SSISQuery = @&amp;quot;
+SELECT * FROM catalog.event_messages em
+WHERE em.operation_id = $ExecutionId
+AND (em.event_name = 'OnError')
+ORDER BY em.event_message_id;
+&amp;quot;@
+$SSISQueryResults = Invoke-DbaQuery -SqlInstance $Inst -Database SSISDB -Query $SSISQuery
+$errMessage = $SSISQueryResults.Message
+$ExecutionPath = $SSISQueryResults.execution_path
+}else{
+$errMessage = $j.group[-1].Message
+$ExecutionPath = 'the job'
+}
+$Text = @&amp;quot;
+# **$Inst**
+## **$JName**
+- The Job step that failed is - **$sname**
+- It failed at - **$edate**
+- It failed in $ExecutionPath with the message
+- $errMessage
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There was a Job Failure&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Job Failures &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last 1 hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/sobrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+if(-not $AllFailedJobs){
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There were no job failures in the last hour at $ (Get-Date)&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;There were no job failures at $ (Get-Date)&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/happyrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = &amp;quot;All is well&amp;quot;
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

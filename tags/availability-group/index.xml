@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Availability Group on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/availability-group/</link><description>Recent content in Availability Group on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/availability-group/index.xml" rel="self" type="application/rss+xml"/><item><title>Refreshing Availability Group Database with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-availability-group-database-with-powershell/</link><pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-availability-group-database-with-powershell/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/09/image1.png" alt="Featured image of post Refreshing Availability Group Database with PowerShell" />&lt;p>Following last weeks post on &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2/" target="_blank" rel="noopener"
+>Refreshing A Mirrored Database with PowerShell&lt;/a> I thought I would write the script to refresh an Availability Group Database.&lt;/p>
+&lt;p>An availability group supports a failover environment for a discrete set of user databases, known as availability databases, that fail over together. An availability group supports a set of primary databases and one to eight sets of corresponding secondary databases.You can read more about Availability groups &lt;a class="link" href="http://msdn.microsoft.com/en-GB/library/ff877884.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with AG. There are other scenarios but this post covers the automation of restoring an Availability Group Database from a backup.&lt;/p>
+&lt;p>The steps that you need to take to restore an Availability Group Database are&lt;/p>
+&lt;ul>
+&lt;li>Remove Database from the Availability Group&lt;/li>
+&lt;li>Restore the Primary Replica Database&lt;/li>
+&lt;li>Backup the Primary Replica Database Transaction Log&lt;/li>
+&lt;li>Restore the Secondary and Tertiary Replica Databases with no recovery&lt;/li>
+&lt;li>Add the Database back into the Availability Group&lt;/li>
+&lt;li>Resolve Orphaned Users – Not covered in this script&lt;/li>
+&lt;li>Check the status&lt;/li>
+&lt;/ul>
+&lt;p>Here is my set up for this post&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/09/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I have 3 servers SQL2012SER08AG1, SQL2012SER08AG2 and SQL2012SER08AG3 with 3 databases in an Availability Group called AG_THEBEARD1. SQL2012SER08AG2 is set up as a secondary replica using Synchronous-Commit Mode SQL2012SER08AG3 is set up as a read only replica using Asynchronous-Commit Mode. I have three databases in my Availability Group and today I shall use the database called TestDatabase (I have no imagination today!) to demonstrate the refresh&lt;/p>
+&lt;p>The script requires some variables to be set up at the beginning. You can easily change this and make the script into a function and call it if you desire, but for this post I shall consider the script as a standalone. The reasoning for this is that I imagine that it will be placed into a run book or stored for use in a repository for specific use and therefore reduces any pre-requisites for using it.&lt;/p>
+&lt;p>First we will remove the database from the Availability Group. This is achieved using the &lt;a class="link" href="http://msdn.microsoft.com/en-us/library/hh213326.aspx#PowerShellProcedure?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Remove-SqlAvailabilityDatabase CMDLet&lt;/a>&lt;/p>
+&lt;pre>&lt;code>Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+&lt;/code>&lt;/pre>
+&lt;p>Next Restore the Primary Replica Database, Backup the Primary Replica Database Transaction Log&lt;br>
+and Restore the Secondary and Tertiary Replica Databases with no recovery using Restore-SqlDatabase and Backup-SqlDatabase (You can also use the SMO method in &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2" target="_blank" rel="noopener"
+>the previous post&lt;/a> if you wish)&lt;/p>
+&lt;pre>&lt;code>Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $PrimaryServer -ReplaceDatabase
+# Backup Primary Database
+Backup-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $PrimaryServer -BackupAction 'Log'
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $SecondaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Secondary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $SecondaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $SecondaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $TertiaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Tertiary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $TertiaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $TertiaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+&lt;/code>&lt;/pre>
+&lt;p>Then add the database back to the Availability Group&lt;/p>
+&lt;pre>&lt;code>Add-SqlAvailabilityDatabase -Path $MyAgPrimaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgSecondaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgTertiaryPath -Database $DBName
+&lt;/code>&lt;/pre>
+&lt;p>Finally test the status of the Availability Group&lt;/p>
+&lt;pre>&lt;code>$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$AG = $srv.AvailabilityGroups[$AGName]
+$AG.DatabaseReplicaStates|ft -AutoSize
+&lt;/code>&lt;/pre>
+&lt;p>I also like to add some output to show the progress of the script. This can be logged using Out-File or displayed on the screen using Out-Host.&lt;/p>
+&lt;pre>&lt;code>$EndDate = Get-Date
+$Time = $EndDate - $StartDate
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script anded at $EndDate and took
+$Time
+&amp;quot; -ForegroundColor Green
+&lt;/code>&lt;/pre>
+&lt;p>Here are the results of my script&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/09/image1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image_thumb1.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Here is the script&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.NOTES
+Name: Availability Group Refresh
+Author: Rob Sewell https://blog.robsewell.com
+.DESCRIPTION
+Refreshes an Availbaility group database from a backup
+YOU WILL NEED TO RESOLVE ORPHANED USERS IF REQUIRED
+#&amp;gt;
+## http://msdn.microsoft.com/en-gb/library/hh213078.aspx#PowerShellProcedure?WT.mc_id=DP-MVP-5002693
+# http://msdn.microsoft.com/en-us/library/hh213326(v=sql.110).aspx?WT.mc_id=DP-MVP-5002693
+cls
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(‘Microsoft.SqlServer.SMO’) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(‘Microsoft.SqlServer.SMOExtended’) | out-null
+$LoadServer = &amp;quot;SQL2012Ser2012&amp;quot; # The Load Server
+$Date = Get-Date -Format ddMMyy
+$PrimaryServer = &amp;quot;SQL2012SER08AG1&amp;quot; # The Primary Availability Group Server
+$SecondaryServer = &amp;quot;SQL2012SER08AG2&amp;quot; # The Secondary Availability Group Server
+$TertiaryServer = &amp;quot;SQL2012SER08AG3&amp;quot; # The Tertiary Availability Group Server
+$AGName = &amp;quot;AG_THEBEARD1&amp;quot; # Availability Group Name
+$DBName = &amp;quot;TestDatabase&amp;quot; # Database Name
+$LoadDatabaseBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\LoadTestDatabase&amp;quot; + $Date + &amp;quot;.bak&amp;quot; # Load database Backup location - Needs access permissions granted
+$DatabaseBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\TestDatabase&amp;quot; + $Date + &amp;quot;.bak&amp;quot; # database Backup location - Needs access permissions granted
+$LogBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\TestDatabase&amp;quot; + $Date + &amp;quot;.trn&amp;quot; # database Backup location - Needs access permissions granted
+# Path to Availability Database Objects
+$MyAgPrimaryPath = &amp;quot;SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$MyAgSecondaryPath = &amp;quot;SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$MyAgTertiaryPath = &amp;quot;SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$StartDate = Get-Date
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script Started $StartDate
+&amp;quot; -ForegroundColor Green
+cd c:
+# Remove old backups
+If(Test-Path $LoadDatabaseBackupFile){Remove-Item -Path $LoadDatabaseBackupFile -Force}
+If(Test-Path $DatabaseBackupFile){Remove-Item -Path $DatabaseBackupFile}
+If(Test-Path $LogBackupFile ) {Remove-Item -Path $LogBackupFile }
+Write-Host &amp;quot;Backup Files removed&amp;quot; -ForegroundColor Green
+# Remove Secondary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$SecondaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Secondary Removed from Availability Group&amp;quot; -ForegroundColor Green
+# Remove Tertiary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$TertiaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Tertiary removed from Availability Group&amp;quot; -ForegroundColor Green
+# Remove Primary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$PrimaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Primary removed from Availability Group&amp;quot; -ForegroundColor Green
+# Backup Load Database
+Backup-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $LoadServer
+Write-Host &amp;quot;Load Database Backed up&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Primary Replica Database from Load Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $PrimaryServer -ReplaceDatabase
+Write-Host &amp;quot;Primary Database Restored&amp;quot; -ForegroundColor Green
+# Backup Primary Database
+# Backup-SqlDatabase -Database $DBName -BackupFile $DatabaseBackupFile -ServerInstance $PrimaryServer
+Backup-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $PrimaryServer -BackupAction 'Log'
+Write-Host &amp;quot;Primary Database Backed Up&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $SecondaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Secondary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $SecondaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $SecondaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+Write-Host &amp;quot;Secondary Database Restored&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $TertiaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Tertiary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $TertiaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $TertiaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+Write-Host &amp;quot;Tertiary Database Restored&amp;quot; -ForegroundColor Green
+# Add database back into Availability Group
+cd SQLSERVER:\SQL\$PrimaryServer
+Add-SqlAvailabilityDatabase -Path $MyAgPrimaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgSecondaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgTertiaryPath -Database $DBName
+Write-Host &amp;quot;Database Added to Availability Group &amp;quot; -ForegroundColor Green
+# Check Availability Group Status
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$AG = $srv.AvailabilityGroups[$AGName]
+$AG.DatabaseReplicaStates|ft -AutoSize
+$EndDate = Get-Date
+$Time = $EndDate - $StartDate
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script ended at $EndDate and took
+$Time
+&amp;quot; -ForegroundColor Green
+&lt;/code>&lt;/pre></description></item></channel></rss>

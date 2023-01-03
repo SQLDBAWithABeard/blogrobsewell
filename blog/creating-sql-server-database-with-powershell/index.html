@@ -1,0 +1,156 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.
+I used my scripts from My Post on Spinning Up Azure SQL Boxes to create two servers and then I wanted to create some databases
+I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases."><title>Creating SQL Server Database with PowerShell</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-sql-server-database-with-powershell/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Creating SQL Server Database with PowerShell"><meta property="og:description" content="This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.
+I used my scripts from My Post on Spinning Up Azure SQL Boxes to create two servers and then I wanted to create some databases
+I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-sql-server-database-with-powershell/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automate"><meta property="article:tag" content="automation"><meta property="article:tag" content="databases"><meta property="article:tag" content="error"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="box-of-tricks"><meta property="article:published_time" content="2013-09-08T00:00:00+00:00"><meta property="article:modified_time" content="2013-09-08T00:00:00+00:00"><meta name=twitter:title content="Creating SQL Server Database with PowerShell"><meta name=twitter:description content="This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.
+I used my scripts from My Post on Spinning Up Azure SQL Boxes to create two servers and then I wanted to create some databases
+I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#errors>Errors</a></li><li><a href=#creating-database>Creating Database</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/creating-sql-server-database-with-powershell/>Creating SQL Server Database with PowerShell</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 08, 2013</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>5 minute read</time></div></footer></div></header><section class=article-content><p>This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.</p><p>I used my scripts from <a class=link href=https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/ target=_blank rel=noopener>My Post on Spinning Up Azure SQL Boxes</a> to create two servers and then I wanted to create some databases</p><p>I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases.</p><h2 id=errors>Errors</h2><p>Whilst finalising the function I didn’t quite get it right sometimes and was faced with an error.</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image39.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image39.png loading=lazy alt=image></a></p><p>Not the most useful of errors to troubleshoot. The issue could be anywhere in the script</p><p>You can view the last errors PowerShell has shown using $Errors. This gives you the last 500 errors but you can see the last error by using $Error[0] if you pipe it to Format-List you can get a more detailed error message so I added a try catch to the function which gave me an error message I could resolve.</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image40.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image40.png loading=lazy alt=image></a></p><p>Much better. The problem was</p><blockquote><p>Cannot create file ‘C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\.LDF’ because it already exists.</p></blockquote><p>Mistyping a variable has caused this. Creating an empty file name variable which then threw the error the second(and third,fourth fifth) times I ran the script but this error pointed me to it.</p><h2 id=creating-database>Creating Database</h2><p>There are a vast number of variables you can set when creating a database. I decided to set File Sizes, File Growth Sizes, Max File Sizes and Recovery Model. I only set Server and Database Name as mandatory parameters and gave the other parameters default values</p><p><a class=link href=https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image41.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image41.png loading=lazy alt=image></a></p><p>We take the parameters for file sizes in MB and set them to KB</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image42.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image42.png loading=lazy alt=image></a></p><p>Then set the default file locations. Create a database object, a Primary file group object and add the file group object to the database object</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image43.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image43.png loading=lazy alt=image></a></p><p>Add a User File Group for User objects</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image44.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image44.png loading=lazy alt=image></a></p><p>Create a database file on the primary file group using the variables set earlier</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image45.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image45.png loading=lazy alt=image></a></p><p>Do the same for the user file and then create a Log File</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image46.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image46.png loading=lazy alt=image></a></p><p>Set the Recovery Model and create the database and then set the user file group as the default</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image47.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image47.png loading=lazy alt=image></a></p><p>Finally catch the errors</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image48.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image48.png loading=lazy alt=image></a></p><p>It can then be called as follows</p><pre><code>Create-Database SERVERNAME DATABASENAME
+</code></pre><p><a class=link href=https://blog.robsewell.com/assets/uploads/2013/09/image49.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image49.png loading=lazy alt=image></a></p><p>or by setting all the parameters</p><pre><code>Create-Database -Server Fade2black -DBName DatabaseTest -SysFileSize 10 -UserFileSize 15 -LogFileSize 20 -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize 250 -DBRecModel FULL
+</code></pre><p><a class=link href=https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image50.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2013/09/image50.png loading=lazy alt=image></a></p><p>This means that I can easily and quickly set up several databases of different types and sizes</p><p>The script can be found here</p><pre><code>#############################################################################    ################
+#
+# NAME: Create-Database.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:08/09/2013
+#
+# COMMENTS: Load function for creating a database
+#           Only Server and DB Name are mandatory the rest will be set to     small defaults
+#
+# USAGE:  Create-Database -Server Fade2black -DBName Test35 -SysFileSize 10     -UserFileSize 15 -LogFileSize 20
+# -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize     250 -DBRecModel FULL
+# ————————————————————————
+
+
+Function Create-Database {
+    Param(
+        [Parameter(Mandatory = $true)]
+        [String]$Server ,
+        [Parameter(Mandatory = $true)]
+        [String]$DBName,
+        [Parameter(Mandatory = $false)]
+        [int]$SysFileSize = 5,
+        [Parameter(Mandatory = $false)]
+        [int]$UserFileSize = 25,
+        [Parameter(Mandatory = $false)]
+        [int]$LogFileSize = 25,
+        [Parameter(Mandatory = $false)]
+        [int]$UserFileGrowth = 5,
+        [Parameter(Mandatory = $false)]
+        [int]$UserFileMaxSize = 100,
+        [Parameter(Mandatory = $false)]
+        [int]$LogFileGrowth = 5,
+        [Parameter(Mandatory = $false)]
+        $LogFileMaxSize = 100,
+        [Parameter(Mandatory = $false)]
+        [String]$DBRecModel = 'FULL'
+    )
+
+    try {
+        # Set server object
+        $srv = New-Object ('Microsoft.SqlServer.Management.SMO.Server')     $server
+        $DB = $srv.Databases[$DBName]
+    
+        # Define the variables
+        # Set the file sizes (sizes are in KB, so multiply here to MB)
+        $SysFileSize = [double]($SysFileSize * 1024.0)
+        $UserFileSize = [double] ($UserFileSize * 1024.0)
+        $LogFileSize = [double] ($LogFileSize * 1024.0)
+        $UserFileGrowth = [double] ($UserFileGrowth * 1024.0)
+        $UserFileMaxSize = [double] ($UserFileMaxSize * 1024.0)
+        $LogFileGrowth = [double] ($LogFileGrowth * 1024.0)
+        $LogFileMaxSize = [double] ($LogFileMaxSize * 1024.0)
+   
+
+        Write-Output &quot;Creating database: $DBName&quot;
+ 
+        # Set the Default File Locations
+        $DefaultDataLoc = $srv.Settings.DefaultFile
+        $DefaultLogLoc = $srv.Settings.DefaultLog
+ 
+        # If these are not set, then use the location of the master db mdf/    ldf
+        if ($DefaultDataLoc.Length -EQ 0) {$DefaultDataLoc = $srv.    Information.MasterDBPath}
+        if ($DefaultLogLoc.Length -EQ 0) {$DefaultLogLoc = $srv.Information.    MasterDBLogPath}
+ 
+        # new database object
+        $DB = New-Object ('Microsoft.SqlServer.Management.SMO.Database')     ($srv, $DBName)
+ 
+        # new filegroup object
+        $PrimaryFG = New-Object ('Microsoft.SqlServer.Management.SMO.    FileGroup') ($DB, 'PRIMARY')
+        # Add the filegroup object to the database object
+        $DB.FileGroups.Add($PrimaryFG )
+ 
+        # Best practice is to separate the system objects from the user     objects.
+        # So create a seperate User File Group
+        $UserFG = New-Object ('Microsoft.SqlServer.Management.SMO.    FileGroup') ($DB, 'UserFG')
+        $DB.FileGroups.Add($UserFG)
+ 
+        # Create the database files
+        # First, create a data file on the primary filegroup.
+        $SystemFileName = $DBName + &quot;_System&quot;
+        $SysFile = New-Object ('Microsoft.SqlServer.Management.SMO.    DataFile') ($PrimaryFG , $SystemFileName)
+        $PrimaryFG.Files.Add($SysFile)
+        $SysFile.FileName = $DefaultDataLoc + $SystemFileName + &quot;.MDF&quot;
+        $SysFile.Size = $SysFileSize
+        $SysFile.GrowthType = &quot;None&quot;
+        $SysFile.IsPrimaryFile = 'True'
+ 
+        # Now create the data file for the user objects
+        $UserFileName = $DBName + &quot;_User&quot;
+        $UserFile = New-Object ('Microsoft.SqlServer.Management.SMO.    Datafile') ($UserFG, $UserFileName)
+        $UserFG.Files.Add($UserFile)
+        $UserFile.FileName = $DefaultDataLoc + $UserFileName + &quot;.NDF&quot;
+        $UserFile.Size = $UserFileSize
+        $UserFile.GrowthType = &quot;KB&quot;
+        $UserFile.Growth = $UserFileGrowth
+        $UserFile.MaxSize = $UserFileMaxSize
+ 
+        # Create a log file for this database
+        $LogFileName = $DBName + &quot;_Log&quot;
+        $LogFile = New-Object ('Microsoft.SqlServer.Management.SMO.LogFile')     ($DB, $LogFileName)
+        $DB.LogFiles.Add($LogFile)
+        $LogFile.FileName = $DefaultLogLoc + $LogFileName + &quot;.LDF&quot;
+        $LogFile.Size = $LogFileSize
+        $LogFile.GrowthType = &quot;KB&quot;
+        $LogFile.Growth = $LogFileGrowth
+        $LogFile.MaxSize = $LogFileMaxSize
+ 
+        #Set the Recovery Model
+        $DB.RecoveryModel = $DBRecModel
+        #Create the database
+        $DB.Create()
+ 
+        #Make the user filegroup the default
+        $UserFG = $DB.FileGroups['UserFG']
+        $UserFG.IsDefault = $true
+        $UserFG.Alter()
+        $DB.Alter()
+
+        Write-Output &quot; $DBName Created&quot;
+        Write-Output &quot;System File&quot;
+        $SysFile| Select Name, FileName, Size, MaxSize, GrowthType|     Format-List
+        Write-Output &quot;User File&quot;
+        $UserFile| Select Name, FileName, Size, MaxSize, GrowthType, Growth|     Format-List
+        Write-Output &quot;LogFile&quot;
+        $LogFile| Select Name, FileName, Size, MaxSize, GrowthType, Growth|     Format-List
+        Write-Output &quot;Recovery Model&quot;
+        $DB.RecoveryModel
+
+    }
+    Catch {
+        $error[0] | fl * -force
+    }
+}
+</code></pre></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automate/>automate</a>
+<a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/databases/>databases</a>
+<a href=/blogrobsewell/tags/error/>error</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/box-of-tricks/>box-of-tricks</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/blogrobsewell/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/><div class=article-details><h2 class=article-title>SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram</h2></div></a></article><article><a href=/blogrobsewell/blog/tsql2sday-get-postroundup/><div class=article-details><h2 class=article-title>TSQL2sDay – Get-PostRoundup</h2></div></a></article><article><a href=/blogrobsewell/blog/using-pester-with-get-dbalastgoodcheckdb-from-dbatools/><div class=article-details><h2 class=article-title>Using Pester with Get-DbaLastGoodCheckDb from dbatools</h2></div></a></article><article><a href=/blogrobsewell/blog/getting-sqlservers-last-known-good-dbcc-checkdb-with-powershell-and-dbatools/><div class=article-details><h2 class=article-title>Getting SQLServers Last Known Good DBCC Checkdb with PowerShell and dbatools</h2></div></a></article><article><a href=/blogrobsewell/blog/finding-text-in-all-files-in-a-folder-with-powershell/><div class=article-details><h2 class=article-title>Finding Text In All Files In A Folder With PowerShell</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

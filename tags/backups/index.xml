@@ -1,0 +1,1442 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>backups on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/backups/</link><description>Recent content in backups on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/backups/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting the SQL Version from a backup using dbatools ………. on PowerShell Core</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/getting-the-sql-version-from-a-backup-using-dbatools-.-on-powershell-core/</link><pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/getting-the-sql-version-from-a-backup-using-dbatools-.-on-powershell-core/</guid><description>&lt;p>Following an upgrade to SQL Server the backup share had a number of backups, some from the old version and some from the newer version. I was asked if I had a script to be able to get the SQL Version from the backup file from all of the files in the backup share.&lt;/p>
+&lt;p>With &lt;a class="link" href="http://dbatools,io" target="_blank" rel="noopener"
+>dbatools&lt;/a> this was easy to accomplish with &lt;a class="link" href="https://docs.dbatools.io/#Read-DbaBackupHeader" target="_blank" rel="noopener"
+>Read-DbaBackuoHeader&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$backupshare = &amp;#34;$share\\keep&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instance = &amp;#34;SQL0\\Mirror&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$information = foreach ($BackupFile in (Get-ChildItem $backupshare)) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $FileName = @{Name = &amp;#39;FileName&amp;#39;; Expression = {$BackupFile.Name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Read-DbaBackupHeader -SqlInstance $Instance -Path $BackupFile.FullName | Select-Object $FileName, DatabaseName , CompatibilityLevel, SqlVersion
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$information | Format-Table
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/11/read-dbabackupheader.png"
+loading="lazy"
+alt="read-dbabackupheader.PNG"
+>&lt;/p>
+&lt;p>You can get more information about the backup using &lt;code>Read-DbaBackupHeader&lt;/code> and as it is PowerShell it is easy to put this information into any format that you wish, maybe into a database with &lt;a class="link" href="https://docs.dbatools.io/#Write-DbaDataTable" target="_blank" rel="noopener"
+>&lt;code>Write-DbaDataTable&lt;/code>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>So I looked at &lt;a class="link" href="https://t.co/MUw7Dw7CRv" target="_blank" rel="noopener"
+>https://t.co/MUw7Dw7CRv&lt;/a>&lt;/p>
+&lt;p>I saw the words &amp;quot; Support for PS Core on Windows 🎉&amp;quot;&lt;/p>
+&lt;p>I updated the module to 0.9.522 and ran a command and&lt;/p>
+&lt;p>BOOOOOOOOOOOOOOOOOOM&lt;/p>
+&lt;p>Good work fine &lt;a class="link" href="https://twitter.com/psdbatools?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@psdbatools&lt;/a> contirbutors and &lt;a class="link" href="https://twitter.com/cl?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@cl&lt;/a> &lt;a class="link" href="https://t.co/fzpSIju1Gx" target="_blank" rel="noopener"
+>pic.twitter.com/fzpSIju1Gx&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1065955800823332864?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>November 23, 2018&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Support for PowerShell Core in dbatools is coming along very nicely. Following some hard work by the dbatools team and some PowerShell Community members like &lt;a class="link" href="https://twitter.com/IISResetMe" target="_blank" rel="noopener"
+>Mathias Jessen&lt;/a> it is now possible to run a large number of dbatools commands in PowerShell Core running on Windows. There is still a little bit of work to do to get it working on Linux and Mac but I hear the team are working hard on that.&lt;/p>
+&lt;p>So the code example you see above was running on Windows 10 using PowerShell 6.1.1 the current latest stable release. This is excellent news and congratulations to all those working hard to make this work&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/11/dbatoolscore.png"
+loading="lazy"
+alt="dbatoolscore.PNG"
+>&lt;/p>
+&lt;p>If you want to try PowerShell Core, you can follow the instructions&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6" target="_blank" rel="noopener"
+>Here for Windows&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-linux?view=powershell-6" target="_blank" rel="noopener"
+>Here for Linux&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-macos?view=powershell-6" target="_blank" rel="noopener"
+>Or here for MacOs&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>TSQL2sDay – Get-PostRoundup</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Testing SQL Server Access to a share with PowerShell using dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</link><pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Test your Sqlserver backups on Linux with PowerShell and dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</link><pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Using Pester with dbatools Test-DbaLastBackup</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-pester-with-dbatools-test-dbalastbackup/</link><pubDate>Sat, 25 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-pester-with-dbatools-test-dbalastbackup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Backing up SQL Server on Linux using Ola Hallengrens Maintenance Solution</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Taking dbatools Test-DbaLastBackup a little further</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/taking-dbatools-test-dbalastbackup-a-little-further/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/taking-dbatools-test-dbalastbackup-a-little-further/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Testing Your SQL Server Backups the Easy Way with PowerShell &amp; dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/</link><pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Adding a T-SQL Job Step to a SQL Agent Job with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/adding-a-t-sql-job-step-to-a-sql-agent-job-with-powershell/</link><pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/adding-a-t-sql-job-step-to-a-sql-agent-job-with-powershell/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Altering a Job Step on Hundreds of SQL Servers with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/altering-a-job-step-on-hundreds-of-sql-servers-with-powershell/</link><pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/altering-a-job-step-on-hundreds-of-sql-servers-with-powershell/</guid><description>&lt;img src="https://dbatools.io/wp-content/uploads/2016/05/dbatools-logo-1.png" alt="Featured image of post Altering a Job Step on Hundreds of SQL Servers with PowerShell" />&lt;p>I flew to Utrecht last week to present with &lt;!-- raw HTML omitted -->Chrissy LeMaire&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->Sander Stad&lt;!-- raw HTML omitted --> for the joint Dutch SQL and PowerShell User Groups. Whilst I was sat at the airport I got a phone call from my current client.&lt;/p>
+&lt;blockquote>
+&lt;p>Them - We need to change the backup path for all of the servers to a different share, how long will it take you?&lt;/p>
+&lt;p>Me - About 5 minutes&lt;/p>
+&lt;/blockquote>
+&lt;p>(PowerShell is very powerful – be careful when following these examples 😉 )&lt;/p>
+&lt;p>This code was run using PowerShell version 5 and will not work on Powershell version 3 or lower as it uses the where method.
+Lets grab all of our jobs on the estate. (You will need to fill the $Servers variable with the names of your instances, maybe from a database or CMS or a text file)&lt;!-- raw HTML omitted -->$Jobs = Get-SQLAgentJob -ServerInstance $Servers&lt;!-- raw HTML omitted -->
+Once we have the jobs we need to iterate only through the ones we need to. This step could also have been done in the line above. Lets assume we are using the Ola Hallengren Solution to backup our estate&lt;!-- raw HTML omitted -->Foreach($job in $Jobs.Where{$&lt;em>.Name -like &amp;lsquo;&lt;em>DatabaseBackup&lt;/em>&amp;rsquo; -and $&lt;/em>.isenabled -eq $true})&lt;!-- raw HTML omitted -->
+Then because I have to target a specific job step I can iterate through those and filter in the same way&lt;!-- raw HTML omitted -->foreach ($Step in $Job.jobsteps.Where{$_.Name -like &amp;lsquo;&lt;em>DatabaseBackup&lt;/em>&amp;rsquo;})&lt;!-- raw HTML omitted -->
+Now all I need to do is to replace C:\Backup with C:\MSSQL\Backup (in this example I am using my labs backup paths)&lt;!-- raw HTML omitted -->$Step.Command = $Step.Command.Replace(&amp;ldquo;Directory = N&amp;rsquo;C:\Backup&amp;rsquo;&amp;rdquo;,&amp;ldquo;Directory = N&amp;rsquo;C:\MSSQL\Backup&amp;rsquo;&amp;rdquo;)&lt;!-- raw HTML omitted -->
+And then call the Alter method&lt;!-- raw HTML omitted -->$Step.Alter()&lt;!-- raw HTML omitted -->
+And that is all there is to it. Here is the full script I used&lt;!-- raw HTML omitted -->$Jobs = Get-SQLAgentJob -ServerInstance $Servers&lt;/p>
+&lt;p>Foreach($job in $Jobs.Where{$&lt;em>.Name -like &amp;lsquo;&lt;em>DatabaseBackup&lt;/em>&amp;rsquo; -and $&lt;/em>.isenabled -eq $true})
+{
+foreach ($Step in $Job.jobsteps.Where{$_.Name -like &amp;lsquo;&lt;em>DatabaseBackup&lt;/em>&amp;rsquo;})
+{
+$Step.Command = $Step.Command.Replace(&amp;ldquo;Directory = N&amp;rsquo;C:\Backup&amp;rsquo;&amp;rdquo;,&amp;ldquo;Directory = N&amp;rsquo;C:\MSSQL\Backup&amp;rsquo;&amp;rdquo;)
+$Step.Alter()
+}
+}&lt;!-- raw HTML omitted -->
+In only a few minutes I had altered several hundred instances worth of Ola Hallengren Jobs 🙂
+This is one of the many reasons I love PowerShell, it enables me to perform mass changes very quickly and easily. Of course, you need to make sure that you know that what you are changing is what you want to change. I have caused severe issues by altering the SQL alerts frequency to 1 second instead of one hour on an estate!! Although the beauty of PowerShell meant that I was able to change it very quickly once the problem was realised&lt;!-- raw HTML omitted -->You can change a lot of settings. If you look at what is available at a job step level&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->Happy Automating&lt;/p></description></item><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p>Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+>my series on using Power Bi with my DBA Database&lt;/a> I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+>You can get the scripts and reports here&lt;/a>&lt;/p>
+&lt;p>Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+>dbareports.io&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+>&lt;/a>&lt;/p>
+&lt;p>This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p>
+&lt;p>I gather the information into 2 tables AgentJobDetail&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [Info].[AgentJobDetail](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AgetnJobDetailID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Date] [datetime] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Category] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[JobName] [nvarchar](250) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Description] [nvarchar](750) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[IsEnabled] [bit] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Status] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[LastRunTime] [datetime] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Outcome] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONSTRAINT [PK_info.AgentJobDetail] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AgetnJobDetailID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and AgentJobServer&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [Info].[AgentJobServer](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AgentJobServerID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Date] [datetime] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[NumberOfJobs] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[SuccessfulJobs] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[FailedJobs] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[DisabledJobs] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[UnknownJobs] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONSTRAINT [PK_Info.AgentJobServer] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AgentJobServerID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Detail table holds the results of every Agent Job and the Server table holds a roll up for each server. The script to gather this information is based on the script I used to put the information into an Excel Sheet as described in my post &lt;a class="link" href="https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/" target="_blank" rel="noopener"
+>How I Check Hundreds of Agent Jobs in 60 Seconds with PowerShell&lt;/a> which I also altered to send an HTML email to the DBA team each morning. This however is a much better solution and allows for better monitoring and trending.&lt;/p>
+&lt;p>As I have explained &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+>in my previous posts&lt;/a> I use an Instance List table to hold the information about each instance in the estate and a series of PowerShell scripts which run via Agent Jobs to gather the information into various tables. These posts describe the use of the Write-Log function and the methodology of gathering the required information and looping through each instance so I wont repeat that here. There is an extra check I do however for Express Edition as this does not contain the Agent service&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$edition = $srv.Edition
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($Edition -eq &amp;#39;Express&amp;#39;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Log -Path $LogFile -Message &amp;#34;No Information gathered as this Connection $Connection is Express&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Agent Job information can be found in SMO by exploring the &lt;code>$srv.JobServer.Jobs&lt;/code> object and I gather the information by iterating through each job and setting the values we require to variables&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $JobCount = $srv.JobServer.jobs.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $successCount = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $failedCount = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $UnknownCount = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $JobsDisabled = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #For each job on the server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> foreach ($jobin$srv.JobServer.Jobs)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobName = $job.Name;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobEnabled = $job.IsEnabled;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobLastRunOutcome = $job.LastRunOutcome;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Category = $Job.Category;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $RunStatus = $Job.CurrentRunStatus;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Time = $job.LastRunDate;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($Time -eq &amp;#39;01/01/000100:00:00&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$Time = &amp;#39;&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Description = $Job.Description;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Counts for jobs Outcome
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($jobEnabled -eq $False)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$JobsDisabled += 1}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> elseif ($jobLastRunOutcome -eq &amp;#34;Failed&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$failedCount += 1; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> elseif ($jobLastRunOutcome -eq &amp;#34;Succeeded&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$successCount += 1; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> elseif ($jobLastRunOutcome -eq &amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$UnknownCount += 1; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I found that some Jobs had names and descriptions that had &amp;rsquo; in them which would cause the SQL update or insert statement to fail so I use the replace method to replace the &amp;rsquo; with ''&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if ($Description -eq $null) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Description = &amp;#39; &amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Description = $Description.replace(&amp;#39;&amp;#39;&amp;#39;&amp;#39;, &amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($jobName -eq $Null) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobName = &amp;#39;None&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$JobName = $JobName.replace(&amp;#39;&amp;#39;&amp;#39;&amp;#39;, &amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then insert the data per job after checking that it does not already exist which allows me to re-run the job should a number of servers be uncontactable at the time of the job running without any additional work&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">IF NOT EXISTS (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SELECT [AgetnJobDetailID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [DBADatabase].[Info].[AgentJobDetail]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">where jobname = &amp;#39;$jobName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">and InstanceID = (SELECT [InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WHERE [ServerName] = &amp;#39;$ServerName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [InstanceName] = &amp;#39;$InstanceName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [Port] = &amp;#39;$Port&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">and lastruntime = &amp;#39;$Time&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">INSERT INTO [Info].[AgentJobDetail]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">([Date]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[Category]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[JobName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[Description]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[IsEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[Status]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[LastRunTime]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[Outcome])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">VALUES
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,(SELECT [InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WHERE [ServerName] = &amp;#39;$ServerName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [InstanceName] = &amp;#39;$InstanceName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [Port] = &amp;#39;$Port&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$Category&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$jobName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$Description&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$jobEnabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$RunStatus&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$Time&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$jobLastRunOutcome&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I put this in a here-string variable and pass it to Invoke-SQLCmd I do the same with the roll up using this query&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">INSERT INTO [Info].[AgentJobServer]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">([Date]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[NumberOfJobs]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[SuccessfulJobs]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[FailedJobs]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[DisabledJobs]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,[UnknownJobs])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">VALUES
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,(SELECT [InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WHERE [ServerName] = &amp;#39;$ServerName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [InstanceName] = &amp;#39;$InstanceName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AND [Port] = &amp;#39;$Port&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$JobCount&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$successCount&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$failedCount&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$JobsDisabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,&amp;#39;$UnknownCount&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This job runs as a SQL Agent Job every morning a half an hour or so before the DBA arrives for the morning shift vastly improving the ability of the DBA to prioritise their morning routine.&lt;/p>
+&lt;p>To create the report open Power Bi Desktop and click Get Data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag2.jpg?w=300"
+loading="lazy"
+alt="ag2"
+>&lt;/a>&lt;/p>
+&lt;p>Then choose SQL Server and click connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag3.jpg?w=274"
+loading="lazy"
+alt="ag3"
+>&lt;/a>&lt;/p>
+&lt;p>Enter the Connection string, the database and the  query to gather the data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag5.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag5.jpg?w=300"
+loading="lazy"
+alt="ag5"
+>&lt;/a>&lt;/p>
+&lt;p>The query is&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Select IL.InstanceID,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IL.ServerName,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IL.InstanceName,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IL.Environment,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IL.Location,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.Category,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.Date,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.Description,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.IsEnabled,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.JobName,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.LastRunTime,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.Outcome,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AJD.Status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [dbo].[InstanceList] IL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">JOIN [Info].[AgentJobDetail] AJD
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ON IL.InstanceID = AJD.InstanceID
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WHERE LastRunTime &amp;gt; DATEADD(Day,-31,GETDATE())
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once we have gathered the data we then create some extra columns and measures for the reports. First I create a date column from the datetime Date Column&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DayDate = DATE(YEAR(&amp;#39;Agent Job Detail&amp;#39;[Date]),MONTH(&amp;#39;Agent Job Detail&amp;#39;[Date]),DAY(&amp;#39;Agent Job Detail&amp;#39;[Date]))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I also do the same for the LastRuntime. I create a day of the week column so that I can report on jobs outcome by day&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DayyOfWeek = CONCATENATE(WEEKDAY(&amp;#39;Agent Job Detail&amp;#39;[Date],2),FORMAT(&amp;#39;Agent Job Detail&amp;#39;[Date],&amp;#34; -dddd&amp;#34;))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>My friend Terry McCann &lt;a class="link" href="http://hyperbi.co.uk" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/@sqlshark" target="_blank" rel="noopener"
+>t&lt;/a> helped me create a column that returns true if the last run time is within 24 hours of the current time to help identify the recent jobs that have failed NOTE - On a Monday morning you will need to change this if you do not check your jobs on the weekend.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Last Run Relative Hour = ((1.0\*(NOW()-&amp;#39;Agent Job Detail&amp;#39;[LastRunTime]))\*24)&amp;lt;24
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I create a measure for Succeeded, Failed and Unknown&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Succeeded = IF(&amp;#39;Agent Job Detail&amp;#39;[Outcome] = &amp;#34;Succeeded&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, 0)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next we have to create some measures for the sum of failed jobs and the averages This is the code for 7 day sum&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Failed7Days = CALCULATE(SUM(&amp;#39;Agent Job Detail&amp;#39;[Failed]),FILTER (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ALL ( &amp;#39;Agent Job Detail&amp;#39;[Last Run Date] ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#39;Agent Job Detail&amp;#39;[Last Run Date] &amp;gt; ( MAX ( &amp;#39;Agent Job Detail&amp;#39;[Last Run Date] ) - 7 )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;amp;&amp;amp; &amp;#39;Agent Job Detail&amp;#39;[Last Run Date] &amp;lt;= MAX ( &amp;#39;Agent Job Detail&amp;#39;[Last Run Date] ) ) )
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and for the 7 Day average&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Failed7DayAverage = DIVIDE([Failed7Days],7)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I did the same for 30 days. I used the &lt;a class="link" href="http://social.technet.microsoft.com/wiki/contents/articles/680.powerpivot-dax-filter-functions.aspx" target="_blank" rel="noopener"
+>TechNet reference for DAX expressions&lt;/a> and got ideas from &lt;a class="link" href="http://blog.crossjoin.co.uk/category/dax/" target="_blank" rel="noopener"
+>Chris Webbs blog&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag6.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag6.jpg?w=83"
+loading="lazy"
+alt="ag6"
+>&lt;/a> First I created the 30 day historical trend chart using a Line and Clustered column chart using the last run date as the axis and the succeed measure as the column and the Failed, Failed 7 Day Average and failed 30 day average as the lines&lt;/p>
+&lt;p>I then formatted the lines and title and column&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag7.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag7.jpg?w=300"
+loading="lazy"
+alt="ag7"
+>&lt;/a>&lt;/p>
+&lt;p>To create the gauge which shows how well we have done today I created a measure to quickly identify todays jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">LastRun Relative Date Offset = INT(&amp;#39;Agent Job Detail&amp;#39;[LastRunTime] - TODAY())
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which I use as a filter for the gauge as shown below. I also create two measures zero and twenty for the minimum and maximum for the gauge&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag8.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag8.jpg?w=300"
+loading="lazy"
+alt="ag8"
+>&lt;/a>&lt;/p>
+&lt;p>The rest of the report is measures for 7 day average and 30 day average, a slicer for environment  and two tables, one to show the historical job counts and one to show the jobs that have failed in the last 24 hours using the Last Run Relative Hour measure from above&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag9.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag9.jpg?w=300"
+loading="lazy"
+alt="ag9"
+>&lt;/a>&lt;/p>
+&lt;p>There are many other reports that you can or may want to create maybe by day of the week or by category depending on your needs. Once you have the data gathered you are free to play with the data as you see fit. Please add any further examples of reports you can run or would like to run in the comments below.&lt;/p>
+&lt;p>Once you have your report written you can publish it to PowerBi.com and create a dashboard and query it with natural language. I have explained the process &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+>in previous posts&lt;/a>&lt;/p>
+&lt;p>For example - How many Jobs failed today&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag110.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag110.jpg?w=300"
+loading="lazy"
+alt="ag110"
+>&lt;/a>&lt;/p>
+&lt;p>Which server had most failed jobs&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag11.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag11.jpg?w=300"
+loading="lazy"
+alt="ag11"
+>&lt;/a>&lt;/p>
+&lt;p>or using the category field which database maintenance jobs failed today&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag13.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag13.jpg?w=300"
+loading="lazy"
+alt="ag13"
+>&lt;/a>&lt;/p>
+&lt;p>I hope these posts have given you ideas about how you can use PowerShell, a DBA Database and Power Bi to help you to manage and report on your environment.&lt;/p>
+&lt;p>&lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+>You can get the scripts and reports here&lt;/a>&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Using Power Bi with my DBA Database</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p>Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p>
+&lt;p>I have an InstanceList table which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [dbo].[InstanceList](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ServerName] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceName] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Port] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AG] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Inactive] [bit] NULL CONSTRAINT [DF_InstanceList_Inactive] DEFAULT ((0)),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Environment] [nvarchar](25) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Location] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONSTRAINT [PK_InstanceList_ID] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p>
+&lt;p>I have 4 scripts&lt;/p>
+&lt;ul>
+&lt;li>ServerInfo which gathers Windows OS information such as Version and edition of the operating system, number of processors,amount of RAM, IP address, domain name etc&lt;/li>
+&lt;li>SQLInfo which gathers information about the instance such as SQL version, edition, collation, max and min memory, MAXDOP , service accounts and start modes, default file locations etc&lt;/li>
+&lt;li>Database information such as size, data usage, index usage, last backup dates, owner and many more&lt;/li>
+&lt;li>Agent Job which gathers the outcome of the jobs that have run, their names, category into two tables one for a server rollup and one for details about each job&lt;/li>
+&lt;/ul>
+&lt;p>Recently I have received a lot of requests for information from various sources, auditors asking about encryption and backup policies, Project managers asking about database and sql versions, compliance asking about numbers of Windows 2003 servers or SQL 2005 servers, system teams asking which serves in a particular location can be turned off at which time dependant on which system they are supporting for a power down&lt;/p>
+&lt;p>Before we had the DBA database holding all of the information about the instances we would have struggled to be able to compile this information and when I saw Power Bi was released to GA I thought that it would be a good place to start to learn about it. By using data that I understood and answering questions that I knew the format of the answer I could be more confident about experimenting - ie. if I know I have 100 servers then any result for servers that exceeds that is incorrect&lt;/p>
+&lt;p>I have never been a BI guy, I claim no expertise in the correct methods of manipulating the data. There may very well be better methods of achieving these results and if there please feel free to comment below so that I can improve my knowledge and keep on learning&lt;/p>
+&lt;p>All data shown in the examples below has been generated from real-life data but all identifiable data has been altered or removed. I have no servers in Bolton, it is where I am from originally!!&lt;/p>
+&lt;p>I downloaded Power BI Desktop from powerbi.com and ran the installer and the first screen you see is this one&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I then clicked on Get Data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png?w=276"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>And then SQL Server and filled in the details for my DBA Database and clicked connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>I used my current Windows credentials&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It then asked me which tables I wanted to load so I said all of them :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png?w=195"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>Once I had loaded the data I looked at the queries and renamed some of the columns to make more sense to me. I also created some calculated columns by clicking New Column&lt;/p>
+&lt;p>I created a relative date column using this code from Chris Webb &lt;a class="link" href="http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/" target="_blank" rel="noopener"
+>http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Relative Date Offset=INT([Date] – TODAY()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Relative Date=IF([Relative Date Offset]=0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today &amp;#34; &amp;amp; IF([Relative Date Offset]&amp;gt;0, &amp;#34;+&amp;#34;, &amp;#34;&amp;#34;) &amp;amp; [Relative Date Offset])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This will enable me to show data for the last day&lt;/p>
+&lt;p>I also did the same for days of the week&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DayOfWeek = CONCATENATE(WEEKDAY(&amp;#39;Info AgentJobDetail&amp;#39;[LastRunTime],2),FORMAT(&amp;#39;InfoAgentJobDetail&amp;#39;[LastRunTime],&amp;#34; -dddd&amp;#34;))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Because I struggled to show the information about the Operating system I also created two columns for OS name and OS edition by adding columns as shown below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Version = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;Server 2012 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Edition = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I started to play with the data.&lt;/p>
+&lt;p>This is probably not how a professional would phrase it but I would say that if you don&amp;rsquo;t know how to use a new application be brave and give it a try.&lt;/p>
+&lt;p>&lt;strong>OBVIOUSLY&lt;/strong> you are a &lt;strong>PROFESSIONAL DBA&lt;/strong> and will not do anything that would endanger production, use a backup of your database and work locally if you need to.&lt;/p>
+&lt;p>The first thing I wanted to know was how many servers I had by operating system, how many by SQL version and the location of them so that I could answer the questions I had been asked. I had already written a query to get the correct information to give to the requestors so I knew the correct answers which was also an advantage. I did this like this&lt;/p>
+&lt;p>I expanded the Info ServerOSInfo query and dragged the ServerName field to the report which created a table of names&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I then changed the ServerName values to Count&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>I then dragged the calculated column Operating System Version to the table&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>If I click on the table and then donut chart in the visualisations it changes to&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png?w=300"
+loading="lazy"
+alt="9"
+>&lt;/a>&lt;/p>
+&lt;p>So you can quickly see how you want the data displayed&lt;/p>
+&lt;p>I then decided to look at the number of SQL 2005 instances that I had and as I had relationships between SQLInfo and Instancelist and Clients I could build a more dynamic report.&lt;/p>
+&lt;p>I created a donut chart with SQLVersion as the legend and InstanceID as the values and a table of SQLVersion, ServerName and Instance Name. I also created a card that was count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png?w=300"
+loading="lazy"
+alt="10"
+>&lt;/a>&lt;/p>
+&lt;p>Now it starts getting really useful. If I want to know how many SQL 2005 instances I have I simply click on SQL2005 in the donut chart and the rest of the report changes&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png?w=300"
+loading="lazy"
+alt="11"
+>&lt;/a>&lt;/p>
+&lt;p>This is very cool and I hope you can see how useful this could be and how brilliant it would be to enable relevant people within the organisation the ability to look at that report and answer their own questions.&lt;/p>
+&lt;p>Lets take it to the next step. I have a location column in the InstanceList table which comprises of town names. If I choose a map and drag that column to the Location field and set Values and Color Saturation to the Count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png?w=166"
+loading="lazy"
+alt="12"
+>&lt;/a>&lt;/p>
+&lt;p>and create two tables one of client with a count of instanceid and one location with a count of instance id I can do this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png?w=300"
+loading="lazy"
+alt="13"
+>&lt;/a>&lt;/p>
+&lt;p>Look at how it dynamically changes as you click on the data labels - This is very cool and makes me smile every time!! I altered the colour saturation colours to make it easier to see. Now if I am asked about SQL 2005 servers I can quickly click on SQL 2005 and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png?w=300"
+loading="lazy"
+alt="14"
+>&lt;/a>&lt;/p>
+&lt;p>I can see that there are 32 instances, most are in Southampton, and which clients they support&lt;/p>
+&lt;p>If I click a location rather than SQL version the report alters like so&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png?w=300"
+loading="lazy"
+alt="15"
+>&lt;/a>&lt;/p>
+&lt;p>So you can simply pass the report file to your colleagues to enable them to use it or you can publish it to Powerbi.com. &lt;a class="link" href="https://support.powerbi.com/knowledgebase/articles/685479-power-bi-pro-content-what-is-it?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>I am not going to go into any detail about the costs or licensing etc&lt;/a> I will just say it is as easy as clicking publish. If you wish to have the information automatically refreshed there are some &lt;a class="link" href="http://biinsight.com/power-bi-personal-gateway-five-things-you-must-know/" target="_blank" rel="noopener"
+>more steps that you would need to go through which are detailed here which enable you to connect your on-premise database to Powerbi using the data management gateway&lt;/a>, alternatively you can simply refresh the data in the report and then publish it and replace the existing report.&lt;/p>
+&lt;p>Once the report is in powerbi.com you can enable Q and A on the data. This is some kind of supernatural mystical magical query language which enables you to query your data with natural language and will alter the results as you type and even cope with (deliberate for screenshot) spelling mistakes :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png?w=300"
+loading="lazy"
+alt="16"
+>&lt;/a>&lt;/p>
+&lt;p>I also created a report for my Agent Jobs to enable me to quickly and easily see which Jobs have failed in the last day&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png?w=300"
+loading="lazy"
+alt="17"
+>&lt;/a>&lt;/p>
+&lt;p>I did this by filtering the report by Relative Date Offset greater than -1 (today) and &lt;code>isenabled = True&lt;/code> and &lt;code>Outcome = Failed&lt;/code>&lt;/p>
+&lt;p>There are many many more ways I can see this being useful and I hope I have given you some ideas and encouraged you to try for yourself and find out more&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p>This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+>described here&lt;/a> to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a> so was surprised to see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I read the announcement and also the details on MSDN &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx&lt;/a> which show that this requires the SQL Server IaaS Agent. This is a default option on new virtual machines.&lt;/p>
+&lt;p>There are some other considerations too. It is only supported for SQL Server 2014 and Windows Server 2012 and 2012R2 at present and you can set a retention period to a maximum of 30 days but it is automated. You do not have to decide upon the backup strategy Azure will decide the frequency and type of backups dependent upon the workload of the database and some other factors such as&lt;/p>
+&lt;p>A full backup is taken ○ when an instance is added to use Managed backup ○ When transaction log growth is 1Gb or more ○ At least once a week ○ If the log chain is broken ○ When a database is created&lt;/p>
+&lt;p>A transaction log backup is taken - If no log backup is found - Transaction log space used is 5Mb or larger - At least once every two hours - Any time the transaction log backup is lagging behind a full database backup. The goal is to keep the log chain ahead of full backup.&lt;/p>
+&lt;p>From &lt;a class="link" href="https://msdn.microsoft.com/en-gb/library/dn449496%28v=sql.120%29.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-gb/library/dn449496(v=sql.120).aspx&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>There are some restrictions - Only database backups are supported - System databases are not supported so you need to back those up yourself - You can only back up to Azure storage - Maximum backup size is 1Tb as this is the maximum size for a blob in Azure storage - Simple recovery is not supported - Maximum retention is 30 days - if you are required to keep your backups for longer than 30 days for regulatory or other reasons you could simply use Azure Automation to copy the files to another storage account in Azure)&lt;/p>
+&lt;/blockquote>
+&lt;p>How to set it up.&lt;/p>
+&lt;p>If you are using the GUI then you will find SQL Automated Backup in the optional config blade of the set up. You can follow the steps &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here to set it up&lt;/a>. If (like me) you want to use PowerShell then use the following code after you have created your Virtual Machine&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$storageaccount = &amp;#34;&amp;lt;storageaccountname&amp;gt;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storageaccountkey = (Get-AzureStorageKey -StorageAccountName $storageaccount).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -StorageAccountKey $storageaccountkey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$encryptionpassword = (Get-Credential -message &amp;#39;Backup Encryption Password&amp;#39; -User &amp;#39;IGNOREUSER&amp;#39;).password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$autobackupconfig = New-AzureVMSqlServerAutoBackupConfig -StorageContext $storagecontext -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-AzureVM -ServiceName &amp;lt;vmservicename&amp;gt; -Name &amp;lt;vmname&amp;gt; | Set-AzureVMSqlServerExtension -AutoBackupSettings $autobackupconfig | Update-AzureVM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once you have run the code, Azure will take care of the rest. Add a couple of databases to your instance and look in the storage account and you will see this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>And in the automaticbackup container you will find the Certificates and master key backups&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It will also create a credential&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/images/5.png"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>You can use the same credential to back up your system databases. If like me you use &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>Ola Hallengrens excellent Maintenance Solution&lt;/a> then simply change your systems backup job as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [msdb]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXEC msdb.dbo.sp_update_jobstep @job_name = &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;, @step_id=1 ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @command=N&amp;#39;sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q &amp;#34;EXECUTE [dbo].[DatabaseBackup] @Databases = &amp;#39;&amp;#39;SYSTEM_DATABASES&amp;#39;&amp;#39;, &amp;#34;https://myaccount.blob.core.windows.net/mycontainer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> , @Credential = &amp;#39;&amp;#39;AutoBackup_Credential&amp;#39;&amp;#39;, @BackupType = &amp;#39;&amp;#39;FULL&amp;#39;&amp;#39;, @Verify = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @CleanupTime = NULL, @CheckSum = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @LogToTable = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;&amp;#34; -b&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you need to restore your database then you can use the GUI and when you choose restore you will see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>Enter your storage account and the key which you can get from the Azure portal. You will notice that the credential has already been selected, click connect and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>There are all of your backups ready to restore to any point in time that you choose. By clicking script the T-SQL is generated which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [master]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BACKUP LOG [Test] TO URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_LogBackup_2015-07-16_06-21-26.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOFORMAT, NOINIT, NAME = N&amp;#39;Test_LogBackup_2015-07-16_06-21-26&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOSKIP, NOREWIND, NOUNLOAD, NORECOVERY , STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE DATABASE [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714201240+00.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714202740+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714224241+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715005741+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715031242+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715052742+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715074243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715095743+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715121243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150716060004+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is an important note. Remember this when you have just set it up so that you don’t think that you have done it wrong (which is what I did!)&lt;/p>
+&lt;p>When you enable Automated Patching for the first time, Azure configures the SQL Server IaaS Agent in the background. During this time, the portal will not show that Automated Patching is configured. Wait several minutes for the agent to be installed, configured. After that the portal will reflect the new settings.&lt;/p>
+&lt;p>From &amp;lt;&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx&lt;/a>&amp;gt;&lt;/p>
+&lt;p>And also look out for this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>The password I had chosen was not complex enough but the PowerShell script had succeeded and not given me the warning&lt;/p>
+&lt;p>To set up SQL Automated Patching you follow a similar steps. The setting is again on the OS Config blade and click enable and then you can choose the frequency and duration of the patching.&lt;/p>
+&lt;p>It is important to remember to choose your maintenance window correctly. If you have set up your SQL VMs correctly you will have them in an availability set and be using either mirroring or Availability Groups and have the VMs set up in the same availability set to ensure availability during the underlying host patching but I had it confirmed by Principal Software Engineering Manager Sethu Srinivasan &lt;a class="link" href="http://twitter.com/sethusrinivasan" target="_blank" rel="noopener"
+>t&lt;/a> via Microsoft PFE Arvind Shyamsundar &lt;a class="link" href="http://blogs.msdn.com/b/arvindsh/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/arvisam" target="_blank" rel="noopener"
+>t&lt;/a> that the SQL Automated Patching is not HA aware so you will need to ensure that you set the maintenance windows on each VM to ensure that they do not overlap&lt;/p></description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p>If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p>
+&lt;p>If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>https://ola.hallengren.com/&lt;/a>&lt;/p>
+&lt;p>You can also watch his presentation at SQLBits at this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a>&lt;/p>
+&lt;p>where he talks about and demonstrates the solution.&lt;/p>
+&lt;p>It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p>
+&lt;p>I particularly like the parameter @ChangeBackupType which when running the transaction log or differential backup will change the backup type to full if the backup type cannot be taken. This is excellent for picking up new databases and backing them up soon after creation&lt;/p>
+&lt;p>When you run the script the jobs are created but not scheduled and it is for this reason I created this function. All it does it schedule the jobs so that I know that they will be run when a new server is created and all the databases will be backed up. I can then go back at a later date and schedule them correctly for the servers workload or tweak them according to specific needs but this allows me that fuzzy feeling of knowing that the backups and other maintenance will be performed.&lt;/p>
+&lt;p>To accomplish this I pass a single parameter $Server to the function this is the connection string and should be in the format of &lt;code>SERVERNAME&lt;/code>, &lt;code>SERVERNAME\INSTANCENAME &lt;/code>or &lt;code>SERVERNAME\INSTANCENAME,Port&lt;/code>&lt;/p>
+&lt;p>I then create a &lt;code>$srv&lt;/code> SMO object as usual&lt;/p>
+&lt;p>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server&lt;/code>&lt;/p>
+&lt;p>Create a JobServer object and a Jobs array which holds the Jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$JobServer = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs = $JobServer.Jobs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And set the schedule for each job. I pick each Job using the Where-Object Cmdlet and break out if the job does not exist&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job = $Jobs|Where-Object {$_.Name -eq &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       if ($Job -eq $Null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       {Write-Output &amp;#34;No Job with that name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       break}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I create a Schedule object and set its properties and create the schedule&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Schedule = new-object Microsoft.SqlServer.Management.Smo.Agent.JobSchedule ($job, &amp;#39;Daily - Midnight ++ Not Sunday&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndDate = Get-Date -Month 12 -Day 31 -Year 9999
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndTimeOfDay = &amp;#39;23:59:59&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyTypes = &amp;#34;Weekly&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyRecurrenceFactor = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencySubDayTypes = &amp;#34;Once&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyInterval = 126 # Weekdays 62 + Saturdays 64 - &amp;lt;a href=&amp;#34;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;#34;&amp;gt;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveStartDate = get-date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$schedule.ActiveStartTimeOfDay = &amp;#39;00:16:00&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.IsEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>MSDN&lt;/a> which is always my first port of call when writing these scripts&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>WeekDays.Sunday = 1&lt;/li>
+&lt;li>WeekDays.Monday = 2&lt;/li>
+&lt;li>WeekDays.Tuesday = 4&lt;/li>
+&lt;li>WeekDays.Wednesday = 8&lt;/li>
+&lt;li>WeekDays.Thursday = 16&lt;/li>
+&lt;li>WeekDays.Friday = 32&lt;/li>
+&lt;li>WeekDays.Saturday = 64&lt;/li>
+&lt;li>WeekDays.WeekDays = 62&lt;/li>
+&lt;li>WeekDays.WeekEnds = 65&lt;/li>
+&lt;li>WeekDays.EveryDay = 127&lt;/li>
+&lt;/ul>
+&lt;p>Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.&lt;/p>
+&lt;/blockquote>
+&lt;p>It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.&lt;/p>
+&lt;p>You can tweak this script or use the code to work with any Agent Jobs and set the schedules accordingly and you can check that you have set the schedules correctly with this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">   $srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObserver = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObs = $JObserver.Jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $ActiveStartTimeOfDay = @{Name = &amp;#34;ActiveStartTimeOfDay&amp;#34;; Expression = {$_.JobSchedules.ActiveStartTimeOfDay}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyInterval = @{Name = &amp;#34;FrequencyInterval&amp;#34;; Expression = {$_.JobSchedules.FrequencyInterval}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyTypes = @{Name = &amp;#34;FrequencyTypes&amp;#34;; Expression = {$_.JobSchedules.FrequencyTypes}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $IsEnabled = @{Name = &amp;#34;IsEnabled&amp;#34;; Expression = {$_.JobSchedules.IsEnabled}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $Jobs|Where-Object{$_.Category -eq &amp;#39;Database Maintenance&amp;#39;}|select name,$IsEnabled,$FrequencyTypes,$FrequencyInterval,$ActiveStartTimeOfDay|Format-Table -AutoSize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can get the script from Script Center via the link below or by searching for &amp;ldquo;Ola&amp;rdquo; using the &lt;a class="link" href="http://www.microsoft.com/en-us/download/details.aspx?id=42525?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>script browser add-in&lt;/a> straight from ISE&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg?w=300"
+loading="lazy"
+alt="browser"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89&lt;/a>&lt;/p></description></item><item><title>Refreshing Availability Group Database with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-availability-group-database-with-powershell/</link><pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-availability-group-database-with-powershell/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/09/image1.png" alt="Featured image of post Refreshing Availability Group Database with PowerShell" />&lt;p>Following last weeks post on &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2/" target="_blank" rel="noopener"
+>Refreshing A Mirrored Database with PowerShell&lt;/a> I thought I would write the script to refresh an Availability Group Database.&lt;/p>
+&lt;p>An availability group supports a failover environment for a discrete set of user databases, known as availability databases, that fail over together. An availability group supports a set of primary databases and one to eight sets of corresponding secondary databases.You can read more about Availability groups &lt;a class="link" href="http://msdn.microsoft.com/en-GB/library/ff877884.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with AG. There are other scenarios but this post covers the automation of restoring an Availability Group Database from a backup.&lt;/p>
+&lt;p>The steps that you need to take to restore an Availability Group Database are&lt;/p>
+&lt;ul>
+&lt;li>Remove Database from the Availability Group&lt;/li>
+&lt;li>Restore the Primary Replica Database&lt;/li>
+&lt;li>Backup the Primary Replica Database Transaction Log&lt;/li>
+&lt;li>Restore the Secondary and Tertiary Replica Databases with no recovery&lt;/li>
+&lt;li>Add the Database back into the Availability Group&lt;/li>
+&lt;li>Resolve Orphaned Users – Not covered in this script&lt;/li>
+&lt;li>Check the status&lt;/li>
+&lt;/ul>
+&lt;p>Here is my set up for this post&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/09/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I have 3 servers SQL2012SER08AG1, SQL2012SER08AG2 and SQL2012SER08AG3 with 3 databases in an Availability Group called AG_THEBEARD1. SQL2012SER08AG2 is set up as a secondary replica using Synchronous-Commit Mode SQL2012SER08AG3 is set up as a read only replica using Asynchronous-Commit Mode. I have three databases in my Availability Group and today I shall use the database called TestDatabase (I have no imagination today!) to demonstrate the refresh&lt;/p>
+&lt;p>The script requires some variables to be set up at the beginning. You can easily change this and make the script into a function and call it if you desire, but for this post I shall consider the script as a standalone. The reasoning for this is that I imagine that it will be placed into a run book or stored for use in a repository for specific use and therefore reduces any pre-requisites for using it.&lt;/p>
+&lt;p>First we will remove the database from the Availability Group. This is achieved using the &lt;a class="link" href="http://msdn.microsoft.com/en-us/library/hh213326.aspx#PowerShellProcedure?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Remove-SqlAvailabilityDatabase CMDLet&lt;/a>&lt;/p>
+&lt;pre>&lt;code>Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+&lt;/code>&lt;/pre>
+&lt;p>Next Restore the Primary Replica Database, Backup the Primary Replica Database Transaction Log&lt;br>
+and Restore the Secondary and Tertiary Replica Databases with no recovery using Restore-SqlDatabase and Backup-SqlDatabase (You can also use the SMO method in &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2" target="_blank" rel="noopener"
+>the previous post&lt;/a> if you wish)&lt;/p>
+&lt;pre>&lt;code>Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $PrimaryServer -ReplaceDatabase
+# Backup Primary Database
+Backup-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $PrimaryServer -BackupAction 'Log'
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $SecondaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Secondary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $SecondaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $SecondaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $TertiaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Tertiary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $TertiaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $TertiaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+&lt;/code>&lt;/pre>
+&lt;p>Then add the database back to the Availability Group&lt;/p>
+&lt;pre>&lt;code>Add-SqlAvailabilityDatabase -Path $MyAgPrimaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgSecondaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgTertiaryPath -Database $DBName
+&lt;/code>&lt;/pre>
+&lt;p>Finally test the status of the Availability Group&lt;/p>
+&lt;pre>&lt;code>$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$AG = $srv.AvailabilityGroups[$AGName]
+$AG.DatabaseReplicaStates|ft -AutoSize
+&lt;/code>&lt;/pre>
+&lt;p>I also like to add some output to show the progress of the script. This can be logged using Out-File or displayed on the screen using Out-Host.&lt;/p>
+&lt;pre>&lt;code>$EndDate = Get-Date
+$Time = $EndDate - $StartDate
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script anded at $EndDate and took
+$Time
+&amp;quot; -ForegroundColor Green
+&lt;/code>&lt;/pre>
+&lt;p>Here are the results of my script&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/09/image1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image_thumb1.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Here is the script&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.NOTES
+Name: Availability Group Refresh
+Author: Rob Sewell https://blog.robsewell.com
+.DESCRIPTION
+Refreshes an Availbaility group database from a backup
+YOU WILL NEED TO RESOLVE ORPHANED USERS IF REQUIRED
+#&amp;gt;
+## http://msdn.microsoft.com/en-gb/library/hh213078.aspx#PowerShellProcedure?WT.mc_id=DP-MVP-5002693
+# http://msdn.microsoft.com/en-us/library/hh213326(v=sql.110).aspx?WT.mc_id=DP-MVP-5002693
+cls
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(‘Microsoft.SqlServer.SMO’) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(‘Microsoft.SqlServer.SMOExtended’) | out-null
+$LoadServer = &amp;quot;SQL2012Ser2012&amp;quot; # The Load Server
+$Date = Get-Date -Format ddMMyy
+$PrimaryServer = &amp;quot;SQL2012SER08AG1&amp;quot; # The Primary Availability Group Server
+$SecondaryServer = &amp;quot;SQL2012SER08AG2&amp;quot; # The Secondary Availability Group Server
+$TertiaryServer = &amp;quot;SQL2012SER08AG3&amp;quot; # The Tertiary Availability Group Server
+$AGName = &amp;quot;AG_THEBEARD1&amp;quot; # Availability Group Name
+$DBName = &amp;quot;TestDatabase&amp;quot; # Database Name
+$LoadDatabaseBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\LoadTestDatabase&amp;quot; + $Date + &amp;quot;.bak&amp;quot; # Load database Backup location - Needs access permissions granted
+$DatabaseBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\TestDatabase&amp;quot; + $Date + &amp;quot;.bak&amp;quot; # database Backup location - Needs access permissions granted
+$LogBackupFile = &amp;quot;\\sql2012ser2012\Backups\GoldenBackup\TestDatabase&amp;quot; + $Date + &amp;quot;.trn&amp;quot; # database Backup location - Needs access permissions granted
+# Path to Availability Database Objects
+$MyAgPrimaryPath = &amp;quot;SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$MyAgSecondaryPath = &amp;quot;SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$MyAgTertiaryPath = &amp;quot;SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName&amp;quot;
+$StartDate = Get-Date
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script Started $StartDate
+&amp;quot; -ForegroundColor Green
+cd c:
+# Remove old backups
+If(Test-Path $LoadDatabaseBackupFile){Remove-Item -Path $LoadDatabaseBackupFile -Force}
+If(Test-Path $DatabaseBackupFile){Remove-Item -Path $DatabaseBackupFile}
+If(Test-Path $LogBackupFile ) {Remove-Item -Path $LogBackupFile }
+Write-Host &amp;quot;Backup Files removed&amp;quot; -ForegroundColor Green
+# Remove Secondary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$SecondaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$SecondaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Secondary Removed from Availability Group&amp;quot; -ForegroundColor Green
+# Remove Tertiary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$TertiaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$TertiaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Tertiary removed from Availability Group&amp;quot; -ForegroundColor Green
+# Remove Primary Replica Database from Availability Group to enable restore
+cd SQLSERVER:\SQL\$PrimaryServer\DEFAULT
+Remove-SqlAvailabilityDatabase -Path SQLSERVER:\SQL\$PrimaryServer\DEFAULT\AvailabilityGroups\$AGName\AvailabilityDatabases\$DBName
+Write-Host &amp;quot;Primary removed from Availability Group&amp;quot; -ForegroundColor Green
+# Backup Load Database
+Backup-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $LoadServer
+Write-Host &amp;quot;Load Database Backed up&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Primary Replica Database from Load Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $PrimaryServer -ReplaceDatabase
+Write-Host &amp;quot;Primary Database Restored&amp;quot; -ForegroundColor Green
+# Backup Primary Database
+# Backup-SqlDatabase -Database $DBName -BackupFile $DatabaseBackupFile -ServerInstance $PrimaryServer
+Backup-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $PrimaryServer -BackupAction 'Log'
+Write-Host &amp;quot;Primary Database Backed Up&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $SecondaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Secondary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $SecondaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $SecondaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+Write-Host &amp;quot;Secondary Database Restored&amp;quot; -ForegroundColor Green
+# Remove connections to database for Restore
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $TertiaryServer
+$srv.KillAllProcesses($dbname)
+# Restore Tertiary Replica Database
+Restore-SqlDatabase -Database $DBName -BackupFile $LoadDatabaseBackupFile -ServerInstance $TertiaryServer -NoRecovery -ReplaceDatabase
+Restore-SqlDatabase -Database $DBName -BackupFile $LogBackupFile -ServerInstance $TertiaryServer -RestoreAction 'Log' -NoRecovery -ReplaceDatabase
+Write-Host &amp;quot;Tertiary Database Restored&amp;quot; -ForegroundColor Green
+# Add database back into Availability Group
+cd SQLSERVER:\SQL\$PrimaryServer
+Add-SqlAvailabilityDatabase -Path $MyAgPrimaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgSecondaryPath -Database $DBName
+Add-SqlAvailabilityDatabase -Path $MyAgTertiaryPath -Database $DBName
+Write-Host &amp;quot;Database Added to Availability Group &amp;quot; -ForegroundColor Green
+# Check Availability Group Status
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $PrimaryServer
+$AG = $srv.AvailabilityGroups[$AGName]
+$AG.DatabaseReplicaStates|ft -AutoSize
+$EndDate = Get-Date
+$Time = $EndDate - $StartDate
+Write-Host &amp;quot;
+##########################################
+Results of Script to refresh $DBName on
+$PrimaryServer , $SecondaryServer , $TertiaryServer
+on AG $AGName
+Time Script ended at $EndDate and took
+$Time
+&amp;quot; -ForegroundColor Green
+&lt;/code>&lt;/pre></description></item><item><title>What Runs on the SQL Server when you run a PowerShell script?–Question from #SQLRelay</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-#sqlrelay/</link><pubDate>Sat, 23 Nov 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-#sqlrelay/</guid><description>&lt;p>Last week I ran a PowerShell lab at SQL Relay in Cardiff. There are still a few places available for SQL Relay week 2. &lt;a class="link" href="http://www.sqlrelay.co.uk/" target="_blank" rel="noopener"
+>Take a look here for more details&lt;/a> and follow the twitter &lt;a class="link" href="https://twitter.com/search?q=%23sqlrelay" target="_blank" rel="noopener"
+>hashtag #SQLRelay&lt;/a> for up to date information&lt;/p>
+&lt;p>The link for my slides and demos from the second part are here &lt;a class="link" href="https://t.co/Fik2odyUMA" title="https://t.co/Fik2odyUMA"
+target="_blank" rel="noopener"
+>https://t.co/Fik2odyUMA&lt;/a>&lt;/p>
+&lt;p>Whilst we were discussing &lt;a class="link" href="https://blog.robsewell.com/checking-for-a-database-backup-with-powershell/" target="_blank" rel="noopener"
+>Show-LastDatabaseBackup&lt;/a> Kev Chant &lt;a class="link" href="https://twitter.com/KevChant" target="_blank" rel="noopener"
+>@KevChant&lt;/a> asked where it was getting the information from and I answered that PowerShell was running SQL commands under the hood against the server and if you ran profiler that is what you would see. We didn’t have time to do that in Cardiff but I thought I would do it today to show what happens&lt;/p>
+&lt;p>A reminder of what &lt;code>Show-LastDatabaseBackup&lt;/code> function does&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image10.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image10.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>If we start a trace with Profiler and run this function we get these results in PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image11.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image11.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>In Profiler we see that it is running the following T-SQL for&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image12.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image12.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>exec sp_executesql N' SELECT dtb.name AS [Name] FROM master.sys.databases AS dtb WHERE (dtb.name=@_msparam_0)',N'@_msparam_0 nvarchar(4000)',@_msparam_0=N'RageAgainstTheMachine'
+&lt;/code>&lt;/pre>
+&lt;p>and then for&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image13.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image13.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>exec sp_executesql N' create table #tempbackup (database_name nvarchar(128), [type] char(1), backup_finish_date datetime) insert into #tempbackup select database_name, [type], max(backup_finish_date) from msdb..backupset where [type] = ''D'' or [type] = ''L'' or [type]=''I'' group by database_name, [type] SELECT (select backup_finish_date from #tempbackup where type = @_msparam_0 and db_id(database_name) = dtb.database_id) AS [LastBackupDate] FROM master.sys.databases AS dtb WHERE (dtb.name=@_msparam_1) drop table #tempbackup ',N'@_msparam_0 nvarchar(4000),@_msparam_1 nvarchar(4000)',@_msparam_0=N'D',@_msparam_1=N'RageAgainstTheMachine'
+&lt;/code>&lt;/pre>
+&lt;p>For&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image14.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image14.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>exec sp_executesql N' create table #tempbackup (database_name nvarchar(128), [type] char(1), backup_finish_date datetime) insert into #tempbackup select database_name, [type], max(backup_finish_date) from msdb..backupset where [type] = ''D'' or [type] = ''L'' or [type]=''I'' group by database_name, [type] SELECT (select backup_finish_date from #tempbackup where type = @_msparam_0 and db_id(database_name) = dtb.database_id) AS [LastDifferentialBackupDate] FROM master.sys.databases AS dtb WHERE (dtb.name=@_msparam_1) &amp;amp;lt;mailto:dtb.name=@_msparam_1)&amp;amp;gt; drop table #tempbackup ',N'@_msparam_0 nvarchar(4000),@_msparam_1 nvarchar(4000)',@_msparam_0=N'I',@_msparam_1=N'RageAgainstTheMachine'
+&lt;/code>&lt;/pre>
+&lt;p>And for&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image15.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image15.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>exec sp_executesql N' create table #tempbackup (database_name nvarchar(128), [type] char(1), backup_finish_date datetime) insert into #tempbackup select database_name, [type], max(backup_finish_date) from msdb..backupset where [type] = ''D'' or [type] = ''L'' or [type]=''I'' group by database_name, [type] SELECT (select backup_finish_date from #tempbackup where type = @_msparam_0 and db_id(database_name) = dtb.database_id) AS [LastLogBackupDate] FROM master.sys.databases AS dtb WHERE (dtb.name=@_msparam_1) &amp;amp;lt;mailto:dtb.name=@_msparam_1)&amp;amp;gt; drop table #tempbackup ',N'@_msparam_0 nvarchar(4000),@_msparam_1 nvarchar(4000)',@_msparam_0=N'L',@_msparam_1=N'RageAgainstTheMachine'
+&lt;/code>&lt;/pre>
+&lt;p>So the answer to your question Kev is&lt;/p>
+&lt;p>Yes it does get the information from the msdb database&lt;/p></description></item><item><title>Show The Last Backups On A Server with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/show-the-last-backups-on-a-server-with-powershell/</link><pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/show-the-last-backups-on-a-server-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>The &lt;code>Show-LastServerBackup&lt;/code> function iterates through each database on the server and takes each of the three properties mentioned in &lt;!-- raw HTML omitted -->yesterdays post&lt;!-- raw HTML omitted -->. However this time I created an empty hash table and added each result to it as follows&lt;/p>
+&lt;p>I created the hash table with &lt;code>@()&lt;/code> and then assign each property to a variable inside the loop and add it to a temporary PSObject with some custom NoteProperties to fit the data&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-LastServerBackup.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Last Backup of each database on a server
+# ————————————————————————
+Function Show-LastServerBackup ($SQLServer) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$Results = @();
+foreach ($db in $server.Databases) {
+$DBName = $db.name
+$LastFull = $db.lastbackupdate
+if ($lastfull -eq '01 January 0001 00:00:00')
+{$LastFull = 'NEVER'}
+$LastDiff = $db.LastDifferentialBackupDate
+if ($lastdiff -eq '01 January 0001 00:00:00')
+{$Lastdiff = 'NEVER'}
+$lastLog = $db.LastLogBackupDate
+if ($lastlog -eq '01 January 0001 00:00:00')
+{$Lastlog = 'NEVER'}
+$TempResults = New-Object PSObject;
+$TempResults | Add-Member -MemberType NoteProperty -Name &amp;quot;Server&amp;quot; -Value $Server;
+$TempResults | Add-Member -MemberType NoteProperty -Name &amp;quot;Database&amp;quot; -Value $DBName;
+$TempResults | Add-Member -MemberType NoteProperty -Name &amp;quot;Last Full Backup&amp;quot; -Value $LastFull;
+$TempResults | Add-Member -MemberType NoteProperty -Name &amp;quot;Last Diff Backup&amp;quot; -Value $LastDiff;
+$TempResults | Add-Member -MemberType NoteProperty -Name &amp;quot;Last Log Backup&amp;quot; -Value $LastLog;
+$Results += $TempResults;
+}
+$Results
+}
+&lt;/code>&lt;/pre></description></item><item><title>Checking For A Database Backup with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/checking-for-a-database-backup-with-powershell/</link><pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/checking-for-a-database-backup-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-LastServerBackup.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Last Backup of each database on a server
+# ————————————————————————
+Function Show-LastDatabaseBackup ($SQLServer, $sqldatabase) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$db = $server.Databases[$sqldatabase]
+Write-Output &amp;quot;Last Full Backup&amp;quot;
+$LastFull = $db.lastbackupdate
+if ($lastfull -eq '01 January 0001 00:00:00')
+{$LastFull = 'NEVER'}
+Write-Output $LastFull
+Write-Output &amp;quot;Last Diff Backup&amp;quot;
+$LastDiff = $db.LastDifferentialBackupDate
+if ($lastdiff -eq '01 January 0001 00:00:00')
+{$Lastdiff = 'NEVER'}
+Write-Output $Lastdiff
+Write-Output &amp;quot;Last Log Backup&amp;quot; $lastLog = $db. LastLogBackupDate
+if ($lastlog -eq '01 January 0001 00:00:00')
+{$Lastlog = 'NEVER'}
+Write-Output $lastlog
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

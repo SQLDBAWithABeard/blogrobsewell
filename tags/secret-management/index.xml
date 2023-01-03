@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Secret Management on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/secret-management/</link><description>Recent content in Secret Management on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 21 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/secret-management/index.xml" rel="self" type="application/rss+xml"/><item><title>Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</link><pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/08/image-16.png" alt="Featured image of post Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools" />&lt;p>Following on from my posts about using Secret Management &lt;a class="link" href="https://blog.robsewell.com/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+>Good bye Import-CliXml&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/" target="_blank" rel="noopener"
+>running programmes as a different user&lt;/a>, I have another use case.&lt;/p>
+&lt;p>After creating Azure SQL Databases in an Elastic Pool using a process pretty similar to this one &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>I blogged about last year&lt;/a>, I needed to be able to programmatically create users and assign permissions.&lt;/p>
+&lt;h2 id="i-need-a-user-to-login-with">I need a user to login with&lt;/h2>
+&lt;p>When I created my Azure SQL Server with Terraform, I set the Azure Admin to be a SPN as you can see in the image from the portal and set it to have an identity using the documentation for &lt;a class="link" href="https://www.terraform.io/docs/providers/azurerm/r/sql_server.html" target="_blank" rel="noopener"
+>azurerm_mssql_server&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-9.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-18.png"
+loading="lazy"
+>
+This allows this user to manage the access for the SQL Server as long as the SQL Server Azure AD identity has Directory Reader privileges. The SQL Server is called temp-beard-sqls and as you can see the identity is assigned to the role.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-11.png"
+loading="lazy"
+>
+The privileges required to do this for a single identity are quite high&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>so now, you can assign an Azure Active Directory Group to that Role and allow less-privileged users to add the identity to this group . The documentation is &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a> and there is a tutorial &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal-tutorial?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a> explaining the steps you need to take.&lt;/p>
+&lt;h2 id="what-is-an-azure-spn">What is an Azure SPN?&lt;/h2>
+&lt;blockquote>
+&lt;p>An Azure service principal is an identity created for use with applications, hosted services, and automated tools to access Azure resources.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?toc=%2Fazure%2Fazure-resource-manager%2Ftoc.json&amp;amp;view=azure-cli-latest?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?toc=%2Fazure%2Fazure-resource-manager%2Ftoc.json&amp;amp;view=azure-cli-latest&lt;/a>&lt;/p>
+&lt;p>I created the SPN using Azure CLI straight from the Azure Portal by clicking this button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and running&lt;/p>
+&lt;pre>&lt;code>az ad sp create-for-rbac --name ServicePrincipalName
+&lt;/code>&lt;/pre>
+&lt;p>This will quickly create a SPN for you and return the password&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yes I have deleted this one&lt;/p>
+&lt;h2 id="add-azure-key-vault-to-secret-management">Add Azure Key Vault to Secret Management&lt;/h2>
+&lt;p>In my previous posts, I have been using the Default Key Vault which is limited to your local machine and the user that is running the code. It would be better to use Azure Key Vault to store the details for the SPN so that it safely stored in the cloud and not on my machine and also so that anyone (or app) that has permissions to the vault can use it.&lt;/p>
+&lt;p>First you need to login to Azure in PowerShell (You will need to have the AZ* modules installed)&lt;/p>
+&lt;pre>&lt;code>Connect-AzAccount
+&lt;/code>&lt;/pre>
+&lt;p>Be aware, the login box can appear behind the VS Code or Azure Data Studio window!&lt;/p>
+&lt;p>Once connected, if you have several Azure subscriptions, you can list them with&lt;/p>
+&lt;pre>&lt;code>Get-AzSubscription
+&lt;/code>&lt;/pre>
+&lt;p>You can choose your subscription with&lt;/p>
+&lt;pre>&lt;code>$AzureSubscription = Set-AzContext -SubscriptionName &amp;quot;NAME OF SUBSCRIPTION&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>For the Secret Management Module to manage the Azure Key Vault, you first need to register it.&lt;/p>
+&lt;p>Ensure that you have permissions to connect by following the details in the network security documentation &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/key-vault/general/network-security?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://docs.microsoft.com/en-us/azure/key-vault/general/network-security&lt;/a> and the secure access documentation &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/key-vault/general/secure-your-key-vault?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://docs.microsoft.com/en-us/azure/key-vault/general/secure-your-key-vault&lt;/a>&lt;/p>
+&lt;p>Then you can run &lt;code>Register-SecretVault&lt;/code> . You need to provide the local name for the key vault, the module name &lt;code>Az.KeyVault&lt;/code>, and a &lt;code>VaultParameters&lt;/code> hashtable with the KeyVault name and the Azure Subscription ID. You can register other types of Key Vaults to the Secret Management module in this way and they will require different values for the &lt;code>VaultParameters&lt;/code> parameter.&lt;/p>
+&lt;pre>&lt;code>$KeyVaultName = 'beard-key-vault'
+Register-SecretVault -Name BeardKeyVault -ModuleName Az.KeyVault -VaultParameters @{ AZKVaultName = $KeyVaultName; SubscriptionId = $AzureSubscription.Subscription.Id }
+&lt;/code>&lt;/pre>
+&lt;h2 id="adding-the-spn-details-to-the-azure-key-vault">Adding the SPN details to the Azure Key Vault&lt;/h2>
+&lt;p>Using the values for AppID – (Note NOT the display name) and the values for the password from the Azure CLI output or by creating a new secret for the SPN with PowerShell or via the portal. You can use the following code to add the SPN details and the tenantid to the Azure Key Vault using the Secret Management module&lt;/p>
+&lt;pre>&lt;code>$ClientId = Read-Host &amp;quot;Enter ClientID&amp;quot; -AsSecureString
+$SecretFromPortal = Read-Host &amp;quot;Enter Client Secret&amp;quot; -AsSecureString
+$tenantid = Read-Host &amp;quot;Enter TenantId&amp;quot; -AsSecureString
+Set-Secret -Vault BeardKeyVault -Name service-principal-guid -Secret $ClientId
+Set-Secret -Vault BeardKeyVault -Name service-principal-secret -SecureStringSecret $SecretFromPortal
+Set-Secret -Vault BeardKeyVault -Name Tenant-Id -Secret $tenantid
+&lt;/code>&lt;/pre>
+&lt;p>You can also do this with the Az.KeyVault module by following the instructions &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-powershell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>You can see the secrets in the portal&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and also at the command line with the Secret Management module using&lt;/p>
+&lt;pre>&lt;code>Get-SecretInfo -Vault RegisteredNameOfVault
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="can-my-user-connect">Can my user connect?&lt;/h2>
+&lt;p>If I try to connect in Azure Data Studio to my Azure SQL Database with my AAD account to the temp-sql-db-beard database. It fails.&lt;/p>
+&lt;p>By the way a great resource for troubleshooting the SQL error 18456 failure states can be found here &lt;a class="link" href="https://sqlblog.org/2020/07/28/troubleshooting-error-18456" target="_blank" rel="noopener"
+>https://sqlblog.org/2020/07/28/troubleshooting-error-18456&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="dbatools-to-the-rescue-">dbatools to the rescue 🙂&lt;/h2>
+&lt;p>dbatools is an open source community collaboration PowerShell module for administrating SQL Server. You can find more about it at &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools.io&lt;/a> and get the book that Chrissy and I are writing about dbatools at &lt;a class="link" href="http://dbatools.io%5Cbook" target="_blank" rel="noopener"
+>dbatools.io\book&lt;/a>&lt;/p>
+&lt;p>You can connect to Azure SQL Database with an Azure SPN using the following code. It will get the secrets from the Azure Key Vault that have been set above and create a connection. Lets see if I can run a query as the SPN.&lt;/p>
+&lt;pre>&lt;code>$SqlInstance = 'temp-beard-sqls.database.windows.net'
+$databasename = 'master'
+$appid = Get-Secret -Vault BeardKeyVault -Name service-principal-guid -AsPlainText
+$Clientsecret = Get-Secret -Vault BeardKeyVault -Name service-principal-secret
+$credential = New-Object System.Management.Automation.PSCredential ($appid,$Clientsecret)
+$tenantid = Get-Secret -Vault BeardKeyVault -Name Sewells-Tenant-Id -AsPlainText
+$AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $databasename -SqlCredential $credential -Tenant $tenantid -TrustServerCertificate
+Invoke-DbaQuery -SqlInstance $AzureSql -Database master -SqlCredential $credential -Query &amp;quot;Select SUSER_NAME() as 'username'&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Excellent 🙂&lt;/p>
+&lt;h2 id="add-a-user-to-the-user-database">Add a user to the user database&lt;/h2>
+&lt;p>I can then add my user to the temp-sql-db-beard Database. I need to create a new connection to the user database as you cannot use the &lt;code>USE [DatabaseName]&lt;/code> statement&lt;/p>
+&lt;pre>&lt;code>$Userdatabasename = 'temp-sql-db-beard'
+$AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $Userdatabasename -SqlCredential $credential -Tenant $tenantid -TrustServerCertificate
+&lt;/code>&lt;/pre>
+&lt;p>Whilst you can use dbatools to create new users in Azure SQL Database at present you cant create AAD users. You can run a T-SQL Script to do this though. This script will create a contained database user in the database. I have added the role membership also but this can also be done with &lt;a class="link" href="https://docs.dbatools.io/#Add-DbaDbRoleMember" target="_blank" rel="noopener"
+>Add-DbaDbRoleMember&lt;/a> from dbatools&lt;/p>
+&lt;pre>&lt;code>$Query = @&amp;quot;
+CREATE USER [rob@sewells-consulting.co.uk] FROM EXTERNAL PROVIDER
+ALTER ROLE db_datareader ADD MEMBER [rob@sewells-consulting.co.uk]
+&amp;quot;@
+Invoke-DbaQuery -SqlInstance $AzureSql -Database $Userdatabasename -SqlCredential $credential -Query $Query
+&lt;/code>&lt;/pre>
+&lt;p>Lets check the users on the database with dbatools&lt;/p>
+&lt;pre>&lt;code>Get-DbaDbUser -SqlInstance $AzureSql -Database $Userdatabasename |Out-GridView
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have my user and it is of type External user. Lets see if I can connect&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Bingo 🙂&lt;/p>
+&lt;p>Happy Automating&lt;/p>
+&lt;p>Because I dont like to see awesome people struggling with PowerShell&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Here is the same code using just the Az.KeyVault module&lt;/p>
+&lt;pre>&lt;code>$appid = (Get-AzKeyVaultSecret -vaultName &amp;quot;beard-key-vault&amp;quot; -name &amp;quot;service-principal-guid&amp;quot;).SecretValueText
+$Clientsecret = (Get-AzKeyVaultSecret -vaultName &amp;quot;beard-key-vault&amp;quot; -name &amp;quot;service-principal-secret&amp;quot;).SecretValue
+$credential = New-Object System.Management.Automation.PSCredential ($appid,$Clientsecret)
+$tenantid = (Get-AzKeyVaultSecret -vaultName &amp;quot;beard-key-vault&amp;quot; -name &amp;quot;Sewells-Tenant-Id&amp;quot;).SecretValueText
+$AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $databasename -SqlCredential $credential -Tenant $tenantid -TrustServerCertificate
+&lt;/code>&lt;/pre></description></item><item><title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</link><pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/runas.png" alt="Featured image of post Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user" />&lt;p>Following on from &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+>my last post about the Secret Management module&lt;/a>. I was asked another question.&lt;/p>
+&lt;blockquote>
+&lt;p>Can I use this to run applications as my admin account?&lt;/p>
+&lt;p>A user with a beard&lt;/p>
+&lt;/blockquote>
+&lt;p>It is good practice to not log into your work station with an account with admin privileges. In many shops, you will need to open applications that can do administration tasks with another set of account credentials.&lt;/p>
+&lt;p>Unfortunately, people being people, they will often store their admin account credentials in a less than ideal manner (OneNote, Notepad ++ etc) to make it easier for them, so that when they right click and run as a different user, they can copy and paste the password.&lt;/p>
+&lt;h2 id="use-the-secret-management-module">Use the Secret Management module&lt;/h2>
+&lt;p>Again, I decided to use a notebook to show this as it is a fantastic way to share code and results and because it means that anyone can try it out.&lt;/p>
+&lt;p>The notebook may not render on a mobile device.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Using the notebook, I can quickly store my admin password safely and open and run the applications using the credential&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" />&lt;p>Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;h2 id="jaap-is-awesome">Jaap is awesome&lt;/h2>
+&lt;p>&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+>t&lt;/a> blog post&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a>&lt;/p>
+&lt;h2 id="joel-is-also-awesome">Joel is also awesome!&lt;/h2>
+&lt;p>When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+>t&lt;/a> module BetterCredentials which uses the Windows Credential Manager&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.powershellgallery.com/packages/BetterCredentials/4.5" target="_blank" rel="noopener"
+>https://www.powershellgallery.com/packages/BetterCredentials/4.5&lt;/a>&lt;/p>
+&lt;h2 id="microsoft-also-awesome">Microsoft? Also awesome!&lt;/h2>
+&lt;p>In February, Microsoft released the SecretManagement module for preview.&lt;/p>
+&lt;p>&lt;a class="link" href="https://devblogs.microsoft.com/powershell/secrets-management-development-release?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://devblogs.microsoft.com/powershell/secrets-management-development-release/&lt;/a>&lt;/p>
+&lt;p>Sydney &lt;a class="link" href="https://twitter.com/sydneysmithreal" target="_blank" rel="noopener"
+>t&lt;/a> gave a presentation at the European PowerShell Conference which you can watch on Youtube.&lt;/p>
+&lt;h2 id="good-bye-import-clixml">Good Bye Import-CliXML&lt;/h2>
+&lt;p>So now I say, it is time to stop using Import-Clixml for storing secrets and use the Microsoft.PowerShell.SecretsManagement module instead for storing your secrets.&lt;/p>
+&lt;h2 id="notebooks-are-as-good-as-blog-posts">Notebooks are as good as blog posts&lt;/h2>
+&lt;p>I love notebooks and to show some people who had asked about storing secrets, I have created some. So, because I am efficient lazy I have embedded them here for you to see. You can find them in my Jupyter Notebook repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;p>in the Secrets folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png?resize=630%2C349&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-and-using-the-secrets-management-module">Installing and using the Secrets Management Module&lt;/h2>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="using-the-secret-management-module-in-your-scripts">Using the Secret Management Module in your scripts&lt;/h2>
+&lt;p>Here is a simple example of using the module to provide the credential for a docker container and then to dbatools to query the container&lt;/p>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted --></description></item></channel></rss>

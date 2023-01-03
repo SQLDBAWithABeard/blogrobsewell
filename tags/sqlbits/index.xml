@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQLBits on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/sqlbits/</link><description>Recent content in SQLBits on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 27 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/sqlbits/index.xml" rel="self" type="application/rss+xml"/><item><title>#NewStarNovember - Being a mentor</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-being-a-mentor/</link><pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-being-a-mentor/</guid><description>&lt;img src="https://images.unsplash.com/photo-1593132517397-ceb31d77194a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Featured image of post #NewStarNovember - Being a mentor" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="who-was-your-mentor">Who was your mentor?&lt;/h1>
+&lt;p>I have never had an official mentor but I am so very very grateful to all of the people who have helped, supported and inspired me throughout my career.&lt;/p>
+&lt;p>I feel so privileged to be able to reach out to so many wonderful people and ask questions and receive advice.&lt;/p>
+&lt;h2 id="so-rob-why-do-you-mentor-others">So Rob, Why do you mentor others?&lt;/h2>
+&lt;p>I have always been willing to share everything that I know and have been doing so in various formats for many years now. I have officially mentored many people for presentations, through events such as New Stars of Data, Data (née SQL) Grillen, Data Minds, Data Scotland, as well as unofficially because they have asked me.&lt;/p>
+&lt;p>Why do I do this? because I enjoy it, because I believe that anyone can give a good presentation and because the more voices we have giving presentations the better that it is for us all.&lt;/p>
+&lt;h2 id="whats-the-best-thing-about-mentoring">What&amp;rsquo;s the best thing about mentoring?&lt;/h2>
+&lt;p>So many things are fantastic about mentoring.&lt;/p>
+&lt;p>You learn so many things. Getting the opinions of different people or watching how others perform similar tasks to you almost always leads to you learning something new. Whether it is the subject they are talking about, or just the way that they use PowerPoint or VS Code, or even the way they have Windows set up there is always something to learn.&lt;/p>
+&lt;p>I also get such a warm fuzzy feeling from seeing people blossom as they gain confidence and realise that they can do a fantastic presentation and that it is a mainly a case of learning and practicing new skills.&lt;/p>
+&lt;p>I am super proud of the people that I have mentored who have continued to present and have since presented at international conferences.&lt;/p>
+&lt;p>I am also equally proud of those who have decided that it was not for them right now and are currently taking a break from presenting.&lt;/p>
+&lt;p>I am delighted to see people who deserve it, become MVPs, or get promoted or change jobs. I hope that maybe I had a little impact, although I tell everyone I mentor, they are doing all of the hard work I am just listening and commenting.&lt;/p>
+&lt;h2 id="doesnt-it-take-a-lot-of-time">Doesn&amp;rsquo;t it take a lot of time?&lt;/h2>
+&lt;p>There is, of course, a time element to being a mentor but I am always happy to give up a few hours each month to help and I am also careful that I don&amp;rsquo;t take on too much and over burden myself.&lt;/p>
+&lt;p>For me, being a mentor means giving guidance and setting goals and with a bit of careful planning you can be efficient about it.&lt;/p>
+&lt;h2 id="what-else-have-you-learnt">What else have you learnt?&lt;/h2>
+&lt;p>I have learnt that everyone is different and that, as a mentor, some of your tactics and procedures will not work for every person. As an example, I have learnt that some people like to have a script that they can use to memorise or to have as an aide whilst others are much happier just with key words.&lt;/p>
+&lt;p>I have learnt that time zones make it harder. If it is Sunday evening for me, it is Sunday morning on the west coast of the US. This can make it harder to find times that fit well for both parties.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?&lt;/h1>
+&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> CFP are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://images.unsplash.com/photo-1546872006-42c78c0ccb29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="in-the-beginning">In the beginning&lt;/h1>
+&lt;p>It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits Conference&lt;/a> (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don&amp;rsquo;t like it and don&amp;rsquo;t ever do it again. (Narrator - exactly the opposite happened - He loved it and does it &lt;a class="link" href="https://sessionize.com/rob-sewell/" target="_blank" rel="noopener"
+>at every opportunity&lt;/a>)&lt;/p>
+&lt;p>It was not the most brilliant presentation. I learned a lot and blogged about it too &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>as you can read here&lt;/a>. But I enjoyed it and it gave me the confidence to do it again and set me on a path to the wonderful life I have now.&lt;/p>
+&lt;h1 id="should-you-speak-at-your-user-group">Should you speak at your User Group?&lt;/h1>
+&lt;p>Yes&lt;/p>
+&lt;p>OK, you want a bit more?&lt;/p>
+&lt;p>Yes you definitely should.&lt;/p>
+&lt;p>You should try it once.&lt;/p>
+&lt;p>Your user group should be filled with some familiar faces of people who you know will support you and only want the best for you.&lt;br>
+It will usually be a smaller group than at an event like a Data Saturday or other local to your town/city event.&lt;br>
+Your user group leader will be delighted to help and to support you.&lt;br>
+If you don&amp;rsquo;t like it, you don&amp;rsquo;t ever have to do it again.&lt;/p>
+&lt;h1 id="what-is-the-benefit-of-speaking">What is the benefit of speaking?&lt;/h1>
+&lt;p>Why should you put yourself through all of that stress and work to put on a wonderful session? I think there are a number of benefits and most won&amp;rsquo;t come to you from doing a single session.&lt;/p>
+&lt;ul>
+&lt;li>The first one does. You will know your subject more thoroughly. By preparing a session to present, you will definitely research, you will read blogs, you will try things out, you will want to make sure that you know all there is to know. This means that you will be improving your knowledge on the subject.&lt;/li>
+&lt;li>Confidence. Speaking in public will give you more confidence.&lt;/li>
+&lt;li>It will improve your communication skills. You will have to be able to convey your message to others&lt;/li>
+&lt;li>Some people say that a job interview is like a presentation and you can improve that skill. (I am not sure but &lt;a class="link" href="https://blog.robsewell.com/blog/i-hate-interviews-tsql2sday/" target="_blank" rel="noopener"
+>I hate interviews and don&amp;rsquo;t perform well&lt;/a>)&lt;/li>
+&lt;li>It will improve your time management skills. You have to do a presentation on Monday, you need to get everything in place in time for that.&lt;/li>
+&lt;/ul>
+&lt;p>There are plenty of other reasons too.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?&lt;/h1>
+&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> call for papers are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>Using the AST in Pester for dbachecks</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-ast-in-pester-for-dbachecks/</link><pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-ast-in-pester-for-dbachecks/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2018/01/02-Pester-results-1.png" alt="Featured image of post Using the AST in Pester for dbachecks" />&lt;p>TagLine – My goal – Chrissy will appreciate Unit Tests one day 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/new-module-coming-soon/" target="_blank" rel="noopener"
+>Chrissy has written about dbachecks&lt;/a> the new up and coming community driven open source PowerShell module for SQL DBAs to validate their SQL Server estate. we have taken some of the ideas that we have presented about a way of using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> with &lt;a class="link" href="https://github.com/Pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> to validate that everything is how it should be and placed them into a meta data driven framework to make things easy for anyone to use. It is looking really good and I am really excited about it. It will be released very soon.&lt;/p>
+&lt;p>Chrissy and I will be doing a pre-con at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> where we will talk in detail about how this works. &lt;a class="link" href="http://sqlbits.com/information/event17/Reliable_Repeatable__Automated_PowerShell_for_DBAs/trainingdetails.aspx" target="_blank" rel="noopener"
+>You can find out more and sign up here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>Cláudio Silva&lt;/a> has improved my &lt;a class="link" href="https://blog.robsewell.com/a-pretty-powerbi-pester-results-template-file/" target="_blank" rel="noopener"
+>PowerBi For Pester&lt;/a> file and made it beautiful and whilst we were discussing this we found that if the Pester Tests were not formatted correctly the Power Bi looked … well rubbish to be honest! Chrissy asked if we could enforce some rules for writing our Pester tests.&lt;/p>
+&lt;p>The rules were&lt;/p>
+&lt;p>The Describe title should be in double quotes&lt;br>
+The Describe should use the plural Tags parameter&lt;br>
+The Tags should be singular&lt;br>
+The first Tag should be a unique tag in Get-DbcConfig&lt;br>
+The context title should end with $psitem&lt;br>
+The code should use Get-SqlInstance or Get-ComputerName&lt;br>
+The Code should use the forEach method&lt;br>
+The code should not use $_&lt;br>
+The code should contain a Context block&lt;/p>
+&lt;p>She asked me if I could write the Pester Tests for it and this is how I did it. I needed to look at the Tags parameter for the Describe. It occurred to me that this was a job for the Abstract Syntax Tree (AST). I don’t know very much about the this but I sort of remembered reading a blog post by &lt;a class="link" href="http://www.lazywinadmin.com/2016/08/powershellpester-make-sure-your.html" target="_blank" rel="noopener"
+>Francois-Xavier Cat about using it with Pester&lt;/a> so I went and read that and &lt;a class="link" href="https://stackoverflow.com/questions/39909021/parsing-powershell-script-with-ast" target="_blank" rel="noopener"
+>found an answer on Stack Overflow&lt;/a> as well. These looked just like what I needed so I made use of them. Thank you very much to Francois-Xavier and wOxxOm for sharing.&lt;/p>
+&lt;p>The first thing I did was to get the Pester Tests which we have located in a checks folder and loop through them and get the content of the file with the Raw parameter&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Describes titles and tags&amp;quot; {
+&lt;/code>&lt;/pre>
+&lt;p>Then I decided to look at the Describes using the method that wOxxOm (I know no more about this person!) showed.&lt;/p>
+&lt;pre>&lt;code>$Describes = \[Management.Automation.Language.Parser\] ::ParseInput($check, \[ref\]$tokens, \[ref\]$errors).
+FindAll(\[Func\[Management.Automation.Language.Ast, bool\]\] {
+param($ast)
+$ast.CommandElements -and
+$ast.CommandElements\[0\].Value -eq 'describe'
+}, $true) |
+ForEach {
+$CE = $_.CommandElements
+$secondString = ($CE |Where { $_.StaticType.name -eq 'string' })\[1\]
+$tagIdx = $CE.IndexOf(($CE |Where ParameterName -eq'Tags') ) + 1
+$tags = if ($tagIdx -and $tagIdx -lt $CE.Count) {
+$CE\[$tagIdx\].Extent
+}
+New-Object PSCustomObject -Property @{
+Name = $secondString
+Tags = $tags
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>As I understand it, this code is using the Parser on the $check (which contains the code from the file) and finding all of the Describe commands and creating an object of the title of the Describe with the StaticType equal to String and values from the Tag parameter.&lt;/p>
+&lt;p>When I ran this against the database tests file I got the following results&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/01-describes-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then it was a simple case of writing some tests for the values&lt;/p>
+&lt;pre>&lt;code>@($describes).Foreach{
+$title = $PSItem.Name.ToString().Trim('&amp;quot;').Trim('''')
+It &amp;quot;$title Should Use a double quote after the Describe&amp;quot; {
+$PSItem.Name.ToString().Startswith('&amp;quot;')| Should be $true
+$PSItem.Name.ToString().Endswith('&amp;quot;')| Should be $true
+}
+It &amp;quot;$title should use a plural for tags&amp;quot; {
+$PsItem.Tags| Should Not BeNullOrEmpty
+}
+# a simple test for no esses apart from statistics and Access!!
+if ($null -ne $PSItem.Tags) {
+$PSItem.Tags.Text.Split(',').Trim().Where{($_ -ne '$filename') -and ($_ -notlike '\*statistics\*') -and ($_ -notlike '\*BackupPathAccess\*') }.ForEach{
+It &amp;quot;$PsItem Should Be Singular&amp;quot; {
+$_.ToString().Endswith('s')| Should Be $False
+}
+}
+It &amp;quot;The first Tag Should Be in the unique Tags returned from Get-DbcCheck&amp;quot; {
+$UniqueTags -contains $PSItem.Tags.Text.Split(',') \[0\].ToString()| Should Be $true
+}
+}
+else {
+It &amp;quot;You haven't used the Tags Parameter so we can't check the tags&amp;quot; {
+$false| Should be $true
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>The Describes variable is inside @() so that if there is only one the ForEach Method will still work. The unique tags are returned from our command Get-DbcCheck which shows all of the checks. We will have a unique tag for each test so that they can be run individually.&lt;/p>
+&lt;p>Yes, I have tried to ensure that the tags are singular by ensuring that they do not end with an s (apart from statistics) and so had to not check  BackupPathAccess and statistics. Filename is a variable that we add to each Describe Tags so that we can run all of the tests in one file. I added a little if block to the Pester as well so that the error if the Tags parameter was not passed was more obvious&lt;/p>
+&lt;p>I did the same with the context blocks as well&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Contexts&amp;quot; {
+## Find the Contexts
+$Contexts = \[Management.Automation.Language.Parser\] ::ParseInput($check, \[ref\]$tokens, \[ref\]$errors).
+FindAll(\[Func\[Management.Automation.Language.Ast, bool\] \] {
+param($ast)
+$ast.CommandElements -and
+$ast.CommandElements\[0\].Value -eq 'Context'
+}, $true) |
+ForEach {
+$CE = $_.CommandElements
+$secondString = ($CE |Where { $_.StaticType.name -eq 'string' })\[1\]
+New-Object PSCustomObject -Property @{
+Name = $secondString
+}
+}
+@($Contexts).ForEach{
+$title = $PSItem.Name.ToString().Trim('&amp;quot;').Trim('''')
+It &amp;quot;$Title Should end with `$psitem So that the PowerBi will work correctly&amp;quot; {
+$PSItem.Name.ToString().Endswith('psitem&amp;quot;')| Should Be $true
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>This time we look for the Context command and ensure that the string value ends with psitem as the PowerBi parses the last value when creating columns&lt;/p>
+&lt;p>Finally I got all of the code and check if it matches some coding standards&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Code&amp;quot; {
+## This just grabs all the code
+$AST = \[System.Management.Automation.Language.Parser\] ::ParseInput($Check, \[ref\]$null, \[ref\]$null)
+$Statements = $AST.EndBlock.statements.Extent
+## Ignore the filename line
+@($Statements.Where{$_.StartLineNumber -ne 1}).ForEach{
+$title = \[regex\]::matches($PSItem.text, &amp;quot;Describe(. *)-Tag&amp;quot;).groups\[1\].value.Replace('&amp;quot;', '').Replace ('''', '').trim()
+It &amp;quot;$title Should Use Get-SqlInstance or Get-ComputerName&amp;quot; {
+($PSItem.text -Match 'Get-SqlInstance') -or ($psitem.text -match 'Get-ComputerName')| Should be $true
+}
+It &amp;quot;$title Should use the ForEach Method&amp;quot; {
+($Psitem.text -match 'Get-SqlInstance\\).ForEach {') -or ($Psitem.text -match 'Get-ComputerName\\). ForEach{')| Should Be $true# use the \ to escape the )
+}
+It &amp;quot;$title Should not use `$_&amp;quot; {
+($Psitem.text -match '$_')| Should Be $false
+}
+It &amp;quot;$title Should Contain a Context Block&amp;quot; {
+$Psitem.text -match 'Context'| Should Be $True
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>I trim the title from the Describe block so that it is easy to see where the failures (or passes) are with some regex and then loop through each statement apart from the first line to ensure that the code is using our internal commands Get-SQLInstance or Get-ComputerName to get information, that we are looping through each of those arrays using the ForEach method rather than ForEach-Object and using $psitem rather than $_ to reference the “This Item” in the array and that each Describe block has a context block.&lt;/p>
+&lt;p>This should ensure that any new tests that are added to the module follow the guidance we have set up on the Wiki and ensure that the Power Bi results still look beautiful!&lt;/p>
+&lt;p>Anyone can run the tests using&lt;/p>
+&lt;pre>&lt;code>Invoke-Pester .\\tests\\Unit.Tests.ps1 -show Fails
+&lt;/code>&lt;/pre>
+&lt;p>before they create a Pull request and it looks like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Pester-results-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>if everything is Green then they can submit their Pull Request 🙂 If not they can see quickly that something needs to be fixed. (fail early 🙂 )&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/03-fails.png"
+loading="lazy"
+alt="03 fails.png"
+>&lt;/p></description></item><item><title>Why Volunteer at SQLBits ?</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/why-volunteer-at-sqlbits/</link><pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/why-volunteer-at-sqlbits/</guid><description>&lt;p>WARNING – Contains Orange and light-hearted photos 😉&lt;/p>
+&lt;p>I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?&lt;/p>
+&lt;h2 id="many-months-of-work">Many months of work&lt;/h2>
+&lt;p>First though, you need to know that the SQLBits conference is organised and run by volunteers. All of the committee spend many, many long hours, out of their own free time, for many months before and after the event to ensure that the attendees, sponsors, speakers and volunteers experience is trouble free. I think that they do an amazing and fantastic job and repeatedly pull off the best, most enjoyable conference that I have been to.&lt;/p>
+&lt;p>&lt;strong>Thank you&lt;/strong> Simon, Chris, Darren, Allan, Alex, Jonathan, Annette&lt;/p>
+&lt;p>Thank you also to their families as well, who undoubtedly miss out on time with them whilst they are organising everything to do with the event, from finding venues, organising dates, speakers, marketing, website, sponsors, printing, audio visual, THE PARTY!! and all the other big and small things that it takes to make an event of that size occur.&lt;/p>
+&lt;h2 id="orange-shirted-wonderful-folk">Orange Shirted Wonderful Folk&lt;/h2>
+&lt;p>There is another group of volunteers that you will have seen at SQLBits. For the last couple of years we have been the ones in the orange shirts.&lt;/p>
+&lt;p>Here is the Class of 2017&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_17_27_05_pro.jpg"
+loading="lazy"
+alt="WP_20170406_17_27_05_Pro.jpg"
+>&lt;/p>
+&lt;p>I think this is a brilliant colour as it makes us easy to spot (although a couple of attendees who also had orange tops on did get stopped and asked for directions 🙂 )&lt;/p>
+&lt;h2 id="what-do-they-do">What do they do?&lt;/h2>
+&lt;p>These folk come in early and get everything set up. Sometimes we have to explain that the event isn’t ready for you yet&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_07_31_20_pro.jpg"
+loading="lazy"
+alt="WP_20170406_07_31_20_Pro.jpg"
+>We sort out the registration desk and greet every attendee, speaker and sponsor and assist them.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_11_25_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_11_25_Pro.jpg"
+>&lt;/p>
+&lt;p>We help the speakers get set up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_15_38_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_15_38_Pro.jpg"
+>&lt;/p>
+&lt;p>and ensure they have everything they need.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/aaron-bertrand.jpg"
+loading="lazy"
+alt="aaron bertrand.jpg"
+>&lt;/p>
+&lt;p>Aaron Bertrand (above) and John Martin from SentryOne said that it is the best experience for a speaker that they have had anywhere.&lt;/p>
+&lt;p>We direct and assist the attendees to be in the right place, sometimes with some flair!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_21_13_03_pro.jpg"
+loading="lazy"
+alt="WP_20170404_21_13_03_Pro.jpg"
+>&lt;/p>
+&lt;p>We ensure that any issues are resolved quickly and with as little distraction as possible. The room is too hot, too cold, too noisy or too quiet. The projector isn’t working or the speakers microphone has a buzz, there is too much light or too little. The water coolers are empty. The rubbish needs picking up. All these and many other minor complications are communicated and passed to the correct people to get resolved.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_17_51_33_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_17_51_33_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Sometimes we have to resolve our own issues. We had folks who were called by their work and had to stop helping and go back to their day jobs for a few hours. We all understand what it is like for people working in technology and adapt and manage accordingly. In almost every photo I took, there is someone in an orange shirt to be seen.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_43_41_pro.jpg"
+loading="lazy"
+alt="WP_20170406_10_43_41_Pro.jpg"
+>&lt;/p>
+&lt;p>We answer numerous questions from the 1500 or so attendees (and the odd sheep) who came this year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rchard.jpg"
+loading="lazy"
+alt="rchard.jpg"
+>&lt;/p>
+&lt;p>From timings and locations to taxi numbers or restaurants. Unfortunately I did &lt;a class="link" href="https://blog.robsewell.com/a-day-in-the-life-of-a-sqlbits-volunteer/" target="_blank" rel="noopener"
+>not beat last years&lt;/a> “Best question I have been asked at SQLBits” which was&lt;/p>
+&lt;blockquote>
+&lt;p>Excuse me, I have a Dalek in the van . What would you like me to do with it?&lt;/p>
+&lt;/blockquote>
+&lt;p>I was even asked questions on the way back to the hotel gone midnight on Saturday!!&lt;/p>
+&lt;p>We stay afterwards and help to get ready for the next day, putting out the new signs for the domes and the required paperwork.&lt;/p>
+&lt;h2 id="so-why-do-we-do-it">So why do we do it?&lt;/h2>
+&lt;p>I asked the guys and gals this question and in their own words, this is why they do it&lt;/p>
+&lt;blockquote>
+&lt;p>Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days are 11 hours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.&lt;/p>
+&lt;p>You do get to attend sessions but you might not always get your first choice. This can be both a good and bad thing. Very often I have filled in on sessions that I normally wouldn’t attend as they are outside my direct area of work, only to find them the most interesting as I get to see how the other half lives.&lt;/p>
+&lt;p>So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is a 150 miles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.&lt;/p>
+&lt;p>All because of the of the experience that is being a volunteer.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sqldub" target="_blank" rel="noopener"
+>Conan Farrell&lt;/a>&lt;/p>
+&lt;p>![WP_20170406_10_33_15_Pro (2).jpg](&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg" target="_blank" rel="noopener"
+>https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I owe a lot to the SQL Community. It was at SQLBits a few years ago that someone convinced me to start speaking. That encouragement and acceptance from the #SQLFamily put into motion a series of events that lead to me &lt;a class="link" href="http://workingwithdevs.com/im-leaving-redgate/" target="_blank" rel="noopener"
+>quitting the best job of my life&lt;/a> last year in favour of &lt;a class="link" href="http://workingwithdevs.com/introducing-dlm-consultants-mission/" target="_blank" rel="noopener"
+>an adventure to set up my own company&lt;/a>. It’s been a wonderful journey and if it had not been for SQLBits (and SQL Relay, and SQL Saturdays, and others) I wouldn’t have taken it.&lt;/p>
+&lt;p>I have a debt to pay. And it’s wonderful to be able to contribute towards giving other people the same opportunities that the community has given me.&lt;/p>
+&lt;p>Also, for similar reasons, I recently joined the committee for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>. While I’ve been a sponsor and a speaker a lot before, I am fairly inexperienced at organising events. Helping out with the awesome SQLBits team has been a great learning curve. I hope to take what I have learned and apply it to my role for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>.&lt;/p>
+&lt;p>Finally, frankly, there are so many great people in the SQL Community it is just wonderful to be able to work with them during the day. (And share some beers with them in the evening!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/_AlexYates_" target="_blank" rel="noopener"
+>Alex Yates&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/alex2.jpg"
+loading="lazy"
+alt="alex2"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer at SQLBits and in the wider Data Platform community for various reasons. The community is the glue in our industry and being part of that glue is both a privilege and an honour. Without volunteers these awesome events couldn’t function and we couldn’t share knowledge as freely. There also would not be the same opportunities to network with such great people and experts in the same field. I am proud to be part of the SQL Family and facilitate the learning that being a volunteer offers to professionals just like me. Stronger together.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+>Paul Andrew&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_16_03_17_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_16_03_17_Pro (2).jpg"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>When I volunteered, I felt I’d like to give back to the SQL Community a bit of the much I’ve received from them. I wanted to become more engaged.&lt;br>
+I didn’t even dream it would be like this, the terrific team I found here was so great that I can barely wait for the next one.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/moliveira_xpto" target="_blank" rel="noopener"
+>Miguel Oliveira&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Volunteering gives you the experience of the effort &amp;amp; reward of running an event.. You build an appreciation of generating success, creating networks of colleagues and friends, being quick to react, and helps you walk away with the feeling of “I contributed to this”. Everyone should volunteer, even if its just once.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/benrebooted?lang=en" target="_blank" rel="noopener"
+>Ben Watt&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_09_31_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20170405_09_31_24_Pro (2).jpg"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>This year was my 10th sqlbits (remembering we skipped unlucky 13) and 7th I’ve been on the helping team for. I started helping when I learned my original conference companions were moving on to different technologies. Something I’ve never understood.&lt;/p>
+&lt;p>Historically I’ve worked in multiple companies as a lone dba, something I’ve found many at SQLBits can relate to. Through user groups and SQLBits I’ve met lots of others in the same boat over the years. It can be a frustrating job defending servers, implementing best practice and writing sql when all your application team want to do is add columns and ship the next release!&lt;/p>
+&lt;p>Yes, there are good networking opportunities and the parties are great but at the core is great quality training. I’ve had a great time playing a small part in helping deliver the experience over the years. Occasionally I have to shout about feedback forms or seating arrangements but on the whole folk are fine with it.  If I’m honest they are long days. A typical day involves a start and end meeting in addition to sessions you are monitoring. Add to that hotel commutes, catching up with the friends you made last year, meals, drinks etc and its 1am. Oh, and tomorrow’s meeting is 7.30 eek….&lt;/p>
+&lt;p>It’s been a great journey watching the progression of events. Each one adds to the last, they run a lot slicker now. The sponsors are first class and always embrace the theme with their stalls and giveaways. I do wish more folk would enter the prize draws and stop me winning though, it’s getting embarrassing now 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/r5d4" target="_blank" rel="noopener"
+>Richard Doering&lt;/a> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rich2.jpg"
+loading="lazy"
+alt="rich2"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>The best Data Platform conference in Europe! I couldn’t miss the opportunity to be much more than just an attendee.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/DataHubert" target="_blank" rel="noopener"
+>Hubert Kobierzewski&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer for sqlbits, to get experience from a multi day event that has a lot of attendees. Lots of take aways to make local community events run smoother for the delegates.&lt;br>
+Thats my main reason&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/vestergaardj" target="_blank" rel="noopener"
+>Jens Vestergard&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>There is no way I could not use this next photo celebrate this years Most Valuable Helper.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_45_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20170407_20_45_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Thank you &lt;a class="link" href="https://twitter.com/wheeliedba" target="_blank" rel="noopener"
+>Shaun Atkinson&lt;/a> you were amazing and thank you for looking after my former intern James as a first time volunteer&lt;/p>
+&lt;h2 id="how-can-i-do-it-next-year">How can I do it next year?&lt;/h2>
+&lt;p>We always welcome new people to our team. If you would like to volunteer your time to help at the next SQLBits please send an email to &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with a subject of I would like to volunteer or something similar. Nearer the time of next years SQLBits (No I don’t know when or where it is, I will know when you do) the awesome, amazing, fantastic, brilliant, organising amazeballs also known as &lt;a class="link" href="https://twitter.com/mrs_fatherjack" target="_blank" rel="noopener"
+>Annette&lt;/a> will get in touch with you with further details&lt;/p>
+&lt;p>You can expect to have a lot of fun, make new friends and help make the best data platform conference the best data platform conference&lt;/p>
+&lt;p>Oh and sometimes theres free pizza 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_18_31_58_pro.jpg"
+loading="lazy"
+alt="WP_20170404_18_31_58_Pro"
+>&lt;/p>
+&lt;h2 id="another-thank-you">Another Thank You&lt;/h2>
+&lt;p>Some lovely people, (I am really sorry but I didn’t get everyones name) brought sweets, biscuits, cakes and other goodies for the crew. Thank you, they were very much appreciated.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170408_08_03_34_pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="pictures-because-smiles-">Pictures because smiles 🙂&lt;/h2>
+&lt;p>Not all of the volunteers wanted to give feedback publically but I had some cracking photos so I thought I would share them as well. Enjoy&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_22_41_36_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_51_50_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_12_55_59_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_05_52_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_43_45_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_37_17_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_16_52_49_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_09_57_06_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_12_48_46_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_16_05_06_pro.jpg"
+loading="lazy"
+>&lt;/p></description></item><item><title>A Day In The Life of a SQLBits Volunteer</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</link><pubDate>Tue, 10 May 2016 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2016/05/dscn0286-3.jpg" alt="Featured image of post A Day In The Life of a SQLBits Volunteer" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So SQLBits has finished for another year. About 1500 people registered for the largest SQL Conference in Europe held over 4 days in Liverpool last week. 2 days of full day sessions and 2 days of shorter sessions, a pub quiz, a party (literally) out of this world.&lt;/p>
+&lt;p>It is organised and run by volunteers&lt;/p>
+&lt;p>Yes, you’re right.&lt;/p>
+&lt;p>Wow.&lt;/p>
+&lt;p>Of course we must pay special thanks to Simon, Darren, Chris, Jonathan, Annette, Allan and Alex without forgetting all that JRJ has done. They ensured that the venue, sessions, speakers, sponsors, audio visual and not forgetting the amazing party by &lt;!-- raw HTML omitted -->Sneaky Experience (Thank you Julia),&lt;!-- raw HTML omitted --> all occurred at the right time in the right place with the right people and the work and effort they have put in cannot be over-estimated but this post isn’t about those generous, inspiring, amazing folk&lt;br>
+Several people asked me what a volunteer does and how they can become one and hopefully this post will answer both of those questions. More than 40 people volunteered to help at SQL Bits&lt;/p>
+&lt;p>Some volunteers arrived on Tuesday to help with the set up. Making sure that we knew where everything was and helping to lift and carry all of the things that needed moving.&lt;br>
+&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>We wanted to begin the process of packing the swag bags so that all the attendees on Wednesday could have them as they arrived but unfortunately we were let down by a delivery firm and that was not possible. That job was completed by some very dedicated helpers during all of Wednesday and finished off by all helpers after Wednesdays sessions had finished. Many, many thanks and respect particularly to Bob and Conan for their dedication to the bag-packing cause, although I did hear “If I ever see another bag again ……..”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>All of the registration desks with badges, lanyards and booklets were set up ready for the next day, the covers were put on the tables, the bean bags put out. (They were needed later!!)&lt;/p>
+&lt;p>We started every morning with a helpers briefing at 7am&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>where we ensured that everyone knew what was happening that day. Most helpers took some part in registration whether it was being at the desks handing out badges, assisting speakers and sponsors on arrival with questions and some the other jobs that needed doing such as putting the table cloths on the tables in the domes and getting out the bags.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>During every session there were two room monitors. Their responsibility was to ensure that everything went smoothly during the day and during each of the sessions on Friday and Saturday. They assisted the speaker with drinks, timings and the other foibles that technology can throw, they would have known what to do if there were issues with the domes.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They also made sure that everyone was in the correct session and answered lots of questions. The bit that hopefully most attendees missed was that in the case of any issues they called in one of the 5 or 6 super helpers who were patrolling the arena, who could go and get the AV guys or the venue staff to iron out the wrinkles, making sure that the water coolers got re-filled etc&lt;br>
+They took all of your feedback forms and took them to the main desk. There were always people at the front desk helping, although Alex, Annette and Terri spent almost all of their time there.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course it doesn’t stop there. During the breaks and particularly at lunchtime the helpers were available and indeed noticeable. They assisted with the queues at lunchtime and for the key-note&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>answered questions and they helped attendees with session choices. There were always people and questions that they were willing to answer or to find someone who could.&lt;br>
+Once the sessions had finished, the helpers didn’t. They manned and womanned the registration desks in the evening. Returned all of the feedback forms and helped with sorting out the venue ready for the next day. There was also a de-brief for any lessons learned.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They even gave out the free drinks tokens at the entrance to the party!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So why do they do it? They are all part of this amazing community dedicated to providing great events for people to learn. Many of them are volunteers at other events and/or user group leaders and attendees and want to give something back to the community.) . They were able to choose the full day and hour sessions that they attended so were still able to learn from the amazing speakers at the brilliant sessions available. Everyone was able to choose which days they helped it doesn’t have to be for every day you are at the conference. They are a wonderful group of people and I have made some fantastic friendships by volunteering and get great hugs 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You also get asked the most brilliant questions like “Excuse me, I have a Dalek in my van, what would you like me to do with it?”&lt;br>
+If that sounds like something you would like to do, you just need to email &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with ‘I would like to be a helper next year at SQLBits’ in the subject. You can also offer to help at your local user group or at other events, speak to your user group leaders for more details on that&lt;br>
+If it’s not for you, that’s cool but please, for me, the next time you see them at an event just say thank you. It really means a lot and they thoroughly deserve every word of thanks that we give them.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p>If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p>
+&lt;p>If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>https://ola.hallengren.com/&lt;/a>&lt;/p>
+&lt;p>You can also watch his presentation at SQLBits at this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a>&lt;/p>
+&lt;p>where he talks about and demonstrates the solution.&lt;/p>
+&lt;p>It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p>
+&lt;p>I particularly like the parameter @ChangeBackupType which when running the transaction log or differential backup will change the backup type to full if the backup type cannot be taken. This is excellent for picking up new databases and backing them up soon after creation&lt;/p>
+&lt;p>When you run the script the jobs are created but not scheduled and it is for this reason I created this function. All it does it schedule the jobs so that I know that they will be run when a new server is created and all the databases will be backed up. I can then go back at a later date and schedule them correctly for the servers workload or tweak them according to specific needs but this allows me that fuzzy feeling of knowing that the backups and other maintenance will be performed.&lt;/p>
+&lt;p>To accomplish this I pass a single parameter $Server to the function this is the connection string and should be in the format of &lt;code>SERVERNAME&lt;/code>, &lt;code>SERVERNAME\INSTANCENAME &lt;/code>or &lt;code>SERVERNAME\INSTANCENAME,Port&lt;/code>&lt;/p>
+&lt;p>I then create a &lt;code>$srv&lt;/code> SMO object as usual&lt;/p>
+&lt;p>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server&lt;/code>&lt;/p>
+&lt;p>Create a JobServer object and a Jobs array which holds the Jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$JobServer = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs = $JobServer.Jobs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And set the schedule for each job. I pick each Job using the Where-Object Cmdlet and break out if the job does not exist&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job = $Jobs|Where-Object {$_.Name -eq &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       if ($Job -eq $Null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       {Write-Output &amp;#34;No Job with that name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       break}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I create a Schedule object and set its properties and create the schedule&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Schedule = new-object Microsoft.SqlServer.Management.Smo.Agent.JobSchedule ($job, &amp;#39;Daily - Midnight ++ Not Sunday&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndDate = Get-Date -Month 12 -Day 31 -Year 9999
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndTimeOfDay = &amp;#39;23:59:59&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyTypes = &amp;#34;Weekly&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyRecurrenceFactor = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencySubDayTypes = &amp;#34;Once&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyInterval = 126 # Weekdays 62 + Saturdays 64 - &amp;lt;a href=&amp;#34;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;#34;&amp;gt;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveStartDate = get-date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$schedule.ActiveStartTimeOfDay = &amp;#39;00:16:00&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.IsEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>MSDN&lt;/a> which is always my first port of call when writing these scripts&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>WeekDays.Sunday = 1&lt;/li>
+&lt;li>WeekDays.Monday = 2&lt;/li>
+&lt;li>WeekDays.Tuesday = 4&lt;/li>
+&lt;li>WeekDays.Wednesday = 8&lt;/li>
+&lt;li>WeekDays.Thursday = 16&lt;/li>
+&lt;li>WeekDays.Friday = 32&lt;/li>
+&lt;li>WeekDays.Saturday = 64&lt;/li>
+&lt;li>WeekDays.WeekDays = 62&lt;/li>
+&lt;li>WeekDays.WeekEnds = 65&lt;/li>
+&lt;li>WeekDays.EveryDay = 127&lt;/li>
+&lt;/ul>
+&lt;p>Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.&lt;/p>
+&lt;/blockquote>
+&lt;p>It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.&lt;/p>
+&lt;p>You can tweak this script or use the code to work with any Agent Jobs and set the schedules accordingly and you can check that you have set the schedules correctly with this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">   $srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObserver = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObs = $JObserver.Jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $ActiveStartTimeOfDay = @{Name = &amp;#34;ActiveStartTimeOfDay&amp;#34;; Expression = {$_.JobSchedules.ActiveStartTimeOfDay}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyInterval = @{Name = &amp;#34;FrequencyInterval&amp;#34;; Expression = {$_.JobSchedules.FrequencyInterval}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyTypes = @{Name = &amp;#34;FrequencyTypes&amp;#34;; Expression = {$_.JobSchedules.FrequencyTypes}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $IsEnabled = @{Name = &amp;#34;IsEnabled&amp;#34;; Expression = {$_.JobSchedules.IsEnabled}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $Jobs|Where-Object{$_.Category -eq &amp;#39;Database Maintenance&amp;#39;}|select name,$IsEnabled,$FrequencyTypes,$FrequencyInterval,$ActiveStartTimeOfDay|Format-Table -AutoSize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can get the script from Script Center via the link below or by searching for &amp;ldquo;Ola&amp;rdquo; using the &lt;a class="link" href="http://www.microsoft.com/en-us/download/details.aspx?id=42525?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>script browser add-in&lt;/a> straight from ISE&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg?w=300"
+loading="lazy"
+alt="browser"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89&lt;/a>&lt;/p></description></item><item><title>Giving Back – #TSQL2sday</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/giving-back-#tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/giving-back-#tsql2sday/</guid><description>&lt;!-- raw HTML omitted --></description></item></channel></rss>

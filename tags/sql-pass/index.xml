@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL PASS on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/sql-pass/</link><description>Recent content in SQL PASS on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Apr 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/sql-pass/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</link><pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</guid><description>&lt;p>Following on from my &lt;a class="link" href="http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/" title="Parsing XML Child Nodes and Converting to DateTime with PowerShell"
+target="_blank" rel="noopener"
+>previous pos&lt;/a>t about parsing XML where I used the information from &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+>Steve Jones blog post&lt;/a> to get information from the &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+>SQL Saturday web site&lt;/a> I thought that this information and script may be useful for others performing the same task.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.&lt;/p>
+&lt;p>We are looking at using &lt;a class="link" href="https://guidebook.com/" target="_blank" rel="noopener"
+>the Guidebook app&lt;/a> to provide an app for our attendees with all the session details for &lt;a class="link" href="https://www.sqlsaturday.com/372" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>The Guidebook admin website requires the data for the sessions in a certain format. You can choose CSV or XLS.&lt;/p>
+&lt;p>In the admin portal you can download the template&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg?w=300"
+loading="lazy"
+alt="down"
+>&lt;/a>&lt;/p>
+&lt;p>which gives an Excel file like this&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg?w=300"
+loading="lazy"
+alt="-excel"
+>&lt;/a>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>So now all we need to do is to fill it with data.&lt;/p>
+&lt;p>I have an Excel Object Snippet which I use to create new Excel Objects when using PowerShell to manipulate Excel. Here it is for you. Once you have run the code you will be able to press CTRL + J and be able to choose the New Excel Object Snippet any time.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$snippet = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Title = &amp;#34;New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description = &amp;#34;Creates a New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Text = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a .com object for Excel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl = new-object -comobject excel.application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.Visible = \`$true # Set this to False when you run in production
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb = \`$xl.Workbooks.Add() # Add a workbook
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$ws = \`$wb.Worksheets.Item(1) # Add a worksheet
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells=\`$ws.Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Do Some Stuff
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">perhaps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col)=&amp;#34;Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col).font.size=16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$Cells.item(\`$row,\`$col).Columnwidth = 10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb.Saveas(&amp;#34;C:\temp\Test\`$filename.xlsx&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.quit()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-IseSnippet @snippet
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I needed to change this to open the existing file by using&lt;/p>
+&lt;p>&lt;code>$wb = $xl.Workbooks.Open($GuideBookPath)&lt;/code>&lt;/p>
+&lt;p>In the more help tab of the Excel workbook it says&lt;/p>
+&lt;blockquote>
+&lt;!-- raw HTML omitted -->
+&lt;/blockquote>
+&lt;p>So we need to do some manipulation of the data we gather. As before I selected the information from the XML as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Speaker = @{Name=&amp;#34;Speaker&amp;#34;; Expression = {$_.speakers.speaker.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = @{Name=&amp;#34;Room&amp;#34;; Expression = {$_.location.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$startTime = @{Name=&amp;#34;StartTime&amp;#34;; Expression = {[datetime]($_.StartTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Endtime = @{Name =&amp;#34;EndTime&amp;#34;; Expression = {[datetime]($_.EndTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Talks = $Sessions.event|Where-Object {$_.title -ne &amp;#39;Coffee Break&amp;#39; -and $_.title -ne &amp;#39;Room Change&amp;#39; -and $_.title -ne &amp;#39;Lunch Break&amp;#39; -and $_.title -ne &amp;#39;Raffle and Cream Tea&amp;#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then looped through the $Talks array and wrote each line to Excel like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($Talk in $Talks)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Date = $Talk.StartTime.ToString(&amp;#39;MM/dd/yyyy&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Start = $talk.StartTime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$End = $Talk.Endtime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Title = $Talk.Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Description = $Talk.Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = $Talk.Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $End
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I know that I converted the String to DateTime and then back to a String again but that was the easiest (quickest) way to obtain the correct format for the Excel file&lt;/p>
+&lt;p>Then to finish save the file and quit Excel&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$wb.Save()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.quit()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then you upload the file in the Guidebook admin area &lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg?w=300"
+loading="lazy"
+alt="import"
+>&lt;/a>&lt;/p>
+&lt;p>wait for the email confirmation and all your sessions are available in the guidebook&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg?w=300"
+loading="lazy"
+alt="sched"
+>&lt;/a>&lt;/p>
+&lt;p>I hope that is useful to others. The full script is below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">## From http://www.sqlservercentral.com/blogs/steve_jones/2015/01/26/downloading-sql-saturday-data/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$i = 372
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$baseURL = “http://www.sqlsaturday.com/eventxml.aspx?sat=”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DestinationFile = “E:\SQLSatData\SQLSat” + $i + “.xml”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$GuideBookPath = &amp;#39;C:\temp\Guidebook_Schedule_Template.xls&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$sourceURL = $baseURL + $i
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$doc = New-Object System.Xml.XmlDocument
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$doc.Load($sourceURL)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$doc.Save($DestinationFile)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Sessions = $doc.GuidebookXML.events
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Speaker = @{Name=&amp;#34;Speaker&amp;#34;; Expression = {$_.speakers.speaker.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = @{Name=&amp;#34;Room&amp;#34;; Expression = {$_.location.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$startTime = @{Name=&amp;#34;StartTime&amp;#34;; Expression = {[datetime]($_.StartTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Endtime = @{Name =&amp;#34;EndTime&amp;#34;; Expression = {[datetime]($_.EndTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Talks = $Sessions.event|Where-Object {$_.title -ne &amp;#39;Coffee Break&amp;#39; -and $_.title -ne &amp;#39;Room Change&amp;#39; -and $_.title -ne &amp;#39;Lunch Break&amp;#39; -and $_.title -ne &amp;#39;Raffle and Cream Tea&amp;#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a .com object for Excel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl = new-object -comobject excel.application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.Visible = $true # Set this to False when you run in production
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$wb = $xl.Workbooks.Open($GuideBookPath)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ws = $wb.Worksheets.item(1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells=$ws.Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(2,1) = &amp;#39;&amp;#39; # To clear that entry
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(3,1) = &amp;#39;&amp;#39; # To clear that entry
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach ($Talk in $Talks)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Date = $Talk.StartTime.ToString(&amp;#39;MM/dd/yyyy&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Start = $talk.StartTime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$End = $Talk.Endtime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Title = $Talk.Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Description = $Talk.Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = $Talk.Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $End
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$wb.Save()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.quit()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</link><pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</guid><description>&lt;p>Just a quick post to say that I will be speaking at the PowerShell Virtual Chapter meeting this Thursday at 4pm GMT 12pm EDT and also at the Cardiff SQL User Group on Tuesday 31st March&lt;/p>
+&lt;p>I will be giving my Making PowerShell Useful for your Team presentation&lt;/p>
+&lt;p>You have heard about PowerShell and may be spent a little bit of time exploring some of the ways in which it will benefit you at work. You want to be able to perform tasks more specific to your organisation and need to share them with your team. I will show you how you can achieve this by demonstrating&lt;/p>
+&lt;ul>
+&lt;li>An easy way to learn the syntax&lt;/li>
+&lt;li>How to explore SQL Server with PowerShell&lt;/li>
+&lt;li>How to turn your one off scripts into shareable functions&lt;/li>
+&lt;li>How to ensure that your team can easily and quickly make use of and contribute to PowerShell solutions&lt;/li>
+&lt;li>Where else to go for help&lt;/li>
+&lt;/ul>
+&lt;p>You can find out more about the Virtual Chapter here&lt;/p>
+&lt;p>&lt;a class="link" href="http://PowerShell.sqlpass.org/%c2%a0" title="http://PowerShell.sqlpass.org/ "
+target="_blank" rel="noopener"
+>http://PowerShell.sqlpass.org/&lt;/a> &lt;/p>
+&lt;p>and the Cardiff meeting here&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/%c2%a0" title="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/ "
+target="_blank" rel="noopener"
+>http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/&lt;/a> &lt;/p>
+&lt;p>The Cardiff meeting has been named The Battle Of The Beards as it features Tobiasz Koprowski: talking about Windows Azure SQL Database - Tips and Tricks for beginners and Terry McCann with SSRS Inception. I will be giving the same presentation as at the Virtual Chapter&lt;/p>
+&lt;p>I hope to see you at one or both sessions&lt;/p></description></item></channel></rss>

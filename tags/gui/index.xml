@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gui on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/gui/</link><description>Recent content in gui on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 24 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/gui/index.xml" rel="self" type="application/rss+xml"/><item><title>The PowerShell Box Of Tricks GUI</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/the-powershell-box-of-tricks-gui/</link><pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/the-powershell-box-of-tricks-gui/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2013/09/image86.png" alt="Featured image of post The PowerShell Box Of Tricks GUI" />&lt;p>When I started as a DBA at MyWork I faced a challenge. Many hundreds of databases, dozens of servers and no idea what was on where. It was remembering this situation when new team members were appointed that lead me to write the &lt;a class="link" href="https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/" target="_blank" rel="noopener"
+>Find-Database script&lt;/a> and I had written a simple GUI using &lt;code>Read-Host&lt;/code> to enable the newbies to see the functions I had created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image85.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image85.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Whilst writing this series of posts I decided that I would create a new GUI&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image86.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image86.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I wanted the choice to be made and then the form to close so I had to use a separate function for calling all the functions referenced in the form. This function takes an input &lt;code>$x&lt;/code> and depending on the value runs a particular code block. Inside the code block I ask some questions using &lt;code>Read-Host&lt;/code> to set the variables, load the function and run it as shown below for &lt;a class="link" href="https://blog.robsewell.com/checking-drive-sizes-with-powershell/" target="_blank" rel="noopener"
+>Show-DriveSizes&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image87.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image87.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Then I set about creating the GUI. First we load the Forms Assembly, create a new Form object and add a title&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image88.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image88.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Then using the &lt;a class="link" href="http://www.alkanesolutions.co.uk/2013/04/19/embedding-base64-image-strings-inside-a-powershell-application/" target="_blank" rel="noopener"
+>details found here&lt;/a> I I converted the image to ASCI and use it as the background image and set the size of the Form&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image89.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image89.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I choose a default font for the form. Note there are many many properties that you can set for all of these objects so &lt;a class="link" href="http://google.com" target="_blank" rel="noopener"
+>use your best learning aid&lt;/a> and find the ones you need.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image90.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image90.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I then create three labels. I will show one. I think the code is self-explanatory and you will be able to see what is going on. Don’t forget to the last line though! That adds it to the form, if you miss it you can spend a few minutes scratching your head wondering why it hasn’t appeared!!!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image91.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image91.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>We need a Text Box for the User to put their choice in. Again the code is fairly easy to understand&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image92.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image92.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The next bit of code enables the user to use Enter and Escape keys to Go or to Quit. Notice that both call the &lt;code>Close()&lt;/code> method to close the Form and return to the PowerShell console&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image93.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image93.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Add a button for OK and one for quit&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image94.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image94.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and finally Activate the Form, Show it and run the function to call the correct function&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image95.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image95.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The &lt;code>Return-Answer&lt;/code> function simply calls the &lt;code>Return-Function&lt;/code> function. I am not sure if that is the best way of doing it but it works in the way i wanted it to&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image96.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image96.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item></channel></rss>

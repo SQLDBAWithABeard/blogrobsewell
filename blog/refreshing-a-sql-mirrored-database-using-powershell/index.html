@@ -1,0 +1,378 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. You can read more about it on MSDN here and Jes Borland wrote a useful post answering many questions here
+There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring."><title>Refreshing A SQL Mirrored Database Using Powershell</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-a-sql-mirrored-database-using-powershell/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Refreshing A SQL Mirrored Database Using Powershell"><meta property="og:description" content="SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. You can read more about it on MSDN here and Jes Borland wrote a useful post answering many questions here
+There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/refreshing-a-sql-mirrored-database-using-powershell/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automation"><meta property="article:tag" content="mirroring"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="dbatools"><meta property="article:published_time" content="2014-08-25T00:00:00+00:00"><meta property="article:modified_time" content="2014-08-25T00:00:00+00:00"><meta name=twitter:title content="Refreshing A SQL Mirrored Database Using Powershell"><meta name=twitter:description content="SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. You can read more about it on MSDN here and Jes Borland wrote a useful post answering many questions here
+There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><ol><li><a href=#remove-mirroring>Remove Mirroring</a></li><li><a href=#restore-principle-database-from-backup>restore principle database from backup</a></li><li><a href=#perform-a-transaction-backup-of-the-principle-database>perform a transaction backup of the principle database</a></li><li><a href=#restore-both-backups-on-the-mirror-server-with-no-recovery>Restore both backups on the mirror server with no recovery</a></li><li><a href=#recreate-mirroring>Recreate mirroring</a></li><li><a href=#resolve-orphaned-users>Resolve orphaned users</a></li><li><a href=#check-mirroring-status>check mirroring status</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a>
+<a href=/blogrobsewell/categories/dbatools/>dbatools</a>
+<a href=/blogrobsewell/categories/powershell/>PowerShell</a>
+<a href=/blogrobsewell/categories/sql-server/>SQL Server</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/refreshing-a-sql-mirrored-database-using-powershell/>Refreshing A SQL Mirrored Database Using Powershell</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 25, 2014</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><p>SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. <a class=link href="http://msdn.microsoft.com/en-gb/library/ms189852.aspx?WT.mc_id=DP-MVP-5002693" target=_blank rel=noopener>You can read more about it on MSDN here</a> and <a class=link href=http://www.brentozar.com/archive/2013/07/database-mirroring-faq/ target=_blank rel=noopener>Jes Borland wrote a useful post answering many questions here</a></p><p>There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring. There are other scenarios but this post covers the automation of restoring a mirrored database from a backup.</p><p>I have mentioned before and no doubt I shall again, <a class=link href=http://www.johnsansom.com/the-best-database-administrators-automate-everything/ target=_blank rel=noopener>John Sansom wrote a great post about automation</a> and I am a strong follower of that principle.</p><p>To refresh a SQL mirror the following steps are required, there are some gotchas that you need to be aware of which I will discuss later</p><ul><li>remove mirroring</li><li>restore principle database from backup</li><li>perform a transaction log backup of the principle database</li><li>restore both backups on the mirror server with no recovery</li><li>recreate mirroring</li><li>resolve orphaned users</li><li>check mirroring status</li></ul><p>Regular blog followers will know that I prefer to use Powershell when I can (and where it is relevant to do so) and so I have used Powershell to automate all of the steps above</p><p>The script requires some variables to be set up at the beginning. You can easily change this and make the script into a function and call it if you desire, but for this post I shall consider the script as a standalone. The reasoning for this is that I imagine that it will be placed into a run book or stored for use in a repository for specific use and therefore reduces any pre-requisites for using it.</p><p>Set variables as follows, the last three variables set the types for the backup action type and device type and do not need to be altered.</p><pre><code>\# Set up some variables
+
+$PrincipalServer = '' # Enter Principal Server Name
+$MirrorServer = '' # Enter Mirror Server Name
+$DBName = '' # Enter Database Name
+$FileShare = '' # Enter FileShare with trailing slash
+$LocationReplace = $FileShare + $DBName + 'Refresh.bak'
+$LocationTran = $FileShare + $DBName + 'formirroring.trn'
+
+$PrincipalEndPoint = 'TCP://SERVERNAME:5022' # Change as required
+$MirrorEndpoint = 'TCP://SERVERNAME:5022' # Change as required
+$WitnessEndpoint = 'TCP://SERVERNAME:5022' # Change as required
+
+$Full = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Database
+$Tran = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Log
+$File = [Microsoft.SqlServer.Management.Smo.DeviceType]::File 
+</code></pre><p>After some error checking the first thing is to create server and database SMO objects</p><pre><code>\# Create Server objects $Principal = New-Object Microsoft.SQLServer.Management.SMO.Server $PrincipalServer $Mirror = New-Object Microsoft.SQLServer.Management.Smo.    server $MirrorServer
+#Create Database Objects
+$DatabaseMirror = $Mirror.Databases[$DBName]
+$DatabasePrincipal = $Principal.Databases[$DBName] 
+</code></pre><p>(Added Extra – Use New-ISESnippet to create a SMO Server Snippet and use CTRL + J to find it</p><pre><code>New-IseSnippet -Title SMO-Server -Description &quot;Create A SQL Server SMO Object&quot; -Text &quot;`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `$server&quot;
+</code></pre><h4 id=remove-mirroring>Remove Mirroring</h4><p>Before we can restore the database we need to remove mirroring</p><pre><code>$DatabasePrincipal.ChangeMirroringState([Microsoft.SqlServer.Management.Smo.MirroringOption]::Off)
+</code></pre><h4 id=restore-principle-database-from-backup>restore principle database from backup</h4><p>Once mirroring has been removed we can restore the database. <a class=link href=http://stuart-moore.com/category/31-days-of-sql-server-backup-and-restore-with-powershell/ target=_blank rel=noopener>Stuart Moore’s Great Series</a> provides all the code you need to backup and restore databases with Powershell. There is however a bug which can catch you out. Here’s the code</p><pre><code>$restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore|Out-Null
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationReplace,$File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.Devices.add($restoredevice)
+#Perform Restore
+$restore.sqlrestore($PrincipalServer)
+$restore.Devices.Remove($restoredevice)
+</code></pre><p>The bug is as follows, if your restore is going to take longer than 10 minutes and you are using an earlier version of SQL than SQL 2012 SP1 CU8 then you will find that the restore fails after 10 minutes. This is the default timeout. You may try to set the</p><pre><code>$srv.ConnectionContext.StatementTimeout
+</code></pre><p>Value to a larger value or 0 and this will work after SQL 2012 SP1 CU8 but prior to that you will still face the same error. The simple workaround is to use <a class=link href=http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894 target=_blank rel=noopener>Invoke-SQLCmd2</a> and to script the restore as follows</p><pre><code>#Set up Restore using refresh backup
+
+$restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationReplace,$File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.Devices.add($restoredevice)
+#Perform Restore
+$restore.sqlrestore($PrincipalServer) # if query time &amp;amp;lt; 600 seconds
+# $query = $restore.Script($PrincipalServer) # if using Invoke-SQLCMD2
+$restore.Devices.Remove($restoredevice)
+</code></pre><h4 id=perform-a-transaction-backup-of-the-principle-database>perform a transaction backup of the principle database</h4><p>We need to have a full and transaction log backup to set up mirroring. Again you may need to use the script method if your backup will take longer than 600 seconds.</p><pre><code>#Setup Trans Backup
+$Backup = New-Object Microsoft.SqlServer.Management.Smo.Backup|Out-Null
+$Full = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Database
+$Tran = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Log
+$File = [Microsoft.SqlServer.Management.Smo.DeviceType]::File
+$Backup.Action = $Tran
+$Backup.BackupSetDescription = “Log Backup of “ + $DBName
+$Backup.Database = $DBName
+$BackupDevice = New-Object –TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationTran,$File)|Out-Null
+$Backup.Devices.Add($BackupDevice)
+# Perform Backup
+$Backup.SqlBackup($PrincipalServer)
+# $query = $Backup.Script($PrincipalServer) # if query time &amp;amp;lt; 600 seconds
+$Backup.Devices.Remove($BackupDevice)
+
+# Invoke-Sqlcmd2 –ServerInstance $PrincipalServer –Database master –Query $query –ConnectionTimeout 0 # comment out if not used
+</code></pre><h4 id=restore-both-backups-on-the-mirror-server-with-no-recovery>Restore both backups on the mirror server with no recovery</h4><p>To complete the mirroring set up we need to restore the backups onto the mirror server with no recovery as follows</p><pre><code>#Set up Restore of Full Backup on Mirror Server
+$restore = New-Object -TypeName Microsoft.SqlServe r.Management.Smo.Restore|Out-Null
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationReplace,$File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.NoRecovery = $true
+$restore.Devices.add($restoredevice)
+$restore.sqlrestore($MirrorServer) # if query time &amp;amp;lt; 600 seconds
+# $query = $restore.Script($MirrorServer) # if using Invoke-SQLCMD2
+$restore.Devices.Remove($restoredevice)
+
+# Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+
+# Set up Restore of Log Backup on Mirror Server
+$restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore|Out-Null
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationTran,$File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.NoRecovery = $true
+$restore.Devices.add($restoredevice)
+$restore.sqlrestore($MirrorServer)
+$restore.Devices.Remove($restoredevice)
+</code></pre><h4 id=recreate-mirroring>Recreate mirroring</h4><p>You recreate mirroring in the same way as you would if you were using T-SQL simply add the principal endpoint to the mirror, and the mirror and witness endpoints to the principal</p><pre><code>#Recreate Mirroring
+$DatabaseMirror.MirroringPartner = $PrincipalEndPoint
+$DatabaseMirror.Alter()
+$DatabasePrincipal.MirroringPartner = $MirrorEndpoint
+$DatabasePrincipal.MirroringWitness = $WitnessEndpoint
+$DatabasePrincipal.Alter()
+</code></pre><h4 id=resolve-orphaned-users>Resolve orphaned users</h4><p>You will need to resolve any users and permissions on your destination servers. I do not know a way to do this with PowerShell and would be interested if anyone has found a way to replace the password or the SID on a user object, please contact me if you know.</p><p>Many people do this with the <a class=link href=http://support.microsoft.com/kb/918992 target=_blank rel=noopener>sp_rev_logins stored procedure</a> which will create the T-SQL for recreating the logins. However, Powershell cannot read the outputs of the message window where the script prints the script. If you know that your logins are staying static then run sp_rev_logins and store the output in a sql file and call it with Invoke-SQLCmd2</p><pre><code>$SQL = ‘’ #Path to File
+Invoke-Sqlcmd2 –ServerInstance $Server –Database master –InputFile $SQL
+</code></pre><p>The other option is to <a class=link href=http://dbadiaries.com/how-to-transfer-logins-to-another-sql-server-or-instance target=_blank rel=noopener>set up a SSIS package following this blog post</a> and call it from Powershell as follows</p><p>**2020 Edit ** - You should use <a class=link href=dbatools.io>dbatools</a> to do this</p><pre><code>Invoke-Command –ComputerName $Server –scriptblock {DTExec.exe /File “PATHTOPackage.dtsx”}
+</code></pre><p>This requires <a class=link href=http://technet.microsoft.com/en-us/magazine/ff700227.aspx target=_blank rel=noopener>Powershell Remoting</a> to have been set up on the server which may or may not be available to you in your environment.</p><p>IMPORTANT NOTE – The script does not include any methods for resolving orphaned users so you will need to test and then add your own solution to the script.</p><h4 id=check-mirroring-status>check mirroring status</h4><p>Lastly you want to check that the script has run successfully and that mirroring is synchronised (I am from the UK!!) To do this I check that time and file used for the last database backup <a class=link href=http://www.mssqltips.com/sqlservertip/1860/identify-when-a-sql-server-database-was-restored-the-source-and-backup-date/ target=_blank rel=noopener>using this script</a></p><pre><code>#Check that correct file and backup date used
+
+$query = &quot;SELECT TOP 1 [rs].[destination_database_name] as 'database',
+[rs].[restore_date] as 'restoredate',
+[bs].[backup_finish_date] as 'backuptime',
+[bmf].[physical_device_name] as 'Filename'
+FROM msdb..restorehistory rs
+INNER JOIN msdb..backupset bs
+ON [rs].[backup_set_id] = [bs].[backup_set_id]
+INNER JOIN msdb..backupmediafamily bmf
+ON [bs].[media_set_id] = [bmf].[media_set_id]
+ORDER BY [rs].[restore_date] DESC&quot;
+
+Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database msdb -Query $query |Format-Table -AutoSize –Wrap
+</code></pre><p>and that mirroring has synchronised using the following Powershell command</p><pre><code>$DatabasePrincipal | select Name, MirroringStatus, IsAccessible |Format-Table -AutoSize
+</code></pre><p>Depending on your needs you may add some error checking using the results of the above scripts. As I said at the top of the post, you can turn this script into a function and call it at will or add it to an Agent Job for regular scheduling or just kept in a folder ready to be run when required. The choice is yours but all usual rules apply. Don’t believe anything you read on this blog post, don’t run any scripts on production, test before running any scripts, understand what the code is doing before you run it or I am not responsible if you break anything</p><p>Here is the script</p><pre><code>&lt;# 
+.NOTES 
+    Name: Refresh Mirrored Database
+    Author: Rob Sewell  https://blog.robsewell.com
+    Requires: Invoke-SQLCMD2 (included)
+    Version History: 
+                    1.2 22/08/2014 
+.SYNOPSIS 
+    Refreshes a mirrored database
+.DESCRIPTION 
+    This script will refresh a mirrored database, recreate mirroring and chekc status of mirroring. 
+    Further details on the website
+    Requires the variables at the top of the script to be filled in
+    IMPORTANT - Orpahaned users are not resolved with this acript without additions. See blog post for options
+#&gt;  
+# Load Invoke-SQLCMD2
+
+
+#Load the assemblies the script requires
+[void][reflection.assembly]::LoadWithPartialName( &quot;Microsoft.SqlServer.Management.Common&quot; );
+[void][reflection.assembly]::LoadWithPartialName( &quot;Microsoft.SqlServer.SmoEnum&quot; );
+[void][reflection.assembly]::LoadWithPartialName( &quot;Microsoft.SqlServer.Smo&quot; );
+[void][reflection.assembly]::LoadWithPartialName( &quot;Microsoft.SqlServer.SmoExtended &quot; );
+[void][System.Reflection.Assembly]::LoadWithPartialName(&quot;Microsoft.SqlServer.ConnectionInfo&quot;) 
+[System.Reflection.Assembly]::LoadWithPartialName(&quot;System.Windows.Forms&quot;)|Out-Null
+
+# Set up some variables
+
+$PrincipalServer = '' # Enter Principal Server Name
+$MirrorServer = '' # Enter Mirror Server Name
+$DBName = '' # Enter Database Name
+$FileShare = '' # Enter FileShare with trailing slash
+$LocationReplace = $FileShare + $DBName + 'Refresh.bak'
+$LocationFUll = $FileShare + $DBName + 'formirroring.bak'
+$LocationTran = $FileShare + $DBName + 'formirroring.trn'
+
+$PrincipalEndPoint = 'TCP://SERVERNAME:5022' # Change as required
+$MirrorEndpoint = 'TCP://SERVERNAME:5022' # Change as required
+$WitnessEndpoint = 'TCP://SERVERNAME:5022' # Change as required
+
+$Full = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Database
+$Tran = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Log
+$File = [Microsoft.SqlServer.Management.Smo.DeviceType]::File
+
+###################### 
+&lt;# 
+.SYNOPSIS 
+Runs a T-SQL script. 
+.DESCRIPTION 
+Runs a T-SQL script. Invoke-Sqlcmd2 only returns message output, such as the output of PRINT statements when -verbose parameter is specified 
+.INPUTS 
+None 
+    You cannot pipe objects to Invoke-Sqlcmd2 
+.OUTPUTS 
+   System.Data.DataTable 
+.EXAMPLE 
+Invoke-Sqlcmd2 -ServerInstance &quot;MyComputer\MyInstance&quot; -Query &quot;SELECT login_time AS 'StartTime' FROM sysprocesses WHERE spid = 1&quot; 
+This example connects to a named instance of the Database Engine on a computer and runs a basic T-SQL query. 
+StartTime 
+----------- 
+2010-08-12 21:21:03.593 
+.EXAMPLE 
+Invoke-Sqlcmd2 -ServerInstance &quot;MyComputer\MyInstance&quot; -InputFile &quot;C:\MyFolder\tsqlscript.sql&quot; | Out-File -filePath &quot;C:\MyFolder\tsqlscript.rpt&quot; 
+This example reads a file containing T-SQL statements, runs the file, and writes the output to another file. 
+.EXAMPLE 
+Invoke-Sqlcmd2  -ServerInstance &quot;MyComputer\MyInstance&quot; -Query &quot;PRINT 'hello world'&quot; -Verbose 
+This example uses the PowerShell -Verbose parameter to return the message output of the PRINT command. 
+VERBOSE: hello world 
+.NOTES 
+Version History 
+v1.0   - Chad Miller - Initial release 
+v1.1   - Chad Miller - Fixed Issue with connection closing 
+v1.2   - Chad Miller - Added inputfile, SQL auth support, connectiontimeout and output message handling. Updated help documentation 
+v1.3   - Chad Miller - Added As parameter to control DataSet, DataTable or array of DataRow Output type 
+#&gt; 
+function Invoke-Sqlcmd2 { 
+    [CmdletBinding()] 
+    param( 
+        [Parameter(Position = 0, Mandatory = $true)] [string]$ServerInstance, 
+        [Parameter(Position = 1, Mandatory = $false)] [string]$Database, 
+        [Parameter(Position = 2, Mandatory = $false)] [string]$Query, 
+        [Parameter(Position = 3, Mandatory = $false)] [string]$Username, 
+        [Parameter(Position = 4, Mandatory = $false)] [string]$Password, 
+        [Parameter(Position = 5, Mandatory = $false)] [Int32]$QueryTimeout = 600, 
+        [Parameter(Position = 6, Mandatory = $false)] [Int32]$ConnectionTimeout = 15, 
+        [Parameter(Position = 7, Mandatory = $false)] [ValidateScript( {test-path $_})] [string]$InputFile, 
+        [Parameter(Position = 8, Mandatory = $false)] [ValidateSet(&quot;DataSet&quot;, &quot;DataTable&quot;, &quot;DataRow&quot;)] [string]$As = &quot;DataRow&quot; 
+    ) 
+ 
+    if ($InputFile) { 
+        $filePath = $(resolve-path $InputFile).path 
+        $Query = [System.IO.File]::ReadAllText(&quot;$filePath&quot;) 
+    } 
+ 
+    $conn = new-object System.Data.SqlClient.SQLConnection 
+      
+    if ($Username) 
+    { $ConnectionString = &quot;Server={0};Database={1};User ID={2};Password={3};Trusted_Connection=False;Connect Timeout={4}&quot; -f $ServerInstance, $Database, $Username, $Password,     $ConnectionTimeout } 
+    else 
+    { $ConnectionString = &quot;Server={0};Database={1};Integrated Security=True;Connect Timeout={2}&quot; -f $ServerInstance, $Database, $ConnectionTimeout } 
+ 
+    &amp;amp;n bsp; $conn.ConnectionString = $ConnectionString 
+     
+    #Following EventHandler is used for PRINT and RAISERROR T-SQL statements. Executed when -Verbose parameter specified by caller 
+    if ($PSBoundParameters.Verbose) { 
+        $conn.FireInfoMessageEventOnUserErrors = $true 
+        $handler = [System.Data.SqlClient.SqlInfoMessageEventHandler] {Write-Verbose &quot;$($_)&quot;} 
+        $conn.add_InfoMessage($handler) 
+    } 
+     
+    $conn.Open() 
+    $cmd = new-object system.Data.SqlClient.SqlCommand($Query, $conn) 
+    $cmd.CommandTimeout = $QueryTimeout 
+    $ds = New-Object system.Data.DataSet 
+    $da = New-Object system.Data.SqlClient.SqlDataAdapter($cmd) 
+    [void]$da.fill($ds) 
+    $conn.Close() 
+    switch ($As) { 
+        'DataSet' { Write-Output ($ds) } 
+        'DataTable' { Write-Output ($ds.Tables) } 
+        'DataRow' { Write-Output ($ds.Tables[0]) } 
+    } 
+ 
+} #Invoke-Sqlcmd2
+
+# Check for existence of Backup file with correct name
+If (!(Test-Path $LocationReplace)) {
+    Write-Output &quot; There is no file called &quot; 
+    Write-Output $LocationReplace
+    Write-Output &quot;Please correct and re-run&quot;
+    break
+}
+
+# Remove Old Backups
+if (Test-Path $locationFull) {
+    Remove-Item $LocationFUll -Force
+}
+
+if (Test-Path $locationTran) {
+    Remove-Item $LocationTran -Force
+}
+
+# Create Server objects
+$Principal = New-Object Microsoft.SQLServer.Management.SMO.Server $PrincipalServer
+$Mirror = New-Object Microsoft.SQLServer.Management.Smo.server $MirrorServer
+
+#Create Database Objects
+$DatabaseMirror = $Mirror.Databases[$DBName]
+$DatabasePrincipal = $Principal.Databases[$DBName]
+
+# If database is on Mirror server fail it over to Principal
+if ($DatabasePrincipal.IsAccessible -eq $False) {
+    $DatabaseMirror.ChangeMirroringState([Microsoft.SqlServer.Management.Smo.MirroringOption]::Failover) 
+}
+
+# remove mirroring
+
+$DatabasePrincipal.ChangeMirroringState([Microsoft.SqlServer.Management.Smo.MirroringOption]::Off)
+
+#Set up Restore using refresh backup
+
+$restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationReplace, $File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.Devices.add($restoredevice)
+#Perform Restore
+$restore.sqlrestore($PrincipalServer) # if query time&lt; 600 seconds
+# $query = $restore.Script($PrincipalServer) # if using Invoke-SQLCMD2
+$restore.Devices.Remove($restoredevice)
+
+# Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+
+# Set up Full Backup
+$Backup = New-Object Microsoft.SqlServer.Management.Smo.Backup
+$Backup.Action = $Full
+$Backup.BackupSetDescription = &quot;Full Backup of &quot; + $DBName
+$Backup.Database = $DatabasePrincipal.Name
+$BackupDevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationFull, $File)
+$Backup.Devices.Add($BackupDevice)
+# Perform Backup
+$Backup.SqlBackup($PrincipalServer)
+# $query = $Backup.Script($PrincipalServer) # if query time&lt; 600 seconds
+$Backup.Devices.Remove($BackupDevice)
+
+# Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+
+ 
+#Setup Trans Backup
+$Backup = New-Object Microsoft.SqlServer.Management.Smo.Backup|Out-Null
+$Full = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Database
+$Tran = [Microsoft.SQLServer.Management.SMO.BackupActionType]::Log
+$File = [Microsoft.SqlServer.Management.Smo.DeviceType]::File
+$Backup.Action = $Tran
+$Backup.BackupSetDescription = &quot;Log Backup of &quot; + $DBName
+$Backup.Database = $DBName
+$BackupDevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationTran, $File)|Out-Null
+$Backup.Devices.Add($BackupDevice)
+# Perform Backup
+$Backup.SqlBackup($PrincipalServer)
+# $query = $Backup.Script($PrincipalServer) # if query time&lt; 600 seconds
+$Backup.Devices.Remove($BackupDevice)
+
+# Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+
+#Set up Restore of Full Backup on Mirror Server
+$restore = New-Object -TypeName Microsoft.SqlServe r.Management.Smo.Restore|Out-Null
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationFUll, $File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.NoRecovery = $true
+$restore.Devices.add($restoredevice)
+$restore.sqlrestore($MirrorServer) # if query time&lt; 600 seconds
+# $query = $restore.Script($MirrorServer) # if using Invoke-SQLCMD2
+$restore.Devices.Remove($restoredevice)
+
+# Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+
+
+# Set up Restore of Log Backup on Mirror Server
+$restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore|Out-Null
+$restoredevice = New-Object -TypeName Microsoft.SQLServer.Management.Smo.BackupDeviceItem($LocationTran, $File)|Out-Null
+$restore.Database = $DBName
+$restore.ReplaceDatabase = $True
+$restore.NoRecovery = $true
+$restore.Devices.add($restoredevice)
+$restore.sqlrestore($MirrorServer)
+$restore.Devices.Remove($restoredevice)
+
+#Recreate Mirroring
+$DatabaseMirror.MirroringPartner = $PrincipalEndPoint
+$DatabaseMirror.Alter()
+$DatabasePrincipal.MirroringPartner = $MirrorEndpoint
+$DatabasePrincipal.MirroringWitness = $WitnessEndpoint
+$DatabasePrincipal.Alter()
+
+# Resolve Orphaned Users if needed
+
+
+#Check that correct file and backup date used
+
+$query = &quot;SELECT TOP 20 [rs].[destination_database_name] as 'database', 
+[rs].[restore_date] as 'restoredate', 
+[bs].[backup_finish_date] as 'backuptime', 
+[bmf].[physical_device_name] as 'Filename'
+FROM msdb..restorehistory rs
+INNER JOIN msdb..backupset bs
+ON [rs].[backup_set_id] = [bs].[backup_set_id]
+INNER JOIN msdb..backupmediafamily bmf 
+ON [bs].[media_set_id] = [bmf].[media_set_id] 
+ORDER BY [rs].[restore_date] DESC&quot;
+
+Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database msdb -Query $query |Format-Table -AutoSize -Wrap
+
+$DatabasePrincipal | select Name, MirroringStatus, IsAccessible |Format-Table -AutoSize
+</code></pre></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/mirroring/>mirroring</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/dbatools/>dbatools</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/07/image-11.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/07/image-11.png></div><div class=article-details><h2 class=article-title>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</h2></div></a></article><article><a href=/blogrobsewell/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/><div class=article-details><h2 class=article-title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/10/image-7.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/10/image-7.png></div><div class=article-details><h2 class=article-title>Getting SQL Server installation date with PowerShell using dbatools</h2></div></a></article><article><a href=/blogrobsewell/blog/meap-meap-#dbatoolsmol-live-book-edition/><div class=article-details><h2 class=article-title>MEAP MEAP – #dbatoolsMoL – Live Book edition</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/04/image-125.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/04/image-125.png></div><div class=article-details><h2 class=article-title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,258 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Following on from my previous post about parsing XML where I used the information from Steve Jones blog post to get information from the SQL Saturday web site I thought that this information and script may be useful for others performing the same task.
+Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back."><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="PowerShelling SQL Saturday Sessions to the Guidebook app"><meta property="og:description" content="Following on from my previous post about parsing XML where I used the information from Steve Jones blog post to get information from the SQL Saturday web site I thought that this information and script may be useful for others performing the same task.
+Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automate"><meta property="article:tag" content="Excel"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="SQL Community"><meta property="article:tag" content="Community"><meta property="article:tag" content="SQL PASS"><meta property="article:tag" content="SQL Saturday Exeter"><meta property="article:tag" content="XML"><meta property="article:published_time" content="2015-04-07T00:00:00+00:00"><meta property="article:modified_time" content="2015-04-07T00:00:00+00:00"><meta name=twitter:title content="PowerShelling SQL Saturday Sessions to the Guidebook app"><meta name=twitter:description content="Following on from my previous post about parsing XML where I used the information from Steve Jones blog post to get information from the SQL Saturday web site I thought that this information and script may be useful for others performing the same task.
+Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/powershell/>PowerShell</a>
+<a href=/blogrobsewell/categories/sql-saturday-exeter/>SQL Saturday Exeter</a>
+<a href=/blogrobsewell/categories/community/>Community</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/>PowerShelling SQL Saturday Sessions to the Guidebook app</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Apr 07, 2015</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>5 minute read</time></div></footer></div></header><section class=article-content><p>Following on from my <a class=link href=http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/ title="Parsing XML Child Nodes and Converting to DateTime with PowerShell" target=_blank rel=noopener>previous pos</a>t about parsing XML where I used the information from <a class=link href=https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/ target=_blank rel=noopener>Steve Jones blog post</a> to get information from the <a class=link href=https://www.sqlsaturday.com/ target=_blank rel=noopener>SQL Saturday web site</a> I thought that this information and script may be useful for others performing the same task.</p><ol><li><p>Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.</p><p>We are looking at using <a class=link href=https://guidebook.com/ target=_blank rel=noopener>the Guidebook app</a> to provide an app for our attendees with all the session details for <a class=link href=https://www.sqlsaturday.com/372 target=_blank rel=noopener>SQL Saturday Exeter</a></p><p>The Guidebook admin website requires the data for the sessions in a certain format. You can choose CSV or XLS.</p><p>In the admin portal you can download the template</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg?w=300" loading=lazy alt=down></a></p><p>which gives an Excel file like this</p></li></ol><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg?w=300" loading=lazy alt=-excel></a></p><p> </p><p>So now all we need to do is to fill it with data.</p><p>I have an Excel Object Snippet which I use to create new Excel Objects when using PowerShell to manipulate Excel. Here it is for you. Once you have run the code you will be able to press CTRL + J and be able to choose the New Excel Object Snippet any time.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$snippet = @{
+</span></span><span class=line><span class=cl>Title = &#34;New Excel Object&#34;;
+</span></span><span class=line><span class=cl>Description = &#34;Creates a New Excel Object&#34;;
+</span></span><span class=line><span class=cl>Text = @&#34;
+</span></span><span class=line><span class=cl># Create a .com object for Excel
+</span></span><span class=line><span class=cl>\`$xl = new-object -comobject excel.application
+</span></span><span class=line><span class=cl>\`$xl.Visible = \`$true # Set this to False when you run in production
+</span></span><span class=line><span class=cl>\`$wb = \`$xl.Workbooks.Add() # Add a workbook
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>\`$ws = \`$wb.Worksheets.Item(1) # Add a worksheet
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>\`$cells=\`$ws.Cells
+</span></span><span class=line><span class=cl>&lt;#
+</span></span><span class=line><span class=cl>Do Some Stuff
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>perhaps
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>\`$cells.item(\`$row,\`$col)=&#34;Server&#34;
+</span></span><span class=line><span class=cl>\`$cells.item(\`$row,\`$col).font.size=16
+</span></span><span class=line><span class=cl>\`$Cells.item(\`$row,\`$col).Columnwidth = 10
+</span></span><span class=line><span class=cl>\`$col++
+</span></span><span class=line><span class=cl>#&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>\`$wb.Saveas(&#34;C:\temp\Test\`$filename.xlsx&#34;)
+</span></span><span class=line><span class=cl>\`$xl.quit()
+</span></span><span class=line><span class=cl>&#34;@
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>New-IseSnippet @snippet
+</span></span></code></pre></td></tr></table></div></div><p>I needed to change this to open the existing file by using</p><p><code>$wb = $xl.Workbooks.Open($GuideBookPath)</code></p><p>In the more help tab of the Excel workbook it says</p><blockquote></blockquote><p>So we need to do some manipulation of the data we gather. As before I selected the information from the XML as follows</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$Speaker = @{Name=&#34;Speaker&#34;; Expression = {$_.speakers.speaker.name}}
+</span></span><span class=line><span class=cl>$Room = @{Name=&#34;Room&#34;; Expression = {$_.location.name}}
+</span></span><span class=line><span class=cl>$startTime = @{Name=&#34;StartTime&#34;; Expression = {[datetime]($_.StartTime)}}
+</span></span><span class=line><span class=cl>$Endtime = @{Name =&#34;EndTime&#34;; Expression = {[datetime]($_.EndTime)}}
+</span></span><span class=line><span class=cl>$Talks = $Sessions.event|Where-Object {$_.title -ne &#39;Coffee Break&#39; -and $_.title -ne &#39;Room Change&#39; -and $_.title -ne &#39;Lunch Break&#39; -and $_.title -ne &#39;Raffle and Cream Tea&#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+</span></span></code></pre></td></tr></table></div></div><p>I then looped through the $Talks array and wrote each line to Excel like this</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>foreach ($Talk in $Talks)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>$Date = $Talk.StartTime.ToString(&#39;MM/dd/yyyy&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$Start = $talk.StartTime.ToString(&#39;hh:mm tt&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$End = $Talk.Endtime.ToString(&#39;hh:mm tt&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$Title = $Talk.Title
+</span></span><span class=line><span class=cl>$Description = $Talk.Description
+</span></span><span class=line><span class=cl>$Room = $Talk.Room
+</span></span><span class=line><span class=cl>$col = 2
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Title
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Date
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Start
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $End
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Room
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Description
+</span></span><span class=line><span class=cl>$row++
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>I know that I converted the String to DateTime and then back to a String again but that was the easiest (quickest) way to obtain the correct format for the Excel file</p><p>Then to finish save the file and quit Excel</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$wb.Save()
+</span></span><span class=line><span class=cl>$xl.quit()
+</span></span></code></pre></td></tr></table></div></div><p>Then you upload the file in the Guidebook admin area <a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg?w=300" loading=lazy alt=import></a></p><p>wait for the email confirmation and all your sessions are available in the guidebook</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg?w=300" loading=lazy alt=sched></a></p><p>I hope that is useful to others. The full script is below</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>## From http://www.sqlservercentral.com/blogs/steve_jones/2015/01/26/downloading-sql-saturday-data/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$i = 372
+</span></span><span class=line><span class=cl>$baseURL = “http://www.sqlsaturday.com/eventxml.aspx?sat=”
+</span></span><span class=line><span class=cl>$DestinationFile = “E:\SQLSatData\SQLSat” + $i + “.xml”
+</span></span><span class=line><span class=cl>$GuideBookPath = &#39;C:\temp\Guidebook_Schedule_Template.xls&#39;
+</span></span><span class=line><span class=cl>$sourceURL = $baseURL + $i
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$doc = New-Object System.Xml.XmlDocument
+</span></span><span class=line><span class=cl>$doc.Load($sourceURL)
+</span></span><span class=line><span class=cl>$doc.Save($DestinationFile)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$Sessions = $doc.GuidebookXML.events
+</span></span><span class=line><span class=cl>$Speaker = @{Name=&#34;Speaker&#34;; Expression = {$_.speakers.speaker.name}}
+</span></span><span class=line><span class=cl>$Room = @{Name=&#34;Room&#34;; Expression = {$_.location.name}}
+</span></span><span class=line><span class=cl>$startTime = @{Name=&#34;StartTime&#34;; Expression = {[datetime]($_.StartTime)}}
+</span></span><span class=line><span class=cl>$Endtime = @{Name =&#34;EndTime&#34;; Expression = {[datetime]($_.EndTime)}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$Talks = $Sessions.event|Where-Object {$_.title -ne &#39;Coffee Break&#39; -and $_.title -ne &#39;Room Change&#39; -and $_.title -ne &#39;Lunch Break&#39; -and $_.title -ne &#39;Raffle and Cream Tea&#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Create a .com object for Excel
+</span></span><span class=line><span class=cl>$xl = new-object -comobject excel.application
+</span></span><span class=line><span class=cl>$xl.Visible = $true # Set this to False when you run in production
+</span></span><span class=line><span class=cl>$wb = $xl.Workbooks.Open($GuideBookPath)
+</span></span><span class=line><span class=cl>$ws = $wb.Worksheets.item(1)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$cells=$ws.Cells
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$cells.item(2,1) = &#39;&#39; # To clear that entry
+</span></span><span class=line><span class=cl>$cells.item(3,1) = &#39;&#39; # To clear that entry
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$col = 2
+</span></span><span class=line><span class=cl>$row = 2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>foreach ($Talk in $Talks)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>$Date = $Talk.StartTime.ToString(&#39;MM/dd/yyyy&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$Start = $talk.StartTime.ToString(&#39;hh:mm tt&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$End = $Talk.Endtime.ToString(&#39;hh:mm tt&#39;) ## to put the info in the right format
+</span></span><span class=line><span class=cl>$Title = $Talk.Title
+</span></span><span class=line><span class=cl>$Description = $Talk.Description
+</span></span><span class=line><span class=cl>$Room = $Talk.Room
+</span></span><span class=line><span class=cl>$col = 2
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Title
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Date
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Start
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $End
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Room
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$col ++
+</span></span><span class=line><span class=cl>$cells.item($row,$col) = $Description
+</span></span><span class=line><span class=cl>$row++
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$wb.Save()
+</span></span><span class=line><span class=cl>$xl.quit()
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automate/>automate</a>
+<a href=/blogrobsewell/tags/excel/>Excel</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/sql-community/>SQL Community</a>
+<a href=/blogrobsewell/tags/community/>community</a>
+<a href=/blogrobsewell/tags/sql-pass/>SQL PASS</a>
+<a href=/blogrobsewell/tags/sql-saturday-exeter/>SQL Saturday Exeter</a>
+<a href=/blogrobsewell/tags/xml/>XML</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/blogrobsewell/blog/parsing-xml-child-nodes-and-converting-to-datetime-with-powershell/><div class=article-details><h2 class=article-title>Parsing XML Child Nodes and Converting to DateTime with PowerShell</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/><div class=article-image><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80" loading=lazy data-key data-hash="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80"></div><div class=article-details><h2 class=article-title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/#tsql2sday-nomnomnomnomnom/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg></div><div class=article-details><h2 class=article-title>#TSQL2sDay – NomNomNomNomNom</h2></div></a></article><article><a href=/blogrobsewell/blog/enterprise-strategies-a-#tsql2sday-post/><div class=article-details><h2 class=article-title>Enterprise Strategies - A #TSQL2sDay post</h2></div></a></article><article><a href=/blogrobsewell/blog/use-twitter-to-get-#powershell-help/><div class=article-details><h2 class=article-title>Use Twitter to get #PowerShell help</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

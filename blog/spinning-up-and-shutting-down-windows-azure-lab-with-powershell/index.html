@@ -1,0 +1,408 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="So at SQL Bits I went to Chris Testa-O’Neill’s session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!"><title>Spinning up and shutting down Windows Azure Lab with Powershell</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Spinning up and shutting down Windows Azure Lab with Powershell"><meta property="og:description" content="So at SQL Bits I went to Chris Testa-O’Neill’s session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!"><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="PowerShell"><meta property="article:published_time" content="2013-05-14T00:00:00+00:00"><meta property="article:modified_time" content="2013-05-14T00:00:00+00:00"><meta name=twitter:title content="Spinning up and shutting down Windows Azure Lab with Powershell"><meta name=twitter:description content="So at SQL Bits I went to Chris Testa-O’Neill’s session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/azure/>azure</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/>Spinning up and shutting down Windows Azure Lab with Powershell</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>May 14, 2013</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><p>So at SQL Bits I went to <a class=link href=http://sqlbits.com/Speakers/Chris_Testa-O_Neill target=_blank rel=noopener>Chris Testa-O’Neill’s</a> session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!!</p><p>So I looked at <a class=link href=http://www.windowsazure.com/en-us/ target=_blank rel=noopener>Windows Azure</a> as a means of having some servers to play with. After watching <a class=link href=http://blogs.msdn.com/b/plankytronixx/archive/2013/03/19/video-explanation-of-pop-up-labs-in-the-cloud.aspx target=_blank rel=noopener>this video</a> and then <a class=link href=http://channel9.msdn.com/Series/Windows-Azure-Virtual-Machines-and-Networking-Tutorials/Creating-Windows-Azure-Virtual-Machines-with-PowerShell target=_blank rel=noopener>this video</a> I took the plunge and dived in.</p><p>After setting up my account I read a few blogs about Powershell and Windows Azure.</p><p><a class=link href=http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/ target=_blank rel=noopener>http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/</a></p><p>Note – Here I only spin up extra small instances and don’t configure SQL as per Microsoft’s recommendations. I am only using these VMs for learning and talking at my user group your needs may be different</p><p>First you’ll need <a class=link href=http://www.microsoft.com/web/downloads/platform.aspx target=_blank rel=noopener>Microsoft Web Platform Installer</a>. Then download and install Windows Azure PowerShell,</p><pre><code>Import-Module c:\Program Files\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1
+</code></pre><p>This gives you all the Windows Azure Powershell Cmdlets.</p><p><code>Get-AzurePublishSettingsFile</code> which will give you a download for a file.  PowerShell will use this to control your Windows Azure so although you need it now, keep it safe and probably out of your usual directories so it doesn’t get compromised.</p><p><code>Import-AzurePublishSettingsFile</code> and the file path to import it into Powershell.</p><p><code>Get-AzureSubscription</code> to see the results and note the subscription name.</p><p>Now we create a storage account</p><pre><code>New-AzureStorageAccount -StorageAccountName chooseaname -label 'a label' -Description 'The Storage Account for the Lab Spin Up and Down' -Location 'West Europe'
+</code></pre><p><code>Get-AzureLocation </code>will show you the available locations if you want a different one.I then set the storage account to be default for my subscription</p><pre><code>Set-AzureSubscription -SubscriptionName 'Subscription Name from Earlier' -CurrentStorageAccount 'theoneyouchose'
+</code></pre><p>I spent a couple of days sorting out the following scripts. They set up three SQL Servers, configure them to allow SSMS, Powershell and RDP connections and also remove them all. The reasoning behind this is that you will be charged for servers even when they are turned off</p><p>First we set some variables</p><pre><code>$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2' 
+$SQL3 = 'SQL3' 
+$size = 'ExtraSmall' 
+$AdminUser = 'ChoosePCAdminName' 
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose' 
+$Location = 'West Europe'
+</code></pre><p>To choose an image run <code>Get-AzureVMImage|select name</code> and pick the one for you. I chose a size of extra small as it is cheaper. As I won’t be pushing the servers very hard I don’t need any extra grunt. Set up a service the first time and use the location switch but then to use the same service again remove the location switch otherwise you will get an error stating DNS name already in use which is a little confusing until you know.</p><pre><code>$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image | 
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows | 
+Add-AzureEndpoint -Name &quot;SQL&quot; -Protocol &quot;tcp&quot; -PublicPort 57502 -LocalPort 1433| 
+Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986\
+</code></pre><p>This creates a VM object and adds two endpoints for the server, one for Powershell and one for SSMS. When you provision more than one server you will need to make sure you use a different Public Port for each server otherwise you will get an error. You will need to note which server has which port when you need to connect with SSMS.</p><p>Once you have your VM object just pass it to New-AzureVM as shown</p><pre><code>New-AzureVM -ServiceName $Service -VMs $vm
+</code></pre><p>Providing you have no errors you can then just wait until you see this.</p><p><a class=link href=https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb1.png target=_blank rel=noopener><img src=https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb_thumb.png loading=lazy alt=image_thumb></a></p><p>It will take a few minutes. Long enough to get a cuppa. Even then you won’t be able to connect straightaway as Azure will be provisioning the server still.</p><p>The next bit of the script downloads the RDP shortcut to a folder on the desktop and assigns a variable for the clean up script. I use this because the next time you spin up a server it may not use exactly the same port for RDP.</p><pre><code>$SQL1RDP = &quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&quot; 
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP 
+Invoke-Expression $SQL1RDP
+</code></pre><p>The <code>Invoke-Expression</code> will open up a RDP connection but unless you have gone to get a cuppa I would check in your management portal before trying to connect as the server may still be provisioning. In fact,I would go to your Windows Azure Management Portal and check your virtual machine tab where you will see your VMs being provisioned</p><p>Now you have three servers but to be able to connect to them from your desktop and practice managing them you still need to do a bit of work. RDP to each server run the following script in Powershell.</p><pre><code># Configure PowerShell Execution Policy to Run all Scripts – It’s a one time Progress 
+Set-ExecutionPolicy –ExecutionPolicy Unrestricted 
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any 
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any 
+netsh advfirewall firewall set rule group=&quot;Remote Administration&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Remote Service Management&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Performance Logs and Alerts&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Remote Event Log Management&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Remote Scheduled Tasks Management&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Remote Volume Management&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Remote Desktop&quot; new enable=yes 
+netsh advfirewall firewall set rule group=&quot;Windows Firewall Remote Management&quot; new enable =yes 
+netsh advfirewall firewall set rule group=&quot;windows management instrumentation (wmi)&quot; new enable =yes\
+</code></pre><p>I use netsh advfirewall as I find it easy and I understand it. I know you can do it with <code>Set-NetFirewallProfile</code> but that’s the beauty of Powershell you can still use all your old cmd knowledge as well. This will allow you to remote manage the servers. You can do it from your laptop with the creation of some more endpoints but I just use one server as a management server for my learning.</p><p>The last part of the script changes SQL to Mixed authentication mode and creates a SQL user with sysadmin and restarts the SQL service on each server and that’s it. Its ready to go.</p><p>Open up SSMS on your desktop and connect to <code>YourServiceName.Cloudapp.Net, PortNumber</code> (57500-5702 in this example)
+To remove all of the implementation run the code that is commented out in steps. First it assigns a variable to each VHD, then it removes the VM. You should then wait a while before removing the VHDs as it takes a few minutes to remove the lease and finally remove the RDP shortcuts as next time they will be different.</p><pre><code>&lt;# 
+.NOTES 
+    Name: CreateLab.ps1 
+    Author: Rob Sewell https://blog.robsewell.com
+    Requires: Get the Windows Azures CmdLets then run this
+    Version History: 
+                    Added New Header 23 August 2014
+    
+.SYNOPSIS 
+	This script will create 3 Windows Azure SQL Servers and open up RDP connections
+	ready for use. There is also the scripts to remove the Windows Azure Objects to save on
+	usage costs
+    
+.DESCRIPTION 
+    
+.PARAMETER 
+    
+.PARAMETER 
+
+.PARAMETER 
+
+.EXAMPLE 
+#&gt; 
+
+
+# Get the Subscription File and Import it
+Get-AzurePublishSettingsFile 
+
+Import-AzurePublishSettingsFile FilepathtoPublishSettingsFile
+
+&lt;# Run this once to set up a Storage Account
+New-AzureStorageAccount -StorageAccountName storageaccountname -location 'West Europe' -Label 'Storage Account for My Lab'
+#&gt;
+
+Get-AzureSubscription #Note the name
+
+#Set the storage account to the subscription
+Set-AzureSubscription -SubscriptionName SubscriptionName -CurrentStorageAccount storageaccountname
+
+
+#Some variables
+
+# Use Get-AzureVMimage to find the one you want ie Get-AzureVMImage | where { ($_.ImageName -like &quot;*SQL*&quot;) }|select ImageName 
+
+$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2'
+$SQL3 = 'SQL3'
+$size = 'ExtraSmall'
+$AdminUser = 'ChoosePCAdminName'
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose'
+$Location = 'West Europe'
+
+&lt;# Run this the first time to create a Service
+
+New-AzureService -ServiceName $Service  -Location $Location -Label 'SQLDBA with a Beard Service' 
+
+#&gt;
+
+#Configure the VMs
+
+$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
+  Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows|
+  Add-AzureEndpoint -Name &quot;SQL&quot; -Protocol &quot;tcp&quot; -PublicPort 57500 -LocalPort 1433 
+
+
+$vm2 = New-AzureVMConfig -Name $SQL2 -InstanceSize $size -ImageName $image |
+  Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+    Add-AzureEndpoint -Name &quot;SQL&quot; -Protocol &quot;tcp&quot; -PublicPort 57501 -LocalPort 1433
+
+
+$vm3 = New-AzureVMConfig -Name $SQL3 -InstanceSize $size -ImageName $image |
+  Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+    Add-AzureEndpoint -Name &quot;SQL&quot; -Protocol &quot;tcp&quot; -PublicPort 57502 -LocalPort 1433| 
+    Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986
+
+#Provision the VMs
+
+New-AzureVM -ServiceName $Service -VMs $vm, $vm2,$vm3 
+
+# Get the RDP Files
+
+$SQL1RDP = &quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&quot;
+$SQL2RDP = &quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL2.rdp&quot;
+$SQL3RDP = &quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL3.rdp&quot;
+
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL2 -LocalPath $SQL2RDP 
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL3 -LocalPath $SQL3RDP
+
+# Open the RDP Fies - Check the machine is up in your Management Portal
+
+Invoke-Expression $SQL1RDP
+Invoke-Expression $SQL2RDP
+Invoke-Expression $SQL3RDP
+
+# Now run the SetupVM script for each server
+
+&lt;# 
+
+This is the clean up script to remove the servers and services
+
+Run this first
+
+ $SQL1Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL1}
+ $SQL2Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL2}
+ $SQL3Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL3}
+
+#Then This
+
+    Remove-AzureVM -Name $SQL1 -ServiceName $Service
+    Remove-AzureVM -Name $SQL2 -ServiceName $Service
+    Remove-AzureVM -Name $SQL3 -ServiceName $Service
+
+Then wait a while and run this
+
+ $SQL1Disk|Remove-AzureDisk -DeleteVHD
+ $SQL2Disk|Remove-AzureDisk -DeleteVHD
+ $SQL3Disk|Remove-AzureDisk -DeleteVHD
+
+  #Remove-AzureService $Service
+
+  Get-ChildItem &quot;$ENV:userprofile\Desktop\Azure\RDP\*.rdp&quot;|Remove-Item
+
+  #&gt;
+
+  &lt;# 
+
+  This is the clean up script for variables
+
+    
+    Remove-Variable [a..z]* -Scope Global 
+    Remove-Variable [1..9]* -Scope Global 
+
+   #&gt;
+   
+.NOTES 
+    Name: SetUpVMSQL1.ps1 
+    Author: Rob Sewell https://blog.robsewell.com
+    Requires: 
+    Version History: 
+                    Added New Header 23 August 2014
+    
+.SYNOPSIS 
+ 	This script will set up the SQL1 VM ready for use and enable SQL Authentication
+	Add a user called SQLAdmin with a password of P@ssw0rd
+	Restart SQL Service.Run on SQL1
+.DESCRIPTION 
+    
+.PARAMETER 
+    
+.PARAMETER 
+
+.PARAMETER 
+
+.EXAMPLE 
+#&gt; 
+
+    # Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+    Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&quot;Remote Administration&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Service Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Performance Logs and Alerts&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Event Log Management&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Scheduled Tasks Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Volume Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Desktop&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Windows Firewall Remote Management&quot; new enable =yes
+netsh advfirewall firewall set rule group=&quot;windows management instrumentation (wmi)&quot; new enable =yes
+
+    # To Load SQL Server Management Objects into PowerShell
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+
+SQLPS
+
+$Name = 'SQL1'
+
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&quot;
+
+
+Invoke-Sqlcmd -ServerInstance $Name  -Database master -Query &quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+
+&quot;
+get-Service -ComputerName $Name  -Name MSSQLSERVER|Restart-Service -force\
+
+&lt;# 
+.NOTES 
+    Name: SetUpVMSQL2.ps1 
+    Author: Rob Sewell https://blog.robsewell.com
+    Requires: 
+    Version History: 
+                    Added New Header 23 August 2014
+    
+.SYNOPSIS 
+    
+.DESCRIPTION 
+    
+.PARAMETER 
+    
+.PARAMETER 
+
+.PARAMETER 
+
+.EXAMPLE 
+#&gt; 
+
+#############################################################################################
+#
+# NAME: SetupVMSQL2.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL1 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# Restart SQL Service
+# ------------------------------------------------------------------------
+
+   
+   # Run on SQL2
+
+    # Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+    Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&quot;Remote Administration&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Service Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Performance Logs and Alerts&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Event Log Management&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Scheduled Tasks Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Volume Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Desktop&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Windows Firewall Remote Management&quot; new enable =yes
+netsh advfirewall firewall set rule group=&quot;windows management instrumentation (wmi)&quot; new enable =yes
+
+    # To Load SQL Server Management Objects into PowerShell
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+
+SQLPS
+
+$Name = 'SQL2'
+
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&quot;
+
+
+Invoke-Sqlcmd -ServerInstance $Name  -Database master -Query &quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+
+&quot;
+get-Service -ComputerName $Name  -Name MSSQLSERVER|Restart-Service -force\
+
+&lt;# 
+.NOTES 
+    Name: SetUpVMSQL3.ps1 
+    Author: Rob Sewell https://blog.robsewell.com
+    Requires: 
+    Version History: 
+                    Added New Header 23 August 2014
+    
+.SYNOPSIS 
+    
+.DESCRIPTION 
+    
+.PARAMETER 
+    
+.PARAMETER 
+
+.PARAMETER 
+
+.EXAMPLE 
+#&gt; 
+
+#############################################################################################
+#
+# NAME: SetupVMSQL3.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL3 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# and enable PS Remoting
+# Restart SQL Service
+# ------------------------------------------------------------------------
+
+   
+   # Run on SQL3
+
+    # Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+    Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+
+
+
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&quot;Remote Administration&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;File and Printer Sharing&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Service Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Performance Logs and Alerts&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Event Log Management&quot; new enable=yes
+Netsh advfirewall firewall set rule group=&quot;Remote Scheduled Tasks Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Volume Management&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Remote Desktop&quot; new enable=yes
+netsh advfirewall firewall set rule group=&quot;Windows Firewall Remote Management&quot; new enable =yes
+netsh advfirewall firewall set rule group=&quot;windows management instrumentation (wmi)&quot; new enable =yes
+
+#Extra one for PS Remoting
+netsh advfirewall firewall add rule name=&quot;Port 5986&quot; dir=in action=allow protocol=TCP localport=5986
+
+    # To Load SQL Server Management Objects into PowerShell
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�)  | out-null
+    [System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+
+SQLPS
+
+$Name = 'SQL3'
+
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&quot;
+
+
+Invoke-Sqlcmd -ServerInstance $Name  -Database master -Query &quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+
+&quot;
+get-Service -ComputerName $Name  -Name MSSQLSERVER|Restart-Service -force
+Enable-PSRemoting -force
+</code></pre><p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine</p></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/powershell/>PowerShell</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/blogrobsewell/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/><div class=article-details><h2 class=article-title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services & PowerBi</h2></div></a></article><article><a href=/blogrobsewell/blog/using-powershell-to-get-azure-endpoint-ports/><div class=article-details><h2 class=article-title>Using PowerShell to get Azure Endpoint Ports</h2></div></a></article><article><a href=/blogrobsewell/blog/starting-my-azure-sql-server-vms-with-powershell/><div class=article-details><h2 class=article-title>Starting My Azure SQL Server VMs with PowerShell</h2></div></a></article><article><a href=/blogrobsewell/blog/launching-azure-vm-after-starting-with-powershell/><div class=article-details><h2 class=article-title>Launching Azure VM After Starting With PowerShell</h2></div></a></article><article><a href=/blogrobsewell/blog/add-adventure-works-database-to-windows-azure-vm/><div class=article-details><h2 class=article-title>Add Adventure Works Database to Windows Azure VM</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

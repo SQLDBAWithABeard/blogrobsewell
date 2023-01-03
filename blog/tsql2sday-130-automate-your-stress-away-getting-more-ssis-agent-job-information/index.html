@@ -1,0 +1,172 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Automation This month it is hosted by Elizabeth Noble blog and twitter.
+Thank you Elizabeth
+Elizabeth asks
+My invitation to you is I want to know what you have automated to make your life easier?
+From the Past I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post You have to start somewhere In it I mention this blog post by John Sansom The Best Database Administrators Automate Everything which I am pleased to see is still available nearly a decade later"><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information"><meta property="og:description" content="Automation This month it is hosted by Elizabeth Noble blog and twitter.
+Thank you Elizabeth
+Elizabeth asks
+My invitation to you is I want to know what you have automated to make your life easier?
+From the Past I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post You have to start somewhere In it I mention this blog post by John Sansom The Best Database Administrators Automate Everything which I am pleased to see is still available nearly a decade later"><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automate"><meta property="article:tag" content="automation"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="SQL Server"><meta property="article:tag" content="SSIS"><meta property="article:tag" content="SQL Agent Jobs"><meta property="article:tag" content="TSql2sDay"><meta property="article:tag" content="Jupyter Notebooks"><meta property="article:published_time" content="2020-09-08T00:00:00+00:00"><meta property="article:modified_time" content="2020-09-08T00:00:00+00:00"><meta property="og:image" content="https://sqldbawithabeard.github.io/blogrobsewell/assets/images/TSQL2sDay150x150.jpg"><meta name=twitter:title content="#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information"><meta name=twitter:description content="Automation This month it is hosted by Elizabeth Noble blog and twitter.
+Thank you Elizabeth
+Elizabeth asks
+My invitation to you is I want to know what you have automated to make your life easier?
+From the Past I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post You have to start somewhere In it I mention this blog post by John Sansom The Best Database Administrators Automate Everything which I am pleased to see is still available nearly a decade later"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://sqldbawithabeard.github.io/blogrobsewell/assets/images/TSQL2sDay150x150.jpg"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#from-the-past>From the Past</a></li><li><a href=#automate-everything>Automate Everything</a></li><li><a href=#i-love-automation>I love Automation</a></li><li><a href=#whats-the-last-thing-that-you-automated>Whats the last thing that you automated?</a><ol><li><a href=#finding-ssis-failures>Finding SSIS failures</a></li><li><a href=#automate-it>Automate it</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/><img src=/blogrobsewell/assets/images/TSQL2sDay150x150.jpg loading=lazy alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information"></a></div><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a>
+<a href=/blogrobsewell/categories/tsql2sday/>TSql2sDay</a>
+<a href=/blogrobsewell/categories/jupyter-notebooks/>Jupyter Notebooks</a>
+<a href=/blogrobsewell/categories/azure-data-studio/>Azure Data Studio</a>
+<a href=/blogrobsewell/categories/powershell/>PowerShell</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 08, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>7 minute read</time></div></footer></div></header><section class=article-content><h1 id=automation>Automation</h1><p>This month it is hosted by Elizabeth Noble blog and twitter.</p><p>Thank you Elizabeth</p><p><img src=https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg loading=lazy alt=tsql2sday></p><p>Elizabeth asks</p><blockquote><p>My invitation to you is I want to know what you have automated to make your life easier?</p></blockquote><h2 id=from-the-past>From the Past</h2><p>I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post <a class=link href=https://blog.robsewell.com/blog/you-have-to-start-somewhere/ target=_blank rel=noopener>You have to start somewhere</a> In it I mention this blog post by John Sansom <a class=link href=http://www.johnsansom.com/the-best-database-administrators-automate-everything/ target=_blank rel=noopener>The Best Database Administrators Automate Everything</a> which I am pleased to see is still available nearly a decade later</p><p>Here is a quote from his blog entry</p><blockquote><h2 id=automate-everything>Automate Everything</h2><p>That’s right, I said everything. Just sit back and take the <em>time</em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word <em>potentially</em> from your vocabulary and evaluate how you could automate <strong>e-v-e-r-y-t-h-i-n-g</strong> that you do.</p><p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important <em>Proactive Mode</em> tasks/projects to be getting on with</p></blockquote><h2 id=i-love-automation>I love Automation</h2><p>I have tried my best at all times to follow this advice in the last decade and pretty much I am happy that I have managed it.</p><ul><li>I use PowerShell (a lot!) to automate all sorts of routine tasks including migrating this blog</li><li>I use <a class=link href=https://blog.robsewell.com/tags/#jupyter-notebooks target=_blank rel=noopener>Jupyter Notebooks</a> to enable myself and others to automate Run Books, Training, Documentation, Demonstrations, Incident Response. You can find my notebooks <a class=link href=https://beard.media/Notebooks target=_blank rel=noopener>here</a></li><li>I use Azure DevOps to automate infrastructure creation and changes with terraform and delivery of changes to code as well as unit testing.</li><li>I use GitHub actions to create this blog, publish the <a class=link href=https://www.powershellgallery.com/packages/ADSNotebook target=_blank rel=noopener>ADSNotebook</a> module</li><li>I use <a class=link href=https://chocolatey.org/ target=_blank rel=noopener>Chocolatey</a> to install and update software</li><li>I have used Desired State Configuration to ensure that infrastructure is as it is expected to be</li></ul><p>At every point I am looking for a means to automate the thing that I am doing because it is almost guaranteed that there will be a time in the future after you have done a thing that there will be a need to do it again or to do it slightly differently.</p><h2 id=whats-the-last-thing-that-you-automated>Whats the last thing that you automated?</h2><p>Following my blog post about <a class=link href=https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/ target=_blank rel=noopener>Notifying a Teams Channel about a SQL Agent Job result</a> I was asked if this could be tweaked to reduce the time spent getting information about SSIS Execution failures.</p><h3 id=finding-ssis-failures>Finding SSIS failures</h3><p>When you run an SSIS package in an Agent Job and it fails, the Agent Job History shows something along these lines</p><blockquote><p>The job failed. The Job was invoked by User MyDomain\MyUserName. The last step to run was step 1 (scheduling ssis package).
+Executed as user: NT Service\SQLSERVERAGENT. Microsoft (R) SQL Server Execute Package Utility Version 11.0.5058.0 for 64-bit Copyright (C) Microsoft Corporation. All rights reserved. Started: 4:17:12 PM Package execution on IS Server failed. <strong>Execution ID: 123456789</strong>, Execution Status:4. To view the details for the execution, right-click on the Integration Services Catalog, and open the [All Executions] report Started: 4:17:12 PM Finished: 4:17:12 PM Elapsed: 4.493 seconds. The package execution failed. The step failed.</p></blockquote><p>The next step is to open SSMS, go to the SSISDb and click through to the SSIS reports and then scroll through to find the package and then the message. This is not particularly efficient and the SSIS reports are not known for their speedy executions!</p><p>This meant that the team member responsible for checking in the morning, could see which instance and which job had failed from the Teams message but then had to manually follow the above steps to find an error message that they could take action on.</p><h3 id=automate-it>Automate it</h3><p>In the SSISDB database there is an <code>event_messages</code> view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)</p><p>In the code below, I</p><ol><li><p>check if the failure comes from an SSIS instance<br>if($Inst -in ($SSISInstances)){</p></li><li><p>Get the Execution ID from the Error message<br><code>$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value</code></p></li><li><p>Create a query for the SSISDB</p><p><code>$SSISQuery = @"</code><br><code>SELECT * FROM catalog.event_messages em</code><br><code>WHERE em.operation_id = $ExecutionId</code><br><code>AND (em.event_name = 'OnError')</code><br><code>ORDER BY em.event_message_id;</code><br><code>"@</code></p></li><li><p>Set the Error Message and the Execution Path to variables<br><code>$errMessage = $SSISQueryResults.Message</code><br><code>$ExecutionPath = $SSISQueryResults.execution_path</code></p></li><li><p>Get the Error Message for none SSIS failures<br><code>}else{</code><br><code>$errMessage = $j.group[-1].Message</code><br><code>$ExecutionPath = 'the job'</code><br><code>}</code></p></li><li><p>Create the Teams message</p></li></ol><p>You will see that I used <code>SELECT *</code> because someone will always ask for some extra information in the future!</p><p><img src=https://blog.robsewell.com/assets/images/happyrob.jpg loading=lazy></p><p>The full script is below, Happy Automating!</p><pre><code>$webhookurl = &quot;https://outlook.office.com/webhook/ the rest of it here&quot; 
+$SSISInstances = # to identify SSIS instances
+$ProdInstances = # ALL instances for checking
+$startdate = (Get-Date).AddHours(-1)
+
+$AllFailedJobs = foreach ($Instance in $ProdInstances) {
+    Write-Host &quot;Connecting to $instance&quot;
+    try{
+        $smo = Connect-DbaInstance $Instance -ErrorAction Stop
+        Write-Host &quot;Connected successfully to $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed to connect to $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+    Write-Host &quot;Getting Agent Jobs on $instance&quot;
+    try {
+        $AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate 
+        Write-Host &quot;Successfully got Agent Jobs on $instance&quot;
+    }
+    catch {
+        Write-Host &quot;Failed to get agent jobs on $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+    
+    $jobs = $agentJobs # | Where-Object { $Psitem.Job -match     '^Beard-\d\d\d\d\d' -or  $Psitem.Job -like 'BeardJob*'  } # if you need to     filter
+    $FailedJobs = $jobs | Where-Object { $Psitem.Status -ne 'Succeeded' }
+    $FailedJobs | Group-Object Job 
+    try{
+        $smo.ConnectionContext.Disconnect()
+        Write-Host &quot;Disconnecting $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed disconnect from  $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+}
+Write-Host &quot;We have  $($AllFailedJobs.Count) Failed Jobs&quot;
+
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true     }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+foreach ($j in $AllFailedJobs) {
+ 
+$Inst = $j.group[-1].SqlInstance
+$jName = $j.name
+$sname = $j.group[-1].StepName
+$edate = $j.group[-1].EndDate
+if($Inst -in ($SSISInstances)){
+    $BaseerrMessage = $j.group[-1].Message
+    $ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value
+$SSISQuery = @&quot;
+SELECT * FROM catalog.event_messages em 
+WHERE em.operation_id = $ExecutionId 
+AND (em.event_name = 'OnError')
+ORDER BY em.event_message_id;
+&quot;@
+
+$SSISQueryResults = Invoke-DbaQuery -SqlInstance $Inst -Database SSISDB -Query $SSISQuery
+$errMessage = $SSISQueryResults.Message
+$ExecutionPath = $SSISQueryResults.execution_path
+}else{
+    $errMessage = $j.group[-1].Message
+    $ExecutionPath = 'the job'
+}
+
+$Text =  @&quot;
+# **$Inst**   
+## **$JName**  
+- The Job step that failed is - **$sname**  
+- It failed at - **$edate**  
+- It failed in $ExecutionPath with the message   
+- $errMessage   
+&quot;@
+
+$JSONBody = [PSCustomObject][Ordered]@{
+    &quot;@type&quot;      = &quot;MessageCard&quot;
+    &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+    &quot;summary&quot;    = &quot;There was a Job Failure&quot;
+    &quot;themeColor&quot; = '0078D7'
+    &quot;sections&quot;   = @(
+        @{
+            &quot;activityTitle&quot;    = &quot;Job Failures &quot;
+            &quot;activitySubtitle&quot; = &quot;in the Last 1 hour&quot;
+            &quot;activityImage&quot;    = &quot;https://blog.robsewell.com/assets/images/sobrob.jpg&quot;
+            &quot;text&quot;             = $text
+            &quot;markdown&quot;         = $true
+        }
+    )
+}
+ 
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+
+$parameters = @{
+    &quot;URI&quot;         = $webhookurl
+    &quot;Method&quot;      = 'POST'
+    &quot;Body&quot;        = $TeamMessageBody
+    &quot;ContentType&quot; = 'application/json'
+}
+ 
+    Invoke-RestMethod @parameters
+}
+
+if(-not $AllFailedJobs){
+  
+        $JSONBody = [PSCustomObject][Ordered]@{
+            &quot;@type&quot;      = &quot;MessageCard&quot;
+            &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+            &quot;summary&quot;    = &quot;There were no job failures in the last hour at $    (Get-Date)&quot;
+            &quot;themeColor&quot; = '0078D7'
+            &quot;sections&quot;   = @(
+                @{
+                    &quot;activityTitle&quot;    = &quot;There were no job failures at $    (Get-Date)&quot;
+                    &quot;activitySubtitle&quot; = &quot;in the Last hour&quot;
+                    &quot;activityImage&quot;    = &quot;https://blog.robsewell.com/assets/images/happyrob.jpg&quot;
+                    &quot;text&quot;             = &quot;All is well&quot;
+                    &quot;markdown&quot;         = $true
+                }
+            )
+        }
+     
+        $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+     
+        $parameters = @{
+            &quot;URI&quot;         = $webhookurl
+            &quot;Method&quot;      = 'POST'
+            &quot;Body&quot;        = $TeamMessageBody
+            &quot;ContentType&quot; = 'application/json'
+        }
+        Invoke-RestMethod @parameters
+}
+</code></pre></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automate/>automate</a>
+<a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/sql-server/>SQL Server</a>
+<a href=/blogrobsewell/tags/ssis/>SSIS</a>
+<a href=/blogrobsewell/tags/sql-agent-jobs/>SQL Agent Jobs</a>
+<a href=/blogrobsewell/tags/tsql2sday/>TSql2sDay</a>
+<a href=/blogrobsewell/tags/jupyter-notebooks/>Jupyter Notebooks</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/blogrobsewell/blog/running-jupyter-notebooks-as-agent-jobs/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/03/image-22.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/03/image-22.png></div><div class=article-details><h2 class=article-title>Running Jupyter Notebooks as Agent Jobs</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/11/image-39.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/11/image-39.png></div><div class=article-details><h2 class=article-title>Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/02/image-16.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/02/image-16.png></div><div class=article-details><h2 class=article-title>Use Jupyter Notebooks to Help People on StackOverFlow</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/07/runas.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/07/runas.png></div><div class=article-details><h2 class=article-title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/07/image-1.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/07/image-1.png></div><div class=article-details><h2 class=article-title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

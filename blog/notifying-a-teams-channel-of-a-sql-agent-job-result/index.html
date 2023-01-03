@@ -1,0 +1,238 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Following on from yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel, I was given another challenge
+Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel
+A person with a need
+The use case was for some migration projects that had steps that were scheduled via SQL Agent Jobs and instead of the DBA having to estimate when they would finish and keep checking so that they could let the next team know that it was time for their part to start, they wanted it to notify a Teams channel."><title>Notifying a Teams Channel of a SQL Agent Job result</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Notifying a Teams Channel of a SQL Agent Job result"><meta property="og:description" content="Following on from yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel, I was given another challenge
+Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel
+A person with a need
+The use case was for some migration projects that had steps that were scheduled via SQL Agent Jobs and instead of the DBA having to estimate when they would finish and keep checking so that they could let the next team know that it was time for their part to start, they wanted it to notify a Teams channel."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automation"><meta property="article:tag" content="dbatools"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="Teams"><meta property="article:tag" content="SQL Agent"><meta property="article:published_time" content="2020-07-29T00:00:00+00:00"><meta property="article:modified_time" content="2020-07-29T00:00:00+00:00"><meta property="og:image" content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/image-18.png"><meta name=twitter:title content="Notifying a Teams Channel of a SQL Agent Job result"><meta name=twitter:description content="Following on from yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel, I was given another challenge
+Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel
+A person with a need
+The use case was for some migration projects that had steps that were scheduled via SQL Agent Jobs and instead of the DBA having to estimate when they would finish and keep checking so that they could let the next team know that it was time for their part to start, they wanted it to notify a Teams channel."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/image-18.png"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#using-sql-agent-job-tokens-with-powershell>Using SQL Agent Job tokens with PowerShell</a></li><li><a href=#nothing-is-ever-as-easy-as-you-think>Nothing is ever as easy as you think</a></li><li><a href=#job_id--jobid>job_id &lt;> $(JobID)</a></li><li><a href=#send-the-information-to-teams>Send the information to Teams</a></li><li><a href=#sql-agent-job-step-success-and-failure>SQL Agent Job Step Success and Failure</a></li><li><a href=#making-people-smile>Making people smile</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/blogrobsewell/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/><img src=/blogrobsewell/assets/uploads/2020/07/image-18.png loading=lazy alt="Featured image of post Notifying a Teams Channel of a SQL Agent Job result"></a></div><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a>
+<a href=/blogrobsewell/categories/dbatools/>dbatools</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/>Notifying a Teams Channel of a SQL Agent Job result</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jul 29, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>7 minute read</time></div></footer></div></header><section class=article-content><p>Following on from <a class=link href=https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/ target=_blank rel=noopener>yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel</a>, I was given another challenge</p><blockquote><p>Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel</p><p>A person with a need</p></blockquote><p>The use case was for some migration projects that had steps that were scheduled via SQL Agent Jobs and instead of the DBA having to estimate when they would finish and keep checking so that they could let the next team know that it was time for their part to start, they wanted it to notify a Teams channel. This turned out especially useful as the job finished earlier than expected at 3am and the off-shore team could begin their work immediately.</p><h2 id=using-sql-agent-job-tokens-with-powershell>Using SQL Agent Job tokens with PowerShell</h2><p>You can use <a class=link href="https://docs.microsoft.com/en-us/sql/ssms/agent/use-tokens-in-job-steps?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target=_blank rel=noopener>SQL Agent job tokens in Job step commands to reference the existing instance or job</a> but I did not know if you could use that with PowerShell until I read <a class=link href=https://littlekendra.com/2009/12/02/sql-2008-agent-jobs-tokens-work-in-powershell/ target=_blank rel=noopener>Kendra Little’s blog post from 2009</a>.</p><p>Thank you Kendra</p><h2 id=nothing-is-ever-as-easy-as-you-think>Nothing is ever as easy as you think</h2><p>So I thought, this is awesome, I can create a function and pass in the Instance and the JobId and all will be golden.</p><p>Nope</p><h2 id=job_id--jobid>job_id &lt;> $(JobID)</h2><p>If we look in the sysjobs table at the Agent Job that we want to notify Teams about the result.</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-12.png loading=lazy></p><p>We can see that the job_id is</p><pre><code>dc5937c3-766f-47b7-a5a5-48365708659a
+</code></pre><p>If we look at the JobId property with PowerShell</p><p><img src="https://blog.robsewell.com/assets/uploads/2020/07/image-15.png?resize=630%2C369&ssl=1" loading=lazy></p><p>We get</p><pre><code>dc5937c3-766f-47b7-a5a5-48365708659a
+</code></pre><p>Awesome, they are the same</p><p>But</p><p>If we look at the value of the $(JobID) SQL Agent Job Token,</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-14.png loading=lazy></p><p>we get</p><pre><code>C33759DC6F76B747A5A548365708659A
+</code></pre><p>which makes matching it to the JobId tricky</p><p>I tried all sorts of ways of casting and converting this value in SQL and PowerShell and in the end I just decided to manually convert the value</p><pre><code>    $CharArray = $JobID.ToCharArray()
+
+    $JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+</code></pre><h2 id=send-the-information-to-teams>Send the information to Teams</h2><p>Following the <a class=link href=https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/ target=_blank rel=noopener>same pattern as yesterdays post</a>, I created a function to send a message, depending on the outcome of the job and post it to the Teams function.</p><p>Again, I used Enter-PsSession to run the Teams notification from a machine that can send the message. (I have also included the code to do this without requiring that below so that you can send the message from the same machine that runs the job if required)</p><p>This code below is saved on a UNC share or the SQL Server as SingleNotifyTeams.ps1</p><pre><code>Param(
+    $SqlInstance,
+    $JobID
+)
+
+$webhookurl = &quot;&quot;
+
+$NotifyServer = 'BeardNUC2'
+function Notify-TeamsSQlAgentJob {
+    Param(
+        $SQLInstance,
+        $JobID,
+        $webhookurl
+    )
+
+    $SQLInstance = $SQLInstance 
+    # Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    $CharArray = $JobID.ToCharArray()
+
+    $JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+
+    $Job = Get-DbaAgentJob -SQlInstance $SQLInstance | Where jobid -eq $JobGuiD
+    $JobName = $Job.Name
+    $Jobsteps = Get-DbaAgentJobStep -SQlInstance $SQLInstance -Job $JobName
+
+    $JobStepNames = $Jobsteps.Name -join ' , '
+    $JobStartDate = $job.JobSteps[0].LastRunDate
+    $JobStatus = $job.LastRunOutcome
+    $lastjobstepid = $jobsteps[-1].id
+    $Jobstepsmsg = $Jobsteps | Out-String
+    $JobStepStatus = ($Jobsteps | Where-Object {$_.id -ne $lastjobstepid -and $_.LastRunDate -ge $JobStartDate} ).ForEach{
+        &quot;   $($_.Name)  - $($_.LastRunDate) **$($_.LastRunOutCome)**  
+&quot;
+    } 
+    
+    $Text = @&quot;
+# **$SqlInstance**   
+## **$JobName**  
+
+$jobstepMsg
+
+Started at $JobStartDate 
+- The individual Job Steps status was  
+
+$JobStepStatus  
+
+
+&quot;@
+
+    if (( $jobsteps | Where id -ne $lastjobstepid).LastRunOutcome -contains 'Failed') {
+        $JSONBody = [PSCustomObject][Ordered]@{
+            &quot;@type&quot;      = &quot;MessageCard&quot;
+            &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+            &quot;summary&quot;    = &quot;There was a Job Failure&quot;
+            &quot;themeColor&quot; = '0078D7'
+            &quot;sections&quot;   = @(
+                @{
+                    &quot;activityTitle&quot;    = &quot;The Job Failed&quot;
+                    &quot;activitySubtitle&quot; = &quot;Work to do - Please investigate the following job by following the steps in the plan at LINKTOPLAN&quot;
+                    &quot;activityImage&quot;    = &quot;https://fit93a.db.files.1drv.com/y4mTOWSzX1AfIWx-VdUgY_Qp3wqebttT7FWSvtKK-zAbpTJuU560Qccv1_Z_Oxd4T4zUtd5oVZGJeS17fkgbl1dXUmvbldnGcoThL-bnQYxrTrMkrJS1Wz2ZRV5RVtZS9f4GleZQOMuWXP1HMYSjYxa6w09nEyGg1masI-wKIZfdnEF6L8r83Q9BB7yIjlp6OXEmccZt99gpb4Qti9sIFNxpg&quot;
+                    &quot;text&quot;             = $text
+                    &quot;markdown&quot;         = $true
+                }
+            )
+        }
+    }
+    else {
+        $JSONBody = [PSCustomObject][Ordered]@{
+            &quot;@type&quot;      = &quot;MessageCard&quot;
+            &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+            &quot;summary&quot;    = &quot;The Job Succeeded&quot;
+            &quot;themeColor&quot; = '0078D7'
+            &quot;sections&quot;   = @(
+                @{
+                    &quot;activityTitle&quot;    = &quot;The Job Succeeded&quot;
+                    &quot;activitySubtitle&quot; = &quot;All is well - Please continue with the next step in the plan at LINKTOPLAN&quot;
+                    &quot;activityImage&quot;    = &quot;https://6f0bzw.db.files.1drv.com/y4mvnTDG9bCgNWTZ-2_DFl4-ZsUwpD9QIHUArsGF66H69zBO8a--FlflXiF7lrL2H3vgya0ogXIDx59hn62wo2tt3HWMbqnnCSp8yPmM1IFNwZMzgvSZBEs_n9B0v4h4M5PfOY45GVSjeFh8md140gWHaFpZoL4Vwh-fD7Zi3djU_r0PduZwNBVGOcoB6SMJ1m4NmMmemWr2lzBn57LutDkxw&quot;
+                    &quot;text&quot;             = $text
+                    &quot;markdown&quot;         = $true
+                }
+            )
+        }
+    }
+
+    $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+ 
+    $NotifyCommand = {
+    $parameters = @{
+        &quot;URI&quot;         = $Using:webhookurl
+        &quot;Method&quot;      = 'POST'
+        &quot;Body&quot;        = $Using:TeamMessageBody
+        &quot;ContentType&quot; = 'application/json'
+    }
+ 
+    Invoke-RestMethod @parameters
+}
+    $Session = New-PSSession -ComputerName $NotifyServer
+    Invoke-Command -Session $Session -ScriptBlock $NotifyCommand
+}
+
+$msg = 'ServerName  = ' + $SQLInstance + 'JobId = ' + $JobID
+Write-Host $msg
+Notify-TeamsSQLAgentJob -SQlInstance $SqlInstance -JobID $JobID -webhookurl $webhookurl
+</code></pre><p>Then it can be called in a SQL Agent job step, again following the guidelines at <a class=link href=http://dbatools.io/agent target=_blank rel=noopener>dbatools.io/agent</a></p><p>It is called slightly differently as you ned to pass in the SQL Agent tokens as parameters to the script</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-16.png loading=lazy></p><pre><code>powershell.exe -File path to Notify-TeamsSQLAgentJob.ps1 -SQLInstance  $(ESCAPE_SQUOTE(SRVR)) -JobID  $(ESCAPE_NONE(JOBID))
+</code></pre><h2 id=sql-agent-job-step-success-and-failure>SQL Agent Job Step Success and Failure</h2><p>We need to take another step to ensure that this works as expected. We have to change the On Failure action for each job step to the “Go To Notify Teams” step</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-17.png loading=lazy></p><h2 id=making-people-smile>Making people smile</h2><p>You can also add images (make sure the usage rights allow) so that the success notification can look like this</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-18.png loading=lazy></p><p>and the failure looks like this</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-19.png loading=lazy></p><p>Happy Automating !</p><p>Here is the code that does not require remoting to another server to send the message</p><pre><code>Param(
+    $SqlInstance,
+    $JobID
+)
+
+$webhookurl = &quot;https://outlook.office.com/webhook/5a8057cd-5e1a-4c84-9227-74a309f1c738@b122247e-1ebf-4b52-b309-c2aa7436fc6b/IncomingWebhook/affb85f05804438eb7ffb57665879248/f32fc7e6-a998-4670-8b33-635876559b80&quot;
+
+function Notify-TeamsSQlAgentJob {
+    Param(
+        $SQLInstance,
+        $JobID,
+        $webhookurl
+    )
+
+    $SQLInstance = $SQLInstance 
+    # Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    $CharArray = $JobID.ToCharArray()
+
+    $JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+
+    $Job = Get-DbaAgentJob -SQlInstance $SQLInstance | Where jobid -eq $JobGuiD
+    $JobName = $Job.Name
+    $Jobsteps = Get-DbaAgentJobStep -SQlInstance $SQLInstance -Job $JobName
+
+    $JobStepNames = $Jobsteps.Name -join ' , '
+    $JobStartDate = $job.JobSteps[0].LastRunDate
+    $JobStatus = $job.LastRunOutcome
+    $lastjobstepid = $jobsteps[-1].id
+    $Jobstepsmsg = $Jobsteps | Out-String
+    $JobStepStatus = ($Jobsteps | Where-Object {$_.id -ne $lastjobstepid -and $_.LastRunDate -ge $JobStartDate} ).ForEach{
+        &quot;   $($_.Name)  - $($_.LastRunDate) **$($_.LastRunOutCome)**  
+&quot;
+    } 
+    
+    $Text = @&quot;
+# **$SqlInstance**   
+## **$JobName**  
+
+$jobstepMsg
+
+Started at $JobStartDate 
+- The individual Job Steps status was  
+
+$JobStepStatus  
+
+
+&quot;@
+
+    if (( $jobsteps | Where id -ne $lastjobstepid).LastRunOutcome -contains 'Failed') {
+        $JSONBody = [PSCustomObject][Ordered]@{
+            &quot;@type&quot;      = &quot;MessageCard&quot;
+            &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+            &quot;summary&quot;    = &quot;There was a Job Failure&quot;
+            &quot;themeColor&quot; = '0078D7'
+            &quot;sections&quot;   = @(
+                @{
+                    &quot;activityTitle&quot;    = &quot;The Job Failed&quot;
+                    &quot;activitySubtitle&quot; = &quot;Work to do - Please investigate the following job by following the steps in the plan at LINKTOPLAN&quot;
+                    &quot;activityImage&quot;    = &quot;https://fit93a.db.files.1drv.com/y4mTOWSzX1AfIWx-VdUgY_Qp3wqebttT7FWSvtKK-zAbpTJuU560Qccv1_Z_Oxd4T4zUtd5oVZGJeS17fkgbl1dXUmvbldnGcoThL-bnQYxrTrMkrJS1Wz2ZRV5RVtZS9f4GleZQOMuWXP1HMYSjYxa6w09nEyGg1masI-wKIZfdnEF6L8r83Q9BB7yIjlp6OXEmccZt99gpb4Qti9sIFNxpg&quot;
+                    &quot;text&quot;             = $text
+                    &quot;markdown&quot;         = $true
+                }
+            )
+        }
+    }
+    else {
+        $JSONBody = [PSCustomObject][Ordered]@{
+            &quot;@type&quot;      = &quot;MessageCard&quot;
+            &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+            &quot;summary&quot;    = &quot;The Job Succeeded&quot;
+            &quot;themeColor&quot; = '0078D7'
+            &quot;sections&quot;   = @(
+                @{
+                    &quot;activityTitle&quot;    = &quot;The Job Succeeded&quot;
+                    &quot;activitySubtitle&quot; = &quot;All is well - Please continue with the next step in the plan at LINKTOPLAN&quot;
+                    &quot;activityImage&quot;    = &quot;https://6f0bzw.db.files.1drv.com/y4mvnTDG9bCgNWTZ-2_DFl4-ZsUwpD9QIHUArsGF66H69zBO8a--FlflXiF7lrL2H3vgya0ogXIDx59hn62wo2tt3HWMbqnnCSp8yPmM1IFNwZMzgvSZBEs_n9B0v4h4M5PfOY45GVSjeFh8md140gWHaFpZoL4Vwh-fD7Zi3djU_r0PduZwNBVGOcoB6SMJ1m4NmMmemWr2lzBn57LutDkxw&quot;
+                    &quot;text&quot;             = $text
+                    &quot;markdown&quot;         = $true
+                }
+            )
+        }
+    }
+
+    $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+ 
+    $parameters = @{
+        &quot;URI&quot;         = $webhookurl
+        &quot;Method&quot;      = 'POST'
+        &quot;Body&quot;        = $TeamMessageBody
+        &quot;ContentType&quot; = 'application/json'
+    }
+ 
+    Invoke-RestMethod @parameters
+}
+
+$msg = 'ServerName  = ' + $SQLInstance + 'JobId = ' + $JobID
+Write-Host $msg
+Notify-TeamsSQLAgentJob -SQlInstance $SqlInstance -JobID $JobID -webhookurl $webhookurl
+</code></pre></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/dbatools/>dbatools</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/teams/>Teams</a>
+<a href=/blogrobsewell/tags/sql-agent/>SQL Agent</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/07/image-11.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/07/image-11.png></div><div class=article-details><h2 class=article-title>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/how-to-import-dbatools-from-a-zip-file-from-the-github-release-into-azure-automation-modules-without-an-error/><div class=article-image><img src="https://images.unsplash.com/photo-1614791962365-7590111b1b1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80" loading=lazy data-key data-hash="https://images.unsplash.com/photo-1614791962365-7590111b1b1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80"></div><div class=article-details><h2 class=article-title>How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/quickly-creating-test-users-in-sql-server-using-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2017/02/remove-them-all.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2017/02/remove-them-all.png></div><div class=article-details><h2 class=article-title>Quickly Creating Test Users in SQL Server using dbatools</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2020/08/image-16.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2020/08/image-16.png></div><div class=article-details><h2 class=article-title>Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools</h2></div></a></article><article><a href=/blogrobsewell/blog/refreshing-a-sql-mirrored-database-using-powershell/><div class=article-details><h2 class=article-title>Refreshing A SQL Mirrored Database Using Powershell</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

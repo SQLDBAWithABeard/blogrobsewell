@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SCCM on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/sccm/</link><description>Recent content in SCCM on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/sccm/index.xml" rel="self" type="application/rss+xml"/><item><title>Triggering a System Center Configuration Manager deployment task</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/triggering-a-system-center-configuration-manager-deployment-task/</link><pubDate>Wed, 18 Feb 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/triggering-a-system-center-configuration-manager-deployment-task/</guid><description>&lt;p>A slightly different topic today.&lt;/p>
+&lt;p>Once you have built up knowledge, you become the person that people ask to solve things. This is something I really enjoy, taking a problem and solving it for people and in the process teaching them and enabling them to automate more things.&lt;/p>
+&lt;p>A colleague was performing a new deployment of a product via SCCM and wanted to trigger the clients to update and receive the new update instead of waiting for it to be scheduled.&lt;/p>
+&lt;p>They had found some code that would do this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000121}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000021}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000022}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000002}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>They had the idea of using this command and a text file containing the machines and PS Remote.&lt;/p>
+&lt;p>I looked at it a different way and gave them a function so that they could provide the Collection Name (In SCCM a collection is a list of machines for a specific purpose) and the function would import the SCCM module, connect to the Site get the names of the machines in the collection and run the command on each one&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Trigger-DeploymentCycle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$CollectionName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># PS script to run
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000121}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000021}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000022}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000002}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## import SCCM module
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module (Join-Path $(Split-Path $env:SMS_ADMIN_UI_PATH) ConfigurationManager.psd1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#open drive for SCCM
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd &amp;lt;Site Code&amp;gt;:\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#### cd &amp;lt;Site Code&amp;gt;:\ replace with Site Code or add param $SiteCOde and use cd ${$SiteCode}:\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Get Computer names in collection
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PCs = (Get-CMDeviceCollectionDirectMembershipRule -CollectionName $CollectionName).rulename
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Count = $PCs.count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output &amp;#34;Total number of PCs = $Count&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-Command –ComputerName $PCs –ScriptBlock $scriptblock –ThrottleLimit 50
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This would work very well but they wanted some error checking to enable them to identify machines they were unable to connect to following the deployment so the final solution which will run a little slower&lt;/p>
+&lt;p>Set up function and parameters and create log files&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Trigger-DeploymentCycle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$CollectionName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create log file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$StartTime = Get-Date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Date = Get-Date -Format ddMMyyHHss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Errorlogpath = &amp;#34;C:\temp\SCCMError&amp;#34; + $Date + &amp;#34;.txt&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Successlogpath = &amp;#34;C:\temp\SCCMSuccess&amp;#34; + $Date + &amp;#34;.txt&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path $Errorlogpath -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path $Successlogpath -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$StartLog = &amp;#34;Script Started at $StartTime&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$StartLog | Out-File -FilePath $Successlogpath -Append
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Create the script block, import the SCCM module, connect to the SCCM site and get the machines in the collection. Note that you will have to change &lt;code>&amp;lt;Site Code&amp;gt;&lt;/code> with your own site code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000121}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000021}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000022}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-WMIMethod -Namespace root\ccm -Class SMS_CLIENT -Name TriggerSchedule &amp;#34;{00000000-0000-0000-0000-000000000002}&amp;#34;|Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## import SCCM module
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module (Join-Path $(Split-Path $env:SMS_ADMIN_UI_PATH) ConfigurationManager.psd1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#open drive for SCCM
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd &amp;lt;Site Code&amp;gt;:\ #### cd &amp;lt;Site Code&amp;gt;:\ replace with Site Code or add param $SiteCOde and use cd ${$SiteCode}:\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Get Computer names in collection
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PCs = (Get-CMDeviceCollectionDirectMembershipRule -CollectionName $CollectionName).rulename
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Count = $PCs.count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output &amp;#34;Total number of PCs = $Count&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I wanted to give them a progress output so I needed to be able to identify the number of machines in the collection by using the count property. I then needed to output the number of the item within the array which I did with&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$a= [array]::IndexOf($PCs, $PC) + 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output &amp;#34; Connecting to PC - $PC -- $a of $count&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then pinged the machine,ran the script block and wrote to the log files and finally opened the log files&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (Test-Connection $PC -Quiet -Count 1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Run command on PC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-Command -ComputerName $PC -scriptblock $scriptblock
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Success = &amp;#34;SUCCESS - finished - $PC -- $a of $count&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Success | Out-File -FilePath $Successlogpath -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output $Success
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage = &amp;#34;ERROR - $PC is not available -- $PC -- $a of $count&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage| Out-File -FilePath $Errorlogpath -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output $ErrorMessage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">notepad $Errorlogpath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">notepad $Successlogpath
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now they can load the function into their PowerShell sessions and type&lt;/p>
+&lt;p>&lt;code>TriggerDeplyment COLLECTIONNAME&lt;/code>&lt;/p>
+&lt;p>and they will be able to manually trigger the tasks. This function will trigger the following tasks for a list of PCs in a collection.&lt;/p>
+&lt;ul>
+&lt;li>Machine Policy Assignment Request &amp;ndash; {00000000-0000-0000-0000-000000000021}&lt;/li>
+&lt;li>Machine Policy Evaluation &amp;ndash; {00000000-0000-0000-0000-000000000022}&lt;/li>
+&lt;li>Software Inventory &amp;ndash; {00000000-0000-0000-0000-000000000002}&lt;/li>
+&lt;li>Application Deployment Evaluation Cycle: {00000000-0000-0000-0000-000000000121}&lt;/li>
+&lt;/ul>
+&lt;p>Here is the list of other tasks you can trigger:&lt;/p>
+&lt;ul>
+&lt;li>Discovery Data Collection Cycle: {00000000-0000-0000-0000-000000000003}&lt;/li>
+&lt;li>Hardware Inventory Cycle: {00000000-0000-0000-0000-000000000001}&lt;/li>
+&lt;li>Machine Policy Retrieval and Evaluation Cycle: {00000000-0000-0000-0000-000000000021}&lt;/li>
+&lt;li>Software Metering Usage Report Cycle: {00000000-0000-0000-0000-000000000031}&lt;/li>
+&lt;li>Software Updates Deployment Evaluation Cycle: {00000000-0000-0000-0000-000000000108}&lt;/li>
+&lt;li>Software Updates Scan Cycle: {00000000-0000-0000-0000-000000000113}&lt;/li>
+&lt;li>Windows Installer Source List Update Cycle: {00000000-0000-0000-0000-000000000032}&lt;/li>
+&lt;li>Hardware Inventory={00000000-0000-0000-0000-000000000001}&lt;/li>
+&lt;li>Software Update Scan={00000000-0000-0000-0000-000000000113}&lt;/li>
+&lt;li>Software Update Deployment Re-eval={00000000-0000-0000-0000-000000000114}&lt;/li>
+&lt;li>Data Discovery={00000000-0000-0000-0000-000000000003}&lt;/li>
+&lt;li>Refresh Default Management Point={00000000-0000-0000-0000-000000000023}&lt;/li>
+&lt;li>Refresh Location (AD site or Subnet)={00000000-0000-0000-0000-000000000024}&lt;/li>
+&lt;li>Software Metering Usage Reporting={00000000-0000-0000-0000-000000000031}&lt;/li>
+&lt;li>Sourcelist Update Cycle={00000000-0000-0000-0000-000000000032}&lt;/li>
+&lt;li>Cleanup policy={00000000-0000-0000-0000-000000000040}&lt;/li>
+&lt;li>Validate assignments={00000000-0000-0000-0000-000000000042}&lt;/li>
+&lt;li>Certificate Maintenance={00000000-0000-0000-0000-000000000051}&lt;/li>
+&lt;li>Branch DP Scheduled Maintenance={00000000-0000-0000-0000-000000000061}&lt;/li>
+&lt;li>Branch DP Provisioning Status Reporting={00000000-0000-0000-0000-000000000062}&lt;/li>
+&lt;li>Refresh proxy management point={00000000-0000-0000-0000-000000000037}&lt;/li>
+&lt;li>Software Update Deployment={00000000-0000-0000-0000-000000000108}&lt;/li>
+&lt;li>State Message Upload={00000000-0000-0000-0000-000000000111}&lt;/li>
+&lt;li>State Message Cache Cleanup={00000000-0000-0000-0000-000000000112}&lt;/li>
+&lt;/ul>
+&lt;p>You can find the function here&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Trigger-DeploymentCycle-c27f7b9d?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Trigger-Deployment&lt;/a>&lt;/p>
+&lt;p>and all of &lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=User&amp;amp;f%5B0%5D.Value=Rob%20Sewell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>my Script Center Submissions&lt;/a> are here&lt;/p>
+&lt;p>As always – The internet lies, fibs and deceives and everything you read including this post should be taken with a pinch of salt and examined carefully. All code should be understood and tested prior to running in a live environment.&lt;/p></description></item></channel></rss>

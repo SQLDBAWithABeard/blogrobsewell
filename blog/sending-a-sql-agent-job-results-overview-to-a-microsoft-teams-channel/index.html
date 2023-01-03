@@ -1,0 +1,377 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.
+SQL Agent Job Overview Using dbatools we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off."><title>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Sending a SQL Agent Job results overview to a Microsoft Teams Channel"><meta property="og:description" content="Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.
+SQL Agent Job Overview Using dbatools we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automation"><meta property="article:tag" content="dbatools"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="Teams"><meta property="article:tag" content="SQL Agent"><meta property="article:published_time" content="2020-07-28T00:00:00+00:00"><meta property="article:modified_time" content="2020-07-28T00:00:00+00:00"><meta property="og:image" content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/image-11.png"><meta name=twitter:title content="Sending a SQL Agent Job results overview to a Microsoft Teams Channel"><meta name=twitter:description content="Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.
+SQL Agent Job Overview Using dbatools we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/07/image-11.png"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#sql-agent-job-overview>SQL Agent Job Overview</a></li><li><a href=#create-a-teams-channel>Create a Teams Channel</a></li><li><a href=#create-a-webhook-connector-for-the-channel>Create a Webhook Connector for the channel</a></li><li><a href=#send-to-teams-using-powershell>Send to Teams using PowerShell</a></li><li><a href=#running-as-a-sql-agent-job>Running as a SQL Agent Job</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/><img src=/blogrobsewell/assets/uploads/2020/07/image-11.png loading=lazy alt="Featured image of post Sending a SQL Agent Job results overview to a Microsoft Teams Channel"></a></div><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a>
+<a href=/blogrobsewell/categories/dbatools/>dbatools</a>
+<a href=/blogrobsewell/categories/powershell/>PowerShell</a>
+<a href=/blogrobsewell/categories/sql-server/>SQL Server</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jul 28, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><p>Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.</p><h2 id=sql-agent-job-overview>SQL Agent Job Overview</h2><p>Using <a class=link href=http://dbatools.io target=_blank rel=noopener>dbatools</a> we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off.</p><p>Here is an example of such a script</p><pre><code>$SqlInstances = (Get-Vm -ComputerName BEARDNUC,BEARDNUC2).Where{$_.State -eq 'Running' -and $_.Name -like '*SQL*'}.Name
+$AllJobs = &quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...     
+---------------------------------------------  
+&quot;
+foreach ($Instance in $SQLInstances) {
+    Write-Host &quot;Connecting to $instance&quot;
+    try{
+        $smo = Connect-DbaInstance $Instance -ErrorAction Stop
+        Write-Host &quot;Connected successfully to $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed to connect to $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+    Write-Host &quot;Getting Agent Jobs on $instance&quot;
+    try {
+        $AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate 
+        Write-Host &quot;Successfully got Agent Jobs on $instance&quot;
+    }
+    catch {
+        Write-Host &quot;Failed to get agent jobs on $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+    
+
+    $jobs = $agentJobs 
+    $NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&quot;00&quot;)
+
+     Write-Host &quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs  - Number of Failed Jobs $NumberOfFailedJobs&quot;
+
+    $AllJobs = $AllJobs + &quot;$($Instance.Split('.')[0])..........&lt;b&gt;$NumberOfJobs&lt;/b&gt;................&lt;b&gt;$NumberOfSuccessfulJobs&lt;/b&gt;.........................&lt;b&gt;$NumberOfFailedJobs&lt;/b&gt;............................&lt;b&gt;$NumberOfFailedJobSteps&lt;/b&gt;..............................&lt;b&gt;$NumberOfCanceledJobs&lt;/b&gt;........
+&quot;
+    try{
+        $smo.ConnectionContext.Disconnect()
+        Write-Host &quot;Disconnecting $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed disconnect from  $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+}
+
+Write-Host &quot;Since $startdate&quot;
+Write-Host &quot;$AllJobs&quot;
+</code></pre><p>and an example of running it.</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-2.png loading=lazy></p><h2 id=create-a-teams-channel>Create a Teams Channel</h2><p>If you have permissions, you can create a new Teams channel by clicking on the 3 ellipses and add channel</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-3.png loading=lazy></p><p>Then fill in the blanks</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-4.png loading=lazy></p><h2 id=create-a-webhook-connector-for-the-channel>Create a Webhook Connector for the channel</h2><p>Next, you need to have a connector for the channel, click on the 3 ellipses for the channel and click on connectors</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-5.png loading=lazy></p><p>Then you can choose the Incoming Webhook connector and click configure</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-6.png loading=lazy></p><p>Give the connector a name and upload an image if you wish and click create</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-7.png loading=lazy></p><p>The resulting screen will give you a URL that you can copy. If you need to find it again, then use the 3 ellipses again, click connectors and look at configured. You can then choose the webhook that you have created and click manage and you will find the URL.</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-8.png loading=lazy></p><h2 id=send-to-teams-using-powershell>Send to Teams using PowerShell</h2><p>Now you can send a message to that Teams channel using PowerShell. You will need to add the webhook URL from your Teams connector</p><pre><code>[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webhookurl = &quot;&quot;
+
+    $Text =  @&quot;
+# Here is a Title
+
+and a message
+
+Image is from
+
+https://www.flickr.com/photos/157270154@N05/38494483572
+
+Photo by CreditDebitPro
+&quot;@
+
+    $JSONBody = [PSCustomObject][Ordered]@{
+        &quot;@type&quot;      = &quot;MessageCard&quot;
+        &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+        &quot;summary&quot;    = &quot;This is my summary&quot;
+        &quot;themeColor&quot; = '0078D7'
+        &quot;sections&quot;   = @(
+            @{
+                &quot;activityTitle&quot;    = &quot;Something Important &quot;
+                &quot;activitySubtitle&quot; = &quot;I have something to say&quot;
+                &quot;activityImage&quot;    = &quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&quot;
+                &quot;text&quot;             = $text
+                &quot;markdown&quot;         = $true
+            }
+        )
+    }
+ 
+    $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+ 
+    $parameters = @{
+        &quot;URI&quot;         = $webhookurl
+        &quot;Method&quot;      = 'POST'
+        &quot;Body&quot;        = $TeamMessageBody
+        &quot;ContentType&quot; = 'application/json'
+    }
+ 
+    Invoke-RestMethod @parameters
+</code></pre><p>The code above will send a message that looks like this</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-9.png loading=lazy></p><h2 id=running-as-a-sql-agent-job>Running as a SQL Agent Job</h2><p>Now we can run this code as a SQL Agent Job and schedule it. Now, you may not be able to run that code on your SQL Server. It cannot connect to the internet, so how can we contact the Teams webhook?</p><p>There are probably a number of ways to do this but the solution that I took, was to allow a proxy account the ability to use PSRemoting and run the part of the script that connects to Teams on a different machine, that does have connectivity.</p><p>The script I used was as follows. You will need to add in the SQL Instances or better still dynamically gather them from your source of truth. You will need the webhook URL and the name of the server that can connect to Teams</p><pre><code>$SQLInstances = 'SQL2005Ser2003','SQL2008Ser12R2','SQL2014Ser12R2','SQL2016N1','SQL2016N2','SQL2016N3','SQL2017N5','SQL2019N20','SQL2019N21','SQL2019N22','SQL2019N5'
+
+$startdate = (Get-Date).AddHours(-12)
+$webhookurl = &quot;&quot;
+$NotifyServer = 'BeardNUC2'
+
+$AllJobs = &quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...     
+---------------------------------------------  
+&quot;
+foreach ($Instance in $SQLInstances) {
+    Write-Host &quot;Connecting to $instance&quot;
+    try{
+        $smo = Connect-DbaInstance $Instance -ErrorAction Stop
+        Write-Host &quot;Connected successfully to $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed to connect to $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+    Write-Host &quot;Getting Agent Jobs on $instance&quot;
+    try {
+        $AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate 
+        Write-Host &quot;Successfully got Agent Jobs on $instance&quot;
+    }
+    catch {
+        Write-Host &quot;Failed to get agent jobs on $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+    
+
+    $jobs = $agentJobs 
+    $NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&quot;00&quot;)
+
+     Write-Host &quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs  - Number of Failed Jobs $NumberOfFailedJobs&quot;
+
+    $AllJobs = $AllJobs + &quot;$($Instance.Split('.')[0])..........&lt;b&gt;$NumberOfJobs&lt;/b&gt;................&lt;b&gt;$NumberOfSuccessfulJobs&lt;/b&gt;.........................&lt;b&gt;$NumberOfFailedJobs&lt;/b&gt;............................&lt;b&gt;$NumberOfFailedJobSteps&lt;/b&gt;..............................&lt;b&gt;$NumberOfCanceledJobs&lt;/b&gt;........
+&quot;
+    try{
+        $smo.ConnectionContext.Disconnect()
+        Write-Host &quot;Disconnecting $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed disconnect from  $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+}
+
+Write-Host &quot;Since $startdate&quot;
+Write-Host &quot;$AllJobs&quot;
+
+$NotifyCommand = {
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webhookurl = $Using:TeamsWebhook
+ 
+$allJobsMessage = $Using:AllJobs 
+    $Text =  @&quot;
+# Overview of SQL Agent Jobs in Production since $($Using:startdate)  
+
+$allJobsMessage
+&quot;@
+
+    $JSONBody = [PSCustomObject][Ordered]@{
+        &quot;@type&quot;      = &quot;MessageCard&quot;
+        &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+        &quot;summary&quot;    = &quot;Overview for the last 12 hours&quot;
+        &quot;themeColor&quot; = '0078D7'
+        &quot;sections&quot;   = @(
+            @{
+                &quot;activityTitle&quot;    = &quot;Job Failures &quot;
+                &quot;activitySubtitle&quot; = &quot;Overview for the last 12 hours since $($Using:startdate)&quot;
+                &quot;activityImage&quot;    = &quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&quot;
+                &quot;text&quot;             = $allJobsMessage
+                &quot;markdown&quot;         = $true
+            }
+        )
+    }
+ 
+    $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+ 
+    $parameters = @{
+        &quot;URI&quot;         = $webhookurl
+        &quot;Method&quot;      = 'POST'
+        &quot;Body&quot;        = $TeamMessageBody
+        &quot;ContentType&quot; = 'application/json'
+    }
+ 
+    Invoke-RestMethod @parameters
+}
+
+$Session = New-PSSession -ComputerName $NotifyServer
+Invoke-Command -Session $Session -ScriptBlock $NotifyCommand
+</code></pre><p>Then, follow the steps at <a class=link href=http://dbatools.io/agent target=_blank rel=noopener>dbatools.io/agent</a> to create an agent job to run the script above on an instance with the dbatools module available to the SQL Service account. Use or create a proxy with permissions on the notify server and create an Agent Job.</p><pre><code>USE [msdb]
+GO
+
+/****** Object:  Job [I am a Job that notifies Teams]    Script Date: 27/07/2020 20:27:27 ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object:  JobCategory [[Uncategorized (Local)]]    Script Date: 27/07/2020 20:27:28 ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'[Uncategorized (Local)]' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'[Uncategorized (Local)]'
+IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+
+END
+
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'12 Hour Teams Notify', 
+		@enabled=1, 
+		@notify_level_eventlog=0, 
+		@notify_level_email=0, 
+		@notify_level_netsend=0, 
+		@notify_level_page=0, 
+		@delete_level=0, 
+		@description=N'This job will notify Teams every 12 hours', 
+		@category_name=N'[Uncategorized (Local)]', 
+		@owner_login_name=N'THEBEARD\SQL_SVC', @job_id = @jobId OUTPUT
+IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+
+/****** Object:  Step [Notify Teams]    Script Date: 27/07/2020 20:27:28 ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Notify Teams', 
+		@step_id=1, 
+		@cmdexec_success_code=0, 
+		@on_success_action=1, 
+		@on_success_step_id=0, 
+		@on_fail_action=2, 
+		@on_fail_step_id=0, 
+		@retry_attempts=0, 
+		@retry_interval=0, 
+		@os_run_priority=0, @subsystem=N'CmdExec', 
+		@command=N'powershell.exe -File C:\temp\AgentJobs\NotifyTeams.ps1', 
+		@flags=0, 
+		@proxy_name=N'TheBeardIsMighty'
+IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+    IF (@@TRANCOUNT &gt; 0) ROLLBACK TRANSACTION
+EndSave:
+GO
+</code></pre><p>When the job runs</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-10.png loading=lazy></p><p>The results are posted to the Teams Channel</p><p><img src=https://blog.robsewell.com/assets/uploads/2020/07/image-11.png loading=lazy></p><p>If you can run the Agent Job on a machine that can connect to Teams and your SQL Instances then you can remove the need to use a remote session by using this code</p><pre><code>$SQLInstances = 'SQL2005Ser2003','SQL2008Ser12R2','SQL2014Ser12R2','SQL2016N1','SQL2016N2','SQL2016N3','SQL2017N5','SQL2019N20','SQL2019N21','SQL2019N22','SQL2019N5'
+
+$startdate = (Get-Date).AddHours(-12)
+$webhookurl = &quot;&quot;
+
+
+# Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+$AllJobs = &quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...     
+---------------------------------------------  
+&quot;
+foreach ($Instance in $SQLInstances) {
+    Write-Host &quot;Connecting to $instance&quot;
+    try{
+        $smo = Connect-DbaInstance $Instance -ErrorAction Stop
+        Write-Host &quot;Connected successfully to $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed to connect to $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+    Write-Host &quot;Getting Agent Jobs on $instance&quot;
+    try {
+        $AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate 
+        Write-Host &quot;Successfully got Agent Jobs on $instance&quot;
+    }
+    catch {
+        Write-Host &quot;Failed to get agent jobs on $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+    
+
+    $jobs = $agentJobs 
+    $NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}|  Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&quot;00&quot;)
+    $NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&quot;00&quot;)
+
+     Write-Host &quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs  - Number of Failed Jobs $NumberOfFailedJobs&quot;
+
+    $AllJobs = $AllJobs + &quot;$($Instance.Split('.')[0])..........&lt;b&gt;$NumberOfJobs&lt;/b&gt;................&lt;b&gt;$NumberOfSuccessfulJobs&lt;/b&gt;.........................&lt;b&gt;$NumberOfFailedJobs&lt;/b&gt;............................&lt;b&gt;$NumberOfFailedJobSteps&lt;/b&gt;..............................&lt;b&gt;$NumberOfCanceledJobs&lt;/b&gt;........
+&quot;
+    try{
+        $smo.ConnectionContext.Disconnect()
+        Write-Host &quot;Disconnecting $instance&quot;
+    }
+    catch{
+        Write-Host &quot;Failed disconnect from  $Instance&quot; 
+        $errorMessage = $_ | Out-String
+        Write-Host $errorMessage
+        Continue
+    }
+
+}
+
+Write-Host &quot;Since $startdate&quot;
+Write-Host &quot;$AllJobs&quot;
+
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+ 
+$allJobsMessage = $AllJobs 
+    $Text =  @&quot;
+# Overview of SQL Agent Jobs in Production since $($startdate)  
+
+$allJobsMessage
+&quot;@
+
+    $JSONBody = [PSCustomObject][Ordered]@{
+        &quot;@type&quot;      = &quot;MessageCard&quot;
+        &quot;@context&quot;   = &quot;http://schema.org/extensions&quot;
+        &quot;summary&quot;    = &quot;Overview for the last 12 hours&quot;
+        &quot;themeColor&quot; = '0078D7'
+        &quot;sections&quot;   = @(
+            @{
+                &quot;activityTitle&quot;    = &quot;Job Results &quot;
+                &quot;activitySubtitle&quot; = &quot;Overview for the last 12 hours since $($startdate)&quot;
+                &quot;activityImage&quot;    = &quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&quot;
+                &quot;text&quot;             = $allJobsMessage
+                &quot;markdown&quot;         = $true
+            }
+        )
+    }
+ 
+    $TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+ 
+    $parameters = @{
+        &quot;URI&quot;         = $webhookurl
+        &quot;Method&quot;      = 'POST'
+        &quot;Body&quot;        = $TeamMessageBody
+        &quot;ContentType&quot; = 'application/json'
+    }
+ 
+    Invoke-RestMethod @parameters
+</code></pre><p>Happy automating!</p></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/dbatools/>dbatools</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/teams/>Teams</a>
+<a href=/blogrobsewell/tags/sql-agent/>SQL Agent</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/blogrobsewell/blog/refreshing-a-sql-mirrored-database-using-powershell/><div class=article-details><h2 class=article-title>Refreshing A SQL Mirrored Database Using Powershell</h2></div></a></article><article><a href=/blogrobsewell/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/><div class=article-details><h2 class=article-title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/10/image-7.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/10/image-7.png></div><div class=article-details><h2 class=article-title>Getting SQL Server installation date with PowerShell using dbatools</h2></div></a></article><article><a href=/blogrobsewell/blog/meap-meap-#dbatoolsmol-live-book-edition/><div class=article-details><h2 class=article-title>MEAP MEAP – #dbatoolsMoL – Live Book edition</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/><div class=article-image><img src=/blogrobsewell/assets/uploads/2019/04/image-125.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2019/04/image-125.png></div><div class=article-details><h2 class=article-title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

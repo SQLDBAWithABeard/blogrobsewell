@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dbatoolsmol on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/dbatoolsmol/</link><description>Recent content in dbatoolsmol on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/dbatoolsmol/index.xml" rel="self" type="application/rss+xml"/><item><title>My current VS Code Extensions and using a workspace file</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" />&lt;p>I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p>
+&lt;h2 id="listing-extensions">Listing Extensions&lt;/h2>
+&lt;p>From the command line you can list your extensions using&lt;/p>
+&lt;pre>&lt;code>code --list-extensions
+code-insiders --list-extensions
+&lt;/code>&lt;/pre>
+&lt;p>My list looks like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-31.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-extensions">Installing Extensions&lt;/h2>
+&lt;p>You can install extensions by opening the Extensions view in Visual Studio Code and searching for the extension. The list I have below has the precise names for each extension which you can use to search&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-24.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can also install extensions from the command-line with&lt;/p>
+&lt;pre>&lt;code>code --install-extension &amp;lt;extensionid&amp;gt;
+code-insiders --install-extension &amp;lt;extensionid&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;h2 id="my-extensions">My Extensions&lt;/h2>
+&lt;p>I am going to list these in alphabetical order by display name for ease (my ease that is!)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Because Chrissy LeMaire and I are writing &lt;a class="link" href="https://beard.media/book" target="_blank" rel="noopener"
+>dbatools in a Month of Lunches&lt;/a> using AsciiDoc, it makes sense to have an extension enabling previewing and syntax, you can find it &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=stayfool.vscode-asciidoc" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure I use the Azure Account Extension – ms-vscode.azure-account&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I use Azure CLI so I make use of the functionality of the Azure CLI Tools extension ms-vscode.azurecli&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure Repos I use the ms-vsts.team extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When creating ARM templates, this extension is very useful msazurermtools.azurerm-vscode-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have a few theme extensions, this one is for fun in demos 😉 beardedbear.beardedtheme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The blackboard theme is my default one gerane.theme-blackboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Chasing closing brackets is much easier with the Bracket Pair Colorizer, I use the beta version coenraads.bracket-pair-colorizer-2&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am rubbish at spelling and typing so I use this to help point out the issues! streetsidesoftware.code-spell-checker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Using the Docker extension adds another view to Visual Studio Code to ease working with containers ms-azuretools.vscode-docker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>As an open-source project maintainer it is good to be able to work with GitHub pull requests without leaving Visual Studio Code github.vscode-pull-request-github_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>GitLens is absolutely invaluable when working with source control. It has so many features. This is an absolute must eamodio.gitlens&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Working with Kubernetes? This extension adds another view for interacting with your cluster ms-kubernetes-tools.vscode-kubernetes-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Visual Studio Live Share enables you to collaborate in real-time in Visual Studio Code with your colleagues or friends. I blogged about this &lt;a class="link" href="https://blog.robsewell.com/visual-studio-code-live-sharing-set-up/" target="_blank" rel="noopener"
+>here&lt;/a> ms-vsliveshare.vsliveshare&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I love writing markdown and this linter assists me to ensure that my markdown is correct davidanson.vscode-markdownlint&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The Material Icon Theme ensures that there are pretty icons in my editor! pkief.material-icon-theme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have both the PowerShell extension ms-vscode.powershell and the PowerShell preview extension ms-vscode.powershell-preview installed but only one can be enabled at a time&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This suite of extensions enables easy remote development so that you can develop your PowerShell scripts, for example, inside a ubuntu container running PowerShell 7 or inside Windows Subsystem for LInux ms-vscode-remote.vscode-remote-extensionpack_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-20.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Writing for cross-platform means looking out for line endings and this extension will display them and any whitespace in your editor medo64.render-crlf&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-21.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>An absolutely essential extension which enables me to backup all of my Visual Studio Code settings, shortcuts, extensions into a GitHub gist and keep all of my machines feeling the same. shan.code-settings-sync&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-22.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For working with SQL Server within Visual Studio Code and having a view for my instances as well as a linter and intellisense I use ms-mssql.mssql&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-23.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yaml files and spaces! I no longer get so confused with this extension to help me 🙂 redhat.vscode-yaml&lt;/p>
+&lt;h2 id="workspaces">Workspaces&lt;/h2>
+&lt;p>Now that is a lot of extensions and I dont need all of them everytime. I use workspaces to help with this. I will create a workspace file for the project I am working on.&lt;/p>
+&lt;p>I open or create the folders I will be working on and then click File and Save Workspace As and save the file in the root of the folder.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-25.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now, the next time I want to open the workspace, I can open the workspace file or if I open the folder Visual Studio Code will helpfully prompt me&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now I can have all of my settings retained for that workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-27.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For this folder, I am ensuring that the PowerShell extension uses the PSScriptAnalyzer Settings file that I have created so that it will show if the code is compatible with the versions of PowerShell I have chosen. I can define settings for a workspace in the settings file, which you can open using CTRL and ,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-28.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>But I can also enable or disable extensions for a workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-29.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So everytime I open this workspace I am only loading the extensions I want&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-30.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Getting SQL Server installation date with PowerShell using dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</link><pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/10/image-7.png" alt="Featured image of post Getting SQL Server installation date with PowerShell using dbatools" />&lt;p>Most of my writing time at the moment is devoted to  &lt;em>&lt;a class="link" href="https://dbatools.io/book" target="_blank" rel="noopener"
+>Learn dbatools in a Month of Lunches&lt;/a>&lt;/em> which is now available but here is a short post following a question someone asked me.&lt;/p>
+&lt;h2 id="how-can-i-get-the-installation-date-for-sql-server-on-my-estate-into-a-database-with-dbatools-">How can I get the Installation Date for SQL Server on my estate into a database with dbatools ?&lt;/h2>
+&lt;p>You can get the date that SQL Server was installed using the creation date of the NT Authority\System login using T-SQL&lt;/p>
+&lt;pre>&lt;code>SELECT create_date
+FROM sys.server_principals
+WHERE sid = 0x010100000000000512000000
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="with-dbatools">With dbatools&lt;/h2>
+&lt;p>To do this with dbatools you can use the command &lt;a class="link" href="https://docs.dbatools.io/#Get-DbaInstanceInstallDate" target="_blank" rel="noopener"
+>Get-DbaInstanceInstallDate&lt;/a> command&lt;/p>
+&lt;pre>&lt;code>Get-DbaInstanceInstallDate -SqlInstance localhost
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="more-than-one-instance">More than one instance&lt;/h2>
+&lt;p>If we want to get the installation date for more than one instance we can simply create an array of instances for the SqlInstance parameter&lt;/p>
+&lt;pre>&lt;code>Get-DbaInstanceInstallDate -SqlInstance localhost, localhost\DAVE
+&lt;/code>&lt;/pre>
+&lt;h2 id="get-the-windows-installation-date-too">Get the Windows installation date too&lt;/h2>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can also get the windows installation date with the IncludeWindows switch&lt;/p>
+&lt;pre>&lt;code>Get-DbaInstanceInstallDate -SqlInstance localhost, localhost\DAVE -IncludeWindows
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="gather-your-instances">Gather your instances&lt;/h2>
+&lt;p>How you get the instances in your estate is going to be different per reader but here is an example using Registered Servers from my local registered servers list, you can also use a Central Management Server&lt;/p>
+&lt;pre>&lt;code>Get-DbaRegisteredServer -Group local
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So we can gather those instances into a variable and pass that to Get-DbaInstanceInstallDate&lt;/p>
+&lt;pre>&lt;code>$SqlInstances = Get-DbaRegisteredServer -Group local
+Get-DbaInstanceInstallDate -SqlInstance $SqlInstances
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="add-to-database">Add to database&lt;/h2>
+&lt;p>To add the results of any PowerShell command to a database, you can pipe the results to &lt;a class="link" href="https://docs.dbatools.io/#Write-DbaDbTableData" target="_blank" rel="noopener"
+>Write-DbaDbTableData&lt;/a>&lt;/p>
+&lt;pre>&lt;code>$SqlInstances = Get-DbaRegisteredServer -Group local
+$writeDbaDataTableSplat = @{
+SqlInstance = 'localhost'
+Table = 'InstallDate'
+Database = 'tempdb'
+Schema = 'dbo'
+AutoCreateTable = $true
+}
+Get-DbaInstanceInstallDate -SqlInstance $SqlInstances | Write-DbaDataTable @writeDbaDataTableSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This will create a table called InstallDate and put the results of the Get-DbaInstanceInstallDate command. Note – If you want to try this code, I would advise using a different database than tempdb!!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It is important to note that the table created may not have the most optimal data types and that you may want to pre-create the table.&lt;/p>
+&lt;p>So there you go, all the installation dates for your estate in a database table. Hope that helps you Jonny.&lt;/p></description></item><item><title>MEAP MEAP – #dbatoolsMoL – Live Book edition</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/meap-meap-#dbatoolsmol-live-book-edition/</link><pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/meap-meap-#dbatoolsmol-live-book-edition/</guid><description>&lt;p>It’s been a busy time!&lt;/p>
+&lt;p>As well as many other things, the fantastical &lt;a class="link" href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life" target="_blank" rel="noopener"
+>BDFL&lt;/a> of &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> Chrissy Lemaire &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>@cl&lt;/a> and myself have written enough of a chunk of &lt;em>&lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>Learn dbatools in a Month of Lunches&lt;/a>&lt;/em> that our publisher &lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>Manning Publications&lt;/a> have agreed to release it as a MEAP. Not a text book, this book is written in a fun conversational style and split up into chapters that you can read in a lunch-time.&lt;/p>
+&lt;p>It is impossible for me to hear MEAP and not think of this 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://tenor.com/view/hungry-coyote-looney-tunes-gif-5063446" target="_blank" rel="noopener"
+>Roadrunner Speeding GIF&lt;/a> from &lt;a class="link" href="https://tenor.com/search/hungry-gifs" target="_blank" rel="noopener"
+>Hungry GIFs&lt;/a>&lt;/p>
+&lt;p>but I expect you are wondering what a MEAP is?&lt;/p>
+&lt;blockquote>
+&lt;p>What is MEAP?&lt;br>
+A book can take a year or more to write, so how do you learn that hot new technology today? The answer is MEAP, the Manning Early Access Program. In MEAP, you read a book chapter-by-chapter while it’s being written and get the final eBook as soon as it’s finished. If you pre-order the pBook, you’ll get it long before it’s available in stores.&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.manning.com/meap-program" target="_blank" rel="noopener"
+>https://www.manning.com/meap-program&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Basically, to make it easy to get and for those that like to get in early, you can order the book and get the first 4 chapters (three in reality) RIGHT NOW!! (It also means that Chrissy and I have to write the rest of book – dang still going to be busy!)&lt;/p>
+&lt;p>Simply head over to &lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>https://beard.media/bookblog&lt;/a> and use the code mlsewell and you can get access to the book too.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/08/meap.png"
+loading="lazy"
+>](&lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>https://beard.media/bookblog&lt;/a>)&lt;/p>
+&lt;p>This will also give you access to the live book.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/livebook.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>live book&lt;/p>
+&lt;p>The live book is fantastic, you can read the whole book from within your browser. See the three icons that appear to the right of the book?&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/stuffage.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>3 little icons (no porridge)&lt;/p>
+&lt;p>The left hand one enables you to bookmark an important part so that you can come back to it easily using the bookmarks link in the top right&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/bookmark.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>bookmarks&lt;/p>
+&lt;p>The middle icon enables you to write notes for yourself, maybe ways that you can use the information or maybe comments about an awesome Italian.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/satori.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Shoes&lt;/p>
+&lt;p>The last one is the way that you can make comments and engage us , the authors in conversation, ask questions, request clarification or wonder about Dutch data manglers&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/sander.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I think its down to PII&lt;/p>
+&lt;p>If you select a piece of text, another menu opens up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/highlight.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The first icon lets you highlight the text, to make it easier to find later&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/highlightyellow.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Hover over the highlight and you can choose different colours for different things.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>or even create pretty pictures for Mathias&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/pretty.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Mathias – Why isn’t he an MVP?&lt;/p>
+&lt;p>You can choose to annotate, which is sort of like highlighting and writing a note with the next icon&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/other-users.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When you want to share a link to a particular part of the book with someone else, you can highlight part of it and click the link icon&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/linkylinky.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It’s easy to start PowerShell as another user as long as you remember when to press SHIFT&lt;/p>
+&lt;p>Which will highlight the paragraph and open a dialogue at the bottom where you can create and copy the link.&lt;/p>
+&lt;p>By far the most important part for Chrissy and I is the last link. When you find something wrong you can mark it for our attention. Yes, even with Chrissy and I proof reading each others words, the fabulous proof reader Cláudio Silva (&lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+>t&lt;/a>) and awesome tech editor Mike Shepard (&lt;a class="link" href="https://powershellstation.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/MikeShepard70" target="_blank" rel="noopener"
+>t&lt;/a>)  as well as many community reviewers there are still, and will continue to be, issues. So when you find them, highlight them and click the right hand most link&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/withwith.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>with with more more than than one one&lt;/p>
+&lt;p>This will open up as shown so that you can fill in what was wrong (Please don’t report this error again Shane &lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/SOZDBA" target="_blank" rel="noopener"
+>t&lt;/a> has beaten you to it!)&lt;/p>
+&lt;p>You will have noticed on social media and elsewhere that we have left some easter eggs in the book&lt;/p>
+&lt;blockquote>
+&lt;p>Yup, we have some easter eggs in &lt;a class="link" href="https://twitter.com/hashtag/dbatoolsMol?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbatoolsMol&lt;/a>&lt;/p>
+&lt;p>We hope you enjoy them &lt;a class="link" href="https://t.co/iZa3u8iLPC" target="_blank" rel="noopener"
+>https://t.co/iZa3u8iLPC&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1167116661503266819?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>August 29, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Whenever you find them or whenever you want to talk about the book on social media, please use the hashtag #dbatoolsMoL – you never know what goodies may end up in your inbox.&lt;/p>
+&lt;p>Oh and if you have got this far and don’t know what dbatools in a Month of Lunches is, listen to the hair and read more &lt;a class="link" href="https://dbatools.io/meap/" target="_blank" rel="noopener"
+>https://dbatools.io/meap/&lt;/a>&lt;/p></description></item><item><title>PowerShell in SQL Notebooks in Azure Data Studio</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/powershell-in-sql-notebooks-in-azure-data-studio/</link><pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/powershell-in-sql-notebooks-in-azure-data-studio/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/07/image-4.png" alt="Featured image of post PowerShell in SQL Notebooks in Azure Data Studio" />&lt;p>I have done a lot of writing in the last few months but you see no blog posts! My wonderful friend Chrissy and I are writing “dbatools in a Month of Lunches” to be published by Manning. That has taken up a lot of my writing mojo. We have hit a little break whilst we have some reviews done ready for the &lt;a class="link" href="https://www.manning.com/meap-program" target="_blank" rel="noopener"
+>MEAP&lt;/a> (For everyone who asks, the answer is the unfulfilling ‘soon’) so it’s time for a blog post!&lt;/p>
+&lt;h2 id="sql-notebooks-are-cool">SQL Notebooks are cool&lt;/h2>
+&lt;p>I have had a lot of fun with SQL Notebooks recently. I have presented a session about them at a couple of events this month &lt;a class="link" href="http://datagrillen.com" target="_blank" rel="noopener"
+>DataGrillen&lt;/a> and SQL Saturday Cork. Here is a little snippet&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://twitter.com/hashtag/dbatools?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbatools&lt;/a> in PowerShell in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> SQL Notebooks for creating the containers and restoring the &lt;a class="link" href="https://twitter.com/hashtag/dbachecks?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbachecks&lt;/a> historical database for running queries in 🙂&lt;br>
+Getting ready for presentation for &lt;a class="link" href="https://twitter.com/hashtag/DataGrillen?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#DataGrillen&lt;/a> &lt;a class="link" href="https://t.co/wiQ41bblQV" target="_blank" rel="noopener"
+>pic.twitter.com/wiQ41bblQV&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1130871277449875456?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>May 21, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Yes, you can run PowerShell in a SQL Notebook in Azure Data Studio just by clicking a link in the markdown cell. This opens up a lot of excellent possibilities.&lt;/p>
+&lt;p>I have had several discussions about how SQL Notebooks can be used by SQL DBAs within their normal everyday roles. (Mainly because I don’t really understand what the sorcerers of data science do with notebooks!). I have helped clients to look at some of their processes and use SQL Notebooks to help with them. Creating Disaster Recovery or Change Run-books or Incident Response Templates or using them for product demonstrations. Of course, I needed to use PowerShell in that 🙂&lt;/p>
+&lt;p>I have really enjoyed working out how to run PowerShell in the markdown in a SQL Notebook in Azure Data Studio and I think &lt;a class="link" href="http://www.centinosystems.com/blog/author/aencentinosystems-com/" target="_blank" rel="noopener"
+>Anthony the kubernetes magician&lt;/a> did too!&lt;/p>
+&lt;blockquote>
+&lt;p>I think &lt;a class="link" href="https://twitter.com/sqldbawithbeard?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@sqldbawithbeard&lt;/a> is an actual wizard! You should see the things he can do with &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/DataGrillen?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#DataGrillen&lt;/a> &lt;a class="link" href="https://t.co/KMeZR3CrPK" target="_blank" rel="noopener"
+>pic.twitter.com/KMeZR3CrPK&lt;/a>&lt;/p>
+&lt;p>— Anthony E. Nocentino (@nocentino) &lt;a class="link" href="https://twitter.com/nocentino/status/1141709511700467712?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>June 20, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>OK enough magic puns lets talk about PowerShell in SQL Notebooks. You can read about &lt;a class="link" href="https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>how to create a SQL Notebook and run T-SQL queries here&lt;/a>, (you no longer need the Insider Edition by the way)&lt;/p>
+&lt;h2 id="powershell-in-markdown">PowerShell in Markdown!&lt;/h2>
+&lt;p>First, before I go any further, I must say this. I was at the European PowerShell Conference when I was working this out and creating my sessions and I said the words&lt;/p>
+&lt;blockquote>
+&lt;p>“Cool, I can click a link and run PowerShell, this is neat”&lt;/p>
+&lt;p>A Beardy fellow in Hannover&lt;/p>
+&lt;/blockquote>
+&lt;p>This stopped some red team friends of mine in their tracks and they said “Show me”. One of them was rubbing their hands with glee! You can imagine the sort of wicked, devious things that they were immediately considering doing.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yes, it’s funny but also it carries a serious warning. Without understanding what it is doing, please don’t enable PowerShell to be run in a SQL Notebook that someone sent you in an email or you find on a GitHub. In the same way as you don’t open the word document attachment which will get a thousand million trillion europounddollars into your bank account or run code you copy from the internet on production without understanding what it does, this could be a very dangerous thing to do.&lt;/p>
+&lt;p>With that warning out of the way, there are loads of really useful and fantastic use cases for this. SQL Notebooks make great run-books or incident response recorders and PowerShell is an obvious tool for this. (If only we could save the PowerShell output in a SQL Notebook, this would be even better)&lt;/p>
+&lt;h2 id="how-on-earth-did-you-work-this-out">How on earth did you work this out?&lt;/h2>
+&lt;p>Someone asked me how I worked it out. I didn’t! It began with Vicky Harp PM lead for the SQL Tools team at Microsoft&lt;/p>
+&lt;blockquote>
+&lt;p>Did you know you can add markdown links to open a terminal and paste in a command in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> notebooks? &lt;a class="link" href="https://t.co/YHX9pIVQco" target="_blank" rel="noopener"
+>pic.twitter.com/YHX9pIVQco&lt;/a>&lt;/p>
+&lt;p>— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1128359827128950784?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>May 14, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>I then went and looked at &lt;a class="link" href="https://twitter.com/kevcunnane" target="_blank" rel="noopener"
+>Kevin Cunnane&lt;/a>‘s notebook. Kevin is a member of the tools team working on Azure Data Studio. With SQL Notebooks, you can double click the markdown cell and see the code that is behind it. To understand how it is working, lets deviate a little.&lt;/p>
+&lt;h2 id="keyboard-shortcuts">Keyboard Shortcuts&lt;/h2>
+&lt;p>IF you click the cog at the bottom left of Azure Data Studio and choose Keyboard Shortcuts&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>you can make Azure Data Studio (and Visual Studio Code) work exactly how you want it to. Typing in the top box will find a command and you can then set the shortcuts that you want to use to save yourself time.&lt;/p>
+&lt;p>&lt;img src="https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>](&lt;a class="link" href="https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?ssl=1" target="_blank" rel="noopener"
+>https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?ssl=1&lt;/a>)&lt;/p>
+&lt;p>This also enables you to see the command that is called when you use a keyboard shortcut. For example, you can see that for the focus terminal command it says &lt;code>workbench.action.terminal.focus&lt;/code>.&lt;/p>
+&lt;p>It turns out that you can call this as a link in a Markdown document using HTML with &lt;code>&amp;lt;a href=&amp;quot;&amp;quot;&amp;gt;&lt;/code> and adding &lt;code>command:&lt;/code> prior to the command text. When the link is clicked the command will run. Cool 🙂&lt;/p>
+&lt;p>For this to be able to work (you read the warning above?) you need to set the Notebook to be trusted by clicking this button.&lt;/p>
+&lt;p>&lt;img src="https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>](&lt;a class="link" href="https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?ssl=1" target="_blank" rel="noopener"
+>https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?ssl=1&lt;/a>)&lt;/p>
+&lt;p>This will allow any command to be run. Of course, people with beards will helpfully advise when this is required for a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/05%20-Working%20with%20dbachecks%20Validation%20Results.ipynb" target="_blank" rel="noopener"
+>SQL Notebook&lt;/a>. (Safe to say people attempting nefarious actions will try the same with your users)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now that we know how to run an Azure Data Studio command using a link in a markdown cell the next step is to run a PowerShell command. I headed to the &lt;a class="link" href="https://code.visualstudio.com/docs/editor/integrated-terminal" target="_blank" rel="noopener"
+>Visual Studio Code documentation&lt;/a> and found&lt;/p>
+&lt;blockquote>
+&lt;p>Send text from a keybinding&lt;br>
+The &lt;code>workbench.action.terminal.sendSequence&lt;/code> command can be used to send a specific sequence of text to the terminal, including escape sequence&lt;/p>
+&lt;/blockquote>
+&lt;p>That’s the command we need, however, we still need to craft the command so that it will work as a link. It needs to be converted into a URL.&lt;/p>
+&lt;p>I started by using this website &lt;a class="link" href="https://www.url-encode-decode.com/" target="_blank" rel="noopener"
+>https://www.url-encode-decode.com/&lt;/a> to do this. This is &lt;strong>how you can check the code in other peoples notebook, use the decode capability.&lt;/strong>&lt;/p>
+&lt;p>Encoding &lt;code>Set-Location C:\dbachecks&lt;/code> gives `Set-Location+C%3A%5Cdbacheck``&lt;/p>
+&lt;p>&lt;img src="https://i0.wp.com/user-images.githubusercontent.com/6729780/59567164-e5044300-9061-11e9-802b-7b28c3aee345.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>So I can just put that code into the href link and bingo!&lt;/p>
+&lt;p>If only it was that easy!!&lt;/p>
+&lt;h2 id="some-replacing-is-required">Some Replacing is required&lt;/h2>
+&lt;p>The + needs to be replaced with a space or &lt;code>%20&lt;/code>&lt;/p>
+&lt;p>You also need to double the &lt;code>\&lt;/code> and replace the &lt;code>%3A&lt;/code> with a &lt;code>:&lt;/code>&lt;br>
+The &lt;code>&amp;quot;&lt;/code> needs to be replaced with &lt;code>\u022&lt;/code>, the &lt;code>'&lt;/code> with &lt;code>\u027&lt;/code>, the curly braces won’t work unless you remove the &lt;code>%0D%0A&lt;/code>. Got all that? Good!&lt;/p>
+&lt;p>Once you have written your PowerShell, encoded it, performed the replacements, you add &lt;code>\u000D&lt;/code> at the end of the code to pass an enter to run the code and then place all of that into a link like this&lt;/p>
+&lt;p>&lt;code>&amp;lt;a href=&amp;quot;command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 PLACE THE ENCODED CODE HERE %22%7D&amp;quot;&amp;gt;Link Text&amp;lt;/a&amp;gt;&lt;/code>&lt;/p>
+&lt;p>This means that if you want to add the PowerShell code to set a location and then list the files and folders in that location to a Markdown cell using PowerShell like this&lt;/p>
+&lt;pre>&lt;code>Set-Location C:\dbachecks
+Get-ChildItem
+&lt;/code>&lt;/pre>
+&lt;p>You would end up with a link like this&lt;/p>
+&lt;p>&lt;code>`&amp;lt;a href=&amp;quot;command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 Set-Location C:%5C%5Cdbachecks \u000D Get-ChildItem \u000D %22%7D&amp;quot;&amp;gt;Set Location and list files&amp;lt;/a`&lt;/code>&amp;gt;&lt;/p>
+&lt;h2 id="doing-something-more-than-once">Doing something more than once?&lt;/h2>
+&lt;p>I don’t want to remember that all of the time so I wrote a PowerShell function. You can find it on GitHub &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1&lt;/a>&lt;/p>
+&lt;p>This will take a PowerShell command and turn it into a link that will work in an Azure Data Studio markdown. It’s not magic, it’s PowerShell. There is a –&lt;code>ToClipboard&lt;/code> parameter which will copy the code to the clipboard ready for you to paste into the cell (On Windows machines only)&lt;/p>
+&lt;h2 id="giants">Giants&lt;/h2>
+&lt;p>There are many uses for this but here’s one I think is cool.&lt;/p>
+&lt;p>The link below will go to a notebook, which will show how you the giants upon whose shoulders I stand&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/GlennAlanBerry" target="_blank" rel="noopener"
+>Glenn Berry&lt;/a>,&lt;br>
+&lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy LeMaire&lt;/a>,&lt;br>
+&lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>André&lt;/a> &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>Kamman&lt;/a>,&lt;br>
+&lt;a class="link" href="https://twitter.com/spaghettidba" target="_blank" rel="noopener"
+>Gianluca Sartori&lt;/a>&lt;/p>
+&lt;p>have enabled me to create a SQL Notebook with a link which will run some PowerShell to create a SQL Notebook which will have all of the Diagnostic Queries in it.&lt;/p>
+&lt;p>You could possibly use something like it for your incident response SQL Notebook.&lt;/p>
+&lt;p>It’s also cool that GitHub renders the notebook in a browser (You can’t run PowerShell or T-SQL from there though, you need Azure Data Studio!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-4.png"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>

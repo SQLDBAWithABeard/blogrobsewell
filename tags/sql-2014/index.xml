@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL 2014 on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/sql-2014/</link><description>Recent content in SQL 2014 on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 22 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/sql-2014/index.xml" rel="self" type="application/rss+xml"/><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p>Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>using Power Bi with my DBA Database&lt;/a> I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p>
+&lt;p>In this post I will show how to create the following report&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+>&lt;/a>&lt;/p>
+&lt;p>Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You will find the latest version of my DBADatabase creation scripts and PowerShell scripts here.&lt;/a>&lt;/p>
+&lt;p>The SQLInfo table is created using this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [Info].[Databases](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DatabaseID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [InstanceID] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Name] [nvarchar](256) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DateAdded] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DateChecked] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AutoClose] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AutoCreateStatisticsEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AutoShrink] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AutoUpdateStatisticsEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AvailabilityDatabaseSynchronizationState] [nvarchar](16) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AvailabilityGroupName] [nvarchar](128) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [CaseSensitive] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Collation] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [CompatibilityLevel] [nvarchar](15) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [CreateDate] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DataSpaceUsageKB] [float] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [EncryptionEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IndexSpaceUsageKB] [float] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsAccessible] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsFullTextEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsMirroringEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsParameterizationForced] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsReadCommittedSnapshotOn] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsSystemObject] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsUpdateable] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [LastBackupDate] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [LastDifferentialBackupDate] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [LastLogBackupDate] [datetime2](7) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Owner] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [PageVerify] [nvarchar](17) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ReadOnly] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [RecoveryModel] [nvarchar](10) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ReplicationOptions] [nvarchar](40) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SizeMB] [float] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SnapshotIsolationState] [nvarchar](10) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SpaceAvailableKB] [float] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Status] [nvarchar](35) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [TargetRecoveryTime] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CONSTRAINT [PK_Databases] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DatabaseID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also enable some logging into a new event log by following the steps here &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx&lt;/a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT&lt;/p>
+&lt;p>To run the script I simply need to add the values for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$CentralDBAServer = &amp;#39;&amp;#39; ## Add the address of the instance that holds the DBADatabase
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CentralDatabaseName = &amp;#39;DBADatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogFile = &amp;#34;\DBADatabaseServerUpdate_&amp;#34; + $Date + &amp;#34;.log&amp;#34; ## Set Path to Log File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get the script &lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>from here&lt;/a> or you can read on to see how it works and how to create the report and publish it to powerbi.com and query it with natural langauge&lt;/p>
+&lt;p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible. I won&amp;rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called $ServerNames holding the server name, instance name and port&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[InstanceName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the array and create a $Connection variable for my SMO connection string and connect to the server&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Even though I place the creation of the SMO server object in a try block you still need to an additional check to ensure that you can connect and populate the object as the code above creates an empty SMO Server object with the name property set to the $Connection variable if you can&amp;rsquo;t connect to that server and doesn’t error as you may expect The way I have always validated an SMO Server object is to check the version property. There is no justifiable reason for choosing that property, you could choose any one but that’s the one I have always used. I use an if statement to do this ( &lt;a class="link" href="https://blog.robsewell.com/blog/powershell-snippets-a-great-learning-tool/" target="_blank" rel="noopener"
+>This post about Snippets will show you the best way to learn PowerShell code&lt;/a>) The reference I use for exiting a loop in the way that you want is &lt;a class="link" href="http://ss64.com/ps/break.html" target="_blank" rel="noopener"
+>this one&lt;/a> In this case we use a continue to carry on iterating the loop&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> if (!( $srv.version)){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Catch-Block &amp;#34; Failed to Connect to $Connection&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the user databases&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach($db in $srv.databases|Where-Object {$_.IsSystemObject -eq $false })
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Name = $db.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Parent = $db.Parent.Name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To gather information on all databases just remove everything after the pipe symbol or if you wish to exclude certain databases from the collection gathering, maybe the database you keep &lt;a class="link" href="https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/" target="_blank" rel="noopener"
+>your Change log table&lt;/a> and DBA Team info in you can do that as well here&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Name = $db.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Parent = $db.Parent.Name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you wish to view all of the different properties that you can gather information on in this way you can use this code to take a look. (This is something you should get used to doing when writing new PowerShell scripts)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Connection = &amp;#39;SERVERNAMEHERE&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv.databases | Get-Member
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>An alternative method of doing this is to set a variable to a $db and then to select all of the properties so that you can see the values and identify the ones you want. Again this a good thing to do when exploring new objects&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$db = $srv.databases[&amp;#39;DBNAMEHERE&amp;#39;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db| Select *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can see from the screen shot below that there are 170 properties available to you on a SQL2014 instance. You can gather any or all of that information as long as you ensure that you have the columns with the correct data types in your table and that your script has the logic to deal with properties that do not exist although I have had less issue with this for the database object than the server object&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db3.png?w=300"
+loading="lazy"
+alt="db3"
+>&lt;/a>&lt;/p>
+&lt;p>You can look for the property that you want by using the Get-Member cmdlet as shown above or use MSDN to find it &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.database%28v=sql.120%29.aspx" target="_blank" rel="noopener"
+>starting from here&lt;/a> or by GoogleBingDuckDuckGo ing &amp;ldquo;PowerShell SMO&amp;rdquo; and the property you wish to find.&lt;/p>
+&lt;p>The rest of the script follows exactly the same pattern as &lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>the previous post&lt;/a> by checking the SQL Info table for an entry for that instance and updating the table if it exists and inserting if it does not.&lt;/p>
+&lt;p>This is how I created the reports shown above.&lt;/p>
+&lt;p>Connect to the DBA Database and run these queries to gather the data for the report.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SELECT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IL.ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,IL.InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,IL.Location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,IL.Environment
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,IL.Inactive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,IL.NotContactable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[DatabaseID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[Name]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[DateAdded]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[DateChecked]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AutoClose]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AutoCreateStatisticsEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AutoShrink]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AutoUpdateStatisticsEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AvailabilityDatabaseSynchronizationState]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[AvailabilityGroupName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[CaseSensitive]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[Collation]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[CompatibilityLevel]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[CreateDate]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[DataSpaceUsageKB]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[EncryptionEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IndexSpaceUsageKB]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsAccessible]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsFullTextEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsMirroringEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsParameterizationForced]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsReadCommittedSnapshotOn]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[IsUpdateable]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[LastBackupDate]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[LastDifferentialBackupDate]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[LastLogBackupDate]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[Owner]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[PageVerify]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[ReadOnly]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[RecoveryModel]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[ReplicationOptions]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[SizeMB]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[SnapshotIsolationState]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[SpaceAvailableKB]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[Status]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">,D.[TargetRecoveryTime]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FROM [DBADatabase].[Info].[Databases] as D
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">JOIN [DBADatabase].[dbo].[InstanceList] as IL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ON IL.InstanceID =D.InstanceID
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To get all the database and instance information and&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SELECT C.ClientName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DatabaseID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Notes]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[ClientDatabaseLookup] as CDL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JOIN [DBADatabase].[dbo].[Clients] as C
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ON CDL.clientid = c.clientid
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To get the client information. The client information needs to be manually added to the table as this (in general) needs a human bean to understand. When the script runs every night it will pick up new databases and I add a default value of &amp;ldquo;Not Entered&amp;rdquo; to the table which makes it easier to identify the databases that need this additional work. (This also means that as a Team Leader I can monitor that my team are doing this) It can also be added to any scripts which create new databases for deployment.&lt;/p>
+&lt;p>Then we need to create some measures and calculated columns for our report. I did this as I realised that I needed it when making the report rather than all up front.&lt;/p>
+&lt;p>I created two calculated columns for size for the databases one for Gb and one for Tb by clicking on the data icon on the left and then new measure&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SizeGb = Query1[SizeMB]/1024
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SizeTb = Query1[SizeGb]/1024
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Some measures for count of Databases, Instances and Servers&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Databases = COUNT(Query1[DatabaseID])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Instances = DISTINCTCOUNT(Query1[InstanceID])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Servers = DISTINCTCOUNT(Query1[ServerName])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I also wanted to be able to differentiate between &amp;lsquo;External&amp;rsquo; and &amp;lsquo;Internal&amp;rsquo; customers. So I created a calculated column for this value using a switch statement.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">External = SWITCH(Clients[ClientName],&amp;#34;Not Entered&amp;#34;, 0 , &amp;#34;Dev Team&amp;#34;,0,&amp;#34;Mi Team&amp;#34;,0,&amp;#34;DBA Team&amp;#34;,0,&amp;#34;Finance Department&amp;#34;,0,&amp;#34;HR&amp;#34;,0,&amp;#34;Operations&amp;#34;,0,&amp;#34;Payroll&amp;#34;,0,&amp;#34;Test Team&amp;#34;,0,&amp;#34;Systems Team&amp;#34;,0,&amp;#34;Unknown&amp;#34;,0,1)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I create a donut chart to show the size of the database in Gb by client (and no, my real clients are not rock bands :-) ) as shown below. I formatted the title, legend and background by clicking on the paintbrush in the visualisation pane. I would encourage you to investigate the options here.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db4.png?w=300"
+loading="lazy"
+alt="db4"
+>&lt;/a> The other donut chart is number of clients per location (and those are SQL User group locations in the UK and my hometown Bolton)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db5.png?w=300"
+loading="lazy"
+alt="db5"
+>&lt;/a>&lt;/p>
+&lt;p>The rest of the visualisations on that report are cards and tables which I am sure that you can work out.&lt;/p>
+&lt;p>I created a map to show the location of the databases&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db6.png?w=300"
+loading="lazy"
+alt="db6"
+>&lt;/a>&lt;/p>
+&lt;p>And after reading this post &lt;a class="link" href="http://sqldusty.com/2015/08/03/power-bi-tip-use-the-treemap-chart-as-a-colorful-slicer/" target="_blank" rel="noopener"
+>http://sqldusty.com/2015/08/03/power-bi-tip-use-the-treemap-chart-as-a-colorful-slicer/&lt;/a> by Dustin Ryan I created a colourful slicer for environment and the client and then added some other information. The important thing here is to pick the information that the person looking at the report needs to see. So if it is recovery model, compatibility level, collation, page verify setting, mirroring, replication, size and number of databases then this report is correct but I doubt that’s what you want :-)&lt;/p>
+&lt;p>You can slice this report by location, client or environment. For example, I can easily see which clients have data in Exeter and the size and number of databases&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db7.png?w=300"
+loading="lazy"
+alt="db7"
+>&lt;/a>&lt;/p>
+&lt;p>Or if Metallica ring me up I can quickly see that they have 4 databases, just under 69Gb of data in Exeter and it isn&amp;rsquo;t mirrored. You will notice that it is not easy to see the recovery model or the compatibility level. If you hover over the results you get a highlight figure which shows the data is filtered but it is not shown visually very well as there are over a thousand databases using full recovery model.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db8.png?w=300"
+loading="lazy"
+alt="db8"
+>&lt;/a>&lt;/p>
+&lt;p>If we are asked about the Integration environment we can see that it is hosted in Bolton, Manchester, Southampton and Exeter and comprises of 394 databases and 739 Gb of data. It is also easier to see the compatibility level and recovery model as the ratios are larger&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db9.png?w=300"
+loading="lazy"
+alt="db9"
+>&lt;/a>&lt;/p>
+&lt;p>Once we have created the report in the way that we want we can then publish it to powerbi.com and share it with others if we wish. Publishing is as easy as pressing the publish button and entering your powerbi credentials but if you want your data to automatically refresh (and this is the point of the exercise to remove manual work) then you will need to install and configure the PowerBi gateway and schedule a refresh I will post about this later.&lt;/p>
+&lt;p>Once the report is published you can access it in the browser and create a dashboard by clicking the pin in the top right of a visualisation and a pop up will ask you which dashboard you wish to pin it to (Another recent update to Power Bi)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db10.png?w=300"
+loading="lazy"
+alt="db10"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have a dashboard you can then perform some natural language question and answer on it. This can be quite interesting and not always quite what you (or your report readers) might expect but it is getting better all the time&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db11.png?w=300"
+loading="lazy"
+alt="db11"
+>&lt;/a>&lt;/p>
+&lt;p>You have to remember to use the names of the columns correctly&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db12.png?w=300"
+loading="lazy"
+alt="db12"
+>&lt;/a>&lt;/p>
+&lt;p>But once you have the query correct you can alter it by adding &amp;ldquo;as a VISUALISATION&amp;rdquo; and choose the visualisation&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db13.png?w=300"
+loading="lazy"
+alt="db13"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db14.png?w=300"
+loading="lazy"
+alt="db14"
+>&lt;/a>&lt;/p>
+&lt;p>And once you have the visualisation you can pin it to the dashboard&lt;/p>
+&lt;p>I think you can see how useful it can be&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db15.png?w=263"
+loading="lazy"
+alt="db15"
+>&lt;/a>&lt;/p>
+&lt;p>This doesn’t work quite as you expect&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db16.png?w=300"
+loading="lazy"
+alt="db16"
+>&lt;/a>&lt;/p>
+&lt;p>But this does&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db17.png?w=275"
+loading="lazy"
+alt="db17"
+>&lt;/a>&lt;/p>
+&lt;p>How about this (and yes it felt wrong to type!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db18.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db18.png?w=300"
+loading="lazy"
+alt="db18"
+>&lt;/a>&lt;/p>
+&lt;p>And the auditors would love to be able to do this. (This is an old copy of the database in case The Eagles people are reading this - your database is backed up every 15 minutes)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db19.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db19.png?w=300"
+loading="lazy"
+alt="db19"
+>&lt;/a>&lt;/p>
+&lt;p>Or this for a DBA ( Yes, my obfuscation script database naming convention is a bit bland)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db20.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db20.png?w=300"
+loading="lazy"
+alt="db20"
+>&lt;/a>&lt;/p>
+&lt;p>Or the DBA team manager might choose this one&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db21.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db21.png?w=300"
+loading="lazy"
+alt="db21"
+>&lt;/a>&lt;/p>
+&lt;p>The advantage that I cannot show via static pictures is that the data, visualisation and the suggestions alter in real time as you type&lt;/p>
+&lt;p>I hope that you have found this useful and that you can see the benefits and advantages of using a DBA Database and empowering people to use self-service to answer their own questions leaving the DBA time to do more important things like drinking coffee :-)&lt;/p>
+&lt;p>As always if you have any questions or comments please feel free to post them on the blog.&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item></channel></rss>

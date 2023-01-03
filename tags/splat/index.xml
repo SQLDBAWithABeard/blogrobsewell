@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>splat on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/splat/</link><description>Recent content in splat on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 11 Mar 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/splat/index.xml" rel="self" type="application/rss+xml"/><item><title>Easily Splatting PowerShell with VS Code</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/easily-splatting-powershell-with-vs-code/</link><pubDate>Sun, 11 Mar 2018 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/easily-splatting-powershell-with-vs-code/</guid><description>&lt;img src="https://pbs.twimg.com/media/DX8UjepX0AYnDMS?format=jpg&name=large" alt="Featured image of post Easily Splatting PowerShell with VS Code" />&lt;p>So I always like to show splatting PowerShell commands when I am presenting sessions or workshops and realised that I had not really blogged about it. (This blog is for &lt;a class="link" href="https://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>@dbafromthecold&lt;/a> who asked me to 🙂 )&lt;/p>
+&lt;h2 id="what-is-splatting">What is Splatting?&lt;/h2>
+&lt;p>Well you will know that when you call a PowerShell function you can use intellisense to get the parameters and sometimes the parameter values as well. This can leave you with a command that looks like this on the screen&lt;/p>
+&lt;pre>&lt;code>Start-DbaMigration -Source $Source -Destination $Destination -BackupRestore -NetworkShare $Share -WithReplace -ReuseSourceFolderStructure -IncludeSupportDbs -NoAgentServer -NoAudits -NoResourceGovernor -NoSaRename -NoBackupDevices
+&lt;/code>&lt;/pre>
+&lt;p>It goes on and on and on and while it is easy to type once, it is not so easy to see which values have been chosen. It is also not so easy to change the values.&lt;/p>
+&lt;p>By Splatting the parameters it makes it much easier to read and also to alter. So instead of the above you can have&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$startDbaMigrationSplat = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Source = $Source
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NetworkShare = $Share
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoAgentServer = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoResourceGovernor = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WithReplace = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ReuseSourceFolderStructure = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Destination = $Destination
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoAudits = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BackupRestore = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoSaRename = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IncludeSupportDbs = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoBackupDevices = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Start-DbaMigration @startDbaMigrationSplat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is much easier on the eye, but if you dont know what the parameters are (and are too lazy to use &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help?view=powershell-6" target="_blank" rel="noopener"
+>Get-Help&lt;/a> – Hint You should always use &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help?view=powershell-6" target="_blank" rel="noopener"
+>Get-Help&lt;/a> ) or like the convenience and efficiency of using the intellisense, this might feel like a backward step that slows your productivity in the cause of easy on the eye code.&lt;/p>
+&lt;p>Enter &lt;a class="link" href="https://github.com/SeeminglyScience/EditorServicesCommandSuite" target="_blank" rel="noopener"
+>EditorServicesCommandSuite&lt;/a> by SeeminglyScience for VS Code. Amongst the things it makes available to you is easy splatting and people are always impressed when I show it&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>You can install it from the PowerShell Gallery like all good modules using&lt;/p>
+&lt;pre>&lt;code>Install-Module EditorServicesCommandSuite -Scope CurrentUser
+&lt;/code>&lt;/pre>
+&lt;p>and then add it to your VSCode PowerShell profile usually found at &lt;code>C:\Users\USERNAME\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\# Place this in your VSCode profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module EditorServicesCommandSuite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-EditorCommand -Module EditorServicesCommandSuite
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and now creating a splat is as easy as this.&lt;/p>
+&lt;p>Write the command, leave the cursor on a parameter, hit F1 – Choose PowerShell : Show Additional Commands (or use a keyboard shortcut) type splat press enter. Done 🙂&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>So very easy 🙂&lt;/p>
+&lt;p>Happy Splatting 🙂&lt;/p></description></item></channel></rss>

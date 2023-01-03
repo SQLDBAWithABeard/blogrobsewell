@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>IaC on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/categories/iac/</link><description>Recent content in IaC on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/categories/iac/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Pipeline Template Job Names and single quotes</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</link><pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Azure DevOps Pipeline Template Job Names and single quotes" />&lt;h1 id="the-job-name-deploy_function_app-appears-more-than-once">The job name Deploy_Function_App appears more than once&lt;/h1>
+&lt;p>This was the error I was notified about in a Azure DevOps pipeline when they tried to run it. The error message continued to say that Job Names must be unique within a pipeline.&lt;/p>
+&lt;h2 id="set-up">Set Up&lt;/h2>
+&lt;p>There is a centralised repository of Azure DevOps Pipeline Template Jobs that call the Bicep modules with the required values in the same repo to deploy Azure Infrastructure.&lt;/p>
+&lt;p>The error was received in the pipeline that was created to make use of these template jobs and deploy a whole projects worth of infrastructure.&lt;/p>
+&lt;p>It looked like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>When I looked at the template job it had&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="so-you-fixed-it">So you fixed it?&lt;/h2>
+&lt;p>I can see that the job name will always be &lt;code>Deploy_Function_App&lt;/code> so I just need to paramatarise it. For this example, I am going to say it was a parameter called suffix, and the code looked like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>A quick Pull Request, which was approved and then pushed and I said &amp;ldquo;Hey, all fixed, try again&amp;rdquo;. This is the response I got - It failed again&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>Job Deploy_Function_App_speechtotext&amp;rsquo; has an invalid name. Valid names may only contain alphanumeric characters and &amp;lsquo;_&amp;rsquo; and may not start with a number.&lt;/p>
+&lt;p>I had to look at it for a few minutes before I spotted the error! The job name sure looks like it only has alphanumeric characters and my YAML is perfectly valid so the string must be properly quoted. I mean it must be properly quoted otherwise it would fail right?&lt;/p>
+&lt;p>Wrong&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is only one single quote here which we did not notice!&lt;/p>
+&lt;p>Altering it to this worked.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: &amp;#39;Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hopefully that might help someone. (No doubt I will find this in a search in a few months time when I do it again!!)&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>What does JS_InvalidFilePath error mean in Azure DevOps?</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</link><pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post What does JS_InvalidFilePath error mean in Azure DevOps? " />&lt;h1 id="cant-find-loc-string-for-key-js_invalidfilepath">Can't find loc string for key: JS_InvalidFilePath&lt;/h1>
+&lt;p>This was the error I received in my Azure DevOps pipeline when I tried to run it.&lt;/p>
+&lt;p>When I investigated further it said&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">##[debug]workingDirectory=/home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]check path : /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[warning]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=warning;]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]task result: Failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[error]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=error;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.complete result=Failed;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="what-is-going-on">What is going on?&lt;/h1>
+&lt;p>I was trying to run a simple Azure PowerShell task and had defined it like this (I used VS Code with the Azure Pipelines extension and made use of the intellisense). I had defined it like this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - task: AzurePowerShell@5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: deploy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> displayName: Deploy from cache
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureSubscription: &amp;#39;azurePAYGconnection&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Inline: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $date = Get-Date -Format yyyyMMddHHmmsss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $deploymentname = &amp;#39;deploy_testRg_{0}&amp;#39; -f $date # name of the deployment seen in the activity log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $TemplateFile = &amp;#39;BicepFiles\Deployments\TheTestResourceGroup.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> New-AzDeployment -Name $deploymentname -Location uksouth -TemplateFile $TemplateFile -Verbose # -WhatIf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azurePowerShellVersion: &amp;#39;LatestVersion&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pwsh: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> enabled: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gave me no errors, the YAML is correct (yes, I was suprised too!). The Azure Pipeline definition does not raise an error either in VS Code or in Azure DevOps.&lt;/p>
+&lt;h1 id="what-was-missing">What was missing?&lt;/h1>
+&lt;p>I had not put &lt;code>ScriptType: 'InlineScript'&lt;/code> and this is what caused that odd error.&lt;/p>
+&lt;p>The correct definition was&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - task: AzurePowerShell@5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: deploy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> displayName: Deploy from cache
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureSubscription: &amp;#39;azurePAYGconnection&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ScriptType: &amp;#39;InlineScript&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Inline: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $date = Get-Date -Format yyyyMMddHHmmsss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $deploymentname = &amp;#39;deploy_testRg_{0}&amp;#39; -f $date # name of the deployment seen in the activity log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $TemplateFile = &amp;#39;BicepFiles\Deployments\TheTestResourceGroup.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> New-AzDeployment -Name $deploymentname -Location uksouth -TemplateFile $TemplateFile -Verbose # -WhatIf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azurePowerShellVersion: &amp;#39;LatestVersion&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pwsh: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> enabled: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hopefully that might help someone. (No doubt I will find this in a search in a few months time when I do it again!!)&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>Deploying a Bicep Module from a private repository without a connection to the repository</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/deploying-a-bicep-module-from-a-private-repository-without-a-connection-to-the-repository/</link><pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/deploying-a-bicep-module-from-a-private-repository-without-a-connection-to-the-repository/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Deploying a Bicep Module from a private repository without a connection to the repository" />&lt;h1 id="using-a-private-module-repository">Using a private module repository&lt;/h1>
+&lt;p>From Bicep version 0.4.1008 you can save and version your Bicep modules in repositories. &lt;a class="link" href="https://msftplayground.com/2021/11/using-private-repositories-for-bicep-modules/" target="_blank" rel="noopener"
+>You can read more about how to do it here&lt;/a>. This is really useful for reusing modules and modularising large corporate infrastructure environments.&lt;/p>
+&lt;p>You can control how a single resource (think of a storage account) is deployed across your environment and ensure that all requirements are followed (the storage account must have public access disabled, must have private endpoints and must have the one production network allowed). This is really useful and since it has been available we have used this to deploy infrastructure.&lt;/p>
+&lt;h1 id="so-whats-the-problem-">So whats the problem ?&lt;/h1>
+&lt;p>When you need to use a module from the repository, you refer to the repository when you define the module path.&lt;/p>
+&lt;p>&lt;code>module storage 'br:bearddemoacr.azurecr.io/bicep/storage/storagev2:0.0.2' = {&lt;/code>&lt;/p>
+&lt;p>This says I want to deploy something we will call &lt;code>storage&lt;/code> and you can find the definition called &lt;code>bicep/storage/storagev2&lt;/code> in a Bicep Repository (&lt;code>br&lt;/code>) at &lt;code>bearddemoacr.azurecr.io&lt;/code> and we will use the tag &lt;code>0.0.2&lt;/code>. The rest of the properties will then be written.&lt;/p>
+&lt;p>On the client that you use to do the deployment, Bicep will &lt;code>restore&lt;/code> the required information from the Bicep Repository and use that to perform the deployments. By default, it uses the path &lt;code>~/.bicep&lt;/code> on Linux/Mac and &lt;code>$HOME\.bicep&lt;/code> on Windows.&lt;/p>
+&lt;p>If you take a look in that directory, you will see the files that have been restored for use.&lt;/p>
+&lt;p>![cachecontents]({{ &amp;ldquo;/assets/uploads/2021/Bicep/cachecontents.png&amp;rdquo; | relative_url }})&lt;/p>
+&lt;p>But this relies on the client that is performing the deployment having connectivity and being able to authenticate to the Azure Container Registry (ACR) that is holding the Bicep Modules.&lt;/p>
+&lt;h1 id="why-would-the-client-not-have-access">Why would the client not have access?&lt;/h1>
+&lt;p>There are a number of situations where the deployment client (a workstation, a devops pipeline agent) may not have access to the ACR. The development and testing of the Bicep Modules may take place in a development Azure subscription which has no connectivity to the production Azure subscription. The production environment may be in Azure Government Cloud or it may be in a customers Azure subscription and opening a connection to an ACR in another subscription in another network may be prohibitively complicated and time consuming due to the process required to gain approvals and perform the actions to open the required paths or (more likely) is simply not allowed.&lt;/p>
+&lt;h1 id="bicep_cache_directory-environment-variable-to-the-rescue">BICEP_CACHE_DIRECTORY environment variable to the rescue&lt;/h1>
+&lt;p>There is an environment variable called BICEP_CACHE_DIRECTORY that defines the path that is used to hold the restored bicep artifacts. This means that we can do two things to enable us to continue to use a Bicep Repository with all of the benefits but still be able to deploy the infrastructure.&lt;/p>
+&lt;h1 id="cache-the-files">Cache the files&lt;/h1>
+&lt;p>Firstly, as part of the build process we can set the &lt;code>BICEP_CACHE_DIRECTORY&lt;/code> path and perform a &lt;code>bicep restore&lt;/code> on the Bicep Resource file. This will restore all of the referenced modules to the path. We can then package this directory with our deployment bicep file and transfer them to the deployment environment.&lt;/p>
+&lt;h1 id="deploy-the-bicep">Deploy the Bicep&lt;/h1>
+&lt;p>Then when we extract the package we can set the &lt;code>BICEP_CACHE_DIRECTORY&lt;/code> to the directory holding the cached files and deploy our bicep as we would normally. Even though the files reference the Bicep Repository by name, the deployment will use the cache. I even tested it by deleting the images from the Bicep Repository completely (after I had run &lt;code>bicep restore&lt;/code> of course) and I was able to deploy from the cache without issue.&lt;/p>
+&lt;p>Hopefully, this wil help someone somewhere as the &lt;code>BICEP_CACHE_DIRECTORY&lt;/code> variable is not wildly known or documented.&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>When you REALLY want to see your Azure DevOps Secret Variable Values</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</link><pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/michael-dziedzic-1bjsASjhfkE-unsplash.jpg" alt="Featured image of post When you REALLY want to see your Azure DevOps Secret Variable Values" />&lt;h1 id="i-really-needed-to-see-the-values">I REALLY needed to see the values&lt;/h1>
+&lt;p>The problem was that I had code in an Azure DevOps PowerShell task which was using a Service Principal to do some things in Azure and it was failing.&lt;/p>
+&lt;p>The pipeline had some things a little like this, it got a number of values from a key vault, set them to variables and used them in a custom function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$somevalue = (Get-AzKeyVaultSecret -vaultName $KeyVaultName -name &amp;#39;AGeneratedName&amp;#39;).SecretValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$somecredential = New-Object System.Management.Automation.PSCredential (&amp;#39;dummy&amp;#39;, $somevalue )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$something = $somecredential.GetNetworkCredential().Password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Do-SomethingSpecial -MyThing $something
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I was getting an error saying &amp;ldquo;forbidden - *** does not have access&amp;rdquo; or similar&lt;/p>
+&lt;p>Thing is, I knew that &lt;code>$something&lt;/code> did have access as I could run the same code from my workstation and it did the logging in for &lt;code>$something&lt;/code> so the error must be in the values that I was passing into the function. (there were more values than this but that is not important)&lt;/p>
+&lt;p>All I needed to do was to see what values had been passed to the function and I could resolve this little issue. But these were secret variables. Helpfully kept out of the logs by Azure DevOps hence the *** so what to do?&lt;/p>
+&lt;p>I thought - I know what I will do, I will write the Parameter values from the function out as Verbose, call the function with &lt;code>-Verbose&lt;/code> and then delete the run to clear up the logs.&lt;/p>
+&lt;p>I added&lt;/p>
+&lt;p>&lt;code>Write-Verbose ($PSBoundParameters | Out-String)&lt;/code>&lt;/p>
+&lt;p>to my function, called it with verbose in the pipeline and got&lt;/p>
+&lt;blockquote>
+&lt;p>Name       Value&lt;br>
+- -         - -&lt;br>
+MyThing       ***&lt;/p>
+&lt;/blockquote>
+&lt;p>Awesome.&lt;/p>
+&lt;p>Write it to a file and read it back. This is a tactic that you can read about that works but it puts the secrets on disk on the agent and I did not want to do that.&lt;/p>
+&lt;p>I thought I would be even cleverer and this time I added to my function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$WhatsMyThing = $MyThing + &amp;#39;-1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Verbose &amp;#34;My thing is $WhatsMyThing&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Thats bound to work.&lt;/p>
+&lt;p>My how I laughed when in the logs I had&lt;/p>
+&lt;blockquote>
+&lt;p>My Thing is  ***-1&lt;/p>
+&lt;/blockquote>
+&lt;p>Right. I thought.&lt;/p>
+&lt;p>This IS IT.&lt;/p>
+&lt;p>I WILL SHOW YOU AZURE DEVOPS&lt;/p>
+&lt;p>I added to my function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$WhatsMyThing =[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($$MyThing ))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Verbose &amp;#34;My thing is $WhatsMyThing&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This converted the value of MyThing into a base64 encoded value which I could see in the logs.&lt;/p>
+&lt;blockquote>
+&lt;p>My Thing is VGhlIEJlYXJkIGlzIExhdWdoaW5nIGF0IHlvdS4gWW91IHRoaW5rIEkgd291bGQgcHV0IHNvbWV0aGluZyByZWFsIGluIGhlcmU/IEdvb2QgdHJ5Lg==&lt;/p>
+&lt;/blockquote>
+&lt;p>and then I could decode it on my workstation with&lt;/p>
+&lt;p>&lt;code>[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('ValueFromLogs'))&lt;/code>&lt;/p>
+&lt;p>and learn that despite two people looking at the values we couldnt tell the difference between AGeneratedName and AnotherGeneratedName and they were the wrong way around!!!!&lt;/p>
+&lt;p>But at least I know now a good way to get those secret values.&lt;/p>
+&lt;p>If you do this, dont forget to delete the pipeline run from Azure DevOps so that the encoded value is not left in the logs for anyone to read.&lt;/p>
+&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>How to deploy an Azure Arc Enabled SQL Managed Instance in AKS</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</link><pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</guid><description>&lt;img src="https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/connecteddc.png" alt="Featured image of post How to deploy an Azure Arc Enabled SQL Managed Instance in AKS" />&lt;h1 id="want-to-play-before-ga-">Want to play before GA ?&lt;/h1>
+&lt;p>Azure SQL enabled by Azure Arc will be generally available at the end of the month following the announcement &lt;a class="link" href="https://azure.microsoft.com/en-us/blog/bring-cloud-experiences-to-data-workloads-anywhere-with-azure-sql-enabled-by-azure-arc?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>You can read more about &lt;a class="link" href="https://azure.microsoft.com/en-us/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc-enabled Data Services &lt;/a>&lt;/p>
+&lt;p>I have been playing with it for a few months, mainly in a Kubernetes cluster running on my NUCs in my office but Azure Arc is available in so many places, all the public clouds, your own data center (or NUCs in your office :-) ) so if you want to try it out and you do not want to build your own Kubernetes cluster then you can use &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/kubernetes-service?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>AKS&lt;/a> in Azure.&lt;/p>
+&lt;h1 id="how-can-i-do-that-">How can I do that ?&lt;/h1>
+&lt;p>One way is to use the &lt;a class="link" href="https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_data?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc Jumpstart website&lt;/a> which has many templates for many scenarios.&lt;/p>
+&lt;p>I like playing with &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Bicep&lt;/a> which is a domain-specific language or DSL for deploying Azure resources.&lt;/p>
+&lt;p>I have &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Beard-Aks-AEDS" target="_blank" rel="noopener"
+>created a repository on GitHub &lt;/a> which you can use to create your own AKS cluster with an Azure Arc Enabled directly connected Data Controller and SQL Managed Instance either 1 node replica or 3 node replica.&lt;/p>
+&lt;p>There is even the code to create an Azure Virtual Machine and install the required tooling if you need it.&lt;/p>
+&lt;p>All of the details and instructions are in the read me file so feel free to go and make use of it and you can have a resource group that looks like this&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/portalresources.png"
+loading="lazy"
+alt="portal"
+>&lt;/p>
+&lt;p>Just dont forget to delete the Resource Group once you have finished!!&lt;/p>
+&lt;p>You can create it any time you like with the code :-)&lt;/p>
+&lt;p>Happy Azure Arc SQL Managed Instance playing!&lt;/p></description></item><item><title>Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server" />&lt;h1 id="reusable-code">Reusable code&lt;/h1>
+&lt;p>We looked at a simple deployment of an Azure SQL Server and a database in the last blog post. You would like to reuse this code though, you will want to create more SQL Instances and SQL databases in the future. With Bicep, you can use modules and parameters to do this.&lt;/p>
+&lt;p>You can create a module for your SQL Instance. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the resource information from the documentation&lt;/a> and create a file named SQLInstance.bicep. I put it in a Resources directory.&lt;/p>
+&lt;h1 id="parameters">Parameters&lt;/h1>
+&lt;p>At the top of the file you need to define parameters to enabled you to pass in different values for the deployment. You can find information about &lt;a class="link" href="https://github.com/Azure/bicep/blob/main/docs/spec/parameters.md" target="_blank" rel="noopener"
+>Bicep parameters in the docs on GitHub&lt;/a>.&lt;/p>
+&lt;p>You define a parameter using the keyword &lt;code>param&lt;/code>. At a minimum you need a name and a datatype. An obvious one for this usecase would be the name of the SQL Instance which could be defined as&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param SqlInstanceName string
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Perhaps your organisation has a requirement for all of the data to be stored in a particular region. You might want to have a default value for your location parameter. You can define a default parameter by assigning it with an equals sign.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param location string = &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Some parameters that you would like to use will only allow certain values. You can define those as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@allowed([
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;Disabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param transparentDataEncryption string = &amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">targetScope = &amp;#39;resourceGroup&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param SqlInstanceName string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param location string = &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param tags object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param administratorLogin string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param administratorLoginPassword string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param minimalTlsVersion string = &amp;#39;1.0&amp;#39; // 1.0,1.1,1.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param publicNetworkAccess string = &amp;#39;Disabled&amp;#39; // &amp;#39;Disabled&amp;#39;,&amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ActiveDirectoryAdminUser string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ActiveDirectoryAdminUserSid string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param tenantid string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param azureADOnlyAuthentication bool = false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ExternalAdministratorPrincipalType string // User Application Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param sqlauditActionsAndGroups array //BATCH_COMPLETED_GROUP,,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP maybe some of these too but the logs will get large,APPLICATION_ROLE_CHANGE_PASSWORD_GROUP,BACKUP_RESTORE_GROUP,DATABASE_LOGOUT_GROUP,DATABASE_OBJECT_CHANGE_GROUP,DATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP,DATABASE_OBJECT_PERMISSION_CHANGE_GROUP,DATABASE_OPERATION_GROUP,DATABASE_PERMISSION_CHANGE_GROUP,DATABASE_PRINCIPAL_CHANGE_GROUP,DATABASE_PRINCIPAL_IMPERSONATION_GROUP,DATABASE_ROLE_MEMBER_CHANGE_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP,SCHEMA_OBJECT_ACCESS_GROUP,SCHEMA_OBJECT_CHANGE_GROUP,SCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP,SCHEMA_OBJECT_PERMISSION_CHANGE_GROUP,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,USER_CHANGE_PASSWORD_GROUP,BATCH_STARTED_GROUP,BATCH_COMPLETED_GROUP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param SqldatabaseNames array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param dbSkuName string // for example GP_Gen5_2, BC_Gen5_10, HS_Gen5_8, P5, S0 etc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param collation string = &amp;#39;SQL_Latin1_General_CP1_CI_AS&amp;#39; //
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param maxSizeBytes int // The max size of the database expressed in bytes.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param zoneRedundant bool = false // Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param licenseType string = &amp;#39;LicenseIncluded&amp;#39; // The license type to apply for this database. LicenseIncluded if you need a license, or BasePrice if you have a license and are eligible for the Azure Hybrid Benefit. - LicenseIncluded or BasePrice
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resource sql &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: SqlInstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: tags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> identity: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> type: &amp;#39;SystemAssigned&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: administratorLogin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: administratorLoginPassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;12.0&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minimalTlsVersion: minimalTlsVersion
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicNetworkAccess: publicNetworkAccess
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administrators: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorType: &amp;#39;ActiveDirectory&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> login: ActiveDirectoryAdminUser
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sid: ActiveDirectoryAdminUserSid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tenantId: tenantid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureADOnlyAuthentication: azureADOnlyAuthentication
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> principalType: ExternalAdministratorPrincipalType
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// SQL Databases
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resource symbolicname &amp;#39;Microsoft.Sql/servers/databases@2020-11-01-preview&amp;#39; = [for item in SqldatabaseNames:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> parent: sql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: tags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sku: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: dbSkuName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> collation: collation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> maxSizeBytes: maxSizeBytes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> zoneRedundant: zoneRedundant
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> licenseType: licenseType
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" />&lt;h1 id="an-error">An Error&lt;/h1>
+&lt;p>Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p>
+&lt;blockquote>
+&lt;p>Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately that was all that I had. I had to find the inner error for details&lt;/p>
+&lt;h1 id="try-the-deployment-log-on-the-resource-group">Try the deployment log on the Resource Group&lt;/h1>
+&lt;p>As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p>
+&lt;p>So I navigated to the home page of the Azure Portal and searched for Activity log.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png"
+loading="lazy"
+alt="activitylog"
+>&lt;/a>&lt;/p>
+&lt;p>I searched for the name of the deployment &lt;code>deploy_bicep003_20210505094331&lt;/code> and saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png"
+loading="lazy"
+alt="activitylogsearch"
+>&lt;/a>&lt;/p>
+&lt;p>clicking on the link showed me this with the relevant information hidden in the JSON&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png"
+loading="lazy"
+alt="activitylogdetails"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Resource name {&amp;rsquo;name&amp;rsquo;:&amp;lsquo;subnet1&amp;rsquo;,&amp;lsquo;addressPrefix&amp;rsquo;:&amp;lsquo;10.0.0.0/24&amp;rsquo;}.name is invalid.&lt;/p>
+&lt;/blockquote>
+&lt;p>Bingo.&lt;/p>
+&lt;p>I had made a mistake in my resource definition for the subnets. I had used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}.name&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item}.addressPrefix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where I should have used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item.name}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item.addressPrefix}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</link><pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC" />&lt;h1 id="starting-working-out">Starting working out?&lt;/h1>
+&lt;p>It is important to keep a healthy body and mind, especially when my life is so sedentary these days. Getting exercise is good for both. This blog post has nothing to do with exercise though (apart from maybe exercising the mind)&lt;/p>
+&lt;h1 id="project-bicep">Project Bicep&lt;/h1>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Bicep&lt;/a> is a language for declaring and deploying Azure Resources. Like &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>Terraform&lt;/a> it enables you to define your infrastructure as code.&lt;/p>
+&lt;h2 id="why-use-bicep-instead">WHy use Bicep instead?&lt;/h2>
+&lt;p>I really like being able to control infrastructure with code. I have used &lt;a class="link" href="https://blog.robsewell.com/tags/#terraform" target="_blank" rel="noopener"
+>Terraform to deploy infrastructure&lt;/a> and almost exclusively on Azure. I have created and altered many environments for clients over the past couple of years using Terraform. I have also used ARM templates but found them confusing and unwieldly to use.&lt;/p>
+&lt;h2 id="existing-state">Existing State&lt;/h2>
+&lt;p>Terraform will deploy the required changes to your infrastructure by comparing the existing state which is stored in a state file with the expected state which is created by running the plan command. If someone alters the Azure resource via the portal, Azure CLI or Azure PowerShell all kinds of mayhem can occur normally failure in deployment and time spent troubleshooting. It is possible to use the &lt;a class="link" href="https://www.terraform.io/docs/cli/commands/import.html" target="_blank" rel="noopener"
+>&lt;code>import&lt;/code> command in Terraform&lt;/a> to get the existing resource state into the state file so that the comparison is performed against the existing state of the resource but this requires a lot of manual intervention.&lt;/p>
+&lt;p>Bicep deploys the changes by comparing the existing state of the Azure resources with the expected state in the code. This, for me, is a super benefit and reduces the complications of those type of errors.&lt;/p>
+&lt;h2 id="latest-api-support">Latest API support&lt;/h2>
+&lt;p>Terraform resources have a lag between features or properties from Azure being made available and those features or properties being incorporated into the Terraform resource. This has lead to me requiring my deployments to have additional Azure CLI, Azure PowerShell or worse both steps to achieve what I need.&lt;/p>
+&lt;p>Bicep immediately supports all preview and GA versions for Azure Services, I don&amp;rsquo;t have to wait and all the things I can do are available to me.&lt;/p>
+&lt;h2 id="authoring">Authoring&lt;/h2>
+&lt;p>I love &lt;a class="link" href="https://code.visualstudio.com" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> and there is a &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&amp;amp;WT.mc_id=devops-13338-abewan" target="_blank" rel="noopener"
+>super extension&lt;/a> that makes authoring a joy.&lt;/p>
+&lt;h2 id="what-if-support">What If Support&lt;/h2>
+&lt;p>I have written before about the &lt;a class="link" href="https://blog.robsewell.com/blog/powershell/how-to-write-a-powershell-function-to-use-confirm-verbose-and-whatif/" target="_blank" rel="noopener"
+>importance of WhatIf for PowerShell functions and how to implement it&lt;/a> and Bicep has &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-deploy-what-if?tabs=azure-powershell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>What If for deployments&lt;/a> so that you can validate that the code you have written will perform the tasks that you expect.&lt;/p>
+&lt;h2 id="deployments-recorded-in-azure">Deployments recorded in Azure&lt;/h2>
+&lt;p>The changes that I make with Bicep are recorded in Azure and I can find them in the deployments for the Resource Group&lt;/p>
+&lt;h2 id="cost">Cost&lt;/h2>
+&lt;p>Bicep is free :-)&lt;/p>
+&lt;h1 id="deploy-an-azure-sql-database-rob">Deploy an Azure SQL Database Rob&lt;/h1>
+&lt;p>OK, let&amp;rsquo;s see an example. I would like to deploy an Azure SQL Database into a Resource Group. I will need an Azure SQL Server resource and an Azure SQL Database resource. The &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Templates site&lt;/a> has the examples that I need. The &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure SQL Server page&lt;/a> shows the Bicep code I need and the explanations of the expected values.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">resource symbolicname &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: {}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> identity: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> type: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minimalTlsVersion: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicNetworkAccess: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> encryptionIdentityId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> keyId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administrators: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorType: &amp;#39;ActiveDirectory&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> principalType: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> login: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sid: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tenantId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureADOnlyAuthentication: bool
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I create a file with a &lt;code>.bicep&lt;/code> extension in VS Code&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png"
+loading="lazy"
+alt="bicepfile"
+>&lt;/a>&lt;/p>
+&lt;p>and add only the required values. (NOTE - this is just an example and I would never recommend that you would put the password for anything in a file in plain text, we will cover how to handle secrets later. )&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">resource sql &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;beardsqlrand01&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: &amp;#39;sysadmin&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: &amp;#39;dbatools.IO&amp;#39; // DON&amp;#39;T DO THIS - EVER
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;12.0&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="validate-the-deployment-with-whatif">Validate the deployment with WhatIf&lt;/h2>
+&lt;p>I created an empty Resource Group for my test&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">New-AzResourceGroup -Name &amp;#39;BicepTest&amp;#39; -Location &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, I am going to check that the code that I have written will perform the actions that I expect. I am hoping to get&lt;/p>
+&lt;ul>
+&lt;li>An Azure SQL Instance called beardsqlrand01&lt;/li>
+&lt;li>In the location North Europe&lt;/li>
+&lt;li>With an admin login and password as stated in the file (NO Don&amp;rsquo;t ever do this in Production)&lt;/li>
+&lt;/ul>
+&lt;p>I do this using the Azure PowerShell command &lt;code>New-AzResourceGroupDeployment&lt;/code> and give it the Resource Group Name and the path to the file&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Validate the deployment with Whatif
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The first thing this does is check the status of the resources in the resource group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatif.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatif.png"
+loading="lazy"
+alt="whatif"
+>&lt;/a>&lt;/p>
+&lt;p>then it provides a list of what it will do. In this example there is only one resource.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png"
+loading="lazy"
+alt="whatifresult"
+>&lt;/a>&lt;/p>
+&lt;p>This tells us that there will be a creation of 1 resource and that the values are as I expect them. As I am happy with that I can then deploy the infrastructure by changing the &lt;code>WhatIf&lt;/code> value to false&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Deploy the changes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="deployment-can-be-seen-in-the-azure-portal">Deployment can be seen in the Azure Portal&lt;/h1>
+&lt;p>If I look in the Azure Portal, I can see the deployment is happening.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploying.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploying.png"
+loading="lazy"
+alt="portaldeploying"
+>&lt;/a>&lt;/p>
+&lt;p>Once it has finished I get an output on the screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/deploymentresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/deploymentresult.png"
+loading="lazy"
+alt="deploymentresult"
+>&lt;/a>&lt;/p>
+&lt;p>and when I look in the portal at the deployment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploymentresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploymentresult.png"
+loading="lazy"
+alt="portaldeploymentresult"
+>&lt;/a>&lt;/p>
+&lt;p>and my resource has been created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portalsqlresource.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portalsqlresource.png"
+loading="lazy"
+alt="portalsqlresource"
+>&lt;/a>&lt;/p>
+&lt;h2 id="add-a-database">Add a database&lt;/h2>
+&lt;p>I have my Azure SQL Instance, next I need a database. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the resource information&lt;/a> and add the required information to my bicep file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">resource sql &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;beardsqlrand01&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: &amp;#39;sysadmin&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: &amp;#39;dbatools.IO&amp;#39; // DON&amp;#39;T DO THIS - EVER
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;12.0&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicNetworkAccess: &amp;#39;Disabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> resource bearddatabase &amp;#39;databases@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;BicepDatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sku: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;Basic&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is a super simple example. The database resource is defined within the SQL Instance resource with a name and a SKU.&lt;/p>
+&lt;p>We validate it in exactly the same way as before. This time we will see that we can incrementally add or change resources to our deployment and validate what will happen.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Validate the deployment with Whatif
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This time the result looks a little different as we already have a resource in the Resource Group.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifdatabase.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifdatabase.png"
+loading="lazy"
+alt="whatifdatabase"
+>&lt;/a>&lt;/p>
+&lt;p>At the top it gives you three types of changes&lt;/p>
+&lt;ul>
+&lt;li>Create&lt;/li>
+&lt;li>NoChange&lt;/li>
+&lt;li>Ignore&lt;/li>
+&lt;/ul>
+&lt;p>It shows at the bottom that the changes are&lt;/p>
+&lt;blockquote>
+&lt;p>Resource changes: 1 to create, 1 no change, 1 to ignore.&lt;/p>
+&lt;/blockquote>
+&lt;p>This tells you that it will create the Azure SQL Database, it will not change the Azure SQL Server and there is no change to the master database.&lt;/p>
+&lt;p>I am happy with that validation, so I deploy the changes, again using the same code as before.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Deploy the changes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If I look in the portal I can see the deployment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployment.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployment.png"
+loading="lazy"
+alt="databasedeployment"
+>&lt;/a>&lt;/p>
+&lt;p>and once it has completed I can see the database in the Portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployed.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployed.png"
+loading="lazy"
+alt="databasedeployed"
+>&lt;/a>&lt;/p>
+&lt;p>Thats all there is to Bicep.&lt;/p>
+&lt;ul>
+&lt;li>Find the resource information in the docs&lt;/li>
+&lt;li>Define your deployment in code&lt;/li>
+&lt;li>Validate your deployment with WhatIf&lt;/li>
+&lt;li>Deploy your changes&lt;/li>
+&lt;/ul>
+&lt;h1 id="remove-the-resource-group">Remove the Resource Group&lt;/h1>
+&lt;p>Now that my test has finished I will remove the Resource Group. If you are following along, this is how to do that&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Remove-AzResourceGroup -Name BicepTest -Force
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="all-of-the-code">All of the code&lt;/h1>
+&lt;p>I have added all of the code for this blog post to my GitHub here &lt;a class="link" href="https://github.com/SQLDBAWithABeard/BeardBicep/tree/main/SimpleSqlDatabase" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/BeardBicep/tree/main/SimpleSqlDatabase&lt;/a> so that you can follow along.&lt;/p>
+&lt;h1 id="next-steps">Next steps&lt;/h1>
+&lt;p>Now that you have an introduction to Bicep and can see how useful and powerful it can be, we will expand on this in the following blog posts.&lt;/p></description></item></channel></rss>

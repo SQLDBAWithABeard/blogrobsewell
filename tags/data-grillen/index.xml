@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Data Grillen on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/data-grillen/</link><description>Recent content in Data Grillen on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/data-grillen/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio Code Live Sharing Set-Up</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/visual-studio-code-live-sharing-set-up/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/visual-studio-code-live-sharing-set-up/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2018/05/07-sign-in.png" alt="Featured image of post Visual Studio Code Live Sharing Set-Up" />&lt;p>There was an &lt;a class="link" href="https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview" target="_blank" rel="noopener"
+>announcement on the Visual Studio Code blog&lt;/a> about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.&lt;/p>
+&lt;p>It is remarkably easy to set up 🙂&lt;/p>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>Open Visual Studio Code, open the Extensions side bar (CTRL + SHIFT + X)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/01-open-extensions.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/01-open-extensions.png"
+loading="lazy"
+alt="01 - open extensions"
+>&lt;/a>&lt;/p>
+&lt;p>Search for Live Share&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/02-search.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/02-search.png"
+loading="lazy"
+alt="02 - search.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Install and then reload when it has done&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/03-reload.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/03-reload.png"
+loading="lazy"
+alt="03 - reload.png"
+>&lt;/a>&lt;/p>
+&lt;p>You will notice in the bottom bar it will say finishing the installation and if you open the terminal (CTRL + ‘) and click on Output and change the drop down on the right to Visual Studio Live Share you can see what it is doing&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/04-finishing-installation.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/04-finishing-installation.png"
+loading="lazy"
+alt="04 - finishing installation.png"
+>&lt;/a>&lt;/p>
+&lt;p>It is installing the dependancies as shown below&lt;/p>
+&lt;blockquote>
+&lt;p>[Client I] Installing dependencies for Live Share…&lt;/p>
+&lt;p>[Client I] Downloading package ‘.NET Core Runtime 2.0.5 for win7-x86’&lt;/p>
+&lt;p>[Client I] Download complete.&lt;/p>
+&lt;p>[Client I] Downloading package ‘OmniSharp for Windows (.NET 4.6)’&lt;/p>
+&lt;p>[Client I] Download complete.&lt;/p>
+&lt;p>[Client I] Installing package ‘.NET Core Runtime 2.0.5 for win7-x86’&lt;/p>
+&lt;p>[Client V] Extracted packed files&lt;/p>
+&lt;p>[Client I] Validated extracted files.&lt;/p>
+&lt;p>[Client I] Moved and validated extracted files.&lt;/p>
+&lt;p>[Client I] Finished installing.&lt;/p>
+&lt;p>[Client I] Installing package ‘OmniSharp for Windows (.NET 4.6)’&lt;/p>
+&lt;p>[Client V] Extracted packed files&lt;/p>
+&lt;p>[Client I] Validated extracted files.&lt;/p>
+&lt;p>[Client I] Finished installing.&lt;/p>
+&lt;p>[Client I] No workspace id found.&lt;/p>
+&lt;/blockquote>
+&lt;p>Incidentally, this will also show the location of the log file&lt;/p>
+&lt;p>You will see in the bottom bar it will now say sign in&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/06-sign-in.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/06-sign-in.png"
+loading="lazy"
+alt="06 - sign in.png"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking that will open a browser and give you a choice of accounts to sign in with, your GitHub or your Microsoft ID&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/07-sign-in.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/07-sign-in.png"
+loading="lazy"
+alt="07 - sign in.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the one that you want to use and do your 2FA.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/08-2FA.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/08-2FA.png"
+loading="lazy"
+alt="08 - 2FA.png"
+>&lt;/a>&lt;/p>
+&lt;p>You do have 2FA on your Microsoft and GitHub (and all the other services)? If not go and set it up now – &lt;a class="link" href="https://account.live.com/proofs/manage/additional?mkt=en-US&amp;amp;refd=account.microsoft.com&amp;amp;refp=security" target="_blank" rel="noopener"
+>here for Microsoft&lt;/a> and &lt;a class="link" href="https://github.com/settings/security" target="_blank" rel="noopener"
+>here for GitHub &lt;/a>&lt;/p>
+&lt;p>Once you have signed in you will get this notification which you can close&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/09-close-this-notification.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/09-close-this-notification.png"
+loading="lazy"
+alt="09 - close this notification.png"
+>&lt;/a>&lt;/p>
+&lt;p>The icon in the bottom will change and show your account name and if you click it it will open the menu&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/09-sharing-menu.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/09-sharing-menu.png"
+loading="lazy"
+alt="09 - sharing menu.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="sharing">Sharing&lt;/h2>
+&lt;p>To share your session you click on the Share icon in the bottom bar or the Start collaboration session in the menu above. The first time you do this there will be a pop-up as shown&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/05-firewall-popup.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/05-firewall-popup.png"
+loading="lazy"
+alt="05 - firewall popup.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can decide which way you (or your organisation) want to share. I chose to accept the firewall exception.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/10-invite-link.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/10-invite-link.png"
+loading="lazy"
+alt="10 - invite link.png"
+>&lt;/a>&lt;/p>
+&lt;p>The invite link is in your clipboard ready to share with your friends and colleagues (other open source contributors ??)&lt;/p>
+&lt;p>They can either open the link in a browser&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/11-join-via-browser.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/11-join-via-browser.png"
+loading="lazy"
+alt="11 - join via browser.png"
+>&lt;/a>&lt;/p>
+&lt;p>or by using the Join Collaboration Session in the menu in VS Code&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/12-Join-via-VS-COde.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/12-Join-via-VS-COde.png"
+loading="lazy"
+alt="12 - Join via VS COde.png"
+>&lt;/a>&lt;/p>
+&lt;p>Once they do the sharer will get a notification&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/13-notification-of-sharing.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/13-notification-of-sharing.png"
+loading="lazy"
+alt="13 - notification of sharing.png"
+>&lt;/a>&lt;/p>
+&lt;p>and the person who has joined will have the same workspace opened in their Visual Studio Code&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/14-shared-workspace.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2018/05/14-shared-workspace.png"
+loading="lazy"
+alt="14 -shared workspace.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can then collaborate on your code and share the session. In the video below the left hand side is running in my jump box in Azure and the right hand side on my laptop and you can see that if you highlight code in one side it is shown in the other and if you alter it in one side it is changed in the other. I also saved that file in the joined session rather than from the session that initialised the sharing and it then saved in both sessions 🙂&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>So that shows how easy it is to install and to use. You can dive deeper &lt;a class="link" href="https://docs.microsoft.com/en-us/visualstudio/liveshare/" target="_blank" rel="noopener"
+>using the documentation&lt;/a>.&lt;/p>
+&lt;p>Happy Collaborating 🙂&lt;/p></description></item></channel></rss>

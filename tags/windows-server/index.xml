@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows Server on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/windows-server/</link><description>Recent content in Windows Server on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/windows-server/index.xml" rel="self" type="application/rss+xml"/><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p>Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>using Power Bi with my DBA Database&lt;/a> I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+>Installing and upgrading default scripts automation - part one - Introduction&lt;/a> which is a series I will continue later.&lt;/p>
+&lt;p>In this post I will show how to create the following report&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/18.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/18.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You will find the latest version of my DBADatabase creation scripts here&lt;/a>.&lt;/p>
+&lt;p>I create the following tables&lt;/p>
+&lt;ul>
+&lt;li>dbo.ClientDatabaseLookup&lt;/li>
+&lt;li>dbo.Clients&lt;/li>
+&lt;li>dbo.InstanceList&lt;/li>
+&lt;li>dbo.InstanceScriptLookup&lt;/li>
+&lt;li>dbo.ScriptList&lt;/li>
+&lt;li>Info.AgentJobDetail&lt;/li>
+&lt;li>Info.AgentJobServer&lt;/li>
+&lt;li>Info.Databases&lt;/li>
+&lt;li>Info.Scriptinstall&lt;/li>
+&lt;li>Info.ServerOSInfo&lt;/li>
+&lt;li>Info.SQLInfo&lt;/li>
+&lt;/ul>
+&lt;p>By adding Server name, Instance Name , Port, Environment, NotContactable, and Location into the InstanceList table I can gather all of the information that I need and also easily add more information to other tables as I need to.&lt;/p>
+&lt;p>The not contactable column is so that I am able to add instances that I am not able to contact due to permission or environment issues. I can still gather information about them manually and add it to the table. I use the same script and change it to generate the SQL query rather than run it, save the query and then run the query manually to insert the data. This is why I have the DateAdded and Date Checked column so that I know how recent the data is. I don’t go as far as recording the change however as that will be added to a DBA-Admin database on every instance which stores every change to the instance.&lt;/p>
+&lt;p>The ServerOSInfo table is created like so&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\*\*\*\*\*\* Object: Table [Info].[ServerOSInfo] Script Date: 26/08/2015 19:50:38 \*\*\*\*\*\*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SET ANSI_NULLS ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SET QUOTED_IDENTIFIER ON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CREATE TABLE [Info].[ServerOSInfo](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ServerOSInfoID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[DateAdded] [datetime] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[DateChecked] [datetime] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ServerName] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[DNSHostName] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Domain] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[OperatingSystem] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[NoProcessors] [tinyint] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[IPAddress] [nvarchar](15) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[RAM] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONSTRAINT [PK__ServerOS__50A5926BC7005F29] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ServerOSInfoID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also  enable some logging into a new event log by following the steps here &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx&lt;/a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT&lt;/p>
+&lt;p>To run the script I simply need to add the values for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$CentralDBAServer = &amp;#39;&amp;#39; ## Add the address of the instance that holds the DBADatabase
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CentralDatabaseName= &amp;#39;DBADatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogFile = &amp;#34;\DBADatabaseServerUpdate_&amp;#34; + $Date + &amp;#34;.log&amp;#34; ## Set Path to Log File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get the &lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>script from here&lt;/a> or you can read on to see how it works and how to create the report&lt;/p>
+&lt;p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Catch-Block{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ([string]$Additional)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage = &amp;#34; On $Connection &amp;#34; + $Additional + $_.Exception.Message + $_.Exception.InnerException.InnerException.message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Message = &amp;#34; This message came from the Automated PowerShell script updating the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DBA Database with Server Information&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Msg = $Additional + $ErrorMessage + &amp;#34; &amp;#34; + $Message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message $ErrorMessage -Level Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-EventLog -LogName SQLAutoScript -Source &amp;#34;SQLAUTOSCRIPT&amp;#34; -EventId 1 -EntryType Error -Message $Msg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the function an additional parameter which will hold each custom error message which I write to both the event log and a text message to enable easy troubleshooting and include the message from the &lt;code>$Error&lt;/code> variable by accessing it with &lt;code>$_&lt;/code>. I won&amp;rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called &lt;code>$Servers&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$AlltheServers = Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query &amp;#34;SELECT DISTINCT [ServerName] FROM [DBADatabase].[dbo].[InstanceList] WHERE Inactive = 0 OR NotContactable = 1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Servers = $AlltheServers| Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the array and gather the information with three WMI queries.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;Gathering Info for $Server &amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach($Server in $Servers)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;Gathering Info for $Servers&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DNSHostName = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Domain = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$OperatingSystem = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$IP = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Info = get-wmiobject win32_computersystem -ComputerName $Server -ErrorAction Stop|select DNSHostName,Domain,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@{Name=&amp;#34;RAM&amp;#34;;Expression={&amp;#34;{0:n0}&amp;#34; -f($_.TotalPhysicalMemory/1gb)}},NumberOfLogicalProcessors
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the variables some default values in case they are not picked up and set the error action for the command to Stop to exit the try and the first query gathers the DNSHostName, Domain Name, the amount of RAM in GB and the number of logical processors, the second gathers the Operating System version but the third was the most interesting to do. There are many methods of gathering the IP Address using PowerShell and I tried a few of them before finding one that would work with all of the server versions that I had in my estate but the one that worked remotely the best for me and this is a good point to say that this works in my lab and in my shop but may not necessarily work in yours, so understand, check and test this and any other script that you find on the internet before you let them anywhere near your production environment.&lt;/p>
+&lt;p>Unfortunately the one that worked everywhere remotely errored with the local server so I added a check to see if the server name in the variable matches the global environment variable of Computer Name&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$OS = gwmi Win32_OperatingSystem -ComputerName $Server| select @{name=&amp;#39;Name&amp;#39;;Expression={($_.caption)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Server -eq $env:COMPUTERNAME)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{$IP = (Get-WmiObject -ComputerName $Server -class win32_NetworkAdapterConfiguration -Filter &amp;#39;ipenabled = &amp;#34;true&amp;#34;&amp;#39; -ErrorAction Stop).ipaddress[0] }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else {$IP = [System.Net.Dns]::GetHostAddresses($Server).IPAddressToString }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;WMI Info gathered for $Server &amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once I have all of the information I check if the server already exists in the ServerOs table and choose to either insert or update.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Exists = Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query &amp;#34;SELECT [ServerName] FROM [DBADatabase].[Info].[ServerOSInfo] WHERE ServerName = &amp;#39;$Server&amp;#39;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($Exists)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UPDATE [Info].[ServerOSInfo]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SET [DateChecked] = GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[ServerName] = &amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DNSHostName] = &amp;#39;$DNSHostName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Domain] = &amp;#39;$Domain&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[OperatingSystem] = &amp;#39;$OperatingSystem&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[NoProcessors] = &amp;#39;$NOProcessors&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[IPAddress] = &amp;#39;$IP&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[RAM] = &amp;#39;$RAM&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WHERE ServerName = &amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> INSERT INTO [Info].[ServerOSInfo]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ([DateChecked]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DateAdded
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DNSHostName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Domain]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[OperatingSystem]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[NoProcessors]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[IPAddress]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[RAM])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VALUES
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ( GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$DNSHostName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$Domain&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$OperatingSystem&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$NoProcessors&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$IP&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$RAM&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $Query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ```
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">And that’s it. Now if you wish to gather different data about your servers then you can examine the data available to you by
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>get-wmiobject Win32_OperatingSystem -ComputerName $Server | Get-Member
+get-wmiobject win32_computersystem -ComputerName $Server | Get-Member&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If you find something that you want to gather you can then add the property to the script and gather that information as well, make sure that you add the column to the table and to both the insert and update statements in the PowerShell Script
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">**Creating the report in Power Bi**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">All data shown in the examples below has been generated from real-life data but all identifiable data has been altered or removed. I was born in Bolton and [SQL SouthWest](http://sqlsouthwest.co.uk/) is based in Exeter :-)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Open Power Bi Desktop and click get data. Add the connection details for your DBA Database server and database and add the query
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;pre>&lt;code>SELECT SOI.[ServerOSInfoID]
+,SOI.[DateChecked]
+,SOI.[ServerName]
+,SOI.[DNSHostName]
+,SOI.[Domain]
+,SOI.[OperatingSystem]
+,SOI.[NoProcessors]
+,SOI.[IPAddress]
+,SOI.[RAM]
+,IL.ServerName
+,IL.InstanceName
+,IL.Location
+,IL.Environment
+,IL.Inactive
+,IL.NotContactable
+FROM [DBADatabase].[Info].[ServerOSInfo] as SOI
+JOIN [dbo].[InstanceList] as IL
+ON IL.ServerName = SOI.[ServerName]
+```
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/21.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/21.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>Create a new column for the Operating Edition by clicking data on the left and using this code as described &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>in my previous post&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Edition = SWITCH([OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And one for OS Version using this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OS Version = SWITCH([OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;Server 2012 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I also created a new measure to count the distinct number of servers and instances as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Servers = DISTINCTCOUNT(Query1[Servers Name])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Instances = COUNT(Query1[Instance])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then in the report area I start by creating a new text box and adding a title to the report and setting the page level filter to InActive is false so that all decommissioned servers are not included&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/31.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/31.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>I then create a donut chart for the number of servers by Operating System by clicking the donut chart in the visualisations and then dragging the OS version to the Details and the Servers Name to the Values&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/41.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/41.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>I then click the format button and added a proper title and the background colour&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/51.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/51.png?w=90"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>Then create the server numbers by location in the same way by clicking donut chart and adding location and count of server names and adding the formatting in the same way as the previous donut&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/61.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/61.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I created a number of charts to hold single values for Domain, Instance, Server, RAM, Processors and the number of Not Contactable to provide a quick easy view of those figures, especially when you filter the report by clicking on a value within the donut chart. I find that managers really like this feature. They are all created in the same way by clicking the card in the visualisation and choosing the value&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/71.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/71.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>I also add a table for the number of servers by operating system and the number of servers by location by dragging those values to a table visualisation. I find that slicers are very useful ways of enabling information to be displayed as required, use the live visualisation to do this, I add the environment column to slice so that I can easily see values for the live environment or the development environment&lt;/p>
+&lt;p>I create a separate page in the report to display all of the server data as this can be useful for other teams such as the systems (server admin) team. I give them a lot of different slicers : - Domain, Location, Environment, OS Version, Edition and NotContactable with a table holding all of the relevant values to enable them to quickly see details&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/81.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/81.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You can get all of the scripts here&lt;/a>&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item></channel></rss>

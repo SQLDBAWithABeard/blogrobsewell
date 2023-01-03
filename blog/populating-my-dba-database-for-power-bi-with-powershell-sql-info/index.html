@@ -1,0 +1,396 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Following my post about using Power Bi with my DBA Database I have been asked if I would share the PowerShell scripts which I use to populate my database.
+In this post I will show how to create the following report
+Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi."><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="Populating My DBA Database for Power Bi with PowerShell - SQL Info"><meta property="og:description" content="Following my post about using Power Bi with my DBA Database I have been asked if I would share the PowerShell scripts which I use to populate my database.
+In this post I will show how to create the following report
+Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automate"><meta property="article:tag" content="automation"><meta property="article:tag" content="DBA Database"><meta property="article:tag" content="documentation"><meta property="article:tag" content="Power Bi"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="SMO"><meta property="article:tag" content="snippet"><meta property="article:tag" content="SQL"><meta property="article:tag" content="SQL DBA"><meta property="article:tag" content="SQL Server"><meta property="article:published_time" content="2015-09-07T00:00:00+00:00"><meta property="article:modified_time" content="2015-09-07T00:00:00+00:00"><meta name=twitter:title content="Populating My DBA Database for Power Bi with PowerShell - SQL Info"><meta name=twitter:description content="Following my post about using Power Bi with my DBA Database I have been asked if I would share the PowerShell scripts which I use to populate my database.
+In this post I will show how to create the following report
+Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/power-bi/>Power Bi</a>
+<a href=/blogrobsewell/categories/powershell/>PowerShell</a>
+<a href=/blogrobsewell/categories/sql-server/>SQL Server</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/>Populating My DBA Database for Power Bi with PowerShell - SQL Info</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 07, 2015</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><p>Following my post about <a class=link href=http://wp.me/p3aio8-gj target=_blank rel=noopener>using Power Bi with my DBA Database</a> I have been asked if I would share the PowerShell scripts which I use to populate my database.</p><p>In this post I will show how to create the following report</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300" loading=lazy alt=1></a></p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300" loading=lazy alt=2></a></p><p>Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post</p><p><a class=link href=http://1drv.ms/1N4fqxt target=_blank rel=noopener>You will find the latest version of my DBADatabase creation scripts and PowerShell scripts here.</a></p><p>The SQLInfo table is created using this code</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>CREATE TABLE [Info].[SQLInfo](
+</span></span><span class=line><span class=cl>	[SQLInfoID] [int] IDENTITY(1,1) NOT NULL,
+</span></span><span class=line><span class=cl>	[DateChecked] [datetime] NULL,
+</span></span><span class=line><span class=cl>	[DateAdded] [datetime] NULL,
+</span></span><span class=line><span class=cl>	[ServerName] [nvarchar](50) NULL,
+</span></span><span class=line><span class=cl>	[InstanceName] [nvarchar](50) NULL,
+</span></span><span class=line><span class=cl>	[SQLVersionString] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[SQLVersion] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[ServicePack] [nvarchar](3) NULL,
+</span></span><span class=line><span class=cl>	[Edition] [nvarchar](50) NULL,
+</span></span><span class=line><span class=cl>	[ServerType] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[Collation] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[IsHADREnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[SQLServiceAccount] [nvarchar](35) NULL,
+</span></span><span class=line><span class=cl>	[SQLService] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[SQLServiceStartMode] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[BAckupDirectory] [nvarchar](256) NULL,
+</span></span><span class=line><span class=cl>	[BrowserAccount] [nvarchar](50) NULL,
+</span></span><span class=line><span class=cl>	[BrowserStartMode] [nvarchar](25) NULL,
+</span></span><span class=line><span class=cl>	[IsSQLClustered] [bit] NULL,
+</span></span><span class=line><span class=cl>	[ClusterName] [nvarchar](25) NULL,
+</span></span><span class=line><span class=cl>	[ClusterQuorumstate] [nvarchar](20) NULL,
+</span></span><span class=line><span class=cl>	[ClusterQuorumType] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[C2AuditMode] [nvarchar](30) NULL,
+</span></span><span class=line><span class=cl>	[CostThresholdForParallelism] [tinyint] NULL,
+</span></span><span class=line><span class=cl>	[MaxDegreeOfParallelism] [tinyint] NULL,
+</span></span><span class=line><span class=cl>	[DBMailEnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[DefaultBackupCComp] [bit] NULL,
+</span></span><span class=line><span class=cl>	[FillFactor] [tinyint] NULL,
+</span></span><span class=line><span class=cl>	[MaxMem] [int] NULL,
+</span></span><span class=line><span class=cl>	[MinMem] [int] NULL,
+</span></span><span class=line><span class=cl>	[RemoteDacEnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[XPCmdShellEnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[CommonCriteriaComplianceEnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[DefaultFile] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[DefaultLog] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[HADREndpointPort] [int] NULL,
+</span></span><span class=line><span class=cl>	[ErrorLogPath] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[InstallDataDirectory] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[InstallSharedDirectory] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[IsCaseSensitive] [bit] NULL,
+</span></span><span class=line><span class=cl>	[IsFullTextInstalled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[LinkedServer] [nvarchar](max) NULL,
+</span></span><span class=line><span class=cl>	[LoginMode] [nvarchar](20) NULL,
+</span></span><span class=line><span class=cl>	[MasterDBLogPath] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[MasterDBPath] [nvarchar](100) NULL,
+</span></span><span class=line><span class=cl>	[NamedPipesEnabled] [bit] NULL,
+</span></span><span class=line><span class=cl>	[OptimizeAdhocWorkloads] [bit] NULL,
+</span></span><span class=line><span class=cl>	[InstanceID] [int] NULL,
+</span></span><span class=line><span class=cl>	[AGListener] [nvarchar](150) NULL,
+</span></span><span class=line><span class=cl>	[AGs] [nvarchar](150) NULL,
+</span></span><span class=line><span class=cl> CONSTRAINT [PK__SQL__50A5926BC7005F29] PRIMARY KEY CLUSTERED 
+</span></span><span class=line><span class=cl>(
+</span></span><span class=line><span class=cl>	[SQLInfoID] ASC
+</span></span><span class=line><span class=cl>)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+</span></span><span class=line><span class=cl>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [Info].[SQLInfo]  WITH CHECK ADD  CONSTRAINT [FK_SQLInfo_InstanceList] FOREIGN KEY([InstanceID])
+</span></span><span class=line><span class=cl>REFERENCES [dbo].[InstanceList] ([InstanceID])
+</span></span><span class=line><span class=cl>GO
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ALTER TABLE [Info].[SQLInfo] CHECK CONSTRAINT [FK_SQLInfo_InstanceList]
+</span></span><span class=line><span class=cl>GO
+</span></span></code></pre></td></tr></table></div></div><p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also enable some logging into a new event log by following the steps here <a class=link href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target=_blank rel=noopener>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx</a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT</p><p>To run the script I simply need to add the values for</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$CentralDBAServer = &#39;&#39; ## Add the address of the instance that holds the DBADatabase
+</span></span><span class=line><span class=cl>$CentralDatabaseName = &#39;DBADatabase&#39; 
+</span></span><span class=line><span class=cl>$LogFile = &#34;\DBADatabaseServerUpdate_&#34; + $Date + &#34;.log&#34; ## Set Path to Log File
+</span></span></code></pre></td></tr></table></div></div><p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get <a class=link href=http://1drv.ms/1N4fqxt target=_blank rel=noopener>the script from here</a> or you can read on to see how it works and how to create the report and publish it to powerbi.com</p><p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>function Catch-Block
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>param ([string]$Additional)
+</span></span><span class=line><span class=cl>$ErrorMessage = &#34; On $Connection &#34; + $Additional + $_.Exception.Message + $_.Exception.InnerException.InnerException.message
+</span></span><span class=line><span class=cl>$Message = &#34; This message came from the Automated PowerShell script updating the DBA Database with Server Information&#34;
+</span></span><span class=line><span class=cl>$Msg = $Additional + $ErrorMessage + &#34; &#34; + $Message
+</span></span><span class=line><span class=cl>Write-Log -Path $LogFile -Message $ErrorMessage -Level Error
+</span></span><span class=line><span class=cl>Write-EventLog -LogName SQLAutoScript -Source &#34;SQLAUTOSCRIPT&#34; -EventId 1 -EntryType Error -Message $Msg
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>I give the function an additional parameter which will hold each custom error message which I write to both the event log and a text message to enable easy troubleshooting and include the message from the $Error variable by accessing it with $_. I won&rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called $ServerNames holding the server name, instance name and port</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> $Query = @&#34;
+</span></span><span class=line><span class=cl> SELECT [ServerName]
+</span></span><span class=line><span class=cl>      ,[InstanceName]
+</span></span><span class=line><span class=cl>      ,[Port]
+</span></span><span class=line><span class=cl>  FROM [DBADatabase].[dbo].[InstanceList]
+</span></span><span class=line><span class=cl>  Where Inactive = 0 
+</span></span><span class=line><span class=cl>    AND NotContactable = 0
+</span></span><span class=line><span class=cl>&#34;@
+</span></span><span class=line><span class=cl>try{
+</span></span><span class=line><span class=cl>$AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+</span></span><span class=line><span class=cl>$ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>I then loop through the array and create a <code>$Connection</code> variable for my SMO connection string and connect to the server</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>foreach ($ServerName in $ServerNames)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>## $ServerName
+</span></span><span class=line><span class=cl> $InstanceName =  $ServerName|Select InstanceName -ExpandProperty InstanceName
+</span></span><span class=line><span class=cl> $Port = $ServerName| Select Port -ExpandProperty Port
+</span></span><span class=line><span class=cl>$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName 
+</span></span><span class=line><span class=cl> $Connection = $ServerName + &#39;\&#39; + $InstanceName + &#39;,&#39; + $Port
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> try
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl> $srv = New-Object (&#39;Microsoft.SqlServer.Management.Smo.Server&#39;) $Connection
+</span></span></code></pre></td></tr></table></div></div><p>Even though I place the creation of the SMO server object in a try block you still need to an additional check to ensure that you can connect and populate the object as the code above creates an empty SMO Server object with the name property set to the $Connection variable if you can&rsquo;t connect to that server and doesn’t error as you may expect The way I have always validated an SMO Server object is to check the version property. There is no justifiable reason for choosing that property, you could choose any one but that’s the one I have always used. I use an if statement to do this ( <a class=link href=http://wp.me/p3aio8-cL target=_blank rel=noopener>This post about Snippets will show you the best way to learn PowerShell code</a>) The reference I use for exiting a loop in the way that you want is <a class=link href=http://ss64.com/ps/break.html target=_blank rel=noopener>this one</a> In this case we use a continue to carry on iterating the loop</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if (!( $srv.version)){
+</span></span><span class=line><span class=cl> Catch-Block &#34; Failed to Connect to $Connection&#34;
+</span></span><span class=line><span class=cl> continue
+</span></span><span class=line><span class=cl> }
+</span></span></code></pre></td></tr></table></div></div><p>If you wish to view all of the different properties that you can gather information on in this way you can use this code to take a look. (This is something you should get used to doing when writing new PowerShell scripts)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$srv = New-Object (&#39;Microsoft.SqlServer.Management.Smo.Server&#39;) $Connection
+</span></span><span class=line><span class=cl> $srv | Get-Member
+</span></span></code></pre></td></tr></table></div></div><p>As you can see from the screenshot below on my SQL2014 server there are 184 properties. I havent chosen to gather all of them, only the ones that are of interest to me, our team or others who request information from our team such as auditors and project managers etc</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png?w=300" loading=lazy alt=3></a></p><p>You can choose to use any or all of these properties as long as you ensure you have the columns in your table with the correct data type and that you have the correct knowledge and logic to stop the script from erroring if/when the property is not available. Here is an example</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>if ($srv.IsHadrEnabled -eq $True)
+</span></span><span class=line><span class=cl> {$IsHADREnabled = $True
+</span></span><span class=line><span class=cl> $AGs = $srv.AvailabilityGroups|Select Name -ExpandProperty Name|Out-String
+</span></span><span class=line><span class=cl> $Expression = @{Name = &#39;ListenerPort&#39; ; Expression = {$_.Name + &#39;,&#39; + $_.PortNumber }}
+</span></span><span class=line><span class=cl> $AGListener =  $srv.AvailabilityGroups.AvailabilityGroupListeners|select $Expression|select ListenerPort -ExpandProperty ListenerPort
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> else
+</span></span><span class=line><span class=cl> {
+</span></span><span class=line><span class=cl> $IsHADREnabled = $false
+</span></span><span class=line><span class=cl> $AGs = &#39;None&#39;
+</span></span><span class=line><span class=cl> $AGListener = &#39;None&#39;
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> $BackupDirectory = $srv.BackupDirectory
+</span></span></code></pre></td></tr></table></div></div><p>I check if the property <code>IsHADREnabled</code> is true and if it is I then gather the information about the Availability Group names and the listener port and if it doesn’t exist I set the values to None.</p><p>You will find that not all of the properties that you want are at the root of the Server SMO object. If you want you max and min memory values and you want to know if <code>remote admin connections</code> or <code>xp_cmdshell</code> are enabled you will need to look at the <code>$Srv.Configuration</code> object</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> $MaxMem = $srv.Configuration.MaxServerMemory.ConfigValue
+</span></span><span class=line><span class=cl> $MinMem = $srv.Configuration.MinServerMemory.ConfigValue
+</span></span><span class=line><span class=cl> $RemoteDacEnabled = $srv.Configuration.RemoteDacConnectionsEnabled.ConfigValue
+</span></span><span class=line><span class=cl> $XPCmdShellEnabled = $srv.Configuration.XPCmdShellEnabled.ConfigValue
+</span></span></code></pre></td></tr></table></div></div><p>You can look for the property that you want by using the Get-Member cmdlet as shown above or use MSDN to find it <a class=link href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.server.aspx?WT.mc_id=DP-MVP-5002693" target=_blank rel=noopener>starting from here</a> or by GoogleBingDuckDuckGo ing &ldquo;PowerShell SMO&rdquo; and the property you wish to find.</p><p>The rest of the script follows exactly the same pattern <a class=link href=http://sqldbawithabeard.com/2015/08/31/populating-my-dba-database-for-power-bi-with-PowerShell-server-info/ target=_blank rel=noopener>as the previous post</a> by checking the SQL Info table for an entry for that instance and updating the table if it exists and inserting if it does not.</p><p>There are other uses for gathering this information than just for reporting on it. You can target different versions of SQL for different scripts. You can identify values that are outside what is expected and change them. If xp_cmdshell should not be enabled, write the TSQL to gather the connection string of all of the servers from the DBADatabase where the SQLInfo table has <code>XPCMDShellenabled = 1</code> and loop through them exactly as above and change the value of <code>$srv.Configuration.XPCmdShellEnabled.ConfigValue</code> to 0 and then <code>$Srv.Alter()</code></p><p>It is a very powerful way of dynamically targeting your estate if you are looking after many instances and with great power comes great responsibility.</p><p>ALWAYS TEST THESE AND ANY SCRIPTS YOU FIND OR SCRIPTS YOU WRITE BEFORE YOU RUN THEM IN YOUR PRODUCTION ENVIRONMENT</p><p>Yeah, I shouted and some people thought it was rude. But its important, it needs to be repeated and drilled in so that it becomes habitual. You can do great damage to your estate with only a few lines of PowerShell and a DBA Database so please be very careful and ensure that you have a suitable test subset of servers that you can use to test</p><p>The other thing we can do is report on the data and with Power Bi we can create self service reports and dashboards and also make use of the natural language query at powerbi.com so that when your systems team ask &ldquo;What are all the servers in X data center?&rdquo; you can enable them to answer it themselves or when the compliance officer asks how many SQL 2005 instances do we have and which clients do they serve you can give them a dashboard they can query themselves.</p><p>This is how I create the two reports you see at the top. I start by connecting to the data source, my DBA Database</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png?w=300" loading=lazy alt=4></a></p><p>And I use this query</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>SELECT 
+</span></span><span class=line><span class=cl>	IL.ServerName
+</span></span><span class=line><span class=cl>	,IL.InstanceName
+</span></span><span class=line><span class=cl>	  ,IL.Location
+</span></span><span class=line><span class=cl>	  ,IL.Environment
+</span></span><span class=line><span class=cl>	  ,IL.Inactive
+</span></span><span class=line><span class=cl>	  ,IL.NotContactable
+</span></span><span class=line><span class=cl>	  ,SI.[SQLInfoID]
+</span></span><span class=line><span class=cl>      ,SI.[DateChecked]
+</span></span><span class=line><span class=cl>      ,SI.[DateAdded]
+</span></span><span class=line><span class=cl>      ,SI.[ServerName]
+</span></span><span class=line><span class=cl>      ,SI.[InstanceName]
+</span></span><span class=line><span class=cl>      ,SI.[SQLVersionString]
+</span></span><span class=line><span class=cl>      ,SI.[SQLVersion]
+</span></span><span class=line><span class=cl>      ,SI.[ServicePack]
+</span></span><span class=line><span class=cl>      ,SI.[Edition]
+</span></span><span class=line><span class=cl>      ,SI.[ServerType]
+</span></span><span class=line><span class=cl>      ,SI.[Collation]
+</span></span><span class=line><span class=cl>      ,SI.[IsHADREnabled]
+</span></span><span class=line><span class=cl>      ,SI.[SQLServiceAccount]
+</span></span><span class=line><span class=cl>      ,SI.[SQLService]
+</span></span><span class=line><span class=cl>      ,SI.[SQLServiceStartMode]
+</span></span><span class=line><span class=cl>      ,SI.[BAckupDirectory]
+</span></span><span class=line><span class=cl>      ,SI.[BrowserAccount]
+</span></span><span class=line><span class=cl>      ,SI.[BrowserStartMode]
+</span></span><span class=line><span class=cl>      ,SI.[IsSQLClustered]
+</span></span><span class=line><span class=cl>      ,SI.[ClusterName]
+</span></span><span class=line><span class=cl>      ,SI.[ClusterQuorumstate]
+</span></span><span class=line><span class=cl>      ,SI.[ClusterQuorumType]
+</span></span><span class=line><span class=cl>      ,SI.[C2AuditMode]
+</span></span><span class=line><span class=cl>      ,SI.[CostThresholdForParallelism]
+</span></span><span class=line><span class=cl>      ,SI.[MaxDegreeOfParallelism]
+</span></span><span class=line><span class=cl>      ,SI.[DBMailEnabled]
+</span></span><span class=line><span class=cl>      ,SI.[DefaultBackupCComp]
+</span></span><span class=line><span class=cl>      ,SI.[FillFactor]
+</span></span><span class=line><span class=cl>      ,SI.[MaxMem]
+</span></span><span class=line><span class=cl>      ,SI.[MinMem]
+</span></span><span class=line><span class=cl>      ,SI.[RemoteDacEnabled]
+</span></span><span class=line><span class=cl>      ,SI.[XPCmdShellEnabled]
+</span></span><span class=line><span class=cl>      ,SI.[CommonCriteriaComplianceEnabled]
+</span></span><span class=line><span class=cl>      ,SI.[DefaultFile]
+</span></span><span class=line><span class=cl>      ,SI.[DefaultLog]
+</span></span><span class=line><span class=cl>      ,SI.[HADREndpointPort]
+</span></span><span class=line><span class=cl>      ,SI.[ErrorLogPath]
+</span></span><span class=line><span class=cl>      ,SI.[InstallDataDirectory]
+</span></span><span class=line><span class=cl>      ,SI.[InstallSharedDirectory]
+</span></span><span class=line><span class=cl>      ,SI.[IsCaseSensitive]
+</span></span><span class=line><span class=cl>      ,SI.[IsFullTextInstalled]
+</span></span><span class=line><span class=cl>      ,SI.[LinkedServer]
+</span></span><span class=line><span class=cl>      ,SI.[LoginMode]
+</span></span><span class=line><span class=cl>      ,SI.[MasterDBLogPath]
+</span></span><span class=line><span class=cl>      ,SI.[MasterDBPath]
+</span></span><span class=line><span class=cl>      ,SI.[NamedPipesEnabled]
+</span></span><span class=line><span class=cl>      ,SI.[OptimizeAdhocWorkloads]
+</span></span><span class=line><span class=cl>      ,SI.[InstanceID]
+</span></span><span class=line><span class=cl>      ,SI.[AGListener]
+</span></span><span class=line><span class=cl>      ,SI.[AGs]
+</span></span><span class=line><span class=cl>        FROM [DBADatabase].[Info].[SQLInfo] as SI
+</span></span><span class=line><span class=cl>  JOIN [DBADatabase].[dbo].[InstanceList] as IL
+</span></span><span class=line><span class=cl>  ON IL.InstanceID =  SI.InstanceID
+</span></span></code></pre></td></tr></table></div></div><p>So that I can easily add any and all the data to the reports if I choose or query using them in powerbi.com</p><p>First I created 3 measures.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> AG = DISTINCTCOUNT(Query1[AGs]) Instances = DISTINCTCOUNT(Query1[InstanceID]) Servers = DISTINCTCOUNT(Query1[ServerName])
+</span></span></code></pre></td></tr></table></div></div><p>I click on map</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png?w=300" loading=lazy alt=5></a></p><p>And drag the location column to location and the Instances measure to both the Values and Color Saturation</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png?w=300" loading=lazy alt=6></a></p><p>I then click on edit and format the title and change the colours for the data</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png?w=300" loading=lazy alt=7></a></p><p>Next I created I heat map for Instances by Edition. The picture shows the details</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png?w=300" loading=lazy alt=8></a></p><p>And a column chart for Instances by Version</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png?w=300" loading=lazy alt=9></a></p><p>I also add a table showing the number of instances in each location and a slicer for environment.</p><p>Even though you have added one slicer, you are able to slice the data by clicking on the charts. If I click on Developer Edition I can quickly see which versions and locations they are in</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png?w=300" loading=lazy alt=10></a></p><p>This works for the map and the column chart as well. This has all been created using live data as a base with all identifying information altered, Bolton is where I was born and the other locations are chosen at random, all other figures and rollups have also been altered.</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png?w=300" loading=lazy alt=11></a></p><p>To create the other report I create two donut charts for Instances by version and by location using steps similar to my previous post and then add some tables for location, edition and xp_cmdshell enabled as well as some cards showing total numbers of Servers, Instances and Availability Groups and a slicer for environment to create a report like this, you can use the donut charts to slice the data as well</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png?w=300" loading=lazy alt=12></a></p><p>But there are so many different points of information gathered by this script that you get extra value using the natural language query on powerbi.com.</p><p>Click Publish and enter your powerbi.com credentials and then log into powerbi.com in a browser and you will see your report and your dataset. (Note, you can easily filter to find your dashboards, reports and data sets)</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png?w=173" loading=lazy alt=13></a></p><p>Click the plus sign to create a new dashboard and click the pin on any of the objects in your report to pin them to the dashboard</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png?w=300" loading=lazy alt=14></a></p><p>Then you can view (and share) your dashboard</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png?w=300" loading=lazy alt=15></a></p><p>Once you have done this you can query your data using natural language. It will cope with spelling mistakes and expects the column names so you may want to think about renaming them in your report by right clicking on them after you get your data.</p><p>You can ask it questions and build up information on the fly and alter it as you need it. As a DBA doing this and imagining enabling others to be able to ask these questions whenever they want from a browser and as many times as they like, it was very cool!</p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png?w=300" loading=lazy alt=16></a></p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png?w=300" loading=lazy alt=17></a></p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png?w=300" loading=lazy alt=18></a></p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png?w=300" loading=lazy alt=19></a></p><p><a class=link href=https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png target=_blank rel=noopener><img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png?w=300" loading=lazy alt=20></a></p><p>Pretty cool, I think you and any of your &lsquo;requestors&rsquo; would agree</p><p><a class=link href=http://1drv.ms/1N4fqxt target=_blank rel=noopener>You can get all of the scripts here</a></p><p>I have written further posts about this</p><p><a class=link href=https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/ target=_blank rel=noopener><strong>Using Power Bi with my DBA Database</strong></a></p><p><a class=link href=https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/ target=_blank rel=noopener><strong>Populating My DBA Database for Power Bi with PowerShell – Server Info</strong></a></p><p><a class=link href=https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/ target=_blank rel=noopener><strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info</strong></a></p><p><a class=link href=https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/ target=_blank rel=noopener><strong>Populating My DBA Database for Power Bi with PowerShell – Databases</strong></a></p><p><a class=link href=https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/ target=_blank rel=noopener><strong>Power Bi, PowerShell and SQL Agent Jobs</strong></a></p></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automate/>automate</a>
+<a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/dba-database/>DBA Database</a>
+<a href=/blogrobsewell/tags/documentation/>documentation</a>
+<a href=/blogrobsewell/tags/power-bi/>Power Bi</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/smo/>SMO</a>
+<a href=/blogrobsewell/tags/snippet/>snippet</a>
+<a href=/blogrobsewell/tags/sql/>sql</a>
+<a href=/blogrobsewell/tags/sql-dba/>sql dba</a>
+<a href=/blogrobsewell/tags/sql-server/>SQL Server</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/><div class=article-details><h2 class=article-title>Populating My DBA Database for Power Bi with PowerShell - Databases</h2></div></a></article><article><a href=/blogrobsewell/blog/power-bi-powershell-and-sql-agent-jobs/><div class=article-details><h2 class=article-title>Power Bi, PowerShell and SQL Agent Jobs</h2></div></a></article><article><a href=/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/><div class=article-details><h2 class=article-title>Populating My DBA Database for Power Bi with PowerShell - Server Info</h2></div></a></article><article><a href=/blogrobsewell/blog/using-power-bi-with-my-dba-database/><div class=article-details><h2 class=article-title>Using Power Bi with my DBA Database</h2></div></a></article><article><a href=/blogrobsewell/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/><div class=article-details><h2 class=article-title>Installing and upgrading default scripts automation - part one - Introduction</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

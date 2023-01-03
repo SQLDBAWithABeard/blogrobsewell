@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>presenting on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/presenting/</link><description>Recent content in presenting on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/presenting/index.xml" rel="self" type="application/rss+xml"/><item><title>How Do You Show Keystrokes On Screen</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-do-you-show-keystrokes-on-screen/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-do-you-show-keystrokes-on-screen/</guid><description>&lt;img src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Featured image of post How Do You Show Keystrokes On Screen" />&lt;p>It started with a tweet from Benni De Jagere &lt;a class="link" href="https://bennidejagere.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/BenniDeJagere" target="_blank" rel="noopener"
+>Twitter&lt;/a> about how to show the keystrokes on the screen.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h1 id="it-depends">It depends&lt;/h1>
+&lt;p>The best answer is always &amp;ldquo;it depends&amp;rdquo; and the correct response to this to determine how much to trust this information is &amp;ldquo;what does it depend uponW&amp;rdquo;&lt;/p>
+&lt;h1 id="what-does-it-depend-upon">what does it depend upon?&lt;/h1>
+&lt;p>It depends upon which programme you are using and wish to demonstrate.&lt;/p>
+&lt;h2 id="visual-studio-code-or-azure-data-studio">Visual Studio Code or Azure Data Studio&lt;/h2>
+&lt;p>If you are using &lt;a class="link" href="https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> or &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is-azure-data-studio?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> then you have it built in.&lt;/p>
+&lt;p>You can press &lt;code>CTRL+SHIFT+P&lt;/code> and search for screencast&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/screencast.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/screencast.png"
+loading="lazy"
+alt="screencast"
+>&lt;/a>&lt;/p>
+&lt;p>if you toggle this on then the keystrokes are displayed on the screen as you type&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/display.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/display.png"
+loading="lazy"
+alt="displaying the keystrokes"
+>&lt;/a>&lt;/p>
+&lt;p>If you &lt;code>CTRL+,&lt;/code> or click on the cog and then settings, you can search for screencast and there are a number of options available. In the screenshot below you can see that the mouse click is highlighted as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/withmouse.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/withmouse.png"
+loading="lazy"
+alt="screencast settings with mouse"
+>&lt;/a>&lt;/p>
+&lt;h2 id="something-else">Something else&lt;/h2>
+&lt;p>If you are wanting to demonstrate in a different application or when switching applications, you can use Carnac - &lt;a class="link" href="http://carnackeys.com/" target="_blank" rel="noopener"
+>http://carnackeys.com/&lt;/a>&lt;/p>
+&lt;p>Download the latest release and then run setup.exe and there will be a beautiful purple icon in the taskbar which if you click it will open the settings screen.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacsettings.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/carnacsettings.png"
+loading="lazy"
+alt="carnac settings"
+>&lt;/a>&lt;/p>
+&lt;p>You can click in any of the squares to decide where you would like the key presses to be displayed and as you can see it works with multiple monitors (although I had some issues with that). You can use the sliders to offset in any direction from the box as well and change the appearance.&lt;/p>
+&lt;p>You can even change the colour of the text as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacdisplays.png" >&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/assets/uploads/2022/07/carnacdisplays.png"
+loading="lazy"
+alt="change colour"
+>&lt;/a>&lt;/p>
+&lt;p>To leave the application simple right click on the icon in the task bar and click Exit.&lt;/p>
+&lt;p>Happy demonstrating!&lt;/p></description></item><item><title>Using PowerShell to Automate StreamLabs OBS and Show Your Webcam in PowerPoint</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-powershell-to-automate-streamlabs-obs-and-show-your-webcam-in-powerpoint/</link><pubDate>Mon, 21 Sep 2020 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-powershell-to-automate-streamlabs-obs-and-show-your-webcam-in-powerpoint/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2020/09/scottwitter.png" alt="Featured image of post Using PowerShell to Automate StreamLabs OBS and Show Your Webcam in PowerPoint" />&lt;h2 id="it-started-with-a-tweet">It started with a tweet&lt;/h2>
+&lt;p>As with many things in my life it started with a tweet&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sammydeprez/status/1307674009669074945" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/scottwitter.png"
+loading="lazy"
+alt="Twitter"
+>&lt;/a>&lt;/p>
+&lt;p>That looks awesome, I thought, so I watched the YouTube video.Scott has written a C# application that would change the scene depending on some text in the PowerPoint slide notes. Then, by applying a Chroma filter to the display capture and placing the webcam capture appropriately, when the slide changed, the Obs scene changed and the webcam became embedded in the slide!!!!!!!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>It is truly awesome but it is for Obs and I use StreamLabs and I wondered if it could be done with PowerShell.&lt;/p>
+&lt;p>(If you just want the code, &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1" target="_blank" rel="noopener"
+>you can find it here&lt;/a>)&lt;/p>
+&lt;h2 id="listen-to-powerpoint-events-with-powershell">Listen to PowerPoint Events with PowerShell&lt;/h2>
+&lt;h3 id="create-a-com-object">Create a Com Object&lt;/h3>
+&lt;p>The first thing that we need to do is to find out when the PowerPoint Slide has changed.&lt;/p>
+&lt;p>You can create a PowerPoint Com Object with&lt;/p>
+&lt;pre>&lt;code>$Application = New-Object -ComObject PowerPoint.Application
+&lt;/code>&lt;/pre>
+&lt;p>and make it visible with&lt;/p>
+&lt;pre>&lt;code>$Application.Visible = 'MsoTrue'
+&lt;/code>&lt;/pre>
+&lt;h3 id="get-the-slide-number-and-notes">Get the Slide Number and Notes&lt;/h3>
+&lt;p>Next step is to get the slide number. It is not truly required for the code, but I like to print it out so that I know which slide I was on for trouble shooting.&lt;/p>
+&lt;p>Looking at &lt;a class="link" href="https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs#L34" target="_blank" rel="noopener"
+>Scotts code here&lt;/a> I worked out that the slide number via PowerShell was&lt;/p>
+&lt;pre>&lt;code>$slideNumber = $PowerPoint.SlideShowWindows[1].view.Slide.SlideIndex
+&lt;/code>&lt;/pre>
+&lt;p>The notes (by looking at &lt;a class="link" href="https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs#L37" target="_blank" rel="noopener"
+>code&lt;/a>) can be accessed at&lt;/p>
+&lt;pre>&lt;code>$notes = $PowerPoint.SlideShowWindows[1].View.Slide.NotesPage.Shapes[2].TextFrame.TextRange.Text
+&lt;/code>&lt;/pre>
+&lt;p>then parse the notes to get the scene name which is defined as &lt;code>OBS:SceneName&lt;/code>&lt;/p>
+&lt;pre>&lt;code>$SceneName = ($notes -split &amp;quot;`r&amp;quot;)[0] -replace 'OBS:', ''
+&lt;/code>&lt;/pre>
+&lt;p>The first part gets the first line and it was thanks to Andreas on twitch who got this working, Thank you Andreas.&lt;/p>
+&lt;h3 id="listen-to-an-event">Listen to an Event&lt;/h3>
+&lt;p>With PowerShell, you can subscribes to events and take action when they fire. The event that we are going to subscribe to is called &lt;code>SlideShowNextSlide&lt;/code>&lt;/p>
+&lt;pre>&lt;code>$subscriber = Register-ObjectEvent -InputObject $PowerPoint -EventName SlideShowNextSlide -Action $action
+&lt;/code>&lt;/pre>
+&lt;p>We have defined an $action variable in the code but we need to provide an action and this is where things got a little tricky.&lt;/p>
+&lt;h2 id="automating-streamlabs-obs">Automating StreamLabs OBS&lt;/h2>
+&lt;p>In Scotts code he uses OBS.WebSocket.NET to control OBS. Excellent, PowerShell and .NET.Unfrotunately, StreamLabs uses an RPC-based API &lt;a class="link" href="https://stream-labs.github.io/streamlabs-obs-api-docs/docs/index.html" target="_blank" rel="noopener"
+>https://stream-labs.github.io/streamlabs-obs-api-docs/docs/index.html&lt;/a>&lt;/p>
+&lt;p>This documentation specifies&lt;/p>
+&lt;blockquote>
+&lt;p>You can access services&amp;rsquo; methods and properties by sending JSON-RPC messages to the named pipe slobs.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="thank-you-keith-hill">Thank you Keith Hill&lt;/h3>
+&lt;p>So Rob traversed a rabbit warren of investigation to understand how to send messages to this API with PowerShell and eventually stumbled across the marvelous Keith Hill &lt;a class="link" href="https://rkeithhill.wordpress.com/" target="_blank" rel="noopener"
+>blog&lt;/a> &lt;a class="link" href="https://twitter.com/r_keith_hill" target="_blank" rel="noopener"
+>twitter&lt;/a> and a blog post from 2014&lt;/p>
+&lt;p>&lt;a class="link" href="https://rkeithhill.wordpress.com/2014/11/01/windows-powershell-and-named-pipes/" target="_blank" rel="noopener"
+>https://rkeithhill.wordpress.com/2014/11/01/windows-powershell-and-named-pipes/&lt;/a>&lt;/p>
+&lt;h3 id="create-a-connection-and-send-and-receive-messages">Create a connection and send and receive messages&lt;/h3>
+&lt;p>Now I had everything I needed to create a connection to SLOBS via named pipes. SLOBS needs to be started here!&lt;/p>
+&lt;pre>&lt;code># Create Client
+$npipeClient = New-Object System.IO.Pipes.NamedPipeClientStream($Env:ComputerName, 'slobs', [System.IO.Pipes.PipeDirection]::InOut, [System.IO.Pipes.PipeOptions]::None, [System.Security.Principal.TokenImpersonationLevel]::Impersonation)
+$npipeClient.Connect()
+$npipeClient
+# Create Reader and writer and send and receive message
+$pipeReader = New-Object System.IO.StreamReader($npipeClient)
+$pipeWriter = New-Object System.IO.StreamWriter($npipeClient)
+$pipeWriter.AutoFlush = $true
+# Send message
+$pipeWriter.WriteLine($scenesMessage)
+# Receive message
+$pipeReader.ReadLine()
+&lt;/code>&lt;/pre>
+&lt;h3 id="which-messages">Which messages?&lt;/h3>
+&lt;p>Next I needed to get the messages to send formatted correctly. Looking at the &lt;a class="link" href="https://stream-labs.github.io/streamlabs-obs-api-docs/docs/index.html#examples" target="_blank" rel="noopener"
+>API docs&lt;/a> I saw&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;jsonrpc&amp;quot;: &amp;quot;2.0&amp;quot;,
+&amp;quot;id&amp;quot;: 1,
+&amp;quot;method&amp;quot;: &amp;quot;getScenes&amp;quot;,
+&amp;quot;params&amp;quot;: {
+&amp;quot;resource&amp;quot;: &amp;quot;ScenesService&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>So I was able to get the current available scenes with&lt;/p>
+&lt;pre>&lt;code>$scenesMessage = '{&amp;quot;jsonrpc&amp;quot;: &amp;quot;2.0&amp;quot;,&amp;quot;id&amp;quot;: 6,&amp;quot;method&amp;quot;: &amp;quot;getScenes&amp;quot;,&amp;quot;params&amp;quot;: {&amp;quot;resource&amp;quot;: &amp;quot;ScenesService&amp;quot;}}'
+$pipeWriter.WriteLine($scenesMessage)
+($pipeReader.ReadLine() | ConvertFrom-Json).result | Select Name, id
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/getslobsscenes.png"
+loading="lazy"
+alt="Get SLOBS Scenes"
+>&lt;/p>
+&lt;h3 id="change-scenes">Change Scenes&lt;/h3>
+&lt;p>The last part of the jigsaw was to change the scene via the named pipe connection&lt;/p>
+&lt;pre>&lt;code>$scenesMessage = '{&amp;quot;jsonrpc&amp;quot;: &amp;quot;2.0&amp;quot;,&amp;quot;id&amp;quot;: 6,&amp;quot;method&amp;quot;: &amp;quot;getScenes&amp;quot;,&amp;quot;params&amp;quot;: {&amp;quot;resource&amp;quot;: &amp;quot;ScenesService&amp;quot;}}'
+$pipeWriter.WriteLine($scenesMessage)
+$scenes = ($pipeReader.ReadLine() | ConvertFrom-Json).result | Select Name, id
+$SceneId = ($scenes | Where Name -eq $SceneName).id
+$MakeSceneActiveMessage = '{ &amp;quot;jsonrpc&amp;quot;: &amp;quot;2.0&amp;quot;, &amp;quot;id&amp;quot;: 1, &amp;quot;method&amp;quot;: &amp;quot;makeSceneActive&amp;quot;, &amp;quot;params&amp;quot;: { &amp;quot;resource&amp;quot;: &amp;quot;ScenesService&amp;quot;,&amp;quot;args&amp;quot;: [&amp;quot;' + $SceneId + '&amp;quot;]}}'
+$pipeWriter.WriteLine($MakeSceneActiveMessage)
+$switchResults = $pipeReader.ReadLine() | ConvertFrom-Json
+&lt;/code>&lt;/pre>
+&lt;p>Which looks like this :-)&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="setting-up-powerpoint-and-scenes">Setting up PowerPoint and Scenes&lt;/h2>
+&lt;p>With the PowerShell set up, we next need to set it up to use the scenes. I followed Scotts example and used &lt;code>OBS:SceneName&lt;/code> as the reference to the Scene. I added this to the first line of the notes on a slide&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/pptxnotes.png"
+loading="lazy"
+alt="Slide Notes"
+>&lt;/p>
+&lt;p>and then created a text box with a green fill&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/greenbox.png"
+loading="lazy"
+alt="Green Box"
+>&lt;/p>
+&lt;p>In StreamLabs, I set up the scene with the same name, the order of the sources is important. They are displayed from top to bottom, front to back so the Display Capture will be on top of the Sony Camera here&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/sourceorder.png"
+loading="lazy"
+alt="Source order"
+>&lt;/p>
+&lt;p>Then I right clicked on the Display Capture and chose Filters&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/choosefilters.png"
+loading="lazy"
+alt="choose filters"
+>&lt;/p>
+&lt;p>and chose a Chroma Key filter&lt;/p>
+&lt;p>With the PowerPoint in SlideShow mode, I set the Chroma Key filter colour to match the colour of the green box, placed the camera source in the correct location and saved.&lt;/p>
+&lt;p>The image below shows form left to right, the Chroma Key settings, the scene in SLOBS and the PowerPoint slideshow&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com//assets/uploads/2020/09/setfilter.png"
+loading="lazy"
+alt="set filters"
+>&lt;/p>
+&lt;p>Normally, I would do this on seperate screens of course!&lt;/p>
+&lt;p>I set up each slide like this and then I closed the PowerPoint and ran the code, &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1" target="_blank" rel="noopener"
+>you can find it here,&lt;/a>)leaving PowerShell running in the background. This opened PowerPoint and I opened the deck and started the slide show and as I navigate through the slide, the scene changes and so does the webcam position :-)&lt;/p>
+&lt;p>You can see a test run below&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>and &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/2020/test.pptx" target="_blank" rel="noopener"
+>the demo pptx can be found here&lt;/a>&lt;/p></description></item><item><title>Presentation Nerves</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/presentation-nerves/</link><pubDate>Tue, 08 Aug 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/presentation-nerves/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Lessons Learnt from my first talk at SQL SouthWest</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/</link><pubDate>Fri, 17 May 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/</guid><description>&lt;p>Edit 2022 -&lt;/p>
+&lt;p>Find your User Groups here &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>&lt;/p>
+&lt;p>The timing was good enough that I could offer to do a talk based on my &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>previous post on Windows Azure&lt;/a> for my SQL User Group &lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>SQL SouthWest&lt;/a> when Jonathan and Annette.( &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+>@FatherJack&lt;/a> and &lt;a class="link" href="https://twitter.com/Mrs_Fatherjack" target="_blank" rel="noopener"
+>@MrsFatherJack&lt;/a>) put out a call for volunteers (Edit Sept 2020 - Brave enough to say now that Jonathan just told me I was doing it !! In the nicest possible way).&lt;/p>
+&lt;p>I did my best with the &lt;a class="link" href="http://en.wikipedia.org/wiki/7_Ps_%28military_adage%29" target="_blank" rel="noopener"
+>7 P’s&lt;/a>. I ran through it at lunchtime, I made sure I had power and a HDMI lead after checking with Jonathan, I got a glass of water. I knew the first line I was going to say&lt;/p>
+&lt;p>However, I neglected to check that I would have HDMI in at the location so everything that was on my laptop was useless! My laptop did very odd things to the USB stick when I tried to transfer to Jonathans laptop and he didn’t have Powershell V3 installed so whilst Neil Hambly &lt;a class="link" href="https://twitter.com/Neil_Hambly" target="_blank" rel="noopener"
+>@Neil_Hambly&lt;/a> from Confio was speaking I was busy ignoring a very interesting talk on Waits to install and configure Powershell Azure on my Azure VM. Sorry Neil.&lt;/p>
+&lt;p>But in the end it more or less worked and we are lucky to have such a patient and supportive user group who helped me along the way as well. Thank you folks&lt;/p>
+&lt;p>Things I took away from the evening&lt;/p>
+&lt;ol>
+&lt;li>Double check you have all the connections&lt;/li>
+&lt;li>Practice and Practice some more&lt;/li>
+&lt;li>Think about the times when something is running and what you will say when there is nothing to see&lt;/li>
+&lt;li>Presenting completely inside a RDP session adds unnecessary complication&lt;/li>
+&lt;li>The Demo Gods WILL hit you and the curse of the red text will fall upon you during the presentation. Accept it and move on.&lt;/li>
+&lt;li>Have an opening line&lt;/li>
+&lt;li>Remember to breath (especially when the demo falls over)&lt;/li>
+&lt;li>Enjoy it!&lt;/li>
+&lt;/ol>
+&lt;p>It didn’t go perfectly but people gave me some good feedback and I am pleased to say that I have pointed people towards something new that will help them and passed over my knowledge and that to me is what the SQL Community is all about. I have a load of other ideas for things I can talk about and blog about so it is going to be a very busy time for me as I work my way through them and do all the other exciting things coming my way in the SQL world.&lt;/p>
+&lt;p>Visit your own User Group – You can find them here &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>&lt;/p>
+&lt;p>If you are in the South West UK then come and join our group. Free training and conversation with like minded people once a month and pizza too what could be better!!&lt;/p></description></item></channel></rss>

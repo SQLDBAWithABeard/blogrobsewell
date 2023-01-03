@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>sql on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/sql/</link><description>Recent content in sql on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/sql/index.xml" rel="self" type="application/rss+xml"/><item><title>TSQL2sDay – Get-PostRoundup</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Why VS Code Increases my Productivity</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/why-vs-code-increases-my-productivity/</link><pubDate>Thu, 13 Apr 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/why-vs-code-increases-my-productivity/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Backing up SQL Server on Linux using Ola Hallengrens Maintenance Solution</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>A Whole Day of PowerShell and SQL – Join Chrissy LeMaire &amp; I at #sqlsatvienna</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-whole-day-of-powershell-and-sql-join-chrissy-lemaire-i-at-#sqlsatvienna/</link><pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-whole-day-of-powershell-and-sql-join-chrissy-lemaire-i-at-#sqlsatvienna/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p>Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+>using Power Bi with my DBA Database&lt;/a> I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p>
+&lt;p>In this post I will show how to create the following report&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You will find the latest version of my DBADatabase creation scripts and PowerShell scripts here.&lt;/a>&lt;/p>
+&lt;p>The SQLInfo table is created using this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [Info].[SQLInfo](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLInfoID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DateChecked] [datetime] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DateAdded] [datetime] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ServerName] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [InstanceName] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLVersionString] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLVersion] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ServicePack] [nvarchar](3) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Edition] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ServerType] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [Collation] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsHADREnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLServiceAccount] [nvarchar](35) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLService] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLServiceStartMode] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [BAckupDirectory] [nvarchar](256) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [BrowserAccount] [nvarchar](50) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [BrowserStartMode] [nvarchar](25) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsSQLClustered] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ClusterName] [nvarchar](25) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ClusterQuorumstate] [nvarchar](20) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ClusterQuorumType] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [C2AuditMode] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [CostThresholdForParallelism] [tinyint] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [MaxDegreeOfParallelism] [tinyint] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DBMailEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DefaultBackupCComp] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [FillFactor] [tinyint] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [MaxMem] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [MinMem] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [RemoteDacEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [XPCmdShellEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [CommonCriteriaComplianceEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DefaultFile] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [DefaultLog] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [HADREndpointPort] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [ErrorLogPath] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [InstallDataDirectory] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [InstallSharedDirectory] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsCaseSensitive] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [IsFullTextInstalled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [LinkedServer] [nvarchar](max) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [LoginMode] [nvarchar](20) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [MasterDBLogPath] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [MasterDBPath] [nvarchar](100) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [NamedPipesEnabled] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [OptimizeAdhocWorkloads] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [InstanceID] [int] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AGListener] [nvarchar](150) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [AGs] [nvarchar](150) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CONSTRAINT [PK__SQL__50A5926BC7005F29] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [SQLInfoID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ALTER TABLE [Info].[SQLInfo] WITH CHECK ADD CONSTRAINT [FK_SQLInfo_InstanceList] FOREIGN KEY([InstanceID])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">REFERENCES [dbo].[InstanceList] ([InstanceID])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ALTER TABLE [Info].[SQLInfo] CHECK CONSTRAINT [FK_SQLInfo_InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also enable some logging into a new event log by following the steps here &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx&lt;/a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT&lt;/p>
+&lt;p>To run the script I simply need to add the values for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$CentralDBAServer = &amp;#39;&amp;#39; ## Add the address of the instance that holds the DBADatabase
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CentralDatabaseName = &amp;#39;DBADatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogFile = &amp;#34;\DBADatabaseServerUpdate_&amp;#34; + $Date + &amp;#34;.log&amp;#34; ## Set Path to Log File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get &lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>the script from here&lt;/a> or you can read on to see how it works and how to create the report and publish it to powerbi.com&lt;/p>
+&lt;p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Catch-Block
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ([string]$Additional)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage = &amp;#34; On $Connection &amp;#34; + $Additional + $_.Exception.Message + $_.Exception.InnerException.InnerException.message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Message = &amp;#34; This message came from the Automated PowerShell script updating the DBA Database with Server Information&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Msg = $Additional + $ErrorMessage + &amp;#34; &amp;#34; + $Message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message $ErrorMessage -Level Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-EventLog -LogName SQLAutoScript -Source &amp;#34;SQLAUTOSCRIPT&amp;#34; -EventId 1 -EntryType Error -Message $Msg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the function an additional parameter which will hold each custom error message which I write to both the event log and a text message to enable easy troubleshooting and include the message from the $Error variable by accessing it with $_. I won&amp;rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called $ServerNames holding the server name, instance name and port&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[InstanceName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the array and create a &lt;code>$Connection&lt;/code> variable for my SMO connection string and connect to the server&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Even though I place the creation of the SMO server object in a try block you still need to an additional check to ensure that you can connect and populate the object as the code above creates an empty SMO Server object with the name property set to the $Connection variable if you can&amp;rsquo;t connect to that server and doesn’t error as you may expect The way I have always validated an SMO Server object is to check the version property. There is no justifiable reason for choosing that property, you could choose any one but that’s the one I have always used. I use an if statement to do this ( &lt;a class="link" href="http://wp.me/p3aio8-cL" target="_blank" rel="noopener"
+>This post about Snippets will show you the best way to learn PowerShell code&lt;/a>) The reference I use for exiting a loop in the way that you want is &lt;a class="link" href="http://ss64.com/ps/break.html" target="_blank" rel="noopener"
+>this one&lt;/a> In this case we use a continue to carry on iterating the loop&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (!( $srv.version)){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Catch-Block &amp;#34; Failed to Connect to $Connection&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you wish to view all of the different properties that you can gather information on in this way you can use this code to take a look. (This is something you should get used to doing when writing new PowerShell scripts)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv | Get-Member
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>As you can see from the screenshot below on my SQL2014 server there are 184 properties. I havent chosen to gather all of them, only the ones that are of interest to me, our team or others who request information from our team such as auditors and project managers etc&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>You can choose to use any or all of these properties as long as you ensure you have the columns in your table with the correct data type and that you have the correct knowledge and logic to stop the script from erroring if/when the property is not available. Here is an example&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if ($srv.IsHadrEnabled -eq $True)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$IsHADREnabled = $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGs = $srv.AvailabilityGroups|Select Name -ExpandProperty Name|Out-String
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Expression = @{Name = &amp;#39;ListenerPort&amp;#39; ; Expression = {$_.Name + &amp;#39;,&amp;#39; + $_.PortNumber }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGListener = $srv.AvailabilityGroups.AvailabilityGroupListeners|select $Expression|select ListenerPort -ExpandProperty ListenerPort
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IsHADREnabled = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGs = &amp;#39;None&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGListener = &amp;#39;None&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $BackupDirectory = $srv.BackupDirectory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I check if the property &lt;code>IsHADREnabled&lt;/code> is true and if it is I then gather the information about the Availability Group names and the listener port and if it doesn’t exist I set the values to None.&lt;/p>
+&lt;p>You will find that not all of the properties that you want are at the root of the Server SMO object. If you want you max and min memory values and you want to know if &lt;code>remote admin connections&lt;/code> or &lt;code>xp_cmdshell&lt;/code> are enabled you will need to look at the &lt;code>$Srv.Configuration&lt;/code> object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $MaxMem = $srv.Configuration.MaxServerMemory.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $MinMem = $srv.Configuration.MinServerMemory.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $RemoteDacEnabled = $srv.Configuration.RemoteDacConnectionsEnabled.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $XPCmdShellEnabled = $srv.Configuration.XPCmdShellEnabled.ConfigValue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can look for the property that you want by using the Get-Member cmdlet as shown above or use MSDN to find it &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.server.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>starting from here&lt;/a> or by GoogleBingDuckDuckGo ing &amp;ldquo;PowerShell SMO&amp;rdquo; and the property you wish to find.&lt;/p>
+&lt;p>The rest of the script follows exactly the same pattern &lt;a class="link" href="http://sqldbawithabeard.com/2015/08/31/populating-my-dba-database-for-power-bi-with-PowerShell-server-info/" target="_blank" rel="noopener"
+>as the previous post&lt;/a> by checking the SQL Info table for an entry for that instance and updating the table if it exists and inserting if it does not.&lt;/p>
+&lt;p>There are other uses for gathering this information than just for reporting on it. You can target different versions of SQL for different scripts. You can identify values that are outside what is expected and change them. If xp_cmdshell should not be enabled, write the TSQL to gather the connection string of all of the servers from the DBADatabase where the SQLInfo table has &lt;code>XPCMDShellenabled = 1&lt;/code> and loop through them exactly as above and change the value of &lt;code>$srv.Configuration.XPCmdShellEnabled.ConfigValue&lt;/code> to 0 and then &lt;code>$Srv.Alter()&lt;/code>&lt;/p>
+&lt;p>It is a very powerful way of dynamically targeting your estate if you are looking after many instances and with great power comes great responsibility.&lt;/p>
+&lt;p>ALWAYS TEST THESE AND ANY SCRIPTS YOU FIND OR SCRIPTS YOU WRITE BEFORE YOU RUN THEM IN YOUR PRODUCTION ENVIRONMENT&lt;/p>
+&lt;p>Yeah, I shouted and some people thought it was rude. But its important, it needs to be repeated and drilled in so that it becomes habitual. You can do great damage to your estate with only a few lines of PowerShell and a DBA Database so please be very careful and ensure that you have a suitable test subset of servers that you can use to test&lt;/p>
+&lt;p>The other thing we can do is report on the data and with Power Bi we can create self service reports and dashboards and also make use of the natural language query at powerbi.com so that when your systems team ask &amp;ldquo;What are all the servers in X data center?&amp;rdquo; you can enable them to answer it themselves or when the compliance officer asks how many SQL 2005 instances do we have and which clients do they serve you can give them a dashboard they can query themselves.&lt;/p>
+&lt;p>This is how I create the two reports you see at the top. I start by connecting to the data source, my DBA Database&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>And I use this query&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SELECT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IL.ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,IL.InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,IL.Location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,IL.Environment
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,IL.Inactive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,IL.NotContactable
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLInfoID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DateChecked]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DateAdded]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[InstanceName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLVersionString]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLVersion]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ServicePack]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[Edition]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ServerType]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[Collation]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[IsHADREnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLServiceAccount]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLService]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[SQLServiceStartMode]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[BAckupDirectory]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[BrowserAccount]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[BrowserStartMode]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[IsSQLClustered]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ClusterName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ClusterQuorumstate]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ClusterQuorumType]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[C2AuditMode]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[CostThresholdForParallelism]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[MaxDegreeOfParallelism]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DBMailEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DefaultBackupCComp]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[FillFactor]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[MaxMem]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[MinMem]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[RemoteDacEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[XPCmdShellEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[CommonCriteriaComplianceEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DefaultFile]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[DefaultLog]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[HADREndpointPort]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[ErrorLogPath]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[InstallDataDirectory]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[InstallSharedDirectory]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[IsCaseSensitive]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[IsFullTextInstalled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[LinkedServer]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[LoginMode]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[MasterDBLogPath]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[MasterDBPath]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[NamedPipesEnabled]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[OptimizeAdhocWorkloads]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[InstanceID]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[AGListener]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,SI.[AGs]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[Info].[SQLInfo] as SI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JOIN [DBADatabase].[dbo].[InstanceList] as IL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ON IL.InstanceID = SI.InstanceID
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So that I can easily add any and all the data to the reports if I choose or query using them in powerbi.com&lt;/p>
+&lt;p>First I created 3 measures.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> AG = DISTINCTCOUNT(Query1[AGs]) Instances = DISTINCTCOUNT(Query1[InstanceID]) Servers = DISTINCTCOUNT(Query1[ServerName])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I click on map&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png?w=300"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>And drag the location column to location and the Instances measure to both the Values and Color Saturation&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I then click on edit and format the title and change the colours for the data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>Next I created I heat map for Instances by Edition. The picture shows the details&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>And a column chart for Instances by Version&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png?w=300"
+loading="lazy"
+alt="9"
+>&lt;/a>&lt;/p>
+&lt;p>I also add a table showing the number of instances in each location and a slicer for environment.&lt;/p>
+&lt;p>Even though you have added one slicer, you are able to slice the data by clicking on the charts. If I click on Developer Edition I can quickly see which versions and locations they are in&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png?w=300"
+loading="lazy"
+alt="10"
+>&lt;/a>&lt;/p>
+&lt;p>This works for the map and the column chart as well. This has all been created using live data as a base with all identifying information altered, Bolton is where I was born and the other locations are chosen at random, all other figures and rollups have also been altered.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png?w=300"
+loading="lazy"
+alt="11"
+>&lt;/a>&lt;/p>
+&lt;p>To create the other report I create two donut charts for Instances by version and by location using steps similar to my previous post and then add some tables for location, edition and xp_cmdshell enabled as well as some cards showing total numbers of Servers, Instances and Availability Groups and a slicer for environment to create a report like this, you can use the donut charts to slice the data as well&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png?w=300"
+loading="lazy"
+alt="12"
+>&lt;/a>&lt;/p>
+&lt;p>But there are so many different points of information gathered by this script that you get extra value using the natural language query on powerbi.com.&lt;/p>
+&lt;p>Click Publish and enter your powerbi.com credentials and then log into powerbi.com in a browser and you will see your report and your dataset. (Note, you can easily filter to find your dashboards, reports and data sets)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png?w=173"
+loading="lazy"
+alt="13"
+>&lt;/a>&lt;/p>
+&lt;p>Click the plus sign to create a new dashboard and click the pin on any of the objects in your report to pin them to the dashboard&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png?w=300"
+loading="lazy"
+alt="14"
+>&lt;/a>&lt;/p>
+&lt;p>Then you can view (and share) your dashboard&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png?w=300"
+loading="lazy"
+alt="15"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have done this you can query your data using natural language. It will cope with spelling mistakes and expects the column names so you may want to think about renaming them in your report by right clicking on them after you get your data.&lt;/p>
+&lt;p>You can ask it questions and build up information on the fly and alter it as you need it. As a DBA doing this and imagining enabling others to be able to ask these questions whenever they want from a browser and as many times as they like, it was very cool!&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png?w=300"
+loading="lazy"
+alt="16"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png?w=300"
+loading="lazy"
+alt="17"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png?w=300"
+loading="lazy"
+alt="18"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png?w=300"
+loading="lazy"
+alt="19"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png?w=300"
+loading="lazy"
+alt="20"
+>&lt;/a>&lt;/p>
+&lt;p>Pretty cool, I think you and any of your &amp;lsquo;requestors&amp;rsquo; would agree&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You can get all of the scripts here&lt;/a>&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Using Power Bi with my DBA Database</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p>Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p>
+&lt;p>I have an InstanceList table which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CREATE TABLE [dbo].[InstanceList](
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] [int] IDENTITY(1,1) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ServerName] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceName] [nvarchar](50) NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Port] [int] NOT NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[AG] [bit] NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Inactive] [bit] NULL CONSTRAINT [DF_InstanceList_Inactive] DEFAULT ((0)),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Environment] [nvarchar](25) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Location] [nvarchar](30) NULL,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CONSTRAINT [PK_InstanceList_ID] PRIMARY KEY CLUSTERED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[InstanceID] ASC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">) ON [PRIMARY]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p>
+&lt;p>I have 4 scripts&lt;/p>
+&lt;ul>
+&lt;li>ServerInfo which gathers Windows OS information such as Version and edition of the operating system, number of processors,amount of RAM, IP address, domain name etc&lt;/li>
+&lt;li>SQLInfo which gathers information about the instance such as SQL version, edition, collation, max and min memory, MAXDOP , service accounts and start modes, default file locations etc&lt;/li>
+&lt;li>Database information such as size, data usage, index usage, last backup dates, owner and many more&lt;/li>
+&lt;li>Agent Job which gathers the outcome of the jobs that have run, their names, category into two tables one for a server rollup and one for details about each job&lt;/li>
+&lt;/ul>
+&lt;p>Recently I have received a lot of requests for information from various sources, auditors asking about encryption and backup policies, Project managers asking about database and sql versions, compliance asking about numbers of Windows 2003 servers or SQL 2005 servers, system teams asking which serves in a particular location can be turned off at which time dependant on which system they are supporting for a power down&lt;/p>
+&lt;p>Before we had the DBA database holding all of the information about the instances we would have struggled to be able to compile this information and when I saw Power Bi was released to GA I thought that it would be a good place to start to learn about it. By using data that I understood and answering questions that I knew the format of the answer I could be more confident about experimenting - ie. if I know I have 100 servers then any result for servers that exceeds that is incorrect&lt;/p>
+&lt;p>I have never been a BI guy, I claim no expertise in the correct methods of manipulating the data. There may very well be better methods of achieving these results and if there please feel free to comment below so that I can improve my knowledge and keep on learning&lt;/p>
+&lt;p>All data shown in the examples below has been generated from real-life data but all identifiable data has been altered or removed. I have no servers in Bolton, it is where I am from originally!!&lt;/p>
+&lt;p>I downloaded Power BI Desktop from powerbi.com and ran the installer and the first screen you see is this one&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I then clicked on Get Data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png?w=276"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>And then SQL Server and filled in the details for my DBA Database and clicked connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>I used my current Windows credentials&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It then asked me which tables I wanted to load so I said all of them :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png?w=195"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>Once I had loaded the data I looked at the queries and renamed some of the columns to make more sense to me. I also created some calculated columns by clicking New Column&lt;/p>
+&lt;p>I created a relative date column using this code from Chris Webb &lt;a class="link" href="http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/" target="_blank" rel="noopener"
+>http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Relative Date Offset=INT([Date] – TODAY()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Relative Date=IF([Relative Date Offset]=0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today &amp;#34; &amp;amp; IF([Relative Date Offset]&amp;gt;0, &amp;#34;+&amp;#34;, &amp;#34;&amp;#34;) &amp;amp; [Relative Date Offset])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This will enable me to show data for the last day&lt;/p>
+&lt;p>I also did the same for days of the week&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DayOfWeek = CONCATENATE(WEEKDAY(&amp;#39;Info AgentJobDetail&amp;#39;[LastRunTime],2),FORMAT(&amp;#39;InfoAgentJobDetail&amp;#39;[LastRunTime],&amp;#34; -dddd&amp;#34;))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Because I struggled to show the information about the Operating system I also created two columns for OS name and OS edition by adding columns as shown below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Version = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;Server 2012 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Edition = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I started to play with the data.&lt;/p>
+&lt;p>This is probably not how a professional would phrase it but I would say that if you don&amp;rsquo;t know how to use a new application be brave and give it a try.&lt;/p>
+&lt;p>&lt;strong>OBVIOUSLY&lt;/strong> you are a &lt;strong>PROFESSIONAL DBA&lt;/strong> and will not do anything that would endanger production, use a backup of your database and work locally if you need to.&lt;/p>
+&lt;p>The first thing I wanted to know was how many servers I had by operating system, how many by SQL version and the location of them so that I could answer the questions I had been asked. I had already written a query to get the correct information to give to the requestors so I knew the correct answers which was also an advantage. I did this like this&lt;/p>
+&lt;p>I expanded the Info ServerOSInfo query and dragged the ServerName field to the report which created a table of names&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I then changed the ServerName values to Count&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>I then dragged the calculated column Operating System Version to the table&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>If I click on the table and then donut chart in the visualisations it changes to&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png?w=300"
+loading="lazy"
+alt="9"
+>&lt;/a>&lt;/p>
+&lt;p>So you can quickly see how you want the data displayed&lt;/p>
+&lt;p>I then decided to look at the number of SQL 2005 instances that I had and as I had relationships between SQLInfo and Instancelist and Clients I could build a more dynamic report.&lt;/p>
+&lt;p>I created a donut chart with SQLVersion as the legend and InstanceID as the values and a table of SQLVersion, ServerName and Instance Name. I also created a card that was count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png?w=300"
+loading="lazy"
+alt="10"
+>&lt;/a>&lt;/p>
+&lt;p>Now it starts getting really useful. If I want to know how many SQL 2005 instances I have I simply click on SQL2005 in the donut chart and the rest of the report changes&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png?w=300"
+loading="lazy"
+alt="11"
+>&lt;/a>&lt;/p>
+&lt;p>This is very cool and I hope you can see how useful this could be and how brilliant it would be to enable relevant people within the organisation the ability to look at that report and answer their own questions.&lt;/p>
+&lt;p>Lets take it to the next step. I have a location column in the InstanceList table which comprises of town names. If I choose a map and drag that column to the Location field and set Values and Color Saturation to the Count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png?w=166"
+loading="lazy"
+alt="12"
+>&lt;/a>&lt;/p>
+&lt;p>and create two tables one of client with a count of instanceid and one location with a count of instance id I can do this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png?w=300"
+loading="lazy"
+alt="13"
+>&lt;/a>&lt;/p>
+&lt;p>Look at how it dynamically changes as you click on the data labels - This is very cool and makes me smile every time!! I altered the colour saturation colours to make it easier to see. Now if I am asked about SQL 2005 servers I can quickly click on SQL 2005 and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png?w=300"
+loading="lazy"
+alt="14"
+>&lt;/a>&lt;/p>
+&lt;p>I can see that there are 32 instances, most are in Southampton, and which clients they support&lt;/p>
+&lt;p>If I click a location rather than SQL version the report alters like so&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png?w=300"
+loading="lazy"
+alt="15"
+>&lt;/a>&lt;/p>
+&lt;p>So you can simply pass the report file to your colleagues to enable them to use it or you can publish it to Powerbi.com. &lt;a class="link" href="https://support.powerbi.com/knowledgebase/articles/685479-power-bi-pro-content-what-is-it?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>I am not going to go into any detail about the costs or licensing etc&lt;/a> I will just say it is as easy as clicking publish. If you wish to have the information automatically refreshed there are some &lt;a class="link" href="http://biinsight.com/power-bi-personal-gateway-five-things-you-must-know/" target="_blank" rel="noopener"
+>more steps that you would need to go through which are detailed here which enable you to connect your on-premise database to Powerbi using the data management gateway&lt;/a>, alternatively you can simply refresh the data in the report and then publish it and replace the existing report.&lt;/p>
+&lt;p>Once the report is in powerbi.com you can enable Q and A on the data. This is some kind of supernatural mystical magical query language which enables you to query your data with natural language and will alter the results as you type and even cope with (deliberate for screenshot) spelling mistakes :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png?w=300"
+loading="lazy"
+alt="16"
+>&lt;/a>&lt;/p>
+&lt;p>I also created a report for my Agent Jobs to enable me to quickly and easily see which Jobs have failed in the last day&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png?w=300"
+loading="lazy"
+alt="17"
+>&lt;/a>&lt;/p>
+&lt;p>I did this by filtering the report by Relative Date Offset greater than -1 (today) and &lt;code>isenabled = True&lt;/code> and &lt;code>Outcome = Failed&lt;/code>&lt;/p>
+&lt;p>There are many many more ways I can see this being useful and I hope I have given you some ideas and encouraged you to try for yourself and find out more&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p>If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p>
+&lt;p>If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>https://ola.hallengren.com/&lt;/a>&lt;/p>
+&lt;p>You can also watch his presentation at SQLBits at this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a>&lt;/p>
+&lt;p>where he talks about and demonstrates the solution.&lt;/p>
+&lt;p>It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p>
+&lt;p>I particularly like the parameter @ChangeBackupType which when running the transaction log or differential backup will change the backup type to full if the backup type cannot be taken. This is excellent for picking up new databases and backing them up soon after creation&lt;/p>
+&lt;p>When you run the script the jobs are created but not scheduled and it is for this reason I created this function. All it does it schedule the jobs so that I know that they will be run when a new server is created and all the databases will be backed up. I can then go back at a later date and schedule them correctly for the servers workload or tweak them according to specific needs but this allows me that fuzzy feeling of knowing that the backups and other maintenance will be performed.&lt;/p>
+&lt;p>To accomplish this I pass a single parameter $Server to the function this is the connection string and should be in the format of &lt;code>SERVERNAME&lt;/code>, &lt;code>SERVERNAME\INSTANCENAME &lt;/code>or &lt;code>SERVERNAME\INSTANCENAME,Port&lt;/code>&lt;/p>
+&lt;p>I then create a &lt;code>$srv&lt;/code> SMO object as usual&lt;/p>
+&lt;p>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server&lt;/code>&lt;/p>
+&lt;p>Create a JobServer object and a Jobs array which holds the Jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$JobServer = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs = $JobServer.Jobs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And set the schedule for each job. I pick each Job using the Where-Object Cmdlet and break out if the job does not exist&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job = $Jobs|Where-Object {$_.Name -eq &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       if ($Job -eq $Null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       {Write-Output &amp;#34;No Job with that name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       break}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I create a Schedule object and set its properties and create the schedule&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Schedule = new-object Microsoft.SqlServer.Management.Smo.Agent.JobSchedule ($job, &amp;#39;Daily - Midnight ++ Not Sunday&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndDate = Get-Date -Month 12 -Day 31 -Year 9999
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndTimeOfDay = &amp;#39;23:59:59&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyTypes = &amp;#34;Weekly&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyRecurrenceFactor = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencySubDayTypes = &amp;#34;Once&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyInterval = 126 # Weekdays 62 + Saturdays 64 - &amp;lt;a href=&amp;#34;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;#34;&amp;gt;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveStartDate = get-date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$schedule.ActiveStartTimeOfDay = &amp;#39;00:16:00&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.IsEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>MSDN&lt;/a> which is always my first port of call when writing these scripts&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>WeekDays.Sunday = 1&lt;/li>
+&lt;li>WeekDays.Monday = 2&lt;/li>
+&lt;li>WeekDays.Tuesday = 4&lt;/li>
+&lt;li>WeekDays.Wednesday = 8&lt;/li>
+&lt;li>WeekDays.Thursday = 16&lt;/li>
+&lt;li>WeekDays.Friday = 32&lt;/li>
+&lt;li>WeekDays.Saturday = 64&lt;/li>
+&lt;li>WeekDays.WeekDays = 62&lt;/li>
+&lt;li>WeekDays.WeekEnds = 65&lt;/li>
+&lt;li>WeekDays.EveryDay = 127&lt;/li>
+&lt;/ul>
+&lt;p>Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.&lt;/p>
+&lt;/blockquote>
+&lt;p>It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.&lt;/p>
+&lt;p>You can tweak this script or use the code to work with any Agent Jobs and set the schedules accordingly and you can check that you have set the schedules correctly with this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">   $srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObserver = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObs = $JObserver.Jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $ActiveStartTimeOfDay = @{Name = &amp;#34;ActiveStartTimeOfDay&amp;#34;; Expression = {$_.JobSchedules.ActiveStartTimeOfDay}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyInterval = @{Name = &amp;#34;FrequencyInterval&amp;#34;; Expression = {$_.JobSchedules.FrequencyInterval}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyTypes = @{Name = &amp;#34;FrequencyTypes&amp;#34;; Expression = {$_.JobSchedules.FrequencyTypes}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $IsEnabled = @{Name = &amp;#34;IsEnabled&amp;#34;; Expression = {$_.JobSchedules.IsEnabled}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $Jobs|Where-Object{$_.Category -eq &amp;#39;Database Maintenance&amp;#39;}|select name,$IsEnabled,$FrequencyTypes,$FrequencyInterval,$ActiveStartTimeOfDay|Format-Table -AutoSize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can get the script from Script Center via the link below or by searching for &amp;ldquo;Ola&amp;rdquo; using the &lt;a class="link" href="http://www.microsoft.com/en-us/download/details.aspx?id=42525?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>script browser add-in&lt;/a> straight from ISE&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg?w=300"
+loading="lazy"
+alt="browser"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89&lt;/a>&lt;/p></description></item><item><title>Making a Change Log Easier With PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/making-a-change-log-easier-with-powershell/</link><pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/making-a-change-log-easier-with-powershell/</guid><description>&lt;p>Having a Change Log is a good thing. A quick and simple place to find out what has changed on a server and when. This can be invaluable when troubleshooting, matching a change to a symptom especially when assessed alongside your performance counter collection. Here is a simple way to make use of a change log and automate it&lt;/p>
+&lt;p>Create a simple table&lt;/p>
+&lt;pre>&lt;code>USE [MDW]
+GO
+CREATE TABLE [dbo].[ChangeLog](
+[ChangeID] [int] IDENTITY(1,1) PRIMARY KEY ,
+[Date] [datetime] NOT NULL,
+[Server] [varchar](50) NOT NULL,
+[UserName] [nvarchar](50) NOT NULL,
+[Change] [nvarchar](max) NOT NULL,
+)
+GO
+&lt;/code>&lt;/pre>
+&lt;p>You can keep this on a central server or create a database on each server, whichever fits your needs best. You can add other columns if you want your information in a different format&lt;/p>
+&lt;p>Once you have your table you can create a couple of Powershell functions to easily and quickly add to and retrieve data from the table. I make use of &lt;a class="link" href="https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1" target="_blank" rel="noopener"
+>Invoke-SQLCMD2&lt;/a> in these functions&lt;/p>
+&lt;p>This can then be included in any automation tasks that you use to update your environments whether you are using automated deployment methods for releases or using SCCM to patch your environments making it easy to update and also easy to automate by making it part of your usual deployment process.&lt;/p>
+&lt;p>To add a new change&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.Synopsis
+A function to add a ChangeLog information
+.DESCRIPTION
+Load function for adding a change to the changelog table in the MDW database on MDWSERVER.
+Use Get-ChangeLog $Server to see details
+Inputs the username of the account running powershell into the database as the user
+REQUIRES Invoke-SQLCMD2
+https://blog.robsewell.com
+.EXAMPLE
+Add-ChangeLog SERVERNAME &amp;quot;Altered AutoGrowth Settings for TempDB to None&amp;quot;
+Adds ServerName UserName and Altered AutoGrowth Settings for TempDB to None to the change log table
+#&amp;gt;
+Function Add-ChangeLog
+{
+[CmdletBinding()]
+Param(
+[Parameter(Mandatory=$True)]
+[string]$Server,
+[Parameter(Mandatory=$True)]
+[string]$Change
+)
+$UserName = $env:USERDOMAIN + '\' + $env:USERNAME
+$Query = &amp;quot;INSERT INTO [dbo].[ChangeLog]
+([Date]
+,[Server]
+,[UserName]
+,[Change])
+VALUES
+(GetDate()
+,'$Server'
+,'$UserName'
+,'$Change')
+&amp;quot;
+Invoke-Sqlcmd2 -ServerInstance MDWSERVER -Database &amp;quot;MDW&amp;quot; -Query $Query -Verbose
+}
+&lt;/code>&lt;/pre>
+&lt;p>You can then run&lt;/p>
+&lt;pre>&lt;code>Add-ChangeLog SERVERNAME &amp;quot;Added New Database SuperAppData&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>to add the change to the change log&lt;/p>
+&lt;p>To retrieve the data you can use&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.Synopsis
+A function to get ChangeLog information
+.DESCRIPTION
+Load function for finding ChangeLog information. Information is selected from the MDW Database on SERVERNAME
+REQUIRES Invooke-SQLCMD2
+https://blog.robsewell.com
+.EXAMPLE
+Get-ChangeLog SERVERNAME
+#&amp;gt;
+Function Get-ChangeLog
+{
+[CmdletBinding()]
+[OutputType([int])]
+Param
+(
+# Server Name Required
+[Parameter(Mandatory=$true,]
+$Server
+)
+$a = @{Expression={$_.Date};Label=&amp;quot;Date&amp;quot;;width=15}, `
+@{Expression={$_.Server};Label=&amp;quot;Server&amp;quot;;width=10},
+@{Expression={$_.UserName};Label=&amp;quot;UserName&amp;quot;;width=20}, `
+@{Expression={$_.Change};Label=&amp;quot;Change&amp;quot;;width=18}
+Invoke-Sqlcmd2 -ServerInstance MDWSERVER -Database &amp;quot;MDW&amp;quot; -Query &amp;quot;SELECT * FROM dbo.ChangeLog WHERE Server = '$Server';&amp;quot; -Verbose|Format-table $a -Auto -Wrap
+}
+&lt;/code>&lt;/pre>
+&lt;p>and use&lt;/p>
+&lt;pre>&lt;code>Get-ChangeLog SERVERNAME
+&lt;/code>&lt;/pre>
+&lt;p>To find out what changed when. Happy Automating&lt;/p></description></item><item><title>Changing Delay Between Responses for SQL Alerts with Powershell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/changing-delay-between-responses-for-sql-alerts-with-powershell/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/changing-delay-between-responses-for-sql-alerts-with-powershell/</guid><description>&lt;p>So you have read that you should have alerts for severity levels 16 to 24 and 823,824 and 825 on &lt;a class="link" href="http://www.sqlskills.com/blogs/glenn/the-accidental-dba-day-17-of-30-configuring-alerts-for-high-severity-problems/" target="_blank" rel="noopener"
+>SQLSkills.com&lt;/a> or maybe you have used &lt;a class="link" href="http://www.brentozar.com/blitz/" target="_blank" rel="noopener"
+>sp_blitz&lt;/a> and received the &lt;a class="link" href="http://www.brentozar.com/blitz/configure-sql-server-alerts/" target="_blank" rel="noopener"
+>Blitz Result: No SQL Server Agent Alerts Configured&lt;/a> and like a good and conscientious DBA you have set them up.&lt;/p>
+&lt;p>Hopefully you also have &lt;a class="link" href="https://www.simple-talk.com/blogs/author/13359-jonathan-allen/" target="_blank" rel="noopener"
+>Jonathan Allens blog&lt;/a> on your feed and if you look at his historical posts and seen this one where &lt;a class="link" href="https://www.simple-talk.com/blogs/2011/06/27/alerts-are-good-arent-they/" target="_blank" rel="noopener"
+>lack of a delay in response broke the Exchange Server!&lt;/a>&lt;/p>
+&lt;p>However sometimes the oft used delay between responses of 1 minute is too much. Alerts should be actionable after all and maybe you sync your email every 15 minutes and don’t need to see 15 alerts for the same error or you decide that certain level of errors require a lesser response and therefore you only need to know about them every hour or three. Or possibly you want to enforce a certain delay for all servers and want to set up a system to check regularly and enforce your rule&lt;/p>
+&lt;p>Whatever the reason, changing the delay between response for every alert on every server with SSMS could be time consuming and (of course) I will use Powershell to do the job.&lt;/p>
+&lt;p>To find the alerts I follow the process I use when finding any new property in powershell&lt;/p>
+&lt;pre>&lt;code>$server = 'SERVERNAME'
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/code>&lt;/pre>
+&lt;p>I know that the Alerts will be found under the JobServer Property&lt;/p>
+&lt;pre>&lt;code>$srv.JobServer.Alerts|Get-Member
+&lt;/code>&lt;/pre>
+&lt;p>Shows me&lt;/p>
+&lt;blockquote>
+&lt;p>DelayBetweenResponses   Property   int DelayBetweenResponses {get;set;}&lt;/p>
+&lt;/blockquote>
+&lt;p>And&lt;/p>
+&lt;blockquote>
+&lt;p> Alter                   Method     void Alter(), void IAlterable.Alter()&lt;/p>
+&lt;/blockquote>
+&lt;p>So I use both of those as follows&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts){
+$Alert.DelayBetweenResponses = 600 # This is in seconds
+$Alert.Alter()
+}
+&lt;/code>&lt;/pre>
+&lt;p>And place it in a foreach loop for the servers I want to change. If I only want to change certain alerts I can do so by filtering on Name&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts|Where-Object {$_.Name -eq 'NameOfAlert'})
+&lt;/code>&lt;/pre>
+&lt;p>Or by category&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts|Where-Object {$_.CategoryName -eq 'Category Name'})
+&lt;/code>&lt;/pre>
+&lt;p>When you have 5 minutes go and look at the results of&lt;/p>
+&lt;pre>&lt;code>$srv.JobServer|Get-Member
+&lt;/code>&lt;/pre>
+&lt;p>And explore and let me know what you find&lt;/p></description></item><item><title>Generating T-SQL Randomly with Powershell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/generating-t-sql-randomly-with-powershell/</link><pubDate>Wed, 05 Nov 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/generating-t-sql-randomly-with-powershell/</guid><description>&lt;p>I have a lab on my laptop running various servers so that I can problem solve and learn and recently I wanted to add several months of data into a database. I had created a stored procedure to take some parameters perform some logic and insert the data.&lt;/p>
+&lt;p>To execute the stored procedure in T-SQL I simply run this&lt;/p>
+&lt;pre>&lt;code>EXECUTE [dbo].[usp_Insert_DriveSpace] 'Server1','C','2014-11-05','100','25'
+&lt;/code>&lt;/pre>
+&lt;p>which uses the server name, drive letter, date, capacity and free space to add the data&lt;/p>
+&lt;p>In my wisdom I decided to create some data that was more ‘real-life’ I was interested in storing drive space data and will be learning how to write reports on it. To do this I had pre-populated some tables in the database with 10 Server Names each with 5 drives so I needed 10*5*90 or 4500 statements&lt;/p>
+&lt;p>I wanted to populate this with about 3 months of data as if it had been gathered every day. I read &lt;a class="link" href="http://smehrozalam.wordpress.com/2009/06/09/t-sql-using-common-table-expressions-cte-to-generate-sequences/" target="_blank" rel="noopener"
+>this post&lt;/a> about using CTEs to create sequences and I am sure it can be done this way but I don’t have the T-SQL skills to do so. If someone can (or has) done that please let me know as I am trying to improve my T-SQL skills and would be interested in how to approach and solve this problem with T-SQL&lt;/p>
+&lt;p>I solved it with Powershell in this way.&lt;/p>
+&lt;p>Created an array of Servers and an array of Drives to enable me to iterate though each.&lt;/p>
+&lt;pre>&lt;code>$Servers = 'Server1','Server2','Server3','Server4','Server5','Server6','Server7','Server8','Server9','Server10'
+$Drives = 'C','D','E','F','G'
+&lt;/code>&lt;/pre>
+&lt;p>Set the drive capacity for each drive. To make my life slightly easier I standardised my ‘servers’&lt;/p>
+&lt;pre>&lt;code>$CDriveCapacity = 100
+$DDriveCapacity = 50
+$EDriveCapacity = 200
+$FDriveCapacity = 200
+$GDriveCapacity = 500
+&lt;/code>&lt;/pre>
+&lt;p>I needed to create a date. You can use &lt;code>Get-Date&lt;/code> to get todays date and to get dates or times in the future or the past you can use the &lt;code>AddDays()&lt;/code> function. You can also add ticks, milliseconds, seconds, minutes, hours, months or years&lt;/p>
+&lt;pre>&lt;code>(Get-Date).AddDays(1)
+&lt;/code>&lt;/pre>
+&lt;p>I then needed to format the date. This is slightly confusing. If you just use &lt;code>Get-Date&lt;/code> to get the current date (time) then you can use the &lt;code>format&lt;/code> or &lt;code>uformat&lt;/code> switch to format the output&lt;/p>
+&lt;pre>&lt;code>Get-Date -Format yyyyMMdd
+Get-Date -UFormat %Y%m%d
+&lt;/code>&lt;/pre>
+&lt;p>However this does not work once you have used the AddDays() method. You have to use the ToString() method&lt;/p>
+&lt;pre>&lt;code>$Date = (Get-Date).AddDays(-7).ToString('yyyy-MM-dd')
+&lt;/code>&lt;/pre>
+&lt;p>To replicate gathering data each day I decided to use a while loop. I set $x to –95 and pressed CTRL and J to bring up Snippets and typed w and picked the while loop. You can find out more about snippets in &lt;a class="link" href="https://blog.robsewell.com/powershell-snippets-a-great-learning-tool/" target="_blank" rel="noopener"
+>my previous post&lt;/a> I started at –95 so that all the identity keys incremented in a real-life manner oldest to newest.&lt;/p>
+&lt;pre>&lt;code>$x = -98
+while ($x -le 0)
+{
+$Date = (get-date).AddDays($x).ToString('yyyy-MM-dd')
+foreach($Server in $Servers)
+{
+foreach ($Drive in $Drives)
+{
+&lt;/code>&lt;/pre>
+&lt;p>I could then use the while loop to generate data for each day and loop through each server and each drive and generate the T-SQL but I wanted more!&lt;/p>
+&lt;p>I wanted to generate some random numbers for the free space available for each drive. I used the &lt;a class="link" href="http://technet.microsoft.com/en-us/library/hh849905.aspx" target="_blank" rel="noopener"
+>Get-Random cmdlet&lt;/a> If you are going to use it make sure you read &lt;a class="link" href="http://www.vtesseract.com/post/15440295910/a-get-random-gotcha-powershell-how-i-was-robbed" target="_blank" rel="noopener"
+>this post&lt;/a> to make sure that you don’t get caught by the gotcha. I decided to set the free space for my OS,Data and Log Files to somewhere between 70 and 3 Gb free as in this imaginary scenario these drives are carefully monitored and the data and log file sizes under the control of a careful DBA but still able to go below thresholds.&lt;/p>
+&lt;pre>&lt;code>if($Drive -eq 'C')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+&lt;/code>&lt;/pre>
+&lt;p>I set the TempDB drive to have either 4,7 or 11 Gb free so that i can try to colour code my reports depending on values and if one field only has three values it makes it simpler to verify.&lt;/p>
+&lt;p>I set the Backup Drive to somewhere between 50 and 0 so that I will hit 0 sometimes!!&lt;/p>
+&lt;p>Here is the full script. It generated 4500 T-SQL statements in just under 16 seconds&lt;/p>
+&lt;pre>&lt;code>$Servers = 'Server1','Server2','Server3','Server4','Server5','Server6','Server7','Server8','Server9','Server10'
+$Drives = 'C','D','E','F','G'
+$CDriveCapacity = 100
+$DDriveCapacity = 50
+$EDriveCapacity = 200
+$FDriveCapacity = 200
+$GDriveCapacity = 500
+$x = -98
+while ($x -le 0)
+{
+$Date = (get-date).AddDays($x).ToString('yyyy-MM-dd')
+foreach($Server in $Servers)
+{
+foreach ($Drive in $Drives)
+{
+if($Drive -eq 'C')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$CDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'D')
+{
+$Free = Get-Random -InputObject 4,7,11
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$DDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'E')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$EDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'F')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$FDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'G')
+{
+$Free = Get-Random -Maximum 50 -Minimum 0
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$GDriveCapacity','$Free'&amp;amp;quot;
+}
+}
+}
+$X++
+}
+&lt;/code>&lt;/pre>
+&lt;p>Once it had run I simply copied the output into SSMS and was on my way&lt;/p></description></item><item><title>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</link><pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/03/033114_2017_howicheckhu6.png" alt="Featured image of post How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell" />&lt;h2 id="editors-note">Editors Note&lt;/h2>
+&lt;p>This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)&lt;/p>
+&lt;h1 id="original-post">Original Post&lt;/h1>
+&lt;p>Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked. In a large estate this can be very time consuming and if done manually prone to human error. I have repeatedly mentioned &lt;!-- raw HTML omitted -->John Sansoms Blog Post entitled “The Best DBAs Automate Everything” &lt;!-- raw HTML omitted -->and I follow that advice. Today I will share with you one fo the first scripts that I wrote.&lt;/p>
+&lt;p>When I started as a DBA I was told that my first job every morning was to check the Agent Jobs and resolve any errors. This is still something I do first before anything else. (Except coffee, experience has taught me that you get your coffee before you log into your computer otherwise on the bad days you can miss out on coffee for many an hour) I have two scripts to do this. The first sends me an email if the number of failed jobs on a server is greater than zero. This helps me to quickly and simply identify where to start in the case of multiple failures and is also a backup to the second script.&lt;/p>
+&lt;p>The second script runs on a different server and creates an excel worksheet and colour codes it. This makes it very simple to quickly scroll through the sheet and spot any red cells which designate failed jobs and also provides a nice easy to understand method to show management that on that specific day everything went well (or badly)&lt;/p>
+&lt;p>As with any Powershell script which manipulates Office applications you first need to create an object and add the workbook and worksheet to it. I also set a filename date variable and a Date variable for the Sheet.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png"
+loading="lazy"
+alt="howicheckhu1"
+>&lt;/a>&lt;/p>
+&lt;p>When you use Powershell to manipulate Excel you can access individual cells by identifying them by Row and Column. I use this to create a description for the work book as follows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png"
+loading="lazy"
+alt="howicheckhu2"
+>&lt;/a>&lt;/p>
+&lt;p>There are lots of properties that you can play with within Excel. As with any Powershell the best way to find what you need is to use the &lt;code>Get-Member&lt;/code> Cmdlet. If you run&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">($cells.item(1,3)|Get-Member).Count
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You will see that there are 185 Methods and Properties available to you (in Office 2013 on Windows 8.1)
+The snippet above creates the following&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png"
+loading="lazy"
+alt="howicheckhu3"
+>&lt;/a>&lt;/p>
+&lt;p>As you can see we are going to colour code the Job Status according to the three available results Successful, Failed and Unknown. We are also going to colour code the date column to see when the job was last run, this will enable you to easily identify if the last time the job ran it was successful but last night it didn’t kick off for some reason.&lt;/p>
+&lt;p>The next step is a fairly standard loop through available servers by picking them from a SQLServers text file, a list of the server names (ServerName\Instance if required) that you wish to check. You could also just create an array of server names or pick them from a table with &lt;code>Invoke-SQLCmd&lt;/code> but which ever way you do it you need to be able to iterate through the array and then the &lt;code>.Jobs&lt;/code> Collection in the &lt;code>JobServer&lt;/code> Namespace as follows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png"
+loading="lazy"
+alt="howicheckhu4"
+>&lt;/a>&lt;/p>
+&lt;p>What the script then does is to use the following properties of the &lt;code>$Job&lt;/code> object and write the Excel File according to the logic in the description&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.IsEnabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.LastRunOutcome
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.LastRunDate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To finish up save the workbook to a share available to all of the DBA Team and quit Excel. Notice that I use a double whammy to make sure Excel is really gone. First I quit the .com object and then I stop the process. I do this because I found that on my server quitting the .com object left the Excel process running and I ended up with dozens and dozens of them. If you have Excel open before you run this script either comment out the last line or save your work (You should save your work anyway regulary!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png"
+loading="lazy"
+alt="howicheckhu5"
+>&lt;/a>&lt;/p>
+&lt;p>As always I take no responsibility for your environment, that’s your Job! Don’t run this on Production unless you know what it is doing and are happy that you have first tested it somewhere safely away from any important systems. Make sure that you understand the correct time to run this job and have qualified the impact on the box it is running on.
+Here is a screen shot of the finished Excel Sheet&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png"
+loading="lazy"
+alt="howicheckhu6"
+>&lt;/a>&lt;/p>
+&lt;p>As you can see the Data Transfer Job needs investigation! The reason I add to yellow rows above and below each servers list of jobs is to help me identify any server that is not responding as that will be easily recognised as two lots of yellow with nothing between them
+I have considered improving this script by inputting the data into a database and running a report from that database but have not had the need to do so yet.&lt;/p>
+&lt;p>Here is the script&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#############################################################################################
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># NAME: Agent Job Status to Excel.ps1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># DATE:22/07/2013
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># COMMENTS: Iterates through the sqlservers.txt file to populate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Excel File with colour coded status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># WARNING - This will stop ALL Excel Processes. Read the Blog Post for more info
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># ————————————————————————
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Get List of sql servers to check
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$sqlservers = Get-Content &amp;#39;&amp;#39;; # from a file or a SQL query or whatever
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a .com object for Excel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl = new-object -comobject excel.application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.Visible = $true # Set this to False when you run in production
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$wb = $xl.Workbooks.Add()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ws = $wb.Worksheets.Item(1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$date = Get-Date -format f
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Filename = ( get-date ).ToString(&amp;#39;ddMMMyyyHHmm&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells = $ws.Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(1, 3).font.bold = $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(1, 3).font.size = 18
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(1, 3) = &amp;#34;Back Up Report $date&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(5, 9) = &amp;#34;Last Job Run Older than 1 Day&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(5, 8).Interior.ColorIndex = 43
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(4, 9) = &amp;#34;Last Job Run Older than 7 Days&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(4, 8).Interior.ColorIndex = 53
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(7, 9) = &amp;#34;Successful Job&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(7, 8).Interior.ColorIndex = 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(8, 9) = &amp;#34;Failed Job&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(8, 8).Interior.ColorIndex = 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(9, 9) = &amp;#34;Job Status Unknown&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item(9, 8).Interior.ColorIndex = 15
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#define some variables to control navigation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row = 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#insert column headings
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col) = &amp;#34;Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col).font.size = 16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cells.item($row, $col).Columnwidth = 10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col) = &amp;#34;Job Name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col).font.size = 16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cells.item($row, $col).Columnwidth = 40
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col) = &amp;#34;Enabled?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col).font.size = 16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cells.item($row, $col).Columnwidth = 15
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col) = &amp;#34;Outcome&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col).font.size = 16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cells.item($row, $col).Columnwidth = 12
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col) = &amp;#34;Last Run Time&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row, $col).font.size = 16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cells.item($row, $col).Columnwidth = 15
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Load SMO extension
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.Reflection.Assembly]::LoadWithPartialName(&amp;#34;Microsoft.SqlServer.Smo&amp;#34;) | Out-Null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Loop through each sql server from sqlservers.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach ($sqlserver in $sqlservers) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create an SMO Server object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object &amp;#34;Microsoft.SqlServer.Management.Smo.Server&amp;#34; $sqlserver;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # For each jobs on the server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> foreach ($job in $srv.JobServer.Jobs) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobName = $job.Name;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobEnabled = $job.IsEnabled;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $jobLastRunOutcome = $job.LastRunOutcome;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Time = $job.LastRunDate ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set Fill Colour for Job Enabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($jobEnabled -eq &amp;#34;FALSE&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { $colourenabled = &amp;#34;2&amp;#34;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else {$colourenabled = &amp;#34;48&amp;#34; }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set Fill Colour for Failed jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($jobLastRunOutcome -eq &amp;#34;Failed&amp;#34;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $colour = &amp;#34;3&amp;#34; # RED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set Fill Colour for Uknown jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Elseif ($jobLastRunOutcome -eq &amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { $colour = &amp;#34;15&amp;#34;} #GREY
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else {$Colour = &amp;#34;4&amp;#34;} # Success is Green
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col) = $sqlserver
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col) = $jobName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col) = $jobEnabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Set colour of cells for Disabled Jobs to Grey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col).Interior.ColorIndex = $colourEnabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($colourenabled -eq &amp;#34;48&amp;#34;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 1 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 2 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 3 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 4 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 5 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 6 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row , 7 ).Interior.ColorIndex = 48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col) = &amp;#34;$jobLastRunOutcome&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col).Interior.ColorIndex = $colour
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Reset Disabled Jobs Fill Colour
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($colourenabled -eq &amp;#34;48&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$cells.item($Row, $col).Interior.ColorIndex = 48}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $cells.item($Row, $col) = $Time
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Set teh Fill Colour for Time Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If ($Time -lt ($(Get-Date).AddDays(-1)))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { $cells.item($Row, $col).Interior.ColorIndex = 43}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If ($Time -lt ($(Get-Date).AddDays(-7)))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { $cells.item($Row, $col).Interior.ColorIndex = 53}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add two Yellow Rows
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ws.rows.item($Row).Interior.ColorIndex = 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ws.rows.item($Row).Interior.ColorIndex = 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$wb.Saveas(&amp;#34;C:\temp\Test$filename.xlsx&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.quit()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stop-Process -Name EXCEL
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you have any questions please get in touch&lt;/p></description></item><item><title>Dropping All Tables From A SQL Database with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/dropping-all-tables-from-a-sql-database-with-powershell/</link><pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/dropping-all-tables-from-a-sql-database-with-powershell/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2013/11/image7.png" alt="Featured image of post Dropping All Tables From A SQL Database with PowerShell" />&lt;p>This post could also have been titled confusion with &lt;code>foreach&lt;/code> or &lt;code>For-EachObject&lt;/code>&lt;/p>
+&lt;p>The scenario – Having created a blank database a number of users and permissions for an external consultant to create a test database for an application I got a phone call.&lt;/p>
+&lt;blockquote>
+&lt;p>Please can you drop all the tables from the database as we need to re-run the installer with some different parameters&lt;/p>
+&lt;/blockquote>
+&lt;p>Sure, I thought. No problem. I will use PowerShell. A simple script is all I need&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image3.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>That ought to do it. Loop through the tables and drop each one. But when I ran it I got this error&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>What I did (which I should have done first up but time pressures hadn’t allowed) was drop the database and write a script to recreate it and all the users and permissions required using my &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Create Windows User Function&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/add-user-to-database-role-with-powershell/" target="_blank" rel="noopener"
+>Add User to Database Role Function&lt;/a> but it got me thinking.&lt;/p>
+&lt;p>So I went home and &lt;a class="link" href="https://blog.robsewell.com/?p=534" target="_blank" rel="noopener"
+>fired up my Azure VMs&lt;/a> and had a play and found two ways of resolving it. But first lets understand what is happening here. I &lt;a class="link" href="http://blog.incworx.com/blog/sharepoint-developer-blog/collection-was-modified-enumeration-operation-may-not-execute-looks-hard-but-it-isnt-v2" target="_blank" rel="noopener"
+>read this post&lt;/a> which explains it quite well for his script.&lt;/p>
+&lt;blockquote>
+&lt;p>We are going through a list collection and deleting any instance of our event receiver, in the “Foreach loop”. But once we delete an item we are modifying the current list collection. The “Foreach” loop looks to see what the current value is, before it moves on to the next item. But since we deleted the current item, we get the “Collection was modified; enumeration operation may not execute” error.&lt;/p>
+&lt;p>Now that understand what is going on, we can now look at a solution to correct the error.&lt;/p>
+&lt;p>The simplest way to avoid modifying the collection would be with a “For Loop”.  With a “For Loop”, no modifications are made that will interrupt the looping process.&lt;/p>
+&lt;/blockquote>
+&lt;p>So when PowerShell has dropped the table it returns to the tables collection to find the current table before moving on to the next table but as we have deleted the table it falls over.&lt;/p>
+&lt;p>So lets fix it.&lt;/p>
+&lt;p>First lets create a test database with PowerShell. A piece of code that is useful to keep for scenarios like this. If you are creating a database for something other than a quick demo or a test then go and explore the other properties of the database object that you will surely want to configure. But for this demo the following is fine, it will use default options. The same applies for the tables script below.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image5.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Now lets create some tables.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image6.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>And check they have been created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image7.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image7.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Now following the advice from above we can do the following&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image8.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image8.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>First we count the number of tables and set it to a variable and then create a for loop. Note if you put &lt;code>$i –le $tables&lt;/code>.Count then the script will only delete 4 tables! In the script block we are setting the &lt;code>$table&lt;/code> variable to the first in the collection and then drops it. List the table names again to check or run &lt;code>$tables.Count&lt;/code> and you will see that all the tables have been deleted.&lt;/p>
+&lt;p>This was the other solution I found. It makes use of the scripter method to script the Drop commands for the tables add them to a Query string and pass that to &lt;code>Invoke-SQLCmd&lt;/code> to run it.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image9.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image9.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item><item><title>Creating SQL User and adding to Server Role with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</link><pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</guid><description>&lt;p>Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+>PowerShell Box of Tricks&lt;/a> series.&lt;/p>
+&lt;p>In yesterdays post &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Creating a Windows User and Adding to SQL Role&lt;/a> we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.&lt;/p>
+&lt;p>It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image69.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image69.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The same error checking is performed as the Windows Login function. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the role object is Null for the Roles and the Contains Method for the Logins&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image99.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image99.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The function is called as follows.&lt;/p>
+&lt;pre>&lt;code>Add-SQLAccountToSQLRole FADE2BLACK Test Password01 dbcreator
+&lt;/code>&lt;/pre>
+&lt;p>The code can be found here&lt;/p>
+&lt;pre>&lt;code>############################################################# ###########
+#
+# NAME: Add-SQLAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a sql user and add them to a server role
+#
+# USAGE: Add-SQLAccountToSQLRole FADE2BLACK Test Password01 dbcreator
+# Add-SQLAccountToSQLRole FADE2BLACK Test Password01 public
+Function Add-SQLAccountToSQLRole ([String]$Server, [String] $User, [String]$Password, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Host &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$SVRRole.AddMember($LoginName)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'SqlLogin'
+$SqlUser.PasswordExpirationEnabled = $false
+$SqlUser.Create($Password)
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$SVRRole.AddMember($LoginName)
+}
+}
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Showing and Killing SQL Server Processes with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/showing-and-killing-sql-server-processes-with-powershell/</link><pubDate>Tue, 17 Sep 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/showing-and-killing-sql-server-processes-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>Create a Server Object and notice that there is a Method named EnumProcesses by piping it to &lt;code>Get-Member&lt;/code> and then look at the Properties and Methods of EnumProcesses&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>#######################################################################
+#
+# NAME: Show-SQLProcesses.ps1
+# AUTHOR: Rob Sewell http://sqldbawithabeard.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Processes on a SQL Server
+####################################
+Function Show-SQLProcesses ($SQLServer)
+{
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$Server.EnumProcesses()|Select Spid,BlockingSpid, Login, Host,Status,Program, Command,Database,Cpu,MemUsage |Format-Table -wrap -auto
+$OUTPUT= [System.Windows.Forms.MessageBox]::Show(&amp;quot;Do you want to Kill a process?&amp;quot; , &amp;quot;Question&amp;quot; , 4)
+if ($OUTPUT -eq &amp;quot;YES&amp;quot; )
+{
+$spid = Read-Host &amp;quot;Which SPID?&amp;quot;
+$Server.KillProcess($Spid)
+}
+else
+{
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Documenting SQL Server the easy way with Power Doc</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/documenting-sql-server-the-easy-way-with-power-doc/</link><pubDate>Thu, 09 May 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/documenting-sql-server-the-easy-way-with-power-doc/</guid><description>&lt;p>You know how it is. Question questions questions. As a DBA you are the fount of all knowledge. You are the protector of the data after all so obviously you know every little thing that is needed to be known.&lt;/p>
+&lt;p>Frequently, I am asked&lt;/p>
+&lt;p>How many processors does that server have?&lt;br>
+How much RAM is on that server? What type?&lt;br>
+What OS? Which Patches were installed&lt;/p>
+&lt;p>or more SQL based questions about configuration&lt;/p>
+&lt;p>Which SQL Product? Which version? Which Service Pack?&lt;br>
+What are the linked servers on that server?&lt;br>
+Or you want to know which login have which roles on the server or the autogrowth settings or any number of other ‘little things’&lt;/p>
+&lt;p>As the DBA as they are asking about my servers I should know and whilst I have a lot of info in my head, there’s not enough room for it all!! So I have to break from what I am doing and dive into Powershell or SSMS and get them the info that they need. When this happens I often thought I wish I could have this information to hand but I have never had time to organise it myself.&lt;/p>
+&lt;p>Worse still, imagine your boss walks through the door and says we have to provide information for an audit. Can you give me full details of all the SQL Servers and their configurations both windows and SQL and I need it by the end of play tomorrow.&lt;/p>
+&lt;p>It happens.&lt;/p>
+&lt;p>Its Personal Development Review time. I should have asked my boss to give me an objective of thoroughly documenting the SQL Server estate this year. I could have done it in a few hours. You only think of these things when its too late.&lt;/p>
+&lt;p>How can I do this? I hear you cry. Head over to &lt;a class="link" href="https://sqlpowerdoc.codeplex.com" title="https://sqlpowerdoc.codeplex.com"
+target="_blank" rel="noopener"
+>https://sqlpowerdoc.codeplex.com&lt;/a> and you will see.&lt;/p>
+&lt;p>SQL PowerDoc was written by Kendal VanDyke who is a practiced IT professional with over a decade of experience in SQL Server development and administration. Kendal is currently a principal consultant with UpSearch SQL, where he helps companies keep their SQL Servers running in high gear. Kendal is also a Microsoft MVP for SQL Server and president of the PASS chapter MagicPASS in Orlando, FL. You can find his blog at &lt;a class="link" href="http://www.kendalvandyke.com/" target="_blank" rel="noopener"
+>http://www.kendalvandyke.com/&lt;/a> and on Twitter at &lt;a class="link" href="https://twitter.com/@SQLDBA" target="_blank" rel="noopener"
+>@SQLDBA&lt;/a>&lt;/p>
+&lt;p>I found out about Power Doc a few weeks ago. It looked so cool, I tested it at home and then on my dev server and then on the whole estate. It is CPU heavy on the box it is running on if you have a load of servers. I don’t know how long it took to run as it ran overnight but the information you get back is staggering, enough to satisfy even the most inquisitive of auditors or questioners. You can pass it to your server team too and they will love it as it can do a Windows based inventory.&lt;/p>
+&lt;p>What does it document? What DOESNT it document? If you head over to &lt;a class="link" href="https://sqlpowerdoc.codeplex.com/wikipage?title=What%27s%20Documented" target="_blank" rel="noopener"
+>https://sqlpowerdoc.codeplex.com/wikipage?title=What%27s%20Documented&lt;/a> the list you see doesn’t reflect the sheer amount of data you can get back. Run it against your own machine and you will see what I mean.&lt;/p>
+&lt;p>As well as documenting everything it also runs around 100 checks to diagnose potential issues and problems. You can see where autogrowth is set to percentage, databases that haven’t been backed up, auto shrink, Max Memory set too high, the list goes on. Even the links to the MSDN articles are in there for the things it finds.&lt;/p>
+&lt;p>The documentation is thorough and even if you haven’t use Powershell before everything you need is on the website to run PowerDoc.&lt;/p>
+&lt;p>So much thought and effort has been put into this it’s difficult to see how it could be improved.&lt;/p>
+&lt;p>What I have done then is added the Excel file to our dba SharePoint team site and enabled the right people access to it. Equally they tell others and I get bothered slightly less.&lt;/p></description></item></channel></rss>

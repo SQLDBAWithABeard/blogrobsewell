@@ -1,0 +1,350 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Editors Note This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)
+Original Post Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked."><title>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</title><link rel=canonical href=https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/><link rel=stylesheet href=/blogrobsewell/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css><meta property="og:title" content="How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell"><meta property="og:description" content="Editors Note This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)
+Original Post Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked."><meta property="og:url" content="https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/"><meta property="og:site_name" content="Rob breaks things and Jess makes him squirrel"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="automate"><meta property="article:tag" content="automation"><meta property="article:tag" content="PowerShell"><meta property="article:tag" content="sql"><meta property="article:tag" content="Excel"><meta property="article:tag" content="SQL Agent Jobs"><meta property="article:tag" content="SQL Server"><meta property="article:published_time" content="2014-03-31T00:00:00+00:00"><meta property="article:modified_time" content="2014-03-31T00:00:00+00:00"><meta property="og:image" content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/03/033114_2017_howicheckhu6.png"><meta name=twitter:title content="How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell"><meta name=twitter:description content="Editors Note This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)
+Original Post Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/03/033114_2017_howicheckhu6.png"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/blogrobsewell/><img src=/blogrobsewell/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/blogrobsewell>Rob breaks things and Jess makes him squirrel</a></h1><h2 class=site-description>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/blogrobsewell/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/blogrobsewell/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/blogrobsewell/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/blogrobsewell/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#editors-note>Editors Note</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/><img src=/blogrobsewell/assets/uploads/2014/03/033114_2017_howicheckhu6.png loading=lazy alt="Featured image of post How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell"></a></div><div class=article-details><header class=article-category><a href=/blogrobsewell/categories/blog/>Blog</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/blogrobsewell/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Mar 31, 2014</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><h2 id=editors-note>Editors Note</h2><p>This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)</p><h1 id=original-post>Original Post</h1><p>Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked. In a large estate this can be very time consuming and if done manually prone to human error. I have repeatedly mentioned John Sansoms Blog Post entitled “The Best DBAs Automate Everything” and I follow that advice. Today I will share with you one fo the first scripts that I wrote.</p><p>When I started as a DBA I was told that my first job every morning was to check the Agent Jobs and resolve any errors. This is still something I do first before anything else. (Except coffee, experience has taught me that you get your coffee before you log into your computer otherwise on the bad days you can miss out on coffee for many an hour) I have two scripts to do this. The first sends me an email if the number of failed jobs on a server is greater than zero. This helps me to quickly and simply identify where to start in the case of multiple failures and is also a backup to the second script.</p><p>The second script runs on a different server and creates an excel worksheet and colour codes it. This makes it very simple to quickly scroll through the sheet and spot any red cells which designate failed jobs and also provides a nice easy to understand method to show management that on that specific day everything went well (or badly)</p><p>As with any Powershell script which manipulates Office applications you first need to create an object and add the workbook and worksheet to it. I also set a filename date variable and a Date variable for the Sheet.</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png loading=lazy alt=howicheckhu1></a></p><p>When you use Powershell to manipulate Excel you can access individual cells by identifying them by Row and Column. I use this to create a description for the work book as follows</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png loading=lazy alt=howicheckhu2></a></p><p>There are lots of properties that you can play with within Excel. As with any Powershell the best way to find what you need is to use the <code>Get-Member</code> Cmdlet. If you run</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>($cells.item(1,3)|Get-Member).Count
+</span></span></code></pre></td></tr></table></div></div><p>You will see that there are 185 Methods and Properties available to you (in Office 2013 on Windows 8.1)
+The snippet above creates the following</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png loading=lazy alt=howicheckhu3></a></p><p>As you can see we are going to colour code the Job Status according to the three available results Successful, Failed and Unknown. We are also going to colour code the date column to see when the job was last run, this will enable you to easily identify if the last time the job ran it was successful but last night it didn’t kick off for some reason.</p><p>The next step is a fairly standard loop through available servers by picking them from a SQLServers text file, a list of the server names (ServerName\Instance if required) that you wish to check. You could also just create an array of server names or pick them from a table with <code>Invoke-SQLCmd</code> but which ever way you do it you need to be able to iterate through the array and then the <code>.Jobs</code> Collection in the <code>JobServer</code> Namespace as follows</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png loading=lazy alt=howicheckhu4></a></p><p>What the script then does is to use the following properties of the <code>$Job</code> object and write the Excel File according to the logic in the description</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$Job.Name
+</span></span><span class=line><span class=cl>$Job.IsEnabled
+</span></span><span class=line><span class=cl>$Job.LastRunOutcome
+</span></span><span class=line><span class=cl>$Job.LastRunDate  
+</span></span></code></pre></td></tr></table></div></div><p>To finish up save the workbook to a share available to all of the DBA Team and quit Excel. Notice that I use a double whammy to make sure Excel is really gone. First I quit the .com object and then I stop the process. I do this because I found that on my server quitting the .com object left the Excel process running and I ended up with dozens and dozens of them. If you have Excel open before you run this script either comment out the last line or save your work (You should save your work anyway regulary!)</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png loading=lazy alt=howicheckhu5></a></p><p>As always I take no responsibility for your environment, that’s your Job! Don’t run this on Production unless you know what it is doing and are happy that you have first tested it somewhere safely away from any important systems. Make sure that you understand the correct time to run this job and have qualified the impact on the box it is running on.
+Here is a screen shot of the finished Excel Sheet</p><p><a class=link href=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png target=_blank rel=noopener><img src=https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png loading=lazy alt=howicheckhu6></a></p><p>As you can see the Data Transfer Job needs investigation! The reason I add to yellow rows above and below each servers list of jobs is to help me identify any server that is not responding as that will be easily recognised as two lots of yellow with nothing between them
+I have considered improving this script by inputting the data into a database and running a report from that database but have not had the need to do so yet.</p><p>Here is the script</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#############################################################################################
+</span></span><span class=line><span class=cl>#
+</span></span><span class=line><span class=cl># NAME: Agent Job Status to Excel.ps1
+</span></span><span class=line><span class=cl># AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+</span></span><span class=line><span class=cl># DATE:22/07/2013
+</span></span><span class=line><span class=cl>#
+</span></span><span class=line><span class=cl># COMMENTS: Iterates through the sqlservers.txt file to populate
+</span></span><span class=line><span class=cl># Excel File with colour coded status
+</span></span><span class=line><span class=cl>#
+</span></span><span class=line><span class=cl># WARNING - This will stop ALL Excel Processes. Read the Blog Post for more info
+</span></span><span class=line><span class=cl>#
+</span></span><span class=line><span class=cl># ————————————————————————
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Get List of sql servers to check
+</span></span><span class=line><span class=cl>$sqlservers = Get-Content &#39;&#39;; # from a file or a SQL query or whatever
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Create a .com object for Excel
+</span></span><span class=line><span class=cl>$xl = new-object -comobject excel.application
+</span></span><span class=line><span class=cl>$xl.Visible = $true # Set this to False when you run in production
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$wb = $xl.Workbooks.Add()
+</span></span><span class=line><span class=cl>$ws = $wb.Worksheets.Item(1)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$date = Get-Date -format f
+</span></span><span class=line><span class=cl>$Filename = ( get-date ).ToString(&#39;ddMMMyyyHHmm&#39;)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$cells = $ws.Cells
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Create a description
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$cells.item(1, 3).font.bold = $True
+</span></span><span class=line><span class=cl>$cells.item(1, 3).font.size = 18
+</span></span><span class=line><span class=cl>$cells.item(1, 3) = &#34;Back Up Report $date&#34;
+</span></span><span class=line><span class=cl>$cells.item(5, 9) = &#34;Last Job Run Older than 1 Day&#34;
+</span></span><span class=line><span class=cl>$cells.item(5, 8).Interior.ColorIndex = 43
+</span></span><span class=line><span class=cl>$cells.item(4, 9) = &#34;Last Job Run Older than 7 Days&#34;
+</span></span><span class=line><span class=cl>$cells.item(4, 8).Interior.ColorIndex = 53
+</span></span><span class=line><span class=cl>$cells.item(7, 9) = &#34;Successful Job&#34;
+</span></span><span class=line><span class=cl>$cells.item(7, 8).Interior.ColorIndex = 4
+</span></span><span class=line><span class=cl>$cells.item(8, 9) = &#34;Failed Job&#34;
+</span></span><span class=line><span class=cl>$cells.item(8, 8).Interior.ColorIndex = 3
+</span></span><span class=line><span class=cl>$cells.item(9, 9) = &#34;Job Status Unknown&#34;
+</span></span><span class=line><span class=cl>$cells.item(9, 8).Interior.ColorIndex = 15
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#define some variables to control navigation
+</span></span><span class=line><span class=cl>$row = 3
+</span></span><span class=line><span class=cl>$col = 2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#insert column headings
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$cells.item($row, $col) = &#34;Server&#34;
+</span></span><span class=line><span class=cl>$cells.item($row, $col).font.size = 16
+</span></span><span class=line><span class=cl>$Cells.item($row, $col).Columnwidth = 10
+</span></span><span class=line><span class=cl>$col++
+</span></span><span class=line><span class=cl>$cells.item($row, $col) = &#34;Job Name&#34;
+</span></span><span class=line><span class=cl>$cells.item($row, $col).font.size = 16
+</span></span><span class=line><span class=cl>$Cells.item($row, $col).Columnwidth = 40
+</span></span><span class=line><span class=cl>$col++
+</span></span><span class=line><span class=cl>$cells.item($row, $col) = &#34;Enabled?&#34;
+</span></span><span class=line><span class=cl>$cells.item($row, $col).font.size = 16    
+</span></span><span class=line><span class=cl>$Cells.item($row, $col).Columnwidth = 15
+</span></span><span class=line><span class=cl>$col++    
+</span></span><span class=line><span class=cl>$cells.item($row, $col) = &#34;Outcome&#34;
+</span></span><span class=line><span class=cl>$cells.item($row, $col).font.size = 16
+</span></span><span class=line><span class=cl>$Cells.item($row, $col).Columnwidth = 12
+</span></span><span class=line><span class=cl>$col++
+</span></span><span class=line><span class=cl>$cells.item($row, $col) = &#34;Last Run Time&#34;
+</span></span><span class=line><span class=cl>$cells.item($row, $col).font.size = 16    
+</span></span><span class=line><span class=cl>$Cells.item($row, $col).Columnwidth = 15
+</span></span><span class=line><span class=cl>$col++
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   
+</span></span><span class=line><span class=cl># Load SMO extension
+</span></span><span class=line><span class=cl>[System.Reflection.Assembly]::LoadWithPartialName(&#34;Microsoft.SqlServer.Smo&#34;) | Out-Null;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Loop through each sql server from sqlservers.txt
+</span></span><span class=line><span class=cl>foreach ($sqlserver in $sqlservers) {
+</span></span><span class=line><span class=cl>    # Create an SMO Server object
+</span></span><span class=line><span class=cl>    $srv = New-Object &#34;Microsoft.SqlServer.Management.Smo.Server&#34; $sqlserver;
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    # For each jobs on the server
+</span></span><span class=line><span class=cl>    foreach ($job in $srv.JobServer.Jobs) {
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        $jobName = $job.Name;
+</span></span><span class=line><span class=cl>        $jobEnabled = $job.IsEnabled;
+</span></span><span class=line><span class=cl>        $jobLastRunOutcome = $job.LastRunOutcome;
+</span></span><span class=line><span class=cl>        $Time = $job.LastRunDate ;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        # Set Fill Colour for Job Enabled
+</span></span><span class=line><span class=cl>        if ($jobEnabled -eq &#34;FALSE&#34;)
+</span></span><span class=line><span class=cl>        { $colourenabled = &#34;2&#34;}
+</span></span><span class=line><span class=cl>        else {$colourenabled = &#34;48&#34; }         
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        # Set  Fill Colour for Failed jobs
+</span></span><span class=line><span class=cl>        if ($jobLastRunOutcome -eq &#34;Failed&#34;) {
+</span></span><span class=line><span class=cl>            $colour = &#34;3&#34; # RED
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>        # Set Fill Colour for Uknown jobs
+</span></span><span class=line><span class=cl>        Elseif ($jobLastRunOutcome -eq &#34;Unknown&#34;)
+</span></span><span class=line><span class=cl>        { $colour = &#34;15&#34;}       #GREY        
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        else {$Colour = &#34;4&#34;}   # Success is Green    
+</span></span><span class=line><span class=cl>        $row++
+</span></span><span class=line><span class=cl>        $col = 2
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col) = $sqlserver
+</span></span><span class=line><span class=cl>        $col++
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col) = $jobName
+</span></span><span class=line><span class=cl>        $col++
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col) = $jobEnabled    
+</span></span><span class=line><span class=cl>        #Set colour of cells for Disabled Jobs to Grey
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col).Interior.ColorIndex = $colourEnabled
+</span></span><span class=line><span class=cl>        if ($colourenabled -eq &#34;48&#34;) { 
+</span></span><span class=line><span class=cl>            $cells.item($Row , 1 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 2 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 3 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 4 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 5 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 6 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>            $cells.item($Row , 7 ).Interior.ColorIndex = 48
+</span></span><span class=line><span class=cl>        } 
+</span></span><span class=line><span class=cl>        $col++
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col) = &#34;$jobLastRunOutcome&#34;
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col).Interior.ColorIndex = $colour
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        #Reset Disabled Jobs Fill Colour
+</span></span><span class=line><span class=cl>        if ($colourenabled -eq &#34;48&#34;) 
+</span></span><span class=line><span class=cl>        {$cells.item($Row, $col).Interior.ColorIndex = 48}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        $col++
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        $cells.item($Row, $col) = $Time 
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>        #Set teh Fill Colour for Time Cells
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        If ($Time -lt ($(Get-Date).AddDays(-1)))
+</span></span><span class=line><span class=cl>        { $cells.item($Row, $col).Interior.ColorIndex = 43}
+</span></span><span class=line><span class=cl>        If ($Time -lt ($(Get-Date).AddDays(-7)))
+</span></span><span class=line><span class=cl>        { $cells.item($Row, $col).Interior.ColorIndex = 53} 
+</span></span><span class=line><span class=cl>              
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    $row++
+</span></span><span class=line><span class=cl>    $row++
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # Add two Yellow Rows
+</span></span><span class=line><span class=cl>    $ws.rows.item($Row).Interior.ColorIndex = 6
+</span></span><span class=line><span class=cl>    $row++
+</span></span><span class=line><span class=cl>    $ws.rows.item($Row).Interior.ColorIndex = 6
+</span></span><span class=line><span class=cl>    $row++
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$wb.Saveas(&#34;C:\temp\Test$filename.xlsx&#34;)
+</span></span><span class=line><span class=cl>$xl.quit()
+</span></span><span class=line><span class=cl>Stop-Process -Name EXCEL
+</span></span></code></pre></td></tr></table></div></div><p>If you have any questions please get in touch</p></section><footer class=article-footer><section class=article-tags><a href=/blogrobsewell/tags/automate/>automate</a>
+<a href=/blogrobsewell/tags/automation/>automation</a>
+<a href=/blogrobsewell/tags/powershell/>PowerShell</a>
+<a href=/blogrobsewell/tags/sql/>sql</a>
+<a href=/blogrobsewell/tags/excel/>Excel</a>
+<a href=/blogrobsewell/tags/sql-agent-jobs/>SQL Agent Jobs</a>
+<a href=/blogrobsewell/tags/sql-server/>SQL Server</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/blogrobsewell/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/><div class=article-image><img src=/blogrobsewell/assets/images/TSQL2sDay150x150.jpg loading=lazy data-key="tsql2sday 130 - Automate your stress away - Getting more SSIS Agent Job information" data-hash=/blogrobsewell/assets/images/TSQL2sDay150x150.jpg></div><div class=article-details><h2 class=article-title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</h2></div></a></article><article><a href=/blogrobsewell/blog/tsql2sday-get-postroundup/><div class=article-details><h2 class=article-title>TSQL2sDay – Get-PostRoundup</h2></div></a></article><article><a href=/blogrobsewell/blog/making-a-change-log-easier-with-powershell/><div class=article-details><h2 class=article-title>Making a Change Log Easier With PowerShell</h2></div></a></article><article><a href=/blogrobsewell/blog/changing-delay-between-responses-for-sql-alerts-with-powershell/><div class=article-details><h2 class=article-title>Changing Delay Between Responses for SQL Alerts with Powershell</h2></div></a></article><article class=has-image><a href=/blogrobsewell/blog/dropping-all-tables-from-a-sql-database-with-powershell/><div class=article-image><img src=/blogrobsewell/assets/uploads/2013/11/image7.png loading=lazy data-key data-hash=/blogrobsewell/assets/uploads/2013/11/image7.png></div><div class=article-details><h2 class=article-title>Dropping All Tables From A SQL Database with PowerShell</h2></div></a></article></div></div></aside><div class=disqus-container></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2014 -
+2023 Rob breaks things and Jess makes him squirrel</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.16.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/blogrobsewell/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

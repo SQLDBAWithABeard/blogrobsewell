@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>powerdoc on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/powerdoc/</link><description>Recent content in powerdoc on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 09 May 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/powerdoc/index.xml" rel="self" type="application/rss+xml"/><item><title>Documenting SQL Server the easy way with Power Doc</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/documenting-sql-server-the-easy-way-with-power-doc/</link><pubDate>Thu, 09 May 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/documenting-sql-server-the-easy-way-with-power-doc/</guid><description>&lt;p>You know how it is. Question questions questions. As a DBA you are the fount of all knowledge. You are the protector of the data after all so obviously you know every little thing that is needed to be known.&lt;/p>
+&lt;p>Frequently, I am asked&lt;/p>
+&lt;p>How many processors does that server have?&lt;br>
+How much RAM is on that server? What type?&lt;br>
+What OS? Which Patches were installed&lt;/p>
+&lt;p>or more SQL based questions about configuration&lt;/p>
+&lt;p>Which SQL Product? Which version? Which Service Pack?&lt;br>
+What are the linked servers on that server?&lt;br>
+Or you want to know which login have which roles on the server or the autogrowth settings or any number of other ‘little things’&lt;/p>
+&lt;p>As the DBA as they are asking about my servers I should know and whilst I have a lot of info in my head, there’s not enough room for it all!! So I have to break from what I am doing and dive into Powershell or SSMS and get them the info that they need. When this happens I often thought I wish I could have this information to hand but I have never had time to organise it myself.&lt;/p>
+&lt;p>Worse still, imagine your boss walks through the door and says we have to provide information for an audit. Can you give me full details of all the SQL Servers and their configurations both windows and SQL and I need it by the end of play tomorrow.&lt;/p>
+&lt;p>It happens.&lt;/p>
+&lt;p>Its Personal Development Review time. I should have asked my boss to give me an objective of thoroughly documenting the SQL Server estate this year. I could have done it in a few hours. You only think of these things when its too late.&lt;/p>
+&lt;p>How can I do this? I hear you cry. Head over to &lt;a class="link" href="https://sqlpowerdoc.codeplex.com" title="https://sqlpowerdoc.codeplex.com"
+target="_blank" rel="noopener"
+>https://sqlpowerdoc.codeplex.com&lt;/a> and you will see.&lt;/p>
+&lt;p>SQL PowerDoc was written by Kendal VanDyke who is a practiced IT professional with over a decade of experience in SQL Server development and administration. Kendal is currently a principal consultant with UpSearch SQL, where he helps companies keep their SQL Servers running in high gear. Kendal is also a Microsoft MVP for SQL Server and president of the PASS chapter MagicPASS in Orlando, FL. You can find his blog at &lt;a class="link" href="http://www.kendalvandyke.com/" target="_blank" rel="noopener"
+>http://www.kendalvandyke.com/&lt;/a> and on Twitter at &lt;a class="link" href="https://twitter.com/@SQLDBA" target="_blank" rel="noopener"
+>@SQLDBA&lt;/a>&lt;/p>
+&lt;p>I found out about Power Doc a few weeks ago. It looked so cool, I tested it at home and then on my dev server and then on the whole estate. It is CPU heavy on the box it is running on if you have a load of servers. I don’t know how long it took to run as it ran overnight but the information you get back is staggering, enough to satisfy even the most inquisitive of auditors or questioners. You can pass it to your server team too and they will love it as it can do a Windows based inventory.&lt;/p>
+&lt;p>What does it document? What DOESNT it document? If you head over to &lt;a class="link" href="https://sqlpowerdoc.codeplex.com/wikipage?title=What%27s%20Documented" target="_blank" rel="noopener"
+>https://sqlpowerdoc.codeplex.com/wikipage?title=What%27s%20Documented&lt;/a> the list you see doesn’t reflect the sheer amount of data you can get back. Run it against your own machine and you will see what I mean.&lt;/p>
+&lt;p>As well as documenting everything it also runs around 100 checks to diagnose potential issues and problems. You can see where autogrowth is set to percentage, databases that haven’t been backed up, auto shrink, Max Memory set too high, the list goes on. Even the links to the MSDN articles are in there for the things it finds.&lt;/p>
+&lt;p>The documentation is thorough and even if you haven’t use Powershell before everything you need is on the website to run PowerDoc.&lt;/p>
+&lt;p>So much thought and effort has been put into this it’s difficult to see how it could be improved.&lt;/p>
+&lt;p>What I have done then is added the Excel file to our dba SharePoint team site and enabled the right people access to it. Equally they tell others and I get bothered slightly less.&lt;/p></description></item></channel></rss>

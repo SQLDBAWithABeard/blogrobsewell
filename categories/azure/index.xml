@@ -1,0 +1,2148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>azure on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/categories/azure/</link><description>Recent content in azure on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 25 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/categories/azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</link><pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-125.png" alt="Featured image of post Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools" />&lt;p>In my posts about using Azure Devops to build Azure resources with Terraform, &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>I built a Linux SQL VM.&lt;/a> I used the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+>Terraform in this GitHub&lt;/a> repository and created this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-mobaxterm">Connecting with MobaXterm&lt;/h2>
+&lt;p>I had set the Network security rules to accept connections only from my static IP using variables in the Build Pipeline. I use &lt;a class="link" href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener"
+>MobaXterm&lt;/a> as my SSH client. Its a free download. I click on sessions&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-120.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose a SSH session and fill in the remote host address from the portal&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-121.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>fill in the password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-122.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="configuring-sql">Configuring SQL&lt;/h2>
+&lt;p>The next task is to configure the SQL installation. Following the instructions on the &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sql/provision-sql-server-linux-virtual-machine?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Microsoft docs site&lt;/a> I run&lt;/p>
+&lt;pre>&lt;code>sudo systemctl stop mssql-server
+sudo /opt/mssql/bin/mssql-conf set-sa-password
+&lt;/code>&lt;/pre>
+&lt;p>enter the sa password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-123.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now to start SQL&lt;/p>
+&lt;pre>&lt;code>sudo systemctl start mssql-server
+&lt;/code>&lt;/pre>
+&lt;h2 id="installing-pwsh">Installing pwsh&lt;/h2>
+&lt;p>Installing PowerShell Core (pwsh) is easy with snap&lt;/p>
+&lt;p>sudo snap install powershell &amp;ndash;classic&lt;/p>
+&lt;p>A couple of minutes of downloads and install&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-124.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and pwsh is ready for use&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-125.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-dbatools">Installing dbatools&lt;/h2>
+&lt;p>To install &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> from the &lt;a class="link" href="https://www.powershellgallery.com/packages/dbatools" target="_blank" rel="noopener"
+>Powershell Gallery&lt;/a> simply run&lt;/p>
+&lt;p>Install-Module dbatools -Scope CurrentUser&lt;/p>
+&lt;p>This will prompt you to allow installing from an untrusted repository&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-126.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and dbatools is ready to go&lt;/p>
+&lt;pre>&lt;code>#Set a credential
+$cred = Get-Credential
+# Show the databases on the local instance
+Get-DbaDatabase -SqlInstance localhost -SqlCredential $cred
+&lt;/code>&lt;/pre>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-127.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-azure-data-studio">Connecting with Azure Data Studio&lt;/h2>
+&lt;p>I can also connect with Azure Data Studio&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-128.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and connect&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Just a quick little post explaining what I did 🙂&lt;/p>
+&lt;p>Happy Linuxing!&lt;/p></description></item><item><title>Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-151.png" alt="Featured image of post Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster" />&lt;p>In the last few posts I have moved from &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>building an Azure SQL DB with Terraform using VS Code&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group&lt;/a>. This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.&lt;/p>
+&lt;p>Luckily, you can 😉 You can use &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure DevOps Job Templates&lt;/a> to achieve this. There is a limitation at present, you can only use them for Build Pipelines and not Release Pipelines.&lt;/p>
+&lt;p>The aim of this little blog series was to have a single Build Pipeline stored as code which I can use to build any infrastructure that I want with Terraform in Azure and be able to use it anywhere&lt;/p>
+&lt;h2 id="creating-a-build-pipeline-template">Creating a Build Pipeline Template&lt;/h2>
+&lt;p>I created a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-BuildTemplates" target="_blank" rel="noopener"
+>GitHub repository&lt;/a> to hold my Build Templates, feel free to use them as a base for your own but please don’t try and use the repo for your own builds.&lt;/p>
+&lt;p>The easiest way to create a Build Template is to already have a Build Pipeline. This cannot be done from a Task Group but I still have the Build Pipeline from my &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> blog post.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-132.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>There is a View YAML button. I can click this to view the YAML definition of the Build Pipeline&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-133.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I copy that and paste it into a new file in my BuildTemplates repository. (I have replaced my Azure Subscription information in the public repository)&lt;/p>
+&lt;pre>&lt;code> jobs:
+- job: Build
+pool:
+name: Hosted VS2017
+demands: azureps
+steps:
+- task: AzureCLI@1
+displayName: 'Azure CLI to deploy azure storage for backend'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+scriptLocation: inlineScript
+inlineScript: |
+# the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
+call az group create --location $(location) --name $(TerraformStorageRG)
+call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
+call az storage container create --name terraform --account-name $(TerraformStorageAccount)
+- task: AzurePowerShell@3
+displayName: 'Azure PowerShell script to get the storage key'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+ScriptType: InlineScript
+Inline: |
+# Using this script we will fetch storage key which is required in terraform file to authenticate backend stoarge account
+$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
+Write-Host &amp;quot;##vso[task.setvariable variable=TerraformStorageKey]$key&amp;quot;
+azurePowerShellVersion: LatestVersion
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+displayName: 'Replace tokens in terraform file'
+inputs:
+rootDirectory: Build
+targetFiles: |
+**/*.tf
+**/*.tfvars
+tokenPrefix: '__'
+tokenSuffix: '__'
+- powershell: |
+Get-ChildItem .\Build -Recurse
+Get-Content .\Build\*.tf
+Get-Content .\Build\*.tfvars
+Get-ChildItem Env: | select Name
+displayName: 'Check values in files'
+enabled: false
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Initialise Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'init -backend-config=&amp;quot;0-backend-config.tfvars&amp;quot;'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Plan Terraform execution'
+inputs:
+TemplatePath: Build
+Arguments: plan
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Apply Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'apply -auto-approve'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+&lt;/code>&lt;/pre>
+&lt;p>Now I can use this yaml as configuration as code for my Build Pipeline 🙂 It can be used from any Azure DevOps project. Once you start looking at the code and the &lt;a class="link" href="https://docs.microsoft.com/en-gb/azure/devops/pipelines/yaml-schema?view=azure-devops&amp;amp;tabs=schema?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>documentation for the yaml&lt;/a> schema you can begin to write your pipelines as YAML, but sometimes it is easier to just create build pipeline or even just a job step in the browser and click the view yaml button!&lt;/p>
+&lt;h2 id="create-an-aks-cluster-with-a-sql-2019-container-using-terraform-and-build-templates">Create an AKS Cluster with a SQL 2019 container using Terraform and Build templates&lt;/h2>
+&lt;p>I have a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository with the Terraform code to build a simple AKS cluster&lt;/a>. This could not have been achieved without &lt;a class="link" href="https://azurecitadel.com/automation/terraform/lab8/" target="_blank" rel="noopener"
+>Richard Cheney’s article&lt;/a> I am not going to explain how it all works for this blog post or some of the negatives of doing it this way. Instead lets build an Azure DevOps Build Pipeline to build it with Terraform using Configuration as Code (the yaml file)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-134.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to create a new Azure DevOps Build Pipeline and as in the previous posts connect it to the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository holding the Terraform code&lt;/a>.&lt;/p>
+&lt;p>This time I am going to choose the Configuration as code template&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-135.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to give it a name and it will show me that it needs the path to the yaml file containing the build definition in the current repository.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-136.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Clicking the 3 ellipses will pop-up a file chooser and I pick the build.yaml file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-137.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The build.yaml file looks like this. The name is the USER/Repository Name and the endpoint is the name of the endpoint for the GitHub service connection in Azure DevOps. The template value is the name of the build yaml file @ the name given for the repository value.&lt;/p>
+&lt;pre>&lt;code> resources:
+repositories:
+- repository: templates
+type: GitHub
+name: SQLDBAWithABeard/Presentations-BuildTemplates-Private
+endpoint: SQLDBAWithABeardGitHub
+jobs:
+- template: AzureTerraform.yaml@templates # Template reference
+&lt;/code>&lt;/pre>
+&lt;p>You can find (and change) your GitHub service connection name by clicking on the cog bottom left in Azure DevOps and clicking service connections&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-140.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I still need to create my variables for my Terraform template (perhaps I can now just leave those in my code?) For the AKS Cluster build right now I have to add presentation, location, ResourceGroupName, AgentPoolName, ServiceName, VMSize, agent_count&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-139.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then I click save and queue and the job starts running&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-141.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I want to edit the pipeline it looks a little different&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-152.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The variables and triggers can be found under the 3 ellipses on the top right&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-153.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It also defaults the trigger to automatic deployment.&lt;/p>
+&lt;p>It takes a bit longer to build&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-142.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and when I get the Terraform code wrong and the build fails, I can just alter the code, commit it, push and a new build will start and the Terraform will work out what is built and what needs to be built!&lt;/p>
+&lt;p>but eventually the job finishes successfully&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-143.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and the resources are built&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-144.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and in Visual Studio Code with the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools" target="_blank" rel="noopener"
+>Kubernetes extension&lt;/a> installed I can connect to the cluster by clicking the 3 ellipses and Add Existing Cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-145.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I choose Azure Kubernetes Services and click next&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-146.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose my subscription and then add the cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-147.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then I can explore my cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-148.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can also see the dashboard by right clicking on the cluster name and Open Dashboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-150.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Right clicking on the service name and choosing describe&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-149.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>shows the external IP address, which I can put into Azure Data Studio and connect to my container&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-151.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So I now I can source control my Build Job Steps and hold them in a central repository. I can make use of them in any project. This gives me much more control and saves me from repeating myself repeating myself. The disadvantage is that there is no handy warning when I change the underlying Build Repository that I will be affecting other Build Pipelines and there is no easy method to see which Build Pipelines are dependent on the build yaml file&lt;/p>
+&lt;p>Happy Automating&lt;/p></description></item><item><title>Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups-to-build-an-azure-linux-sql-vm/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups-to-build-an-azure-linux-sql-vm/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-107.png" alt="Featured image of post Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM" />&lt;p>In my &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>last post&lt;/a> I showed how to build an Azure DevOps Pipeline for a Terraform build of an Azure SQLDB. This will take the terraform code and build the required infrastructure.&lt;/p>
+&lt;p>The plan all along has been to enable me to build &lt;em>different&lt;/em> environments depending on the requirement. Obviously I can repeat the steps from the last post for a new repository containing a Terraform code for a different environment but&lt;/p>
+&lt;blockquote>
+&lt;p>If you are going to do something more than once Automate It&lt;/p>
+&lt;p>who first said this? Anyone know?&lt;/p>
+&lt;/blockquote>
+&lt;p>The build steps for building the Terraform are the same each time (if I keep a standard folder and naming structure) so it would be much more beneficial if I could keep them in a single place and any alterations to the process only need to be made in the one place 🙂&lt;/p>
+&lt;h2 id="task-groups">Task Groups&lt;/h2>
+&lt;p>Azure DevOps has task groups. On &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the Microsoft Docs web-page&lt;/a> they are described as&lt;/p>
+&lt;blockquote>
+&lt;p>A &lt;em>task group&lt;/em> allows you to encapsulate a sequence of tasks, already defined in a build or a release pipeline, into a single reusable task that can be added to a build or release pipeline, just like any other tas&lt;/p>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>If you are doing this with a more complicated existing build pipeline it is important that &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>you read the Before You Create A Task Group on the docs pag&lt;/a>e. This will save you time when trying to understand why variables are not available (Another grey hair on my beard!)&lt;/p>
+&lt;h2 id="creating-a-task-group">Creating A Task Group&lt;/h2>
+&lt;p>Here’s the thing, creating a task group is so easy it should be the default way you create Azure DevOps Pipelines. Let me walk you through it&lt;/p>
+&lt;p>I will use the Build Pipeline from the previous post. Click edit from the build page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-92.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-92.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then CTRL and click to select all of the steps&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-93.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-93.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Right Click and theres a Create Task Group button to click !&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-94.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-94.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can see that it has helpfully added the values for the parameters it requires for the location, Storage Account and the Resource Group.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-95.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-95.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Remember the grey beard hair above? We need to change those values to use the variables that we will add to the Build Pipeline using&lt;/p>
+&lt;pre>&lt;code>$(VariableName)
+&lt;/code>&lt;/pre>
+&lt;p>Once you have done that click Create&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-96.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-96.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This will also alter the current Build Pipeline to use the Task Group. Now we have a Task Group that we can use in any build pipeline in this project.&lt;/p>
+&lt;h2 id="using-the-task-group-with-a-new-build-pipeline-to-build-an-azure-linux-sql-vm">Using the Task Group with a new Build Pipeline to build an Azure Linux SQL VM&lt;/h2>
+&lt;p>Lets re-use the build steps to create an Azure SQL Linux VM. First I created a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+>new GitHub Repository&lt;/a> for my Terraform code. Using the docs I created the Terraform to create a resource group, a Linux SQL VM, a virtual network, a subnet, a NIC for the VM, a public IP for the VM, a network security group with two rules, one for SQL and one for SSH. It will look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The next step is to choose the repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-98.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-98.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>again we are going to select Empty job (although the next post will be about the Configuration as Code 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-99.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-99.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>As before&lt;/a> we will name the Build Pipeline and the Agent Job Step and click the + to add a new task. This time we will search for the Task Group name that we created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-100.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-100.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I need to add in the variables from the variable.tf in the code and also for the Task Group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-117.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-117.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and when I click save and queue&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-102.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-102.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>It runs for less than 7 minutes&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-118.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-118.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and when I look in the Azure portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-119.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-119.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and I can connect in Azure Data Studio&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="altering-the-task-group">Altering The Task Group&lt;/h2>
+&lt;p>You can find the Task Groups under Pipelines in your Azure DevOps project&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-97.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-97.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Click on the Task Group that you have created and then you can alter, edit it if required and click save&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-107.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-107.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This will warn you that any changes will affect all pipelines and task groups that are using this task group. To find out what will be affected click on references&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-108.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-108.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>which will show you what will be affected.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-109.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-109.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now I can run the same build steps for any Build Pipeline and alter them all in a single place using Task Groups simplifying the administration of the Build Pipelines.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/" target="_blank" rel="noopener"
+>The next post will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>The first post showed how to build an Azure SQLDB with Terraform using VS Code&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>The second post showed how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Building Azure SQL Db with Terraform using Azure DevOps</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/building-azure-sql-db-with-terraform-using-azure-devops/</link><pubDate>Sat, 20 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/building-azure-sql-db-with-terraform-using-azure-devops/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-49.png" alt="Featured image of post Building Azure SQL Db with Terraform using Azure DevOps" />&lt;p>In &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>my last post&lt;/a> I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.&lt;/p>
+&lt;p>Of course, I haven&amp;rsquo;t stopped there, who wants to manually run code to create things. There was a lot of install this and set up that. I would rather give the code to a build system and get it to run it. I can then even set it to automatically deploy new infrastructure when I commit some code to alter the configuration.&lt;/p>
+&lt;p>This scenario though is to build environments for presentations. Last time I created an Azure SQL DB and tagged it with DataInDevon (By the way you can get tickets for &lt;a class="link" href="http://dataindevon.co.uk" target="_blank" rel="noopener"
+>Data In Devon here&lt;/a> – It is in Exeter on April 26th and 27th)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>If I want to create the same environment but give it tags for a different event (This way I know when I can delete resources in Azure!) or name it differently, I can use Azure DevOps and alter the variables. I could just alter the code and commit the change and trigger a build or I could create variables and enable them to be set at the time the job is run. I use the former in “work” situations and the second for my presentations environment.&lt;/p>
+&lt;p>I have created a project in &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/devops/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure DevOps&lt;/a> for my Presentation Builds. I will be using GitHub to share the code that I have used. Once I clicked on pipelines, this is the page I saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-51.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-51.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking new pipeline, Azure DevOps asked me where my code was&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-52.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-52.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I chose GitHub, authorised and chose the repository.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-53.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-53.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I then chose Empty Job on the next page. See the Configuration as code choice? We will come back to that later and our infrastructure as code will be deployed with a configuration as code 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-54.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-54.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The next page allows us to give the build a good name and choose the Agent Pool that we want to use. Azure DevOps gives 7 different hosted agents running Linux, Mac, Windows or you can download an agent and run it on your own cpus. We will use the default agent for this process.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-55.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-55.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking on Agent Job 1 enables me to change the name of the Agent Job. I could also choose a different type of Agent for different jobs within the same pipeline. This would be useful for testing different OS’s for example but for right now I shall just name it properly.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-65.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-65.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="state">State&lt;/h2>
+&lt;p>First we need somewhere to store the state of our build so that if we re-run it the Terraform plan step will be able to work out what it needs to do. (This is not absolutely required just for building my presentation environments and this might not be the best way to achieve this but for right now this is what I do and it works.)&lt;/p>
+&lt;p>I click on the + and search for Azure CLI.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-58.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-58.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and click on the Add button which gives me some boxes to fill in.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-59.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-59.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I choose my Azure subscription from the first drop down and choose Inline Script from the second&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-60.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-60.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Inside the script block I put the following code&lt;/p>
+&lt;pre>&lt;code># the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
+call az group create --location $(location) --name $(TerraformStorageRG)
+call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
+call az storage container create --name terraform --account-name $(TerraformStorageAccount)
+&lt;/code>&lt;/pre>
+&lt;p>This will create a Resource Group, a storage account and a container and use some variables to provide the values, we will come back to the variables later.&lt;/p>
+&lt;h2 id="access-key">Access Key&lt;/h2>
+&lt;p>The next thing that we need to do is to to enable the job to be able to access the storage account. We don’t want to store that key anywhere but we can use our Azure DevOps variables and some PowerShell to gather the access key and write it to the variable when the job is running . To create the variables I clicked on the variables tab&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-66.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-66.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and then added the variables with the following names TerraformStorageRG, TerraformStorageAccount and location from the previous task and TerraformStorageKey for the next task.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-62.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>With those created, I go back to Tasks and add an Azure PowerShell task&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-63.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I then add this code to get the access key and overwrite the variable.&lt;/p>
+&lt;pre>&lt;code># Using this script we will fetch storage key which is required in terraform file to authenticate backend storage account
+$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
+Write-Host &amp;quot;##vso[task.setvariable variable=TerraformStorageKey]$key&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-67.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-67.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="infrastructure-as-code">Infrastructure as Code&lt;/h2>
+&lt;p>In &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB" target="_blank" rel="noopener"
+>my GitHub repository&lt;/a> I now have the following folders&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-64.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-64.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The manual folders hold the code &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>from the last blog post&lt;/a>. In the Build folder, the main.tf file is identical and looks like this.&lt;/p>
+&lt;pre>&lt;code>provider &amp;quot;azurerm&amp;quot; {
+version = &amp;quot;=1.24.0&amp;quot;
+}
+terraform {
+backend &amp;quot;azurerm&amp;quot; {
+key = &amp;quot;terraform.tfstate&amp;quot;
+}
+}
+resource &amp;quot;azurerm_resource_group&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.ResourceGroupName}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_server&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlServerName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group.presentation.name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+version = &amp;quot;12.0&amp;quot;
+administrator_login = &amp;quot;__SQLServerAdminUser__&amp;quot;
+administrator_login_password = &amp;quot;__SQLServerAdminPassword__&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_database&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlDatabaseName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_sql_server.presentation.resource_group_name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+server_name = &amp;quot;${azurerm_sql_server.presentation.name}&amp;quot;
+edition = &amp;quot;${var.Edition}&amp;quot;
+requested_service_objective_name = &amp;quot;${var.ServiceObjective}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>The variables.tf folder looks like this.&lt;/p>
+&lt;pre>&lt;code>variable &amp;quot;presentation&amp;quot; {
+description = &amp;quot;The name of the presentation - used for tagging Azure resources so I know what they belong to&amp;quot;
+default = &amp;quot;__Presentation__&amp;quot;
+}
+variable &amp;quot;ResourceGroupName&amp;quot; {
+description = &amp;quot;The Prefix used for all resources in this example&amp;quot;
+default = &amp;quot;__ResourceGroupName__&amp;quot;
+}
+variable &amp;quot;location&amp;quot; {
+description = &amp;quot;The Azure Region in which the resources in this example should exist&amp;quot;
+default = &amp;quot;__location__&amp;quot;
+}
+variable &amp;quot;SqlServerName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;__SqlServerName__&amp;quot;
+}
+variable &amp;quot;SQLServerAdminUser&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server Admin user for the Azure SQL Database&amp;quot;
+default = &amp;quot;__SQLServerAdminUser__&amp;quot;
+}
+variable &amp;quot;SQLServerAdminPassword&amp;quot; {
+description = &amp;quot;The Azure SQL Database users password&amp;quot;
+default = &amp;quot;__SQLServerAdminPassword__&amp;quot;
+}
+variable &amp;quot;SqlDatabaseName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;__SqlDatabaseName__&amp;quot;
+}
+variable &amp;quot;Edition&amp;quot; {
+description = &amp;quot;The Edition of the Database - Basic, Standard, Premium, or DataWarehouse&amp;quot;
+default = &amp;quot;__Edition__&amp;quot;
+}
+variable &amp;quot;ServiceObjective&amp;quot; {
+description = &amp;quot;The Service Tier S0, S1, S2, S3, P1, P2, P4, P6, P11 and ElasticPool&amp;quot;
+default = &amp;quot;__ServiceObjective__&amp;quot;
+}
+&lt;/code>&lt;/pre>
+&lt;p>It is exactly the same except that the values have been replaced by the value name prefixed and suffixed with __. This will enable me to replace the values with the variables in my Azure DevOps Build job.&lt;/p>
+&lt;p>The backend-config.tf file will store the details of the state that will be created by the first step and use the access key that has been retrieved in the second step.&lt;/p>
+&lt;pre>&lt;code>resource_group_name = &amp;quot;__TerraformStorageRG__&amp;quot;
+storage_account_name = &amp;quot;__TerraformStorageAccount__&amp;quot;
+container_name = &amp;quot;terraform&amp;quot;
+access_key = &amp;quot;__TerraformStorageKey__&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>I need to add the following variables to my Azure DevOps Build – Presentation, ResourceGroupName, SqlServerName, SQLServerAdminUser, SQLServerAdminPassword, SqlDatabaseName, Edition, ServiceObjective . Personally I would advise setting the password or any other sensitive values to sensitive by clicking the padlock for that variable. This will stop the value being written to the log as well as hiding it behind *’s&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-69.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-69.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Because I have tagged the variables with Settable at queue time , I can set the values whenever I run a build, so if I am at a different event I can change the name.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-70.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-70.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>But the build job hasn’t been set up yet. First we need to replace the values in the variables file.&lt;/p>
+&lt;h2 id="replace-the-tokens">Replace the Tokens&lt;/h2>
+&lt;p>I installed the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens" target="_blank" rel="noopener"
+>Replace Tokens Task&lt;/a> from the marketplace and added that to the build.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-72.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-72.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I am going to use a standard naming convention for my infrastructure code files so I add Build to the Root Directory. You can also click the ellipses and navigate to a folder in your repo. In the Target Files I add &lt;em>”&lt;/em>&lt;em>/*&lt;/em>.tf” and “&lt;strong>&lt;em>/*&lt;/em>.tfvars” which will search all of the folders (&lt;/strong>) and only work on files with a .tf or .tfvars extension (/*.tfvars) The next step is to make sure that the replacement prefix and suffix are correct. It is hidden under Advanced&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-74.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-74.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Because I often forget this step and to aid in troubleshooting I add another step to read the contents of the files and place them in the logs. I do this by adding a PowerShell step which uses&lt;/p>
+&lt;pre>&lt;code>Get-ChildItem .\Build -Recurse
+Get-Content .\Build\*.tf
+Get-Content .\Build\*.tfvars
+&lt;/code>&lt;/pre>
+&lt;p>Under control options there is a check box to enable or disable the steps so once I know that everything is ok with the build I will disable this step. The output in the log of a build will look like this showing the actual values in the files. This is really useful for finding spaces :-).&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-76.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-76.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="running-the-terraform-in-azure-devops">Running the Terraform in Azure DevOps&lt;/h2>
+&lt;p>With everything set up we can now run the Terraform. I installed the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform" target="_blank" rel="noopener"
+>Terraform task&lt;/a> from the marketplace and added a task. We are going to follow the same process as the last blog post, init, plan, apply but this time we are going to automate it 🙂&lt;/p>
+&lt;p>First we will initialise&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-130.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-130.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I put Build in the Terraform Template path. The Terraform arguments are&lt;/p>
+&lt;pre>&lt;code>init -backend-config=&amp;quot;0-backend-config.tfvars&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>which will tell the Terraform to use the backend-config.tfvars file for the state. It is important to tick the Install terraform checkbox to ensure that terraform is available on the agent and to add the Azure Subscription (or Service Endpoint in a corporate environment&lt;/p>
+&lt;p>After the Initialise, I add the Terraform task again add Build to the target path and this time the argument is plan&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-78.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-78.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Again, tick the install terraform checkbox and also the Use Azure Service Endpoint and choose the Azure Subscription.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-131.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-131.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>We also need to tell the Terraform where to find the tfstate file by specifying the variables for the resource group and storage account and the container&lt;/p>
+&lt;p>Finally, add another Terraform task for the apply remembering to tick the install Terraform and Use Azure checkboxes&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-79.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-79.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The arguments are&lt;/p>
+&lt;pre>&lt;code>apply -auto-approve
+&lt;/code>&lt;/pre>
+&lt;p>This will negate the requirement for the “Only “yes” will be accepted to approve” &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>from the manual steps post&lt;/a>!&lt;/p>
+&lt;h2 id="build-a-thing">Build a Thing&lt;/h2>
+&lt;p>Now we can build the environment – Clicking Save and Queue&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-80.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-80.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>opens this dialogue&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-81.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-81.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>where the variables can be filled in.&lt;/p>
+&lt;p>The build will be queued and clicking on the build number will open the logs&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-82.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-82.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-83.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-83.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>6 minutes later the job has finished&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-84.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-84.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and the resources have been created.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-85.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-85.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>If I want to look in the logs of the job I can click on one of the steps and take a look. This is the apply step&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-87.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-87.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="do-it-again-for-another-presentation">Do it Again For Another Presentation&lt;/h2>
+&lt;p>So that is good, I can create my environment as I want it. Once my presentation has finished I can delete the Resource Groups. When I need to do the presentation again, I can queue another build and change the variables&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-88.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-88.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-89.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-89.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The job will run&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-90.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-90.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and the new resource group will be created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-91.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-91.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>all ready for my next presentation 🙂&lt;/p>
+&lt;p>This is brilliant, I can set up the same solution for different repositories for different presentations (infrastructure) and recreate the above steps.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>The next post will show how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/" target="_blank" rel="noopener"
+>The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>The first post showed how to build an Azure SQL Database with Terraform using VS Code&lt;/a>&lt;/p></description></item><item><title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services &amp; PowerBi</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</link><pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</guid><description>&lt;p>Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+>http://www.psconf.eu/&lt;/a>&lt;/p>
+&lt;p>I ended up creating an interactive PowerBi report to which my good friend and Data Platform MVP Paul Andrew &lt;a class="link" href="https://mrpaulandrew.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+>t&lt;/a> added a bit of magic and I published it. The magnificent Tobias Weltner &lt;a class="link" href="http://www.powertheshell.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/TobiasPSP" target="_blank" rel="noopener"
+>t&lt;/a> who organises PSConfEU pointed the domain name &lt;a class="link" href="http://powershell.cool" target="_blank" rel="noopener"
+>http://powershell.cool&lt;/a> at the link. It looks like this.&lt;/p>
+&lt;p>During the monthly &lt;a class="link" href="https://twitter.com/hashtag/PSTweetChat?src=hash" target="_blank" rel="noopener"
+>#PSTweetChat&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Reminder that we do this chat the first Friday of every month from 1-2PM Eastern which I think is 6:00PM UTC &lt;a class="link" href="https://twitter.com/hashtag/pstweetchat?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#pstweetchat&lt;/a>&lt;/p>
+&lt;p>— Jeffery Hicks (@JeffHicks) &lt;a class="link" href="https://twitter.com/JeffHicks/status/959495635182477324?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 2, 2018&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>I mentioned that I need to blog about how I created it and Jeff replied&lt;/p>
+&lt;blockquote>
+&lt;p>Yes, please. I&amp;rsquo;d love to setup something similiar for the PowerShell+DevOps Summit. &lt;a class="link" href="https://twitter.com/hashtag/pstweetchat?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#pstweetchat&lt;/a>&lt;/p>
+&lt;p>— Jeffery Hicks (@JeffHicks) &lt;a class="link" href="https://twitter.com/JeffHicks/status/959494450547511298?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 2, 2018&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>so here it is! Looking forward to seeing the comparison between the &lt;a class="link" href="https://powershell.org/summit/" target="_blank" rel="noopener"
+>PowerShell and Devops Summi&lt;/a>t and the &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+>PowerShell Conference Europe&lt;/a> 🙂&lt;/p>
+&lt;p>This is an overview of how it works&lt;/p>
+&lt;ul>
+&lt;li>A &lt;a class="link" href="https://flow.microsoft.com/" target="_blank" rel="noopener"
+>Microsoft Flow&lt;/a> looks for tweets with the &lt;a class="link" href="https://twitter.com/search?q=%23PSConfEU&amp;amp;src=typd" target="_blank" rel="noopener"
+>#PSConfEU&lt;/a> hashtag and then gets the information about the tweet&lt;/li>
+&lt;li>&lt;a class="link" href="https://azure.microsoft.com/en-gb/services/cognitive-services/text-analytics/" target="_blank" rel="noopener"
+>Microsoft Cognitive Services Text Analysis API&lt;/a> analyses the sentiment of the tweet and provides a score between 0 (negative) and 1 (positive)&lt;/li>
+&lt;li>Details about the tweet and the sentiment are saved in &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/sql-database/" target="_blank" rel="noopener"
+>Azure SQL database&lt;/a>&lt;/li>
+&lt;li>A &lt;a class="link" href="http://PowerBi.com" target="_blank" rel="noopener"
+>PowerBi&lt;/a> report uses that data and provides the report&lt;/li>
+&lt;/ul>
+&lt;p>You will find all of the resources and the scripts to do all of the below in &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>the GitHub repo.&lt;/a> So clone it and navigate to the filepath&lt;/p>
+&lt;h2 id="create-database">Create Database&lt;/h2>
+&lt;p>First lets create a database. Connect to your Azure subscription&lt;/p>
+&lt;pre>&lt;code>## Log in to your Azure subscription using the Add-AzureRmAccount command and follow the on-screen directions.
+Add-AzureRmAccount
+## Select the subscription
+Set-AzureRmContext -SubscriptionId YourSubscriptionIDHere
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/01-subscription.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/01-subscription.png"
+loading="lazy"
+alt="01 - subscription.png"
+>&lt;/a>&lt;/p>
+&lt;p>Then set some variables&lt;/p>
+&lt;pre>&lt;code># The data center and resource name for your resources
+$resourcegroupname = &amp;quot;twitterresource&amp;quot;
+$location = &amp;quot;WestEurope&amp;quot;
+# The logical server name: Use a random value or replace with your own value (do not capitalize)
+$servername = &amp;quot;server-$(Get-Random)&amp;quot;
+# Set an admin login and password for your database
+# The login information for the server You need to set these and uncomment them - Dont use these values
+# $adminlogin = &amp;quot;ServerAdmin&amp;quot;
+# $password = &amp;quot;ChangeYourAdminPassword1&amp;quot;
+# The ip address range that you want to allow to access your server - change as appropriate
+# $startip = &amp;quot;0.0.0.0&amp;quot;
+# $endip = &amp;quot;0.0.0.0&amp;quot;
+# To just add your own IP Address
+$startip = $endip = (Invoke-WebRequest 'http:// myexternalip.com/raw').Content -replace &amp;quot;`n&amp;quot;
+# The database name
+$databasename = &amp;quot;tweets&amp;quot;
+$AzureSQLServer = &amp;quot;$servername.database. windows.net,1433&amp;quot;
+$Table = &amp;quot;table.sql&amp;quot;
+$Proc = &amp;quot;InsertTweets.sql&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>They should all make sense, take note that you need to set and uncomment the login and password and choose which IPs to allow through the firewall&lt;/p>
+&lt;p>Create a Resource Group&lt;/p>
+&lt;pre>&lt;code>## Create a resource group
+New-AzureRmResourceGroup -Name $resourcegroupname -Location $location
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/02-resource-group.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/02-resource-group.png"
+loading="lazy"
+alt="02 - resource group.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a SQL Server&lt;/p>
+&lt;pre>&lt;code>## Create a Server
+$newAzureRmSqlServerSplat = @{
+SqlAdministratorCredentials = $SqlAdministratorCredentials
+ResourceGroupName = $resourcegroupname
+ServerName = $servername
+Location = $location
+}
+New-AzureRmSqlServer @newAzureRmSqlServerSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/03-create-server.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/03-create-server.png"
+loading="lazy"
+alt="03 - create server.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a firewall rule, I just use my own IP and add the allow azure IPs&lt;/p>
+&lt;pre>&lt;code>$newAzureRmSqlServerFirewallRuleSplat = @{
+EndIpAddress = $endip
+StartIpAddress = $startip
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+FirewallRuleName = &amp;quot;AllowSome&amp;quot;
+}
+New-AzureRmSqlServerFirewallRule @newAzureRmSqlServerFirewallRuleSplat
+# Allow Azure IPS
+$newAzureRmSqlServerFirewallRuleSplat = @{
+AllowAllAzureIPs = $true
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+}
+New-AzureRmSqlServerFirewallRule @newAzureRmSqlServerFirewallRuleSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/03a-firewall-rule.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/03a-firewall-rule.png"
+loading="lazy"
+alt="03a - firewall rule.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a database&lt;/p>
+&lt;pre>&lt;code># Create a database
+$newAzureRmSqlDatabaseSplat = @{
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+Edition = 'Basic'
+DatabaseName = $databasename
+}
+New-AzureRmSqlDatabase @newAzureRmSqlDatabaseSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/04-create-database.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/04-create-database.png"
+loading="lazy"
+alt="04 - create database.png"
+>&lt;/a>&lt;/p>
+&lt;p>I have used the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> to run the scripts to create the database. You can get it using&lt;/p>
+&lt;pre>&lt;code>Install-Module dbatools # -Scope CurrentUser # if not admin process
+Run the scripts
+# Create a credential
+$newObjectSplat = @{
+ArgumentList = $adminlogin, $ (ConvertTo-SecureString -String $password -AsPlainText -Force)
+TypeName = 'System.Management.Automation. PSCredential'
+}
+$SqlAdministratorCredentials = New-Object @newObjectSplat
+## Using dbatools module
+$invokeDbaSqlCmdSplat = @{
+SqlCredential = $SqlAdministratorCredentials
+Database = $databasename
+File = $Table,$Proc
+SqlInstance = $AzureSQLServer
+}
+Invoke-DbaSqlCmd @invokeDbaSqlCmdSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/05-Create-Table-Sproc.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/05-Create-Table-Sproc.png"
+loading="lazy"
+alt="05 - Create Table Sproc.png"
+>&lt;/a>&lt;/p>
+&lt;p>This will have created the following in Azure, you can see it in the portal&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/07-portal.png"
+loading="lazy"
+alt="07 - portal.png"
+>&lt;/p>
+&lt;p>You can connect to the database in SSMS and you will see&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/06-show-table.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/06-show-table.png"
+loading="lazy"
+alt="06 - show table.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-cognitive-services">Create Cognitive Services&lt;/h2>
+&lt;p>Now you can create the Text Analysis Cognitive Services API&lt;/p>
+&lt;p>First login (if you need to) and set some variables&lt;/p>
+&lt;pre>&lt;code>## This creates cognitive services for analysing the tweets
+## Log in to your Azure subscription using the Add-AzureRmAccount command and follow the on-screen directions.
+Add-AzureRmAccount
+## Select the subscription
+Set-AzureRmContext -SubscriptionId YOUR SUBSCRIPTION ID HERE
+#region variables
+# The data center and resource name for your resources
+$resourcegroupname = &amp;quot;twitterresource&amp;quot;
+$location = &amp;quot;WestEurope&amp;quot;
+$APIName = 'TweetAnalysis'
+#endregion
+Then create the API and get the key
+#Create the cognitive services
+$newAzureRmCognitiveServicesAccountSplat = @{
+ResourceGroupName = $resourcegroupname
+Location = $location
+SkuName = 'F0'
+Name = $APIName
+Type = 'TextAnalytics'
+}
+New-AzureRmCognitiveServicesAccount @newAzureRmCognitiveServicesAccountSplat
+# Get the Key
+$getAzureRmCognitiveServicesAccountKeySplat = @ {
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+Get-AzureRmCognitiveServicesAccountKey @getAzureRmCognitiveServicesAccountKeySplat
+&lt;/code>&lt;/pre>
+&lt;p>You will need to accept the prompt&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/08-cognitive-service.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/08-cognitive-service.png"
+loading="lazy"
+alt="08 -cognitive service"
+>&lt;/a>&lt;/p>
+&lt;p>Copy the Endpoint URL as you will need it.Then save one of  the keys for the next step!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/09-cognitiveservice-key.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/09-cognitiveservice-key.png"
+loading="lazy"
+alt="09 cognitiveservice key"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-the-flow">Create the Flow&lt;/h2>
+&lt;p>I have exported the Flow to a zip file and also the json for a PowerApp (no details about that in this post). Both are available in the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub repo&lt;/a>. I have submitted a template but it is not available yet.&lt;/p>
+&lt;p>Navigate to &lt;a class="link" href="https://flow.microsoft.com/" target="_blank" rel="noopener"
+>https://flow.microsoft.com/&lt;/a> and sign in&lt;/p>
+&lt;h2 id="creating-connections">Creating Connections&lt;/h2>
+&lt;p>You will need to set up your connections. Click New Connection and search for Text&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/16-import-step-3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/16-import-step-3.png"
+loading="lazy"
+alt="16 - import step 3.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Add and fill in the Account Key and the Site URL from the steps above&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/17-import-step-5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/17-import-step-5.png"
+loading="lazy"
+alt="17 import step 5.png"
+>&lt;/a>&lt;/p>
+&lt;p>click new connection and search for SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png"
+loading="lazy"
+alt="18 - import step 6.png"
+>&lt;/a>&lt;/p>
+&lt;p>Enter the SQL Server Name (value of &lt;code>$AzureSQLServer&lt;/code>) , Database Name , User Name and Password from the steps above&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png"
+loading="lazy"
+alt="19 - import step 7.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click new Connection and search for Twitter and create a connection (the authorisation pop-up may be hidden behind other windows!)&lt;/p>
+&lt;h2 id="import-the-flow">Import the Flow&lt;/h2>
+&lt;p>If you have a premium account you can import the flow, click Import&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/11-import-flow.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/11-import-flow.png"
+loading="lazy"
+alt="11 - import flow.png"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png"
+loading="lazy"
+alt="12 - choose import.png"
+>&lt;/a>&lt;/p>
+&lt;p>and choose the import.zip from the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub Repo&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png"
+loading="lazy"
+alt="13 import step 1.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click on Create as new and choose a name&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/14-import-step-2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/14-import-step-2.png"
+loading="lazy"
+alt="14 - import step 2.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click select during import next to Sentiment and choose the Sentiment connection&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/15-impot-step-3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/15-impot-step-3.png"
+loading="lazy"
+alt="15 impot step 3.png"
+>&lt;/a>&lt;/p>
+&lt;p>Select during import for the SQL Server Connection and choose the SQL Server Connection and do the same for the Twitter Connection&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/20-import-stpe-8.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/20-import-stpe-8.png"
+loading="lazy"
+alt="20 - import stpe 8.png"
+>&lt;/a>&lt;/p>
+&lt;p>Then click import&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/21-imported.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/21-imported.png"
+loading="lazy"
+alt="21 - imported.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-the-flow-without-import">Create the flow without import&lt;/h2>
+&lt;p>If you do not have a premium account you can still create the flow using these steps. I have created a template but it is not available at the moment. Create the connections as above and then click Create from blank.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/22-importblank.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/22-importblank.png"
+loading="lazy"
+alt="22 - importblank.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the trigger When a New Tweet is posted and add a search term. You may need to choose the connection to twitter by clicking the three dots&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/23-importblank-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/23-importblank-1.png"
+loading="lazy"
+alt="23 - importblank 1.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Add an action&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/24-add-action.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/24-add-action.png"
+loading="lazy"
+alt="24 - add action.png"
+>&lt;/a>&lt;/p>
+&lt;p>search for detect and choose the Text Analytics Detect Sentiment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/25-choose-sentuiment.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/25-choose-sentuiment.png"
+loading="lazy"
+alt="25 - choose sentuiment.png"
+>&lt;/a>&lt;/p>
+&lt;p>Enter the name for the connection, the account key and the URL from the creation of the API above. If you forgot to copy them&lt;/p>
+&lt;pre>&lt;code>#region Forgot the details
+# Copy the URL if you forget to save it
+$getAzureRmCognitiveServicesAccountSplat = @{
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+(Get-AzureRmCognitiveServicesAccount @getAzureRmCognitiveServicesAccountSplat). Endpoint | Clip
+# Copy the Key if you forgot
+$getAzureRmCognitiveServicesAccountKeySplat = @ {
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+(Get-AzureRmCognitiveServicesAccountKey @getAzureRmCognitiveServicesAccountKeySplat). Key1 | Clip
+#endregion
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/26-enter-details.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/26-enter-details.png"
+loading="lazy"
+alt="26 - enter details.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click in the text box and choose Tweet Text&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/27-choose-tweet-text.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/27-choose-tweet-text.png"
+loading="lazy"
+alt="27 - choose tweet text.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click New Step and add an action. Search for SQL Server and choose SQL Server – Execute Stored Procedure&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/28-choose-sql-server-execute-stored-procedure.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/28-choose-sql-server-execute-stored-procedure.png"
+loading="lazy"
+alt="28 - choose sql server execute stored procedure.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the stored procedure [dbo].[InsertTweet]&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/29-choose-stored-procedure.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/29-choose-stored-procedure.png"
+loading="lazy"
+alt="29 - choose stored procedure.png"
+>&lt;/a>&lt;/p>
+&lt;p>Fill in as follows&lt;/p>
+&lt;ul>
+&lt;li>__PowerAppsID__         0&lt;/li>
+&lt;li>Date                                 Created At&lt;/li>
+&lt;li>Sentiment                      Score&lt;/li>
+&lt;li>Tweet                              Tweet Text&lt;/li>
+&lt;li>UserLocation                 Location&lt;/li>
+&lt;li>UserName                      Tweeted By&lt;/li>
+&lt;/ul>
+&lt;p>as shown below&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/30-stored-procedure-info.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/30-stored-procedure-info.png?resize=630%2C368&amp;amp;ssl=1"
+loading="lazy"
+alt="30 stored procedure info.png"
+>&lt;/a>&lt;/p>
+&lt;p>Give the flow a name at the top and click save flow&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/31-flow-created.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/31-flow-created.png"
+loading="lazy"
+alt="31 flow created.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="connect-powerbi">Connect PowerBi&lt;/h2>
+&lt;p>Open the PSConfEU Twitter Analysis Direct.pbix from the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub repo&lt;/a> in PowerBi Desktop. Click the arrow next to Edit Queries and then change data source settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png"
+loading="lazy"
+alt="32 change data source.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Change source and enter the server (value of &lt;code>$AzureSQLServer&lt;/code>) and the database name. It will alert you to apply changes&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png"
+loading="lazy"
+alt="33 apply changes.png"
+>&lt;/a>&lt;/p>
+&lt;p>It will then pop-up with a prompt for the credentials. Choose Database and enter your credentials and click connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/34-creds.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/34-creds.png?resize=630%2C370&amp;amp;ssl=1"
+loading="lazy"
+alt="34 - creds.png"
+>&lt;/a>&lt;/p>
+&lt;p>and your PowerBi will be populated from the Azure SQL Database 🙂 This will fail if there are no records in the table because your flow hasn’t run yet. If it does just wait until you see some tweets and then click apply changes again.&lt;/p>
+&lt;p>You will probably want to alter the pictures and links etc and then yo can publish the report&lt;/p>
+&lt;p>Happy Twitter Analysis&lt;/p>
+&lt;p>Dont forget to keep an eye on your flow runs to make sure they have succeeded.&lt;/p></description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p>This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+>described here&lt;/a> to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a> so was surprised to see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I read the announcement and also the details on MSDN &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx&lt;/a> which show that this requires the SQL Server IaaS Agent. This is a default option on new virtual machines.&lt;/p>
+&lt;p>There are some other considerations too. It is only supported for SQL Server 2014 and Windows Server 2012 and 2012R2 at present and you can set a retention period to a maximum of 30 days but it is automated. You do not have to decide upon the backup strategy Azure will decide the frequency and type of backups dependent upon the workload of the database and some other factors such as&lt;/p>
+&lt;p>A full backup is taken ○ when an instance is added to use Managed backup ○ When transaction log growth is 1Gb or more ○ At least once a week ○ If the log chain is broken ○ When a database is created&lt;/p>
+&lt;p>A transaction log backup is taken - If no log backup is found - Transaction log space used is 5Mb or larger - At least once every two hours - Any time the transaction log backup is lagging behind a full database backup. The goal is to keep the log chain ahead of full backup.&lt;/p>
+&lt;p>From &lt;a class="link" href="https://msdn.microsoft.com/en-gb/library/dn449496%28v=sql.120%29.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-gb/library/dn449496(v=sql.120).aspx&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>There are some restrictions - Only database backups are supported - System databases are not supported so you need to back those up yourself - You can only back up to Azure storage - Maximum backup size is 1Tb as this is the maximum size for a blob in Azure storage - Simple recovery is not supported - Maximum retention is 30 days - if you are required to keep your backups for longer than 30 days for regulatory or other reasons you could simply use Azure Automation to copy the files to another storage account in Azure)&lt;/p>
+&lt;/blockquote>
+&lt;p>How to set it up.&lt;/p>
+&lt;p>If you are using the GUI then you will find SQL Automated Backup in the optional config blade of the set up. You can follow the steps &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here to set it up&lt;/a>. If (like me) you want to use PowerShell then use the following code after you have created your Virtual Machine&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$storageaccount = &amp;#34;&amp;lt;storageaccountname&amp;gt;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storageaccountkey = (Get-AzureStorageKey -StorageAccountName $storageaccount).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -StorageAccountKey $storageaccountkey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$encryptionpassword = (Get-Credential -message &amp;#39;Backup Encryption Password&amp;#39; -User &amp;#39;IGNOREUSER&amp;#39;).password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$autobackupconfig = New-AzureVMSqlServerAutoBackupConfig -StorageContext $storagecontext -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-AzureVM -ServiceName &amp;lt;vmservicename&amp;gt; -Name &amp;lt;vmname&amp;gt; | Set-AzureVMSqlServerExtension -AutoBackupSettings $autobackupconfig | Update-AzureVM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once you have run the code, Azure will take care of the rest. Add a couple of databases to your instance and look in the storage account and you will see this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>And in the automaticbackup container you will find the Certificates and master key backups&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It will also create a credential&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/blogrobsewell/images/5.png"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>You can use the same credential to back up your system databases. If like me you use &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>Ola Hallengrens excellent Maintenance Solution&lt;/a> then simply change your systems backup job as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [msdb]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXEC msdb.dbo.sp_update_jobstep @job_name = &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;, @step_id=1 ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @command=N&amp;#39;sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q &amp;#34;EXECUTE [dbo].[DatabaseBackup] @Databases = &amp;#39;&amp;#39;SYSTEM_DATABASES&amp;#39;&amp;#39;, &amp;#34;https://myaccount.blob.core.windows.net/mycontainer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> , @Credential = &amp;#39;&amp;#39;AutoBackup_Credential&amp;#39;&amp;#39;, @BackupType = &amp;#39;&amp;#39;FULL&amp;#39;&amp;#39;, @Verify = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @CleanupTime = NULL, @CheckSum = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @LogToTable = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;&amp;#34; -b&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you need to restore your database then you can use the GUI and when you choose restore you will see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>Enter your storage account and the key which you can get from the Azure portal. You will notice that the credential has already been selected, click connect and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>There are all of your backups ready to restore to any point in time that you choose. By clicking script the T-SQL is generated which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [master]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BACKUP LOG [Test] TO URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_LogBackup_2015-07-16_06-21-26.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOFORMAT, NOINIT, NAME = N&amp;#39;Test_LogBackup_2015-07-16_06-21-26&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOSKIP, NOREWIND, NOUNLOAD, NORECOVERY , STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE DATABASE [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714201240+00.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714202740+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714224241+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715005741+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715031242+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715052742+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715074243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715095743+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715121243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150716060004+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is an important note. Remember this when you have just set it up so that you don’t think that you have done it wrong (which is what I did!)&lt;/p>
+&lt;p>When you enable Automated Patching for the first time, Azure configures the SQL Server IaaS Agent in the background. During this time, the portal will not show that Automated Patching is configured. Wait several minutes for the agent to be installed, configured. After that the portal will reflect the new settings.&lt;/p>
+&lt;p>From &amp;lt;&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx&lt;/a>&amp;gt;&lt;/p>
+&lt;p>And also look out for this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>The password I had chosen was not complex enough but the PowerShell script had succeeded and not given me the warning&lt;/p>
+&lt;p>To set up SQL Automated Patching you follow a similar steps. The setting is again on the OS Config blade and click enable and then you can choose the frequency and duration of the patching.&lt;/p>
+&lt;p>It is important to remember to choose your maintenance window correctly. If you have set up your SQL VMs correctly you will have them in an availability set and be using either mirroring or Availability Groups and have the VMs set up in the same availability set to ensure availability during the underlying host patching but I had it confirmed by Principal Software Engineering Manager Sethu Srinivasan &lt;a class="link" href="http://twitter.com/sethusrinivasan" target="_blank" rel="noopener"
+>t&lt;/a> via Microsoft PFE Arvind Shyamsundar &lt;a class="link" href="http://blogs.msdn.com/b/arvindsh/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/arvisam" target="_blank" rel="noopener"
+>t&lt;/a> that the SQL Automated Patching is not HA aware so you will need to ensure that you set the maintenance windows on each VM to ensure that they do not overlap&lt;/p></description></item><item><title>Uploading a Source Folder to Azure File Storage</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/uploading-a-source-folder-to-azure-file-storage/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/uploading-a-source-folder-to-azure-file-storage/</guid><description>&lt;p>Azure File Storage enables you to present an Azure Storage Account to your IaaS VMs as a share using SMB. You can fid out further details here&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/%c2%a0" title="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/ "
+target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/&lt;/a> &lt;/p>
+&lt;p>Once you have created your Azure File Storage Account and connected your Azure Virtual Machines to it, you may need to upload data from your premises into the storage to enable it to be accessed by the Virtual Machines&lt;/p>
+&lt;p>To accomplish this I wrote a function and called it Upload-ToAzureFileStorage&lt;/p>
+&lt;p>I started by creating a source folder and files to test&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New2 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New3 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New4 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New5 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\b -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\c -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\d -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\1 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\2 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\3 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\4 -ItemType Directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New2\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New3\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New4\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New5\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\1\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\2\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\3\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-Item -Path C:\\temp\\TestUpload\\New1\\list\\a\\4\\file.txt -ItemType File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we needed to connect to the subscription, get the storage account access key and create a context to store them&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#Select Azure Subscription
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Get the Storage Account Key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$StorageAccountKey = (Get-AzureStorageKey -StorageAccountName $StorageAccountName).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># create a context for account and key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ctx=New-AzureStorageContext $StorageAccountName $StorageAccountKey
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806403.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Get-AzureStorageShare  cmdlet&lt;/a> shows the shares available for the context so we can check if the share exists&lt;/p>
+&lt;p>&lt;code>$S = Get-AzureStorageShare -Context $ctx -ErrorAction SilentlyContinue|Where-Object {$\_.Name -eq $AzureShare}&lt;/code>&lt;/p>
+&lt;p>and if it doesnt exist create it using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806378.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageShare&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$s = New-AzureStorageShare $AzureShare -Context $ctx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>For the sake only of doing it a different way we can check for existence of the directory in Azure File Storage that we are going to upload the files to like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$d = Get-AzureStorageFile -Share $s -ErrorAction SilentlyContinue|select Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($d.Name -notcontains $AzureDirectory)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and if it doesnt exist create it using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806385.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageDirectory&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$d = New-AzureStorageDirectory -Share $s -Path $AzureDirectory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now that we have the directory created in the storage account we need to create any subfolders. First get the folders&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\# get all the folders in the source directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Folders = Get-ChildItem -Path $Source -Directory -Recurse
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We can then iterate through them using a foreach loop. If we do this and select the FullName property the results will be&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\\temp\\TestUpload\\New1 C:\\temp\\TestUpload\\New2 C:\\temp\\TestUpload\\New3 C:\\temp\\TestUpload\\New4 C:\\temp\\TestUpload\\New5 C:\\temp\\TestUpload\\New1\\list C:\\temp\\TestUpload\\New1\\list\\a C:\\temp\\TestUpload\\New1\\list\\b C:\\temp\\TestUpload\\New1\\list\\c C:\\temp\\TestUpload\\New1\\list\\d C:\\temp\\TestUpload\\New1\\list\\a\\1 C:\\temp\\TestUpload\\New1\\list\\a\\2 C:\\temp\\TestUpload\\New1\\list\\a\\3 C:\\temp\\TestUpload\\New1\\list\\a\\4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>but to create new folders we need to remove the &lt;code>&amp;quot;C:\\temp\\TestUpload&amp;quot;&lt;/code> and replace it with the Directory name in Azure. I chose to do this as follows using the substring method and the length of the source folder path.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach($Folder in $Folders)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $f = ($Folder.FullName).Substring(($source.Length))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Path = $AzureDirectory + $f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and tested that the results came out as I wanted&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">AppName\\New1 AppName\\New2 AppName\\New3 AppName\\New4 AppName\\New5 AppName\\New1\\list AppName\\New1\\list\\a AppName\\New1\\list\\b AppName\\New1\\list\\c AppName\\New1\\list\\d AppName\\New1\\list\\a\\1 AppName\\New1\\list\\a\\2 AppName\\New1\\list\\a\\3 AppName\\New1\\list\\a\\4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I could then create the new folders in azure using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806385.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageDirectory&lt;/a> again&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">New-AzureStorageDirectory -Share $s -Path $Path -ErrorAction SilentlyContinue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I followed the same process with the files&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$files = Get-ChildItem -Path $Source -Recurse -File&amp;lt;/pre&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;pre&amp;gt;foreach($File in $Files)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $f = ($file.FullName).Substring(($Source.Length))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Path = $AzureDirectory + $f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then created the files using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806404.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Set-AzureStorageFileContent&lt;/a> this has a -Force and a -Confirm switch and I added those into my function by using a [switch] Parameter&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#upload the files to the storage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if($Confirm)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Set-AzureStorageFileContent -Share $s -Source $File.FullName -Path $Path -Confirm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Set-AzureStorageFileContent -Share $s -Source $File.FullName -Path $Path -Force
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can download the function from the Script Center&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe&lt;/a>&lt;/p>
+&lt;p>As also, any comments or queries are welcome and obviously the internet lies so please understand and test all code you find before using it in production&lt;/p></description></item><item><title>A look at the SQL Assessment Intelligence Pack in Operational Insights</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-look-at-the-sql-assessment-intelligence-pack-in-operational-insights/</link><pubDate>Mon, 24 Nov 2014 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/a-look-at-the-sql-assessment-intelligence-pack-in-operational-insights/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2014/11/opsman1.jpg" alt="Featured image of post A look at the SQL Assessment Intelligence Pack in Operational Insights" />&lt;p>Operational Insights is a service that has been added in preview to Azure. It enables you to collect, combine, correlate and visualize all your machine data in one place. It can collect data from all of your machines either via SCOM or by using an agent. Once the data is collected Operational Insights has a number of Intelligence Packs which have pre-configured rules and algorithms to provide analysis in various areas including for SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-gb/services/operational-insights/" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-gb/services/operational-insights/&lt;/a>&lt;/p>
+&lt;p>I thought I would take a look. I have an installation of SCOM in my lab on my laptop and I read the instructions to see how to connect it to Operational Insights. (You don’t have to have a SCOM installation to use Operational insights you can make use of an agent as well just follow the steps from the page below)&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-us/trial/operational-insights-get-started/" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-us/trial/operational-insights-get-started/&lt;/a>&lt;/p>
+&lt;p>It really is very simple&lt;/p>
+&lt;p>If you have an Azure subscription already you can sign into the portal and join the preview program by clicking&lt;/p>
+&lt;p>New –&amp;gt; App Services –&amp;gt; Operational Insights&lt;/p>
+&lt;p>and create a new Operational Insights Workspace.&lt;/p>
+&lt;p>Once you have done that, if you have an installation of SCOM 2012 you need to be running Service Pack 1 and download and install the System Center Operational Insights Connector for Operations Manager and import the MPB files into SCOM.&lt;/p>
+&lt;p>If you have SCOM 2012R2 the connector is already installed and to connect your SCOM to Operational Insights is very very easy as you can see on&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&amp;amp;step3=SCOMcustomer" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&amp;amp;step3=SCOMcustomer&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>In the Operations Manager Console, click Administration.&lt;/li>
+&lt;li>Under Administration, select System Center Advisor, and then click Advisor Connection.&lt;/li>
+&lt;li>Click Register to Advisor Service.&lt;/li>
+&lt;li>Sign in with your Microsoft or Organizational account.&lt;/li>
+&lt;li>Choose an existing Operational Insights workspace from the drop down menu&lt;/li>
+&lt;li>Confirm your changes.&lt;/li>
+&lt;li>In the System Center Advisor Overview page, Under Actions, click Add a Computer/Group.&lt;/li>
+&lt;li>Under Options, select Windows Server or All Instance Groups, and then search and add servers that you want data&lt;/li>
+&lt;/ol>
+&lt;p>That is it. No really, that is it. I was amazed how quickly I was able to get this done in my lab and it would not take very long in a large implementation of SCOM either as you will have your groups of computers defined which will make it easy to decide which groups to use. You could use a separate workspace for each type of server or split up the information per service. It really is very customisable.&lt;/p>
+&lt;p>Once you have done that, go and add some of the Intelligence Packs. Each intelligence pack will change the amount  and type of data that is collected. At November 23rd there are&lt;/p>
+&lt;ul>
+&lt;li>Alert Management – for your SCOM Alerts&lt;/li>
+&lt;li>Change Tracking – Tracking Configuration Changes&lt;/li>
+&lt;li>Log Management – for event log collection and interrogation&lt;/li>
+&lt;li>System Update Assessment – Missing Security Updates&lt;/li>
+&lt;li>Malware Assessment – Status of Anti-Malware and Anti-Virus scans&lt;/li>
+&lt;li>Capacity Planning – Identify Capacity and Utilisation bottlenecks&lt;/li>
+&lt;li>SQL Assessment – The risk and health of SQL Server Environment&lt;/li>
+&lt;/ul>
+&lt;p>There are also two ‘coming soon’ Intelligence packs&lt;/p>
+&lt;ul>
+&lt;li>AD Assessment – Risk and health of Active Directory&lt;/li>
+&lt;li>Security – Explore security related data and help identify security breaches&lt;/li>
+&lt;/ul>
+&lt;p>You then (if you are like me) have a period of frustration whilst you wait for all of the data to be uploaded and aggregated but once it is you sign into the Operational Insights Portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://preview.opinsights.azure.com" target="_blank" rel="noopener"
+>https://preview.opinsights.azure.com&lt;/a> and it will look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg"
+loading="lazy"
+alt="opsman1"
+>&lt;/a>&lt;/p>
+&lt;p>There is a lot of information there. As it is on my laptop and the lab is not running all of the time and is not connected to the internet most of the time I am not surprised that there are some red parts to my assessment!!&lt;/p>
+&lt;p>Obviously I was interested in the SQL Assessment and I explored it a bit further&lt;/p>
+&lt;p>Clicking on the SQL Assessment tile takes you to a screen which shows the SQL Assessment broken down into 6 Focus areas&lt;/p>
+&lt;p>Security and Compliance, Availability and Business Continuity, Performance and Scalability, Upgrade, Migration and  Deployment, Operations and Monitoring and Change and Configuration Management. MSDN &lt;a class="link" href="http://msdn.microsoft.com/en-us/library/azure/dn873967.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/en-us/library/azure/dn873967.aspx&lt;/a> gives some more information about each one&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Security and Compliance&lt;/strong> – Safeguard the reputation of your organization by defending yourself from security threats and breaches, enforcing corporate policies, and meeting - technical, legal and regulatory compliance requirements.&lt;/li>
+&lt;li>&lt;strong>Availability and Business Continuity&lt;/strong> – Keep your services available and your business profitable by ensuring the resiliency of your infrastructure and by having the right - level of business protection in the event of a disaster.&lt;/li>
+&lt;li>&lt;strong>Performance and Scalability&lt;/strong> – Help your organization to grow and innovate by ensuring that your IT environment can meet current performance requirements and can respond - quickly to changing business needs.&lt;/li>
+&lt;li>&lt;strong>Upgrade, Migration and Deployment&lt;/strong> – Position your IT department to be the key driver of change and innovation, by taking full advantage of new enabling technologies to - unlock more business value for organizational units, workforce and customers.&lt;/li>
+&lt;li>&lt;strong>Operations and Monitoring&lt;/strong> – Lower your IT maintenance budget by streamlining your IT operations and implementing a comprehensive preventative maintenance program to - maximize business performance.&lt;/li>
+&lt;li>&lt;strong>Change and Configuration Management&lt;/strong> – Protect the day-to-day operations of your organization and ensure that changes won’t negatively affect the business by establishing change control procedures and by tracking and auditing system configurations.&lt;/li>
+&lt;/ul>
+&lt;p>You will be able to see some dials showing you how well you are doing in each area for the servers whose data has been collected.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman2.jpg"
+loading="lazy"
+alt="opsman2"
+>&lt;/a>&lt;/p>
+&lt;p>Each area will have the High Priority Recommendations shown below the dial and you can click on them to see more information about those recommendations&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman3.jpg"
+loading="lazy"
+alt="opsman3"
+>&lt;/a>&lt;/p>
+&lt;p>You can also click the dial or the see all link to enter the search area where you can customise how you wish to see the data that has been collected, this looks a bit confusing at first&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman4.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman4.jpg"
+loading="lazy"
+alt="opsman4"
+>&lt;/a>&lt;/p>
+&lt;p>The top bar contains the search , the timescale and some buttons to save the search, view the saved searches and view the search history, all of which will be shown in the right hand column below&lt;/p>
+&lt;p>The left column contains a bar graph for the search and all of the filters. The middle column contains the results of the search and can be viewed in list or tabular format and exported to CSV using the button below. A little bit of experimentation will give you a better understanding of how the filtering works and how you can make use of that for your environment&lt;/p>
+&lt;p>By looking at the search for the Operations and Monitoring Focus Area shown above&lt;/p>
+&lt;blockquote>
+&lt;p>Type:SQLAssessmentRecommendation IsRollup=true RecommendationPeriod=2014-11 FocusArea=”Operations and Monitoring” RecommendationResult=Failed | sort RecommendationWeight desc&lt;/p>
+&lt;/blockquote>
+&lt;p>I saw that &lt;code>RecommendationResult=Failed&lt;/code> and changed it to &lt;code>RecommendationResult=Passed&lt;/code>. This enabled me to see all of the Recommendations that had been passed in the Focus Area and clicking the export button downloaded a csv file. I deleted &lt;code>RecommendationResult=Passed&lt;/code> from the search and that gave me all of the recommendations that made up that Focus Area&lt;/p>
+&lt;ul>
+&lt;li>Operations and Monitoring Focus Area&lt;/li>
+&lt;li>Recommendation&lt;/li>
+&lt;li>Enable Remote Desktop on servers.&lt;/li>
+&lt;li>Enable Remote Desktop on virtual machines.&lt;/li>
+&lt;li>Ensure computers are able to download updates.&lt;/li>
+&lt;li>Configure event logs to overwrite or archive old events automatically.&lt;/li>
+&lt;li>Review event log configuration to ensure event data is retained automatically. This relates to System Logs&lt;/li>
+&lt;li>Review event log configuration to ensure event data is retained automatically. This relates to Application Logs&lt;/li>
+&lt;/ul>
+&lt;p>I decided then to do the same for each of the Focus Areas for the SQL Assessment Intelligence Pack&lt;/p>
+&lt;p>Security and Compliance Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Change passwords that are the same as the login name.&lt;/li>
+&lt;li>Remove logins with blank passwords.&lt;/li>
+&lt;li>LAN Manager Hash for Passwords Stored&lt;/li>
+&lt;li>Investigate why unsigned kernel modules were loaded.&lt;/li>
+&lt;li>Apply security best practices to contained databases.&lt;/li>
+&lt;li>Enable User Account control on all computers.&lt;/li>
+&lt;li>Consider disabling the xp_cmdshell extended stored procedure.&lt;/li>
+&lt;li>Implement Windows authentication on Microsoft Azure-hosted SQL Server deployments.&lt;/li>
+&lt;li>Avoid using the Local System account to run the SQL Server service.&lt;/li>
+&lt;li>Avoid adding users to the db_owner database role.&lt;/li>
+&lt;li>Ensure only essential users are added to the SQL Server sysadmin server role.&lt;/li>
+&lt;li>Disable SQL Server guest user in all user databases.&lt;/li>
+&lt;li>Avoid running SQL Server Agent jobs using highly-privileged accounts.&lt;/li>
+&lt;li>Configure the SQL Server Agent service to use a recommended account.&lt;/li>
+&lt;li>Apply Windows password policies to SQL Server logins.&lt;/li>
+&lt;li>Investigate failures to validate the integrity of protected files.&lt;/li>
+&lt;li>Investigate failures to validate kernel modules.&lt;/li>
+&lt;/ul>
+&lt;p>Availability and Business Continuity Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Schedule full database backups at least weekly.&lt;/li>
+&lt;li>Optimize your backup strategy with Microsoft Azure Blob Storage.&lt;/li>
+&lt;li>Avoid using the Simple database recovery model.&lt;/li>
+&lt;li>Ensure all installations of Windows are activated.&lt;/li>
+&lt;li>Investigate logical disk errors.&lt;/li>
+&lt;li>Reduce the maximum Kerberos access token size.&lt;/li>
+&lt;li>Investigate connection failures due to SSPI context errors.&lt;/li>
+&lt;li>Set the PAGE_VERIFY database option to CHECKSUM.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate a write error on a disk.&lt;/li>
+&lt;li>Check the network access to Active Directory domain controllers.&lt;/li>
+&lt;li>Review DNS configuration on non-DNS servers.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate memory dumps.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate why the computer shut down unexpectedly.&lt;/li>
+&lt;li>Enable dynamic DNS registration for domain-joined servers.&lt;/li>
+&lt;/ul>
+&lt;p>Performance and Scalability Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Increase the number of tempdb database files.&lt;/li>
+&lt;li>Configure the tempdb database to reduce page allocation contention.&lt;/li>
+&lt;li>Ensure all tempdb database files have identical initial sizes and growth increments.&lt;/li>
+&lt;li>Set autogrowth increments for database files and log files to fixed values rather than percentage values.&lt;/li>
+&lt;li>Set autogrowth increments for transaction log files to less than 1GB.&lt;/li>
+&lt;li>Modify auto-grow settings to use a fixed size growth increment of less than 1GB and consider enabling Instant File Initialization.&lt;/li>
+&lt;li>Change your Affinity Mask and Affinity I/O MASK settings to prevent conflicts.&lt;/li>
+&lt;li>Resolve issues caused by excessive virtual log files.&lt;/li>
+&lt;li>Modify the database file layout for databases larger than 1TB.&lt;/li>
+&lt;li>Set the AUTO_CLOSE option to OFF for frequently accessed databases.&lt;/li>
+&lt;li>Review memory requirements on servers with less than 4GB of physical memory installed.&lt;/li>
+&lt;li>Configure system SiteName properties to be dynamic.&lt;/li>
+&lt;li>Align the Max Degree of Parallelism option to the number of logical processors.&lt;/li>
+&lt;li>Align the Max Degree of Parallelism option to the number of logical processors.&lt;/li>
+&lt;li>Consider disabling the AUTO_SHRINK database option.&lt;/li>
+&lt;li>Review memory requirements on computers with high paging file use.&lt;/li>
+&lt;li>Ensure SQL Server does not consume memory required by other applications and system components.&lt;/li>
+&lt;li>Consider changing your power saving settings to optimize performance.&lt;/li>
+&lt;li>Increase the initial size of the tempdb database.&lt;/li>
+&lt;li>Review the configuration of Maximum Transfer Unit (MTU) size.&lt;/li>
+&lt;li>Review your paging file settings.&lt;/li>
+&lt;li>Review and optimize memory cache configuration.&lt;/li>
+&lt;li>Review the configuration of Maximum Transfer Unit (MTU) size.&lt;/li>
+&lt;li>Review the system processor scheduling mode.&lt;/li>
+&lt;li>Review network provider ordering settings.&lt;/li>
+&lt;li>Remove invalid entries from the PATH environment variable.&lt;/li>
+&lt;li>Remove network entries from the PATH environment variable.&lt;/li>
+&lt;li>Investigate processes that use a large number of threads.&lt;/li>
+&lt;li>Avoid hosting user database files on the same disk volume as tempdb database files.&lt;/li>
+&lt;li>Review processes with large working set sizes.&lt;/li>
+&lt;li>Reduce the length of the PATH environment variable.&lt;/li>
+&lt;li>Reduce the number of entries in the PATH environment variable.&lt;/li>
+&lt;li>Ensure SQL Server does not consume memory required by other applications and system components.&lt;/li>
+&lt;li>Enable the backup compression default configuration option.&lt;/li>
+&lt;li>Ensure the DNS Client service is running and is set to start automatically.&lt;/li>
+&lt;li>Consider compressing database tables and indexes.&lt;/li>
+&lt;/ul>
+&lt;p>Upgrade, Migration and Deployment Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Ensure all devices run supported operating system versions.&lt;/li>
+&lt;li>Ensure that the guest user is enabled in the msdb database.&lt;/li>
+&lt;li>Avoid using the Affinity64 Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Affinity Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Affinity I/O Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Allow Updates configuration option in SQL Server.&lt;/li>
+&lt;li>Avoid using the Allow Updates configuration option in SQL Server.&lt;/li>
+&lt;li>Avoid using the Affinity64 I/O Mask configuration setting in new development work.&lt;/li>
+&lt;li>Configure SQL Server to accept incoming connections.&lt;/li>
+&lt;li>Configure SQL Server instances and firewalls to allow communication over TCP/IP.&lt;/li>
+&lt;/ul>
+&lt;p>As I have no data for Change and Configuration Management I was not able to see the recommendations in my Operation Insights Workspace.&lt;/p>
+&lt;p>Edit: Daniele Muscetta has said in the comments that this is a bug which is being tracked&lt;/p>
+&lt;p>As you can see from the type and description of the recommendations above these are all areas that a DBA will be concerned about and the benefit of having all of this information gathered, pre-sorted, prioritised and presented to you in this manner will enable you to work towards a better SQL environment and track your progress. You can read more about the SQL Assessment Intelligence Pack here&lt;/p>
+&lt;p>&lt;a class="link" href="http://msdn.microsoft.com/en-us/library/azure/dn873958.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/en-us/library/azure/dn873958.aspx&lt;/a>&lt;/p>
+&lt;p>As well as the pre-determined queries that are built into the Intelligence pack you can search your data in any way that you require enabling you to present information about the health and risk of your SQL Environment to your team or your management with ease. The “with ease” bit is dependent on you understanding the language and structure of the search queries.&lt;/p>
+&lt;p>You will need to put this page into your bookmarks&lt;/p>
+&lt;p>&lt;a class="link" href="http://msdn.microsoft.com/library/azure/dn873997.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/library/azure/dn873997.aspx&lt;/a>&lt;/p>
+&lt;p>As it contains the syntax and definitions to search your data&lt;/p>
+&lt;p>A very useful page for a starter like me is&lt;/p>
+&lt;p>&lt;a class="link" href="http://blogs.msdn.com/b/dmuscett/archive/2014/10/19/advisor-searches-collection.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.msdn.com/b/dmuscett/archive/2014/10/19/advisor-searches-collection.aspx&lt;/a>&lt;/p>
+&lt;p>by Daniele Muscetta which has a list of useful Operational Insights search queries such as&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>SQL Recommendation by Computer&lt;/strong>&lt;/p>
+&lt;p>Type=SQLAssessmentRecommendation IsRollup=false RecommendationResult=Failed | measure count() by Computer&lt;/p>
+&lt;/blockquote>
+&lt;p>If you click the star to the right of the search box you will find the saved searches. For the SQL Assessment Intelligence Pack there are&lt;/p>
+&lt;p>Did the agent pass the prerequisite check (if not, SQL Assessment data won’t be complete)&lt;/p>
+&lt;p>Focus Areas&lt;/p>
+&lt;ul>
+&lt;li>How many SQL Recommendation are affecting a Computer a SQL Instance or a - Database?&lt;/li>
+&lt;li>How many times did each unique SQL Recommendation trigger?&lt;/li>
+&lt;li>SQL Assesments passed by Server&lt;/li>
+&lt;li>SQL Recommendation by Computer&lt;/li>
+&lt;li>SQL Recommendation by Database&lt;/li>
+&lt;li>SQL Recommendation by Instance&lt;/li>
+&lt;/ul>
+&lt;p>You can use these and you can save your own searches which show the data in a way that is valuable to you.&lt;/p>
+&lt;p>Overall I am impressed with this tool and can see how it can be beneficial for a DBA as well as for System Administrators. I was amazed how easy it was to set up and how quickly I was able to start manipulating the data once it had been uploaded.&lt;/p></description></item><item><title>Using PowerShell to get Azure Endpoint Ports</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-powershell-to-get-azure-endpoint-ports/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-powershell-to-get-azure-endpoint-ports/</guid><description>&lt;p>A quick blog today. I was reading &lt;a class="link" href="http://www.mssqltips.com/sqlservertip/3076/how-to-read-the-sql-server-database-transaction-log/" target="_blank" rel="noopener"
+>this blog post about How to read the SQL Error Log&lt;/a> and I thought I would try some of the examples. I started my Azure VM using &lt;a class="link" href="https://blog.robsewell.com/?p=534" target="_blank" rel="noopener"
+>the steps in my previous post&lt;/a>&lt;/p>
+&lt;p>I ran&lt;/p>
+&lt;pre>&lt;code>Get-AzureVM -ServiceName TheBestBeard -Name Fade2black
+&lt;/code>&lt;/pre>
+&lt;p>and then&lt;/p>
+&lt;pre>&lt;code> Get-AzureVM -ServiceName TheBestBeard -Name Fade2black|Get-AzureEndpoint |Format-Table -AutoSize
+&lt;/code>&lt;/pre>
+&lt;p>and bingo I had my SQL Port to put in SSMS and can go and play some more with SQL&lt;/p></description></item><item><title>Starting My Azure SQL Server VMs with PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/starting-my-azure-sql-server-vms-with-powershell/</link><pubDate>Wed, 27 Nov 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/starting-my-azure-sql-server-vms-with-powershell/</guid><description>&lt;p>The last post about &lt;a class="link" href="https://blog.robsewell.com/?p=505" target="_blank" rel="noopener"
+>Launching Azure VMs with PowerShell&lt;/a> made someone ask me to explain how I start my Azure VMs normally so here goes.&lt;/p>
+&lt;p>When I decide to write a blog post or develop and test a script or run through demos from a presentation or blog post I fire up my Azure Virtual machines with PowerShell. This is how I do it&lt;/p>
+&lt;p>Open PowerShell and check that I am connected to my default subscription by running &lt;code>Get-AzureSubscription&lt;/code>&lt;/p>
+&lt;p>Note – You must have installed Windows Azure PowerShell and installed the PublishSettingsFile or used &lt;code>Add-AzureAccount&lt;/code> for your subscription following the steps here&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.windowsazure.com/en-us/manage/install-and-configure-windows-powershell/" target="_blank" rel="noopener"
+>http://www.windowsazure.com/en-us/manage/install-and-configure-windows-powershell/&lt;/a>&lt;/p>
+&lt;p>Then I run the following three Cmdlets&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;code>Get-AzureVM&lt;/code> shows me the VMs associated with that subscription.&lt;/p>
+&lt;p>I then pipe to &lt;code>Start-AzureVM&lt;/code> as I want to start both machines. If I only wanted one I would check that&lt;/p>
+&lt;pre>&lt;code>Get-AzureVM -name Fade2Black -ServiceName TheBestBeard
+&lt;/code>&lt;/pre>
+&lt;p>returned the correct machine and then pipe that to &lt;code>Start-AzureVM&lt;/code>&lt;/p>
+&lt;p>Once the VMs have started I use &lt;code>Get-AzureRemoteDesktopFile&lt;/code> giving a local path for the rdp file and specifying &lt;code>–Launch&lt;/code> to run the RDP session&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image1.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and away we go 🙂&lt;/p>
+&lt;p>Once I have finished simply run&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and my machines are stopped and no longer running my credit down.&lt;/p></description></item><item><title>Launching Azure VM After Starting With PowerShell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/launching-azure-vm-after-starting-with-powershell/</link><pubDate>Sat, 26 Oct 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/launching-azure-vm-after-starting-with-powershell/</guid><description>&lt;p>So this morning I decided I was going to run through this blog post on understanding query plans &lt;a class="link" href="http://sqlmag.com/t-sql/understanding-query-plans" target="_blank" rel="noopener"
+>http://sqlmag.com/t-sql/understanding-query-plans&lt;/a>. I logged into my Azure Portal to check my balance and clicked start on the machine and then immediately clicked connect.&lt;/p>
+&lt;p>D’oh&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/10/image3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/10/image3.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course the RDP session wouldn’t open as the machine was not up so I went and made a coffee. Whilst doing that I thought of a way of doing it with PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/10/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/10/image.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>A little Do Until loop on the PowerState Property 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/10/image1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/10/image1.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course if I was doing it all though PowerShell I would have done this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/10/image2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/10/image2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item><item><title>Add Adventure Works Database to Windows Azure VM</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/add-adventure-works-database-to-windows-azure-vm/</link><pubDate>Sun, 19 May 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/add-adventure-works-database-to-windows-azure-vm/</guid><description>&lt;p>This has been an interesting journey. The Adventure Works database is frequently used in blogs and reference books and I wanted to install it in my Windows Azure Learning Lab and I also wanted to automate the process.&lt;/p>
+&lt;p>The easiest way is to download the Windows Azure MDF file from  &lt;a class="link" href="http://msftdbprodsamples.codeplex.com/" target="_blank" rel="noopener"
+>http://msftdbprodsamples.codeplex.com/&lt;/a> jump through all the security warnings in Internet Explorer and save the file and then create the database as follows&lt;/p>
+&lt;pre>&lt;code>CREATE DATABASE AdventureWorks2012
+ON (FILENAME = 'PATH TO \AdventureWorks2012_Data.mdf')
+FOR ATTACH_REBUILD_LOG ;
+&lt;/code>&lt;/pre>
+&lt;p>That is the way I will do it from now on! After reading &lt;a class="link" href="http://answers.oreilly.com/topic/2006-how-to-download-a-file-from-the-internet-with-windows-powershell/" target="_blank" rel="noopener"
+>this page&lt;/a> I tried to download the file with Powershell but it would not as I could not provide a direct link to the file. Maybe someone can help me with that. So I thought I would use my SkyDrive to hold the MDF file and map a drive on the server.&lt;/p>
+&lt;p>to do this you need to add the Desktop Experience feature to the server. This can be done as follows&lt;/p>
+&lt;pre>&lt;code>Import-Module ServerManager
+Add-WindowsFeature Desktop-Experience -restart
+&lt;/code>&lt;/pre>
+&lt;p>This will take a few minutes to install, reboot and then configure the updates before you can log back in. While it is doing this log into your SkyDrive and navigate to a folder and copy the URL to notepad&lt;/p>
+&lt;p>It will look something like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://skydrive.live.com/?lc=2137#cid=XXXXXXXXXXXXXXXX&amp;amp;id=CYYYYYYYYYYYYYYYY" title="https://skydrive.live.com/?lc=2137#cid=XXXXXXXXXXXXXXXX&amp;amp;id=CYYYYYYYYYYYYYYYY"
+target="_blank" rel="noopener"
+>https://skydrive.live.com/?lc=2137#cid=XXXXXXXXXXXXXXXX&amp;amp;id=CYYYYYYYYYYYYYYYY&lt;/a>&lt;/p>
+&lt;p>Copy the GUID after the cid=&lt;/p>
+&lt;p>and write this command&lt;/p>
+&lt;pre>&lt;code>net use T: \\d.docs.live.net@SSL\XXXXXXXXXXXXXXXX /user:$user $password
+&lt;/code>&lt;/pre>
+&lt;p>I keep this in a script and pass the user and password in via &lt;code>Read-Host&lt;/code>&lt;/p>
+&lt;p>However, if you try to copy the item from the folder you will get an error&lt;/p>
+&lt;p>The file size exceeds the limit allowed and cannot be saved&lt;/p>
+&lt;p>So you will need to alter a registry key as follows&lt;/p>
+&lt;pre>&lt;code>Set-ItemProperty -Path HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebClient\Parameters -Name FileSizeLimitInBytes -Value 4294967295
+&lt;/code>&lt;/pre>
+&lt;p>and then restart the WebClient service Then run the &lt;code>net use&lt;/code> command to map the drive and copy the file with &lt;code>Copy-Item&lt;/code>&lt;/p>
+&lt;p>But my script to auto install the Adventure Works database via Powershell once you have completed all the pre-requisites is&lt;/p>
+&lt;pre>&lt;code>$user = Read-Host &amp;quot;user&amp;quot;
+$password = Read-Host &amp;quot;Password&amp;quot;
+net use T: \\d.docs.live.net@SSL\XXXXXXXXXXXXXXX /user:$user $password
+New-Item c:\AW -ItemType directory
+Copy-Item T:\Documents\Azure\AdventureWorks2012_Data.mdf C:\AW
+Invoke-Sqlcmd -ServerInstance YourServerName -Database master -Query &amp;quot;CREATE DATABASE AdventureWorks2012
+ON (FILENAME = 'C:\AW\AdventureWorks2012_Data.mdf')
+FOR ATTACH_REBUILD_LOG ;&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>To be honest I don’t think I will use this method as my copy failed twice before it succeeded so I will just download the file and create the database!!&lt;/p>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item><item><title>Spinning up and shutting down Windows Azure Lab with Powershell</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/</link><pubDate>Tue, 14 May 2013 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/</guid><description>&lt;p>So at SQL Bits I went to &lt;a class="link" href="http://sqlbits.com/Speakers/Chris_Testa-O_Neill" target="_blank" rel="noopener"
+>Chris Testa-O’Neill’s&lt;/a> session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!!&lt;/p>
+&lt;p>So I looked at &lt;a class="link" href="http://www.windowsazure.com/en-us/" target="_blank" rel="noopener"
+>Windows Azure&lt;/a> as a means of having some servers to play with. After watching &lt;a class="link" href="http://blogs.msdn.com/b/plankytronixx/archive/2013/03/19/video-explanation-of-pop-up-labs-in-the-cloud.aspx" target="_blank" rel="noopener"
+>this video&lt;/a> and then &lt;a class="link" href="http://channel9.msdn.com/Series/Windows-Azure-Virtual-Machines-and-Networking-Tutorials/Creating-Windows-Azure-Virtual-Machines-with-PowerShell" target="_blank" rel="noopener"
+>this video&lt;/a> I took the plunge and dived in.&lt;/p>
+&lt;p>After setting up my account I read a few blogs about Powershell and Windows Azure.&lt;/p>
+&lt;p>&lt;a class="link" href="http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/" target="_blank" rel="noopener"
+>http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/&lt;/a>&lt;/p>
+&lt;p>Note – Here I only spin up extra small instances and don’t configure SQL as per Microsoft’s recommendations. I am only using these VMs for learning and talking at my user group your needs may be different&lt;/p>
+&lt;p>First you’ll need &lt;a class="link" href="http://www.microsoft.com/web/downloads/platform.aspx" target="_blank" rel="noopener"
+>Microsoft Web Platform Installer&lt;/a>. Then download and install Windows Azure PowerShell,&lt;/p>
+&lt;pre>&lt;code>Import-Module c:\Program Files\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1
+&lt;/code>&lt;/pre>
+&lt;p>This gives you all the Windows Azure Powershell Cmdlets.&lt;/p>
+&lt;p>&lt;code>Get-AzurePublishSettingsFile&lt;/code> which will give you a download for a file.  PowerShell will use this to control your Windows Azure so although you need it now, keep it safe and probably out of your usual directories so it doesn’t get compromised.&lt;/p>
+&lt;p>&lt;code>Import-AzurePublishSettingsFile&lt;/code> and the file path to import it into Powershell.&lt;/p>
+&lt;p>&lt;code>Get-AzureSubscription&lt;/code> to see the results and note the subscription name.&lt;/p>
+&lt;p>Now we create a storage account&lt;/p>
+&lt;pre>&lt;code>New-AzureStorageAccount -StorageAccountName chooseaname -label 'a label' -Description 'The Storage Account for the Lab Spin Up and Down' -Location 'West Europe'
+&lt;/code>&lt;/pre>
+&lt;p>&lt;code>Get-AzureLocation &lt;/code>will show you the available locations if you want a different one.I then set the storage account to be default for my subscription&lt;/p>
+&lt;pre>&lt;code>Set-AzureSubscription -SubscriptionName 'Subscription Name from Earlier' -CurrentStorageAccount 'theoneyouchose'
+&lt;/code>&lt;/pre>
+&lt;p>I spent a couple of days sorting out the following scripts. They set up three SQL Servers, configure them to allow SSMS, Powershell and RDP connections and also remove them all. The reasoning behind this is that you will be charged for servers even when they are turned off&lt;/p>
+&lt;p>First we set some variables&lt;/p>
+&lt;pre>&lt;code>$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2'
+$SQL3 = 'SQL3'
+$size = 'ExtraSmall'
+$AdminUser = 'ChoosePCAdminName'
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose'
+$Location = 'West Europe'
+&lt;/code>&lt;/pre>
+&lt;p>To choose an image run &lt;code>Get-AzureVMImage|select name&lt;/code> and pick the one for you. I chose a size of extra small as it is cheaper. As I won’t be pushing the servers very hard I don’t need any extra grunt. Set up a service the first time and use the location switch but then to use the same service again remove the location switch otherwise you will get an error stating DNS name already in use which is a little confusing until you know.&lt;/p>
+&lt;pre>&lt;code>$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57502 -LocalPort 1433|
+Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986\
+&lt;/code>&lt;/pre>
+&lt;p>This creates a VM object and adds two endpoints for the server, one for Powershell and one for SSMS. When you provision more than one server you will need to make sure you use a different Public Port for each server otherwise you will get an error. You will need to note which server has which port when you need to connect with SSMS.&lt;/p>
+&lt;p>Once you have your VM object just pass it to New-AzureVM as shown&lt;/p>
+&lt;pre>&lt;code>New-AzureVM -ServiceName $Service -VMs $vm
+&lt;/code>&lt;/pre>
+&lt;p>Providing you have no errors you can then just wait until you see this.&lt;/p>
+&lt;p>&lt;a class="link" href="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb1.png" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb_thumb.png"
+loading="lazy"
+alt="image_thumb"
+>&lt;/a>&lt;/p>
+&lt;p>It will take a few minutes. Long enough to get a cuppa. Even then you won’t be able to connect straightaway as Azure will be provisioning the server still.&lt;/p>
+&lt;p>The next bit of the script downloads the RDP shortcut to a folder on the desktop and assigns a variable for the clean up script. I use this because the next time you spin up a server it may not use exactly the same port for RDP.&lt;/p>
+&lt;pre>&lt;code>$SQL1RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&amp;quot;
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
+Invoke-Expression $SQL1RDP
+&lt;/code>&lt;/pre>
+&lt;p>The &lt;code>Invoke-Expression&lt;/code> will open up a RDP connection but unless you have gone to get a cuppa I would check in your management portal before trying to connect as the server may still be provisioning. In fact,I would go to your Windows Azure Management Portal and check your virtual machine tab where you will see your VMs being provisioned&lt;/p>
+&lt;p>Now you have three servers but to be able to connect to them from your desktop and practice managing them you still need to do a bit of work. RDP to each server run the following script in Powershell.&lt;/p>
+&lt;pre>&lt;code># Configure PowerShell Execution Policy to Run all Scripts – It’s a one time Progress
+Set-ExecutionPolicy –ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes\
+&lt;/code>&lt;/pre>
+&lt;p>I use netsh advfirewall as I find it easy and I understand it. I know you can do it with &lt;code>Set-NetFirewallProfile&lt;/code> but that’s the beauty of Powershell you can still use all your old cmd knowledge as well. This will allow you to remote manage the servers. You can do it from your laptop with the creation of some more endpoints but I just use one server as a management server for my learning.&lt;/p>
+&lt;p>The last part of the script changes SQL to Mixed authentication mode and creates a SQL user with sysadmin and restarts the SQL service on each server and that’s it. Its ready to go.&lt;/p>
+&lt;p>Open up SSMS on your desktop and connect to &lt;code>YourServiceName.Cloudapp.Net, PortNumber&lt;/code> (57500-5702 in this example)
+To remove all of the implementation run the code that is commented out in steps. First it assigns a variable to each VHD, then it removes the VM. You should then wait a while before removing the VHDs as it takes a few minutes to remove the lease and finally remove the RDP shortcuts as next time they will be different.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.NOTES
+Name: CreateLab.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires: Get the Windows Azures CmdLets then run this
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+This script will create 3 Windows Azure SQL Servers and open up RDP connections
+ready for use. There is also the scripts to remove the Windows Azure Objects to save on
+usage costs
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+# Get the Subscription File and Import it
+Get-AzurePublishSettingsFile
+Import-AzurePublishSettingsFile FilepathtoPublishSettingsFile
+&amp;lt;# Run this once to set up a Storage Account
+New-AzureStorageAccount -StorageAccountName storageaccountname -location 'West Europe' -Label 'Storage Account for My Lab'
+#&amp;gt;
+Get-AzureSubscription #Note the name
+#Set the storage account to the subscription
+Set-AzureSubscription -SubscriptionName SubscriptionName -CurrentStorageAccount storageaccountname
+#Some variables
+# Use Get-AzureVMimage to find the one you want ie Get-AzureVMImage | where { ($_.ImageName -like &amp;quot;*SQL*&amp;quot;) }|select ImageName
+$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2'
+$SQL3 = 'SQL3'
+$size = 'ExtraSmall'
+$AdminUser = 'ChoosePCAdminName'
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose'
+$Location = 'West Europe'
+&amp;lt;# Run this the first time to create a Service
+New-AzureService -ServiceName $Service -Location $Location -Label 'SQLDBA with a Beard Service'
+#&amp;gt;
+#Configure the VMs
+$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows|
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57500 -LocalPort 1433
+$vm2 = New-AzureVMConfig -Name $SQL2 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57501 -LocalPort 1433
+$vm3 = New-AzureVMConfig -Name $SQL3 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57502 -LocalPort 1433|
+Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986
+#Provision the VMs
+New-AzureVM -ServiceName $Service -VMs $vm, $vm2,$vm3
+# Get the RDP Files
+$SQL1RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&amp;quot;
+$SQL2RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL2.rdp&amp;quot;
+$SQL3RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL3.rdp&amp;quot;
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL2 -LocalPath $SQL2RDP
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL3 -LocalPath $SQL3RDP
+# Open the RDP Fies - Check the machine is up in your Management Portal
+Invoke-Expression $SQL1RDP
+Invoke-Expression $SQL2RDP
+Invoke-Expression $SQL3RDP
+# Now run the SetupVM script for each server
+&amp;lt;#
+This is the clean up script to remove the servers and services
+Run this first
+$SQL1Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL1}
+$SQL2Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL2}
+$SQL3Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL3}
+#Then This
+Remove-AzureVM -Name $SQL1 -ServiceName $Service
+Remove-AzureVM -Name $SQL2 -ServiceName $Service
+Remove-AzureVM -Name $SQL3 -ServiceName $Service
+Then wait a while and run this
+$SQL1Disk|Remove-AzureDisk -DeleteVHD
+$SQL2Disk|Remove-AzureDisk -DeleteVHD
+$SQL3Disk|Remove-AzureDisk -DeleteVHD
+#Remove-AzureService $Service
+Get-ChildItem &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\*.rdp&amp;quot;|Remove-Item
+#&amp;gt;
+&amp;lt;#
+This is the clean up script for variables
+Remove-Variable [a..z]* -Scope Global
+Remove-Variable [1..9]* -Scope Global
+#&amp;gt;
+.NOTES
+Name: SetUpVMSQL1.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+This script will set up the SQL1 VM ready for use and enable SQL Authentication
+Add a user called SQLAdmin with a password of P@ssw0rd
+Restart SQL Service.Run on SQL1
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL1'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force\
+&amp;lt;#
+.NOTES
+Name: SetUpVMSQL2.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+#############################################################################################
+#
+# NAME: SetupVMSQL2.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL1 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# Restart SQL Service
+# ------------------------------------------------------------------------
+# Run on SQL2
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL2'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force\
+&amp;lt;#
+.NOTES
+Name: SetUpVMSQL3.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+#############################################################################################
+#
+# NAME: SetupVMSQL3.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL3 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# and enable PS Remoting
+# Restart SQL Service
+# ------------------------------------------------------------------------
+# Run on SQL3
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+#Extra one for PS Remoting
+netsh advfirewall firewall add rule name=&amp;quot;Port 5986&amp;quot; dir=in action=allow protocol=TCP localport=5986
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL3'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force
+Enable-PSRemoting -force
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item></channel></rss>

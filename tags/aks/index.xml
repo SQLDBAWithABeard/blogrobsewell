@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AKS on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/aks/</link><description>Recent content in AKS on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 03 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/aks/index.xml" rel="self" type="application/rss+xml"/><item><title>How to deploy an Azure Arc Enabled SQL Managed Instance in AKS</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</link><pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</guid><description>&lt;img src="https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/connecteddc.png" alt="Featured image of post How to deploy an Azure Arc Enabled SQL Managed Instance in AKS" />&lt;h1 id="want-to-play-before-ga-">Want to play before GA ?&lt;/h1>
+&lt;p>Azure SQL enabled by Azure Arc will be generally available at the end of the month following the announcement &lt;a class="link" href="https://azure.microsoft.com/en-us/blog/bring-cloud-experiences-to-data-workloads-anywhere-with-azure-sql-enabled-by-azure-arc?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>You can read more about &lt;a class="link" href="https://azure.microsoft.com/en-us/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc-enabled Data Services &lt;/a>&lt;/p>
+&lt;p>I have been playing with it for a few months, mainly in a Kubernetes cluster running on my NUCs in my office but Azure Arc is available in so many places, all the public clouds, your own data center (or NUCs in your office :-) ) so if you want to try it out and you do not want to build your own Kubernetes cluster then you can use &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/kubernetes-service?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>AKS&lt;/a> in Azure.&lt;/p>
+&lt;h1 id="how-can-i-do-that-">How can I do that ?&lt;/h1>
+&lt;p>One way is to use the &lt;a class="link" href="https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_data?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc Jumpstart website&lt;/a> which has many templates for many scenarios.&lt;/p>
+&lt;p>I like playing with &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Bicep&lt;/a> which is a domain-specific language or DSL for deploying Azure resources.&lt;/p>
+&lt;p>I have &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Beard-Aks-AEDS" target="_blank" rel="noopener"
+>created a repository on GitHub &lt;/a> which you can use to create your own AKS cluster with an Azure Arc Enabled directly connected Data Controller and SQL Managed Instance either 1 node replica or 3 node replica.&lt;/p>
+&lt;p>There is even the code to create an Azure Virtual Machine and install the required tooling if you need it.&lt;/p>
+&lt;p>All of the details and instructions are in the read me file so feel free to go and make use of it and you can have a resource group that looks like this&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/portalresources.png"
+loading="lazy"
+alt="portal"
+>&lt;/p>
+&lt;p>Just dont forget to delete the Resource Group once you have finished!!&lt;/p>
+&lt;p>You can create it any time you like with the code :-)&lt;/p>
+&lt;p>Happy Azure Arc SQL Managed Instance playing!&lt;/p></description></item><item><title>Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-151.png" alt="Featured image of post Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster" />&lt;p>In the last few posts I have moved from &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>building an Azure SQL DB with Terraform using VS Code&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group&lt;/a>. This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.&lt;/p>
+&lt;p>Luckily, you can 😉 You can use &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure DevOps Job Templates&lt;/a> to achieve this. There is a limitation at present, you can only use them for Build Pipelines and not Release Pipelines.&lt;/p>
+&lt;p>The aim of this little blog series was to have a single Build Pipeline stored as code which I can use to build any infrastructure that I want with Terraform in Azure and be able to use it anywhere&lt;/p>
+&lt;h2 id="creating-a-build-pipeline-template">Creating a Build Pipeline Template&lt;/h2>
+&lt;p>I created a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-BuildTemplates" target="_blank" rel="noopener"
+>GitHub repository&lt;/a> to hold my Build Templates, feel free to use them as a base for your own but please don’t try and use the repo for your own builds.&lt;/p>
+&lt;p>The easiest way to create a Build Template is to already have a Build Pipeline. This cannot be done from a Task Group but I still have the Build Pipeline from my &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> blog post.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-132.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>There is a View YAML button. I can click this to view the YAML definition of the Build Pipeline&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-133.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I copy that and paste it into a new file in my BuildTemplates repository. (I have replaced my Azure Subscription information in the public repository)&lt;/p>
+&lt;pre>&lt;code> jobs:
+- job: Build
+pool:
+name: Hosted VS2017
+demands: azureps
+steps:
+- task: AzureCLI@1
+displayName: 'Azure CLI to deploy azure storage for backend'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+scriptLocation: inlineScript
+inlineScript: |
+# the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
+call az group create --location $(location) --name $(TerraformStorageRG)
+call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
+call az storage container create --name terraform --account-name $(TerraformStorageAccount)
+- task: AzurePowerShell@3
+displayName: 'Azure PowerShell script to get the storage key'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+ScriptType: InlineScript
+Inline: |
+# Using this script we will fetch storage key which is required in terraform file to authenticate backend stoarge account
+$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
+Write-Host &amp;quot;##vso[task.setvariable variable=TerraformStorageKey]$key&amp;quot;
+azurePowerShellVersion: LatestVersion
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+displayName: 'Replace tokens in terraform file'
+inputs:
+rootDirectory: Build
+targetFiles: |
+**/*.tf
+**/*.tfvars
+tokenPrefix: '__'
+tokenSuffix: '__'
+- powershell: |
+Get-ChildItem .\Build -Recurse
+Get-Content .\Build\*.tf
+Get-Content .\Build\*.tfvars
+Get-ChildItem Env: | select Name
+displayName: 'Check values in files'
+enabled: false
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Initialise Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'init -backend-config=&amp;quot;0-backend-config.tfvars&amp;quot;'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Plan Terraform execution'
+inputs:
+TemplatePath: Build
+Arguments: plan
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Apply Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'apply -auto-approve'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+&lt;/code>&lt;/pre>
+&lt;p>Now I can use this yaml as configuration as code for my Build Pipeline 🙂 It can be used from any Azure DevOps project. Once you start looking at the code and the &lt;a class="link" href="https://docs.microsoft.com/en-gb/azure/devops/pipelines/yaml-schema?view=azure-devops&amp;amp;tabs=schema?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>documentation for the yaml&lt;/a> schema you can begin to write your pipelines as YAML, but sometimes it is easier to just create build pipeline or even just a job step in the browser and click the view yaml button!&lt;/p>
+&lt;h2 id="create-an-aks-cluster-with-a-sql-2019-container-using-terraform-and-build-templates">Create an AKS Cluster with a SQL 2019 container using Terraform and Build templates&lt;/h2>
+&lt;p>I have a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository with the Terraform code to build a simple AKS cluster&lt;/a>. This could not have been achieved without &lt;a class="link" href="https://azurecitadel.com/automation/terraform/lab8/" target="_blank" rel="noopener"
+>Richard Cheney’s article&lt;/a> I am not going to explain how it all works for this blog post or some of the negatives of doing it this way. Instead lets build an Azure DevOps Build Pipeline to build it with Terraform using Configuration as Code (the yaml file)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-134.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to create a new Azure DevOps Build Pipeline and as in the previous posts connect it to the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository holding the Terraform code&lt;/a>.&lt;/p>
+&lt;p>This time I am going to choose the Configuration as code template&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-135.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to give it a name and it will show me that it needs the path to the yaml file containing the build definition in the current repository.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-136.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Clicking the 3 ellipses will pop-up a file chooser and I pick the build.yaml file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-137.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The build.yaml file looks like this. The name is the USER/Repository Name and the endpoint is the name of the endpoint for the GitHub service connection in Azure DevOps. The template value is the name of the build yaml file @ the name given for the repository value.&lt;/p>
+&lt;pre>&lt;code> resources:
+repositories:
+- repository: templates
+type: GitHub
+name: SQLDBAWithABeard/Presentations-BuildTemplates-Private
+endpoint: SQLDBAWithABeardGitHub
+jobs:
+- template: AzureTerraform.yaml@templates # Template reference
+&lt;/code>&lt;/pre>
+&lt;p>You can find (and change) your GitHub service connection name by clicking on the cog bottom left in Azure DevOps and clicking service connections&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-140.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I still need to create my variables for my Terraform template (perhaps I can now just leave those in my code?) For the AKS Cluster build right now I have to add presentation, location, ResourceGroupName, AgentPoolName, ServiceName, VMSize, agent_count&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-139.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then I click save and queue and the job starts running&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-141.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I want to edit the pipeline it looks a little different&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-152.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The variables and triggers can be found under the 3 ellipses on the top right&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-153.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It also defaults the trigger to automatic deployment.&lt;/p>
+&lt;p>It takes a bit longer to build&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-142.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and when I get the Terraform code wrong and the build fails, I can just alter the code, commit it, push and a new build will start and the Terraform will work out what is built and what needs to be built!&lt;/p>
+&lt;p>but eventually the job finishes successfully&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-143.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and the resources are built&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-144.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and in Visual Studio Code with the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools" target="_blank" rel="noopener"
+>Kubernetes extension&lt;/a> installed I can connect to the cluster by clicking the 3 ellipses and Add Existing Cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-145.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I choose Azure Kubernetes Services and click next&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-146.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose my subscription and then add the cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-147.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then I can explore my cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-148.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can also see the dashboard by right clicking on the cluster name and Open Dashboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-150.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Right clicking on the service name and choosing describe&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-149.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>shows the external IP address, which I can put into Azure Data Studio and connect to my container&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-151.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So I now I can source control my Build Job Steps and hold them in a central repository. I can make use of them in any project. This gives me much more control and saves me from repeating myself repeating myself. The disadvantage is that there is no handy warning when I change the underlying Build Repository that I will be affecting other Build Pipelines and there is no easy method to see which Build Pipelines are dependent on the build yaml file&lt;/p>
+&lt;p>Happy Automating&lt;/p></description></item></channel></rss>

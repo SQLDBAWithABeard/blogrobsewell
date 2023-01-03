@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on Rob breaks things and Jess makes him squirrel</title><link>https://sqldbawithabeard.github.io/blogrobsewell/tags/linux/</link><description>Recent content in linux on Rob breaks things and Jess makes him squirrel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 25 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://sqldbawithabeard.github.io/blogrobsewell/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</link><pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-125.png" alt="Featured image of post Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools" />&lt;p>In my posts about using Azure Devops to build Azure resources with Terraform, &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>I built a Linux SQL VM.&lt;/a> I used the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+>Terraform in this GitHub&lt;/a> repository and created this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-mobaxterm">Connecting with MobaXterm&lt;/h2>
+&lt;p>I had set the Network security rules to accept connections only from my static IP using variables in the Build Pipeline. I use &lt;a class="link" href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener"
+>MobaXterm&lt;/a> as my SSH client. Its a free download. I click on sessions&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-120.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose a SSH session and fill in the remote host address from the portal&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-121.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>fill in the password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-122.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="configuring-sql">Configuring SQL&lt;/h2>
+&lt;p>The next task is to configure the SQL installation. Following the instructions on the &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sql/provision-sql-server-linux-virtual-machine?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Microsoft docs site&lt;/a> I run&lt;/p>
+&lt;pre>&lt;code>sudo systemctl stop mssql-server
+sudo /opt/mssql/bin/mssql-conf set-sa-password
+&lt;/code>&lt;/pre>
+&lt;p>enter the sa password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-123.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now to start SQL&lt;/p>
+&lt;pre>&lt;code>sudo systemctl start mssql-server
+&lt;/code>&lt;/pre>
+&lt;h2 id="installing-pwsh">Installing pwsh&lt;/h2>
+&lt;p>Installing PowerShell Core (pwsh) is easy with snap&lt;/p>
+&lt;p>sudo snap install powershell &amp;ndash;classic&lt;/p>
+&lt;p>A couple of minutes of downloads and install&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-124.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and pwsh is ready for use&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-125.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-dbatools">Installing dbatools&lt;/h2>
+&lt;p>To install &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> from the &lt;a class="link" href="https://www.powershellgallery.com/packages/dbatools" target="_blank" rel="noopener"
+>Powershell Gallery&lt;/a> simply run&lt;/p>
+&lt;p>Install-Module dbatools -Scope CurrentUser&lt;/p>
+&lt;p>This will prompt you to allow installing from an untrusted repository&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-126.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and dbatools is ready to go&lt;/p>
+&lt;pre>&lt;code>#Set a credential
+$cred = Get-Credential
+# Show the databases on the local instance
+Get-DbaDatabase -SqlInstance localhost -SqlCredential $cred
+&lt;/code>&lt;/pre>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-127.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-azure-data-studio">Connecting with Azure Data Studio&lt;/h2>
+&lt;p>I can also connect with Azure Data Studio&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-128.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and connect&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Just a quick little post explaining what I did 🙂&lt;/p>
+&lt;p>Happy Linuxing!&lt;/p></description></item><item><title>Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups-to-build-an-azure-linux-sql-vm/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups-to-build-an-azure-linux-sql-vm/</guid><description>&lt;img src="https://sqldbawithabeard.github.io/blogrobsewell/assets/uploads/2019/04/image-107.png" alt="Featured image of post Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM" />&lt;p>In my &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>last post&lt;/a> I showed how to build an Azure DevOps Pipeline for a Terraform build of an Azure SQLDB. This will take the terraform code and build the required infrastructure.&lt;/p>
+&lt;p>The plan all along has been to enable me to build &lt;em>different&lt;/em> environments depending on the requirement. Obviously I can repeat the steps from the last post for a new repository containing a Terraform code for a different environment but&lt;/p>
+&lt;blockquote>
+&lt;p>If you are going to do something more than once Automate It&lt;/p>
+&lt;p>who first said this? Anyone know?&lt;/p>
+&lt;/blockquote>
+&lt;p>The build steps for building the Terraform are the same each time (if I keep a standard folder and naming structure) so it would be much more beneficial if I could keep them in a single place and any alterations to the process only need to be made in the one place 🙂&lt;/p>
+&lt;h2 id="task-groups">Task Groups&lt;/h2>
+&lt;p>Azure DevOps has task groups. On &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the Microsoft Docs web-page&lt;/a> they are described as&lt;/p>
+&lt;blockquote>
+&lt;p>A &lt;em>task group&lt;/em> allows you to encapsulate a sequence of tasks, already defined in a build or a release pipeline, into a single reusable task that can be added to a build or release pipeline, just like any other tas&lt;/p>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>If you are doing this with a more complicated existing build pipeline it is important that &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>you read the Before You Create A Task Group on the docs pag&lt;/a>e. This will save you time when trying to understand why variables are not available (Another grey hair on my beard!)&lt;/p>
+&lt;h2 id="creating-a-task-group">Creating A Task Group&lt;/h2>
+&lt;p>Here’s the thing, creating a task group is so easy it should be the default way you create Azure DevOps Pipelines. Let me walk you through it&lt;/p>
+&lt;p>I will use the Build Pipeline from the previous post. Click edit from the build page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-92.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-92.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then CTRL and click to select all of the steps&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-93.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-93.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Right Click and theres a Create Task Group button to click !&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-94.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-94.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can see that it has helpfully added the values for the parameters it requires for the location, Storage Account and the Resource Group.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-95.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-95.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Remember the grey beard hair above? We need to change those values to use the variables that we will add to the Build Pipeline using&lt;/p>
+&lt;pre>&lt;code>$(VariableName)
+&lt;/code>&lt;/pre>
+&lt;p>Once you have done that click Create&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-96.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-96.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This will also alter the current Build Pipeline to use the Task Group. Now we have a Task Group that we can use in any build pipeline in this project.&lt;/p>
+&lt;h2 id="using-the-task-group-with-a-new-build-pipeline-to-build-an-azure-linux-sql-vm">Using the Task Group with a new Build Pipeline to build an Azure Linux SQL VM&lt;/h2>
+&lt;p>Lets re-use the build steps to create an Azure SQL Linux VM. First I created a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+>new GitHub Repository&lt;/a> for my Terraform code. Using the docs I created the Terraform to create a resource group, a Linux SQL VM, a virtual network, a subnet, a NIC for the VM, a public IP for the VM, a network security group with two rules, one for SQL and one for SSH. It will look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The next step is to choose the repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-98.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-98.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>again we are going to select Empty job (although the next post will be about the Configuration as Code 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-99.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-99.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>As before&lt;/a> we will name the Build Pipeline and the Agent Job Step and click the + to add a new task. This time we will search for the Task Group name that we created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-100.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-100.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I need to add in the variables from the variable.tf in the code and also for the Task Group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-117.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-117.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and when I click save and queue&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-102.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-102.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>It runs for less than 7 minutes&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-118.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-118.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and when I look in the Azure portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-119.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-119.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and I can connect in Azure Data Studio&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="altering-the-task-group">Altering The Task Group&lt;/h2>
+&lt;p>You can find the Task Groups under Pipelines in your Azure DevOps project&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-97.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-97.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Click on the Task Group that you have created and then you can alter, edit it if required and click save&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-107.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-107.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This will warn you that any changes will affect all pipelines and task groups that are using this task group. To find out what will be affected click on references&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-108.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-108.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>which will show you what will be affected.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-109.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-109.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now I can run the same build steps for any Build Pipeline and alter them all in a single place using Task Groups simplifying the administration of the Build Pipelines.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/" target="_blank" rel="noopener"
+>The next post will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>The first post showed how to build an Azure SQLDB with Terraform using VS Code&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>The second post showed how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>dbatools with SQL on Docker and running SQL queries</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/dbatools-with-sql-on-docker-and-running-sql-queries/</link><pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/dbatools-with-sql-on-docker-and-running-sql-queries/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>$srv.Query($Query)&lt;/p>
+&lt;p>$srv.Query($Query).column1&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>Test your Sqlserver backups on Linux with PowerShell and dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</link><pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Backing up SQL Server on Linux using Ola Hallengrens Maintenance Solution</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>SQL VNext sp_configure on Windows and Linux with dbatools</title><link>https://sqldbawithabeard.github.io/blogrobsewell/blog/sql-vnext-sp_configure-on-windows-and-linux-with-dbatools/</link><pubDate>Mon, 27 Feb 2017 00:00:00 +0000</pubDate><guid>https://sqldbawithabeard.github.io/blogrobsewell/blog/sql-vnext-sp_configure-on-windows-and-linux-with-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item></channel></rss>
