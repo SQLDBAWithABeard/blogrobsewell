@@ -20,7 +20,7 @@ subtitle = "A blog about all things PowerShell, SQLBits, Community, dbatools, db
 [sidebar.avatar]
 enabled = true
 local = true
-src = "/bio-photo1.jpg"
+src = "/img/avatar.png"
 
 [article]
 math = false
