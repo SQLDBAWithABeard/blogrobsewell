@@ -16,7 +16,6 @@ hasCJKLanguage = false
 #disqusShortname = "hugo-theme-stack"
 
 [params]
-  <!--snip snip-->
 
   # Social icons may appear on your site header, footer, and other pages
   # Add as many icons as you like below
