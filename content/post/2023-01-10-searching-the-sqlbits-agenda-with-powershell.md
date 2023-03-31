@@ -22,7 +22,7 @@ tags:
 
 
 
-image: content\assets\images\2023\dragonsqlbitslogo.png
+image: assets/uploads/2023/dragonsqlbitslogo.png
 ---
 # What is SQLBits?
 
