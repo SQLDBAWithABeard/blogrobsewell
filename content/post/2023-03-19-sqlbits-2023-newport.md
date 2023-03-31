@@ -19,7 +19,7 @@ tags:
 
 
 
-image: content/assets/images/2023/dragonsqlbitslogo.png
+image: assets/images/2023/dragonsqlbitslogo.png
 ---
 # What is SQLBits?
 
