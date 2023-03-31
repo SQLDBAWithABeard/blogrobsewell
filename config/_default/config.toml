@@ -2,7 +2,7 @@
 baseurl = "https://sqldbawithabeard.github.io/blogrobsewell/"
 languageCode = "en-us"
 paginate = 5
-title = "A blog from Rob Sewell (aka: SQL Dba With A Beard) about all things PowerShell, SQLBits, Community, dbatools, dbatoolsMoL, dbachecks, Azure, SQL, PSConfEU and more"
+title = "Rob Sewell (aka SQL DBA With A Beard)"
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
