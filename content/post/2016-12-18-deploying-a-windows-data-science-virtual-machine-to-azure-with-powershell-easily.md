@@ -10,8 +10,8 @@ tags:
   - powershell
   - slovenia
   - Data Science
-header:
-  teaser: assets/uploads/2016/12/rdp-file.png
+
+image: assets/uploads/2016/12/rdp-file.png
 ---
 This weekend (10 December 2016), I went to Slovenia for a [SQL Saturday](http://www.sqlsaturday.com/567/eventhome.aspx). As always, it was an amazing event well organised by [Mladen Prajdic](https://twitter.com/MladenPrajdic), [Dejan Sarka](http://sqlblog.com/blogs/dejan_sarka/default.aspx), and [Matija Lah](https://twitter.com/MatijaLah) in a fabulous setting amongst fabulous scenery. I highly recommend it and, also, [Ljubljana](https://en.wikipedia.org/wiki/Ljubljana)  is a wonderful place to be in December with all the lights and markets.
 

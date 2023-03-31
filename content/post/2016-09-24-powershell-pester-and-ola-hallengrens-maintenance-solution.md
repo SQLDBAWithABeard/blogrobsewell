@@ -13,8 +13,8 @@ tags:
   - powershell
   - sql
   - Ola Hallengren
-header:
-  teaser: assets/uploads/2016/09/pester-ola-check.png
+
+image: assets/uploads/2016/09/pester-ola-check.png
 ---
 If you are a SQL DBA you will have heard of [Ola Hallengrens Maintenance solution](https://ola.hallengren.com/) If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also [watch a video from Ola at SQL Bits](https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution)  
 Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to [Pester](https://github.com/pester/Pester) You can find a great [how to get started here](https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx) which will show you how to get Pester and how to get started with TDD.  

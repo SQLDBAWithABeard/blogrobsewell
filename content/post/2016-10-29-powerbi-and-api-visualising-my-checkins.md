@@ -11,8 +11,8 @@ tags:
   - powershell
   - swarm
   - Power Bi
-header: 
-  teaser: assets/uploads/2016/10/powerbi6.png)](/assets/uploads/2016/10/powerbi6.png
+ 
+image: assets/uploads/2016/10/powerbi6.png)](/assets/uploads/2016/10/powerbi6.png
 ---
 For my own amusement and also to show my wife where I have been I use the [Swarm](https://www.swarmapp.com/) check-in app on my phone and check-in to places. Also for my own amusement I used PowerBi to visualise the data via the API and allow me to filter it in various ways.
 

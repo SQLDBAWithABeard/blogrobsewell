@@ -11,8 +11,8 @@ tags:
   - PowerShell
   - script
   - sql
-header:
-  teaser: assets/uploads/2016/07/getcomand-sqlagent.png
+
+image: assets/uploads/2016/07/getcomand-sqlagent.png
 ---
 So with the July Release of SSMS everything changed for using PowerShell with SQL. [You can read the details here](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/) As I mentioned in my previous post the name of the module has changed to sqlserver
 

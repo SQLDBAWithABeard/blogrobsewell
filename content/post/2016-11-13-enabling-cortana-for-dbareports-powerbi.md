@@ -8,8 +8,8 @@ tags:
   - cortana
   - dbareports
   - dbatools
-header: 
-  teaser: assets/uploads/2016/11/cortana-search-2.png
+ 
+image: assets/uploads/2016/11/cortana-search-2.png
 ---
 Last week at the Birmingham user group I gave a presentation about PowerShell and SQL Server
 

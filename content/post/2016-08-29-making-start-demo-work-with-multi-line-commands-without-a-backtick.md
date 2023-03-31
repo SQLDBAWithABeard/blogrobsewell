@@ -9,8 +9,8 @@ tags:
   - presentations
   - psconfeu
   - speaking
-header:
-  teaser: assets/uploads/2016/08/start-demo2.png
+
+image: assets/uploads/2016/08/start-demo2.png
 ---
 I love to speak about PowerShell. I really enjoy giving presentations and when I saw Start-Demo being used at the PowerShell Conference in Hanover I started to make use of it in my presentations.
 

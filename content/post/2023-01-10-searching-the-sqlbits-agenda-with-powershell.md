@@ -20,8 +20,8 @@ tags:
   - Sampler
 
 
-header:
-  teaser: https://pbs.twimg.com/profile_banners/179662929/1672824362/1080x360
+
+image: https://pbs.twimg.com/profile_banners/179662929/1672824362/1080x360
 ---
 # What is SQLBits?
 

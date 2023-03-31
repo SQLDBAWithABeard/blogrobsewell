@@ -7,8 +7,8 @@ categories:
 tags:
   - error
   - pester
-header:
-  teaser: assets/uploads/2016/01/pester-success_thumb1.jpg
+
+image: assets/uploads/2016/01/pester-success_thumb1.jpg
 ---
 This error caught me out. I am putting this post here firstly to remind me if I do it again and also to help others who may hit the same issue.
 

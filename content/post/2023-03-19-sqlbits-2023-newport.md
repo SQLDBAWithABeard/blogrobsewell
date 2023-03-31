@@ -18,8 +18,8 @@ tags:
   - Organising
 
 
-header:
-  teaser: assets\images\2023\dragonsqlbitslogo.png
+
+image: assets\images\2023\dragonsqlbitslogo.png
 ---
 # What is SQLBits?
 
