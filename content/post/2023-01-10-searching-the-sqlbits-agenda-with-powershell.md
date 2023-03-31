@@ -9,6 +9,7 @@ categories:
   - Community
   - Speaking
   - Conference
+  - SQLBits
 
 tags:
   - SQLBits

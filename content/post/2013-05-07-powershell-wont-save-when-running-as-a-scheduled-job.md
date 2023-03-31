@@ -1,10 +1,11 @@
 ---
 title: "Powershell won’t save when running as a scheduled job"
-date: "2013-05-07" 
+date: "2013-05-07"
 categories:
   - Blog
-
+  - SQLBits
 tags:
+  - SQLBits
   - laerte
   - mvp
   - PowerShell
@@ -22,10 +23,10 @@ It was one of those jobs that gets put to the bottom of the list because the ser
 
 [![Laerte_Junior[1]](https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1_thumb.jpg?resize=168%2C223 "Laerte_Junior[1]")](https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1.jpg)After a fascinating session I asked him if I could show him my problem. He very graciously said yes and after looking at the code and listening to me explain the problem he suggested this very simple solution which he said had taken him a great deal of searching to find. It’s a bug with COM objects and requires the creation of folders as shown below. I cam into work today, tried it and it worked. HOORAY another thing off my list and big thanks to Laerte
 
-    #Region Bug_Jobs_ComObjects #(32Bit, always) 
+    #Region Bug_Jobs_ComObjects #(32Bit, always)
     # Create Folder #
-    New-Item –name C:\Windows\System32\config\systemprofile\Desktop  –itemtype directory 
-    # #(64Bit) 
+    New-Item –name C:\Windows\System32\config\systemprofile\Desktop  –itemtype directory
+    # #(64Bit)
     # Create folder #
     New-Item –name C:\Windows\SysWOW64\config\systemprofile\Desktop  –itemtype directory
     #EndRegion Bug_Jobs_ComObjects

@@ -1,6 +1,6 @@
 ---
 title: "#TSQL2sDay Why My Head is Always in The Cloud"
-date: "2013-11-10" 
+date: "2013-11-10"
 categories:
   - Blog
 
@@ -8,7 +8,8 @@ tags:
   - TSql2sDay
   - azure
   - PowerShell
-  - SQLBits  - giving back
+  - SQLBits
+  - giving back
 
 ---
 [![](https://i1.wp.com/www.sqlchicken.com/wp-content/uploads/2013/11/20121003200545_thumb.jpg?resize=175%2C175)](http://www.sqlchicken.com/2013/11/t-sql-tuesday-48-cloud-atlas/)

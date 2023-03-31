@@ -1,6 +1,6 @@
 ---
 title: "Write Your first Pester Test Today"
-date: "2017-11-16" 
+date: "2017-11-16"
 categories:
   - Blog
 
@@ -10,6 +10,7 @@ tags:
   - logins
   - pester
   - PowerShell
+  - SQLBits
 
 ---
 <P>I was in Glasgow this Friday enjoying the fantastic hospitality of the <A href="http://sqlglasgow.co.uk" rel=noopener target=_blank>Glasgow SQL User Group</A>&nbsp;<A href="https://twitter.com/SqlGlasgow" rel=noopener target=_blank>@SQLGlasgow</A>&nbsp;and presenting sessions with <A href="https://twitter.com/AndreKamman" rel=noopener target=_blank>Andre Kamman</A>, <A href="https://twitter.com/sql_williamd" rel=noopener target=_blank>William Durkin </A>and <A href="https://twitter.com/cl" rel=noopener target=_blank>Chrissy LeMaire</A></P>
@@ -41,10 +42,10 @@ tags:
 <DIV><PRE class="lang:ps decode:true  ">(Get-DbaLogin -SqlInstance rob-xps -Login sa -Disabled).Count | Should Be 1</PRE></DIV>
 <DIV>which is</DIV>
 <UL>
-<LI>the code for getting the information about the thing we wanted to test (The count of the disabled sa logins on the instance) 
-<LI>a pipe symbol | 
-<LI>The Should key word 
-<LI>The Be keyword 
+<LI>the code for getting the information about the thing we wanted to test (The count of the disabled sa logins on the instance)
+<LI>a pipe symbol |
+<LI>The Should key word
+<LI>The Be keyword
 <LI>and the result we want to pass the test (1) </LI></UL>
 <P>Ta Da! One Pester test written. You can run the test just by highlighting the code and running it in VS Code (or PowerShell ISE) and it will look like this for a passing test</P>
 <P><IMG class="alignnone size-full wp-image-8778" alt="passing test" src="https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?resize=630%2C323&amp;ssl=1" width=630 height=323 sizes="(max-width: 630px) 100vw, 630px" data-recalc-dims="1" srcset="https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?w=2579&amp;ssl=1 2579w,https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?resize=300%2C154&amp;ssl=1 300w,https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?resize=768%2C393&amp;ssl=1 768w,https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?resize=1024%2C525&amp;ssl=1 1024w,https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?w=1260&amp;ssl=1 1260w,https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?w=1890&amp;ssl=1 1890w" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?fit=630%2C323&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?fit=300%2C154&amp;ssl=1" data-image-description="" data-image-title="passing test" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="2579,1321" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/11/passing-test.png?fit=2579%2C1321&amp;ssl=1" data-permalink="https://blog.robsewell.com/write-your-first-pester-test-today/passing-test/#main" data-attachment-id="8778"></P>

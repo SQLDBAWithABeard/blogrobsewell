@@ -17,9 +17,7 @@ tags:
   - Sesssionize
   - Organising
 
-
-
-image: assets/images/2023/dragonsqlbitslogo.png
+image: assets/uploads/2023/dragonsqlbitslogo.png
 ---
 # What is SQLBits?
 

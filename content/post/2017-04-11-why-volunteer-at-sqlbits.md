@@ -1,8 +1,10 @@
 ---
 title: "Why Volunteer at SQLBits ?"
-date: "2017-04-11" 
+date: "2017-04-11"
 categories:
   - Blog
+  - SQLBits
+  - Community
 
 tags:
   - helper
@@ -83,65 +85,65 @@ So why do we do it?
 I asked the guys and gals this question and in their own words, this is why they do it
 
 > Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days are 11 hours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.
-> 
+>
 > You do get to attend sessions but you might not always get your first choice. This can be both a good and bad thing. Very often I have filled in on sessions that I normally wouldn’t attend as they are outside my direct area of work, only to find them the most interesting as I get to see how the other half lives.
-> 
+>
 > So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is a 150 miles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.
-> 
+>
 > All because of the of the experience that is being a volunteer.
-> 
+>
 > [Conan Farrell](https://twitter.com/sqldub)
-> 
+>
 > ![WP_20170406_10_33_15_Pro (2).jpg](https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg
 
 > I owe a lot to the SQL Community. It was at SQLBits a few years ago that someone convinced me to start speaking. That encouragement and acceptance from the #SQLFamily put into motion a series of events that lead to me [quitting the best job of my life](http://workingwithdevs.com/im-leaving-redgate/) last year in favour of [an adventure to set up my own company](http://workingwithdevs.com/introducing-dlm-consultants-mission/). It’s been a wonderful journey and if it had not been for SQLBits (and SQL Relay, and SQL Saturdays, and others) I wouldn’t have taken it.
-> 
+>
 > I have a debt to pay. And it’s wonderful to be able to contribute towards giving other people the same opportunities that the community has given me.
-> 
+>
 > Also, for similar reasons, I recently joined the committee for [SQL Relay](https://sqlrelay.co.uk). While I’ve been a sponsor and a speaker a lot before, I am fairly inexperienced at organising events. Helping out with the awesome SQLBits team has been a great learning curve. I hope to take what I have learned and apply it to my role for [SQL Relay](https://sqlrelay.co.uk).
-> 
+>
 > Finally, frankly, there are so many great people in the SQL Community it is just wonderful to be able to work with them during the day. (And share some beers with them in the evening!)
-> 
+>
 > [Alex Yates](https://twitter.com/_AlexYates_)
-> 
+>
 > ![alex2](https://blog.robsewell.com/assets/uploads/2017/04/alex2.jpg)
 
 > I volunteer at SQLBits and in the wider Data Platform community for various reasons. The community is the glue in our industry and being part of that glue is both a privilege and an honour. Without volunteers these awesome events couldn’t function and we couldn’t share knowledge as freely. There also would not be the same opportunities to network with such great people and experts in the same field. I am proud to be part of the SQL Family and facilitate the learning that being a volunteer offers to professionals just like me. Stronger together.
-> 
+>
 > [Paul Andrew](https://twitter.com/mrpaulandrew)
-> 
+>
 > ![WP_20170404_16_03_17_Pro (2).jpg](https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_16_03_17_pro-2.jpg)
 
-> When I volunteered, I felt I’d like to give back to the SQL Community a bit of the much I’ve received from them. I wanted to become more engaged.  
+> When I volunteered, I felt I’d like to give back to the SQL Community a bit of the much I’ve received from them. I wanted to become more engaged.
 > I didn’t even dream it would be like this, the terrific team I found here was so great that I can barely wait for the next one.
-> 
+>
 > [Miguel Oliveira](https://twitter.com/moliveira_xpto)
 
 > Volunteering gives you the experience of the effort & reward of running an event.. You build an appreciation of generating success, creating networks of colleagues and friends, being quick to react, and helps you walk away with the feeling of “I contributed to this”. Everyone should volunteer, even if its just once.
-> 
+>
 > [Ben Watt](https://twitter.com/benrebooted?lang=en)
-> 
+>
 > ![WP_20170405_09_31_24_Pro (2).jpg](https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_09_31_24_pro-2.jpg)
 
 > This year was my 10th sqlbits (remembering we skipped unlucky 13) and 7th I’ve been on the helping team for. I started helping when I learned my original conference companions were moving on to different technologies. Something I’ve never understood.
-> 
+>
 > Historically I’ve worked in multiple companies as a lone dba, something I’ve found many at SQLBits can relate to. Through user groups and SQLBits I’ve met lots of others in the same boat over the years. It can be a frustrating job defending servers, implementing best practice and writing sql when all your application team want to do is add columns and ship the next release!
-> 
+>
 > Yes, there are good networking opportunities and the parties are great but at the core is great quality training. I’ve had a great time playing a small part in helping deliver the experience over the years. Occasionally I have to shout about feedback forms or seating arrangements but on the whole folk are fine with it.  If I’m honest they are long days. A typical day involves a start and end meeting in addition to sessions you are monitoring. Add to that hotel commutes, catching up with the friends you made last year, meals, drinks etc and its 1am. Oh, and tomorrow’s meeting is 7.30 eek….
-> 
+>
 > It’s been a great journey watching the progression of events. Each one adds to the last, they run a lot slicker now. The sponsors are first class and always embrace the theme with their stalls and giveaways. I do wish more folk would enter the prize draws and stop me winning though, it’s getting embarrassing now 🙂
-> 
+>
 > [Richard Doering](https://twitter.com/r5d4) 
-> 
+>
 > ![rich2](https://blog.robsewell.com/assets/uploads/2017/04/rich2.jpg)
 
 > The best Data Platform conference in Europe! I couldn’t miss the opportunity to be much more than just an attendee.
-> 
+>
 > [Hubert Kobierzewski](https://twitter.com/DataHubert)
 
-> I volunteer for sqlbits, to get experience from a multi day event that has a lot of attendees. Lots of take aways to make local community events run smoother for the delegates.  
+> I volunteer for sqlbits, to get experience from a multi day event that has a lot of attendees. Lots of take aways to make local community events run smoother for the delegates.
 > Thats my main reason
-> 
+>
 > [Jens Vestergard](https://twitter.com/vestergaardj)
 
 There is no way I could not use this next photo celebrate this years Most Valuable Helper.

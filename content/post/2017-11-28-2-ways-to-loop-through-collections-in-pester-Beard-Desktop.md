@@ -3,6 +3,7 @@ title: "2 Ways to Loop through collections in Pester"
 date: "2017-11-28"
 categories:
   - Blog
+  - SQLBits
 
 tags:
   - connection
@@ -12,7 +13,7 @@ tags:
   - sqlserver
   - test
   - testcases
-
+  - SQLBits
 ---
 In my last post I showed you [how to write your first Pester test](https://blog.robsewell.com/write-your-first-pester-test-today/) to validate something. Here’s a recap
 

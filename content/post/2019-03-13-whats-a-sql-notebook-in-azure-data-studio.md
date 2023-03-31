@@ -1,6 +1,6 @@
 ---
 title: "Whats a SQL Notebook in Azure Data Studio?"
-date: "2019-03-13" 
+date: "2019-03-13"
 categories:
   - dbatools
   - dbachecks
@@ -12,11 +12,11 @@ categories:
 tags:
   - dbachecks
   - dbatools
-  - GitHub 
+  - GitHub
   - Notebooks
   - Jupyter Notebooks
   - Azure Data Studio
-
+  - SQLBits
 
 image: assets/uploads/2019/03/image-7.png
 ---
@@ -25,13 +25,13 @@ image: assets/uploads/2019/03/image-7.png
 Recently Vicky Harp tweeted
 
 > We're getting very close to release of SQL Notebooks in [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw)! You can give the feature an early spin today with the insider build. [pic.twitter.com/SEZp7ZdxCp](https://t.co/SEZp7ZdxCp)
-> 
+>
 > — Vicky Harp (@vickyharp) [March 8, 2019](https://twitter.com/vickyharp/status/1104127412944551936?ref_src=twsrc%5Etfw)
 
 By the way, you can watch a recording from SQLBits of Vicky’s session
 
 > If you missed [#sqlbits](https://twitter.com/hashtag/sqlbits?src=hash&ref_src=twsrc%5Etfw), you will definitely want to watch this demo by [@vickyharp](https://twitter.com/vickyharp?ref_src=twsrc%5Etfw) and [@MGoCODE](https://twitter.com/MGoCODE?ref_src=twsrc%5Etfw) about [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw). Learn the latest about our cross-platform tool, including a new feature, SQL Notebooks [#SQLServer](https://twitter.com/hashtag/SQLServer?src=hash&ref_src=twsrc%5Etfw) [https://t.co/diubYwQckn](https://t.co/diubYwQckn)
-> 
+>
 > — Azure Data Studio (@AzureDataStudio) [March 7, 2019](https://twitter.com/AzureDataStudio/status/1103806327065722880?ref_src=twsrc%5Etfw)
 
 So in the interest of learning about something new I decided to give it a try.
@@ -52,7 +52,7 @@ See the [change log](https://github.com/Microsoft/azuredatastudio/blob/master/C
 Once you have installed you can connect to an instance, right click and choose New Notebook or you can use File – New Notebook
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image.png)
 
-Incidentally, I use the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG) to create the containers and I map `C:\MSSQL\BACKUP\KEEP` on my local machine (where my backups are) to `/var/opt/mssql/backups` on the containers on lines 10 and 17 of the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.  
+Incidentally, I use the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG) to create the containers and I map `C:\MSSQL\BACKUP\KEEP` on my local machine (where my backups are) to `/var/opt/mssql/backups` on the containers on lines 10 and 17 of the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.
 The `Create-Ag.ps1` shows the code and creates an AG with [dbatools.](http://dbatools.io) But I digress!
 
 Install Notebook Dependencies
