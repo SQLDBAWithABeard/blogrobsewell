@@ -10,7 +10,7 @@ tags:
   - powershell
 
 header:
-  teaser: /assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg
+  teaser: assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg
 ---
 My wonderful friend [Chrissy LeMaire](https://twitter.com/cl) and I are the creators of two GitHub repositories for SQL Server and PowerShell called [dbatools](https://dbatools.io/) and [dbareports](https://dbareports.io)
 

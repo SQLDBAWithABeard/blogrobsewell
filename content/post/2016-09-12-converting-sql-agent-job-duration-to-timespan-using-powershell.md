@@ -13,7 +13,7 @@ tags:
   - smo
   - sql
 header:
-  teaser: /assets/uploads/2016/09/timespan.png
+  teaser: assets/uploads/2016/09/timespan.png
 ---
 When you look in msdb for the SQL Agent Job duration you will find that it is an int.
 

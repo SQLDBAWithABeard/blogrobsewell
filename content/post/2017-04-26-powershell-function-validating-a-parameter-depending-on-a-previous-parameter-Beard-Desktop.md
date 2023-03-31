@@ -10,7 +10,7 @@ tags:
   - parameters
   - PowerShell
 header:
-  teaser: /assets/uploads/2017/04/01-more-help.png
+  teaser: assets/uploads/2017/04/01-more-help.png
 ---
 I was chatting on the [SQL Community Slack](https://sqlps.io/slack) with my friend Sander Stad [b](http://www.sqlstad.nl/) | [t](https://twitter.com/sqlstad) about some functions he is writing for the amazing PowerShell SQL Server Community module [dbatools](https://dbatools.io). He was asking my opinion as to how to enable user choice or options for Agent Schedules and I said that he should validate the input of the parameters. He said that was difficult as if the parameter was Weekly the frequency values required would be different from if the parameter was Daily or Monthly. That’s ok, I said, you can still validate the parameter.
 

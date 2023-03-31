@@ -14,7 +14,7 @@ tags:
   - smo
 
 header:
-  teaser: /assets/uploads/2016/05/tweets.png)](/assets/uploads/2016/05/tweets.png
+  teaser: assets/uploads/2016/05/tweets.png)](/assets/uploads/2016/05/tweets.png
 ---
 It started with a tweet from Dusty
 
