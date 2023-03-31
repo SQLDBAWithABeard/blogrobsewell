@@ -37,5 +37,3 @@ identifier = "linkedin"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/robsewellsqldba"
 
-[social.params]
-icon = "brand-linkedin"

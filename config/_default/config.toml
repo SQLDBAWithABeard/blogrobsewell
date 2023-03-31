@@ -14,3 +14,19 @@ hasCJKLanguage = false
 
 # Change it to your Disqus shortname before using
 #disqusShortname = "hugo-theme-stack"
+
+[params]
+  <!--snip snip-->
+
+  # Social icons may appear on your site header, footer, and other pages
+  # Add as many icons as you like below
+  # Icon pack "fab" includes brand icons, see: https://fontawesome.com/icons?d=gallery&s=brands&m=free
+  # Icon pack "fas" includes solid icons, see: https://fontawesome.com/icons?d=gallery&s=solid&m=free
+  # Icon pack "far" includes regular icons, see: https://fontawesome.com/icons?d=gallery&s=regular&m=free
+  # [[params.social]]
+  #     icon      = "github" # icon name without the 'fa-'
+  #     icon_pack = "fab"
+  #     url       = "https://github.com/apreshill/apero"
+  [[params.social]]
+      icon      = "linkedin" # icon name without the 'fa-'
+      icon_pack = "fab"
