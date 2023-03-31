@@ -21,7 +21,7 @@ tags:
 
 
 
-image: https://pbs.twimg.com/profile_banners/179662929/1672824362/1080x360
+image: content\assets\images\2023\dragonsqlbitslogo.png
 ---
 # What is SQLBits?
 
@@ -34,7 +34,7 @@ This year it is in Newport, Wales at the International Convention Centre Wales (
 
 ## What is there at SQLBits?
 
-Tuesday and Wednesday are training days with all day sessions provided by subject matter experts including Microsoft Product Group members, Microsoft Valued Professionals, Microsoft Certified Trainers, and other experts. There are 30 options covering all areas of the Data Platform and none-technical sessions as well. 
+Tuesday and Wednesday are training days with all day sessions provided by subject matter experts including Microsoft Product Group members, Microsoft Valued Professionals, Microsoft Certified Trainers, and other experts. There are 30 options covering all areas of the Data Platform and none-technical sessions as well.
 
 You can see the [training day agenda here](https://events.sqlbits.com/2023/training-days)
 
@@ -129,13 +129,13 @@ If all you want is to search for your favourite speaker then you can use the `se
 
 [![image](https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png)](https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png)
 
-`Get-SQLBitsSchedule -search Monica -output object`  
+`Get-SQLBitsSchedule -search Monica -output object`
 
 [![image](https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png)](https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png)
 
 You can also use it search for topics
 
-`Get-SQLBitsSchedule -search 'Mental Health'  -output object` 
+`Get-SQLBitsSchedule -search 'Mental Health'  -output object`
 
 [![image](https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png)](https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png)
 
