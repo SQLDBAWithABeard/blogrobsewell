@@ -1,5 +1,6 @@
 ---
 title: "2 Ways to Loop through collections in Pester"
+date: "2017-11-28"
 categories:
   - Blog
 

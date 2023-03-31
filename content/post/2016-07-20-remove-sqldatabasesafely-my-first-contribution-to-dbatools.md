@@ -1,5 +1,6 @@
 ---
 title: "Remove-SQLDatabaseSafely My First Contribution to DBATools"
+date: "2016-07-20"
 categories:
   - Blog
 

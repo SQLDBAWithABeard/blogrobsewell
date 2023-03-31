@@ -1,5 +1,6 @@
 ---
 title: "Enabling Cortana for dbareports PowerBi"
+date: "2016-11-13"
 categories:
   - Blog
 

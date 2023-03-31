@@ -1,5 +1,6 @@
 ---
 title: "Some Pester Tests for SQL Defaults"
+date: "2016-05-24"
 categories:
   - Blog
 

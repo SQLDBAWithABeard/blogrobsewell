@@ -1,5 +1,6 @@
 ---
 title: "PowerShell, Pester and Ola Hallengrens Maintenance Solution"
+date: "2016-09-24"
 categories:
   - Blog
 

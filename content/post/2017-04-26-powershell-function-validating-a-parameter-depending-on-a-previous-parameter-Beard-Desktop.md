@@ -1,5 +1,6 @@
 ---
 title: "PowerShell Function – Validating a Parameter Depending On A Previous Parameter’s Value"
+date: "2017-04-26"
 categories:
   - Blog
 

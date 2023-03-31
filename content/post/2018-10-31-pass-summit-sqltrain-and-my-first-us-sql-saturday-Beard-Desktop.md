@@ -1,5 +1,6 @@
 ---
 title: "PASS Summit, SQLTrain and My First US SQL Saturday"
+date: "2018-10-31"
 categories:
   - Blog
 

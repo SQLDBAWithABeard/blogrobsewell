@@ -1,5 +1,6 @@
 ---
 title: "The SQL Server Community Collaborative GitHub Organisation is born"
+date: "2016-09-14"
 categories:
   - Blog
 

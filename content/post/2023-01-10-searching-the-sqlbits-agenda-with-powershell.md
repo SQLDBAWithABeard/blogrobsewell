@@ -1,6 +1,7 @@
 ---
 title: 'SQLBits Agenda and PowerShell, displaying and searching'
 
+date: "2023-01-10"
 categories:
   - Blog
   - PowerShell

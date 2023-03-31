@@ -1,5 +1,6 @@
 ---
 title: "Creating SQL Server Containers for versions 2012-2017"
+date: "2018-05-10"
 categories:
   - Blog
 

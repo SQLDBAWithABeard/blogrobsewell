@@ -1,5 +1,6 @@
 ---
 title: "DBA Database scripts are on Github"
+date: "2016-05-16"
 categories:
   - Blog
 

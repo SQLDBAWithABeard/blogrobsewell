@@ -1,5 +1,6 @@
 ---
 title: "Making Start-Demo work with multi-line commands without a backtick"
+date: "2016-08-29"
 categories:
   - Blog
 

@@ -1,5 +1,6 @@
 ---
 title: "Converting SQL Agent Job Duration to TimeSpan using PowerShell"
+date: "2016-09-12"
 categories:
   - Blog
 

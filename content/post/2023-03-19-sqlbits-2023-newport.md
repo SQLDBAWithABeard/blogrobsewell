@@ -1,6 +1,7 @@
 ---
 title: 'SQLBits 2023 in Newport - A beards viewpoint'
 
+date: "2023-03-19"
 categories:
   - Blog
   - SQLBits

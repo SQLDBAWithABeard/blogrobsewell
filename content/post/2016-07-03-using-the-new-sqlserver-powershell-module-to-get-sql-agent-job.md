@@ -1,5 +1,6 @@
 ---
 title: "Using the new SQLServer Powershell module to get SQL Agent Job Information"
+date: "2016-07-03"
 categories:
   - Blog
 

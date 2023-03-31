@@ -1,5 +1,6 @@
 ---
 title: "Deploying a Windows Data Science Virtual Machine to Azure with PowerShell easily"
+date: "2016-12-18"
 categories:
   - azure
   - Blog

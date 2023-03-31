@@ -1,5 +1,6 @@
 ---
 title: "Using PowerShell to set Extended Events Sessions to AutoStart"
+date: "2016-03-28"
 categories:
   - Blog
 

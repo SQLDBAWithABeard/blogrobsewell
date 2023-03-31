@@ -1,5 +1,6 @@
 ---
 title: "PowerBi and API – Visualising my Checkins"
+date: "2016-10-29"
 categories:
   - Blog
 
