@@ -33,7 +33,7 @@ jobs:
       run: echo "${{ env.BASEURL }}"
 
     - name: Build
-      run: hugo --baseURL "${{ env.BASEURL }}"
+      run: hugo --minify --gc --baseURL "${{ env.BASEURL }}"
 
     - name: Deploy
       uses: afc163/surge-preview@v1
