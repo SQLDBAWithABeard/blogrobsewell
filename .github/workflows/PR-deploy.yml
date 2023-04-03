@@ -25,12 +25,13 @@ jobs:
     - name: Setup base URL env var
       run: |
         export PRNUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        echo BASEURL="https://jpomfret_blog_preview-pr-"$PRNUMBER".surge.sh/" >> $GITHUB_ENV
+        echo BASEURL="https:// SQLDBAWithABeard-blogrobsewell-build_preview-pr-"$PRNUMBER".surge.sh/"
+        >> $GITHUB_ENV
     - name: Report base URL env var
       run: echo "${{ env.BASEURL }}"
 
     - name: Build
-      working-directory: blog
+      working-directory: content
       run: hugo --minify --baseURL "${{ env.BASEURL }}" --buildDrafts --buildFuture
 
     - name: Deploy
