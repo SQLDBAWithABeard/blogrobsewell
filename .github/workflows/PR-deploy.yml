@@ -30,7 +30,7 @@ jobs:
       run: echo "${{ env.BASEURL }}"
 
     - name: Build
-      working-directory: content
+      # working-directory: content
       run: hugo --minify --baseURL "${{ env.BASEURL }}" --buildDrafts --buildFuture
 
     - name: Deploy
@@ -39,7 +39,7 @@ jobs:
       with:
         surge_token: ${{ secrets.SURGE_TOKEN }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        dist: blog/public
+        dist: public
         failOnError: 'true'
         teardown: true
         build: |
