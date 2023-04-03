@@ -1,39 +1,37 @@
 name: Build and Deploy PR Preview
 
+# From this post:
+  # https://rmoff.net/2022/04/06/using-github-actions-to-build-automagic-hugo-previews-of-draft-articles/
+
 on:
   pull_request:
 
+  workflow_dispatch:
+
 jobs:
   build_preview:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
+    env:
+      HUGO_VERSION: 0.102.3
+
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Ruby Dev
-      run: sudo apt-get install ruby-dev
-
-    - name: Install AsciiDoctor
-      run: sudo gem install asciidoctor
-
-    - name: Install Rouge
-      run: sudo gem install rouge -v 3.30.0
-
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: "latest"
-        extended: true
-
+    - name: Install Hugo CLI
+      run: |
+        wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb \
+        && sudo dpkg -i ${{ runner.temp }}/hugo.deb
     - name: Setup base URL env var
       run: |
         export PRNUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        echo BASEURL="https://rmoff-rmoff-blog-build_preview-pr-"$PRNUMBER".surge.sh/" >> $GITHUB_ENV
-
+        echo BASEURL="https://jpomfret_blog_preview-pr-"$PRNUMBER".surge.sh/" >> $GITHUB_ENV
     - name: Report base URL env var
       run: echo "${{ env.BASEURL }}"
 
     - name: Build
-      run: hugo --minify --gc --baseURL "${{ env.BASEURL }}"
+      working-directory: blog
+      run: hugo --minify --baseURL "${{ env.BASEURL }}" --buildDrafts --buildFuture
 
     - name: Deploy
       uses: afc163/surge-preview@v1
@@ -41,7 +39,7 @@ jobs:
       with:
         surge_token: ${{ secrets.SURGE_TOKEN }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        dist: public
+        dist: blog/public
         failOnError: 'true'
         teardown: true
         build: |
