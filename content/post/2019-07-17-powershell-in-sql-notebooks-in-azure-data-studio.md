@@ -21,6 +21,9 @@ tags:
   - Glenn Berry
   - Diagnostic Notebooks
 
+aliases:
+  - jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio/
+
 
 image: assets/uploads/2019/07/image-4.png
 
