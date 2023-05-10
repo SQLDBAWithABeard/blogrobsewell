@@ -1,6 +1,6 @@
 ---
 title: "PowerShell in SQL Notebooks in Azure Data Studio"
-date: "2019-07-17" 
+date: "2019-07-17"
 categories:
   - Blog
   - Jupyter Notebooks
@@ -22,7 +22,7 @@ tags:
   - Diagnostic Notebooks
 
 aliases:
-  - jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio/
+  - jupyter notebooks/azure data studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio/
 
 
 image: assets/uploads/2019/07/image-4.png
@@ -35,9 +35,9 @@ SQL Notebooks are cool
 
 I have had a lot of fun with SQL Notebooks recently. I have presented a session about them at a couple of events this month [DataGrillen](http://datagrillen.com) and SQL Saturday Cork. Here is a little snippet
 
-> [#dbatools](https://twitter.com/hashtag/dbatools?src=hash&ref_src=twsrc%5Etfw) in PowerShell in [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw) SQL Notebooks for creating the containers and restoring the [#dbachecks](https://twitter.com/hashtag/dbachecks?src=hash&ref_src=twsrc%5Etfw) historical database for running queries in 🙂  
+> [#dbatools](https://twitter.com/hashtag/dbatools?src=hash&ref_src=twsrc%5Etfw) in PowerShell in [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw) SQL Notebooks for creating the containers and restoring the [#dbachecks](https://twitter.com/hashtag/dbachecks?src=hash&ref_src=twsrc%5Etfw) historical database for running queries in 🙂
 > Getting ready for presentation for [#DataGrillen](https://twitter.com/hashtag/DataGrillen?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/wiQ41bblQV](https://t.co/wiQ41bblQV)
-> 
+>
 > — Rob Sewell (@sqldbawithbeard) [May 21, 2019](https://twitter.com/sqldbawithbeard/status/1130871277449875456?ref_src=twsrc%5Etfw)
 
 Yes, you can run PowerShell in a SQL Notebook in Azure Data Studio just by clicking a link in the markdown cell. This opens up a lot of excellent possibilities.
@@ -47,7 +47,7 @@ I have had several discussions about how SQL Notebooks can be used by SQL DBAs w
 I have really enjoyed working out how to run PowerShell in the markdown in a SQL Notebook in Azure Data Studio and I think [Anthony the kubernetes magician](http://www.centinosystems.com/blog/author/aencentinosystems-com/) did too!
 
 > I think [@sqldbawithbeard](https://twitter.com/sqldbawithbeard?ref_src=twsrc%5Etfw) is an actual wizard! You should see the things he can do with [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw) [#DataGrillen](https://twitter.com/hashtag/DataGrillen?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/KMeZR3CrPK](https://t.co/KMeZR3CrPK)
-> 
+>
 > — Anthony E. Nocentino (@nocentino) [June 20, 2019](https://twitter.com/nocentino/status/1141709511700467712?ref_src=twsrc%5Etfw)
 
 OK enough magic puns lets talk about PowerShell in SQL Notebooks. You can read about [how to create a SQL Notebook and run T-SQL queries here](https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/), (you no longer need the Insider Edition by the way)
@@ -58,7 +58,7 @@ PowerShell in Markdown!
 First, before I go any further, I must say this. I was at the European PowerShell Conference when I was working this out and creating my sessions and I said the words
 
 > “Cool, I can click a link and run PowerShell, this is neat”
-> 
+>
 > A Beardy fellow in Hannover
 
 This stopped some red team friends of mine in their tracks and they said “Show me”. One of them was rubbing their hands with glee! You can imagine the sort of wicked, devious things that they were immediately considering doing.
@@ -75,7 +75,7 @@ How on earth did you work this out?
 Someone asked me how I worked it out. I didn’t! It began with Vicky Harp PM lead for the SQL Tools team at Microsoft
 
 > Did you know you can add markdown links to open a terminal and paste in a command in [@AzureDataStudio](https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw) notebooks? [pic.twitter.com/YHX9pIVQco](https://t.co/YHX9pIVQco)
-> 
+>
 > — Vicky Harp (@vickyharp) [May 14, 2019](https://twitter.com/vickyharp/status/1128359827128950784?ref_src=twsrc%5Etfw)
 
 I then went and looked at [Kevin Cunnane](https://twitter.com/kevcunnane)‘s notebook. Kevin is a member of the tools team working on Azure Data Studio. With SQL Notebooks, you can double click the markdown cell and see the code that is behind it. To understand how it is working, lets deviate a little.
@@ -105,7 +105,7 @@ This will allow any command to be run. Of course, people with beards will helpfu
 
 Now that we know how to run an Azure Data Studio command using a link in a markdown cell the next step is to run a PowerShell command. I headed to the [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/integrated-terminal) and found
 
-> Send text from a keybinding  
+> Send text from a keybinding
 > The `workbench.action.terminal.sendSequence` command can be used to send a specific sequence of text to the terminal, including escape sequence
 
 That’s the command we need, however, we still need to craft the command so that it will work as a link. It needs to be converted into a URL.
@@ -125,7 +125,7 @@ Some Replacing is required
 
 The + needs to be replaced with a space or `%20`
 
-You also need to double the `\` and replace the `%3A` with a `:`  
+You also need to double the `\` and replace the `%3A` with a `:`
 The `"` needs to be replaced with `\u022`, the `'` with `\u027`, the curly braces won’t work unless you remove the `%0D%0A`. Got all that? Good!
 
 Once you have written your PowerShell, encoded it, performed the replacements, you add `\u000D` at the end of the code to pass an enter to run the code and then place all of that into a link like this
@@ -153,13 +153,13 @@ Giants
 
 There are many uses for this but here’s one I think is cool.
 
-The link below will go to a notebook, which will show how you the giants upon whose shoulders I stand  
-  
-[Glenn Berry](https://twitter.com/GlennAlanBerry),  
-[Chrissy LeMaire](https://twitter.com/cl),  
-[André](https://twitter.com/AndreKamman) [Kamman](https://twitter.com/AndreKamman),  
-[Gianluca Sartori](https://twitter.com/spaghettidba)  
-  
+The link below will go to a notebook, which will show how you the giants upon whose shoulders I stand
+
+[Glenn Berry](https://twitter.com/GlennAlanBerry),
+[Chrissy LeMaire](https://twitter.com/cl),
+[André](https://twitter.com/AndreKamman) [Kamman](https://twitter.com/AndreKamman),
+[Gianluca Sartori](https://twitter.com/spaghettidba)
+
 have enabled me to create a SQL Notebook with a link which will run some PowerShell to create a SQL Notebook which will have all of the Diagnostic Queries in it.
 
 You could possibly use something like it for your incident response SQL Notebook.

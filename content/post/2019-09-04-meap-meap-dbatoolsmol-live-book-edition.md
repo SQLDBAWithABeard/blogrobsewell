@@ -17,8 +17,8 @@ tags:
 
 slug: meap-meap-dbatoolsmol-live-book-edition
 aliases:
-  - /dbatools/powershell/sql%20server/meap-meap-dbatoolsmol-live-book-edition/
-  - /blog/dbatools/powershell/sql%20server/meap-meap-dbatoolsmol-live-book-edition/
+  - /blog/dbatools/powershell/sql server/meap-meap-dbatoolsmol-live-book-edition/
+  - /dbatools/powershell/sql server/meap-meap-dbatoolsmol-live-book-edition/
 
 ---
 It’s been a busy time!
