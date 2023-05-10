@@ -1,6 +1,6 @@
 ---
 title: "A Pretty PowerBi Pester Results Template File"
-date: "2017-10-29" 
+date: "2017-10-29"
 categories:
   - Blog
 
@@ -10,6 +10,7 @@ tags:
   - pester
   - PowerShell
 
+slug: power%20bi/powershell/a-pretty-powerbi-pester-results-template-file
 ---
 <P>I have left the heat and humidity of Singapore where I have been presenting at the PowerShell Conference Asia and DevOpsDays Singapore to travel to Seattle for PASS Summit. During my Green is Good – Red is Bad session someone asked me if the PowerBi that I showed at the end would work with any Pester Test Results object and I said (without thinking) that it would.</P>
 <P>It turns out that the PowerBi that I had set up for that session will work with my function to run Pester Tests against an Ola Hallengren installation but some of the formatting and custom columns were specific to that test.</P>

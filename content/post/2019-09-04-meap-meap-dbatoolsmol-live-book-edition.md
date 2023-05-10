@@ -1,6 +1,6 @@
 ---
-title: "MEAP MEAP – #dbatoolsMoL – Live Book edition"
-date: "2019-09-04" 
+title: "MEAP MEAP – dbatoolsMoL – Live Book edition"
+date: "2019-09-04"
 categories:
   - Blog
   - dbatools
@@ -15,6 +15,8 @@ tags:
   - BDFL
   - MEAP
 
+slug: dbatools/powershell/sql%20server/meap-meap-dbatoolsmol-live-book-edition/
+
 ---
 It’s been a busy time!
 
@@ -24,11 +26,11 @@ It is impossible for me to hear MEAP and not think of this 🙂
 
 [Roadrunner Speeding GIF](https://tenor.com/view/hungry-coyote-looney-tunes-gif-5063446) from [Hungry GIFs](https://tenor.com/search/hungry-gifs)
 
-but I expect you are wondering what a MEAP is?  
+but I expect you are wondering what a MEAP is?
 
-> What is MEAP?  
+> What is MEAP?
 > A book can take a year or more to write, so how do you learn that hot new technology today? The answer is MEAP, the Manning Early Access Program. In MEAP, you read a book chapter-by-chapter while it’s being written and get the final eBook as soon as it’s finished. If you pre-order the pBook, you’ll get it long before it’s available in stores.
-> 
+>
 > [https://www.manning.com/meap-program](https://www.manning.com/meap-program)
 
 Basically, to make it easy to get and for those that like to get in early, you can order the book and get the first 4 chapters (three in reality) RIGHT NOW!! (It also means that Chrissy and I have to write the rest of book – dang still going to be busy!)
@@ -107,10 +109,10 @@ This will open up as shown so that you can fill in what was wrong (Please don’
 
 You will have noticed on social media and elsewhere that we have left some easter eggs in the book
 
-> Yup, we have some easter eggs in [#dbatoolsMol](https://twitter.com/hashtag/dbatoolsMol?src=hash&ref_src=twsrc%5Etfw)  
->   
+> Yup, we have some easter eggs in [#dbatoolsMol](https://twitter.com/hashtag/dbatoolsMol?src=hash&ref_src=twsrc%5Etfw)
+>
 > We hope you enjoy them [https://t.co/iZa3u8iLPC](https://t.co/iZa3u8iLPC)
-> 
+>
 > — Rob Sewell (@sqldbawithbeard) [August 29, 2019](https://twitter.com/sqldbawithbeard/status/1167116661503266819?ref_src=twsrc%5Etfw)
 
 Whenever you find them or whenever you want to talk about the book on social media, please use the hashtag #dbatoolsMoL – you never know what goodies may end up in your inbox.
