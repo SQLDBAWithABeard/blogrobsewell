@@ -1,5 +1,5 @@
 ---
-title: "MEAP MEAP – dbatoolsMoL – Live Book edition"
+title: "MEAP MEAP – #dbatoolsMoL – Live Book edition"
 date: "2019-09-04"
 categories:
   - Blog
@@ -15,7 +15,8 @@ tags:
   - BDFL
   - MEAP
 
-slug: dbatools/powershell/sql%20server/meap-meap-dbatoolsmol-live-book-edition/
+slug: meap-meap-dbatoolsmol-live-book-edition
+alias: /dbatools/powershell/sql%20server/meap-meap-dbatoolsmol-live-book-edition/
 
 ---
 It’s been a busy time!
