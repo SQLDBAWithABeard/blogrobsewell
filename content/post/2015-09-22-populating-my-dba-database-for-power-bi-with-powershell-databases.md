@@ -1,12 +1,12 @@
 ---
 title: "Populating My DBA Database for Power Bi with PowerShell - Databases"
 date: "2015-09-22"
-date: "2015-09-22" 
-categories: 
+date: "2015-09-22"
+categories:
   - Power Bi
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - SQL Agent Jobs
   - automate
   - automation
@@ -77,7 +77,7 @@ CREATE TABLE [Info].[Databases](
 	[SpaceAvailableKB] [float] NULL,
 	[Status] [nvarchar](35) NULL,
 	[TargetRecoveryTime] [int] NULL,
- CONSTRAINT [PK_Databases] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Databases] PRIMARY KEY CLUSTERED
 (
 	[DatabaseID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -90,7 +90,7 @@ The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to
 To run the script I simply need to add the values for
 ```
 $CentralDBAServer = '' ## Add the address of the instance that holds the DBADatabase
-$CentralDatabaseName = 'DBADatabase' 
+$CentralDatabaseName = 'DBADatabase'
 $LogFile = "\DBADatabaseServerUpdate_" + $Date + ".log" ## Set Path to Log File
 ```
 And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get the script [from here](http://1drv.ms/1N4fqxt) or you can read on to see how it works and how to create the report and publish it to powerbi.com and query it with natural langauge
@@ -102,7 +102,7 @@ I create a function called Catch-Block to save keystrokes and put my commands in
       ,[InstanceName]
       ,[Port]
   FROM [DBADatabase].[dbo].[InstanceList]
-  Where Inactive = 0 
+  Where Inactive = 0
     AND NotContactable = 0
 "@
 try{
@@ -117,7 +117,7 @@ foreach ($ServerName in $ServerNames)
 ## $ServerName
  $InstanceName =  $ServerName|Select InstanceName -ExpandProperty InstanceName
  $Port = $ServerName| Select Port -ExpandProperty Port
-$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName 
+$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
  $Connection = $ServerName + '\' + $InstanceName + ',' + $Port
 
  try
@@ -140,7 +140,8 @@ $Parent = $db.Parent.Name
 ```
 To gather information on all databases just remove everything after the pipe symbol or if you wish to exclude certain databases from the collection gathering, maybe the database you keep [your Change log table](https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/) and DBA Team info in you can do that as well here
 
-```foreach($db in $srv.databases|Where-Object {$_.Name -ne 'EXCLUDENAME' })
+```
+foreach($db in $srv.databases|Where-Object {$_.Name -ne 'EXCLUDENAME' })
 {
 $Name = $db.Name
 $Parent = $db.Parent.Name
@@ -153,7 +154,7 @@ $srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $Connection
 ```
 An alternative method of doing this is to set a variable to a $db and then to select all of the properties so that you can see the values and identify the ones you want. Again this a good thing to do when exploring new objects
 ```
-$db = $srv.databases['DBNAMEHERE'] 
+$db = $srv.databases['DBNAMEHERE']
 $db| Select *
 ```
 You can see from the screen shot below that there are 170 properties available to you on a SQL2014 instance. You can gather any or all of that information as long as you ensure that you have the columns with the correct data types in your table and that your script has the logic to deal with properties that do not exist although I have had less issue with this for the database object than the server object
@@ -168,7 +169,7 @@ This is how I created the reports shown above.
 
 Connect to the DBA Database and run these queries to gather the data for the report.
 ```
-SELECT 
+SELECT
 IL.ServerName
 ,IL.InstanceName
 ,IL.Location
