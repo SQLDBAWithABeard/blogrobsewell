@@ -1,7 +1,8 @@
 ---
 title: "Email Subject - Congratulations On Your MVP Award - #MVPBuzz"
+slug: "Email Subject - Congratulations On Your MVP Award - MVPBuzz"
 
-date: "2023-07-05"
+date: "2023-07-06"
 categories:
   - Blog
   - Community
