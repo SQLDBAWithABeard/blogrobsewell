@@ -1,5 +1,5 @@
 ---
-title: 'Email Subject Congratulations On Your MVP Award - #MVPBuzz'
+title: 'Email Subject - Congratulations On Your MVP Award - MVPBuzz'
 
 date: "2023-07-05"
 categories:
