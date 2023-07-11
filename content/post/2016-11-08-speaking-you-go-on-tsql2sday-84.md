@@ -1,5 +1,6 @@
 ---
 title: "Speaking? You? Go on. #tsql2sday #84"
+slug: "Speaking? You? Go on. tsql2sday 84"
 date: "2016-11-08"
 categories:
   - SQL Server

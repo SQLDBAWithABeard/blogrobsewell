@@ -1,6 +1,7 @@
 ---
 title: "Hitting the Wall – #TSQL2sDay"
-date: "2018-08-14" 
+slug: "Hitting the Wall – TSQL2sDay"
+date: "2018-08-14"
 categories:
   - Blog
 

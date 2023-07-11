@@ -1,5 +1,6 @@
 ---
-title: "TSQL2sday #94 Lets get all Posh!"
+title: "#TSQL2sday #94 Lets get all Posh!"
+slug: "TSQL2sday 94 Lets get all Posh!"
 date: "2017-09-05"
 categories:
   - PowerShell

@@ -1,6 +1,7 @@
 ---
-title: "TSQL2sDay – Get-PostRoundup"
-date: "2017-09-20" 
+title: "#TSQL2sDay – Get-PostRoundup"
+slug: "TSQL2sDay – Get-PostRoundup"
+date: "2017-09-20"
 categories:
   - Blog
 
@@ -15,7 +16,7 @@ tags:
   - dbatools
   - documentation
   - Excel
-  - GitHub 
+  - GitHub
   - permissions
   - pester
   - PowerShell

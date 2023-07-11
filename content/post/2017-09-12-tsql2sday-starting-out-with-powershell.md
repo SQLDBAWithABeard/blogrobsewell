@@ -1,6 +1,7 @@
 ---
 title: "#TSQL2sDay – Starting Out with PowerShell"
-date: "2017-09-12" 
+slug: "TSQL2sDay – Starting Out with PowerShell"
+date: "2017-09-12"
 categories:
   - Blog
 
@@ -36,11 +37,11 @@ tags:
 <P>You can find all of the commands in a module with the <A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Command?view=powershell-5.1" rel=noopener target=_blank>Get-Command</A> command like this</P><PRE class="lang:ps decode:true">Get-Command -Module microsoft.powershell.management</PRE>
 <P>This will show you all of the commands in the management module which may be a good place to start exploring. In this module for example</P>
 <UL>
-<LI><A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Management/Test-Connection?view=powershell-5.1" rel=noopener target=_blank>Test-Connection</A> is like ping but better 
-<LI><A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Management/Test-Path?view=powershell-5.1" rel=noopener target=_blank>Test-Path</A> tests the existence of files and file paths 
-<LI>*-Service works with services 
-<LI>*-Process works with processes 
-<LI>*-Computer for power options for a computer 
+<LI><A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Management/Test-Connection?view=powershell-5.1" rel=noopener target=_blank>Test-Connection</A> is like ping but better
+<LI><A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Management/Test-Path?view=powershell-5.1" rel=noopener target=_blank>Test-Path</A> tests the existence of files and file paths
+<LI>*-Service works with services
+<LI>*-Process works with processes
+<LI>*-Computer for power options for a computer
 <LI><A href="https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Management/Get-ComputerInfo?view=powershell-5.1" rel=noopener target=_blank>Get-ComputerInfo</A> which will give you computer information (surprisingly 🙂 ) </LI></UL>
 <P>This is also something to remember in the future when you want to know what commands a module has or what the precise name of the command is.</P>
 <P>Maybe once you install the <A href="https://dbatools.io" rel=noopener target=_blank>dbatools module</A>, the <A href="https://docs.microsoft.com/en-us/powershell/module/sqlserver/?view=sqlserver-ps" rel=noopener target=_blank>sqlserver module </A>or the <A href="https://github.com/Microsoft/ReportingServicesTools" rel=noopener target=_blank>SSRS module</A>??</P>
@@ -83,7 +84,7 @@ tags:
 <P>I suggest that you get used to following this step as well. This is a great way of exploring the results of any command and understanding what you can do with it.</P>
 <P>We will use the <A href="https://docs.microsoft.com/en-gb/powershell/module/Microsoft.PowerShell.Utility/Get-Member?view=powershell-5.1" rel=noopener target=_blank>Get-Member</A> command. Another one that I use every single day.</P>
 <P>Warning – You do not <STRONG>have</STRONG> to use these methods to accomplish tasks in PowerShell against SQL Server as both Microsoft and the community have released modules which will enable you to general tasks without “coding”</P>
-<P>This is an example to get you comfortable with PowerShell by using a target that you are comfortable with and can recognise.</P><PRE class="lang:ps decode:true">## Create a smo object provide your host\instance after -SqlInstance 
+<P>This is an example to get you comfortable with PowerShell by using a target that you are comfortable with and can recognise.</P><PRE class="lang:ps decode:true">## Create a smo object provide your host\instance after -SqlInstance
 $SMO = Connect-DbaSqlServer -SqlInstance ROB-XPS\sql2016</PRE>
 <P>Now that we have an object we can explore it</P><PRE class="lang:ps decode:true">$SMO</PRE>
 <P>By just calling the variable it will display the default properties</P>
@@ -96,7 +97,7 @@ $SMO = Connect-DbaSqlServer -SqlInstance ROB-XPS\sql2016</PRE>
 <P>Other things you can do include reading the errorlog</P><PRE class="lang:ps decode:true">$SMO.ReadErrorLog() | Out-GridView</PRE>
 <P><IMG class="alignnone size-full wp-image-8031" alt="08 - errorlog.png" src="https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?resize=630%2C284&amp;ssl=1" width=630 height=284 sizes="(max-width: 630px) 100vw, 630px" data-recalc-dims="1" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?fit=630%2C284&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?fit=300%2C135&amp;ssl=1" data-image-description="" data-image-title="08 – errorlog" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="2912,1313" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?fit=2912%2C1313&amp;ssl=1" data-permalink="https://blog.robsewell.com/08-errorlog/" data-attachment-id="8031" srcset="https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?w=2912&amp;ssl=1 2912w,https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?resize=300%2C135&amp;ssl=1 300w,https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?resize=768%2C346&amp;ssl=1 768w,https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?resize=1024%2C462&amp;ssl=1 1024w,https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?w=1260&amp;ssl=1 1260w,https://blog.robsewell.com/assets/uploads/2017/09/08-errorlog.png?w=1890&amp;ssl=1 1890w"></P>
 <P>Get the connections to a database</P><PRE class="lang:ps decode:true">$smo.GetActiveDBConnectionCount('master')</PRE>
-<P>Get the current Traceflags</P><PRE class="lang:ps decode:true">$smo.EnumActiveCurrentSessionTraceFlags() 
+<P>Get the current Traceflags</P><PRE class="lang:ps decode:true">$smo.EnumActiveCurrentSessionTraceFlags()
 $smo.EnumActiveGlobalTraceFlags()</PRE>
 <P>The properties that are available at this level are similar to the view that you see in SSMS Object Explorer for the instance. You can see a databases folder in SSMS and you can expand it. You can do the same in PowerShell</P><PRE class="lang:ps decode:true">$SMO.Databases.Name</PRE>
 <P>That is going to just show you the names of the databases on that instance. You can do the same thing using the pipe | again and <A href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-object?view=powershell-5.1" rel=noopener target=_blank>Select-Object</A></P><PRE class="lang:ps decode:true">$Smo.Databases | Select-Object Name</PRE>
@@ -114,10 +115,10 @@ $smo.EnumActiveGlobalTraceFlags()</PRE>
 <H2>Recap</H2>
 <P>You should take from this for the future</P>
 <UL>
-<LI>Get-Command *search* – Find a Command 
-<LI>Get-Help NameOfCommand – How do I use the Command ? 
-<LI>$var = Some Command here – Set the output of a command to a variable 
-<LI>$var | Get-Member – What Events, Methods, Properties do I have on this object 
+<LI>Get-Command *search* – Find a Command
+<LI>Get-Help NameOfCommand – How do I use the Command ?
+<LI>$var = Some Command here – Set the output of a command to a variable
+<LI>$var | Get-Member – What Events, Methods, Properties do I have on this object
 <LI>$var | Select Property1, Property2, Property3 </LI></UL>
 <H2>That’s All Code – Where’s The Easy Buttons ?</H2>
 <P>There are two answers to this.</P>

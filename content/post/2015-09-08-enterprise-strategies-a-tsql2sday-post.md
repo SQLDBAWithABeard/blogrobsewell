@@ -1,13 +1,14 @@
 ---
 title: "Enterprise Strategies - A #TSQL2sDay post"
+slug: "Enterprise Strategies - A TSQL2sDay post"
 date: "2015-09-08"
-date: "2015-09-08" 
-categories: 
+date: "2015-09-08"
+categories:
   - PowerShell
   - SQL Server
   - TSQL2sDAY
   - Community
-tags: 
+tags:
   - TSQL2sDAY
   - alerts
   - automate
@@ -46,9 +47,9 @@ So here are a few points that I think you should consider if you look after SQL 
 	## $ServerName
 	 $InstanceName =  $ServerName|Select InstanceName -ExpandProperty InstanceName
 	 $Port = $ServerName| Select Port -ExpandProperty Port
-	$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName 
+	$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
 	 $Connection = $ServerName + '\' + $InstanceName + ',' + $Port
-	
+
 	 try
 	 {
 	 $srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $Connection

@@ -1,5 +1,6 @@
 ---
 title: "#tsql2sday – Giving Back – Reprise"
+slug: "tsql2sday – Giving Back – Reprise"
 date: "2018-05-08"
 categories:
   - Blog

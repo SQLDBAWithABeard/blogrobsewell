@@ -1,6 +1,7 @@
 ---
 title: "#TSQL2sDay – NomNomNomNomNom"
-date: "2019-03-12" 
+slug: "TSQL2sDay – NomNomNomNomNom"
+date: "2019-03-12"
 categories:
   - Blog
   - PowerShell
@@ -28,7 +29,7 @@ Mmmm Cookies
 
 Photo by [Pille-Riin Priske](https://unsplash.com/photos/DM-KD1_fZrg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/cookie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-I’m not good at bragging, [I’m generally convinced that all of you are better than me](https://en.wikipedia.org/wiki/Impostor_syndrome). Yes, I am aware that it is irrational. This has made writing this post really hard. Sure, I get immense pleasure and satisfaction from solving a problem, that’s a form of instant fulfillment. Certainly, I enjoy teaching people and passing over my knowledge for them to use.  
+I’m not good at bragging, [I’m generally convinced that all of you are better than me](https://en.wikipedia.org/wiki/Impostor_syndrome). Yes, I am aware that it is irrational. This has made writing this post really hard. Sure, I get immense pleasure and satisfaction from solving a problem, that’s a form of instant fulfillment. Certainly, I enjoy teaching people and passing over my knowledge for them to use.
 I am not going to write about technical things that I have done because they don’t give me sustenance in that way.
 
 So what does give me sustenance when times are hard?
@@ -51,7 +52,7 @@ Cake !!!!!
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/prince-abid-653931-unsplash.jpg)
 
-  
+
 Photo by [Prince Abid](https://unsplash.com/photos/pEvPkPmuHzo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/cake?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 Hey, thats cake and not cookies Rob.

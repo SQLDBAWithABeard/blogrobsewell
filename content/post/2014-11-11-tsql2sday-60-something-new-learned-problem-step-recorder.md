@@ -1,6 +1,7 @@
 ---
 title: "#tsql2sday #60 – Something New Learned – Problem Step Recorder"
-date: "2014-11-11" 
+slug: "tsql2sday 60 – Something New Learned – Problem Step Recorder"
+date: "2014-11-11"
 categories:
   - Blog
   - TSql2sDay
@@ -36,7 +37,7 @@ Simply put, it records “This is what I did” There are many situations when t
 
 *   You can use this during installations to help create documentation. “This is what I did” when I installed X and now you can follow those steps and I know I haven’t missed anything.
 *   You can use it when communicating with 3rd parties or other support teams. “This is what I did” when I got this error and here are all of the steps so that you can re-create the issue and I know that I haven’t missed anything
-*   You can use this when resolving high priority incidents. “This is what I did” when System X broke, it includes all of the times of my actions.  
+*   You can use this when resolving high priority incidents. “This is what I did” when System X broke, it includes all of the times of my actions.
     I still keep my notepad by my keyboard out of habit but I have a record of the exact steps that I took to try to resolve the issue which will be very useful for reporting on the incident in the near future and also placing into a Knowledge Base for others to use if it happens again and I know I haven’t missed anything
 *   For assisting family members. Like many, I am “The IT guy” and PSR enables me to provide clear instructions with pictures showing exactly where I clicked to those family members who are having trouble with “The internet being broken”
 
