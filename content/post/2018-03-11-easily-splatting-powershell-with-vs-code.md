@@ -1,6 +1,6 @@
 ---
 title: "Easily Splatting PowerShell with VS Code"
-date: "2018-03-11" 
+date: "2018-03-11"
 categories:
   - Blog
 
@@ -11,7 +11,7 @@ tags:
   - splatting
 
 
-image: https://pbs.twimg.com/media/DX8UjepX0AYnDMS?format=jpg&name=large
+image: assets/uploads/2022/dbachecks.jpg
 
 ---
 So I always like to show splatting PowerShell commands when I am presenting sessions or workshops and realised that I had not really blogged about it. (This blog is for [@dbafromthecold](https://twitter.com/dbafromthecold) who asked me to 🙂 )
@@ -64,7 +64,7 @@ Import-EditorCommand -Module EditorServicesCommandSuite
 
 and now creating a splat is as easy as this.
 
-Write the command, leave the cursor on a parameter, hit F1 – Choose PowerShell : Show Additional Commands (or use a keyboard shortcut) type splat press enter. Done 🙂  
+Write the command, leave the cursor on a parameter, hit F1 – Choose PowerShell : Show Additional Commands (or use a keyboard shortcut) type splat press enter. Done 🙂
 
 <DIV id=v-pfRz040C-1 class=video-player><IFRAME height=362 src="https://videopress.com/embed/pfRz040C?hd=1&amp;loop=0&amp;autoPlay=0&amp;permalink=1" frameBorder=0 width=630 allowfullscreen></IFRAME>
 <SCRIPT src="https://s0.wp.com/wp-content/plugins/video/assets/js/next/videopress-iframe.js"></SCRIPT>

@@ -33,6 +33,14 @@ url = "https://tech.lgbt/@robsewell"
 icon = "brand-mastodon"
 
 [[social]]
+identifier = "bluesky"
+name = "BlueSky"
+url = "https://staging.bsky.app/profile/robsewell.bsky.social"
+
+[social.params]
+icon = "brand-mastodon"
+
+[[social]]
 identifier = "linkedin"
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/robsewellsqldba"

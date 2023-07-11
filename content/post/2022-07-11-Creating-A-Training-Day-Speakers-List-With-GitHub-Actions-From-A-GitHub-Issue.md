@@ -1,6 +1,6 @@
 ---
 title: "Creating A Training Day Speakers List with GitHub Action from a GitHub Issue"
-date: "2022-07-11" 
+date: "2022-07-11"
 categories:
   - Blog
   - Community
@@ -22,18 +22,18 @@ tags:
  - Dev Containers
 
 
-image: https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80
+image: assets/uploads/2022/bench.jpg
 ---
 
 [The last post](/blog/community/Training-Day-Speakers-List) showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.
 
 # What do we need?
 
-The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. [The web page can be found here](https://callfordataspeakers.com/precon). This page is generated from a JSON file. 
+The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. [The web page can be found here](https://callfordataspeakers.com/precon). This page is generated from a JSON file.
 
 # A new repository
 
-It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website. 
+It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website.
 
 # Create a dev container
 
@@ -55,7 +55,7 @@ I also added two more for this repository as we are using GitHub Actions
 - [me-dutour-mathieu.vscode-github-actions](https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions) - for intellisense for GitHub Action files
 - [cschleiden.vscode-github-action](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions) - to be able to start/stop/monitor GitHub Actions from the workspace
 
-![the view in codespaces of the GitHub Actions](assets/uploads/2022/07/githubactionsview.png)  
+![the view in codespaces of the GitHub Actions](assets/uploads/2022/07/githubactionsview.png)
 
 
 # Gather the Information
@@ -81,12 +81,12 @@ There are a number of `-type` entries. [You can find the definitions in the docs
 
 ![The intellisense showing the type options](assets/uploads/2022/07/intellisense-ghactions.png)
 
-I used the intellisense to build a quick simple form to gather 5 pieces of information 
+I used the intellisense to build a quick simple form to gather 5 pieces of information
 
 - full name
-- topics 
-- regions 
-- sessionize profile URL 
+- topics
+- regions
+- sessionize profile URL
 - languages
 
 You can find [the YAML file here](https://github.com/dataplat/DataSpeakers/blob/main/.github/ISSUE_TEMPLATE/Add-Speaker.yml) and [the issue here](https://github.com/dataplat/DataSpeakers/issues/new?assignees=&labels=&template=Add-Speaker.yml)
@@ -101,7 +101,7 @@ GitHub Actions is a platform that can run automated processes called workflows t
 
 ## Triggering the workflow
 
-Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.  
+Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.
 
 You can automatically add labels, close stale issues and much more. There are a large number of events open to you as [can be seen here ](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows). Even looking at just issues there are a number of activities types that can be used
 
@@ -122,14 +122,14 @@ You can automatically add labels, close stale issues and much more. There are a 
 - milestoned
 - demilestoned
 
-(and there are separate ones for issue comments) 
+(and there are separate ones for issue comments)
 
 The beginning of the workflow YAML file has the name and then the trigger. This triggers the workflow when an issue is opened.
 
 ````
 name: Add a new speaker json
 
-on: 
+on:
  issues:
    types:
      - "opened"
@@ -137,7 +137,7 @@ on:
 
 ## Getting all the source
 
-The workflow consists of [one or many jobs](https://docs.github.com/en/actions/using-jobs) that can be run on different runners. The first job is named `AddNewSpeaker` and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.   
+The workflow consists of [one or many jobs](https://docs.github.com/en/actions/using-jobs) that can be run on different runners. The first job is named `AddNewSpeaker` and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.
 
 We **_use_** a default **_action_** to checkout and because we push changes back to the repository (more on that later) we choose a `fetch-depth` of 0 to get all of the history and the `ref` main as that is the branch we are working with.
 
@@ -178,11 +178,11 @@ The say thank you comment uses `github.event.issue.number` and `github.event.iss
       run: Write-Host "$GITHUB_CONTEXT"
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
-      shell: pwsh 
+      shell: pwsh
 ````
 ## Get the info into a file
 
-Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates `### <label>` and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a `pscustomobject`  
+Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates `### <label>` and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a `pscustomobject`
 
 Then I could convert it to Json and save it to a file. I chose to save each speakers information in their own file in case anything else would be needed in the future and also so that if the process failed it only affected this speakers information.
 
@@ -194,7 +194,7 @@ I also add the speaker file name to a text file that I may make use of at some f
         Write-Host "What do we have?"
         # gci -recurse = this is for troubleshooting because paths are hard
         $IssueBody =  "${{ github.event.issue.body }}"
-        # Write-Host $IssueBody 
+        # Write-Host $IssueBody
         $IssueBody | Out-File speakers/temp.txt
         # get the temp file contents - I do this so I don't lose anything
         $file = Get-Content ./speakers/temp.txt -Raw
@@ -213,7 +213,7 @@ I also add the speaker file name to a text file that I may make use of at some f
         $filePath = './speakers/{0}.json' -f $speakerFileName
         $SpeakerObject |ConvertTo-Json | Out-FIle -FilePath $filePath
         $speakerFileName | OUt-File ./speakers/list.txt -Append
-      shell: pwsh  
+      shell: pwsh
 ````
 ### Because Ben is a fantastic tester
 
@@ -225,7 +225,7 @@ $speakerFileName = $SpeakerObject.name -replace ' ', '-' -replace '''','-' -repl
 
 ## Let the user know and commit the new file
 
-Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).  
+Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).
 
 I love the `EndBug/add-and-commit` action as it enables me to make changes in a workflow and commit those changes safely back to the repository.
 
@@ -253,7 +253,7 @@ Don't repeat yourself. The idea is to create the JSON file for the web-page from
 The other workflow cannot be triggered manually as it relies on an issue to create the required file.
 
 ````
-on: 
+on:
  workflow_call:
  workflow_dispatch:
 ````

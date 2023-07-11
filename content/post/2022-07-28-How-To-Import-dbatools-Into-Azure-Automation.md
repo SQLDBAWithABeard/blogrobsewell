@@ -1,6 +1,6 @@
 ---
 title: "How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error"
-date: "2022-07-28" 
+date: "2022-07-28"
 categories:
   - Blog
   - PowerShell
@@ -16,7 +16,7 @@ tags:
   - pwsh
 
 
-image: https://images.unsplash.com/photo-1614791962365-7590111b1b1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80
+image: assets/uploads/2022/dbatools.jpg
 ---
 There are a number of methods to import PowerShell modules into Azure automation [as described in the documentation here](https://docs.microsoft.com/en-us/azure/automation/shared-resources/modules?WT.mc_id=DP-MVP-5002693)
 
@@ -84,11 +84,11 @@ If you do not rename the module correctly but leave it as the name of file `dbat
 ![image](https://user-images.githubusercontent.com/6729780/181572041-2fe18929-cc14-40ae-b654-62653206903f.png)
 
 
-> Error importing the module dbatools-signed. Import failed with the following error:   
-> Orchestrator.Shared.AsyncModuleImport.ModuleImportException: Cannot import the module of name dbatools-signed, as the module structure was invalid. at   
-> Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.ExecuteInternal(CodeActivityContext context, Byte[] moduleContent, String moduleName, ModuleLanguage moduleLanguage) at  
- > Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.Execute(CodeActivityContext context) at  
- > System.Activities.CodeActivity.InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager) at System.Activities.Runtime.ActivityExecutor.ExecuteActivityWorkItem.ExecuteBody(ActivityExecutor executor, BookmarkManager bookmarkManager, Location resultLocation)  
+> Error importing the module dbatools-signed. Import failed with the following error:
+> Orchestrator.Shared.AsyncModuleImport.ModuleImportException: Cannot import the module of name dbatools-signed, as the module structure was invalid. at
+> Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.ExecuteInternal(CodeActivityContext context, Byte[] moduleContent, String moduleName, ModuleLanguage moduleLanguage) at
+ > Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.Execute(CodeActivityContext context) at
+ > System.Activities.CodeActivity.InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager) at System.Activities.Runtime.ActivityExecutor.ExecuteActivityWorkItem.ExecuteBody(ActivityExecutor executor, BookmarkManager bookmarkManager, Location resultLocation)
 
 If you get that, just re-upload the zip file and use the correct name in the form.
 

@@ -1,6 +1,6 @@
 ---
 title: "GitHub Pages in Dev Containers and Codespaces"
-date: "2022-07-04" 
+date: "2022-07-04"
 categories:
   - Blog
   - Community
@@ -18,16 +18,16 @@ tags:
  - Dev Containers
 
 
-image: https://images.unsplash.com/photo-1494961104209-3c223057bd26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1102&q=80
+image: assets/uploads/2022/containers2.jpg
 ---
 
 # Broken Link
 
-It started with a message from Mikey Bronowski ( [Blog](https://www.bronowski.it/blog/)  [Twitter](https://twitter.com/@MikeyBronowski) )  
+It started with a message from Mikey Bronowski ( [Blog](https://www.bronowski.it/blog/)  [Twitter](https://twitter.com/@MikeyBronowski) )
 
 ![message from Mikey](assets/uploads/2022/07/mikey-dm.png)
 
-Now this means that you get to see my awesome [404 page ](https://blog.robsewell.com/justsomethingsad) which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.  
+Now this means that you get to see my awesome [404 page ](https://blog.robsewell.com/justsomethingsad) which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.
 
 ## Why do something manual when you can automate it
 
@@ -35,13 +35,13 @@ This blog is running on GitHub Pages via a repository. Every time a change is pu
 
 So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts [Running GitHub Pages locally](2021-04-11-locally-viewing-github-pages-new-data-saturdays.md) or [Running GitHub Pages locally with a Remote Theme (this site has a remote theme)](2021-04-15-locally-viewing-github-pages-locally-with-remote-theme.md). Then I could see the changes locally before pushing them to the repository.
 
-But my brain didn't work in that way. Instead it thought "Hmmm maybe I could do this in the browser in [GitHub Codespaces](https://github.com/features/codespaces) and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code"  
+But my brain didn't work in that way. Instead it thought "Hmmm maybe I could do this in the browser in [GitHub Codespaces](https://github.com/features/codespaces) and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code"
 
-The most wonderful Jess Pomfret [Blog](https://jesspomfret.com) [Twitter](https://twitter.com/@jpomfret) and I delivered a [dbatools](https://dbatools.io) Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the [PowerShell Conference Europe](psconf.eu) about using dev containers so I had a little knowledge of how it can be done.  
+The most wonderful Jess Pomfret [Blog](https://jesspomfret.com) [Twitter](https://twitter.com/@jpomfret) and I delivered a [dbatools](https://dbatools.io) Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the [PowerShell Conference Europe](psconf.eu) about using dev containers so I had a little knowledge of how it can be done.
 
 # How easy is it ?
 
-It's super super easy. Surprisingly easy.  
+It's super super easy. Surprisingly easy.
 
 ## Open a codespace for your repository
 
@@ -64,7 +64,7 @@ and follow the prompts
 
 ## The config files are created
 
-This will create a `.devcontainer` directory with 
+This will create a `.devcontainer` directory with
 - devcontainer.json
 - Dockerfile
 - post-create.sh
@@ -73,7 +73,7 @@ Which will do all that you need. You can stop here. You will just need to run `j
 
 ## Automatic regeneration
 
-To make it automatically regenerate. I added  
+To make it automatically regenerate. I added
 
 `bundle exec jekyll serve --force-polling`
 
@@ -103,6 +103,6 @@ The rest is pretty much the same except the url!
 
 # Rather Have Video ?
 
-If you prefer video then you can find one on Youtube showing the same process. 
+If you prefer video then you can find one on Youtube showing the same process.
 
 {% include youtubePlayer.html id="aFFmPlbjfCw" %}

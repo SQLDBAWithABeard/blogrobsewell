@@ -1,6 +1,6 @@
 ---
-title: '#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits'
-slug: 'NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits'
+title: "#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits"
+slug: "NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits"
 
 date: "2022-11-24"
 categories:
@@ -17,7 +17,7 @@ tags:
   - SQLBits
 
 
-image: https://images.unsplash.com/photo-1546872006-42c78c0ccb29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80
+image: assets/uploads/2017/newstars1.jpg
 ---
 Thank you to the ever wonderful Ben [for the suggestion to blog](https://www.newstarsofdata.com/tell-us-your-story/). Check out #NewStarNovember for more blog posts.
 

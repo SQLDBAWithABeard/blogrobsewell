@@ -1,6 +1,6 @@
 ---
 title: "GitHub Action Workflow Protected branch update failed"
-date: "2022-07-15" 
+date: "2022-07-15"
 categories:
   - Blog
   - Community
@@ -20,7 +20,7 @@ tags:
  - Dev Containers
 
 
-image: https://images.unsplash.com/photo-1580265862291-4251b8c7e836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80 
+image: assets/uploads/2022/noentry.jpg
 ---
 
 [The last post](/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/) showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.
@@ -45,7 +45,7 @@ So I changed the settings so that a Pull Request is required and needs to be rev
 I had already altered the workflow trigger for the workflow to generate the speaker-list.json so that it would run when changes to the speakers directory were pushed to the main branch by adding
 
 ````
-on: 
+on:
  workflow_call:
  workflow_dispatch:
  push:
@@ -55,11 +55,11 @@ on:
      - speakers/*
 ````
 
-I then approved a PR with a change to that directory and saw that the workflow had started.  
+I then approved a PR with a change to that directory and saw that the workflow had started.
 
 Then it failed :-(.
 
-The error message could be seen in the codespaces with the extension [cschleiden.vscode-github-actions](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions)  
+The error message could be seen in the codespaces with the extension [cschleiden.vscode-github-actions](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions)
 
 
 [![no can do](assets/uploads/2022/07/pushdenied.png)](assets/uploads/2022/07/pushdenied.png)
@@ -71,8 +71,8 @@ This is the error message
 Done
 Pushing to https://github.com/dataplat/DataSpeakers
 POST git-receive-pack (604 bytes)
-remote: error: GH006: Protected branch update failed for refs/heads/main.        
-remote: error: At least 1 approving review is required by reviewers with write access.        
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: error: At least 1 approving review is required by reviewers with write access.
 error: failed to push some refs to 'https://github.com/dataplat/DataSpeakers'
 
 Of course, because I have now protected my branch, I cannot automatically push changes into the main branch.
@@ -91,20 +91,20 @@ The instructions to do this are found [in the docs here](https://docs.github.com
 - Click Generate new token.
 - Give your token a descriptive name.
 - To give your token an expiration.
-- Select the scopes, or permissions, you'd like to grant this token.   
+- Select the scopes, or permissions, you'd like to grant this token.
 For this scenario just choose `public_repo`
 - Click Generate token.
 - Save the generated token somewhere safe like your password manager. ( You **do** have a password manager? - Our family use 1Password)
 
 ## Save it as a secret in the repository
 
-You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository [by following this guide](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md) 
+You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository [by following this guide](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
 
 
 - navigate to the main page of the repository.
 - Under your repository name, click on the "Settings" tab.
 - In the left sidebar, click Secrets.
-- On the right bar, click on "Add a new secret" 
+- On the right bar, click on "Add a new secret"
 - Type a name for your secret in the "Name" input box. I used `REPO_TOKEN`
 - Type the value for your secret.
 - Click Add secret.
@@ -131,7 +131,7 @@ and you can see [the commit here](https://github.com/dataplat/DataSpeakers/commi
 
 # But thats not all folks
 
-This will work correctly for a PR and it will work for the initial workflow that has been called.  
+This will work correctly for a PR and it will work for the initial workflow that has been called.
 
 It ***will not work*** for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. [In that scenario we get this error](https://github.com/dataplat/DataSpeakers/actions/runs/2659979920)
 
@@ -139,7 +139,7 @@ It ***will not work*** for the reusable workflow. When the reusable workflow is 
 
 > Input required and not supplied: token
 
-for the `actions/checkout@v2` action. This took some tracking down to resolve but finally I found the answer [in a forum post](https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard)  
+for the `actions/checkout@v2` action. This took some tracking down to resolve but finally I found the answer [in a forum post](https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard)
 
 In the ***calling*** workflow add a `secrets` entry and pass in the token secret.
 
@@ -154,10 +154,10 @@ createSpeakerListJson:
 and then at the top of the ***reusable workflow*** define the secrets
 
 ````
-on: 
+on:
  workflow_call:
   secrets:
-    REPO_TOKEN: 
+    REPO_TOKEN:
       required: true
 ````
 and finally all is well and Dr Greg Low [Blog](https://blog.greglow.com/) [Twitter](https://twitter.com/greglow) can be added ;-)

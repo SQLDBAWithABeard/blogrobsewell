@@ -1,6 +1,6 @@
 ---
 title: "How Do You Show Keystrokes On Screen"
-date: "2022-07-22" 
+date: "2022-07-22"
 categories:
   - Blog
   - Community
@@ -14,7 +14,7 @@ tags:
  - carnac
 
 
-image: https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+image: assets/uploads/2022/containers.jpg
 ---
 It started with a tweet from Benni De Jagere [Blog](https://bennidejagere.com/) [Twitter](https://twitter.com/BenniDeJagere) about how to show the keystrokes on the screen.
 
@@ -27,11 +27,11 @@ The best answer is always "it depends" and the correct response to this to deter
 
 # what does it depend upon?
 
-It depends upon which programme you are using and wish to demonstrate. 
+It depends upon which programme you are using and wish to demonstrate.
 
 ## Visual Studio Code or Azure Data Studio
 
-If you are using [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693) or [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is-azure-data-studio?WT.mc_id=DP-MVP-5002693) then you have it built in.  
+If you are using [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693) or [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is-azure-data-studio?WT.mc_id=DP-MVP-5002693) then you have it built in.
 
 You can press `CTRL+SHIFT+P` and search for screencast
 
