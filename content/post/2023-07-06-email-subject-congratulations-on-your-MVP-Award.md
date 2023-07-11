@@ -7,6 +7,7 @@ categories:
   - Blog
   - Community
   - Award
+  - Data Saturdays
 
 tags:
   - MVP
