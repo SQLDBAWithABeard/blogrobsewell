@@ -17,7 +17,7 @@ tags:
 image: assets/uploads/2023/datasaturdayoslo-trainingday.png
 
 ---
-# The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell
+## Jess and Rob are doing training in Oslo in September at Data Saturday Oslo
 
 On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret [B](https://jesspomfret.com) [M](https://tech.lgbt/@Jpomfret)
 
@@ -26,9 +26,9 @@ Secure your spot now by registering at the Eventbrite page: [Register Here](http
 
 Designed specifically for DBAs working in hybrid environments, this training day will equip you with the knowledge and tools needed to excel in your role. Whether you're managing on-premises databases, Platform as a Service (PaaS) offerings, or Azure virtual machines, this training has you covered.
 
-As technology evolves, so does the role of a Database Administrator (DBA). In today's hybrid computing landscape, where applications are deployed across on-premises and cloud platforms, DBAs face new challenges and opportunities. To navigate this changing landscape, it's crucial to stay ahead of the curve and expand your skill set. That's why we're excited to present a full-day training session led by two industry experts: Jess Pomfret and Rob Sewell.
+As technology evolves, so does the role of a Database Administrator (DBA). In today's hybrid computing landscape, where applications are deployed across on-premises and cloud platforms, DBAs face new challenges and opportunities. To navigate this changing landscape, it's crucial to stay ahead of the curve and expand your skill set.
 
-Designed specifically for DBAs working in hybrid environments, this training day will equip you with the knowledge and tools needed to excel in your role. Whether you're managing on-premises databases, Platform as a Service (PaaS) offerings, or Azure virtual machines, this training has you covered.
+## Automation
 
 One of the key focuses of the training is automation. As authors of[dbatools in a Month of Lunches](https://beard.media/book)" we will provide hands-on experience using automation tooling, such as PowerShell and community-developed modules like dbatools, dbachecks, and ImportExcel. You'll learn how to automate routine tasks, streamline your operations, and save valuable time and effort. From simple tasks to complex processes, automation will become your best friend in managing your hybrid environment.
 
@@ -36,15 +36,21 @@ Additionally, this training we'll introduce you to the concept of infrastructure
 
 Whether you're a seasoned DBA, a developer working with SQL Server, an accidental DBA, or someone with DevOps responsibilities, this training is tailored to suit your needs. Jess and Rob will guide you through various scenarios, enabling you to sharpen your skills and empower your team to be more efficient.
 
-Rest assured, you don't need any specific equipment or tools to attend this training. All scripts and slides will be provided, and you'll have the opportunity to follow along with most of the demos. Just bring something to take notes with, as you'll be learning a wealth of valuable solutions to bring back to your workplace.
+Rest assured, you don't need any specific equipment or tools to attend this training. All scripts and slides will be provided, and you'll have the opportunity to follow along with most of the demos. Just bring something to take notes with, as you'll be learning a wealth of valuable solutions to bring back to your workplace. If you bring a laptop then having a container runtime like docker or podman will be beneficial.
+
+## Register Here
 
 Secure your spot now by registering at the Eventbrite page: [Register Here](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217).
 
-[![training day](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217)](assets/uploads/2023/datasaturdayoslo-trainingday.png)
+[![training day](assets/uploads/2023/datasaturdayoslo-trainingday.png)](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217)
+
+## Who are we?
 
 Jess Pomfret [B](https://jesspomfret.com) [M](https://tech.lgbt/@Jpomfret) is a Data Platform Architect and a Microsoft MVP. With a passion for SQL Server and PowerShell, she has been solving performance tuning challenges and automating processes since 2011. Jess is an active contributor to the open-source PowerShell modules dbatools and dbachecks, which help DBAs streamline SQL Server management. She's also made significant contributions to the SqlServerDsc module, enhancing its configuration capabilities.
 
 Rob Sewell is a former SQL Server DBA turned automation advocate. His areas of expertise include PowerShell, Azure, and SQL (PaaS). As a Cloud and Data Center MVP and Data Platform MVP, Rob actively supports and participates in various Data and PowerShell events worldwide. He shares his knowledge and experiences through his blog and Twitter, constantly engaging with the community. When he's not looking at a screen, Rob enjoys riding his bike and staying active.
+
+## Join Us
 
 Join us for this exciting training day, packed with demos and practical solutions that you can immediately implement in your hybrid SQL Server environment. Regardless of your experience level, this training will help you take your skills to the next level and optimize your workflows.
 
