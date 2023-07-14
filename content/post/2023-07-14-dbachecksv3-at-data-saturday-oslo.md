@@ -23,7 +23,7 @@ On Saturday September 2nd 2023, will be [Data Saturday Oslo](https://datasaturda
 
 For more information about this free Saturday event, visit the official event page at [DataSaturday0035](https://datasaturdays.com/2023-09-02-datasaturday0035/) where you can sign up. Don't wait, spaces are limited!
 
-I will be presenting a session with Jess Pomfret [B](https://jesspomfret.com) [M](https://tech.lgbt/@Jpomfret) and Cláudio Silva [Blog](https://claudioessilva.eu/) [Twitter](https://twitter.com/claudioessilva) introducing dbachecks v3.
+I will be presenting a session with Jess Pomfret [Blog](https://jesspomfret.com) [Mastodon](https://tech.lgbt/@Jpomfret) and Cláudio Silva [Blog](https://claudioessilva.eu/) [Twitter](https://twitter.com/claudioessilva) introducing dbachecks v3.
 
 ## abstract
 
