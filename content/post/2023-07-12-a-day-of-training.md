@@ -19,7 +19,7 @@ image: assets/uploads/2023/datasaturdayoslo-trainingday.png
 ---
 ## Jess and Rob are doing training in Oslo in September at Data Saturday Oslo
 
-On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret [B](https://jesspomfret.com) [M](https://tech.lgbt/@Jpomfret)
+On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret [Blog](https://jesspomfret.com) [Mastodon](https://tech.lgbt/@Jpomfret)
 
 Ready to take your DBA skills to the next level in a hybrid environment?
 Secure your spot now by registering at the Eventbrite page: [Register Here](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217).
