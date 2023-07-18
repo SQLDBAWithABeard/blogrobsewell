@@ -3,6 +3,13 @@ mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
 
+[outputs]
+    page = ["HTML"]
+    home = ["HTML", "RSS"]
+    section = ["HTML","RSS"]
+    taxonomyTerm = ["HTML", "RSS"]
+    taxonomy = ["HTML", "RSS"]
+
 favicon = "/favicon.ico"
 
 [footer]

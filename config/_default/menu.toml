@@ -7,6 +7,15 @@
 #icon = "home"
 #newtab = true
 
+[[main]]
+identifier = "rss"
+name = "RSS"
+url = "/index.xml"
+[main.params]
+icon = "rss"
+newtab = true
+
+
 [[social]]
 identifier = "github"
 name = "GitHub"

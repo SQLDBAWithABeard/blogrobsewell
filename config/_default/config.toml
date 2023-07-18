@@ -14,12 +14,3 @@ hasCJKLanguage = false
 
 # Change it to your Disqus shortname before using
 #disqusShortname = "hugo-theme-stack"
-
-rssFullContent = false
-
-[outputs]
-    page = ["HTML"]
-    home = ["HTML", "RSS"]
-    section = ["HTML","RSS"]
-    taxonomyTerm = ["HTML", "RSS"]
-    taxonomy = ["HTML", "RSS"]
