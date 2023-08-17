@@ -1,9 +1,10 @@
 ---
 title: "Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster"
-date: "2019-04-22" 
+date: "2019-04-22"
 categories:
-  - azure
+  - Azure
   - Blog
+  - IaC
 
 tags:
   - aks
@@ -55,11 +56,11 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
           inlineScript: |
             # the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
             call az group create --location $(location) --name $(TerraformStorageRG)
-            
+
             call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
-            
+
             call az storage container create --name terraform --account-name $(TerraformStorageAccount)
-    
+
       - task: AzurePowerShell@3
         displayName: 'Azure PowerShell script to get the storage key'
         inputs:
@@ -67,12 +68,12 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
           ScriptType: InlineScript
           Inline: |
             # Using this script we will fetch storage key which is required in terraform file to authenticate backend stoarge account
-          
+
             $key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
-          
+
             Write-Host "##vso[task.setvariable variable=TerraformStorageKey]$key"
           azurePowerShellVersion: LatestVersion
-    
+
       - task: qetza.replacetokens.replacetokens-task.replacetokens@3
         displayName: 'Replace tokens in terraform file'
         inputs:
@@ -82,17 +83,17 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
             **/*.tfvars
           tokenPrefix: '__'
           tokenSuffix: '__'
-    
+
       - powershell: |
           Get-ChildItem .\Build -Recurse
-        
-          Get-Content .\Build\*.tf 
-          Get-Content .\Build\*.tfvars 
-        
+
+          Get-Content .\Build\*.tf
+          Get-Content .\Build\*.tfvars
+
           Get-ChildItem Env: | select Name
         displayName: 'Check values in files'
         enabled: false
-    
+
       - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
         displayName: 'Initialise Terraform'
         inputs:
@@ -101,7 +102,7 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
           InstallTerraform: true
           UseAzureSub: true
           ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
-    
+
       - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
         displayName: 'Plan Terraform execution'
         inputs:
@@ -110,7 +111,7 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
           InstallTerraform: true
           UseAzureSub: true
           ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
-    
+
       - task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
         displayName: 'Apply Terraform'
         inputs:
@@ -150,10 +151,10 @@ The build.yaml file looks like this. The name is the USER/Repository Name and th
      resources:
       repositories:
         - repository: templates
-          type: GitHub 
+          type: GitHub
           name: SQLDBAWithABeard/Presentations-BuildTemplates-Private
           endpoint: SQLDBAWithABeardGitHub
-    
+
     jobs:
     - template: AzureTerraform.yaml@templates  # Template reference
 

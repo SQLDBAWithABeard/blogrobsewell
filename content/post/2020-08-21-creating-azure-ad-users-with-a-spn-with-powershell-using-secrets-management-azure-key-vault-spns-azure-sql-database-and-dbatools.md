@@ -1,11 +1,12 @@
 ---
 title: "Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools"
-date: "2020-08-21" 
+date: "2020-08-21"
 categories:
   - Blog
   - dbatools
   - Azure DevOps
   - SQL Server
+  - IaC
 
 tags:
   - automation
@@ -15,7 +16,7 @@ tags:
   - Secret Management
   - Import-CliXml
   - SPN
-  - Terraform
+  - terraform
   - Azure SQL Database
   - Key Vault
 
@@ -44,7 +45,7 @@ The privileges required to do this for a single identity are quite high
 
 so now, you can assign an Azure Active Directory Group to that Role and allow less-privileged users to add the identity to this group . The documentation is [here](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal?WT.mc_id=DP-MVP-5002693) and there is a tutorial [here](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-service-principal-tutorial?WT.mc_id=DP-MVP-5002693) explaining the steps you need to take.
 
-What is an Azure SPN?  
+What is an Azure SPN?
 ----------------------------------------
 
 > An Azure service principal is an identity created for use with applications, hosted services, and automated tools to access Azure resources.
@@ -99,8 +100,8 @@ Adding the SPN details to the Azure Key Vault
 Using the values for AppID – (Note NOT the display name) and the values for the password from the Azure CLI output or by creating a new secret for the SPN with PowerShell or via the portal. You can use the following code to add the SPN details and the tenantid to the Azure Key Vault using the Secret Management module
 
     $ClientId = Read-Host "Enter ClientID" -AsSecureString
-    $SecretFromPortal = Read-Host "Enter Client Secret" -AsSecureString 
-    $tenantid = Read-Host "Enter TenantId" -AsSecureString 
+    $SecretFromPortal = Read-Host "Enter Client Secret" -AsSecureString
+    $tenantid = Read-Host "Enter TenantId" -AsSecureString
     Set-Secret -Vault BeardKeyVault -Name service-principal-guid -Secret $ClientId
     Set-Secret -Vault BeardKeyVault -Name service-principal-secret -SecureStringSecret $SecretFromPortal
     Set-Secret -Vault BeardKeyVault -Name Tenant-Id -Secret $tenantid
@@ -120,8 +121,8 @@ and also at the command line with the Secret Management module using
 Can my user connect?
 --------------------
 
-If I try to connect in Azure Data Studio to my Azure SQL Database with my AAD account to the temp-sql-db-beard database. It fails.  
-  
+If I try to connect in Azure Data Studio to my Azure SQL Database with my AAD account to the temp-sql-db-beard database. It fails.
+
 By the way a great resource for troubleshooting the SQL error 18456 failure states can be found here [https://sqlblog.org/2020/07/28/troubleshooting-error-18456](https://sqlblog.org/2020/07/28/troubleshooting-error-18456)
 
 ![](https://blog.robsewell.com/assets/uploads/2020/08/image-13.png)
@@ -139,10 +140,10 @@ You can connect to Azure SQL Database with an Azure SPN using the following code
     $Clientsecret = Get-Secret -Vault BeardKeyVault -Name service-principal-secret
     $credential = New-Object System.Management.Automation.PSCredential ($appid,$Clientsecret)
     $tenantid = Get-Secret -Vault BeardKeyVault -Name Sewells-Tenant-Id -AsPlainText
-    $AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $databasename  -SqlCredential $credential -Tenant $tenantid  -TrustServerCertificate 
-    
-    Invoke-DbaQuery -SqlInstance $AzureSql -Database master  -SqlCredential $credential -Query "Select SUSER_NAME() as 'username'" 
-    
+    $AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $databasename  -SqlCredential $credential -Tenant $tenantid  -TrustServerCertificate
+
+    Invoke-DbaQuery -SqlInstance $AzureSql -Database master  -SqlCredential $credential -Query "Select SUSER_NAME() as 'username'"
+
 
 ![](https://blog.robsewell.com/assets/uploads/2020/08/image-14.png)
 
@@ -154,9 +155,9 @@ Add a user to the user database
 I can then add my user to the temp-sql-db-beard Database. I need to create a new connection to the user database as you cannot use the `USE [DatabaseName]` statement
 
     $Userdatabasename = 'temp-sql-db-beard'
-    
-    $AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $Userdatabasename -SqlCredential $credential -Tenant $tenantid  -TrustServerCertificate 
-    
+
+    $AzureSQL = Connect-DbaInstance -SqlInstance $SqlInstance -Database $Userdatabasename -SqlCredential $credential -Tenant $tenantid  -TrustServerCertificate
+
 
 Whilst you can use dbatools to create new users in Azure SQL Database at present you cant create AAD users. You can run a T-SQL Script to do this though. This script will create a contained database user in the database. I have added the role membership also but this can also be done with [Add-DbaDbRoleMember](https://docs.dbatools.io/#Add-DbaDbRoleMember) from dbatools
 
@@ -176,8 +177,8 @@ I have my user and it is of type External user. Lets see if I can connect
 
 ![](https://blog.robsewell.com/assets/uploads/2020/08/image-16.png)
 
-Bingo 🙂  
-  
+Bingo 🙂
+
 Happy Automating
 
 Because I dont like to see awesome people struggling with PowerShell

@@ -1,15 +1,16 @@
 ---
 title: "Building Azure SQL Db with Terraform with Visual Studio Code"
-date: "2019-04-17" 
+date: "2019-04-17"
 categories:
   - Blog
+  - IaC
 
 tags:
-  - Terraform
+  - terraform
   - Azure
   - Azure SQL Database
   - Visual Studio Code
-  - IaaC
+  - IaC
 
 
 image: assets/uploads/2019/04/image-42.png
@@ -22,10 +23,10 @@ What is Terraform?
 
 According to the website
 
->   
+>
 > HashiCorp Terraform enables you to safely and predictably create, change, and improve infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned
-> 
->   
+>
+>
 > [https://www.terraform.io/](https://www.terraform.io/)
 
 This means that I can define my infrastructure as code. If I can do that then I can reliably do the same thing again and again, at work to create environments that have the same configuration or outside of work to repeatedly build the environment I need.
@@ -39,7 +40,7 @@ To understand how to build a thing the best place to start is the documentation 
       name     = "acceptanceTestResourceGroup1"
       location = "West US"
     }
-    
+
     resource "azurerm_sql_server" "test" {
       name                         = "mysqlserver"
       resource_group_name          = "${azurerm_resource_group.test.name}"
@@ -48,13 +49,13 @@ To understand how to build a thing the best place to start is the documentation 
       administrator_login          = "4dm1n157r470r"
       administrator_login_password = "4-v3ry-53cr37-p455w0rd"
     }
-    
+
     resource "azurerm_sql_database" "test" {
       name                = "mysqldatabase"
       resource_group_name = "${azurerm_resource_group.test.name}"
       location            = "West US"
       server_name         = "${azurerm_sql_server.test.name}"
-    
+
       tags = {
         environment = "production"
       }
@@ -74,17 +75,17 @@ So I can put that code into a file (name it main.tf) and alter it with the value
         description = "The name of the presentation - used for     tagging Azure resources so I know what they belong to"
         default = "dataindevon"
     }
-    
+
     variable "ResourceGroupName" {
       description = "The Resource Group Name"
       default     = "beardrules"
     }
-    
+
     variable "location" {
       description = "The Azure Region in which the resources in     this example should exist"
       default     = "uksouth"
     }
-    
+
     variable "SqlServerName" {
       description = "The name of the Azure SQL Server to be     created or to have the database on - needs to be unique,     lowercase between 3 and 24 characters including the prefix"
       default     = "jeremy"
@@ -97,17 +98,17 @@ So I can put that code into a file (name it main.tf) and alter it with the value
       description = "The Azure SQL Database users password"
       default     = "JonathanlovesR3ge%"
     }
-    
+
     variable "SqlDatabaseName" {
       description = "The name of the Azure SQL database on - needs     to be unique, lowercase between 3 and 24 characters     including the prefix"
       default     = "jsdb"
     }
-    
+
     variable "Edition" {
       description = "The Edition of the Database - Basic,     Standard, Premium, or DataWarehouse"
       default     = "Standard"
     }
-    
+
     variable "ServiceObjective" {
       description = "The Service Tier S0, S1, S2, S3, P1, P2, P4,     P6, P11 and ElasticPool"
       default     = "S0"
@@ -119,7 +120,7 @@ and my main.tf then looks like this.
     provider "azurerm" {
         version = "=1.24.0"
     }
-    
+
     resource "azurerm_resource_group" "presentation" {
       name     = "${var.ResourceGroupName}"
       location = "${var.location}"
@@ -127,7 +128,7 @@ and my main.tf then looks like this.
         environment = "${var.presentation}"
       }
     }
-    
+
     resource "azurerm_sql_server" "presentation" {
       name                         = "${var.SqlServerName}"
       resource_group_name          = "${azurerm_resource_group.    presentation.name}"
@@ -139,7 +140,7 @@ and my main.tf then looks like this.
         environment = "${var.presentation}"
       }
     }
-    
+
     resource "azurerm_sql_database" "presentation" {
       name                = "${var.SqlDatabaseName}"
       resource_group_name = "${azurerm_sql_server.presentation.    resource_group_name}"
@@ -147,7 +148,7 @@ and my main.tf then looks like this.
       server_name         = "${azurerm_sql_server.presentation.    name}"
       edition                          = "${var.Edition}"
       requested_service_objective_name = "${var.ServiceObjective}"
-    
+
       tags = {
         environment = "${var.presentation}"
       }

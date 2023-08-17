@@ -1,19 +1,20 @@
 ---
 title: "Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools"
-date: "2019-04-25" 
+date: "2019-04-25"
 categories:
   - Azure
   - Blog
   - dbatools
   - PowerShell
   - SQL Server
+  - IaC
 
 tags:
   - azure
   - dbatools
   - linux
   - pwsh
-  - Terraform
+  - terraform
   - PowerShell
 
 

@@ -1,10 +1,11 @@
 ---
 title: "Using the same Azure DevOps build steps for Terraform with different Pipelines with Task Groups to build an Azure Linux SQL VM"
-date: "2019-04-22" 
+date: "2019-04-22"
 categories:
   - azure
   - Blog
   - DevOps
+  - IaC
 
 tags:
   - automation
@@ -23,8 +24,8 @@ In my [last post](https://blog.robsewell.com/building-azure-sql-db-with-terrafor
 The plan all along has been to enable me to build _different_ environments depending on the requirement. Obviously I can repeat the steps from the last post for a new repository containing a Terraform code for a different environment but
 
 > If you are going to do something more than once Automate It
-> 
-> who first said this? Anyone know?  
+>
+> who first said this? Anyone know?
 
 The build steps for building the Terraform are the same each time (if I keep a standard folder and naming structure) so it would be much more beneficial if I could keep them in a single place and any alterations to the process only need to be made in the one place 🙂
 
@@ -33,10 +34,10 @@ Task Groups
 
 Azure DevOps has task groups. On [the Microsoft Docs web-page](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693) they are described as
 
->   
+>
 > A _task group_ allows you to encapsulate a sequence of tasks, already defined in a build or a release pipeline, into a single reusable task that can be added to a build or release pipeline, just like any other tas
-> 
->   
+>
+>
 > [https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693)
 
 If you are doing this with a more complicated existing build pipeline it is important that [you read the Before You Create A Task Group on the docs pag](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/task-groups?view=azure-devops?WT.mc_id=DP-MVP-5002693)e. This will save you time when trying to understand why variables are not available (Another grey hair on my beard!)
@@ -126,7 +127,7 @@ This will warn you that any changes will affect all pipelines and task groups th
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-108.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-108.png?ssl=1)
 
-  
+
 
 which will show you what will be affected.
 

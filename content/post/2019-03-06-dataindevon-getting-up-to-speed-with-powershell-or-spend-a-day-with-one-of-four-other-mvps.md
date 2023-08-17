@@ -1,6 +1,6 @@
 ---
 title: "#DataInDevon – Getting up to speed with PowerShell or spend a day with one of four other MVPs :-)"
-date: "2019-03-06" 
+date: "2019-03-06"
 categories:
   - Blog
   - PowerShell
@@ -9,6 +9,7 @@ tags:
   - dataindevon
   - PowerShell
   - Global Azure Bootcamp
+    terraform
 
 ---
 Saturday 27th April is Global Azure Bootcamp day
@@ -33,9 +34,9 @@ Friday Is Training Day
 
 It’s a great opportunity to get cheap high-quality training from some of the best in their areas of expertise. There are still some tickets for £175 and the price will rise only to £200. I think that £200 is fantastic value to be able to spend a day learning from
 
-Alex Whittles – Data Platform MVP – [Bi in Azure](https://sqlsouthwest.co.uk/training-day-schedule/#BiinAzure)  
-John Martin – Data Platform MVP – [Infrastructure as Code with Terraform](https://sqlsouthwest.co.uk/training-day-schedule/#InfrastructureAsCode)  
-Terry McCann – Data Platform MVP – [Machine Learning: From model to production using the cloud, containers and Dev Ops ](https://sqlsouthwest.co.uk/training-day-schedule/#MachineLearning)  
+Alex Whittles – Data Platform MVP – [Bi in Azure](https://sqlsouthwest.co.uk/training-day-schedule/#BiinAzure)
+John Martin – Data Platform MVP – [Infrastructure as Code with Terraform](https://sqlsouthwest.co.uk/training-day-schedule/#InfrastructureAsCode)
+Terry McCann – Data Platform MVP – [Machine Learning: From model to production using the cloud, containers and Dev Ops ](https://sqlsouthwest.co.uk/training-day-schedule/#MachineLearning)
 William Durkin – Data Platform MVP – [Performance Pain Reduction for Data Platform Projects](https://sqlsouthwest.co.uk/training-day-schedule/#Performance)
 
 and myself – [Getting up to speed with PowerShell](https://sqlsouthwest.co.uk/training-day-schedule/#Powershell)

@@ -1,10 +1,11 @@
 ---
 title: "Building Azure SQL Db with Terraform using Azure DevOps"
-date: "2019-04-20" 
+date: "2019-04-20"
 categories:
-  - azure
+  - Azure
   - Blog
   - Azure DevOps
+  - IaC
 
 tags:
   - terraform
@@ -17,8 +18,8 @@ image: assets/uploads/2019/04/image-49.png
 ---
 In [my last post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/) I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.
 
-Of course, I haven't stopped there, who wants to manually run code to create things. There was a lot of install this and set up that. I would rather give the code to a build system and get it to run it. I can then even set it to automatically deploy new infrastructure when I commit some code to alter the configuration.  
-  
+Of course, I haven't stopped there, who wants to manually run code to create things. There was a lot of install this and set up that. I would rather give the code to a build system and get it to run it. I can then even set it to automatically deploy new infrastructure when I commit some code to alter the configuration.
+
 This scenario though is to build environments for presentations. Last time I created an Azure SQL DB and tagged it with DataInDevon (By the way you can get tickets for [Data In Devon here](http://dataindevon.co.uk) – It is in Exeter on April 26th and 27th)
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-49.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-49.png?ssl=1)
@@ -70,9 +71,9 @@ Inside the script block I put the following code
 
     # the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
     call az group create --location $(location) --name $(TerraformStorageRG)
-    
+
     call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
-    
+
     call az storage container create --name terraform --account-name $(TerraformStorageAccount)
 
 This will create a Resource Group, a storage account and a container and use some variables to provide the values, we will come back to the variables later.
@@ -95,9 +96,9 @@ With those created, I go back to Tasks and add an Azure PowerShell task
 I then add this code to get the access key and overwrite the variable.
 
     # Using this script we will fetch storage key which is required in terraform file to authenticate backend storage account
-    
+
     $key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
-    
+
     Write-Host "##vso[task.setvariable variable=TerraformStorageKey]$key"
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-67.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-67.png?ssl=1)
@@ -114,13 +115,13 @@ The manual folders hold the code [from the last blog post](https://blog.robsewel
     provider "azurerm" {
         version = "=1.24.0"
     }
-    
+
     terraform {
       backend "azurerm" {
         key = "terraform.tfstate"
       }
     }
-    
+
     resource "azurerm_resource_group" "presentation" {
       name     = "${var.ResourceGroupName}"
       location = "${var.location}"
@@ -128,7 +129,7 @@ The manual folders hold the code [from the last blog post](https://blog.robsewel
         environment = "${var.presentation}"
       }
     }
-    
+
     resource "azurerm_sql_server" "presentation" {
       name                         = "${var.SqlServerName}"
       resource_group_name          = "${azurerm_resource_group.presentation.name}"
@@ -140,7 +141,7 @@ The manual folders hold the code [from the last blog post](https://blog.robsewel
         environment = "${var.presentation}"
       }
     }
-    
+
     resource "azurerm_sql_database" "presentation" {
       name                = "${var.SqlDatabaseName}"
       resource_group_name = "${azurerm_sql_server.presentation.resource_group_name}"
@@ -148,7 +149,7 @@ The manual folders hold the code [from the last blog post](https://blog.robsewel
       server_name         = "${azurerm_sql_server.presentation.name}"
       edition                          = "${var.Edition}"
       requested_service_objective_name = "${var.ServiceObjective}"
-    
+
       tags = {
         environment = "${var.presentation}"
       }
@@ -160,22 +161,22 @@ The variables.tf folder looks like this.
         description = "The name of the presentation - used for tagging Azure resources so I know what they belong to"
         default = "__Presentation__"
     }
-    
+
     variable "ResourceGroupName" {
       description = "The Prefix used for all resources in this example"
       default     = "__ResourceGroupName__"
     }
-    
+
     variable "location" {
       description = "The Azure Region in which the resources in this example should exist"
       default     = "__location__"
     }
-    
+
     variable "SqlServerName" {
       description = "The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase between 3 and 24 characters including the prefix"
       default     = "__SqlServerName__"
     }
-    
+
     variable "SQLServerAdminUser" {
       description = "The name of the Azure SQL Server Admin user for the Azure SQL Database"
       default     = "__SQLServerAdminUser__"
@@ -188,13 +189,13 @@ The variables.tf folder looks like this.
       description = "The name of the Azure SQL database on - needs to be unique, lowercase between 3 and 24 characters including the prefix"
       default     = "__SqlDatabaseName__"
     }
-    
-    
+
+
     variable "Edition" {
       description = "The Edition of the Database - Basic, Standard, Premium, or DataWarehouse"
       default     = "__Edition__"
     }
-    
+
     variable "ServiceObjective" {
       description = "The Service Tier S0, S1, S2, S3, P1, P2, P4, P6, P11 and ElasticPool"
       default     = "__ServiceObjective__"
@@ -205,11 +206,11 @@ It is exactly the same except that the values have been replaced by the value na
 The backend-config.tf file will store the details of the state that will be created by the first step and use the access key that has been retrieved in the second step.
 
     resource_group_name = "__TerraformStorageRG__"
-    
+
     storage_account_name = "__TerraformStorageAccount__"
-    
+
     container_name = "terraform"
-    
+
     access_key = "__TerraformStorageKey__"
 
 I need to add the following variables to my Azure DevOps Build – Presentation, ResourceGroupName, SqlServerName, SQLServerAdminUser, SQLServerAdminPassword, SqlDatabaseName, Edition, ServiceObjective . Personally I would advise setting the password or any other sensitive values to sensitive by clicking the padlock for that variable. This will stop the value being written to the log as well as hiding it behind *’s
@@ -236,9 +237,9 @@ I am going to use a standard naming convention for my infrastructure code files 
 Because I often forget this step and to aid in troubleshooting I add another step to read the contents of the files and place them in the logs. I do this by adding a PowerShell step which uses
 
     Get-ChildItem .\Build -Recurse
-    
-    Get-Content .\Build\*.tf 
-    Get-Content .\Build\*.tfvars 
+
+    Get-Content .\Build\*.tf
+    Get-Content .\Build\*.tfvars
 
 Under control options there is a check box to enable or disable the steps so once I know that everything is ok with the build I will disable this step. The output in the log of a build will look like this showing the actual values in the files. This is really useful for finding spaces :-).
 
