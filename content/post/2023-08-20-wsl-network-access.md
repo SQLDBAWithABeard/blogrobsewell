@@ -10,6 +10,8 @@ tags:
   - PowerShell
   - bash
   - terraform
+  - WSL
+  - DNS
 
 
 image: assets/uploads/2023/wsl-dns-fail.png

@@ -7,11 +7,8 @@ categories:
   - IaC
 
 tags:
-  - PowerShell
   - bash
   - terraform
-  - wsl
-  - dns
 
 
 image: assets/uploads/2023/terraform.png
