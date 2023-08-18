@@ -1,6 +1,6 @@
 ---
 title: "Microsoft Values The Community"
-date: "2021-02-17" 
+date: "2021-02-17"
 categories:
   - Blog
   - Community
@@ -20,21 +20,25 @@ When PASS announced that operations would cease, a common question was "OK, so w
 
 # User Groups
 
-User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from. 
+User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from.
 
-Attending my local user group for the first time really helped me to improve. [At the time I was really struggling in my job with no idea how to get support from people who __know__ what should be done.](https://blog.robsewell.com/blog/you-have-to-start-somewhere/) I joined the group, I made many friends and I learnt a lot. My OneNote is full of notes I have taken during User Group sessions. I became involved in running the user group and the associated SQL Saturday and then became aware of the wider community. 
+Attending my local user group for the first time really helped me to improve. [At the time I was really struggling in my job with no idea how to get support from people who __know__ what should be done.](https://blog.robsewell.com/blog/you-have-to-start-somewhere/) I joined the group, I made many friends and I learnt a lot. My OneNote is full of notes I have taken during User Group sessions. I became involved in running the user group and the associated SQL Saturday and then became aware of the wider community.
 
 We are always very proud of the number of speakers who started their speaking career at our user group and have gone to great things. I too, [started my speaking career at our user group](https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/).
 
-Our little user group in Exeter in the UK (or in Teams these days!) and user groups in general have a big place in my heart and I am a strong supporter of them. (If you would like a speaker, please always feel free to get in touch with me.) so I too, wondered 
+Our little user group in Exeter in the UK (or in Teams these days!) and user groups in general have a big place in my heart and I am a strong supporter of them. (If you would like a speaker, please always feel free to get in touch with me.) so I too, wondered
 
-> What is going to happen to the user groups now?  
-  
+> What is going to happen to the user groups now?
+
 # Microsoft Values The Community
 
-Microsoft have announced the support that they will be giving to user groups. You can watch Buck Woody [t](https://twitter.com/BuckWoodyMSFT) explain everything that the Microsoft Data Platform is doing to empower the community on Youtube [here](https://youtu.be/obFlSwpIihc). (While you are there, I suggest subscribing to the channel, it's really awesome) 
+Microsoft have announced the support that they will be giving to user groups. You can watch Buck Woody [t](https://twitter.com/BuckWoodyMSFT) explain everything that the Microsoft Data Platform is doing to empower the community on Youtube
 
-Microsoft always has and always will support the technical professionals who use their products and they recognise that at the grass roots, the local user groups are the core of the community. 
+ {{< youtube obFlSwpIihc >}}
+
+ (While you are there, I suggest subscribing to the channel, it's really awesome)
+
+Microsoft always has and always will support the technical professionals who use their products and they recognise that at the grass roots, the local user groups are the core of the community.
 
 # So Microsoft are taking over the User Groups?
 
@@ -66,18 +70,18 @@ You are in charge, if you already run your user group and don't need these resou
 
 # What are the requirements?
 
-Throughout the duration of the Group’s participation in the Program, the Group will: 
+Throughout the duration of the Group’s participation in the Program, the Group will:
 1.	Have a group leader and a designated co-leader who have each accepted these T&Cs.
-2.	Not charge other members a fee to attend Group meetings, except in cases in which the venue and/or hosting costs (e.g., food and beverages) are passed through to members. 
-3.	Maintain a published code of conduct that is easily accessible from the Group’s home page. See guidance [https://aka.ms/atg/guidance](https://aka.ms/atg/guidance?WT.mc_id=DP-MVP-5002693). 
-4.	Maintain a regular meeting cadence including having meetings at least six times per year that relate to or cover Azure Data products & services or relate to Diversity, Equity & Inclusion (DE&I) or Professional Development targeted to data professionals.  
-5.	Comply with Program’s Code of Conduct located at [https://aka.ms/atg/code_of_conduct](https://aka.ms/atg/code_of_conduct?WT.mc_id=DP-MVP-5002693). 
+2.	Not charge other members a fee to attend Group meetings, except in cases in which the venue and/or hosting costs (e.g., food and beverages) are passed through to members.
+3.	Maintain a published code of conduct that is easily accessible from the Group’s home page. See guidance [https://aka.ms/atg/guidance](https://aka.ms/atg/guidance?WT.mc_id=DP-MVP-5002693).
+4.	Maintain a regular meeting cadence including having meetings at least six times per year that relate to or cover Azure Data products & services or relate to Diversity, Equity & Inclusion (DE&I) or Professional Development targeted to data professionals.
+5.	Comply with Program’s Code of Conduct located at [https://aka.ms/atg/code_of_conduct](https://aka.ms/atg/code_of_conduct?WT.mc_id=DP-MVP-5002693).
 6.	Adhere to Microsoft’s Trademark and Brand guidelines, when using any Microsoft trademarks or referring to Microsoft’s software, products or services (see [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx?WT.mc_id=DP-MVP-5002693).
 
 # Which technologies do these benefits apply to?
 
 - SQL Server (on Windows, Linux, and in Containers, on-premises and in Microsoft Azure)
-- Azure Data Lake    
+- Azure Data Lake
 - Azure Cosmos DB
 - Azure HDInsight, Hadoop and Spark on Azure
 - Azure Search

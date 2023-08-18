@@ -1,6 +1,6 @@
 ---
 title: "Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools"
-date: "2017-03-06" 
+date: "2017-03-06"
 categories:
   - Blog
 
@@ -25,9 +25,9 @@ Once you have downloaded and installed SSMS you can load the module.
 Import-Module sqlserver
 ````
 There is one situation where you will get an error loading the sqlserver module into PowerShell. If you have the SQLPS module already imported then you will get the following error:
-  
+
 > Import-Module : The following error occurred while loading the extended type data file:
-  
+
 ![sqlserver-module-error](https://blog.robsewell.com/assets/uploads/2017/02/sqlserver-module-error.png)
 
 In that case you will need to remove the SQLPS module first.
@@ -52,34 +52,34 @@ while ($I -lt 10) {
     $i++
 }
 ````
-Now that we have those users in files we can assign them to a variable by using `Get-Content`  
-  
-````$Admins = Get-Content 'C:\temp\Admins.txt'````  
-  
-Of course we can use any source for our users 
-- a database 
-- an excel file 
-- Active Directory 
-- or even just type them in.  
+Now that we have those users in files we can assign them to a variable by using `Get-Content`
 
-We can use the `Add-SQLLogin` command from the sqlserver module to add our users as SQL Logins, but at present we cannot add them as database users and assign them to a role.  
-If we want to add a Windows Group or a Windows User to our SQL Server we can do so using:  
+````$Admins = Get-Content 'C:\temp\Admins.txt'````
+
+Of course we can use any source for our users
+- a database
+- an excel file
+- Active Directory
+- or even just type them in.
+
+We can use the `Add-SQLLogin` command from the sqlserver module to add our users as SQL Logins, but at present we cannot add them as database users and assign them to a role.
+If we want to add a Windows Group or a Windows User to our SQL Server we can do so using:
 
 ````
-Add-SqlLogin -ServerInstance $Server -LoginName $User -LoginType WindowsUser -DefaultDatabase tempdb -Enable -GrantConnectSql  
+Add-SqlLogin -ServerInstance $Server -LoginName $User -LoginType WindowsUser -DefaultDatabase tempdb -Enable -GrantConnectSql
 ````
-Notice that we need to enable and grant connect SQL to the user. 
+Notice that we need to enable and grant connect SQL to the user.
 
-If we want to add a SQL login the code is pretty much the same but we either have to enter the password in an authentication box or pass in a PSCredential object holding the username and password. Keeping credentials secure in PowerShell scripts is outside the scope of this post and the requirement is for none-live environments so we will pass in the same password for all users as a string to the script. You may want or be required to achieve this in a different fashion.  
+If we want to add a SQL login the code is pretty much the same but we either have to enter the password in an authentication box or pass in a PSCredential object holding the username and password. Keeping credentials secure in PowerShell scripts is outside the scope of this post and the requirement is for none-live environments so we will pass in the same password for all users as a string to the script. You may want or be required to achieve this in a different fashion.
 
 ````
 $Pass = ConvertTo-SecureString -String $Password -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Pass
 Add-SqlLogin -ServerInstance $Server -LoginName $User -LoginType $LoginType -DefaultDatabase tempdb -Enable -GrantConnectSql -LoginPSCredential $Credential
 ````
-We can ensure that we are not trying to add logins that already exist using  
+We can ensure that we are not trying to add logins that already exist using
 
-```` 
+````
 if(!($srv.Logins.Contains($User)))
 {
 ````
@@ -101,7 +101,7 @@ and add them to a database role.
 $db.roles[$role].AddMember($User)
 ````
 I created a little function to call in the script and then simply loop through our users and admins and call the function.
-```` 
+````
 foreach ($User in $Users) {
     Add-UserToRole -Password $Password -User $user -Server $server -Role $Userrole -LoginType SQLLogin
 }
@@ -111,32 +111,32 @@ foreach ($User in $Admins) {
 }
 ````
 
-To check that they have been added correctly I simply use the <A href="https://dbatools.io/Get-DbaDbRoleMember" target=_blank>Get-DbaRoleMember</A>;command from dbatools and output it to <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/out-gridview" target=_blank>Out-GridView</A>&nbsp;using the alias ogv as I am on the command line:  
- 
+To check that they have been added correctly I simply use the <A href="https://dbatools.io/Get-DbaDbRoleMember" target=_blank>Get-DbaRoleMember</A>;command from dbatools and output it to <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/out-gridview" target=_blank>Out-GridView</A>&nbsp;using the alias ogv as I am on the command line:
+
 ````
 Get-DbaRoleMember -SqlInstance $server |ogv
 ````
 which looks like this:
-  
+
   ![get-dbarole-memebr](https://blog.robsewell.com/assets/uploads/2017/02/get-dbarole-memebr.png)
 
-Once we need to clean up the logins and users we can use the <A href="https://msdn.microsoft.com/hu-hu/mt786484" target=_blank>Get-SQLLogin</A> and <A href="https://msdn.microsoft.com/hu-hu/mt786485" target=_blank>Remove-SQLLogin</A> commands from the sqlserver module to remove the logins and if we do that first we can then use the dbatools command <A href="https://dbatools.io/functions/remove-sqlorphanuser/" target=_blank>Remove-SQLOrphanuser</A> to remove the orphaned users 🙂 (I thought that was rather cunning!)  
+Once we need to clean up the logins and users we can use the <A href="https://msdn.microsoft.com/hu-hu/mt786484" target=_blank>Get-SQLLogin</A> and <A href="https://msdn.microsoft.com/hu-hu/mt786485" target=_blank>Remove-SQLLogin</A> commands from the sqlserver module to remove the logins and if we do that first we can then use the dbatools command <A href="https://dbatools.io/functions/remove-sqlorphanuser/" target=_blank>Remove-SQLOrphanuser</A> to remove the orphaned users 🙂 (I thought that was rather cunning!)
 
 ````
 (Get-SqlLogin -ServerInstance $server).Where{$_.Name -like '*Beard_Service_*'}|Remove-SqlLogin
 Remove-SQLOrphanUser -SqlServer $Server -databases $database
 ````
 
-The Remove-SQLLogin will prompt for confirmation and the result of the Remove-SQLOrphanUser looks like this  
+The Remove-SQLLogin will prompt for confirmation and the result of the Remove-SQLOrphanUser looks like this
 
 ![image](https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png)
 
-When you are looking at doing this type of automation with PowerShell, you should remember always to make use of <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/get-command" target=_blank>Get-Command</A>, <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/get-help" target=_blank>Get-Help</A> and <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/get-member" target=_blank>Get-Member</A>. That will enable you to work out how to do an awful lot. I have a short video on youtube about this:  
-  
-{% include youtubePlayer.html id="zC-KpI89fkg" %}
+When you are looking at doing this type of automation with PowerShell, you should remember always to make use of <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/get-command" target=_blank>Get-Command</A>, <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/get-help" target=_blank>Get-Help</A> and <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/get-member" target=_blank>Get-Member</A>. That will enable you to work out how to do an awful lot. I have a short video on youtube about this:
 
-and when you get stuck come and ask in the SQL Server Slack at <A href="https://sqlps.io/slack" target=_blank>https://sqlps.io/slack</A>. You will find a powershellhelp channel in there.  
-Here is the complete code:  
+ {{< youtube zC-KpI89fkg >}}
+
+and when you get stuck come and ask in the SQL Server Slack at <A href="https://sqlps.io/slack" target=_blank>https://sqlps.io/slack</A>. You will find a powershellhelp channel in there.
+Here is the complete code:
 
 ````
 #Requires -module sqlserver

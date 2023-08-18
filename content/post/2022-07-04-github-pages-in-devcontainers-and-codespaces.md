@@ -105,4 +105,4 @@ The rest is pretty much the same except the url!
 
 If you prefer video then you can find one on Youtube showing the same process.
 
-{% include youtubePlayer.html id="aFFmPlbjfCw" %}
+ {{< youtube aFFmPlbjfCw >}}

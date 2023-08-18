@@ -1,6 +1,6 @@
 ---
 title: "Creating a New Data Saturdays event"
-date: "2021-03-18" 
+date: "2021-03-18"
 categories:
   - Blog
   - Community
@@ -30,7 +30,7 @@ A Data Saturday is an event that provides (usually free) training and informatio
 
 The Data Saturdays resource is an [open-source repository](https://github.com/sqlcollaborative/datasaturdays) which enables event organisers to easily build a web presence as an entry point into their event. It integrates with other free event management solutions such as [Sessionize](https://sessionize.com) enabling Call For Speakers, easily integrating the schedule, room links and speaker walls. The website is [https://datasaturdays.com](https://datasaturdays.com)
 
-Here is a screenshot of the first Data Saturday "in" Pordenone.  
+Here is a screenshot of the first Data Saturday "in" Pordenone.
 
 ![Pordenone](https://blog.robsewell.com//assets/uploads/2021/datasaturday1.png)
 
@@ -57,9 +57,9 @@ The old method of creating an event involved the organiser providing the require
 
 I love automation, I get a real buzz out of taking manual monotonous tasks and automating them. I looked at the process we were following and took the bait and decided to automate it. I have created a data-driven process for creating and updating the event web-page and the rest of this blog post is an accompaniment to [the official documentation in the Wiki in the Data Saturdays GitHub repository](https://github.com/sqlcollaborative/DataSaturdays/wiki). I might also blog about how I did it.
 
-If you wish to just watch a video, you can find that here  
+If you wish to just watch a video, you can find that here
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QdoZ7NNn32c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+ {{< youtube QdoZ7NNn32c >}}
 
 ## Creating a New Data Saturday Event
 
@@ -81,7 +81,7 @@ It will ask you where you want to fork it and you should choose your own GitHub 
 
 ![forkwhere](https://blog.robsewell.com//assets/uploads/2021/forkwhere.png)
 
-It will only take a few seconds and you will have a fork of the repository in your own account. 
+It will only take a few seconds and you will have a fork of the repository in your own account.
 
 ### Clone the Repository to your machine
 
@@ -97,7 +97,7 @@ If you do not see Git:Clone you will need to install git from [https://git-scm.c
 
 ### Create a new branch
 
-You create a new branch to hold your changes by clicking on the branch name in the bottom left 
+You create a new branch to hold your changes by clicking on the branch name in the bottom left
 
 ![branchchoose](https://blog.robsewell.com//assets/uploads/2021/branchchoose.png)
 
@@ -137,13 +137,13 @@ This is the most important file. This file is the one that will feed the page th
 
 In the `_data/events` directory create a new file named `datasaturdayXXXX.yml` (The XXXX is your number again) example `datasaturday0007.yml`
 
-In this file paste all the following 
+In this file paste all the following
 
 ````
 name: "This is the name of your event inside the double quotes"
 date: The date of your event in YYYY-MM-DD HH:mm:ss TZ IE 2021-06-12 08:00:00 -0000
 
-description: "Your event description inside double quotes, you may use HTML. 
+description: "Your event description inside double quotes, you may use HTML.
 
 You MUST escape double quotes with a backslash \
 
@@ -192,7 +192,7 @@ The example above has no problems so the YAML is correct. If it is not you will 
 
 Normally with YAML the problem is spaces, try to line up the text until the problem goes away.
 
-### Sync your local repository with GitHub 
+### Sync your local repository with GitHub
 
 Once your changes have been made, you will need to commit them with a commit message. We suggest that it is something relevant to your event
 

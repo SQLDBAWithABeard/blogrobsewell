@@ -16,9 +16,9 @@ tags:
 
 image: assets/uploads/2016/09/pester-ola-check.png
 ---
-If you are a SQL DBA you will have heard of [Ola Hallengrens Maintenance solution](https://ola.hallengren.com/) If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also [watch a video from Ola at SQL Bits](https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution)  
-Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to [Pester](https://github.com/pester/Pester) You can find a great [how to get started here](https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx) which will show you how to get Pester and how to get started with TDD.  
-This isn’t TDD though this is Environment Validation and this is how I went about creating my test.  
+If you are a SQL DBA you will have heard of [Ola Hallengrens Maintenance solution](https://ola.hallengren.com/) If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also [watch a video from Ola at SQL Bits](https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution)
+Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to [Pester](https://github.com/pester/Pester) You can find a great [how to get started here](https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx) which will show you how to get Pester and how to get started with TDD.
+This isn’t TDD though this is Environment Validation and this is how I went about creating my test.
 First I thought about what I would look for in SSMS when I had installed the maintenance solution and made a list of the things that I would check which looked something like this. This would be the checklist you would create (or have already created) for yourself or a junior following this install. This is how easy you can turn that checklist into a Pester Test and remove the human element and open your install for automated testing
 
 *   SQL Server Agent is running – Otherwise the jobs won’t run 🙂
@@ -63,7 +63,7 @@ if($CheckForBackups -eq $true)
 {
 $CheckForDBFolders -eq $true
 }
-$Root = $Share + '\' + $Folder 
+$Root = $Share + '\' + $Folder
 ```
 I also set the Agent service display name so I can get its status. I split the jobs up using a [Context block](https://github.com/pester/Pester/wiki/Context), one each for Backups, Database maintenance and solution clean up but they all follow the same pattern. .First get the jobs
 ```
@@ -157,7 +157,7 @@ If($CheckForDBFolders -eq $True)
 Context &amp;quot;Folder Check for $db on $Server on $Share&amp;quot; {
 It &amp;quot;Should have a folder for $db database&amp;quot; {
 Test-Path $Dbfolder |Should Be $true
-} 
+}
 ```
 But we need some logic for checking for folders because Ola is smart and checks for Log Shipping databases so as not to break the LSN chain and system databases only have full folders and simple recovery databases only have full and diff folders. I used the `System.IO.Directory` Exists method as I found it slightly quicker for UNC Shares
 ```
@@ -199,7 +199,12 @@ It 'Has a Full Folder' {
 ```
 and a similar thing for the files in the folders although this caused me some more issues with performance. I first used Get-ChildItem but in folders where a log backup is running every 15 minutes it soon became very slow. So I then decided to compare the create time of the folder with the last write time which was significantly quicker for directories with a number of files but then fell down when there was a single file in the directory so if the times match I revert back to `Get-ChildItem`.
 
-If anyone has a better more performant option I would be interested in knowing. I used Øyvind Kallstad PowerShell Conference session Chasing the seconds [Slides](https://github.com/psconfeu/2016/tree/master/%C3%98yvind%20Kallstad) and [Video](https://www.youtube.com/watch?v=erwAsXZnQ58) and tried the methods in there with [Measure-Command](https://technet.microsoft.com/en-us/library/hh849910.aspx) but this was the best I came up with
+If anyone has a better more performant option I would be interested in knowing. I used Øyvind Kallstad PowerShell Conference session Chasing the seconds [Slides](https://github.com/psconfeu/2016/tree/master/%C3%98yvind%20Kallstad) and Video
+
+ {{< youtube erwAsXZnQ58 >}}
+
+
+and tried the methods in there with [Measure-Command](https://technet.microsoft.com/en-us/library/hh849910.aspx) but this was the best I came up with
 ```
 If($CheckForBackups -eq $true)
 {

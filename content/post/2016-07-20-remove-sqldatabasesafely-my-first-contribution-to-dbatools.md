@@ -20,7 +20,13 @@ What is DBA Tools?
 
 > A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.
 
-You can read more about [here](https://dbatools.io) and it is [freely available for download on GitHub](https://github.com/ctrlbold/dbatools) I thoroughly recommend that [you watch this quick video](https://www.youtube.com/watch?v=PciYdDEBiDM) to see just how easy it is to migrate an entire SQL instance in one command ([Longer session here](https://www.youtube.com/watch?v=kQYUrSlb0wg) )
+You can read more about [here](https://dbatools.io) and it is [freely available for download on GitHub](https://github.com/ctrlbold/dbatools) I thoroughly recommend that [you watch this quick video]
+
+ {{< youtube PciYdDEBiDM >}}
+
+ to see just how easy it is to migrate an entire SQL instance in one command Longer session here
+
+ {{< youtube kQYUrSlb0wg >}}
 
 Installing it is as easy as
 
@@ -140,17 +146,17 @@ $job.Description = "This job will restore the $dbname database using the final b
 ```
 and then to add a job step to run the restore command
 ```
-$jobStep = new-object Microsoft.SqlServer.Management.Smo.Agent.JobStep $job, $jobStepName $jobStep.SubSystem = 'TransactSql' # 'PowerShell' 
-$jobStep.DatabaseName = 'master' 
-$jobStep.Command = $jobStepCommmand 
-$jobStep.OnSuccessAction = 'QuitWithSuccess' 
-$jobStep.OnFailAction = 'QuitWithFailure' 
+$jobStep = new-object Microsoft.SqlServer.Management.Smo.Agent.JobStep $job, $jobStepName $jobStep.SubSystem = 'TransactSql' # 'PowerShell'
+$jobStep.DatabaseName = 'master'
+$jobStep.Command = $jobStepCommmand
+$jobStep.OnSuccessAction = 'QuitWithSuccess'
+$jobStep.OnFailAction = 'QuitWithFailure'
 if ($Pscmdlet.ShouldProcess($destination, "Creating Agent JobStep on $destination")
-    { 
+    {
         $null = $jobStep.Create()
-    } 
+    }
     $job.ApplyToTargetServer($destination)
-    $job.StartStepID = $jobStartStepid 
+    $job.StartStepID = $jobStartStepid
     $job.Alter()
 ```
 The database is dropped
