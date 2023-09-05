@@ -44,7 +44,7 @@ icon = "brand-mastodon"
 [[social]]
 identifier = "bluesky"
 name = "BlueSky"
-url = "https://staging.bsky.app/profile/robsewell.bsky.social"
+url = "https://bsky.app/profile/robsewell.bsky.social"
 
 [social.params]
 icon = "brand-mastodon"
