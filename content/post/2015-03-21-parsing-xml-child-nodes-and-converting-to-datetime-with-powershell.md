@@ -5,10 +5,8 @@ date: "2015-03-21"
 categories: 
   - Community
   - PowerShell
-  - SQL Saturday Exeter
   - SQL Server
 tags: 
-  - PowerShell
   - SQL Saturday Exeter
   - Event Organising
 ---

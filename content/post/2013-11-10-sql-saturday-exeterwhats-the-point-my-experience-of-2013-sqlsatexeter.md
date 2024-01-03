@@ -2,14 +2,14 @@
 title: "SQL Saturday Exeter&ndash;What&rsquo;s the Point? My Experience of 2013 SQLSatExeter"
 date: "2013-11-10"
 categories:
-  - SQL Saturday Exeter
+  - Community
+  - SQLBits
 tags:
   - "development"
   - "exeter"
   - learning
   - "sql-bits-xi"
   - SQL Community
-  - Community
   - SQL Family
   - SQL PASS
   - SQL Saturday Exeter

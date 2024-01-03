@@ -4,8 +4,8 @@ date: "2015-04-07"
 date: "2015-04-07" 
 categories: 
   - PowerShell
-  - SQL Saturday Exeter
   - Community
+  - Automation
 tags: 
   - automate
   - Excel
