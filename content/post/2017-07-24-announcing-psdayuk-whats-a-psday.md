@@ -3,12 +3,13 @@ title: "Announcing PSDay.UK – Whats a PSDay?"
 date: "2017-07-24" 
 categories:
   - Blog
+  - PSConfEU
+  - PSConfAsia
+  - Community
+  - PowerShell
 
 tags:
-  - community
-  - PowerShell
-  - psconfasia
-  - psconfeu
+
   - psday
 
 ---

@@ -3,11 +3,10 @@ title: "Making Start-Demo work with multi-line commands without a backtick"
 date: "2016-08-29"
 categories:
   - Blog
-
+  - PSConfEU
+  - PowerShell
+  - Presentations
 tags:
-  - powershell
-  - presentations
-  - psconfeu
   - speaking
 
 image: assets/uploads/2016/08/start-demo2.png

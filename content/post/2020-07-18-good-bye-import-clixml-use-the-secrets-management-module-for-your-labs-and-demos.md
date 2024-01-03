@@ -7,13 +7,13 @@ categories:
   - Azure Data Studio
   - PowerShell
   - dbatools
+  - PSConfEU
 
 tags:
   - adsnotebook
   - dbatools
   - docker
   - jaap
-  - psconfeu
   - Secret Management
   - Import-CliXml
   - Jupyter Notebooks

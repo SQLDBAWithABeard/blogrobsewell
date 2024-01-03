@@ -3,11 +3,14 @@ title: "Some Pester Tests for SQL Defaults"
 date: "2016-05-24"
 categories:
   - Blog
-
+  - PSConfEU
+  - PowerShell
+  - GitHub
+  - Automation
+  
 tags:
   - alerts
   - automate
-  - automation
   - databases
   - defaults
   - documentation
@@ -15,8 +18,6 @@ tags:
   - github
   - pbm
   - pester
-  - powershell
-  - psconfeu
   - report
   - splatting
   - sql

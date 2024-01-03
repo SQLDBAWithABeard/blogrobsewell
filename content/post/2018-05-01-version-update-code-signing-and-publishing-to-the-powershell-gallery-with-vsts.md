@@ -3,14 +3,14 @@ title: "Version Update, Code Signing and publishing to the PowerShell Gallery wi
 date: "2018-05-01" 
 categories:
   - Blog
-
+  - PSConfEU
 tags:
   - dbachecks
   - dbatools
   - GitHub 
   - pester
   - PowerShell
-  - psconfeu
+
 
 
 image: assets/uploads/2018/05/32-Dashboard.png

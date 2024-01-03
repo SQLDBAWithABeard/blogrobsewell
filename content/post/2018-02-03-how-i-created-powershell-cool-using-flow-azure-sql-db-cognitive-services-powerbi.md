@@ -5,7 +5,7 @@ categories:
   - azure
   - Blog
   - PowerShell
-  - PowerShell Conference Europe
+  - PSConfEU
 
 
 tags:
@@ -15,7 +15,7 @@ tags:
   - Flow
   - Cognitive Services
   - Power Bi
-  - PSConfEU
+
 
 ---
 Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website [http://www.psconf.eu/](http://www.psconf.eu/)
