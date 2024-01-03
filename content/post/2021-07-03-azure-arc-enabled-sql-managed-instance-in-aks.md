@@ -4,12 +4,10 @@ date: "2021-07-03"
 categories:
   - Blog
   - Bicep
-  - IaC
-  - Azure Arc Enabled Data Services
+  - Automation
 
 tags:
- - Blog
- - Bicep
+ - IaC
  - Azure
  - SQL Server
  - Azure Arc Enabled Data Services

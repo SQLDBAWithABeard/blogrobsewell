@@ -5,13 +5,13 @@ categories:
   - Azure
   - Blog
   - Azure DevOps
-  - IaC
+  - Automation
 
 tags:
   - terraform
   - Azure SQL Database
   - Azure DevOps
-  - automation
+  - IaC
 
 
 image: assets/uploads/2019/04/image-49.png

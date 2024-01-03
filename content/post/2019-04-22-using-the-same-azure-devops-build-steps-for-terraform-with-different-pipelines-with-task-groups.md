@@ -5,10 +5,10 @@ categories:
   - azure
   - Blog
   - DevOps
-  - IaC
+  - Automation
 
 tags:
-  - automation
+  - IaC
   - terraform
   - Azure DevOps
   - DevOps

@@ -4,14 +4,11 @@ date: "2021-03-18"
 categories:
   - Blog
   - Community
-  - Data Saturdays
-
+  - Automation
 tags:
  - Blog
  - Events
- - Community
  - Data Saturdays
- - Automation
  - YAML
 
 

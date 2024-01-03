@@ -5,7 +5,6 @@ date: "2023-07-05"
 categories:
   - Blog
   - Troubleshooting
-  - Office
 
 tags:
   - Microsoft Teams
@@ -14,6 +13,7 @@ tags:
   - Speaker
   - Hyper-V
   - Remote Working
+  - Office
 
 image: assets/uploads/2023/teams-live-captions.png
 ---

@@ -4,13 +4,12 @@ date: "2021-11-04"
 categories:
   - Blog
   - Azure DevOps
-  - IaC
+  - Automation
 
 tags:
- - Blog
- - Azure DevOps
  - Error
  - pipeline
+ - IaC
 
 
 

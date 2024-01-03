@@ -4,14 +4,13 @@ date: "2021-08-10"
 categories:
   - Blog
   - Azure DevOps
-  - IaC
+  - Automation
 
 tags:
- - Blog
  - Azure
- - Azure DevOps
  - Error
  - Secrets
+ - IaC
  
 
 

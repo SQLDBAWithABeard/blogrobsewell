@@ -6,12 +6,9 @@ date: "2023-07-06"
 categories:
   - Blog
   - Community
-  - Award
-  - Data Saturdays
 
 tags:
   - MVP
-  - Community
   - Microsoft Valued Professional
 
 image: assets/uploads/2023/MVP_Logo_Horizontal.png

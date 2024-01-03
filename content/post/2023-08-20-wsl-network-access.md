@@ -4,10 +4,10 @@ date: "2023-08-20"
 categories:
   - Blog
   - TipsAndTricks
-  - IaC
+  - PowerShell
+  - Automation
 
 tags:
-  - PowerShell
   - bash
   - terraform
   - WSL

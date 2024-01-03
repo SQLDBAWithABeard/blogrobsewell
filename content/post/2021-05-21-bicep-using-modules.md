@@ -4,13 +4,12 @@ date: "2021-05-21"
 categories:
   - Blog
   - Bicep
-  - IaC
+  - Automation
   - VS Code
 tags:
- - Blog
- - Bicep
  - Azure
  - SQL Server
+ - IaC
 
 
 

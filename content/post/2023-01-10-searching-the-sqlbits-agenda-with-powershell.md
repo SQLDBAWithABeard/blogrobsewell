@@ -7,13 +7,8 @@ categories:
   - PowerShell
   - SQLBits
   - Community
-  - Speaking
-  - Conference
-  - SQLBits
 
 tags:
-  - SQLBits
-  - Community
   - Speaking
   - Conference
   - Sesssionize

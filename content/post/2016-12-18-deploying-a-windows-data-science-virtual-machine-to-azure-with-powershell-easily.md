@@ -4,10 +4,10 @@ date: "2016-12-18"
 categories:
   - azure
   - Blog
+  - PowerShell
 
 tags:
   - azure
-  - powershell
   - slovenia
   - Data Science
 

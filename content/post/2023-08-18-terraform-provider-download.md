@@ -4,11 +4,12 @@ date: "2023-08-17"
 categories:
   - Blog
   - TipsAndTricks
-  - IaC
+  - Automation
 
 tags:
   - bash
   - terraform
+  - IaC
 
 
 image: assets/uploads/2023/terraform.png

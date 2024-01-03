@@ -4,18 +4,16 @@ date: "2021-04-15"
 categories:
   - Blog
   - Community
-  - Data Saturdays
+  - Automation
 
 tags:
  - Blog
  - Events
- - Community
- - Data Saturdays
- - Automation
  - YAML
  - docker
  - jekyll
  - GitHub Pages
+ - Data Saturdays
 
 
 image: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png

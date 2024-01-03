@@ -4,11 +4,11 @@ date: "2023-07-14"
 categories:
   - Blog
   - Community
-  - Data Saturdays
+  - PowerShell
   - dbachecks
 
 tags:
-  - PowerShell
+  - Data Saturdays
   - dbachecks
   - Oslo
 

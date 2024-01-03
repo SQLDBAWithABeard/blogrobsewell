@@ -6,12 +6,12 @@ categories:
   - dbatools
   - Azure DevOps
   - SQL Server
-  - IaC
+  - Automation
+  - PowerShell
 
 tags:
-  - automation
+  - IaC
   - dbatools
-  - PowerShell
   - Azure
   - Secret Management
   - Import-CliXml

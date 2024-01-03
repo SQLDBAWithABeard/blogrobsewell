@@ -6,8 +6,6 @@ categories:
   - Blog
   - SQLBits
   - Community
-  - Speaking
-  - Conference
 
 tags:
   - SQLBits

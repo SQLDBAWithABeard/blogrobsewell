@@ -4,14 +4,13 @@ date: "2021-04-11"
 categories:
   - Blog
   - Community
-  - Data Saturdays
-
+  - Automation
 tags:
  - Blog
  - Events
  - Community
  - Data Saturdays
- - Automation
+
  - YAML
  - docker
  - jekyll

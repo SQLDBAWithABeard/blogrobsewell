@@ -4,11 +4,10 @@ date: "2021-11-02"
 categories:
   - Blog
   - Bicep
-  - IaC
+  - Automation
 
 tags:
- - Blog
- - Bicep
+ - IaC
  - Azure
  - Bicep Module Repository
  - Cache
