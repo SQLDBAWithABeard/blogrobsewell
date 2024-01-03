@@ -21,7 +21,7 @@ image: assets/uploads/2024/ads.png
 
 ---
 
-# Can you help? Erland said
+## Can you help? Erland said
 
 The first I realised about this problem was when Erland Sommarskog [b](https://www.sommarskog.se/) asked me if I could help with [this forum post](https://learn.microsoft.com/en-us/answers/questions/1465685/scheduling-python-notebook-using-sql-server-agent?wt.mc_id=dp-mvp-5002693) The poster was getting an error when trying to run a Notebook Agent Job. The error was a very generic instance not found error
 
@@ -79,7 +79,7 @@ and rerun the job, which fails, and get the error message
 
 So I have recreated the error.
 
-# Now to solve it
+## Now to solve it
 
 First we need to understand what is happening. If we look at the Job Step for the Agent Job in Azure Data Studio
 
@@ -125,9 +125,9 @@ Then it is setting that variable as the default value for the `ServerInstance` p
 
 This means that all of the times that the `Invoke-SqlCmd` cmdlet is called it will use the correct value whether it is on a default or a named instance.
 
-# Most best solution
+## Most best solution
 
-As this code is [available on GitHub](https://github.com/microsoft/sqltoolsservice) and anyone can create an issue or a Pull Request, I did just that :-)
+As this code is [available on GitHub](https://github.com/microsoft/sqltoolsservice) and anyone can create an issue or a Pull Request, I did just that :-)  
 
-Issue - https://github.com/microsoft/sqltoolsservice/issues/2305
+Issue - https://github.com/microsoft/sqltoolsservice/issues/2305  
 Pull request - https://github.com/microsoft/sqltoolsservice/pull/2306 
