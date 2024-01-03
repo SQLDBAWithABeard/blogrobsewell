@@ -39,7 +39,7 @@ Once I am ready to test the pull request I perform a checkout using the extensio
 
 This will update all of the files in my local repository with all of the changes in this pull request
 
-<VIDEO src="https://blog.robsewell.com/wp-content/uploads/2019/01/pull-request-checkout.mp4" controls></VIDEO>
+<VIDEO src="https://blog.robsewell.com/assets/uploads/2019/01/pull-request-checkout.mp4" controls></VIDEO>
 
 You can see at the bottom left that the branch changes from development to the name of the PR.[](https://blog.robsewell.com/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/)
 
