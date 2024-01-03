@@ -4,10 +4,11 @@ date: "2017-01-05"
 categories:
   - Blog
   - Developing
+  - VS Code
 
 tags:
   - sql server
-  - VS Code
+
 
 ---
 Reading this blog post by [Shawn Melton Introduction of Visual Studio Code for DBAs](http://www.sqlshack.com/introduction-visual-studio-code-dbas/) reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code

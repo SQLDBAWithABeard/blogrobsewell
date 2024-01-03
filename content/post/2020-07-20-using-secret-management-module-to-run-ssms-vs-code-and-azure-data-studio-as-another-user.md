@@ -10,14 +10,10 @@ categories:
 
 tags:
   - adsnotebook
-  - dbatools
-  - PowerShell
   - ssms
   - Secret Management
   - Import-CliXml
-  - Jupyter Notebooks
   - Microsoft
-  - Azure Data Studio
   - VS Code
 
 

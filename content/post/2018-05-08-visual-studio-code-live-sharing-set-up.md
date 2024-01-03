@@ -3,14 +3,14 @@ title: "Visual Studio Code Live Sharing Set-Up"
 date: "2018-05-08" 
 categories:
   - Blog
-
-tags:
+  - PowerShell
   - dbachecks
   - dbatools
-  - PowerShell
+  - VS Code
+
+tags:
   - sqlgrillen
   - Data Grillen
-  - VS Code
   - Live Share
 
 

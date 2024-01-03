@@ -3,13 +3,13 @@ title: "Setting the default file type for a new file in VS Code"
 date: "2017-04-24" 
 categories:
   - Blog
+  - VS Code
+  - PowerShell
 
 tags:
   - defaults
   - keymap
-  - PowerShell
   - settings
-  - VS Code
 
 ---
 Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.

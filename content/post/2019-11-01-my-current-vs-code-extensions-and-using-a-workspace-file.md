@@ -6,13 +6,11 @@ categories:
   - dbatools
   - PowerShell
   - SQL Server
-  - Visual Studio Code
+  - VS Code
   
 tags:
   - dbatoolsmol
   - extensions
-  - PowerShell
-  - Visual Studio Code
   - workspace
 
 

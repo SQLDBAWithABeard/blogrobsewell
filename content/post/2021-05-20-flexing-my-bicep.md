@@ -5,13 +5,13 @@ categories:
   - Blog
   - Bicep
   - IaC
+  - VS Code
 
 tags:
  - Blog
  - Bicep
  - Azure
  - SQL Server
- - VS Code
 
 
 
