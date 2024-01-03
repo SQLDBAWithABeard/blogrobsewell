@@ -18,7 +18,7 @@ After setting up my account I read a few blogs about Powershell and Windows Azur
 
 Note – Here I only spin up extra small instances and don’t configure SQL as per Microsoft’s recommendations. I am only using these VMs for learning and talking at my user group your needs may be different
 
-First you’ll need [Microsoft Web Platform Installer](http://www.microsoft.com/web/downloads/platform.aspx). Then download and install Windows Azure PowerShell,
+First you’ll need [Microsoft Web Platform Installer](http://www.microsoft.com/web/downloads/platform.aspx?WT.mc_id=DP-MVP-5002693). Then download and install Windows Azure PowerShell,
 
     Import-Module c:\Program Files\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1
 

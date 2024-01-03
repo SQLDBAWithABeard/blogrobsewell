@@ -22,7 +22,7 @@ I never take it for granted and again I am humbled and indeed honoured (*) to ag
 
 # What did I do last year ?
 
-You can see most of it on [my public MVP profile](https://mvp.microsoft.com/en-us/PublicProfile/5002693) Here is a summary
+You can see most of it on [my public MVP profile](https://mvp.microsoft.com/en-us/PublicProfile/5002693?WT.mc_id=DP-MVP-5002693) Here is a summary
 
 - 18 sessions at conferences including SQLBits, PSCOnfEU, PASS Summit, Data Scotland, Data Grillen, PSConfEU MiniCon, PSDayUK, South Coast Summit
 - 6 sessions for User Groups - in person and remote
@@ -44,12 +44,12 @@ I will continue to not take myself seriously, to wear fun outfits and allow myse
 
 I hope to have many more photos taken of me, like this one
 
-[![psconfeukeynote](assets/uploads/2023/20230619_120715.jpg)](assets/uploads/2023/20230619_120715.jpg)
+[![psconfeukeynote](../assets/uploads/2023/20230619_120715.jpg)](../assets/uploads/2023/20230619_120715.jpg)
 
 
  where I am giving a keynote at the PowerShell Conference Europe dressed in a rainbow suit and talking about how to communicate with other people appropriately
 
- [![psconfeukeynote](assets/uploads/2023/psconfeu-keynote.png)](assets/uploads/2023/psconfeu-keynote.png)
+ [![psconfeukeynote](../assets/uploads/2023/psconfeu-keynote.png)](../assets/uploads/2023/psconfeu-keynote.png)
 
  Thank you to all of the people who make this happen, to those that support me and challenge me and let me work alongside them to do amazing things.
 

@@ -21,7 +21,7 @@ SQL Express sets AUTO_CLOSE to on by default and this is what was creating the e
 
 What does the AUTO_CLOSE setting do?
 
-According to BoL [Link](http://technet.microsoft.com/en-us/library/ms190249(v=sql.105).aspx)
+According to BoL [Link](http://technet.microsoft.com/en-us/library/ms190249(v=sql.105).aspx?WT.mc_id=DP-MVP-5002693)
 
 
 |Description|Default value|
@@ -33,7 +33,7 @@ According to BoL [Link](http://technet.microsoft.com/en-us/library/ms190249(v=sq
 
 That explains what was happening, the database was shutting down as the session finished and then starting back up again when the next one started. Repeatedly. Filling up the log files with entries, resetting the DMVs and using resources unnecessarily.
 
-To find databases with this setting on query the master.sys.databases for the is_auto_close_on column [Link](http://technet.microsoft.com/en-us/library/ms178534.aspx) or check the properties page in SSMS
+To find databases with this setting on query the master.sys.databases for the is_auto_close_on column [Link](http://technet.microsoft.com/en-us/library/ms178534.aspx?WT.mc_id=DP-MVP-5002693) or check the properties page in SSMS
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/08/image_thumb.png)](https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/08/image.png)
 

@@ -30,9 +30,9 @@ And plenty more… Add some in the comments below.
 
 Our [Primary responsibility](http://www.johnsansom.com/the-database-administrators-primary-responsibility/) is the data. We need to be able to ensure that the data is safe and can be made available quickly and easily. In this situation we need to have a valid backup and a quick and easy method of restoring it. I chose to solve this by creating a T-SQL script which will :-
 
-*   Perform a [DBCC CHECKDB](http://technet.microsoft.com/en-us/library/ms176064.aspx) on the database
-*   [Backup the database with CHECKSUM](http://technet.microsoft.com/en-us/library/ms187893.aspx)
-*   Perform a [VERIFY ONLY](http://technet.microsoft.com/en-us/library/ms188902.aspx) restore of the database
+*   Perform a [DBCC CHECKDB](http://technet.microsoft.com/en-us/library/ms176064.aspx?WT.mc_id=DP-MVP-5002693) on the database
+*   [Backup the database with CHECKSUM](http://technet.microsoft.com/en-us/library/ms187893.aspx?WT.mc_id=DP-MVP-5002693)
+*   Perform a [VERIFY ONLY](http://technet.microsoft.com/en-us/library/ms188902.aspx?WT.mc_id=DP-MVP-5002693) restore of the database
 *   Drop the database
 *   Create an agent job to restore the database from that backup
 

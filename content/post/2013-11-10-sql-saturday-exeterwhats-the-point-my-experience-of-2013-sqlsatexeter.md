@@ -28,7 +28,7 @@ In March this year the SQL South West User Group hosted SQL Saturday #194 in Exe
 
 It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry [@mrdenny](https://twitter.com/@mrdenny). The conversation went along the lines of
 
-“I want to go to this training session being delivered by this guy. [Link to MVP page](https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851). It’s £150 and is in Exeter so no other costs required”
+“I want to go to this training session being delivered by this guy. [Link to MVP page](https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693). It’s £150 and is in Exeter so no other costs required”
 
 My boss – “OK”
 
