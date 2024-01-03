@@ -5,16 +5,12 @@ slug: "NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits"
 date: "2022-11-24"
 categories:
   - Blog
-  - NewStarNovember
   - Community
-  - Speaking
   - SQLBits
 
 tags:
   - NewStarNovember
   - Speaking
-  - Community
-  - SQLBits
 
 
 image: assets/uploads/2017/newstars1.jpg
