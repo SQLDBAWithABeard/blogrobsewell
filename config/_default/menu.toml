@@ -52,7 +52,7 @@ icon = "brand-mastodon"
 [[social]]
 identifier = "linkedin"
 name = "LinkedIn"
-url = "https://www.linkedin.com/in/robsewellsqldba"
+url = "https://www.linkedin.com/in/robmsewell/"
 
 [social.params]
 icon = "brand-linkedin"
