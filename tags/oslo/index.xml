@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oslo on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/oslo/</link><description>Recent content in Oslo on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/oslo/index.xml" rel="self" type="application/rss+xml"/><item><title>dbachecks v3 at Data Saturday Oslo</title><link>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-session.jpeg" alt="Featured image of post dbachecks v3 at Data Saturday Oslo" />&lt;h1 id="dbachecks-v3-at-data-saturday-oslo">dbachecks v3 at Data Saturday Oslo&lt;/h1>
+&lt;p>&lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/datasaturdayoslo-session.jpeg"
+loading="lazy"
+alt="dbachecksv3"
+>&lt;/a>&lt;/p>
+&lt;p>On Saturday September 2nd 2023, will be &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>Data Saturday Oslo&lt;/a> in Oslo, Norway.&lt;/p>
+&lt;p>For more information about this free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>DataSaturday0035&lt;/a> where you can sign up. Don&amp;rsquo;t wait, spaces are limited!&lt;/p>
+&lt;p>I will be presenting a session with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>Mastodon&lt;/a> and Cláudio Silva &lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+>Twitter&lt;/a> introducing dbachecks v3.&lt;/p>
+&lt;h2 id="abstract">abstract&lt;/h2>
+&lt;p>dbachecks v1 was released back in 2018, bringing together the DBA PowerShell magic of dbatools with pester, a PowerShell testing framework to create a powerful infrastructure validation tool.&lt;/p>
+&lt;p>dbachecks is able to answer questions such as:&lt;/p>
+&lt;ul>
+&lt;li>can I connect to all of my instances?&lt;/li>
+&lt;li>was my last full backup with 7 days&lt;/li>
+&lt;li>are my databases owned by the expected login&lt;/li>
+&lt;li>am I using &amp;lsquo;page verify&amp;rsquo; to detect corruption&lt;/li>
+&lt;li>are any of my certificates nearing expiration&lt;/li>
+&lt;li>and many more&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>v2 introduced the ability to store these results in a database and create a time series chart showing changes over time.&lt;/p>
+&lt;p>But now, we introduce v3!&lt;/p>
+&lt;p>dbachecks v3 takes advantage of Pester v5 - a total rewrite of the tool enabled us to not only increase the performance of the module but position it to be able to grow and expand in a controlled and predictable way in the future.&lt;/p>
+&lt;p>In this session, we&amp;rsquo;ll talk about the changes we&amp;rsquo;ve made to the module, demo the new features and prove the massive performance increase using Profiler.&lt;/p>
+&lt;p>Come and join us as we share the biggest release yet of the dbachecks module and learn how you can utilise it in your environments.&lt;/p>
+&lt;p>For more information about the free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>DataSaturday0035&lt;/a>. Don&amp;rsquo;t wait, spaces are limited!&lt;/p>
+&lt;p>You can also join Jess and I on Friday 1st September 2023 for a power-packed day of learning, networking, and enhancing your DBA skills.&lt;/p>
+&lt;p>Ready to take your DBA skills to the next level in a hybrid environment? Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>Register Here&lt;/a>.&lt;/p></description></item><item><title>The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo</title><link>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</link><pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-trainingday.png" alt="Featured image of post The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo" />&lt;h2 id="jess-and-rob-are-doing-training-in-oslo-in-september-at-data-saturday-oslo">Jess and Rob are doing training in Oslo in September at Data Saturday Oslo&lt;/h2>
+&lt;p>On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>Mastodon&lt;/a>&lt;/p>
+&lt;p>Ready to take your DBA skills to the next level in a hybrid environment?
+Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>Register Here&lt;/a>.&lt;/p>
+&lt;p>Designed specifically for DBAs working in hybrid environments, this training day will equip you with the knowledge and tools needed to excel in your role. Whether you&amp;rsquo;re managing on-premises databases, Platform as a Service (PaaS) offerings, or Azure virtual machines, this training has you covered.&lt;/p>
+&lt;p>As technology evolves, so does the role of a Database Administrator (DBA). In today&amp;rsquo;s hybrid computing landscape, where applications are deployed across on-premises and cloud platforms, DBAs face new challenges and opportunities. To navigate this changing landscape, it&amp;rsquo;s crucial to stay ahead of the curve and expand your skill set.&lt;/p>
+&lt;h2 id="automation">Automation&lt;/h2>
+&lt;p>One of the key focuses of the training is automation. As authors of&lt;a class="link" href="https://beard.media/book" target="_blank" rel="noopener"
+>dbatools in a Month of Lunches&lt;/a>&amp;quot; we will provide hands-on experience using automation tooling, such as PowerShell and community-developed modules like dbatools, dbachecks, and ImportExcel. You&amp;rsquo;ll learn how to automate routine tasks, streamline your operations, and save valuable time and effort. From simple tasks to complex processes, automation will become your best friend in managing your hybrid environment.&lt;/p>
+&lt;p>Additionally, this training we&amp;rsquo;ll introduce you to the concept of infrastructure as code. You&amp;rsquo;ll discover how to automate the provisioning, configuration, and management of your SQL Server instances and PaaS services. The training doesn&amp;rsquo;t stop there. You&amp;rsquo;ll explore the power of GitHub Actions and Azure Functions, unlocking the ability to integrate your workflows with other tools in your environment. These techniques will elevate the quality of your work, reduce manual intervention, and improve overall productivity.&lt;/p>
+&lt;p>Whether you&amp;rsquo;re a seasoned DBA, a developer working with SQL Server, an accidental DBA, or someone with DevOps responsibilities, this training is tailored to suit your needs. Jess and Rob will guide you through various scenarios, enabling you to sharpen your skills and empower your team to be more efficient.&lt;/p>
+&lt;p>Rest assured, you don&amp;rsquo;t need any specific equipment or tools to attend this training. All scripts and slides will be provided, and you&amp;rsquo;ll have the opportunity to follow along with most of the demos. Just bring something to take notes with, as you&amp;rsquo;ll be learning a wealth of valuable solutions to bring back to your workplace. If you bring a laptop then having a container runtime like docker or podman will be beneficial.&lt;/p>
+&lt;h2 id="register-here">Register Here&lt;/h2>
+&lt;p>Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>Register Here&lt;/a>.&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-trainingday.png"
+loading="lazy"
+alt="training day"
+>&lt;/a>&lt;/p>
+&lt;h2 id="who-are-we">Who are we?&lt;/h2>
+&lt;p>Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>B&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>M&lt;/a> is a Data Platform Architect and a Microsoft MVP. With a passion for SQL Server and PowerShell, she has been solving performance tuning challenges and automating processes since 2011. Jess is an active contributor to the open-source PowerShell modules dbatools and dbachecks, which help DBAs streamline SQL Server management. She&amp;rsquo;s also made significant contributions to the SqlServerDsc module, enhancing its configuration capabilities.&lt;/p>
+&lt;p>Rob Sewell is a former SQL Server DBA turned automation advocate. His areas of expertise include PowerShell, Azure, and SQL (PaaS). As a Cloud and Data Center MVP and Data Platform MVP, Rob actively supports and participates in various Data and PowerShell events worldwide. He shares his knowledge and experiences through his blog and Twitter, constantly engaging with the community. When he&amp;rsquo;s not looking at a screen, Rob enjoys riding his bike and staying active.&lt;/p>
+&lt;h2 id="join-us">Join Us&lt;/h2>
+&lt;p>Join us for this exciting training day, packed with demos and practical solutions that you can immediately implement in your hybrid SQL Server environment. Regardless of your experience level, this training will help you take your skills to the next level and optimize your workflows.&lt;/p>
+&lt;p>Ready to take your DBA skills to the next level in a hybrid environment? Don&amp;rsquo;t miss out on this exclusive training day with Jess Pomfret and Rob Sewell. Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>Register Here&lt;/a>.&lt;/p>
+&lt;p>For more information about the free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>DataSaturday0035&lt;/a>. Don&amp;rsquo;t wait, spaces are limited!&lt;/p>
+&lt;p>Join us on Friday 1st September 2023 for a power-packed day of learning, networking, and enhancing your DBA skills. We can&amp;rsquo;t wait to see you there!&lt;/p></description></item></channel></rss>

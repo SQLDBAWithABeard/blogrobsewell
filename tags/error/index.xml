@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Error on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/error/</link><description>Recent content in Error on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 03 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/error/index.xml" rel="self" type="application/rss+xml"/><item><title>Making Notebook Agent Jobs on Named Instances work</title><link>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</link><pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2024/ads.png" alt="Featured image of post Making Notebook Agent Jobs on Named Instances work" />&lt;h2 id="can-you-help-erland-said">Can you help? Erland said&lt;/h2>
+&lt;p>The first I realised about this problem was when Erland Sommarskog &lt;a class="link" href="https://www.sommarskog.se/" target="_blank" rel="noopener"
+>b&lt;/a> asked me if I could help with &lt;a class="link" href="https://learn.microsoft.com/en-us/answers/questions/1465685/scheduling-python-notebook-using-sql-server-agent?wt.mc_id=dp-mvp-5002693" target="_blank" rel="noopener"
+>this forum post&lt;/a> The poster was getting an error when trying to run a Notebook Agent Job. The error was a very generic instance not found error&lt;/p>
+&lt;blockquote>
+&lt;p>A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider&lt;!-- raw HTML omitted --> error: 40 - Could not open a connection to SQL Server) The system cannot find the file specified&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="reproduce-the-issue">Reproduce the issue&lt;/h2>
+&lt;p>How very odd I thought. I noticed that it was a named instance, so I tried to recreate the issue on my own named instance DAVE. &lt;a class="link" href="https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/" target="_blank" rel="noopener"
+>I added a new notebook job&lt;/a> and when I tried to run it. It failed&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/newjob.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/newjob.png"
+loading="lazy"
+alt="notebookjob"
+>&lt;/a>&lt;/p>
+&lt;h3 id="huh-">Huh ?&lt;/h3>
+&lt;p>Hmm. But I got a different error.&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/joberror.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/joberror.png"
+loading="lazy"
+alt="notebookjob"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;lsquo;Login failed for user &amp;lsquo;NT Service\SQLAGENT$DAVE&amp;rsquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>That doesn&amp;rsquo;t make a lot of sense. Why is the login failing?&lt;/p>
+&lt;h3 id="where-is-the-logon-">Where is the logon ?&lt;/h3>
+&lt;p>I checked the error log using&lt;/p>
+&lt;p>&lt;code>Get-DbaErrorLog -SqlInstance $SqlInstance -Source logon&lt;/code>&lt;/p>
+&lt;p>but there were no results.&lt;/p>
+&lt;p>Wait a minute.&lt;/p>
+&lt;h2 id="bingo">Bingo&lt;/h2>
+&lt;p>I have the default instance running on this machine. Lets check the error log on that instance as well.&lt;/p>
+&lt;p>&lt;code>Get-DbaErrorLog -SqlInstance $ENV:COMPUTERNAME -Source logon&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/logonfailed.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/logonfailed.png"
+loading="lazy"
+alt="failedlogin"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Login failed for user &amp;lsquo;NT Service\SQLAgent$DAVE&amp;rsquo;. Reason: Could not find a login matching the name provided. [CLIENT: &lt;!-- raw HTML omitted -->]&lt;/p>
+&lt;/blockquote>
+&lt;p>So the Agent service for the named instance is failing to logon to the default instance on the host.&lt;/p>
+&lt;h2 id="lets-recreate-the-error-properly-this-time">Let&amp;rsquo;s recreate the error properly this time&lt;/h2>
+&lt;p>Stop the default instance&lt;/p>
+&lt;p>&lt;code>Stop-Service MSSQLSERVER -Force&lt;/code>&lt;/p>
+&lt;p>and rerun the job, which fails, and get the error message&lt;/p>
+&lt;p>&lt;code>Get-DbaAgentJobHistory -SqlInstance $SqlInstance -Job $JobName&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/noinstance.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/noinstance.png"
+loading="lazy"
+alt="no instance"
+>&lt;/a>&lt;/p>
+&lt;p>So I have recreated the error.&lt;/p>
+&lt;h2 id="now-to-solve-it">Now to solve it&lt;/h2>
+&lt;p>First we need to understand what is happening. If we look at the Job Step for the Agent Job in Azure Data Studio&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/--rkQiLIPCM"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>There is some PowerShell running to execute the cells of the notebook and gather the results and place them in the database for later use.&lt;/p>
+&lt;p>The code uses &lt;code>$(ESCAPE_SQUOTE(A THING))&lt;/code> which is passing the Agent Job tokens to the script. &lt;a class="link" href="https://learn.microsoft.com/en-us/sql/ssms/agent/use-tokens-in-job-steps?view=sql-server-ver16&amp;amp;WT.mc_id=DP-MVP-5002693#sql-server-agent-tokens" target="_blank" rel="noopener"
+>you can find the list of Agent Job tokens here&lt;/a>&lt;/p>
+&lt;p>Then it calls &lt;code>Invoke-SqlCmd&lt;/code> without a &lt;code>ServerInstance&lt;/code> parameter. If you look at the documentation for the parameter &lt;a class="link" href="https://learn.microsoft.com/en-us/powershell/module/sqlserver/invoke-sqlcmd?view=sqlserver-ps&amp;amp;WT.mc_id=DP-MVP-5002693#-serverinstance" target="_blank" rel="noopener"
+>web&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/serverinstancehelp.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/serverinstancehelp.png"
+loading="lazy"
+alt="halp instance"
+>&lt;/a>&lt;/p>
+&lt;p>it shows the Default Value as &lt;code>None&lt;/code> but this does not explain what it does. With no value set for the &lt;code>ServerInstance&lt;/code> parameter, &lt;code>Invoke-SqlCmd&lt;/code> will try to connect to the default instance as we can see below.&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/instanceconnect.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/instanceconnect.png"
+loading="lazy"
+alt="halp instance"
+>&lt;/a>&lt;/p>
+&lt;h2 id="solution">Solution&lt;/h2>
+&lt;p>So we can get the Agent Job Tokens for the host and the instance name and set them as a variable and pass them to the ServerInstance paramater every time that it is called.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PowerShell" data-lang="PowerShell">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$SqlInstance&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s1">&amp;#39;{0}\{1}&amp;#39;&lt;/span> &lt;span class="o">-f&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$(&lt;/span>&lt;span class="n">ESCAPE_SQUOTE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MACH&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$(&lt;/span>&lt;span class="n">ESCAPE_SQUOTE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INST&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="better-solution">Better Solution&lt;/h2>
+&lt;p>To save a load of copy pasta, the risk of not identifying all of the calls to the cmdlet, and keep the exising coding standards we can instead use &lt;a class="link" href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parameters_default_values?view=powershell-7.4&amp;amp;WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>PsDefaultParameters&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$SqlInstance = &amp;#39;{0}\{1}&amp;#39; -f &amp;#34;$(ESCAPE_SQUOTE(MACH))&amp;#34;, &amp;#34;$(ESCAPE_SQUOTE(INST))&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PSDefaultParameterValues = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Invoke-SqlCmd:ServerInstance&amp;#34; = $SqlInstance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="what-is-this-doing">What is this doing?&lt;/h3>
+&lt;p>It is creating a variable named &lt;code>SqlInstance&lt;/code> that is made up of the SQL Agent Job Tokens for the machine and the instance name&lt;/p>
+&lt;p>Then it is setting that variable as the default value for the &lt;code>ServerInstance&lt;/code> paramater of the &lt;code>Invoke-SqlCmd&lt;/code> cmdlet for this session only&lt;/p>
+&lt;p>This means that all of the times that the &lt;code>Invoke-SqlCmd&lt;/code> cmdlet is called it will use the correct value whether it is on a default or a named instance.&lt;/p>
+&lt;h2 id="most-best-solution">Most best solution&lt;/h2>
+&lt;p>As this code is &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice" target="_blank" rel="noopener"
+>available on GitHub&lt;/a> and anyone can create an issue or a Pull Request, I did just that :-)&lt;/p>
+&lt;p>Issue - &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice/issues/2305" target="_blank" rel="noopener"
+>https://github.com/microsoft/sqltoolsservice/issues/2305&lt;/a>&lt;br>
+Pull request - &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice/pull/2306" target="_blank" rel="noopener"
+>https://github.com/microsoft/sqltoolsservice/pull/2306&lt;/a>&lt;/p></description></item><item><title>Azure DevOps Pipeline Template Job Names and single quotes</title><link>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</link><pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Azure DevOps Pipeline Template Job Names and single quotes" />&lt;h1 id="the-job-name-deploy_function_app-appears-more-than-once">The job name Deploy_Function_App appears more than once&lt;/h1>
+&lt;p>This was the error I was notified about in a Azure DevOps pipeline when they tried to run it. The error message continued to say that Job Names must be unique within a pipeline.&lt;/p>
+&lt;h2 id="set-up">Set Up&lt;/h2>
+&lt;p>There is a centralised repository of Azure DevOps Pipeline Template Jobs that call the Bicep modules with the required values in the same repo to deploy Azure Infrastructure.&lt;/p>
+&lt;p>The error was received in the pipeline that was created to make use of these template jobs and deploy a whole projects worth of infrastructure.&lt;/p>
+&lt;p>It looked like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>When I looked at the template job it had&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="so-you-fixed-it">So you fixed it?&lt;/h2>
+&lt;p>I can see that the job name will always be &lt;code>Deploy_Function_App&lt;/code> so I just need to paramatarise it. For this example, I am going to say it was a parameter called suffix, and the code looked like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>A quick Pull Request, which was approved and then pushed and I said &amp;ldquo;Hey, all fixed, try again&amp;rdquo;. This is the response I got - It failed again&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>Job Deploy_Function_App_speechtotext&amp;rsquo; has an invalid name. Valid names may only contain alphanumeric characters and &amp;lsquo;_&amp;rsquo; and may not start with a number.&lt;/p>
+&lt;p>I had to look at it for a few minutes before I spotted the error! The job name sure looks like it only has alphanumeric characters and my YAML is perfectly valid so the string must be properly quoted. I mean it must be properly quoted otherwise it would fail right?&lt;/p>
+&lt;p>Wrong&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is only one single quote here which we did not notice!&lt;/p>
+&lt;p>Altering it to this worked.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: &amp;#39;Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hopefully that might help someone. (No doubt I will find this in a search in a few months time when I do it again!!)&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>What does JS_InvalidFilePath error mean in Azure DevOps?</title><link>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</link><pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post What does JS_InvalidFilePath error mean in Azure DevOps? " />&lt;h1 id="cant-find-loc-string-for-key-js_invalidfilepath">Can't find loc string for key: JS_InvalidFilePath&lt;/h1>
+&lt;p>This was the error I received in my Azure DevOps pipeline when I tried to run it.&lt;/p>
+&lt;p>When I investigated further it said&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">##[debug]workingDirectory=/home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]check path : /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[warning]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=warning;]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]task result: Failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[error]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=error;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.complete result=Failed;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="what-is-going-on">What is going on?&lt;/h1>
+&lt;p>I was trying to run a simple Azure PowerShell task and had defined it like this (I used VS Code with the Azure Pipelines extension and made use of the intellisense). I had defined it like this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - task: AzurePowerShell@5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: deploy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> displayName: Deploy from cache
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureSubscription: &amp;#39;azurePAYGconnection&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Inline: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $date = Get-Date -Format yyyyMMddHHmmsss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $deploymentname = &amp;#39;deploy_testRg_{0}&amp;#39; -f $date # name of the deployment seen in the activity log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $TemplateFile = &amp;#39;BicepFiles\Deployments\TheTestResourceGroup.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> New-AzDeployment -Name $deploymentname -Location uksouth -TemplateFile $TemplateFile -Verbose # -WhatIf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azurePowerShellVersion: &amp;#39;LatestVersion&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pwsh: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> enabled: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gave me no errors, the YAML is correct (yes, I was suprised too!). The Azure Pipeline definition does not raise an error either in VS Code or in Azure DevOps.&lt;/p>
+&lt;h1 id="what-was-missing">What was missing?&lt;/h1>
+&lt;p>I had not put &lt;code>ScriptType: 'InlineScript'&lt;/code> and this is what caused that odd error.&lt;/p>
+&lt;p>The correct definition was&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - task: AzurePowerShell@5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: deploy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> displayName: Deploy from cache
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureSubscription: &amp;#39;azurePAYGconnection&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ScriptType: &amp;#39;InlineScript&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Inline: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $date = Get-Date -Format yyyyMMddHHmmsss
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $deploymentname = &amp;#39;deploy_testRg_{0}&amp;#39; -f $date # name of the deployment seen in the activity log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $TemplateFile = &amp;#39;BicepFiles\Deployments\TheTestResourceGroup.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> New-AzDeployment -Name $deploymentname -Location uksouth -TemplateFile $TemplateFile -Verbose # -WhatIf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azurePowerShellVersion: &amp;#39;LatestVersion&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pwsh: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> enabled: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hopefully that might help someone. (No doubt I will find this in a search in a few months time when I do it again!!)&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>When you REALLY want to see your Azure DevOps Secret Variable Values</title><link>https://blog.robsewell.com/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</link><pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/michael-dziedzic-1bjsASjhfkE-unsplash.jpg" alt="Featured image of post When you REALLY want to see your Azure DevOps Secret Variable Values" />&lt;h1 id="i-really-needed-to-see-the-values">I REALLY needed to see the values&lt;/h1>
+&lt;p>The problem was that I had code in an Azure DevOps PowerShell task which was using a Service Principal to do some things in Azure and it was failing.&lt;/p>
+&lt;p>The pipeline had some things a little like this, it got a number of values from a key vault, set them to variables and used them in a custom function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$somevalue = (Get-AzKeyVaultSecret -vaultName $KeyVaultName -name &amp;#39;AGeneratedName&amp;#39;).SecretValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$somecredential = New-Object System.Management.Automation.PSCredential (&amp;#39;dummy&amp;#39;, $somevalue )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$something = $somecredential.GetNetworkCredential().Password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Do-SomethingSpecial -MyThing $something
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I was getting an error saying &amp;ldquo;forbidden - *** does not have access&amp;rdquo; or similar&lt;/p>
+&lt;p>Thing is, I knew that &lt;code>$something&lt;/code> did have access as I could run the same code from my workstation and it did the logging in for &lt;code>$something&lt;/code> so the error must be in the values that I was passing into the function. (there were more values than this but that is not important)&lt;/p>
+&lt;p>All I needed to do was to see what values had been passed to the function and I could resolve this little issue. But these were secret variables. Helpfully kept out of the logs by Azure DevOps hence the *** so what to do?&lt;/p>
+&lt;p>I thought - I know what I will do, I will write the Parameter values from the function out as Verbose, call the function with &lt;code>-Verbose&lt;/code> and then delete the run to clear up the logs.&lt;/p>
+&lt;p>I added&lt;/p>
+&lt;p>&lt;code>Write-Verbose ($PSBoundParameters | Out-String)&lt;/code>&lt;/p>
+&lt;p>to my function, called it with verbose in the pipeline and got&lt;/p>
+&lt;blockquote>
+&lt;p>Name       Value&lt;br>
+- -         - -&lt;br>
+MyThing       ***&lt;/p>
+&lt;/blockquote>
+&lt;p>Awesome.&lt;/p>
+&lt;p>Write it to a file and read it back. This is a tactic that you can read about that works but it puts the secrets on disk on the agent and I did not want to do that.&lt;/p>
+&lt;p>I thought I would be even cleverer and this time I added to my function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$WhatsMyThing = $MyThing + &amp;#39;-1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Verbose &amp;#34;My thing is $WhatsMyThing&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Thats bound to work.&lt;/p>
+&lt;p>My how I laughed when in the logs I had&lt;/p>
+&lt;blockquote>
+&lt;p>My Thing is  ***-1&lt;/p>
+&lt;/blockquote>
+&lt;p>Right. I thought.&lt;/p>
+&lt;p>This IS IT.&lt;/p>
+&lt;p>I WILL SHOW YOU AZURE DEVOPS&lt;/p>
+&lt;p>I added to my function&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$WhatsMyThing =[Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($$MyThing ))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Verbose &amp;#34;My thing is $WhatsMyThing&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This converted the value of MyThing into a base64 encoded value which I could see in the logs.&lt;/p>
+&lt;blockquote>
+&lt;p>My Thing is VGhlIEJlYXJkIGlzIExhdWdoaW5nIGF0IHlvdS4gWW91IHRoaW5rIEkgd291bGQgcHV0IHNvbWV0aGluZyByZWFsIGluIGhlcmU/IEdvb2QgdHJ5Lg==&lt;/p>
+&lt;/blockquote>
+&lt;p>and then I could decode it on my workstation with&lt;/p>
+&lt;p>&lt;code>[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('ValueFromLogs'))&lt;/code>&lt;/p>
+&lt;p>and learn that despite two people looking at the values we couldnt tell the difference between AGeneratedName and AnotherGeneratedName and they were the wrong way around!!!!&lt;/p>
+&lt;p>But at least I know now a good way to get those secret values.&lt;/p>
+&lt;p>If you do this, dont forget to delete the pipeline run from Azure DevOps so that the encoded value is not left in the logs for anyone to read.&lt;/p>
+&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" />&lt;h1 id="an-error">An Error&lt;/h1>
+&lt;p>Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p>
+&lt;blockquote>
+&lt;p>Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately that was all that I had. I had to find the inner error for details&lt;/p>
+&lt;h1 id="try-the-deployment-log-on-the-resource-group">Try the deployment log on the Resource Group&lt;/h1>
+&lt;p>As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p>
+&lt;p>So I navigated to the home page of the Azure Portal and searched for Activity log.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png"
+loading="lazy"
+alt="activitylog"
+>&lt;/a>&lt;/p>
+&lt;p>I searched for the name of the deployment &lt;code>deploy_bicep003_20210505094331&lt;/code> and saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png"
+loading="lazy"
+alt="activitylogsearch"
+>&lt;/a>&lt;/p>
+&lt;p>clicking on the link showed me this with the relevant information hidden in the JSON&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png"
+loading="lazy"
+alt="activitylogdetails"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Resource name {&amp;rsquo;name&amp;rsquo;:&amp;lsquo;subnet1&amp;rsquo;,&amp;lsquo;addressPrefix&amp;rsquo;:&amp;lsquo;10.0.0.0/24&amp;rsquo;}.name is invalid.&lt;/p>
+&lt;/blockquote>
+&lt;p>Bingo.&lt;/p>
+&lt;p>I had made a mistake in my resource definition for the subnets. I had used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}.name&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item}.addressPrefix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where I should have used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item.name}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item.addressPrefix}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>PowerShell Function – Validating a Parameter Depending On A Previous Parameter’s Value</title><link>https://blog.robsewell.com/blog/powershell-function-validating-a-parameter-depending-on-a-previous-parameters-value/</link><pubDate>Wed, 26 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-function-validating-a-parameter-depending-on-a-previous-parameters-value/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-more-help.png" alt="Featured image of post PowerShell Function – Validating a Parameter Depending On A Previous Parameter’s Value" />&lt;p>I was chatting on the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Community Slack&lt;/a> with my friend Sander Stad &lt;a class="link" href="http://www.sqlstad.nl/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sqlstad" target="_blank" rel="noopener"
+>t&lt;/a> about some functions he is writing for the amazing PowerShell SQL Server Community module &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a>. He was asking my opinion as to how to enable user choice or options for Agent Schedules and I said that he should validate the input of the parameters. He said that was difficult as if the parameter was Weekly the frequency values required would be different from if the parameter was Daily or Monthly. That’s ok, I said, you can still validate the parameter.&lt;/p>
+&lt;p>You can read more about Parameters either online &lt;a class="link" href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_parameters" target="_blank" rel="noopener"
+>here&lt;/a> or &lt;a class="link" href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_functions_advanced_parameters" target="_blank" rel="noopener"
+>here&lt;/a> or by running&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Get-Help About_Parameters
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-Help About_Functions_Parameters
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can also find more help information with&lt;/p>
+&lt;p>&lt;code>Get-Help About_*Parameters*&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/01-more-help.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-more-help.png"
+loading="lazy"
+alt="01 more help.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>This is not a post about using Parameters, &lt;a class="link" href="https://www.google.co.uk/search?q=powershell&amp;#43;about&amp;#43;paramters&amp;amp;ie=&amp;amp;oe=#safe=strict&amp;amp;q=powershell&amp;#43;parameters&amp;amp;spf=370" target="_blank" rel="noopener"
+>google for those&lt;/a> but this is what I showed him.&lt;/p>
+&lt;p>Lets create a simple function that accepts 2 parameters Word and Number&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> function Test-validation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [string]$Word,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [int]$Number
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return &amp;#34;$Word and $Number&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We can run it with any parameters&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/02-any-parameters.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/02-any-parameters.png"
+loading="lazy"
+alt="02 any parameters"
+>&lt;/a>&lt;/p>
+&lt;p>If we wanted to restrict the Word parameter to only accept Sun, Moon or Earth we can use the &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/ms714434%28v=vs.85%29.aspx" target="_blank" rel="noopener"
+>ValidateSetAttribute&lt;/a> as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> function Test-validation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    Param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [ValidateSet(&amp;#34;sun&amp;#34;, &amp;#34;moon&amp;#34;, &amp;#34;earth&amp;#34;)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [string]$Word,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [int]$Number
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return &amp;#34;$Word and $Number&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now if we try and set a value for the $Word parameter that isn’t sun moon or earth then we get an error&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/03-parameter-error.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/03-parameter-error.png"
+loading="lazy"
+alt="03 parameter error.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>and it tells us that the reason for the error is that TheBeard! does not belong to the set sun, moon, earth.&lt;/p>
+&lt;p>But what Sander wanted was to validate the value of the second parameter depending on the value of the first one. So lets say we wanted&lt;/p>
+&lt;ul>
+&lt;li>If word is sun, number must be 1 or 2&lt;/li>
+&lt;li>If word is moon, number must be 3 or 4&lt;/li>
+&lt;li>If word is earth, number must be 5 or 6&lt;/li>
+&lt;/ul>
+&lt;p>We can use the &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/system.management.automation.validatescriptattribute%28v=vs.85%29.aspx" target="_blank" rel="noopener"
+>ValidateScriptAttribute&lt;/a>  to do this. This requires a script block which returns True or False. You can access the current parameter with &lt;code>$_&lt;/code> so we can use a script block like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if($Word -eq &amp;#39;Sun&amp;#39;){$_ -eq 1 -or $_ -eq 2}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> elseif($Word -eq &amp;#39;Moon&amp;#39;){$_ -eq 3 -or $_ -eq 4}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> elseif($Word -eq &amp;#39;earth&amp;#39;){$_ -eq 5 -or $_ -eq 6}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The function now looks like&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Test-validation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    Param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [ValidateSet(&amp;#34;sun&amp;#34;, &amp;#34;moon&amp;#34;, &amp;#34;earth&amp;#34;)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [string]$Word,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [ValidateScript({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            if($Word -eq &amp;#39;Sun&amp;#39;){$_ -eq 1 -or $_ -eq 2}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            elseif($Word -eq &amp;#39;Moon&amp;#39;){$_ -eq 3 -or $_ -eq 4}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            elseif($Word -eq &amp;#39;earth&amp;#39;){$_ -eq 5 -or $_ -eq 6}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        })]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [int]$Number
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return &amp;#34;$Word and $Number&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It will still fail if we use the wrong “Word” in the same way but now if we enter earth and 7 we get this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/04-parameter-error.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/04-parameter-error.png"
+loading="lazy"
+alt="04 parameter error.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>But if we enter sun and 1 or moon and 3 or earth and 5 all is well&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/05-working.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/05-working.png"
+loading="lazy"
+alt="05 working"
+>&lt;/a>&lt;/p>
+&lt;p>I would add one more thing. We should always write PowerShell functions that are easy for our users to self-help. Of course, this means write good help for the function. here is a great place to start from June Blender&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/06-june.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/06-june.png"
+loading="lazy"
+alt="06 June.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>In this example, the error message&lt;/p>
+&lt;blockquote>
+&lt;p>Test-validation : Cannot validate argument on parameter ‘number’. The ”&lt;br>
+if($word -eq ‘Sun’){$_ -eq 1 -or $_ -eq 2}&lt;br>
+elseif($word -eq ‘Moon’){$_ -eq 3 -or $_ -eq 4}&lt;br>
+elseif($word -eq ‘earth’){$_ -eq 5 -or $_ -eq 6}&lt;br>
+” validation script for the argument with value “7” did not return a result of True. Determine why the validation script failed, and then try the&lt;br>
+command again.&lt;br>
+At line:1 char:39&lt;/p>
+&lt;ul>
+&lt;li>Test-validation -Word “earth” -number 007&lt;br>
++                                       ~~~&lt;/li>
+&lt;li>CategoryInfo          : InvalidData: (:) [Test-validation], ParameterBindingValidationException&lt;/li>
+&lt;li>FullyQualifiedErrorId : ParameterArgumentValidationError,Test-validation&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>is not obvious to a none-coder so we could make it easier. As we are passing in a script block we can just add a comment like this. I added a spare line above and below to make it stand out a little more&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Test-validation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    Param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    (
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [ValidateSet(&amp;#34;sun&amp;#34;, &amp;#34;moon&amp;#34;, &amp;#34;earth&amp;#34;)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [string]$Word,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [ValidateScript({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            # Sun Accepts 1 or 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Moon Accepts 3 or 4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Earth Accepts 5 or 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            if($Word -eq &amp;#39;Sun&amp;#39;){$_ -eq 1 -or $_ -eq 2}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            elseif($Word -eq &amp;#39;Moon&amp;#39;){$_ -eq 3 -or $_ -eq 4}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">            elseif($Word -eq &amp;#39;earth&amp;#39;){$_ -eq 5 -or $_ -eq 6}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        })]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        [int]$Number
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return &amp;#34;$Word and $Number&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now if you enter the wrong parameter you get this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/07-more-help.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/07-more-help.png"
+loading="lazy"
+alt="07 more help.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>which I think makes it a little more obvious&lt;/p></description></item><item><title>PowerShell Function – Validating a Parameter Depending On A Previous Parameter’s Value</title><link>https://blog.robsewell.com/blog/powershell-function-validating-a-parameter-depending-on-a-previous-parameters-value/</link><pubDate>Wed, 26 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-function-validating-a-parameter-depending-on-a-previous-parameters-value/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>PowerShell Pester – The script failed due to call depth overflow.</title><link>https://blog.robsewell.com/blog/powershell-pester-the-script-failed-due-to-call-depth-overflow./</link><pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-pester-the-script-failed-due-to-call-depth-overflow./</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-success_thumb1.jpg" alt="Featured image of post PowerShell Pester – The script failed due to call depth overflow." />&lt;p>This error caught me out. I am putting this post here firstly to remind me if I do it again and also to help others who may hit the same issue.&lt;/p>
+&lt;p>I also have been looking at &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> which is a framework for running unit tests within PowerShell&lt;/p>
+&lt;p>You will find some good blog posts about starting with Pester here&lt;/p>
+&lt;p>So I created a function script file &lt;code>Create-HyperVFromBase.ps1&lt;/code> and a tests script file &lt;code>Create-HyperVFromBase.tests.ps1&lt;/code> as shown.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/01/pester-scripts_thumb.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-scripts_thumb.jpg"
+loading="lazy"
+alt="pester scripts"
+>&lt;/a>&lt;/p>
+&lt;p>The tests contained this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $here = Split-Path -Parent $MyInvocation.MyCommand.Path
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(&amp;#34;.Tests.&amp;#34;, &amp;#34;.&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">. {&amp;#39;$here\$sut&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#34;Create Hyper V from Base Tests&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Parameter Values,Validations and Errors&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It exists {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> test-path function:\create-hypervmfrombase | should be $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>When I ran the test I got the following error&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/01/pester-error1_thumb1.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-error1_thumb1.jpg"
+loading="lazy"
+alt="pester error1"
+>&lt;/a>&lt;/p>
+&lt;p>or&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/01/pester-error2_thumb1.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-error2_thumb1.jpg"
+loading="lazy"
+alt="pester error2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.google.co.uk/search?q=pester&amp;#43;The&amp;#43;script&amp;#43;failed&amp;#43;due&amp;#43;to&amp;#43;call&amp;#43;depth&amp;#43;overflow.&amp;amp;ie=&amp;amp;oe=#q=pester&amp;#43;%22The&amp;#43;script&amp;#43;failed&amp;#43;due&amp;#43;to&amp;#43;call&amp;#43;depth&amp;#43;overflow.%22" target="_blank" rel="noopener"
+>Googling pester “The script failed due to call depth overflow.”&lt;/a> returned only 7 results but the &lt;a class="link" href="https://www.reddit.com/r/PowerShell/comments/3kkbgm/confused_about_pester/" target="_blank" rel="noopener"
+>Reddit link&lt;/a> contained the information I needed&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>.Replace() &lt;/code>is case sensitive. It didn’t remove the .tests. keyword from your file name. So it calls your test script again and repeats the same mistake over and over.&lt;/p>
+&lt;/blockquote>
+&lt;p>and so I renamed the tests script file to &lt;code>Create-HyperVFromBase.Tests.ps1&lt;/code> With a Capital T! and bingo&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/01/pester-success_thumb1.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-success_thumb1.jpg"
+loading="lazy"
+alt="pester success"
+>&lt;/a>&lt;/p>
+&lt;p>Don’t forget to name your Pester Tests scripts with a capital T when loading the script in this way and remember that &lt;code>Replace()&lt;/code> is case sensitive.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(&amp;#34;.Tests.&amp;#34;, &amp;#34;.&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">. &amp;#34;$here\$sut&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>PowerShell Pester Testing for Parameter Validation</title><link>https://blog.robsewell.com/blog/powershell-pester-testing-for-parameter-validation/</link><pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-pester-testing-for-parameter-validation/</guid><description>&lt;p>This error caught me out. I am putting this post here firstly to remind me if I do it again adn also to help others who may hit the same issue.&lt;/p>
+&lt;p>Today I am rewriting a function to create a Hyper-V VM so that I can properly script the creation of my labs for demos and other things. I am doing this because I want to use DSC to create an availability group and want to be able to tear down and recreate the machines (but thats for another day)&lt;/p>
+&lt;p>I also have been looking at &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> which is a framework for running unit tests within PowerShell&lt;/p>
+&lt;p>You will find some good blog posts about starting with Pester &lt;a class="link" href="https://www.google.co.uk/search?q=PowerShell&amp;#43;pester&amp;#43;tutorial&amp;amp;ie=&amp;amp;oe=" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>Here is the start of the function. I validate the VMName parameter to ensure that there a VM with that  name does not already exist&lt;/p>
+&lt;p>function Create-HyperVMFromBase {
+[cmdletbinding()]
+param (
+[Parameter(Mandatory = $true,HelpMessage=&amp;ldquo;Enter a VMName for the VM that does not exist&amp;rdquo;)] [ValidateScript({(!(Get-VM -Name $_))})]
+[string]$VMName,&lt;/p>
+&lt;p>and my Pester test looks like this&lt;/p>
+&lt;p>$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(&amp;quot;.Tests.&amp;quot;, &amp;ldquo;.&amp;rdquo;)
+. {&amp;rsquo;$here$sut'}&lt;/p>
+&lt;p>Describe &amp;ldquo;Create Hyper V from Base Tests&amp;rdquo; {
+Context &amp;ldquo;Parameter Values,Validations and Errors&amp;rdquo; {
+It exists {
+test-path function:\create-hypervmfrombase | should be $true
+}
+It &amp;ldquo;Should error when VMName exists&amp;rdquo; {
+$VMName = (Get-VM|Select -First 1 Name).Name
+create-hypervmfrombase -VMName $VMName |should throw
+}&lt;/p>
+&lt;p>I thought that what I was testing was that the function threw an error when an incorrect parameter was passed. The should throw should be true but what I got was&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2016/01/pester-error3.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-error3_thumb.jpg"
+loading="lazy"
+alt="pester error3"
+>&lt;/a>&lt;/p>
+&lt;p>So I was getting the correct error but not passing the test. It was a simple fix. Simply adding curly braces around the call to the function&lt;/p>
+&lt;p>$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(&amp;quot;.Tests.&amp;quot;, &amp;ldquo;.&amp;rdquo;)
+. &amp;ldquo;$here$sut&amp;rdquo;
+Describe &amp;ldquo;Create Hyper V from Base Tests&amp;rdquo; {
+Context &amp;ldquo;Parameter Values,Validations and Errors&amp;rdquo; {
+It exists {
+test-path function:\create-hypervmfrombase | should be $true
+}
+It &amp;ldquo;Should error when VMName exists&amp;rdquo; {
+$VMName = (Get-VM|Select -First 1 Name).Name
+{create-hypervmfrombase -VMName $VMName} |should throw
+}
+}
+}&lt;/p>
+&lt;p>and we pass the test.&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2016/01/pester-success2.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/01/pester-success2_thumb.jpg"
+loading="lazy"
+alt="pester success2"
+>&lt;/a>&lt;/p></description></item><item><title>Creating SQL Server Database with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-server-database-with-powershell/</link><pubDate>Sun, 08 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-server-database-with-powershell/</guid><description>&lt;p>This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.&lt;/p>
+&lt;p>I used my scripts from &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>My Post on Spinning Up Azure SQL Boxes&lt;/a> to create two servers and then I wanted to create some databases&lt;/p>
+&lt;p>I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases.&lt;/p>
+&lt;h2 id="errors">Errors&lt;/h2>
+&lt;p>Whilst finalising the function I didn’t quite get it right sometimes and was faced with an error.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image39.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image39.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Not the most useful of errors to troubleshoot. The issue could be anywhere in the script&lt;/p>
+&lt;p>You can view the last errors PowerShell has shown using $Errors. This gives you the last 500 errors but you can see the last error by using $Error[0] if you pipe it to Format-List you can get a more detailed error message so I added a try catch to the function which gave me an error message I could resolve.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image40.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image40.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Much better. The problem was&lt;/p>
+&lt;blockquote>
+&lt;p>Cannot create file ‘C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\.LDF’ because it already exists.&lt;/p>
+&lt;/blockquote>
+&lt;p>Mistyping a variable has caused this. Creating an empty file name variable which then threw the error the second(and third,fourth fifth) times I ran the script but this error pointed me to it.&lt;/p>
+&lt;h2 id="creating-database">Creating Database&lt;/h2>
+&lt;p>There are a vast number of variables you can set when creating a database. I decided to set File Sizes, File Growth Sizes, Max File Sizes and Recovery Model. I only set Server and Database Name as mandatory parameters and gave the other parameters default values&lt;/p>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image41.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image41.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>We take the parameters for file sizes in MB and set them to KB&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image42.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image42.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Then set the default file locations. Create a database object, a Primary file group object and add the file group object to the database object&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image43.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image43.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Add a User File Group for User objects&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image44.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image44.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Create a database file on the primary file group using the variables set earlier&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image45.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image45.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Do the same for the user file and then create a Log File&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image46.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image46.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Set the Recovery Model and create the database and then set the user file group as the default&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image47.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image47.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Finally catch the errors&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image48.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image48.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>It can then be called as follows&lt;/p>
+&lt;pre>&lt;code>Create-Database SERVERNAME DATABASENAME
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image49.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image49.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>or by setting all the parameters&lt;/p>
+&lt;pre>&lt;code>Create-Database -Server Fade2black -DBName DatabaseTest -SysFileSize 10 -UserFileSize 15 -LogFileSize 20 -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize 250 -DBRecModel FULL
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image50.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image50.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>This means that I can easily and quickly set up several databases of different types and sizes&lt;/p>
+&lt;p>The script can be found here&lt;/p>
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Create-Database.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:08/09/2013
+#
+# COMMENTS: Load function for creating a database
+# Only Server and DB Name are mandatory the rest will be set to small defaults
+#
+# USAGE: Create-Database -Server Fade2black -DBName Test35 -SysFileSize 10 -UserFileSize 15 -LogFileSize 20
+# -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize 250 -DBRecModel FULL
+# ————————————————————————
+Function Create-Database {
+Param(
+[Parameter(Mandatory = $true)]
+[String]$Server ,
+[Parameter(Mandatory = $true)]
+[String]$DBName,
+[Parameter(Mandatory = $false)]
+[int]$SysFileSize = 5,
+[Parameter(Mandatory = $false)]
+[int]$UserFileSize = 25,
+[Parameter(Mandatory = $false)]
+[int]$LogFileSize = 25,
+[Parameter(Mandatory = $false)]
+[int]$UserFileGrowth = 5,
+[Parameter(Mandatory = $false)]
+[int]$UserFileMaxSize = 100,
+[Parameter(Mandatory = $false)]
+[int]$LogFileGrowth = 5,
+[Parameter(Mandatory = $false)]
+$LogFileMaxSize = 100,
+[Parameter(Mandatory = $false)]
+[String]$DBRecModel = 'FULL'
+)
+try {
+# Set server object
+$srv = New-Object ('Microsoft.SqlServer.Management.SMO.Server') $server
+$DB = $srv.Databases[$DBName]
+# Define the variables
+# Set the file sizes (sizes are in KB, so multiply here to MB)
+$SysFileSize = [double]($SysFileSize * 1024.0)
+$UserFileSize = [double] ($UserFileSize * 1024.0)
+$LogFileSize = [double] ($LogFileSize * 1024.0)
+$UserFileGrowth = [double] ($UserFileGrowth * 1024.0)
+$UserFileMaxSize = [double] ($UserFileMaxSize * 1024.0)
+$LogFileGrowth = [double] ($LogFileGrowth * 1024.0)
+$LogFileMaxSize = [double] ($LogFileMaxSize * 1024.0)
+Write-Output &amp;quot;Creating database: $DBName&amp;quot;
+# Set the Default File Locations
+$DefaultDataLoc = $srv.Settings.DefaultFile
+$DefaultLogLoc = $srv.Settings.DefaultLog
+# If these are not set, then use the location of the master db mdf/ ldf
+if ($DefaultDataLoc.Length -EQ 0) {$DefaultDataLoc = $srv. Information.MasterDBPath}
+if ($DefaultLogLoc.Length -EQ 0) {$DefaultLogLoc = $srv.Information. MasterDBLogPath}
+# new database object
+$DB = New-Object ('Microsoft.SqlServer.Management.SMO.Database') ($srv, $DBName)
+# new filegroup object
+$PrimaryFG = New-Object ('Microsoft.SqlServer.Management.SMO. FileGroup') ($DB, 'PRIMARY')
+# Add the filegroup object to the database object
+$DB.FileGroups.Add($PrimaryFG )
+# Best practice is to separate the system objects from the user objects.
+# So create a seperate User File Group
+$UserFG = New-Object ('Microsoft.SqlServer.Management.SMO. FileGroup') ($DB, 'UserFG')
+$DB.FileGroups.Add($UserFG)
+# Create the database files
+# First, create a data file on the primary filegroup.
+$SystemFileName = $DBName + &amp;quot;_System&amp;quot;
+$SysFile = New-Object ('Microsoft.SqlServer.Management.SMO. DataFile') ($PrimaryFG , $SystemFileName)
+$PrimaryFG.Files.Add($SysFile)
+$SysFile.FileName = $DefaultDataLoc + $SystemFileName + &amp;quot;.MDF&amp;quot;
+$SysFile.Size = $SysFileSize
+$SysFile.GrowthType = &amp;quot;None&amp;quot;
+$SysFile.IsPrimaryFile = 'True'
+# Now create the data file for the user objects
+$UserFileName = $DBName + &amp;quot;_User&amp;quot;
+$UserFile = New-Object ('Microsoft.SqlServer.Management.SMO. Datafile') ($UserFG, $UserFileName)
+$UserFG.Files.Add($UserFile)
+$UserFile.FileName = $DefaultDataLoc + $UserFileName + &amp;quot;.NDF&amp;quot;
+$UserFile.Size = $UserFileSize
+$UserFile.GrowthType = &amp;quot;KB&amp;quot;
+$UserFile.Growth = $UserFileGrowth
+$UserFile.MaxSize = $UserFileMaxSize
+# Create a log file for this database
+$LogFileName = $DBName + &amp;quot;_Log&amp;quot;
+$LogFile = New-Object ('Microsoft.SqlServer.Management.SMO.LogFile') ($DB, $LogFileName)
+$DB.LogFiles.Add($LogFile)
+$LogFile.FileName = $DefaultLogLoc + $LogFileName + &amp;quot;.LDF&amp;quot;
+$LogFile.Size = $LogFileSize
+$LogFile.GrowthType = &amp;quot;KB&amp;quot;
+$LogFile.Growth = $LogFileGrowth
+$LogFile.MaxSize = $LogFileMaxSize
+#Set the Recovery Model
+$DB.RecoveryModel = $DBRecModel
+#Create the database
+$DB.Create()
+#Make the user filegroup the default
+$UserFG = $DB.FileGroups['UserFG']
+$UserFG.IsDefault = $true
+$UserFG.Alter()
+$DB.Alter()
+Write-Output &amp;quot; $DBName Created&amp;quot;
+Write-Output &amp;quot;System File&amp;quot;
+$SysFile| Select Name, FileName, Size, MaxSize, GrowthType| Format-List
+Write-Output &amp;quot;User File&amp;quot;
+$UserFile| Select Name, FileName, Size, MaxSize, GrowthType, Growth| Format-List
+Write-Output &amp;quot;LogFile&amp;quot;
+$LogFile| Select Name, FileName, Size, MaxSize, GrowthType, Growth| Format-List
+Write-Output &amp;quot;Recovery Model&amp;quot;
+$DB.RecoveryModel
+}
+Catch {
+$error[0] | fl * -force
+}
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

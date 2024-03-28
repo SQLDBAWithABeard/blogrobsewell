@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bicep on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/bicep/</link><description>Recent content in Bicep on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/bicep/index.xml" rel="self" type="application/rss+xml"/><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" />&lt;h1 id="an-error">An Error&lt;/h1>
+&lt;p>Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p>
+&lt;blockquote>
+&lt;p>Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately that was all that I had. I had to find the inner error for details&lt;/p>
+&lt;h1 id="try-the-deployment-log-on-the-resource-group">Try the deployment log on the Resource Group&lt;/h1>
+&lt;p>As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p>
+&lt;p>So I navigated to the home page of the Azure Portal and searched for Activity log.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png"
+loading="lazy"
+alt="activitylog"
+>&lt;/a>&lt;/p>
+&lt;p>I searched for the name of the deployment &lt;code>deploy_bicep003_20210505094331&lt;/code> and saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png"
+loading="lazy"
+alt="activitylogsearch"
+>&lt;/a>&lt;/p>
+&lt;p>clicking on the link showed me this with the relevant information hidden in the JSON&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png"
+loading="lazy"
+alt="activitylogdetails"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Resource name {&amp;rsquo;name&amp;rsquo;:&amp;lsquo;subnet1&amp;rsquo;,&amp;lsquo;addressPrefix&amp;rsquo;:&amp;lsquo;10.0.0.0/24&amp;rsquo;}.name is invalid.&lt;/p>
+&lt;/blockquote>
+&lt;p>Bingo.&lt;/p>
+&lt;p>I had made a mistake in my resource definition for the subnets. I had used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}.name&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item}.addressPrefix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where I should have used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item.name}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item.addressPrefix}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Every day is a learning day.&lt;/p></description></item></channel></rss>

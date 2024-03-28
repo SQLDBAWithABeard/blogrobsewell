@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/kubernetes/</link><description>Recent content in Kubernetes on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes lab certificates expired</title><link>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</link><pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post Kubernetes lab certificates expired" />&lt;h1 id="it-wont-start">It won&amp;rsquo;t start!&lt;/h1>
+&lt;p>I have a 3 node kubernetes cluster running in my office that I have used for my &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc-enabled data services&lt;/a> presentations over the last year (&lt;a class="link" href="beard.media/presentations" >Side note, my presentations are here&lt;/a>). A few days ago after a power cut I tried to connect to my cluster with &lt;a class="link" href="https://k8slens.dev/" target="_blank" rel="noopener"
+>Lens&lt;/a> and was not able to.&lt;/p>
+&lt;p>I tried to run &lt;code>kubectl get nodes&lt;/code> but got no response.&lt;/p>
+&lt;h2 id="try-on-the-master-node">Try on the master node&lt;/h2>
+&lt;p>I used my windows terminal profile that ssh&amp;rsquo;s into the master node and ran&lt;/p>
+&lt;p>&lt;code>systemctl status kubelet&lt;/code>&lt;/p>
+&lt;p>this resulted in&lt;/p>
+&lt;blockquote>
+&lt;p>rob@beardlinux:~$ systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+Drop-In: /etc/systemd/system/kubelet.service.d
+└─10-kubeadm.conf
+Active: active (running) since Thu 2022-07-07 09:29:00 BST; 8min ago
+Docs: &lt;a class="link" href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener"
+>https://kubernetes.io/docs/home/&lt;/a>
+Main PID: 1201 (kubelet)
+Tasks: 15 (limit: 38316)
+Memory: 120.3M
+CGroup: /system.slice/kubelet.service
+└─1201 /usr/bin/kubelet &amp;ndash;bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf &amp;ndash;kubeconfig=/etc/kub&amp;gt;
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.318044 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.418240 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="how-many-logs">How many logs?&lt;/h2>
+&lt;p>So beardlinux is the master node that we are running on so why can it not be found?&lt;/p>
+&lt;p>&lt;code>journalctl -u kubelet -n 50&lt;/code>&lt;/p>
+&lt;p>that will show me, i thought. It showed&lt;/p>
+&lt;blockquote>
+&lt;p>jrob@beardlinux:~$ journalctl -u kubelet -n 50
+&amp;ndash; Logs begin at Thu 2022-06-16 14:26:08 BST, end at Thu 2022-07-07 19:38:55 BST. &amp;ndash;
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.710347 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.810556 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.910804 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.011102 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.111501 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.211840 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.312180 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.412460 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.512751 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.612983 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.713231 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.813398 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.913647 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.013891 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.114153 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.214312 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.314439 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.414546 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.514875 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.615009 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.715310 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.815683 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.915917 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.016190 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.116399 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;p>Ah :-(&lt;/p>
+&lt;p>so after some investigation I found&lt;/p>
+&lt;blockquote>
+&lt;p>Jul 06 08:03:09 beardlinux kubelet[1021]: I0706 08:03:09.755007 1021 kubelet_node_status.go:71] Attempting to register node beardlinux
+Jul 06 08:03:09 beardlinux kubelet[1021]: E0706 08:03:09.755338 1021 kubelet_node_status.go:93] Unable to register node &amp;ldquo;beardlinux&amp;rdquo; with API server: Post &amp;ldquo;https://192.168.2.62:6443/api/v1/nodes&amp;rdquo;: dial tcp 192.168.2.62:6443: connect: connection refused&lt;/p>
+&lt;/blockquote>
+&lt;p>which lead me to an issue on GitHub where there was a &lt;a class="link" href="https://github.com/kubernetes/kubeadm/issues/1026#issuecomment-768832968" target="_blank" rel="noopener"
+>comment&lt;/a> to check for expired certificates&lt;/p>
+&lt;h2 id="do-i-have-expired-certificates">Do I have expired certificates?&lt;/h2>
+&lt;p>You can check your certificates using&lt;/p>
+&lt;p>&lt;code>kubeadm certs check-expiration&lt;/code>&lt;/p>
+&lt;p>which resulted in&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/expired-certs.png"
+loading="lazy"
+alt="expired-certs"
+>&lt;/p>
+&lt;h2 id="and-renewing-them">And renewing them&lt;/h2>
+&lt;p>They are renewed using &lt;code>kubeadm certs renew all&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# kubeadm certs renew all
+[renew] Reading configuration from the cluster&amp;hellip;
+[renew] FYI: You can look at this config file with &amp;lsquo;kubectl -n kube-system get cm kubeadm-config -o yaml&amp;rsquo;
+[renew] Error reading configuration from the Cluster. Falling back to default configuration&lt;/p>
+&lt;p>certificate embedded in the kubeconfig file for the admin to use and for kubeadm itself renewed
+certificate for serving the Kubernetes API renewed
+certificate the apiserver uses to access etcd renewed
+certificate for the API server to connect to kubelet renewed
+certificate embedded in the kubeconfig file for the controller manager to use renewed
+certificate for liveness probes to healthcheck etcd renewed
+certificate for etcd nodes to communicate with each other renewed
+certificate for serving etcd renewed
+certificate for the front proxy client renewed
+certificate embedded in the kubeconfig file for the scheduler manager to use renewed&lt;/p>
+&lt;p>Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.&lt;/p>
+&lt;/blockquote>
+&lt;p>stopped and started the kubelet&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# systemctl stop kubelet
+root@beardlinux:/home/rob# systemctl start kubelet&lt;/p>
+&lt;/blockquote>
+&lt;p>and checked the nodes&lt;/p>
+&lt;blockquote>
+&lt;p>pwsh 7.2.5&amp;gt; kubectl get nodes
+NAME STATUS ROLES AGE VERSION
+beardlinux Ready control-plane,master 376d v1.20.2
+beardlinux2 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2
+beardlinux3 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2&lt;/p>
+&lt;/blockquote>
+&lt;p>I also had to update my config with the new certificate data to make that work as well.&lt;/p></description></item><item><title>Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster</title><link>https://blog.robsewell.com/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-151.png" alt="Featured image of post Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster" />&lt;p>In the last few posts I have moved from &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>building an Azure SQL DB with Terraform using VS Code&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group&lt;/a>. This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.&lt;/p>
+&lt;p>Luckily, you can 😉 You can use &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure DevOps Job Templates&lt;/a> to achieve this. There is a limitation at present, you can only use them for Build Pipelines and not Release Pipelines.&lt;/p>
+&lt;p>The aim of this little blog series was to have a single Build Pipeline stored as code which I can use to build any infrastructure that I want with Terraform in Azure and be able to use it anywhere&lt;/p>
+&lt;h2 id="creating-a-build-pipeline-template">Creating a Build Pipeline Template&lt;/h2>
+&lt;p>I created a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-BuildTemplates" target="_blank" rel="noopener"
+>GitHub repository&lt;/a> to hold my Build Templates, feel free to use them as a base for your own but please don’t try and use the repo for your own builds.&lt;/p>
+&lt;p>The easiest way to create a Build Template is to already have a Build Pipeline. This cannot be done from a Task Group but I still have the Build Pipeline from my &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> blog post.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-132.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>There is a View YAML button. I can click this to view the YAML definition of the Build Pipeline&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-133.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I copy that and paste it into a new file in my BuildTemplates repository. (I have replaced my Azure Subscription information in the public repository)&lt;/p>
+&lt;pre>&lt;code> jobs:
+- job: Build
+pool:
+name: Hosted VS2017
+demands: azureps
+steps:
+- task: AzureCLI@1
+displayName: 'Azure CLI to deploy azure storage for backend'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+scriptLocation: inlineScript
+inlineScript: |
+# the following script will create Azure resource group, Storage account and a Storage container which will be used to store terraform state
+call az group create --location $(location) --name $(TerraformStorageRG)
+call az storage account create --name $(TerraformStorageAccount) --resource-group $(TerraformStorageRG) --location $(location) --sku Standard_LRS
+call az storage container create --name terraform --account-name $(TerraformStorageAccount)
+- task: AzurePowerShell@3
+displayName: 'Azure PowerShell script to get the storage key'
+inputs:
+azureSubscription: 'PUTYOURAZURESUBNAMEHERE'
+ScriptType: InlineScript
+Inline: |
+# Using this script we will fetch storage key which is required in terraform file to authenticate backend stoarge account
+$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(TerraformStorageRG) -AccountName $(TerraformStorageAccount)).Value[0]
+Write-Host &amp;quot;##vso[task.setvariable variable=TerraformStorageKey]$key&amp;quot;
+azurePowerShellVersion: LatestVersion
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+displayName: 'Replace tokens in terraform file'
+inputs:
+rootDirectory: Build
+targetFiles: |
+**/*.tf
+**/*.tfvars
+tokenPrefix: '__'
+tokenSuffix: '__'
+- powershell: |
+Get-ChildItem .\Build -Recurse
+Get-Content .\Build\*.tf
+Get-Content .\Build\*.tfvars
+Get-ChildItem Env: | select Name
+displayName: 'Check values in files'
+enabled: false
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Initialise Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'init -backend-config=&amp;quot;0-backend-config.tfvars&amp;quot;'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Plan Terraform execution'
+inputs:
+TemplatePath: Build
+Arguments: plan
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform.Xpirit-Vsts-Release-Terraform.Terraform@2
+displayName: 'Apply Terraform'
+inputs:
+TemplatePath: Build
+Arguments: 'apply -auto-approve'
+InstallTerraform: true
+UseAzureSub: true
+ConnectedServiceNameARM: 'PUTYOURAZURESUBNAMEHERE'
+&lt;/code>&lt;/pre>
+&lt;p>Now I can use this yaml as configuration as code for my Build Pipeline 🙂 It can be used from any Azure DevOps project. Once you start looking at the code and the &lt;a class="link" href="https://docs.microsoft.com/en-gb/azure/devops/pipelines/yaml-schema?view=azure-devops&amp;amp;tabs=schema?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>documentation for the yaml&lt;/a> schema you can begin to write your pipelines as YAML, but sometimes it is easier to just create build pipeline or even just a job step in the browser and click the view yaml button!&lt;/p>
+&lt;h2 id="create-an-aks-cluster-with-a-sql-2019-container-using-terraform-and-build-templates">Create an AKS Cluster with a SQL 2019 container using Terraform and Build templates&lt;/h2>
+&lt;p>I have a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository with the Terraform code to build a simple AKS cluster&lt;/a>. This could not have been achieved without &lt;a class="link" href="https://azurecitadel.com/automation/terraform/lab8/" target="_blank" rel="noopener"
+>Richard Cheney’s article&lt;/a> I am not going to explain how it all works for this blog post or some of the negatives of doing it this way. Instead lets build an Azure DevOps Build Pipeline to build it with Terraform using Configuration as Code (the yaml file)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-134.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to create a new Azure DevOps Build Pipeline and as in the previous posts connect it to the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AKS" target="_blank" rel="noopener"
+>GitHub Repository holding the Terraform code&lt;/a>.&lt;/p>
+&lt;p>This time I am going to choose the Configuration as code template&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-135.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am going to give it a name and it will show me that it needs the path to the yaml file containing the build definition in the current repository.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-136.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Clicking the 3 ellipses will pop-up a file chooser and I pick the build.yaml file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-137.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The build.yaml file looks like this. The name is the USER/Repository Name and the endpoint is the name of the endpoint for the GitHub service connection in Azure DevOps. The template value is the name of the build yaml file @ the name given for the repository value.&lt;/p>
+&lt;pre>&lt;code> resources:
+repositories:
+- repository: templates
+type: GitHub
+name: SQLDBAWithABeard/Presentations-BuildTemplates-Private
+endpoint: SQLDBAWithABeardGitHub
+jobs:
+- template: AzureTerraform.yaml@templates # Template reference
+&lt;/code>&lt;/pre>
+&lt;p>You can find (and change) your GitHub service connection name by clicking on the cog bottom left in Azure DevOps and clicking service connections&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-140.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I still need to create my variables for my Terraform template (perhaps I can now just leave those in my code?) For the AKS Cluster build right now I have to add presentation, location, ResourceGroupName, AgentPoolName, ServiceName, VMSize, agent_count&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-139.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then I click save and queue and the job starts running&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-141.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I want to edit the pipeline it looks a little different&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-152.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The variables and triggers can be found under the 3 ellipses on the top right&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-153.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It also defaults the trigger to automatic deployment.&lt;/p>
+&lt;p>It takes a bit longer to build&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-142.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and when I get the Terraform code wrong and the build fails, I can just alter the code, commit it, push and a new build will start and the Terraform will work out what is built and what needs to be built!&lt;/p>
+&lt;p>but eventually the job finishes successfully&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-143.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and the resources are built&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-144.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and in Visual Studio Code with the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools" target="_blank" rel="noopener"
+>Kubernetes extension&lt;/a> installed I can connect to the cluster by clicking the 3 ellipses and Add Existing Cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-145.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I choose Azure Kubernetes Services and click next&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-146.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose my subscription and then add the cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-147.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then I can explore my cluster&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-148.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can also see the dashboard by right clicking on the cluster name and Open Dashboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-150.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Right clicking on the service name and choosing describe&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-149.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>shows the external IP address, which I can put into Azure Data Studio and connect to my container&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-151.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So I now I can source control my Build Job Steps and hold them in a central repository. I can make use of them in any project. This gives me much more control and saves me from repeating myself repeating myself. The disadvantage is that there is no handy warning when I change the underlying Build Repository that I will be affecting other Build Pipelines and there is no easy method to see which Build Pipelines are dependent on the build yaml file&lt;/p>
+&lt;p>Happy Automating&lt;/p></description></item></channel></rss>

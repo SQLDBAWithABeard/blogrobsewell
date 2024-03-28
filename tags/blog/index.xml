@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/blog/</link><description>Recent content in Blog on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>How Do You Show Keystrokes On Screen</title><link>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post How Do You Show Keystrokes On Screen" />&lt;p>It started with a tweet from Benni De Jagere &lt;a class="link" href="https://bennidejagere.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/BenniDeJagere" target="_blank" rel="noopener"
+>Twitter&lt;/a> about how to show the keystrokes on the screen.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h1 id="it-depends">It depends&lt;/h1>
+&lt;p>The best answer is always &amp;ldquo;it depends&amp;rdquo; and the correct response to this to determine how much to trust this information is &amp;ldquo;what does it depend uponW&amp;rdquo;&lt;/p>
+&lt;h1 id="what-does-it-depend-upon">what does it depend upon?&lt;/h1>
+&lt;p>It depends upon which programme you are using and wish to demonstrate.&lt;/p>
+&lt;h2 id="visual-studio-code-or-azure-data-studio">Visual Studio Code or Azure Data Studio&lt;/h2>
+&lt;p>If you are using &lt;a class="link" href="https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> or &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is-azure-data-studio?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> then you have it built in.&lt;/p>
+&lt;p>You can press &lt;code>CTRL+SHIFT+P&lt;/code> and search for screencast&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/screencast.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/screencast.png"
+loading="lazy"
+alt="screencast"
+>&lt;/a>&lt;/p>
+&lt;p>if you toggle this on then the keystrokes are displayed on the screen as you type&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/display.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/display.png"
+loading="lazy"
+alt="displaying the keystrokes"
+>&lt;/a>&lt;/p>
+&lt;p>If you &lt;code>CTRL+,&lt;/code> or click on the cog and then settings, you can search for screencast and there are a number of options available. In the screenshot below you can see that the mouse click is highlighted as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/withmouse.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/withmouse.png"
+loading="lazy"
+alt="screencast settings with mouse"
+>&lt;/a>&lt;/p>
+&lt;h2 id="something-else">Something else&lt;/h2>
+&lt;p>If you are wanting to demonstrate in a different application or when switching applications, you can use Carnac - &lt;a class="link" href="http://carnackeys.com/" target="_blank" rel="noopener"
+>http://carnackeys.com/&lt;/a>&lt;/p>
+&lt;p>Download the latest release and then run setup.exe and there will be a beautiful purple icon in the taskbar which if you click it will open the settings screen.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacsettings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/carnacsettings.png"
+loading="lazy"
+alt="carnac settings"
+>&lt;/a>&lt;/p>
+&lt;p>You can click in any of the squares to decide where you would like the key presses to be displayed and as you can see it works with multiple monitors (although I had some issues with that). You can use the sliders to offset in any direction from the box as well and change the appearance.&lt;/p>
+&lt;p>You can even change the colour of the text as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacdisplays.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/carnacdisplays.png"
+loading="lazy"
+alt="change colour"
+>&lt;/a>&lt;/p>
+&lt;p>To leave the application simple right click on the icon in the task bar and click Exit.&lt;/p>
+&lt;p>Happy demonstrating!&lt;/p></description></item><item><title>Kubernetes lab certificates expired</title><link>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</link><pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post Kubernetes lab certificates expired" />&lt;h1 id="it-wont-start">It won&amp;rsquo;t start!&lt;/h1>
+&lt;p>I have a 3 node kubernetes cluster running in my office that I have used for my &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc-enabled data services&lt;/a> presentations over the last year (&lt;a class="link" href="beard.media/presentations" >Side note, my presentations are here&lt;/a>). A few days ago after a power cut I tried to connect to my cluster with &lt;a class="link" href="https://k8slens.dev/" target="_blank" rel="noopener"
+>Lens&lt;/a> and was not able to.&lt;/p>
+&lt;p>I tried to run &lt;code>kubectl get nodes&lt;/code> but got no response.&lt;/p>
+&lt;h2 id="try-on-the-master-node">Try on the master node&lt;/h2>
+&lt;p>I used my windows terminal profile that ssh&amp;rsquo;s into the master node and ran&lt;/p>
+&lt;p>&lt;code>systemctl status kubelet&lt;/code>&lt;/p>
+&lt;p>this resulted in&lt;/p>
+&lt;blockquote>
+&lt;p>rob@beardlinux:~$ systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+Drop-In: /etc/systemd/system/kubelet.service.d
+└─10-kubeadm.conf
+Active: active (running) since Thu 2022-07-07 09:29:00 BST; 8min ago
+Docs: &lt;a class="link" href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener"
+>https://kubernetes.io/docs/home/&lt;/a>
+Main PID: 1201 (kubelet)
+Tasks: 15 (limit: 38316)
+Memory: 120.3M
+CGroup: /system.slice/kubelet.service
+└─1201 /usr/bin/kubelet &amp;ndash;bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf &amp;ndash;kubeconfig=/etc/kub&amp;gt;
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.318044 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.418240 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="how-many-logs">How many logs?&lt;/h2>
+&lt;p>So beardlinux is the master node that we are running on so why can it not be found?&lt;/p>
+&lt;p>&lt;code>journalctl -u kubelet -n 50&lt;/code>&lt;/p>
+&lt;p>that will show me, i thought. It showed&lt;/p>
+&lt;blockquote>
+&lt;p>jrob@beardlinux:~$ journalctl -u kubelet -n 50
+&amp;ndash; Logs begin at Thu 2022-06-16 14:26:08 BST, end at Thu 2022-07-07 19:38:55 BST. &amp;ndash;
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.710347 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.810556 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.910804 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.011102 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.111501 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.211840 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.312180 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.412460 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.512751 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.612983 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.713231 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.813398 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.913647 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.013891 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.114153 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.214312 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.314439 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.414546 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.514875 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.615009 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.715310 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.815683 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.915917 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.016190 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.116399 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;p>Ah :-(&lt;/p>
+&lt;p>so after some investigation I found&lt;/p>
+&lt;blockquote>
+&lt;p>Jul 06 08:03:09 beardlinux kubelet[1021]: I0706 08:03:09.755007 1021 kubelet_node_status.go:71] Attempting to register node beardlinux
+Jul 06 08:03:09 beardlinux kubelet[1021]: E0706 08:03:09.755338 1021 kubelet_node_status.go:93] Unable to register node &amp;ldquo;beardlinux&amp;rdquo; with API server: Post &amp;ldquo;https://192.168.2.62:6443/api/v1/nodes&amp;rdquo;: dial tcp 192.168.2.62:6443: connect: connection refused&lt;/p>
+&lt;/blockquote>
+&lt;p>which lead me to an issue on GitHub where there was a &lt;a class="link" href="https://github.com/kubernetes/kubeadm/issues/1026#issuecomment-768832968" target="_blank" rel="noopener"
+>comment&lt;/a> to check for expired certificates&lt;/p>
+&lt;h2 id="do-i-have-expired-certificates">Do I have expired certificates?&lt;/h2>
+&lt;p>You can check your certificates using&lt;/p>
+&lt;p>&lt;code>kubeadm certs check-expiration&lt;/code>&lt;/p>
+&lt;p>which resulted in&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/expired-certs.png"
+loading="lazy"
+alt="expired-certs"
+>&lt;/p>
+&lt;h2 id="and-renewing-them">And renewing them&lt;/h2>
+&lt;p>They are renewed using &lt;code>kubeadm certs renew all&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# kubeadm certs renew all
+[renew] Reading configuration from the cluster&amp;hellip;
+[renew] FYI: You can look at this config file with &amp;lsquo;kubectl -n kube-system get cm kubeadm-config -o yaml&amp;rsquo;
+[renew] Error reading configuration from the Cluster. Falling back to default configuration&lt;/p>
+&lt;p>certificate embedded in the kubeconfig file for the admin to use and for kubeadm itself renewed
+certificate for serving the Kubernetes API renewed
+certificate the apiserver uses to access etcd renewed
+certificate for the API server to connect to kubelet renewed
+certificate embedded in the kubeconfig file for the controller manager to use renewed
+certificate for liveness probes to healthcheck etcd renewed
+certificate for etcd nodes to communicate with each other renewed
+certificate for serving etcd renewed
+certificate for the front proxy client renewed
+certificate embedded in the kubeconfig file for the scheduler manager to use renewed&lt;/p>
+&lt;p>Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.&lt;/p>
+&lt;/blockquote>
+&lt;p>stopped and started the kubelet&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# systemctl stop kubelet
+root@beardlinux:/home/rob# systemctl start kubelet&lt;/p>
+&lt;/blockquote>
+&lt;p>and checked the nodes&lt;/p>
+&lt;blockquote>
+&lt;p>pwsh 7.2.5&amp;gt; kubectl get nodes
+NAME STATUS ROLES AGE VERSION
+beardlinux Ready control-plane,master 376d v1.20.2
+beardlinux2 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2
+beardlinux3 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2&lt;/p>
+&lt;/blockquote>
+&lt;p>I also had to update my config with the new certificate data to make that work as well.&lt;/p></description></item><item><title>GitHub Action Workflow Protected branch update failed</title><link>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/noentry.jpg" alt="Featured image of post GitHub Action Workflow Protected branch update failed" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/" >The last post&lt;/a> showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="protecting-the-repository">Protecting the repository&lt;/h1>
+&lt;p>I opened the repository in the browser and GitHub and was provided with a warning that said&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/protectbranch.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/protectbranch.png"
+loading="lazy"
+alt="protect your branch"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking on the protect this branch button gave the reasoning.&lt;/p>
+&lt;blockquote>
+&lt;p>Protect your most important branches
+Branch protection rules define whether collaborators can delete or force push to the branch and set requirements for any pushes to the branch, such as passing status checks or a linear commit history.&lt;/p>
+&lt;/blockquote>
+&lt;p>So I changed the settings so that a Pull Request is required and needs to be reviewed.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/branchprotected.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/branchprotected.png"
+loading="lazy"
+alt="all protected"
+>&lt;/a>&lt;/p>
+&lt;h1 id="breaks-the-workflow">Breaks the workflow&lt;/h1>
+&lt;p>I had already altered the workflow trigger for the workflow to generate the speaker-list.json so that it would run when changes to the speakers directory were pushed to the main branch by adding&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> paths:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - speakers/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then approved a PR with a change to that directory and saw that the workflow had started.&lt;/p>
+&lt;p>Then it failed :-(.&lt;/p>
+&lt;p>The error message could be seen in the codespaces with the extension &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-actions&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushdenied.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushdenied.png"
+loading="lazy"
+alt="no can do"
+>&lt;/a>&lt;/p>
+&lt;p>This is the error message&lt;/p>
+&lt;blockquote>
+&lt;p>Error: To &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+! refs/heads/main:refs/heads/main [remote rejected] (protected branch hook declined)
+Done
+Pushing to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+POST git-receive-pack (604 bytes)
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: error: At least 1 approving review is required by reviewers with write access.
+error: failed to push some refs to &amp;lsquo;&lt;a class="link" href="https://github.com/dataplat/DataSpeakers%27" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers'&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, because I have now protected my branch, I cannot automatically push changes into the main branch.&lt;/p>
+&lt;h1 id="fix-it">Fix it&lt;/h1>
+&lt;p>To fix this, I had to create a new PAT token with &lt;code>public_repo&lt;/code> scope and save it as a secret for the workflow to access and update the checkout to use this token.&lt;/p>
+&lt;h2 id="create-a-new-pat-token">Create a new PAT token&lt;/h2>
+&lt;p>The instructions to do this are found &lt;a class="link" href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" rel="noopener"
+>in the docs here&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>In the upper-right corner of any page, click your profile photo, then click Settings.&lt;/li>
+&lt;li>In the left sidebar, click Developer settings.&lt;/li>
+&lt;li>In the left sidebar, click Personal access tokens.&lt;/li>
+&lt;li>Click Generate new token.&lt;/li>
+&lt;li>Give your token a descriptive name.&lt;/li>
+&lt;li>To give your token an expiration.&lt;/li>
+&lt;li>Select the scopes, or permissions, you&amp;rsquo;d like to grant this token.
+For this scenario just choose &lt;code>public_repo&lt;/code>&lt;/li>
+&lt;li>Click Generate token.&lt;/li>
+&lt;li>Save the generated token somewhere safe like your password manager. ( You &lt;strong>do&lt;/strong> have a password manager? - Our family use 1Password)&lt;/li>
+&lt;/ul>
+&lt;h2 id="save-it-as-a-secret-in-the-repository">Save it as a secret in the repository&lt;/h2>
+&lt;p>You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository &lt;a class="link" href="https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md" target="_blank" rel="noopener"
+>by following this guide&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>navigate to the main page of the repository.&lt;/li>
+&lt;li>Under your repository name, click on the &amp;ldquo;Settings&amp;rdquo; tab.&lt;/li>
+&lt;li>In the left sidebar, click Secrets.&lt;/li>
+&lt;li>On the right bar, click on &amp;ldquo;Add a new secret&amp;rdquo;&lt;/li>
+&lt;li>Type a name for your secret in the &amp;ldquo;Name&amp;rdquo; input box. I used &lt;code>REPO_TOKEN&lt;/code>&lt;/li>
+&lt;li>Type the value for your secret.&lt;/li>
+&lt;li>Click Add secret.&lt;/li>
+&lt;/ul>
+&lt;h2 id="use-it-in-your-workflow">Use it in your workflow&lt;/h2>
+&lt;p>Now that you have saved your secret, you can use it your workflows. To get rid of the protected branch error it is used in the &lt;code>actions/checkout&lt;/code> action like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> token: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I remembered to do for both workflows!!&lt;/p>
+&lt;p>I then created a PR to test it and this time it was able to successfully push changes to the main branch&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushcompleted.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushcompleted.png"
+loading="lazy"
+alt="its pushed"
+>&lt;/a>&lt;/p>
+&lt;p>and you can see &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/80d585ff1de15db22744ad5e7295294260b8fc98" target="_blank" rel="noopener"
+>the commit here&lt;/a> or &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/7046d51de7b1d9e9b9f188879a4981a76f35c3c4" target="_blank" rel="noopener"
+>the PR&lt;/a> if you wish.&lt;/p>
+&lt;h1 id="but-thats-not-all-folks">But thats not all folks&lt;/h1>
+&lt;p>This will work correctly for a PR and it will work for the initial workflow that has been called.&lt;/p>
+&lt;p>It &lt;em>&lt;strong>will not work&lt;/strong>&lt;/em> for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions/runs/2659979920" target="_blank" rel="noopener"
+>In that scenario we get this error&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/gregbrokeit.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/gregbrokeit.png"
+loading="lazy"
+alt="Greg Broke it"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Input required and not supplied: token&lt;/p>
+&lt;/blockquote>
+&lt;p>for the &lt;code>actions/checkout@v2&lt;/code> action. This took some tracking down to resolve but finally I found the answer &lt;a class="link" href="https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard" target="_blank" rel="noopener"
+>in a forum post&lt;/a>&lt;/p>
+&lt;p>In the &lt;em>&lt;strong>calling&lt;/strong>&lt;/em> workflow add a &lt;code>secrets&lt;/code> entry and pass in the token secret.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then at the top of the &lt;em>&lt;strong>reusable workflow&lt;/strong>&lt;/em> define the secrets&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> required: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and finally all is well and Dr Greg Low &lt;a class="link" href="https://blog.greglow.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/greglow" target="_blank" rel="noopener"
+>Twitter&lt;/a> can be added ;-)&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/bench.jpg" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/Training-Day-Speakers-List" >The last post&lt;/a> showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="what-do-we-need">What do we need?&lt;/h1>
+&lt;p>The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>The web page can be found here&lt;/a>. This page is generated from a JSON file.&lt;/p>
+&lt;h1 id="a-new-repository">A new repository&lt;/h1>
+&lt;p>It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website.&lt;/p>
+&lt;h1 id="create-a-dev-container">Create a dev container&lt;/h1>
+&lt;p>It&amp;rsquo;s a brand new repository &lt;code>.devcontainer&lt;/code> directory was created and the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/main/containers/powershell/.devcontainer" target="_blank" rel="noopener"
+>Microsoft VS Code Remote / GitHub Codespaces Container Definitions repository PowerShell containers&lt;/a> added. This means that whenever I or anyone else wants to work on the repo the development experience will be the same.&lt;/p>
+&lt;h2 id="add-extensions">Add extensions&lt;/h2>
+&lt;p>There are a number of default extensions that I install for PowerShell or generic development&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.powershell" target="_blank" rel="noopener"
+>ms-vscode.powershell&lt;/a> - because I am working with PowerShell&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets" target="_blank" rel="noopener"
+>2gua.rainbow-brackets&lt;/a> - because I like to easily see which opening bracket matches which closing bracket&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow" target="_blank" rel="noopener"
+>oderwat.indent-rainbow&lt;/a> - so that I can quickly see the indentations, invaluable with YAML files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens" target="_blank" rel="noopener"
+>usernamehw.errorlens&lt;/a> - so that linting errors are displayed in the editor alongside the code&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank" rel="noopener"
+>eamodio.gitlens&lt;/a> - to make source control easier&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=TylerLeonhardt.vscode-inline-values-powershell" target="_blank" rel="noopener"
+>TylerLeonhardt.vscode-inline-values-powershell&lt;/a> - so that you can see inline values when debugging&lt;/li>
+&lt;/ul>
+&lt;p>I also added two more for this repository as we are using GitHub Actions&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions" target="_blank" rel="noopener"
+>me-dutour-mathieu.vscode-github-actions&lt;/a> - for intellisense for GitHub Action files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-action&lt;/a> - to be able to start/stop/monitor GitHub Actions from the workspace&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/githubactionsview.png"
+loading="lazy"
+alt="the view in codespaces of the GitHub Actions"
+>&lt;/p>
+&lt;h1 id="gather-the-information">Gather the Information&lt;/h1>
+&lt;p>People can update repositories using Pull Requests but this needed to be a little more guided and it was decided that it was to be done with &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms" target="_blank" rel="noopener"
+>forms via GitHub Issues&lt;/a>&lt;/p>
+&lt;h2 id="where-to-put-it">Where to put it?&lt;/h2>
+&lt;p>You can create custom GitHub Issues using YAML files in the &lt;code>.github/ISSUE_TEMPLATE&lt;/code> directory. An Add Speaker issue template file was created. The name and the description will be seen on the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new/choose" target="_blank" rel="noopener"
+>new issues page&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add Speaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: Add New Speaker information
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">body:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - type: markdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attributes:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> value: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please follow the instructions to create a new speaker entry.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> We wil display this on callfordataspeakers.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a number of &lt;code>-type&lt;/code> entries. &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema" target="_blank" rel="noopener"
+>You can find the definitions in the docs&lt;/a> or you can use the intellisense from the extensions. The types are checkboxes, dropdown, input, markdown, textarea&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/intellisense-ghactions.png"
+loading="lazy"
+alt="The intellisense showing the type options"
+>&lt;/p>
+&lt;p>I used the intellisense to build a quick simple form to gather 5 pieces of information&lt;/p>
+&lt;ul>
+&lt;li>full name&lt;/li>
+&lt;li>topics&lt;/li>
+&lt;li>regions&lt;/li>
+&lt;li>sessionize profile URL&lt;/li>
+&lt;li>languages&lt;/li>
+&lt;/ul>
+&lt;p>You can find &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/blob/main/.github/ISSUE_TEMPLATE/Add-Speaker.yml" target="_blank" rel="noopener"
+>the YAML file here&lt;/a> and &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new?assignees=&amp;amp;labels=&amp;amp;template=Add-Speaker.yml" target="_blank" rel="noopener"
+>the issue here&lt;/a>&lt;/p>
+&lt;h1 id="process-the-information">Process the information&lt;/h1>
+&lt;p>Now that we have a method of gathering the information, the next stage is to process it automagically. For this we are going to be &lt;a class="link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener"
+>using GitHub Actions&lt;/a>&lt;/p>
+&lt;h2 id="workflow">Workflow&lt;/h2>
+&lt;p>GitHub Actions is a platform that can run automated processes called workflows that are defined as YAML files and triggered by events in the repository. We create another directory called &lt;code>workflows&lt;/code> also in the &lt;code>.github&lt;/code> directory.&lt;/p>
+&lt;h2 id="triggering-the-workflow">Triggering the workflow&lt;/h2>
+&lt;p>Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.&lt;/p>
+&lt;p>You can automatically add labels, close stale issues and much more. There are a large number of events open to you as &lt;a class="link" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows" target="_blank" rel="noopener"
+>can be seen here &lt;/a>. Even looking at just issues there are a number of activities types that can be used&lt;/p>
+&lt;ul>
+&lt;li>opened&lt;/li>
+&lt;li>edited&lt;/li>
+&lt;li>deleted&lt;/li>
+&lt;li>transferred&lt;/li>
+&lt;li>pinned&lt;/li>
+&lt;li>unpinned&lt;/li>
+&lt;li>closed&lt;/li>
+&lt;li>reopened&lt;/li>
+&lt;li>assigned&lt;/li>
+&lt;li>unassigned&lt;/li>
+&lt;li>labeled&lt;/li>
+&lt;li>unlabeled&lt;/li>
+&lt;li>locked&lt;/li>
+&lt;li>unlocked&lt;/li>
+&lt;li>milestoned&lt;/li>
+&lt;li>demilestoned&lt;/li>
+&lt;/ul>
+&lt;p>(and there are separate ones for issue comments)&lt;/p>
+&lt;p>The beginning of the workflow YAML file has the name and then the trigger. This triggers the workflow when an issue is opened.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add a new speaker json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issues:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> types:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;#34;opened&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-all-the-source">Getting all the source&lt;/h2>
+&lt;p>The workflow consists of &lt;a class="link" href="https://docs.github.com/en/actions/using-jobs" target="_blank" rel="noopener"
+>one or many jobs&lt;/a> that can be run on different runners. The first job is named &lt;code>AddNewSpeaker&lt;/code> and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.&lt;/p>
+&lt;p>We &lt;strong>&lt;em>use&lt;/em>&lt;/strong> a default &lt;strong>&lt;em>action&lt;/em>&lt;/strong> to checkout and because we push changes back to the repository (more on that later) we choose a &lt;code>fetch-depth&lt;/code> of 0 to get all of the history and the &lt;code>ref&lt;/code> main as that is the branch we are working with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addNewSpeaker:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="being-polite">Being polite&lt;/h2>
+&lt;p>costs nothing so this action from Peter Evans can be used to add or update a comment&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hi @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for your Speaker submission.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Action should be running now and adding it to the webpage. It should should update here.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If it doesn&amp;#39;t - get in touch with Rob on Twitter https://twitter.com/sqldbawithbeard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="wait-a-minute-how-did-you-work-that-out">wait a minute, how did you work that out?&lt;/h3>
+&lt;p>The say thank you comment uses &lt;code>github.event.issue.number&lt;/code> and &lt;code>github.event.issue.user.login&lt;/code> to ensure that the comment goes on the issue that triggered the workflow and thanks the user that created it. To work out what is available, I used this PowerShell step to write out the GitHub context to the logs as JSON&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># You also can print the whole GitHub context to the logs to view more details.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: View the GitHub context
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: Write-Host &amp;#34;$GITHUB_CONTEXT&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GITHUB_CONTEXT: ${{ toJson(github) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="get-the-info-into-a-file">Get the info into a file&lt;/h2>
+&lt;p>Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates &lt;code>### &amp;lt;label&amp;gt;&lt;/code> and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a &lt;code>pscustomobject&lt;/code>&lt;/p>
+&lt;p>Then I could convert it to Json and save it to a file. I chose to save each speakers information in their own file in case anything else would be needed in the future and also so that if the process failed it only affected this speakers information.&lt;/p>
+&lt;p>I also add the speaker file name to a text file that I may make use of at some future point.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Get Speaker Information to file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Host &amp;#34;What do we have?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # gci -recurse = this is for troubleshooting because paths are hard
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody = &amp;#34;${{ github.event.issue.body }}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write-Host $IssueBody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody | Out-File speakers/temp.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # get the temp file contents - I do this so I don&amp;#39;t lose anything
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $file = Get-Content ./speakers/temp.txt -Raw
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # parse the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $regexResult = [regex]::Matches($file, &amp;#39;(?ms)fullname\n\n(?&amp;lt;fullname&amp;gt;.*)\n\n### topics\n\n(?&amp;lt;topics&amp;gt;.*)\n\n### regions\n\n(?&amp;lt;regions&amp;gt;.*)\n\n### Sessionize\n\n(?&amp;lt;Sessionize&amp;gt;.*)\n\n### language\n\n(?&amp;lt;language&amp;gt;.*)\n&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # create an object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerObject = [PSCustomObject]@{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name = $regexResult[0].Groups[&amp;#39;fullname&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> topics = $regexResult[0].Groups[&amp;#39;topics&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> regions = $regexResult[0].Groups[&amp;#39;regions&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sessionize = $regexResult[0].Groups[&amp;#39;Sessionize&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> language = $regexResult[0].Groups[&amp;#39;language&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #save it to a file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $filePath = &amp;#39;./speakers/{0}.json&amp;#39; -f $speakerFileName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $SpeakerObject |ConvertTo-Json | Out-FIle -FilePath $filePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName | OUt-File ./speakers/list.txt -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="because-ben-is-a-fantastic-tester">Because Ben is a fantastic tester&lt;/h3>
+&lt;p>All the best testers will do unexpected but valid actions and my wonderful friend Ben Weissman (&lt;a class="link" href="https://twitter.com/bweissman" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://bweissman.azurewebsites.net/" target="_blank" rel="noopener"
+>Blog&lt;/a>) added some characters into the full name option that made the file save fail. He added his pronouns, which is awesome but not what I expected for a full name option. This is totally my fault for not considering either using pronouns or that as a user input field that is used in code the data should be validated. I used a few replaces to ensure the file name is acceptable.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="let-the-user-know-and-commit-the-new-file">Let the user know and commit the new file&lt;/h2>
+&lt;p>Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).&lt;/p>
+&lt;p>I love the &lt;code>EndBug/add-and-commit&lt;/code> action as it enables me to make changes in a workflow and commit those changes safely back to the repository.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Speaker Json has been added https://github.com/dataplat/DataSpeakers/tree/main/speakers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Add &amp;amp; Commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: EndBug/add-and-commit@v8.0.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_name: Beardy McBeardFace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_email: mrrobsewell@outlook.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> message: &amp;#39;The Beard says hooray we have another speaker @${{ github.event.issue.user.login }} - This is an automated message&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dry">DRY&lt;/h2>
+&lt;p>Don&amp;rsquo;t repeat yourself. The idea is to create the JSON file for the web-page from each of the speakers individual json files. People will want to change what they have entered or they will make mistakes, future functionality might require the same steps. With this in mind I created a separate workflow file to create the &lt;code>speaker-list.json&lt;/code> file. This used two different triggers&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>workflow_calls&lt;/code> so that it can be called from another workflow&lt;/li>
+&lt;li>&lt;code>workflow_dispatch&lt;/code> so that it can be run manually&lt;/li>
+&lt;/ul>
+&lt;p>The other workflow cannot be triggered manually as it relies on an issue to create the required file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="only-run-if">Only run if&lt;/h2>
+&lt;p>The second workflow file uses a PowerShell action to combine the individual JSONs into a single one and commits that to the repository. It also comments on the issue but it can only do this if the workflow was triggered from the add speaker job and not manually so some conditional logic was required. There were a number of options that I could choose to decide if to run this step but I decided on using the event issue number &lt;code>if: github.event.issue.number != null&lt;/code> as if there was no issue, there was nothing to comment and this would leave this step open to be used in future coding if required.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if: github.event.issue.number != null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The speaker-list.json file has been recreated ready for the website https://github.com/dataplat/DataSpeakers/blob/main/website/speaker-list.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> https://callfordataspeakers.com/precon should be updated now
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="calling-another-workflow">Calling another workflow&lt;/h2>
+&lt;p>To call another workflow in a job you use the &lt;code>uses:&lt;/code> field and the path to the yaml file and the branch. We also added the &lt;code>needs:&lt;/code> so that this job will run after the &lt;code>addNewSpeaker&lt;/code> has completed.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="close-the-issue">Close the issue&lt;/h2>
+&lt;p>This process needed to be completely automatic and so we use Peter Evans close issue action and tag the speaker and say thankyou as well as closing the issue. We have a &lt;code>needs:&lt;/code> property so that this job will only run following the successful run of the previous two jobs.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">closeIssue:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: [addNewSpeaker,createSpeakerListJson]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Close Issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/close-issue@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> comment: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hey @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Closing this issue now that the Action has run successfully.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for adding your information to the list.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It will be active on callfordataspeakers.com shortly.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please share on social media.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Love and Hugs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Rob and Daniel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @SqlDbaWithABeard @dhmacher
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="show-me-what-it-looks-like">Show me what it looks like&lt;/h1>
+&lt;p>You can &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>take a look at the repo&lt;/a> there are a &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues?q=is%3Aissue&amp;#43;is%3Aclosed" target="_blank" rel="noopener"
+>number of issues&lt;/a> like &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/36" target="_blank" rel="noopener"
+>this one from Monica Rathbun&lt;/a> (&lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>Twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/monissue.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/monissue.png"
+loading="lazy"
+alt="Monicas Image"
+>&lt;/a>&lt;/p>
+&lt;p>you can see the workflows &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions" target="_blank" rel="noopener"
+>running here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/workflowrun.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/workflowrun.png"
+loading="lazy"
+alt="workflow run"
+>&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Training Day Speakers List</title><link>https://blog.robsewell.com/blog/training-day-speakers-list/</link><pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/training-day-speakers-list/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/magnify.jpg" alt="Featured image of post Training Day Speakers List" />&lt;p>How do data platform events find Training Day/Pre-Con speakers?&lt;/p>
+&lt;p>&lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>So we built a thing for speakers to add themselves and for events to find them&lt;/a>&lt;/p>
+&lt;p>I think event organisers know who the &lt;em>big names&lt;/em> are and the topics that they can deliver for full day training sessions or pre-cons as they are also known. Finding other speakers and finding speakers who can deliver on different topics is a little more difficult.&lt;/p>
+&lt;h1 id="hey-new-speakers">Hey New Speakers&lt;/h1>
+&lt;p>With all the &lt;em>*waves hand at world for the last 2 years&lt;/em> going on, there are a number of new speakers who have taken advantage of virtual events like &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a>, &lt;a class="link" href="https://datagrillen.com/dativerse/" target="_blank" rel="noopener"
+>DatiVerse&lt;/a> and other events that have helped to promote and support new speakers. This is truly awesome and I love seeing the pool of speakers growing and all the new voices enriching our learning.&lt;/p>
+&lt;p>There are undoubtedly speakers who have content and can provide full day seesions that events and attendees will gladly have if only the organisers knew about the content and/or the speakers knew about the events.&lt;/p>
+&lt;h1 id="events-want-your-content">Events want your content&lt;/h1>
+&lt;p>This came up on social media and after a quick conversation with Daniel Hutmacher (&lt;a class="link" href="https://twitter.com/dhmacher" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://sqlsunday.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>) we decided to create a resource page that can be found on &lt;a class="link" href="https://callfordataspeakers.com" target="_blank" rel="noopener"
+>Call For Data Speakers&lt;/a>.&lt;/p>
+&lt;p>Call For Data Speakers enables speakers to sign up to receive an email when a new event is announced. It also enables events to sign up, so that speakers can be notified when there is a call for speakers. So this seemed to be the obvious place to hold a list of speakers that event organisers can contact and show the topics that they can present full day or training day sessions on.&lt;/p>
+&lt;h1 id="yes-even-you-please-join">YES even you. Please join.&lt;/h1>
+&lt;p>I have created some automation that will make adding (and removing) yourself from this list easy to do. You can just go straight to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>the repo&lt;/a> and follow the instructions if you dont want to read any more here.&lt;/p>
+&lt;p>I see this as a resource for everybody, famouse or not, new or old. I absolutely want &lt;strong>you to add yourself&lt;/strong>, if you have content that can be used to provide a full day of training. Please don&amp;rsquo;t let imposter syndrome get in the way. Right now, all you are doing is listing your idea for people to see. Hopefully soon event organisers will get in touch and say hey I see you present on &amp;hellip; please would you submit to our event for a training day.&lt;/p>
+&lt;p>Event organisers - You &lt;strong>do need to reach out to speakers&lt;/strong>. By adding some effort into finding speakers your event will be more rounded and of interest and benefit to a wider numebr of attendees and sponsors. I am talking about pre-con speakers here bu the same applies to general sessions.&lt;/p>
+&lt;h1 id="how-do-i-do-it">How do I do it?&lt;/h1>
+&lt;p>This process is all automated and driven by GitHub Issues.&lt;/p>
+&lt;h2 id="to-add-yourself-as-a-speaker">To add yourself as a speaker&lt;/h2>
+&lt;p>Open the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues" target="_blank" rel="noopener"
+>Issues Page&lt;/a> and click new issue.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/newissue.png"
+loading="lazy"
+alt="open a new issue"
+>&lt;/p>
+&lt;p>Click the get started button next to Add Speaker.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/emptyissue.png"
+loading="lazy"
+alt="empty issue"
+>&lt;/p>
+&lt;p>Fill in the details, the title can be anything that you like -&lt;/p>
+&lt;ul>
+&lt;li>Your full name&lt;/li>
+&lt;li>topics you can provide training days or pre-cons for (dbatools, Index Tuning, DevOps for example) Add as many as you like.
+&lt;strong>Just topics&lt;/strong> not session titles or descriptions, those will be in your sessionize profile then this resource does not need updating so frequently. It is after all just a &amp;ldquo;Here I am, come find me&amp;rdquo; resource.&lt;/li>
+&lt;li>regions that you would be willing to present training days or pre-cons in (these match the regions on callfordataspeakers.com)&lt;/li>
+&lt;li>Your sessionize profile URl which will show the event organisers the precise sessions that you have and also your contact details/methods&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/filledinsessions.png"
+loading="lazy"
+alt="new speaker info"
+>&lt;/p>
+&lt;p>Thats it, then press Submit new issue and the automation will do its thing&lt;/p>
+&lt;h1 id="what-does-it-look-like">What does it look like?&lt;/h1>
+&lt;p>A GitHub Action will run and &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>the web-page&lt;/a> will be updated.&lt;/p>
+&lt;p>You can then search for topics, regions, click on any topic to see all the speakers that are happy to present on that topic.&lt;/p>
+&lt;p>Click on a speaker and you will be directed to their Sessionize profile page.&lt;/p>
+&lt;p>Here is a quick look at the demo page after I had some test data in there!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/callfordataprecons.png"
+loading="lazy"
+alt="PreConSpeakers"
+>&lt;/p>
+&lt;h1 id="what-else-can-i-do">What else can I do?&lt;/h1>
+&lt;p>Please promote this resource. It will have no benefit if speakers do not add themselves and event organisers do not know about it.&lt;/p>
+&lt;p>I would be really happy if you can keep this in mind if you are organising a data platform event, let any speakers know that this exists so that they can add themselves, share it on social media.&lt;/p>
+&lt;p>Many Thanks.&lt;/p></description></item><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" />&lt;h1 id="broken-link">Broken Link&lt;/h1>
+&lt;p>It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+>Twitter&lt;/a> )&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+>&lt;/p>
+&lt;p>Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+>404 page &lt;/a> which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p>
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it">Why do something manual when you can automate it&lt;/h2>
+&lt;p>This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p>
+&lt;p>So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts &lt;a class="link" href="2021-04-11-locally-viewing-github-pages-new-data-saturdays.md" >Running GitHub Pages locally&lt;/a> or &lt;a class="link" href="2021-04-15-locally-viewing-github-pages-locally-with-remote-theme.md" >Running GitHub Pages locally with a Remote Theme (this site has a remote theme)&lt;/a>. Then I could see the changes locally before pushing them to the repository.&lt;/p>
+&lt;p>But my brain didn&amp;rsquo;t work in that way. Instead it thought &amp;ldquo;Hmmm maybe I could do this in the browser in &lt;a class="link" href="https://github.com/features/codespaces" target="_blank" rel="noopener"
+>GitHub Codespaces&lt;/a> and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code&amp;rdquo;&lt;/p>
+&lt;p>The most wonderful Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@jpomfret" target="_blank" rel="noopener"
+>Twitter&lt;/a> and I delivered a &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the &lt;a class="link" href="psconf.eu" >PowerShell Conference Europe&lt;/a> about using dev containers so I had a little knowledge of how it can be done.&lt;/p>
+&lt;h1 id="how-easy-is-it-">How easy is it ?&lt;/h1>
+&lt;p>It&amp;rsquo;s super super easy. Surprisingly easy.&lt;/p>
+&lt;h2 id="open-a-codespace-for-your-repository">Open a codespace for your repository&lt;/h2>
+&lt;p>First I went to the repository for my website and opened a codespace by clicking on the green code button and creating a codespace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/create-codespace.png"
+loading="lazy"
+alt="the create codespace button"
+>&lt;/p>
+&lt;h2 id="add-the-development-container-configuration">Add the development container configuration&lt;/h2>
+&lt;p>Using &lt;code>CTRL SHIFT + P&lt;/code> to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/add-config.png"
+loading="lazy"
+alt="Add the configuration"
+>&lt;/p>
+&lt;p>and follow the prompts&lt;/p>
+&lt;ul>
+&lt;li>Show All Definitions&lt;/li>
+&lt;li>Jekyll&lt;/li>
+&lt;li>bullseye (or buster if you use Apples)&lt;/li>
+&lt;li>lts&lt;/li>
+&lt;/ul>
+&lt;h2 id="the-config-files-are-created">The config files are created&lt;/h2>
+&lt;p>This will create a &lt;code>.devcontainer&lt;/code> directory with&lt;/p>
+&lt;ul>
+&lt;li>devcontainer.json&lt;/li>
+&lt;li>Dockerfile&lt;/li>
+&lt;li>post-create.sh&lt;/li>
+&lt;/ul>
+&lt;p>Which will do all that you need. You can stop here. You will just need to run &lt;code>jekyll serve&lt;/code> to start the website.&lt;/p>
+&lt;h2 id="automatic-regeneration">Automatic regeneration&lt;/h2>
+&lt;p>To make it automatically regenerate. I added&lt;/p>
+&lt;p>&lt;code>bundle exec jekyll serve --force-polling&lt;/code>&lt;/p>
+&lt;p>to the end of the post-create.sh file. This will automatically start the website and regenerate it everytime I make a change :-)&lt;/p>
+&lt;h2 id="view-the-logs">View the logs&lt;/h2>
+&lt;p>You can watch the logs of the regeneration with View Creation Log from the command palette - Use &lt;code>CTRL SHIFT + P&lt;/code> to open it. Then you can see the log output in real-time.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/view-creation-log.png"
+loading="lazy"
+alt="look at the logs"
+>&lt;/p>
+&lt;h2 id="open-the-website-locally">Open the website &amp;ldquo;locally&amp;rdquo;&lt;/h2>
+&lt;p>To open the website from inside the devcontainers the ports are exposed via the configuration. In the browser in codepaces there is a port tab and a button to press to open the website and show the updates that you have written.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/port-forwards.png"
+loading="lazy"
+alt="the ports get forwarded"
+>&lt;/p>
+&lt;p>If you click that you get a live view of the website so that you can validate that it works.&lt;/p>
+&lt;h1 id="and-vs-code">And VS Code?&lt;/h1>
+&lt;p>This showed it being created in codespaces in the browser, you can have the same effect in VS Code by adding a &lt;code>.devcontainer&lt;/code> directory and copying the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/jekyll/.devcontainer" target="_blank" rel="noopener"
+>vs code dev containers repo&lt;/a>&lt;/p>
+&lt;p>The rest is pretty much the same except the url!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/vscode.png"
+loading="lazy"
+alt="running in vs code"
+>&lt;/p>
+&lt;h1 id="rather-have-video-">Rather Have Video ?&lt;/h1>
+&lt;p>If you prefer video then you can find one on Youtube showing the same process.&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/aFFmPlbjfCw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div></description></item><item><title>Azure DevOps Pipeline Template Job Names and single quotes</title><link>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</link><pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Azure DevOps Pipeline Template Job Names and single quotes" />&lt;h1 id="the-job-name-deploy_function_app-appears-more-than-once">The job name Deploy_Function_App appears more than once&lt;/h1>
+&lt;p>This was the error I was notified about in a Azure DevOps pipeline when they tried to run it. The error message continued to say that Job Names must be unique within a pipeline.&lt;/p>
+&lt;h2 id="set-up">Set Up&lt;/h2>
+&lt;p>There is a centralised repository of Azure DevOps Pipeline Template Jobs that call the Bicep modules with the required values in the same repo to deploy Azure Infrastructure.&lt;/p>
+&lt;p>The error was received in the pipeline that was created to make use of these template jobs and deploy a whole projects worth of infrastructure.&lt;/p>
+&lt;p>It looked like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>When I looked at the template job it had&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="so-you-fixed-it">So you fixed it?&lt;/h2>
+&lt;p>I can see that the job name will always be &lt;code>Deploy_Function_App&lt;/code> so I just need to paramatarise it. For this example, I am going to say it was a parameter called suffix, and the code looked like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], true) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Log_Analytics
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ${{ if eq(parameters[&amp;#39;dependsOnLogAnalytics&amp;#39;], false) }}:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dependsOn:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Deploy_Resource_Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vmImage: windows-latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>A quick Pull Request, which was approved and then pushed and I said &amp;ldquo;Hey, all fixed, try again&amp;rdquo;. This is the response I got - It failed again&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2022/01/bemoreuniquenames.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/01/uniquenames.png"
+loading="lazy"
+alt="unique"
+>&lt;/a>&lt;/p>
+&lt;p>Job Deploy_Function_App_speechtotext&amp;rsquo; has an invalid name. Valid names may only contain alphanumeric characters and &amp;lsquo;_&amp;rsquo; and may not start with a number.&lt;/p>
+&lt;p>I had to look at it for a few minutes before I spotted the error! The job name sure looks like it only has alphanumeric characters and my YAML is perfectly valid so the string must be properly quoted. I mean it must be properly quoted otherwise it would fail right?&lt;/p>
+&lt;p>Wrong&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is only one single quote here which we did not notice!&lt;/p>
+&lt;p>Altering it to this worked.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - job: &amp;#39;Deploy_Function_App${{ parameters.suffix }}&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hopefully that might help someone. (No doubt I will find this in a search in a few months time when I do it again!!)&lt;/p>
+&lt;p>Happy automating&lt;/p></description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" />&lt;h1 id="an-error">An Error&lt;/h1>
+&lt;p>Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p>
+&lt;blockquote>
+&lt;p>Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately that was all that I had. I had to find the inner error for details&lt;/p>
+&lt;h1 id="try-the-deployment-log-on-the-resource-group">Try the deployment log on the Resource Group&lt;/h1>
+&lt;p>As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p>
+&lt;p>So I navigated to the home page of the Azure Portal and searched for Activity log.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png"
+loading="lazy"
+alt="activitylog"
+>&lt;/a>&lt;/p>
+&lt;p>I searched for the name of the deployment &lt;code>deploy_bicep003_20210505094331&lt;/code> and saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png"
+loading="lazy"
+alt="activitylogsearch"
+>&lt;/a>&lt;/p>
+&lt;p>clicking on the link showed me this with the relevant information hidden in the JSON&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png"
+loading="lazy"
+alt="activitylogdetails"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Resource name {&amp;rsquo;name&amp;rsquo;:&amp;lsquo;subnet1&amp;rsquo;,&amp;lsquo;addressPrefix&amp;rsquo;:&amp;lsquo;10.0.0.0/24&amp;rsquo;}.name is invalid.&lt;/p>
+&lt;/blockquote>
+&lt;p>Bingo.&lt;/p>
+&lt;p>I had made a mistake in my resource definition for the subnets. I had used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}.name&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item}.addressPrefix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where I should have used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item.name}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item.addressPrefix}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" />&lt;h1 id="a-different-method-for-my-own-site">A different method for my own site&lt;/h1>
+&lt;p>This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>b&lt;/a> and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+>b&lt;/a> after a twitter discussion a few weeks ago.&lt;/p>
+&lt;blockquote>
+&lt;p>How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="do-you-need-to">Do you need to?&lt;/h2>
+&lt;p>My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code>CTRL + K, V&lt;/code> and you can see a live preview of your post as you type.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>However, I appreciate that at some point you will probably want to see what your site looks like locally, so I decided to look at the blog posts in the theme locally for this blog. My &lt;a class="link" href="_posts%5c2021-04-10-locally-viewing-github-pages-new-data-saturdays.md" >last post&lt;/a> showed how I do this with the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site&lt;/a> but I get an error when running this for my site because it cant find the gem sources. This is because I am using a remote theme for my blog.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/nogemsources.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nogemsources.png"
+loading="lazy"
+alt="nogemsources"
+>&lt;/a>&lt;/p>
+&lt;p>What I could do is work out how to get these in the right place, but I am lazy! Whilst researching for the Data Saturdays site, I had found another docker container, the official Jekyll one &lt;a class="link" href="https://hub.docker.com/r/jekyll/jekyll" target="_blank" rel="noopener"
+>https://hub.docker.com/r/jekyll/jekyll&lt;/a>. I wondered if I could use that.&lt;/p>
+&lt;h2 id="which-version-to-use">Which version to use?&lt;/h2>
+&lt;p>First we need to know which version of Jekyll GitHub Pages is using. You can find all of that information here &lt;a class="link" href="https://pages.github.com/versions/" target="_blank" rel="noopener"
+>https://pages.github.com/versions/&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/githubpagesversions.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/githubpagesversions.jpg"
+loading="lazy"
+alt="ghpagesversions"
+>&lt;/a>&lt;/p>
+&lt;p>So we need to use 3.9.0&lt;/p>
+&lt;p>so I ran&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.9&lt;/code>&lt;/p>
+&lt;p>but&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/noimage.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/noimage.jpg"
+loading="lazy"
+alt="noimage"
+>&lt;/a>&lt;/p>
+&lt;p>so I tried 3.8.6 and it worked for me.&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.8.6&lt;/code>&lt;/p>
+&lt;h1 id="set-up">Set up&lt;/h1>
+&lt;p>Let&amp;rsquo;s back up a bit and set the environment up. I am using Docker on Windows Subsystem for Linux 2 (WSL2) I installed it &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>using this guide&lt;/a>. I believe this will work using native Docker, you would just need to replace the &lt;code>$PWD&lt;/code> in the example below with a dot &lt;code>.&lt;/code>&lt;/p>
+&lt;p>Once that is installed and the image is pulled, I can then run my blog locally using&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=$PWD:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>or if not using WSL2&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=.:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>The &lt;code>--rm&lt;/code> means that the container will be removed when it is stopped, &lt;code>--volume=&amp;quot;$PWD:/srv/jekyll&amp;quot;&lt;/code> maps the current directory locally to the &lt;code>/srv/jekyll&lt;/code> directory in the container so I need to change the directory to my local repository for my blog. &lt;code>-p 4001:4000&lt;/code> says map port 4001 on my machine to port 4000 on the container. This means that I can view the blog locally at https://localhost:4001. &lt;code>jekyll serve&lt;/code> will build the site and run it for me.&lt;/p>
+&lt;h2 id="of-course-there-is-tweaking">Of course, there is tweaking&lt;/h2>
+&lt;p>We have to make a few changes to make this work easily. When I run the site locally with this command I get the following error and the site would not build.&lt;/p>
+&lt;blockquote>
+&lt;p>Liquid Exception: No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to your github.com repository. in /_layouts/default.html&lt;br>
+ERROR: YOUR SITE COULD NOT BE BUILT:&lt;br>
+No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to yocom repository.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/jekyllerror.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/jekyllerror.jpg"
+loading="lazy"
+alt="jekyllerror"
+>&lt;/a>&lt;/p>
+&lt;p>to fix this add the following to your &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>repository: GITHUBUSERNAME/REPONAME&lt;/code>&lt;/p>
+&lt;p>mine is&lt;/p>
+&lt;p>&lt;code>repository: SQLDBAWithABeard/robsewell&lt;/code>&lt;/p>
+&lt;p>Then when I run the container I get another warning&lt;/p>
+&lt;blockquote>
+&lt;p>GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data.&lt;/p>
+&lt;/blockquote>
+&lt;p>This does not really matter as the site still builds but another warning&lt;/p>
+&lt;blockquote>
+&lt;p>Auto-regeneration may not work on some Windows versions.
+Please see: &lt;a class="link" href="https://github.com/Microsoft/BashOnWindows/issues/216" target="_blank" rel="noopener"
+>https://github.com/Microsoft/BashOnWindows/issues/216&lt;/a>
+If it does not work, please upgrade Bash on Windows or run Jekyll with &amp;ndash;no-watch.&lt;/p>
+&lt;/blockquote>
+&lt;p>means that the site will not auto-regenerate when you make a change and save the file.&lt;/p>
+&lt;p>We fix these errors by adding&lt;/p>
+&lt;p>&lt;code>github: [metadata]&lt;/code>&lt;/p>
+&lt;p>to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>and running the container with an extra switch for the jekyll command &lt;code>--force_polling&lt;/code>&lt;/p>
+&lt;h2 id="so-now-it-works">So now it works?&lt;/h2>
+&lt;p>So with the additional data in the &lt;code>_config.yml&lt;/code> file and the new command&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>the site will build. You will still get the warning for auto-regeneration but it works. The purple arrow and the yellow box show the file that was changed and that it regenerated.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/regenerate.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/regenerate.jpg"
+loading="lazy"
+alt="regenerate"
+>&lt;/a>&lt;/p>
+&lt;p>It will only regenerate whilst running for blog post changes and not for configuration changes, such as altering the &lt;code>_config.yml&lt;/code> file. If you want to see those, you will have to stop the container and re-run it.&lt;/p>
+&lt;p>There is one last problem however. When you write your blog posts in Jekyll you name the file YYYY-MM-DD-Nameoffile.md this will give the post time of YYYY-MM-DD but the file for this blog post is named with a date in the future and by default it doesn&amp;rsquo;t show. The green box shows the file name but there is no corresponding blog post.&lt;/p>
+&lt;p>To fix this we add another entry to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>future: true&lt;/code>&lt;/p>
+&lt;p>This will tell Jekyll to show the posts with a data in the future. Unless you wish to show future posts on your blog when it is live, you will have to remember to change this to&lt;/p>
+&lt;p>&lt;code>future: false&lt;/code>&lt;/p>
+&lt;p>when you push your changes to GitHub so that your blog behaves as expected but now you can see your current blog post and write away and be able to see how it will look in your theme&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/futureposts.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/futureposts.jpg"
+loading="lazy"
+alt="futureposts"
+>&lt;/a>&lt;/p>
+&lt;h1 id="lets-make-it-even-better">Let&amp;rsquo;s make it even better&lt;/h1>
+&lt;p>When you run the container, it will need to download all of the things it needs to run the site. This can take a little time.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/downloadingthings.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/downloadingthings.jpg"
+loading="lazy"
+alt="downloadingthings"
+>&lt;/a>&lt;/p>
+&lt;p>It would be better if we had our own image that had all of those already downloaded for us. Let&amp;rsquo;s create our own image. We need to run our container without the &lt;code>rm&lt;/code> option this time as we need it not to be removed when we stop it.&lt;/p>
+&lt;p>&lt;code>docker run -volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>Once it has finished downloading and installing all that it needs and generated the site press &lt;code>CTRL +C&lt;/code> to stop the container and run&lt;/p>
+&lt;p>&lt;code>docker ps -a&lt;/code>&lt;/p>
+&lt;p>which will show you all of containers.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/dockerps.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/dockerps.jpg"
+loading="lazy"
+alt="dockerps"
+>&lt;/a>&lt;/p>
+&lt;p>Use the first 3 characters of the container. In my example it is &lt;code>760&lt;/code>. If you have more than one, look for the one with the &lt;code>jekyll/jekyll:3.8.6&lt;/code> as the image.&lt;/p>
+&lt;p>Then we can create our own image using&lt;/p>
+&lt;p>&lt;code>docker commit 760 myblogimage&lt;/code>&lt;/p>
+&lt;p>replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;p>Once you have created the image, you can remove the stopped container with&lt;/p>
+&lt;p>&lt;code>docker rm 760&lt;/code>&lt;/p>
+&lt;p>Again, replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;h2 id="quicker-run">Quicker run&lt;/h2>
+&lt;p>Now you can use your own image and the container will not need to download and install all of the things. Replace &lt;code>jekyll/jekyll:3.8&lt;/code> with &lt;code>myblogimage&lt;/code>&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 myblogimage jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/muchquicker.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/muchquicker.jpg"
+loading="lazy"
+alt="muchquicker"
+>&lt;/a>&lt;/p>
+&lt;p>Happy local blog writing.&lt;/p></description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" />&lt;h1 id="data-saturdays-has-new-clothes">Data Saturdays Has New Clothes!&lt;/h1>
+&lt;p>The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+>&lt;/a>&lt;/p>
+&lt;p>Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+>https://www.dcac.com/&lt;/a> generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+>99designs.com&lt;/a>. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>blog&lt;/a> for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p>
+&lt;h1 id="now-we-have-to-update-the-web-site">Now we have to update the web-site&lt;/h1>
+&lt;p>The next challenge we face is to update the website. As the website is hosted on GitHub Pages using Jekyll, this means that we can easily update the website by updating the code and letting GitHub actions build the new site but we have no way of checking the way that it looks before we push the changes. With such a radical change required, I felt that it would be a good idea to explore how to do this locally.&lt;/p>
+&lt;h2 id="install-everything-you-need-locally">Install everything you need locally&lt;/h2>
+&lt;p>I examined the requirements to create a local development environment and this meant installing Jekyll and Ruby and a host of other things, there appeared to be a whole bundle of quirks and strange errors that may or may not need to be handled so I quickly went off that idea!!&lt;/p>
+&lt;h2 id="docker-to-the-rescue">Docker to the rescue&lt;/h2>
+&lt;p>This is a fantastic use case for using a Docker container. I can host all of the required bits inside a container, spin it up and down as I need it and I don&amp;rsquo;t have to worry about polluting my machine with software and settings or the pain of having to configure it to work.&lt;/p>
+&lt;p>Also, other people have already done a lot of the work so I dont have to.&lt;/p>
+&lt;p>I am running Docker in WSL2. I followed these &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>instructions&lt;/a> to set it up. It doesn&amp;rsquo;t take very long.&lt;/p>
+&lt;p>With thanks to Hans Kristian Flaatten &lt;a class="link" href="https://github.com/Starefossen" target="_blank" rel="noopener"
+>GitHub&lt;/a> - &lt;a class="link" href="https://twitter.com/Starefossen" target="_blank" rel="noopener"
+>Twitter&lt;/a> who has created &lt;a class="link" href="https://github.com/Starefossen/docker-github-pages" target="_blank" rel="noopener"
+>this docker image&lt;/a> it is as easy as running this from the local directory of the site repository&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v &amp;#34;$PWD&amp;#34;:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you are not using WSL but native Docker on Windows, then the command to run is slightly different&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v .:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>As soon as the container has started running and built the site I can see my changes locally in my browser at &lt;code>http://localhost:4000/&lt;/code> There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/localdev.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localdev.jpg"
+loading="lazy"
+alt="localdev"
+>&lt;/a>&lt;/p>
+&lt;h1 id="develop-and-test">Develop and Test&lt;/h1>
+&lt;p>Now I can make changes to the code in the website and save the file and the site will update. In the below video, you can see that I have updated the favicon so that the new logo appears.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>I shall go back to editing the site now.&lt;/p>
+&lt;h1 id="a-little-feature-if-you-are-working-on-your-event-page">A little &amp;lsquo;Feature&amp;rsquo; if you are working on your event page&lt;/h1>
+&lt;p>If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts &lt;code>http://0.0.0.0:4000/&lt;/code> like &lt;a class="link" href="http://0.0.0.0:4000/2021-04-17-datasaturday0005/" target="_blank" rel="noopener"
+>http://0.0.0.0:4000/2021-04-17-datasaturday0005/&lt;/a>. This will not work on a Windows machine so you will have to replace &lt;code>0.0.0.0&lt;/code> in the address bar with &lt;code>localhost&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/0000.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/0000.jpg"
+loading="lazy"
+alt="0000"
+>&lt;/a>&lt;/p>
+&lt;p>and then it will work&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg"
+loading="lazy"
+alt="localhostworks"
+>&lt;/a>&lt;/p>
+&lt;h1 id="data-saturdays">Data Saturdays&lt;/h1>
+&lt;p>You can find the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site here&lt;/a>. There is a list of all of the upcoming and past Data Saturdays events available.&lt;/p></description></item><item><title>Creating a New Data Saturdays event</title><link>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</link><pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturdays.png" alt="Featured image of post Creating a New Data Saturdays event" />&lt;h1 id="creating-a-new-data-saturdays-event">Creating a New Data Saturdays Event&lt;/h1>
+&lt;p>There&amp;rsquo;s a new process to create a Data Saturdays Event page, so I thought I would write an explanation and a run through&lt;/p>
+&lt;h2 id="what-is-data-saturdays-">What is Data Saturdays ?&lt;/h2>
+&lt;p>Firstly, not everyone will know what a Data Saturday event is, so lets start with that. There are two parts to it.&lt;/p>
+&lt;p>A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.&lt;/p>
+&lt;p>The Data Saturdays resource is an &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>open-source repository&lt;/a> which enables event organisers to easily build a web presence as an entry point into their event. It integrates with other free event management solutions such as &lt;a class="link" href="https://sessionize.com" target="_blank" rel="noopener"
+>Sessionize&lt;/a> enabling Call For Speakers, easily integrating the schedule, room links and speaker walls. The website is &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>https://datasaturdays.com&lt;/a>&lt;/p>
+&lt;p>Here is a screenshot of the first Data Saturday &amp;ldquo;in&amp;rdquo; Pordenone.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturday1.png"
+loading="lazy"
+alt="Pordenone"
+>&lt;/p>
+&lt;p>The marvelous &lt;a class="link" href="https://twitter.com/spaghettidba" target="_blank" rel="noopener"
+>Gianluca Sartori&lt;/a> and I started this to enable Pordenone to hold an event. We open-sourced the &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>code&lt;/a> and hosted it in the &lt;a class="link" href="https://github.com/sqlcollaborative/" target="_blank" rel="noopener"
+>SQL Collaborative GitHub organisation&lt;/a> alongside community tools such as &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> with a &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/blob/main/LICENSE" target="_blank" rel="noopener"
+>MIT licence&lt;/a> so that it is free for anyone to use and to collaborate with. The website is hosted on &lt;a class="link" href="https://pages.github.com/" target="_blank" rel="noopener"
+>GitHub Pages&lt;/a> which generates static pages using &lt;a class="link" href="https://docs.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll" target="_blank" rel="noopener"
+>Jekyll&lt;/a>. We figured that this not only enabled a quick free solution but also offered opportunities for people to enrich their skills by collaborating.&lt;/p>
+&lt;p>We wanted to include other community leaders to assist with guiding the project and we were proud that everyone we asked to be involved accepted. The people who are Admins of the project (who can approve changes to the code and therefore the website) in addition to Gianluca and I are : -&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Steve Jones&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlespresso" target="_blank" rel="noopener"
+>Monica Rathbun&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/_randolph_west" target="_blank" rel="noopener"
+>Randolph West&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/intoleranse" target="_blank" rel="noopener"
+>Johan Ludvig Brattås&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/amtwo" target="_blank" rel="noopener"
+>Andy Mallon&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlzelda" target="_blank" rel="noopener"
+>Elizabeth Noble&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/Warwick_Rudd" target="_blank" rel="noopener"
+>Warwick Rudd&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlatspeed" target="_blank" rel="noopener"
+>Matt Gordon&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>We have now enabled 10 Data Saturday events to exist, which we still think is amazing! However with growth comes challenges.&lt;/p>
+&lt;h2 id="creating-an-event-the-old-way">Creating an event the old way&lt;/h2>
+&lt;p>The old method of creating an event involved the organiser providing the required information and an admin creating the static HTML page. Copying and pasting, ensuring that the template stayed the same but the detail was altered. Of course, when things are done manually humans can make errors and we made errors. The beauty of hosting the website in code in GitHub is that we can quickly change the code when we notice and fix them but this was not ideal.&lt;/p>
+&lt;h2 id="automation-automation-automation-">Automation Automation AUTOMATION !&lt;/h2>
+&lt;p>I love automation, I get a real buzz out of taking manual monotonous tasks and automating them. I looked at the process we were following and took the bait and decided to automate it. I have created a data-driven process for creating and updating the event web-page and the rest of this blog post is an accompaniment to &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/wiki" target="_blank" rel="noopener"
+>the official documentation in the Wiki in the Data Saturdays GitHub repository&lt;/a>. I might also blog about how I did it.&lt;/p>
+&lt;p>If you wish to just watch a video, you can find that here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/QdoZ7NNn32c"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;h2 id="creating-a-new-data-saturday-event">Creating a New Data Saturday Event&lt;/h2>
+&lt;p>How do you create a new event? The steps are laid out in the &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/wiki" target="_blank" rel="noopener"
+>wiki&lt;/a>&lt;/p>
+&lt;h3 id="tooling">Tooling&lt;/h3>
+&lt;p>We suggest that you use &lt;a class="link" href="http://aka.ms/vscode" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> as the editor to make these changes. Visual Studio Code is a superb free lightweight cross-platform code editor. To reduce the frustration we also suggest that you add the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml" target="_blank" rel="noopener"
+>YAML Extension&lt;/a> to Visual Studio Code as this will help to identify any problems with YAML.&lt;/p>
+&lt;h3 id="fork-the-data-saturdays-repository">Fork the Data Saturdays Repository&lt;/h3>
+&lt;p>I have previously written a blog post that &lt;a class="link" href="https://blog.robsewell.com/blog/source%20control/jupyter%20notebooks/azure%20data%20studio/dbatools/dbachecks/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/" target="_blank" rel="noopener"
+>explains how to contribute to an open-source repository which you can also use as reference for some of these steps&lt;/a>&lt;/p>
+&lt;p>We are using GitHub as the source control for the website, so you will need to signup for a &lt;a class="link" href="https://github.com/" target="_blank" rel="noopener"
+>GitHub account&lt;/a> if you do not have one already. This is free. Once you have that, navigate to the &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>Data Saturdays repository&lt;/a> and click on the Fork button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/fork.png"
+loading="lazy"
+alt="fork"
+>&lt;/p>
+&lt;p>It will ask you where you want to fork it and you should choose your own GitHub account&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/forkwhere.png"
+loading="lazy"
+alt="forkwhere"
+>&lt;/p>
+&lt;p>It will only take a few seconds and you will have a fork of the repository in your own account.&lt;/p>
+&lt;h3 id="clone-the-repository-to-your-machine">Clone the Repository to your machine&lt;/h3>
+&lt;p>To work with the code, you need to clone it to your own machine (There are other options like &lt;a class="link" href="https://github.com/features/codespaces" target="_blank" rel="noopener"
+>codespaces&lt;/a> which I love, but we will leave that for another time) Click on the green Code button and copy the URL using the button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/cloneweb.png"
+loading="lazy"
+alt="cloneweb"
+>&lt;/p>
+&lt;p>then in Visual Studio Code &lt;code>CTRL + SHIFT + P&lt;/code> will open the Command Palette and search for clone&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/clonevs.png"
+loading="lazy"
+alt="clonevs"
+>&lt;/p>
+&lt;p>If you do not see Git:Clone you will need to install git from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+>https://git-scm.com/downloads&lt;/a>&lt;/p>
+&lt;h3 id="create-a-new-branch">Create a new branch&lt;/h3>
+&lt;p>You create a new branch to hold your changes by clicking on the branch name in the bottom left&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/branchchoose.png"
+loading="lazy"
+alt="branchchoose"
+>&lt;/p>
+&lt;p>and give it a new name&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newbranch.png"
+loading="lazy"
+alt="newbranch"
+>&lt;/p>
+&lt;h3 id="create-the-markdown-file">Create the Markdown File&lt;/h3>
+&lt;p>Now you can start to create the data for your event. First you need to see what the next available number is. Check the &lt;code>_data/events&lt;/code> directory to see what has gone before you.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/getnextnumber.png"
+loading="lazy"
+alt="getnextnumber"
+>&lt;/p>
+&lt;p>In the &lt;code>_posts&lt;/code> directory, create a new file with the following naming convention &lt;code>YYYY-MM-DD-datasaturdayXXXX.md&lt;/code> where &lt;code>XXXX&lt;/code> is the next number available. An example name is &lt;code>2021-06-12-datasaturday0007.md&lt;/code>&lt;/p>
+&lt;p>In the file you place the following content&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">layout: post
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;The Name of the Data Saturday in double quotes&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">subtitle: &amp;#34;Data Saturday&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tags: [event]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">comments: false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">data: datasaturdayXXXX
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The 3 dashes are important to keep. The name must be in double quotes and the data must match your number. It should look like this.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/markdown.png"
+loading="lazy"
+alt="markdown"
+>&lt;/p>
+&lt;p>Save the file.&lt;/p>
+&lt;h3 id="create-the-data-file">Create the data file.&lt;/h3>
+&lt;p>This is the most important file. This file is the one that will feed the page that you use. This is the file that you will update as your event timeline progresses.&lt;/p>
+&lt;p>In the &lt;code>_data/events&lt;/code> directory create a new file named &lt;code>datasaturdayXXXX.yml&lt;/code> (The XXXX is your number again) example &lt;code>datasaturday0007.yml&lt;/code>&lt;/p>
+&lt;p>In this file paste all the following&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: &amp;#34;This is the name of your event inside the double quotes&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: The date of your event in YYYY-MM-DD HH:mm:ss TZ IE 2021-06-12 08:00:00 -0000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: &amp;#34;Your event description inside double quotes, you may use HTML.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">You MUST escape double quotes with a backslash \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(Look in the repo or wiki for examples of how to enter images)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Line breaks need to be entered as &amp;lt;br&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">registrationurl: This is your registration URL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">join:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: Click on the room you want to join. You can change rooms at any time to attend the sessions that you prefer.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rooms:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Room 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> url: you can add more rooms if you have a virtual event. You can remove these if you do not know yet.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scheduleurl: This is your schedule URL from Sessionize. You can leave this blank until you have it.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sponsors:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - link: https://yoursponsorlink
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: your sponsor image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> height: image height if required
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">speakerlisturl: This is your Call For Speakers URL when you start, once you have chosen your sessions change this to your Sessionize SpeakerWall API URL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">callforspeakers: true (until your call for speaker finishes!)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">volunteerrequesturl: If you want a link for people to volunteer place it here
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">organizers:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Your name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> twitter: https://twitter.com/TWITTERNAME
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> email: Contact email or not
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now you have to fill in your own data. The fields have explanations in them, the wiki has descriptions and you can always refer back to this blog post also. Some are obvious like name and date, some will take a little thought like description and some you won&amp;rsquo;t have yet like your Sessionize API URLs.&lt;/p>
+&lt;p>This file can be altered any time that you like during your event timeline as more information becomes available or you wish to change things. Each time, you can create a Pull Request to the Data Saturdays repository but before that &lt;strong>It is really important&lt;/strong> that you check your YAML.&lt;/p>
+&lt;p>Once your data file is ready&lt;/p>
+&lt;h3 id="check-your-yaml">Check your YAML&lt;/h3>
+&lt;p>If you have followed our advice and used Visual Studio Code and the YAML extension then you can check that your YAML is correctly formed by looking at the problems tab&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/noproblem.png"
+loading="lazy"
+alt="noproblem"
+>&lt;/p>
+&lt;p>The example above has no problems so the YAML is correct. If it is not you will see&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/problem.png"
+loading="lazy"
+alt="problem"
+>&lt;/p>
+&lt;p>Normally with YAML the problem is spaces, try to line up the text until the problem goes away.&lt;/p>
+&lt;h3 id="sync-your-local-repository-with-github">Sync your local repository with GitHub&lt;/h3>
+&lt;p>Once your changes have been made, you will need to commit them with a commit message. We suggest that it is something relevant to your event&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/commit.png"
+loading="lazy"
+alt="commit"
+>&lt;/p>
+&lt;p>Then you will need to press the publish button in Visual Studio Code to publish this branch to GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/publish.png"
+loading="lazy"
+alt="publish"
+>&lt;/p>
+&lt;h3 id="create-a-pull-request-in-the-data-saturdays-repository">Create a Pull Request in the Data Saturdays Repository&lt;/h3>
+&lt;p>Last step is to create a Pull Request. Open your browser at your local GitHub repository. You will see a green button saying compare and pull request.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/createpr.png"
+loading="lazy"
+alt="createpr"
+>&lt;/p>
+&lt;p>When you click that it will automatically open a pull request for you. Add some details about who you are and your event and an admin will then review it and merge it. Once it has been merged, the site will be rebuilt and will include your new event page.&lt;/p>
+&lt;h3 id="continue-to-update-your-event">Continue to update your event&lt;/h3>
+&lt;p>AS you progress along your event timeline, you will need to edit the data file and create a new Pull Request. You will do this&lt;/p>
+&lt;ul>
+&lt;li>When you get a new sponsor&lt;/li>
+&lt;li>When you have enough volunteers&lt;/li>
+&lt;li>When your Call for Speaker closes&lt;/li>
+&lt;li>When your event is published and you have your SpeakerWall and Schedule API URLs from Sessionize&lt;/li>
+&lt;li>To add links to your virtual rooms&lt;/li>
+&lt;li>To add your feedback links&lt;/li>
+&lt;li>After your event has finished&lt;/li>
+&lt;/ul>
+&lt;p>As you change those things, create new Pull Requests, and they are merged, your event page will be updated.&lt;/p></description></item></channel></rss>

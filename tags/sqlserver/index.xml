@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sqlserver on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sqlserver/</link><description>Recent content in Sqlserver on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 30 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sqlserver/index.xml" rel="self" type="application/rss+xml"/><item><title>Handling Missing Instances when Looping with Pester</title><link>https://blog.robsewell.com/blog/handling-missing-instances-when-looping-with-pester/</link><pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/handling-missing-instances-when-looping-with-pester/</guid><description>&lt;p>In my previous posts about &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>writing your first Pester Test&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/2-ways-to-loop-through-collections-in-pester/" target="_blank" rel="noopener"
+>looping through instances&lt;/a> I described how you can start to validate that your SQL Server is how YOU want it to be.&lt;/p>
+&lt;h2 id="unavailable-machines">Unavailable machines&lt;/h2>
+&lt;p>Once you begin to have a number of tests for a number of instances you want to be able to handle any machines that are not available cleanly otherwise you might end up with something like this.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-error.png"
+loading="lazy"
+alt="01 - error.png"
+>&lt;/p>
+&lt;p>In this (made up) example we loop through 3 instances and try to check the DNS Server entry is correct but for one of them we get a massive error and if we had created a large number of tests for each machine we would have a large number of massive errors.&lt;/p>
+&lt;h2 id="empty-collection">Empty Collection&lt;/h2>
+&lt;p>If we don’t successfully create our collection we might have an empty collection which will give us a different issue. No tests&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/02-no-tests.png"
+loading="lazy"
+alt="02 - no tests.png"
+>&lt;/p>
+&lt;p>If this was in amongst a whole number of tests we would not have tested anything in this Describe block and might be thinking that our tests were OK because we had no failures of our tests. We would be wrong!&lt;/p>
+&lt;h2 id="dealing-with-empty-collections">Dealing with Empty Collections&lt;/h2>
+&lt;p>One way of dealing with empty collections is to test that they have more than 0 members&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if ($instances.count -gt 0) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## Tests in here
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else {Write-Warning &amp;#34;Uh-Oh - The Beard is Sad! - The collection is empty. Did you set `$Instances correctly?&amp;#34;}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice the backtick ` before the $ to escape it in the Write-Warning. An empty collection now looks like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/03-uh-oh.png"
+loading="lazy"
+alt="03 - uh-oh.png"
+>&lt;/p>
+&lt;p>Which is much better and provides useful information to the user&lt;/p>
+&lt;h2 id="dealing-with-unavailable-machines">Dealing with Unavailable Machines&lt;/h2>
+&lt;p>If we want to make sure we dont clutter up our test results with a whole load of failures when a machine is unavailable we can use similar logic.&lt;/p>
+&lt;p>First we could check if it is responding to a ping (assuming that ICMP is allowed by the firewall and switches) using&lt;/p>
+&lt;p>&lt;code>Test-Connection -ComputerName $computer -Count 1 -Quiet -ErrorAction SilentlyContinue&lt;/code>&lt;/p>
+&lt;p>This will just try one ping and do it quietly only returning True or False and if there are any errors it shouldn’t mention it&lt;/p>
+&lt;p>In the example above I am using PSRemoting and we should make sure that that is working too. So whilst I could use&lt;/p>
+&lt;p>&lt;code>Test-WSMan -ComputerName $computer&lt;/code>&lt;/p>
+&lt;p>this only checks if a WSMAN connection is possible and not other factors that could be affecting the ability to run remote sessions. Having been caught by this before I have always used &lt;a class="link" href="http://www.leeholmes.com/blog/2009/11/20/testing-for-powershell-remoting-test-psremoting/" target="_blank" rel="noopener"
+>this function from Lee Holmes&lt;/a> (Thank you Lee) and thus can use&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $computer = $_.Split(&amp;#39;\\&amp;#39;)\[0\]# To get the computername if there is an instance name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Check if machine responds to ping
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!(Test-Connection-ComputerName $computer-Count 1-Quiet -ErrorAction SilentlyContinue))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - $Computer is not responding to a ping - aborting the tests for this machine&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Check if PSremoting is possible for this machine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Requires Test-PSRemoting by Lee Holmes http://www.leeholmes.com/blog/2009/11/20/testing-for-powershell-remoting-test-psremoting/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!(Test-PsRemoting$computer))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - $Computer is not able to use PSRemoting - aborting the tests for this machine&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Describe &amp;#34;Testing Instance $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## Put tests in here
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which provides a result like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/04-better-handling.png"
+loading="lazy"
+alt="04 - better handling.png"
+>&lt;/p>
+&lt;p>Which is much better I think 🙂&lt;/p>
+&lt;h2 id="let-dbatools-do-the-error-handling-for-you">Let dbatools do the error handling for you&lt;/h2>
+&lt;p>If your tests are only using the dbatools module then there is built in error handling that you can use. By default dbatools returns useful messages rather than the exceptions from PowerShell (You can enable the exceptions using the -EnableExceptions parameter if you want/need to) so if we run our example from the previous post it will look like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/05-dbatools-handling.png"
+loading="lazy"
+alt="05 - dbatools handling.png"
+>&lt;/p>
+&lt;p>which is fine for a single command but we don’t really want to waste time and resources repeatedly trying to connect to an instance if we know it is not available if we are running multiple commands against each instance.&lt;/p>
+&lt;h2 id="dbatools-at-the-beginning-of-the-loop">dbatools at the beginning of the loop&lt;/h2>
+&lt;p>We can use &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a>to perform a check at the beginning of the loop as we discussed in the &lt;a class="link" href="https://blog.robsewell.com/2-ways-to-loop-through-collections-in-pester/" target="_blank" rel="noopener"
+>previous post&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!((Test-DbaConnection-SqlInstance $_ -WarningAction SilentlyContinue).ConnectSuccess))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - we cannot connect to $_ - aborting the tests for this instance&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice that we have used &lt;code>-WarningAction SilentlyContinue&lt;/code> to hide the warnings from the command this tiime. Our test now looks like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/06-dbatools-test-dbaconnection.png"
+loading="lazy"
+alt="06 - dbatools test-dbaconnection.png"
+>&lt;/p>
+&lt;p>&lt;code>Test-DbaConnection&lt;/code> performs a number of tests so you can check for ping SQL version, domain name and remoting if you want to exclude tests on those basis&lt;/p>
+&lt;h2 id="round-up">Round Up&lt;/h2>
+&lt;p>In this post we have covered some methods of ensuring that your Pester Tests return what you expect. You don’t want empty collections of SQL Instances making you think you have no failed tests when you have not actually run any tests.&lt;/p>
+&lt;p>You can do this by checking how many instances are in the collection&lt;/p>
+&lt;p>You also dont want to keep running tests against a machine or instance that is not responding or available.&lt;/p>
+&lt;p>You can do this by checking a ping with &lt;code>Test-Connection&lt;/code> or if remoting is required by using the &lt;code>Test-PSRemoting&lt;/code> function from Lee Holmes&lt;/p>
+&lt;p>If you want to use dbatools exclusively you can use &lt;code>Test-DbaConnection&lt;/code>&lt;/p>
+&lt;p>Here is a framework to put your tests inside. You will need to provide the values for the $Instances and place your tests inside the Describe Block&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if ($instances.count -gt 0) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $TestConnection = Test-DbaConnection-SqlInstance $_ -WarningAction SilentlyContinue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Check if machine responds to ping
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!($TestConnection.IsPingable))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - The Beard is Sad! - - $_ is not responding to a ping - aborting the tests for this instance&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Check if we have remote access to the machine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!($TestConnection.PsRemotingAccessible))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - The Beard is Sad! - - $_ is not able to use PSRemoting - aborting the tests for this instance&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Check if we have SQL connection to the Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!($TestConnection.ConnectSuccess))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {Write-Warning &amp;#34;Uh-Oh - The Beard is Sad! - - we cannot connect to SQL on $_ - aborting the tests for this instance&amp;#34;; Return}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Describe &amp;#34;Testing Instance $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## Now put your tests in here - seperate them with context blocks if you want to
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Networks&amp;#34; { }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## If the collection is empty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Warning &amp;#34;Uh-Oh - The Beard is Sad! - The collection is empty. Did you set `$Instances correctly?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p>In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>how to write your first Pester test&lt;/a> to validate something. Here’s a recap&lt;/p>
+&lt;ul>
+&lt;li>Decide the information you wish to test&lt;/li>
+&lt;li>Understand how to get it with PowerShell&lt;/li>
+&lt;li>Understand what makes it pass and what makes it fail&lt;/li>
+&lt;li>Write a Pester Test&lt;/li>
+&lt;/ul>
+&lt;p>You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p>
+&lt;h2 id="getting-the-latest-version-of-the-module">Getting the Latest Version of the Module&lt;/h2>
+&lt;p>Steve Jones wrote about getting the latest version of Pester and the correct way to do it. You can &lt;a class="link" href="https://voiceofthedba.com/2017/11/27/installing-pester/" target="_blank" rel="noopener"
+>find the important information here&lt;/a>&lt;/p>
+&lt;h2 id="test-cases">Test Cases&lt;/h2>
+&lt;p>The first way is to use the Test Case parameter of the It command (the test) which I have written about when &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>using TDD for Pester here&lt;/a>&lt;/p>
+&lt;p>Lets write a test first to check if we can successfully connect to a SQL Instance. Running&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand connection&lt;/code>&lt;/p>
+&lt;p>shows us that the &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a> command is the one that we want from the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>. We should always run Get-Help to understand how to use any PowerShell command. This shows us that the results will look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-gethelp-test-dbaconnection.png"
+loading="lazy"
+alt="01 - gethelp test-dbaconnection"
+>&lt;/p>
+&lt;p>So there is a ConnectSuccess result which returns True or false. Our test can look like this for a single instance&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to ROB-XPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    It &amp;#34;Connects successfully to ROB-XPS&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        (Test-DbaConnection-SqlInstance ROB-XPS).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gives us some test results that look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/successful-test.png"
+loading="lazy"
+alt="successful test.png"
+>&lt;/p>
+&lt;p>which is fine for one instance but we want to check many.&lt;/p>
+&lt;p>We need to gather the instances into a $Instances variable. In my examples I have hard coded a list of SQL Instances but you can, and probably should, use a more dynamic method, maybe the results of a query to a configuration database. Then we can fill our TestCases variable which can be done like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can write our test like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to SQL Instances&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Put the TestCases &amp;#39;Name&amp;#39; in &amp;lt;&amp;gt; and add the TestCases parameter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Connects successfully to &amp;lt;Instance&amp;gt;&amp;#34; -TestCases $TestCases {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add a Parameter to the test with the same name as the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param($Instance)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write the test using the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Test-DbaConnection -SqlInstance $Instance).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Within the title of the test we refer to the instance inside &amp;lt;&amp;gt; and add the parameter TestCases with a value of the $TestCases variable. We also need to add a Param() to the test with the same name and then use that variable in the test.&lt;/p>
+&lt;p>This looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/Testcases-test.png"
+loading="lazy"
+alt="Testcases test.png"
+>&lt;/p>
+&lt;h2 id="pester-is-powershell">Pester is PowerShell&lt;/h2>
+&lt;p>The problem with  Test Cases is that we can only easily loop through one collection, but as Pester is just PowerShell we can simply use ForEach if we wanted to loop through multiple ones, like instances and then databases.&lt;/p>
+&lt;p>I like to use the ForEach method as it is slightly quicker than other methods. It will only work with PowerShell version 4 and above. Below that version you need to pipe the collection to For-EachObject.&lt;/p>
+&lt;p>Lets write a test to see if our databases have trustworthy set on. We can do this using the Trustworthy property returned from &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase/" target="_blank" rel="noopener"
+>&lt;code>Get-DbaDatabase&lt;/code>&lt;/a>&lt;/p>
+&lt;p>We loop through our Instances using the ForEach method and create a Context for each Instance to make the test results easier to read. We then place the call to &lt;code>Get-DbaDatabase &lt;/code>inside braces and loop through those and check the Trustworthy property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing user databases&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the instances
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create a Context for each Instance.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Testing User Databases on $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the User databases on the instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Get-DbaDatabase -SqlInstance $_ -ExcludeAllSystemDb).ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Refer to the database name and Instance name inside a $()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Database $($_.Name) on Instance $($_.Parent.Name) should not have TRUSTWORTHY ON&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $_.Trustworthy | Should Be $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it looks like this&lt;/p>
+&lt;h2 id="testdatabasetrustworthypnghttpsblogrobsewellcomassetsuploads201711testdatabasetrustworthypng">&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/testdatabasetrustworthy.png"
+loading="lazy"
+alt="testdatabasetrustworthy.png"
+>&lt;/h2>
+&lt;p>So there you have two different ways to loop through collections in your Pester tests. Hopefully this can help you to write some good tests to validate your environment.&lt;/p>
+&lt;p>Happy Pestering&lt;/p>
+&lt;h2 id="spend-a-whole-day-with-chrissy--i-at-sqlbits">Spend a Whole Day With Chrissy &amp;amp; I at SQLBits&lt;/h2>
+&lt;p>If you would like to spend a whole day with Chrissy LeMaire and I at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> in London in February – we have a pre-con on the Thursday&lt;/p>
+&lt;p>You can find out more about the pre-con &lt;a class="link" href="http://sqlps.io/bitsprecon" target="_blank" rel="noopener"
+>sqlps.io/bitsprecon&lt;/a>&lt;/p>
+&lt;p>and you can register at &lt;a class="link" href="http://sqlps.io/bitsreg" target="_blank" rel="noopener"
+>sqlps.io/bitsreg&lt;/a>&lt;/p></description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p>In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>how to write your first Pester test&lt;/a> to validate something. Here’s a recap&lt;/p>
+&lt;ul>
+&lt;li>Decide the information you wish to test&lt;/li>
+&lt;li>Understand how to get it with PowerShell&lt;/li>
+&lt;li>Understand what makes it pass and what makes it fail&lt;/li>
+&lt;li>Write a Pester Test&lt;/li>
+&lt;/ul>
+&lt;p>You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p>
+&lt;h2 id="getting-the-latest-version-of-the-module">Getting the Latest Version of the Module&lt;/h2>
+&lt;p>Steve Jones wrote about getting the latest version of Pester and the correct way to do it. You can &lt;a class="link" href="https://voiceofthedba.com/2017/11/27/installing-pester/" target="_blank" rel="noopener"
+>find the important information here&lt;/a>&lt;/p>
+&lt;h2 id="test-cases">Test Cases&lt;/h2>
+&lt;p>The first way is to use the Test Case parameter of the It command (the test) which I have written about when &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>using TDD for Pester here&lt;/a>&lt;/p>
+&lt;p>Lets write a test first to check if we can successfully connect to a SQL Instance. Running&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand connection&lt;/code>&lt;/p>
+&lt;p>shows us that the &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a> command is the one that we want from the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>. We should always run Get-Help to understand how to use any PowerShell command. This shows us that the results will look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-gethelp-test-dbaconnection.png"
+loading="lazy"
+alt="01 - gethelp test-dbaconnection"
+>&lt;/p>
+&lt;p>So there is a ConnectSuccess result which returns True or false. Our test can look like this for a single instance&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to ROB-XPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    It &amp;#34;Connects successfully to ROB-XPS&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        (Test-DbaConnection-SqlInstance ROB-XPS).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gives us some test results that look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/successful-test.png"
+loading="lazy"
+alt="successful test.png"
+>&lt;/p>
+&lt;p>which is fine for one instance but we want to check many.&lt;/p>
+&lt;p>We need to gather the instances into a $Instances variable. In my examples I have hard coded a list of SQL Instances but you can, and probably should, use a more dynamic method, maybe the results of a query to a configuration database. Then we can fill our TestCases variable which can be done like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can write our test like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to SQL Instances&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Put the TestCases &amp;#39;Name&amp;#39; in &amp;lt;&amp;gt; and add the TestCases parameter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Connects successfully to &amp;lt;Instance&amp;gt;&amp;#34; -TestCases $TestCases {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add a Parameter to the test with the same name as the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param($Instance)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write the test using the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Test-DbaConnection -SqlInstance $Instance).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Within the title of the test we refer to the instance inside &amp;lt;&amp;gt; and add the parameter TestCases with a value of the $TestCases variable. We also need to add a Param() to the test with the same name and then use that variable in the test.&lt;/p>
+&lt;p>This looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/Testcases-test.png"
+loading="lazy"
+alt="Testcases test.png"
+>&lt;/p>
+&lt;h2 id="pester-is-powershell">Pester is PowerShell&lt;/h2>
+&lt;p>The problem with  Test Cases is that we can only easily loop through one collection, but as Pester is just PowerShell we can simply use ForEach if we wanted to loop through multiple ones, like instances and then databases.&lt;/p>
+&lt;p>I like to use the ForEach method as it is slightly quicker than other methods. It will only work with PowerShell version 4 and above. Below that version you need to pipe the collection to For-EachObject.&lt;/p>
+&lt;p>Lets write a test to see if our databases have trustworthy set on. We can do this using the Trustworthy property returned from &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase/" target="_blank" rel="noopener"
+>&lt;code>Get-DbaDatabase&lt;/code>&lt;/a>&lt;/p>
+&lt;p>We loop through our Instances using the ForEach method and create a Context for each Instance to make the test results easier to read. We then place the call to &lt;code>Get-DbaDatabase &lt;/code>inside braces and loop through those and check the Trustworthy property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing user databases&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the instances
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create a Context for each Instance.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Testing User Databases on $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the User databases on the instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Get-DbaDatabase -SqlInstance $_ -ExcludeAllSystemDb).ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Refer to the database name and Instance name inside a $()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Database $($_.Name) on Instance $($_.Parent.Name) should not have TRUSTWORTHY ON&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $_.Trustworthy | Should Be $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it looks like this&lt;/p>
+&lt;h2 id="testdatabasetrustworthypnghttpsblogrobsewellcomassetsuploads201711testdatabasetrustworthypng">&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/testdatabasetrustworthy.png"
+loading="lazy"
+alt="testdatabasetrustworthy.png"
+>&lt;/h2>
+&lt;p>So there you have two different ways to loop through collections in your Pester tests. Hopefully this can help you to write some good tests to validate your environment.&lt;/p>
+&lt;p>Happy Pestering&lt;/p>
+&lt;h2 id="spend-a-whole-day-with-chrissy--i-at-sqlbits">Spend a Whole Day With Chrissy &amp;amp; I at SQLBits&lt;/h2>
+&lt;p>If you would like to spend a whole day with Chrissy LeMaire and I at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> in London in February – we have a pre-con on the Thursday&lt;/p>
+&lt;p>You can find out more about the pre-con &lt;a class="link" href="http://sqlps.io/bitsprecon" target="_blank" rel="noopener"
+>sqlps.io/bitsprecon&lt;/a>&lt;/p>
+&lt;p>and you can register at &lt;a class="link" href="http://sqlps.io/bitsreg" target="_blank" rel="noopener"
+>sqlps.io/bitsreg&lt;/a>&lt;/p></description></item><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>#TSQL2sDay – Starting Out with PowerShell</title><link>https://blog.robsewell.com/blog/tsql2sday-starting-out-with-powershell/</link><pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-starting-out-with-powershell/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>
+&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p>
+&lt;blockquote>
+&lt;p>This means that if you have a PowerShell script doing &lt;em>Import-Module SQLPS&lt;/em>, it will need to be changed to be &lt;em>Import-Module SqlServer&lt;/em> in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to &lt;em>“%Program Files\WindowsPowerShell\Modules\SqlServer&lt;/em>” and hence no update to $env:PSModulePath is required.&lt;/p>
+&lt;/blockquote>
+&lt;p>So SQLPS will still continue to work but will not be updated and will not contain the new CMDlets or the future new CMDlets.&lt;/p>
+&lt;h2 id="so-what-new-things-do-we-have">So what new things do we have?&lt;/h2>
+&lt;blockquote>
+&lt;p>This month we introduce CMDLETs for the following areas:&lt;/p>
+&lt;ul>
+&lt;li>Always Encrypted&lt;/li>
+&lt;li>SQL Agent&lt;/li>
+&lt;li>SQL Error Logs&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>Chrissy LeMaire has written about the &lt;a class="link" href="https://blog.netnerds.net/2016/06/the-sql-server-PowerShell-module-formerly-known-as-sqlps/" target="_blank" rel="noopener"
+>new SQL Agent cmdlets&lt;/a>&lt;/p>
+&lt;p>Aaron Nelson has written about the &lt;a class="link" href="http://sqlvariant.com/2016/06/webinar-on-25-new-PowerShell-cmdlets-for-sql-server-and-more/" target="_blank" rel="noopener"
+>new Get-SqlErrorLog cmdlet&lt;/a>&lt;/p>
+&lt;p>Laerte Junior has written about &lt;a class="link" href="https://www.simple-talk.com/blogs/2016/06/30/invoke-sqlcmd-just-got-better/" target="_blank" rel="noopener"
+>Invoke-SQLCmd&lt;/a>&lt;/p>
+&lt;p>All four of us will be presenting a webinar on the new CMDlets via the &lt;a class="link" href="http://PowerShell.sqlpass.org/" target="_blank" rel="noopener"
+>PowerShell Virtual Chapter&lt;/a> Wed, Jul 06 2016 12:00 Eastern Daylight Time If you cant make it a recording will be made available on YouTube on the VC Channel &lt;a class="link" href="https://sqlps.io/video" target="_blank" rel="noopener"
+>https://sqlps.io/video&lt;/a>&lt;/p>
+&lt;h2 id="always-encrypted-cmdlets">Always Encrypted CMDlets&lt;/h2>
+&lt;p>That leaves the Always Encrypted CMDLets and there are 17 of those!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p> &lt;/p>
+&lt;p>That seems to cover setting up Always Encrypted with PowerShell , removing it and getting information about it. When the new SSMS update is dropped you will be able to start using all of this new functionality.&lt;/p>
+&lt;p>Just remember Import-Module sqlserver&lt;/p>
+&lt;h2 id="call-to-action">CALL TO ACTION&lt;/h2>
+&lt;p>Microsoft are engaging with the community to improve the tools we all use in our day to day work. There is are two Trello boards set up for &lt;strong>YOU&lt;/strong> to use to contribute&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/vote" target="_blank" rel="noopener"
+>https://sqlps.io/vote&lt;/a>  for SQLPS  sqlserver PowerShell module&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/ssms" target="_blank" rel="noopener"
+>https://sqlps.io/ssms&lt;/a> for SSMS&lt;/p>
+&lt;p>Go and join them and upvote &lt;strong>YOUR&lt;/strong> preferred choice of the next lot of CMDlets&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/trellocount.png"
+loading="lazy"
+alt="trellocount"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>We have also set up a SQL Community Slack for anyone in the community to discuss all things related to SQL including the Trello board items and already it seems a good place for people to get help with 150+ members in a few days. You can get an invite here &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Come and join us&lt;/p></description></item></channel></rss>

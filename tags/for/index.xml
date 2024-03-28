@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>For on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/for/</link><description>Recent content in For on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Nov 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/for/index.xml" rel="self" type="application/rss+xml"/><item><title>Dropping All Tables From A SQL Database with PowerShell</title><link>https://blog.robsewell.com/blog/dropping-all-tables-from-a-sql-database-with-powershell/</link><pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dropping-all-tables-from-a-sql-database-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image7.png" alt="Featured image of post Dropping All Tables From A SQL Database with PowerShell" />&lt;p>This post could also have been titled confusion with &lt;code>foreach&lt;/code> or &lt;code>For-EachObject&lt;/code>&lt;/p>
+&lt;p>The scenario – Having created a blank database a number of users and permissions for an external consultant to create a test database for an application I got a phone call.&lt;/p>
+&lt;blockquote>
+&lt;p>Please can you drop all the tables from the database as we need to re-run the installer with some different parameters&lt;/p>
+&lt;/blockquote>
+&lt;p>Sure, I thought. No problem. I will use PowerShell. A simple script is all I need&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image3.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>That ought to do it. Loop through the tables and drop each one. But when I ran it I got this error&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>What I did (which I should have done first up but time pressures hadn’t allowed) was drop the database and write a script to recreate it and all the users and permissions required using my &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Create Windows User Function&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/add-user-to-database-role-with-powershell/" target="_blank" rel="noopener"
+>Add User to Database Role Function&lt;/a> but it got me thinking.&lt;/p>
+&lt;p>So I went home and &lt;a class="link" href="https://blog.robsewell.com/?p=534" target="_blank" rel="noopener"
+>fired up my Azure VMs&lt;/a> and had a play and found two ways of resolving it. But first lets understand what is happening here. I &lt;a class="link" href="http://blog.incworx.com/blog/sharepoint-developer-blog/collection-was-modified-enumeration-operation-may-not-execute-looks-hard-but-it-isnt-v2" target="_blank" rel="noopener"
+>read this post&lt;/a> which explains it quite well for his script.&lt;/p>
+&lt;blockquote>
+&lt;p>We are going through a list collection and deleting any instance of our event receiver, in the “Foreach loop”. But once we delete an item we are modifying the current list collection. The “Foreach” loop looks to see what the current value is, before it moves on to the next item. But since we deleted the current item, we get the “Collection was modified; enumeration operation may not execute” error.&lt;/p>
+&lt;p>Now that understand what is going on, we can now look at a solution to correct the error.&lt;/p>
+&lt;p>The simplest way to avoid modifying the collection would be with a “For Loop”.  With a “For Loop”, no modifications are made that will interrupt the looping process.&lt;/p>
+&lt;/blockquote>
+&lt;p>So when PowerShell has dropped the table it returns to the tables collection to find the current table before moving on to the next table but as we have deleted the table it falls over.&lt;/p>
+&lt;p>So lets fix it.&lt;/p>
+&lt;p>First lets create a test database with PowerShell. A piece of code that is useful to keep for scenarios like this. If you are creating a database for something other than a quick demo or a test then go and explore the other properties of the database object that you will surely want to configure. But for this demo the following is fine, it will use default options. The same applies for the tables script below.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image5.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Now lets create some tables.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image6.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>And check they have been created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image7.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image7.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Now following the advice from above we can do the following&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image8.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image8.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>First we count the number of tables and set it to a variable and then create a for loop. Note if you put &lt;code>$i –le $tables&lt;/code>.Count then the script will only delete 4 tables! In the script block we are setting the &lt;code>$table&lt;/code> variable to the first in the collection and then drops it. List the table names again to check or run &lt;code>$tables.Count&lt;/code> and you will see that all the tables have been deleted.&lt;/p>
+&lt;p>This was the other solution I found. It makes use of the scripter method to script the Drop commands for the tables add them to a Query string and pass that to &lt;code>Invoke-SQLCmd&lt;/code> to run it.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/11/image9.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image9.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item></channel></rss>

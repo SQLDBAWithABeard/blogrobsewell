@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Meetup on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/meetup/</link><description>Recent content in Meetup on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/meetup/index.xml" rel="self" type="application/rss+xml"/><item><title>Microsoft Values The Community</title><link>https://blog.robsewell.com/blog/microsoft-values-the-community/</link><pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoft-values-the-community/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/MSCommunity.png" alt="Featured image of post Microsoft Values The Community" />&lt;h1 id="what-happens-next">What Happens Next?&lt;/h1>
+&lt;p>When PASS announced that operations would cease, a common question was &amp;ldquo;OK, so what happens now? To SQL Saturdays?, to the summit?, to the local user groups?&amp;rdquo; The answers to some of those questions will lie in other conversations but for right now, let&amp;rsquo;s talk about Local User Groups.&lt;/p>
+&lt;h1 id="user-groups">User Groups&lt;/h1>
+&lt;p>User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from.&lt;/p>
+&lt;p>Attending my local user group for the first time really helped me to improve. &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>At the time I was really struggling in my job with no idea how to get support from people who &lt;strong>know&lt;/strong> what should be done.&lt;/a> I joined the group, I made many friends and I learnt a lot. My OneNote is full of notes I have taken during User Group sessions. I became involved in running the user group and the associated SQL Saturday and then became aware of the wider community.&lt;/p>
+&lt;p>We are always very proud of the number of speakers who started their speaking career at our user group and have gone to great things. I too, &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>started my speaking career at our user group&lt;/a>.&lt;/p>
+&lt;p>Our little user group in Exeter in the UK (or in Teams these days!) and user groups in general have a big place in my heart and I am a strong supporter of them. (If you would like a speaker, please always feel free to get in touch with me.) so I too, wondered&lt;/p>
+&lt;blockquote>
+&lt;p>What is going to happen to the user groups now?&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="microsoft-values-the-community">Microsoft Values The Community&lt;/h1>
+&lt;p>Microsoft have announced the support that they will be giving to user groups. You can watch Buck Woody &lt;a class="link" href="https://twitter.com/BuckWoodyMSFT" target="_blank" rel="noopener"
+>t&lt;/a> explain everything that the Microsoft Data Platform is doing to empower the community on Youtube&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/obFlSwpIihc"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>(While you are there, I suggest subscribing to the channel, it&amp;rsquo;s really awesome)&lt;/p>
+&lt;p>Microsoft always has and always will support the technical professionals who use their products and they recognise that at the grass roots, the local user groups are the core of the community.&lt;/p>
+&lt;h1 id="so-microsoft-are-taking-over-the-user-groups">So Microsoft are taking over the User Groups?&lt;/h1>
+&lt;p>NO.&lt;/p>
+&lt;p>Microsoft&amp;rsquo;s philosophy is that local user groups should be Community-owned but they can be Microsoft-empowered. They have created a series of assets, resources, and benefits for user group leaders to run their groups. I am astonished at the scale of what has been achieved in a short amount of time. There are a lot of benefits that will make it easier for user groups to have a stable presence and all the tools that they need to enable their user group .&lt;/p>
+&lt;h1 id="what-is-being-offered-">What is being offered ?&lt;/h1>
+&lt;p>If you want to skip right to the sign up please fill out the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>The Azure Data Community will provide&lt;/p>
+&lt;ul>
+&lt;li>The Community Landing Page &lt;a class="link" href="aka.ms/datacommunity?WT.mc_id=DP-MVP-5002693" >aka.ms/datacommunity&lt;/a> which is central gateway for useful Azure Data Community resources from blog posts and videos to the user groups.&lt;/li>
+&lt;li>Meetup Pro fees, fully paid for by Microsoft saving user groups leaders from paying out of their own pocket or finding sponsorship.&lt;/li>
+&lt;li>A centralised way to find groups and events in the Data Community &lt;a class="link" href="https://www.meetup.com/pro/azuredatatechgroups/" target="_blank" rel="noopener"
+>https://www.meetup.com/pro/azuredatatechgroups/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datacommunity.png"
+loading="lazy"
+alt="Community"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Full Microsoft Teams subscriptions with all the bells &amp;amp; whistles for qualified Community Groups using a customisable template for the user group to define as they wish. This will be fantastic for running virtual events, sharing slides and demo code as well as keping in touch wiht your fellow user group members&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Community Leader Collaboration (via Teams &amp;amp; Meetup) enabling all the user groups leaders to be able to communicate, collaborate and share resources.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="do-i-have-to-use-this-">Do I have to use this ?&lt;/h1>
+&lt;p>NO.&lt;/p>
+&lt;p>You are in charge, if you already run your user group and don&amp;rsquo;t need these resources, let the team know and they will get you listed on the community gateway site.&lt;/p>
+&lt;h1 id="what-are-the-requirements">What are the requirements?&lt;/h1>
+&lt;p>Throughout the duration of the Group’s participation in the Program, the Group will:&lt;/p>
+&lt;ol>
+&lt;li>Have a group leader and a designated co-leader who have each accepted these T&amp;amp;Cs.&lt;/li>
+&lt;li>Not charge other members a fee to attend Group meetings, except in cases in which the venue and/or hosting costs (e.g., food and beverages) are passed through to members.&lt;/li>
+&lt;li>Maintain a published code of conduct that is easily accessible from the Group’s home page. See guidance &lt;a class="link" href="https://aka.ms/atg/guidance?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/guidance&lt;/a>.&lt;/li>
+&lt;li>Maintain a regular meeting cadence including having meetings at least six times per year that relate to or cover Azure Data products &amp;amp; services or relate to Diversity, Equity &amp;amp; Inclusion (DE&amp;amp;I) or Professional Development targeted to data professionals.&lt;/li>
+&lt;li>Comply with Program’s Code of Conduct located at &lt;a class="link" href="https://aka.ms/atg/code_of_conduct?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/code_of_conduct&lt;/a>.&lt;/li>
+&lt;li>Adhere to Microsoft’s Trademark and Brand guidelines, when using any Microsoft trademarks or referring to Microsoft’s software, products or services (see &lt;a class="link" href="https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx&lt;/a>.&lt;/li>
+&lt;/ol>
+&lt;h1 id="which-technologies-do-these-benefits-apply-to">Which technologies do these benefits apply to?&lt;/h1>
+&lt;ul>
+&lt;li>SQL Server (on Windows, Linux, and in Containers, on-premises and in Microsoft Azure)&lt;/li>
+&lt;li>Azure Data Lake&lt;/li>
+&lt;li>Azure Cosmos DB&lt;/li>
+&lt;li>Azure HDInsight, Hadoop and Spark on Azure&lt;/li>
+&lt;li>Azure Search&lt;/li>
+&lt;li>Data Warehousing (Azure SQL Data Warehouse, Fast Track and APS)&lt;/li>
+&lt;li>Azure Stream Analytics&lt;/li>
+&lt;li>Cortana Intelligence Suite&lt;/li>
+&lt;li>Information Management (ADF, SSIS, and Data Sync)&lt;/li>
+&lt;li>SQL Server Reporting Services and Analysis Services&lt;/li>
+&lt;li>SQL Server Machine Learning Services&lt;/li>
+&lt;li>Azure Database for MySQL&lt;/li>
+&lt;li>Azure Database for PostgreSQL&lt;/li>
+&lt;li>Azure SQL (Database, Pools, Serverless, Hyperscale, Managed Instance, Virtual Machines)&lt;/li>
+&lt;li>Azure SQL Edge&lt;/li>
+&lt;li>Big Data Clusters&lt;/li>
+&lt;li>Azure Databricks&lt;/li>
+&lt;li>Azure Arc Enabled Data Services&lt;/li>
+&lt;li>Azure Synapse Analytics&lt;/li>
+&lt;li>Azure Data Catalog&lt;/li>
+&lt;/ul>
+&lt;p>Sign up vis the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>Thank you to all of those people involved in making this happen.&lt;/p></description></item></channel></rss>

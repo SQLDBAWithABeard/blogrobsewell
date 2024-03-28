@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Teams on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/teams/</link><description>Recent content in Teams on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/teams/index.xml" rel="self" type="application/rss+xml"/><item><title>Notifying a Teams Channel of a SQL Agent Job result</title><link>https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/</link><pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-18.png" alt="Featured image of post Notifying a Teams Channel of a SQL Agent Job result" />&lt;p>Following on from &lt;a class="link" href="https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/" target="_blank" rel="noopener"
+>yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel&lt;/a>, I was given another challenge&lt;/p>
+&lt;blockquote>
+&lt;p>Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel&lt;/p>
+&lt;p>A person with a need&lt;/p>
+&lt;/blockquote>
+&lt;p>The use case was for some migration projects that had steps that were scheduled via SQL Agent Jobs and instead of the DBA having to estimate when they would finish and keep checking so that they could let the next team know that it was time for their part to start, they wanted it to notify a Teams channel. This turned out especially useful as the job finished earlier than expected at 3am and the off-shore team could begin their work immediately.&lt;/p>
+&lt;h2 id="using-sql-agent-job-tokens-with-powershell">Using SQL Agent Job tokens with PowerShell&lt;/h2>
+&lt;p>You can use &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/ssms/agent/use-tokens-in-job-steps?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>SQL Agent job tokens in Job step commands to reference the existing instance or job&lt;/a> but I did not know if you could use that with PowerShell until I read &lt;a class="link" href="https://littlekendra.com/2009/12/02/sql-2008-agent-jobs-tokens-work-in-powershell/" target="_blank" rel="noopener"
+>Kendra Little’s blog post from 2009&lt;/a>.&lt;/p>
+&lt;p>Thank you Kendra&lt;/p>
+&lt;h2 id="nothing-is-ever-as-easy-as-you-think">Nothing is ever as easy as you think&lt;/h2>
+&lt;p>So I thought, this is awesome, I can create a function and pass in the Instance and the JobId and all will be golden.&lt;/p>
+&lt;p>Nope&lt;/p>
+&lt;h2 id="job_id--jobid">job_id &amp;lt;&amp;gt; $(JobID)&lt;/h2>
+&lt;p>If we look in the sysjobs table at the Agent Job that we want to notify Teams about the result.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>We can see that the job_id is&lt;/p>
+&lt;pre>&lt;code>dc5937c3-766f-47b7-a5a5-48365708659a
+&lt;/code>&lt;/pre>
+&lt;p>If we look at the JobId property with PowerShell&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-15.png?resize=630%2C369&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>We get&lt;/p>
+&lt;pre>&lt;code>dc5937c3-766f-47b7-a5a5-48365708659a
+&lt;/code>&lt;/pre>
+&lt;p>Awesome, they are the same&lt;/p>
+&lt;p>But&lt;/p>
+&lt;p>If we look at the value of the $(JobID) SQL Agent Job Token,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>we get&lt;/p>
+&lt;pre>&lt;code>C33759DC6F76B747A5A548365708659A
+&lt;/code>&lt;/pre>
+&lt;p>which makes matching it to the JobId tricky&lt;/p>
+&lt;p>I tried all sorts of ways of casting and converting this value in SQL and PowerShell and in the end I just decided to manually convert the value&lt;/p>
+&lt;pre>&lt;code> $CharArray = $JobID.ToCharArray()
+$JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+&lt;/code>&lt;/pre>
+&lt;h2 id="send-the-information-to-teams">Send the information to Teams&lt;/h2>
+&lt;p>Following the &lt;a class="link" href="https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/" target="_blank" rel="noopener"
+>same pattern as yesterdays post&lt;/a>, I created a function to send a message, depending on the outcome of the job and post it to the Teams function.&lt;/p>
+&lt;p>Again, I used Enter-PsSession to run the Teams notification from a machine that can send the message. (I have also included the code to do this without requiring that below so that you can send the message from the same machine that runs the job if required)&lt;/p>
+&lt;p>This code below is saved on a UNC share or the SQL Server as SingleNotifyTeams.ps1&lt;/p>
+&lt;pre>&lt;code>Param(
+$SqlInstance,
+$JobID
+)
+$webhookurl = &amp;quot;&amp;quot;
+$NotifyServer = 'BeardNUC2'
+function Notify-TeamsSQlAgentJob {
+Param(
+$SQLInstance,
+$JobID,
+$webhookurl
+)
+$SQLInstance = $SQLInstance
+# Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$CharArray = $JobID.ToCharArray()
+$JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+$Job = Get-DbaAgentJob -SQlInstance $SQLInstance | Where jobid -eq $JobGuiD
+$JobName = $Job.Name
+$Jobsteps = Get-DbaAgentJobStep -SQlInstance $SQLInstance -Job $JobName
+$JobStepNames = $Jobsteps.Name -join ' , '
+$JobStartDate = $job.JobSteps[0].LastRunDate
+$JobStatus = $job.LastRunOutcome
+$lastjobstepid = $jobsteps[-1].id
+$Jobstepsmsg = $Jobsteps | Out-String
+$JobStepStatus = ($Jobsteps | Where-Object {$_.id -ne $lastjobstepid -and $_.LastRunDate -ge $JobStartDate} ).ForEach{
+&amp;quot; $($_.Name) - $($_.LastRunDate) **$($_.LastRunOutCome)**
+&amp;quot;
+}
+$Text = @&amp;quot;
+# **$SqlInstance**
+## **$JobName**
+$jobstepMsg
+Started at $JobStartDate
+- The individual Job Steps status was
+$JobStepStatus
+&amp;quot;@
+if (( $jobsteps | Where id -ne $lastjobstepid).LastRunOutcome -contains 'Failed') {
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There was a Job Failure&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;The Job Failed&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;Work to do - Please investigate the following job by following the steps in the plan at LINKTOPLAN&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://fit93a.db.files.1drv.com/y4mTOWSzX1AfIWx-VdUgY_Qp3wqebttT7FWSvtKK-zAbpTJuU560Qccv1_Z_Oxd4T4zUtd5oVZGJeS17fkgbl1dXUmvbldnGcoThL-bnQYxrTrMkrJS1Wz2ZRV5RVtZS9f4GleZQOMuWXP1HMYSjYxa6w09nEyGg1masI-wKIZfdnEF6L8r83Q9BB7yIjlp6OXEmccZt99gpb4Qti9sIFNxpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+}
+else {
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;The Job Succeeded&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;The Job Succeeded&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;All is well - Please continue with the next step in the plan at LINKTOPLAN&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://6f0bzw.db.files.1drv.com/y4mvnTDG9bCgNWTZ-2_DFl4-ZsUwpD9QIHUArsGF66H69zBO8a--FlflXiF7lrL2H3vgya0ogXIDx59hn62wo2tt3HWMbqnnCSp8yPmM1IFNwZMzgvSZBEs_n9B0v4h4M5PfOY45GVSjeFh8md140gWHaFpZoL4Vwh-fD7Zi3djU_r0PduZwNBVGOcoB6SMJ1m4NmMmemWr2lzBn57LutDkxw&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$NotifyCommand = {
+$parameters = @{
+&amp;quot;URI&amp;quot; = $Using:webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $Using:TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+$Session = New-PSSession -ComputerName $NotifyServer
+Invoke-Command -Session $Session -ScriptBlock $NotifyCommand
+}
+$msg = 'ServerName = ' + $SQLInstance + 'JobId = ' + $JobID
+Write-Host $msg
+Notify-TeamsSQLAgentJob -SQlInstance $SqlInstance -JobID $JobID -webhookurl $webhookurl
+&lt;/code>&lt;/pre>
+&lt;p>Then it can be called in a SQL Agent job step, again following the guidelines at &lt;a class="link" href="http://dbatools.io/agent" target="_blank" rel="noopener"
+>dbatools.io/agent&lt;/a>&lt;/p>
+&lt;p>It is called slightly differently as you ned to pass in the SQL Agent tokens as parameters to the script&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;pre>&lt;code>powershell.exe -File path to Notify-TeamsSQLAgentJob.ps1 -SQLInstance $(ESCAPE_SQUOTE(SRVR)) -JobID $(ESCAPE_NONE(JOBID))
+&lt;/code>&lt;/pre>
+&lt;h2 id="sql-agent-job-step-success-and-failure">SQL Agent Job Step Success and Failure&lt;/h2>
+&lt;p>We need to take another step to ensure that this works as expected. We have to change the On Failure action for each job step to the “Go To Notify Teams” step&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="making-people-smile">Making people smile&lt;/h2>
+&lt;p>You can also add images (make sure the usage rights allow) so that the success notification can look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and the failure looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Happy Automating !&lt;/p>
+&lt;p>Here is the code that does not require remoting to another server to send the message&lt;/p>
+&lt;pre>&lt;code>Param(
+$SqlInstance,
+$JobID
+)
+$webhookurl = &amp;quot;https://outlook.office.com/webhook/5a8057cd-5e1a-4c84-9227-74a309f1c738@b122247e-1ebf-4b52-b309-c2aa7436fc6b/IncomingWebhook/affb85f05804438eb7ffb57665879248/f32fc7e6-a998-4670-8b33-635876559b80&amp;quot;
+function Notify-TeamsSQlAgentJob {
+Param(
+$SQLInstance,
+$JobID,
+$webhookurl
+)
+$SQLInstance = $SQLInstance
+# Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$CharArray = $JobID.ToCharArray()
+$JobGUID = $CharArray[8] + $CharArray[9] + $CharArray[6] + $CharArray[7] + $CharArray[4] + $CharArray[5] + $CharArray[2] + $CharArray[3] + '-' + $CharArray[12] + $CharArray[13] + $CharArray[10] + $CharArray[11] + '-' + $CharArray[16] + $CharArray[17] + $CharArray[14] + $CharArray[15] + '-' + $CharArray[18] + $CharArray[19] + $CharArray[20] + $CharArray[21] + '-' + $CharArray[22] + $CharArray[23] + $CharArray[24] + $CharArray[25] + $CharArray[26] + $CharArray[27] + $CharArray[28] + $CharArray[29] + $CharArray[30] + $CharArray[31] + $CharArray[32] + $CharArray[33]
+$Job = Get-DbaAgentJob -SQlInstance $SQLInstance | Where jobid -eq $JobGuiD
+$JobName = $Job.Name
+$Jobsteps = Get-DbaAgentJobStep -SQlInstance $SQLInstance -Job $JobName
+$JobStepNames = $Jobsteps.Name -join ' , '
+$JobStartDate = $job.JobSteps[0].LastRunDate
+$JobStatus = $job.LastRunOutcome
+$lastjobstepid = $jobsteps[-1].id
+$Jobstepsmsg = $Jobsteps | Out-String
+$JobStepStatus = ($Jobsteps | Where-Object {$_.id -ne $lastjobstepid -and $_.LastRunDate -ge $JobStartDate} ).ForEach{
+&amp;quot; $($_.Name) - $($_.LastRunDate) **$($_.LastRunOutCome)**
+&amp;quot;
+}
+$Text = @&amp;quot;
+# **$SqlInstance**
+## **$JobName**
+$jobstepMsg
+Started at $JobStartDate
+- The individual Job Steps status was
+$JobStepStatus
+&amp;quot;@
+if (( $jobsteps | Where id -ne $lastjobstepid).LastRunOutcome -contains 'Failed') {
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There was a Job Failure&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;The Job Failed&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;Work to do - Please investigate the following job by following the steps in the plan at LINKTOPLAN&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://fit93a.db.files.1drv.com/y4mTOWSzX1AfIWx-VdUgY_Qp3wqebttT7FWSvtKK-zAbpTJuU560Qccv1_Z_Oxd4T4zUtd5oVZGJeS17fkgbl1dXUmvbldnGcoThL-bnQYxrTrMkrJS1Wz2ZRV5RVtZS9f4GleZQOMuWXP1HMYSjYxa6w09nEyGg1masI-wKIZfdnEF6L8r83Q9BB7yIjlp6OXEmccZt99gpb4Qti9sIFNxpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+}
+else {
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;The Job Succeeded&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;The Job Succeeded&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;All is well - Please continue with the next step in the plan at LINKTOPLAN&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://6f0bzw.db.files.1drv.com/y4mvnTDG9bCgNWTZ-2_DFl4-ZsUwpD9QIHUArsGF66H69zBO8a--FlflXiF7lrL2H3vgya0ogXIDx59hn62wo2tt3HWMbqnnCSp8yPmM1IFNwZMzgvSZBEs_n9B0v4h4M5PfOY45GVSjeFh8md140gWHaFpZoL4Vwh-fD7Zi3djU_r0PduZwNBVGOcoB6SMJ1m4NmMmemWr2lzBn57LutDkxw&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+$msg = 'ServerName = ' + $SQLInstance + 'JobId = ' + $JobID
+Write-Host $msg
+Notify-TeamsSQLAgentJob -SQlInstance $SqlInstance -JobID $JobID -webhookurl $webhookurl
+&lt;/code>&lt;/pre></description></item><item><title>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</title><link>https://blog.robsewell.com/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/</link><pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-11.png" alt="Featured image of post Sending a SQL Agent Job results overview to a Microsoft Teams Channel" />&lt;p>Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.&lt;/p>
+&lt;h2 id="sql-agent-job-overview">SQL Agent Job Overview&lt;/h2>
+&lt;p>Using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off.&lt;/p>
+&lt;p>Here is an example of such a script&lt;/p>
+&lt;pre>&lt;code>$SqlInstances = (Get-Vm -ComputerName BEARDNUC,BEARDNUC2).Where{$_.State -eq 'Running' -and $_.Name -like '*SQL*'}.Name
+$AllJobs = &amp;quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...
+---------------------------------------------
+&amp;quot;
+foreach ($Instance in $SQLInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs
+$NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+Write-Host &amp;quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs - Number of Failed Jobs $NumberOfFailedJobs&amp;quot;
+$AllJobs = $AllJobs + &amp;quot;$($Instance.Split('.')[0])..........&amp;lt;b&amp;gt;$NumberOfJobs&amp;lt;/b&amp;gt;................&amp;lt;b&amp;gt;$NumberOfSuccessfulJobs&amp;lt;/b&amp;gt;.........................&amp;lt;b&amp;gt;$NumberOfFailedJobs&amp;lt;/b&amp;gt;............................&amp;lt;b&amp;gt;$NumberOfFailedJobSteps&amp;lt;/b&amp;gt;..............................&amp;lt;b&amp;gt;$NumberOfCanceledJobs&amp;lt;/b&amp;gt;........
+&amp;quot;
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;Since $startdate&amp;quot;
+Write-Host &amp;quot;$AllJobs&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>and an example of running it.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="create-a-teams-channel">Create a Teams Channel&lt;/h2>
+&lt;p>If you have permissions, you can create a new Teams channel by clicking on the 3 ellipses and add channel&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then fill in the blanks&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="create-a-webhook-connector-for-the-channel">Create a Webhook Connector for the channel&lt;/h2>
+&lt;p>Next, you need to have a connector for the channel, click on the 3 ellipses for the channel and click on connectors&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can choose the Incoming Webhook connector and click configure&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Give the connector a name and upload an image if you wish and click create&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The resulting screen will give you a URL that you can copy. If you need to find it again, then use the 3 ellipses again, click connectors and look at configured. You can then choose the webhook that you have created and click manage and you will find the URL.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="send-to-teams-using-powershell">Send to Teams using PowerShell&lt;/h2>
+&lt;p>Now you can send a message to that Teams channel using PowerShell. You will need to add the webhook URL from your Teams connector&lt;/p>
+&lt;pre>&lt;code>[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webhookurl = &amp;quot;&amp;quot;
+$Text = @&amp;quot;
+# Here is a Title
+and a message
+Image is from
+https://www.flickr.com/photos/157270154@N05/38494483572
+Photo by CreditDebitPro
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;This is my summary&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Something Important &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;I have something to say&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+&lt;/code>&lt;/pre>
+&lt;p>The code above will send a message that looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-9.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="running-as-a-sql-agent-job">Running as a SQL Agent Job&lt;/h2>
+&lt;p>Now we can run this code as a SQL Agent Job and schedule it. Now, you may not be able to run that code on your SQL Server. It cannot connect to the internet, so how can we contact the Teams webhook?&lt;/p>
+&lt;p>There are probably a number of ways to do this but the solution that I took, was to allow a proxy account the ability to use PSRemoting and run the part of the script that connects to Teams on a different machine, that does have connectivity.&lt;/p>
+&lt;p>The script I used was as follows. You will need to add in the SQL Instances or better still dynamically gather them from your source of truth. You will need the webhook URL and the name of the server that can connect to Teams&lt;/p>
+&lt;pre>&lt;code>$SQLInstances = 'SQL2005Ser2003','SQL2008Ser12R2','SQL2014Ser12R2','SQL2016N1','SQL2016N2','SQL2016N3','SQL2017N5','SQL2019N20','SQL2019N21','SQL2019N22','SQL2019N5'
+$startdate = (Get-Date).AddHours(-12)
+$webhookurl = &amp;quot;&amp;quot;
+$NotifyServer = 'BeardNUC2'
+$AllJobs = &amp;quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...
+---------------------------------------------
+&amp;quot;
+foreach ($Instance in $SQLInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs
+$NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+Write-Host &amp;quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs - Number of Failed Jobs $NumberOfFailedJobs&amp;quot;
+$AllJobs = $AllJobs + &amp;quot;$($Instance.Split('.')[0])..........&amp;lt;b&amp;gt;$NumberOfJobs&amp;lt;/b&amp;gt;................&amp;lt;b&amp;gt;$NumberOfSuccessfulJobs&amp;lt;/b&amp;gt;.........................&amp;lt;b&amp;gt;$NumberOfFailedJobs&amp;lt;/b&amp;gt;............................&amp;lt;b&amp;gt;$NumberOfFailedJobSteps&amp;lt;/b&amp;gt;..............................&amp;lt;b&amp;gt;$NumberOfCanceledJobs&amp;lt;/b&amp;gt;........
+&amp;quot;
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;Since $startdate&amp;quot;
+Write-Host &amp;quot;$AllJobs&amp;quot;
+$NotifyCommand = {
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webhookurl = $Using:TeamsWebhook
+$allJobsMessage = $Using:AllJobs
+$Text = @&amp;quot;
+# Overview of SQL Agent Jobs in Production since $($Using:startdate)
+$allJobsMessage
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;Overview for the last 12 hours&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Job Failures &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;Overview for the last 12 hours since $($Using:startdate)&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $allJobsMessage
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+$Session = New-PSSession -ComputerName $NotifyServer
+Invoke-Command -Session $Session -ScriptBlock $NotifyCommand
+&lt;/code>&lt;/pre>
+&lt;p>Then, follow the steps at &lt;a class="link" href="http://dbatools.io/agent" target="_blank" rel="noopener"
+>dbatools.io/agent&lt;/a> to create an agent job to run the script above on an instance with the dbatools module available to the SQL Service account. Use or create a proxy with permissions on the notify server and create an Agent Job.&lt;/p>
+&lt;pre>&lt;code>USE [msdb]
+GO
+/****** Object: Job [I am a Job that notifies Teams] Script Date: 27/07/2020 20:27:27 ******/
+BEGIN TRANSACTION
+DECLARE @ReturnCode INT
+SELECT @ReturnCode = 0
+/****** Object: JobCategory [[Uncategorized (Local)]] Script Date: 27/07/2020 20:27:28 ******/
+IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N'[Uncategorized (Local)]' AND category_class=1)
+BEGIN
+EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N'JOB', @type=N'LOCAL', @name=N'[Uncategorized (Local)]'
+IF (@@ERROR &amp;lt;&amp;gt; 0 OR @ReturnCode &amp;lt;&amp;gt; 0) GOTO QuitWithRollback
+END
+DECLARE @jobId BINARY(16)
+EXEC @ReturnCode = msdb.dbo.sp_add_job @job_name=N'12 Hour Teams Notify',
+@enabled=1,
+@notify_level_eventlog=0,
+@notify_level_email=0,
+@notify_level_netsend=0,
+@notify_level_page=0,
+@delete_level=0,
+@description=N'This job will notify Teams every 12 hours',
+@category_name=N'[Uncategorized (Local)]',
+@owner_login_name=N'THEBEARD\SQL_SVC', @job_id = @jobId OUTPUT
+IF (@@ERROR &amp;lt;&amp;gt; 0 OR @ReturnCode &amp;lt;&amp;gt; 0) GOTO QuitWithRollback
+/****** Object: Step [Notify Teams] Script Date: 27/07/2020 20:27:28 ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Notify Teams',
+@step_id=1,
+@cmdexec_success_code=0,
+@on_success_action=1,
+@on_success_step_id=0,
+@on_fail_action=2,
+@on_fail_step_id=0,
+@retry_attempts=0,
+@retry_interval=0,
+@os_run_priority=0, @subsystem=N'CmdExec',
+@command=N'powershell.exe -File C:\temp\AgentJobs\NotifyTeams.ps1',
+@flags=0,
+@proxy_name=N'TheBeardIsMighty'
+IF (@@ERROR &amp;lt;&amp;gt; 0 OR @ReturnCode &amp;lt;&amp;gt; 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
+IF (@@ERROR &amp;lt;&amp;gt; 0 OR @ReturnCode &amp;lt;&amp;gt; 0) GOTO QuitWithRollback
+EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
+IF (@@ERROR &amp;lt;&amp;gt; 0 OR @ReturnCode &amp;lt;&amp;gt; 0) GOTO QuitWithRollback
+COMMIT TRANSACTION
+GOTO EndSave
+QuitWithRollback:
+IF (@@TRANCOUNT &amp;gt; 0) ROLLBACK TRANSACTION
+EndSave:
+GO
+&lt;/code>&lt;/pre>
+&lt;p>When the job runs&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The results are posted to the Teams Channel&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If you can run the Agent Job on a machine that can connect to Teams and your SQL Instances then you can remove the need to use a remote session by using this code&lt;/p>
+&lt;pre>&lt;code>$SQLInstances = 'SQL2005Ser2003','SQL2008Ser12R2','SQL2014Ser12R2','SQL2016N1','SQL2016N2','SQL2016N3','SQL2017N5','SQL2019N20','SQL2019N21','SQL2019N22','SQL2019N5'
+$startdate = (Get-Date).AddHours(-12)
+$webhookurl = &amp;quot;&amp;quot;
+# Import-Module 'C:\Program Files\WindowsPowerShell\Modules\dbatools\1.0.107\dbatools.psd1'
+$AllJobs = &amp;quot;
+SqlInstance...|...Total...|...Successful...|...FailedJobs...|...FailedSteps...|...Canceled...
+---------------------------------------------
+&amp;quot;
+foreach ($Instance in $SQLInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs
+$NumberOfJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}).Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfFailedJobSteps = ($Jobs |Where-Object {$PSitem.StepId -ne 0}| Where-Object {$PSItem.Status -eq 'Failed'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfSuccessfulJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Succeeded'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+$NumberOfCanceledJobs = ($Jobs |Where-Object {$PSitem.StepId -eq 0} | Where-Object {$PSItem.Status -eq 'Canceled'}).StepName.Count.ToString(&amp;quot;00&amp;quot;)
+Write-Host &amp;quot;SqlInstance $Instance - Number of Jobs $NumberOfJobs - Number of Successful Jobs $NumberOfSuccessfulJobs - Number of Failed Jobs $NumberOfFailedJobs&amp;quot;
+$AllJobs = $AllJobs + &amp;quot;$($Instance.Split('.')[0])..........&amp;lt;b&amp;gt;$NumberOfJobs&amp;lt;/b&amp;gt;................&amp;lt;b&amp;gt;$NumberOfSuccessfulJobs&amp;lt;/b&amp;gt;.........................&amp;lt;b&amp;gt;$NumberOfFailedJobs&amp;lt;/b&amp;gt;............................&amp;lt;b&amp;gt;$NumberOfFailedJobSteps&amp;lt;/b&amp;gt;..............................&amp;lt;b&amp;gt;$NumberOfCanceledJobs&amp;lt;/b&amp;gt;........
+&amp;quot;
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;Since $startdate&amp;quot;
+Write-Host &amp;quot;$AllJobs&amp;quot;
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$allJobsMessage = $AllJobs
+$Text = @&amp;quot;
+# Overview of SQL Agent Jobs in Production since $($startdate)
+$allJobsMessage
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;Overview for the last 12 hours&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Job Results &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;Overview for the last 12 hours since $($startdate)&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://live.staticflickr.com/4568/38494483572_a98d623854_k.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $allJobsMessage
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+&lt;/code>&lt;/pre>
+&lt;p>Happy automating!&lt;/p></description></item></channel></rss>

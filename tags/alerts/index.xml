@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alerts on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/alerts/</link><description>Recent content in Alerts on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 24 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/alerts/index.xml" rel="self" type="application/rss+xml"/><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p>When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+>PowerShell Conference EU&lt;/a> in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+>click here&lt;/a> and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+>slides and code here&lt;/a>) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+>Irwin Strachans Active Directory Operations Test&lt;/a> which got me thinking.&lt;/p>
+&lt;p>I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p>
+&lt;p>I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> It &amp;#39;Should have a default Backup Directory of F:\SQLBACKUP\BACKUPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SqlServer.Management.Smo.Server .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">return $srv.BackupDirectory}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$State = Invoke-Command -ComputerName ROB-SURFACEBOOK -ScriptBlock $Scriptblock
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$State |Should Be &amp;#39;F:\SQLBACKUP\BACKUPS&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is the how to find the properties that you want&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ## Load the Assemblies
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Create a Server SMO object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SqlServer.Management.Smo.Server SERVERNAME
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Explore it
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv|gm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## If you find an array pick the first one and expand and then explore that
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases[0] | select *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases[0] | gm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I quickly found as I added more tests that it was taking a long time to perform the tests (about 5 seconds each test) and that it took an age to fail each of the tests if the server name was incorrect or the server unavailable.&lt;/p>
+&lt;p>I fixed the first one by testing with a ping before running the tests&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ## Check for connectivity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if((Test-Connection $Server -count 1 -Quiet) -eq $false){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Error &amp;#39;Could not connect to $Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The continue is there because I wanted to loop through an array of servers&lt;/p>
+&lt;p>I improved the performance using a remote session and a custom object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> Describe &amp;#34;$Server&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BeforeAll {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[pscustomobject]$Return = @{}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = &amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SQLAdmins = $Using:SQLAdmins
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.DBAAdminDb = $Srv.Databases.Name.Contains(&amp;#39;DBA-Admin&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Logins = $srv.Logins.Where{$_.IsSystemObject -eq $false}.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SQLAdmins = @(Compare-Object $Logins $SQLAdmins -SyncWindow 0).Length - $Logins.count -eq $SQLAdmins.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SysAdmins = $Srv.Roles[&amp;#39;sysadmin&amp;#39;].EnumMemberNames()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SQLAdmin = @(Compare-Object $SysAdmins $SQLAdmins -SyncWindow 0).Length - $SysAdmins.count -eq $SQLAdmins.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.BackupDirectory = $srv.BackupDirectory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.DataDirectory = $srv.DefaultFile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The BeforeAll script block is run, as it sounds like it should, once before all of the tests, BeforeEach would run once before each of the tests. I define an empty custom object and then create an SMO object and add the properties I am interested in testing to it. I then return the custom object at the end&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Return.Alerts82345Exist = ($srv.JobServer.Alerts |Where {$_.Messageid -eq 823 -or $_.Messageid -eq 824 -or $_.Messageid -eq 825}).Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Enabled = ($srv.JobServer.Alerts |Where {$_.Messageid -eq 823 -or $_.Messageid -eq 824 -or $_.Messageid -eq 825 -and $_.IsEnabled -eq $true}).Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SysDatabasesFullBackupToday = $srv.Databases.Where{$_.IsSystemObject -eq $true -and $_.Name -ne &amp;#39;tempdb&amp;#39; -and $_.LastBackupDate -lt (Get-Date).AddDays(-1)}.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return $Return
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return = Invoke-Command -ScriptBlock $Scriptblock -ComputerName $Server -ErrorAction Stop
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">catch {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Error &amp;#34;Unable to Connect to $Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">I was then able to test against the property of the custom object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#39;Should have Alerts for Severity 20 and above&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts20SeverityPlusExist | Should Be 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Severity 20 and above Alerts should be enabled&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts20SeverityPlusEnabled | Should Be 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Should have alerts for 823,824 and 825&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Exist |Should Be 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Alerts for 823,824 and 825 should be enebled&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Enabled |Should Be 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Occasionally, for reasons I haven’t explored I had to test against the value property of the returned object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;The Full User Database Backup should be scheduled Weekly $OlaUserFullSchedule&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.OlaUserFullSchedule.value | Should Be $OlaUserFullSchedule
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I wanted to be able to run the tests against environments or groups of servers with different default values so I parameterised the Test Results as well and then the logical step was to turn it into a function and then I could do some parameter splatting. This also gives me the opportunity to show all of the things that I am currently giving parameters to the test for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Parms = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Servers = &amp;#39;SQLServer1&amp;#39;,&amp;#39;SQLServer2&amp;#39;,&amp;#39;SQLServer3&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SQLAdmins = &amp;#39;THEBEARD\Rob&amp;#39;,&amp;#39;THEBEARD\SQLDBAsAlsoWithBeards&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BackupDirectory = &amp;#39;C:\MSSQL\Backup&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DataDirectory = &amp;#39;C:\MSSQL\Data\&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogDirectory = &amp;#39;C:\MSSQL\Logs\&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MaxMemMb = &amp;#39;4096&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Collation = &amp;#39;Latin1_General_CI_AS&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TempFiles = 4 ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaSysFullFrequency = &amp;#39;Daily&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaSysFullStartTime = &amp;#39;21:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullFrequency = 1 ;## 1 for Sunday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullStartTime = &amp;#39;22:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffFrequency = 126; ## 126 for every day except Sunday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffStartTime = &amp;#39;22:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserLogSubDayInterval = 15;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserLoginterval = &amp;#39;Minute&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitz = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitzCache = $True;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitzIndex = $True;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPAskBrent = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HASSPBlitzTrace = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPWhoisActive = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogWhoIsActiveToTable = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTable = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableEnabled = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableScheduled = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableFrequency = 2 ; # 2 means Monday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableStartTime = &amp;#39;03:00:00&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-SQLDefault @Parms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have some other tests which always return what I want, particularly the firewall rules which you will have to modify to suit your own environment&lt;/p>
+&lt;p>To be able to run this you will need to have the Pester Module. If you are using Windows 10 then it is installed by default, if not&lt;/p>
+&lt;p>&lt;code>Find-Module –Name 'Pester' | Install-Module&lt;/code>&lt;/p>
+&lt;p>You can find more about Pester &lt;a class="link" href="https://mcpmag.com/articles/2016/05/11/testing-powershell-scripts-with-pester.aspx?utm_content=buffer5606b&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer" target="_blank" rel="noopener"
+>here&lt;/a> and &lt;a class="link" href="http://mikefrobbins.com/category/pester/" target="_blank" rel="noopener"
+>here&lt;/a> and also these &lt;a class="link" href="https://www.youtube.com/channel/UCxgrI58XiKnDDByjhRJs5fg/search?query=pester" target="_blank" rel="noopener"
+>videos from the conference&lt;/a>&lt;br>
+You can find the tests on &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Test-SQLDefaults.ps1" target="_blank" rel="noopener"
+>GitHub here&lt;/a> and I will continue to add to the defaults that I check.&lt;br>
+This is not a replacement for other SQL configuration tools such as PBM but it is a nice simple way of giving a report on the current status of a SQL installation either at a particular point in time when something is wrong or after an installation prior to passing the server over to another team or into service&lt;/p></description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p>&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>Jen McCown&lt;/a> and is about Enterprise Strategy.&lt;/p>
+&lt;p>Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+>TSQL Tuesdays over 5 years ago&lt;/a> and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+>you search for them&lt;/a>&lt;/p>
+&lt;p>Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>This post by John Sansom&lt;/a> could have been written for this months party and I recommend that you read it.&lt;/p>
+&lt;p>So here are a few points that I think you should consider if you look after SQL in an Enterprise environment.&lt;/p>
+&lt;ul>
+&lt;li>Enterprise Strategy will undoubtedly garner a whole host of excellent posts and Jen will provide a round up post which will I am certain will be an excellent resource. &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/the-tsql2sday-70-roundup/" target="_blank" rel="noopener"
+>Take a look here&lt;/a>&lt;/li>
+&lt;li>Know where your instances are and have a single place that you can reference them from. Some people recommend a &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/bb895144.aspx?f=255&amp;amp;MSPPError=-2147217396" target="_blank" rel="noopener"
+>Central Management Server&lt;/a> but I find this too restrictive for my needs. I use an InstanceList table in my DBA Database with the following columns [ServerName], [InstanceName] , [Port] , [AG] , [Inactive] , [Environment] and [Location]. This enables me to target instances not just by name but by environment (Dev, Test, Pre-Prod, Live etc), by location or by joining the InstanceList table with another table I can target by the application or any number of other factors. I also capture information about the servers at windows and SQL level to this database so I can target the SQL 2012 servers specifically if need be or any other metric. This is very powerful and enables far greater flexibility than the CMS in my opinion.&lt;/li>
+&lt;li>Use PowerShell (no surprise I would mention this!) PowerShell is a brilliant tool for automation and I use it all of the time&lt;/li>
+&lt;li>Get used to using this piece of PowerShell code&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName],[InstanceName],[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0 AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice the query variable above, this is where the power lies as it enables you to gather all the instances that you need for your task as described in the bullet post above. Once you get used to doing this you can do things like this identify all the instances with Remote DAC disabled using a query against the DBA Database and then enable it on all servers by adding this code to the loop above&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$srv.RemoteDacEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.alter()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Very quick very simple and very very powerful. You can also use this to run TSQL scripts against the instances you target but there are some &lt;a class="link" href="https://www.bing.com/search?q=issues%20with%20invoke-sqlcmd&amp;amp;form=EDGEAR&amp;amp;qs=PF&amp;amp;cvid=bafe07c6afd54a6cb0ce7a1583300a79&amp;amp;pq=issues%20with%20invoke-sqlcmd&amp;amp;elv=AF!A!XC!KoOyC2FxnVd!deIwlgRcylR4EqUAG2rfVDNS" target="_blank" rel="noopener"
+>added complications with Invoke-SQLCmd&lt;/a> that you need to be aware of&lt;/p>
+&lt;ul>
+&lt;li>BE CAREFUL. Test and understand and test before you run any script on a live system especially using a script like this which enables you to target ALL of your servers. You must definitely check that your $ServerNames array contains only the instances you need before you make any changes. You need to be ultra-cautious when it is possible to do great damage&lt;/li>
+&lt;li>Write scripts that are robust and handle errors gracefully. I use Jason Wasser @wasserja Write-Log function to write to a text file and wrap my commands in a try catch block.&lt;/li>
+&lt;li>Include comments in your scripts to assist either the future you or the folks in your position in 5 years time. I would also add one of my bug bears - Use the description block in Agent Jobs. The first place any DBA is going to go to when that job fails is to open the properties of the job. Please fill in that block so that anyone troubleshooting knows some information about what the job does or at the very least a link to some documentation about it&lt;/li>
+&lt;li>Finally in my list, don&amp;rsquo;t overdo the alerts. Alerting is vital for any DBA it is a brilliant way to ensure that you quickly know about any issues affecting your estate but &lt;a class="link" href="http://thomaslarock.com/2012/02/the-minimalist-guide-to-database-administration/" target="_blank" rel="noopener"
+>all alerts should be actionable&lt;/a> and in some cases you can automate the action that you can take but the message here is don&amp;rsquo;t send messages to the DBA team email for every single tiny thing or they will get swamped and ignore the vital one. This holds for whichever alerting or monitoring system that you use&lt;/li>
+&lt;/ul>
+&lt;p>This is but a small sub-section of things that you need to consider when responsible for a large SQL estate but if you need help and advice or just moral support and you don’t already interact with the SQL community then make today the day you start. Maybe &lt;a class="link" href="http://thomaslarock.com/sql-family/" target="_blank" rel="noopener"
+>this post by Thomas La Rock&lt;/a> is a good place to start or &lt;a class="link" href="http://www.sqlpass.org/PASSChapters.aspx" target="_blank" rel="noopener"
+>your nearest User Group/Chapter&lt;/a> or the &lt;a class="link" href="https://twitter.com/hashtag/sqlfamily" target="_blank" rel="noopener"
+>#sqlfamily hashtag&lt;/a> or give me a shout and I will gladly help.&lt;/p></description></item></channel></rss>
