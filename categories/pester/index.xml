@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pester on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/pester/</link><description>Recent content in Pester on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/pester/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET PowerShell Notebooks – Using Pester</title><link>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post .NET PowerShell Notebooks – Using Pester" />&lt;p>&lt;a class="link" href="http://localhost:4001/blog/jupyter%20notebooks/azure%20data%20studio/powershell/pwsh/dbatools/dbachecks/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+>My last post&lt;/a> had a lot of information about the new .NET PowerShell notebooks including installation instructions.&lt;/p>
+&lt;p>.NET Notebooks are Jupyter Notebooks that use .NET core to enable C#, F# and PowerShell kernels.&lt;/p>
+&lt;h2 id="use-cases">Use Cases&lt;/h2>
+&lt;p>One of the main benefits that I see for Jupyter Notebooks for Ops folk is that the results of the query are saved with the notebook. This makes them fantastic for Incident resolution.&lt;/p>
+&lt;p>If you have an incident at 3am and you know that you will need that information in the wash up meeting the next day instead of copying and pasting results into a OneNote document or a text file, you can simply run the queries in a notebook and save it.&lt;/p>
+&lt;p>In the meeting, you can simply open the notebook and the results will be available for everyone to see.&lt;/p>
+&lt;p>Even better, if you have a template notebook for those scenarios and you can then compare them to previous occurrences.&lt;/p>
+&lt;h2 id="using-pester">Using Pester&lt;/h2>
+&lt;p>Using Pester to validate that an environment is as you expect it is a good resource for incident resolution, potentially enabling you to quickly establish an area to concentrate on for the issue. However, if you try to run Pester in a .NET Notebook you will receive an error&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code> | ^ The term 'Get-CimInstance' is not recognized as the name of a
+| cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included,
+| verify that the path is correct and try again.
+&lt;/code>&lt;/pre>
+&lt;p>Import-Module: The module to process &amp;lsquo;Pester.psm1&amp;rsquo;, listed in field &amp;lsquo;ModuleToProcess/RootModule&amp;rsquo; of module manifest &amp;lsquo;C:\Users\mrrob\Documents\PowerShell\Modules\Pester\4.9.0\Pester.psd1&amp;rsquo; was not processed because no valid module was found in any module directory. &lt;!-- raw HTML omitted -->
+Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>in the issue that I raised&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Yes, it was the CimCmdlets module from the system32 module path that got imported (via the &lt;code>WinCompat&lt;/code> feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …&lt;br>
+The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue &lt;a class="link" href="https://github.com/PowerShell/PowerShell/issues/11783" target="_blank" rel="noopener"
+>PowerShell/PowerShell#11783&lt;/a> to track this work.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/DotNet%20Notebook/01-PesterWontRun.ipynb" target="_blank" rel="noopener"
+>You can see all of this including all the results in this notebook that I have created and shared on GitHub and also below as a gist to embed in this blog post&lt;/a>&lt;/p>
+&lt;h2 id="sharing-code-and-results-">Sharing Code AND Results 🙂&lt;/h2>
+&lt;p>Notebooks – A brilliant way of sharing what you did and the results that you got enabling others to follow along. You can do this with this Notebook. Download it and open it in your Jupyter Lab and you will be able to run it and see all of the errors and the fix on your machine.&lt;/p>
+&lt;!-- raw HTML omitted --></description></item></channel></rss>

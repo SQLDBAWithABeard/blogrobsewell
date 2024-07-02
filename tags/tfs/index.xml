@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tfs on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/tfs/</link><description>Recent content in Tfs on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 21 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/tfs/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying To a Power Bi Report Server with PowerShell</title><link>https://blog.robsewell.com/blog/deploying-to-a-power-bi-report-server-with-powershell/</link><pubDate>Tue, 21 Aug 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/deploying-to-a-power-bi-report-server-with-powershell/</guid><description>&lt;p>Just a quick post to share some code that I used to solve a problem I had recently.&lt;/p>
+&lt;p>I needed to automate the deployment of some Power Bi reports to a Power Bi Report Server PBRS using TFS. I had some modified &lt;a class="link" href="https://blog.robsewell.com/dbachecks-dark-mode-historical-validation-powerbi/" target="_blank" rel="noopener"
+>historical validation dbachecks&lt;/a> pbix files that I wanted to automate the deployment of and enable the client to be able to quickly and simply deploy the reports as needed.&lt;/p>
+&lt;h2 id="the-manual-way">The manual way&lt;/h2>
+&lt;p>It is always a good idea to understand how to do a task manually before automating it. To deploy to PBRS you need to use the Power Bi Desktop optimised for Power Bi Report Server. &lt;a class="link" href="https://docs.microsoft.com/en-us/power-bi/report-server/quickstart-create-powerbi-report" target="_blank" rel="noopener"
+>There are instructions here&lt;/a>. Then it is easy to deploy to the PBRS by clicking file and save as and choosing Power Bi Report Server&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/manual-deploy.png"
+loading="lazy"
+alt="manual deploy"
+>&lt;/p>
+&lt;p>If I then want to set the datasource to use a different set of credentials I navigate to the folder that holds the report in PBRS and click the hamburger menu and Manage&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/manage.png"
+loading="lazy"
+alt="manage"
+>&lt;/p>
+&lt;p>and I can alter the User Name and Password or the type of connection by clicking on DataSources&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/testconn.png"
+loading="lazy"
+alt="testconn.PNG"
+>&lt;/p>
+&lt;p>and change it to use the reporting user for example.&lt;/p>
+&lt;h2 id="automation">Automation&lt;/h2>
+&lt;p>But I dont want to have to do this each time and there will be multiple pbix files, so I wanted to automate the solution. The end result was a VSTS or TFS release process so that I could simply drop the pbix into a git repository, commit my changes, sync them and have the system deploy them automatically.&lt;/p>
+&lt;p>As with all good ideas, I started with a google and found &lt;a class="link" href="http://byobi.com/2018/04/programmatically-deploy-power-bi-reports-to-power-bi-report-server/" target="_blank" rel="noopener"
+>this post&lt;/a> by &lt;a class="link" href="https://twitter.com/SQLbyoBI" target="_blank" rel="noopener"
+>Bill Anton&lt;/a> which gave me a good start ( I could not get the connection string change to work in my test environment but this was not required so I didnt really examine why)&lt;/p>
+&lt;p>I wrote a function that I can use via TFS or VSTS by embedding it in a PowerShell script. The function requires the &lt;a class="link" href="https://github.com/Microsoft/ReportingServicesTools" target="_blank" rel="noopener"
+>ReportingServicesTools&lt;/a> module which you can get by&lt;/p>
+&lt;p>Install-Module -Name ReportingServicesTools&lt;/p>
+&lt;p>The function below is available via the &lt;a class="link" href="https://www.powershellgallery.com/packages/PublishPBIXFile/1.0.0.2/DisplayScript" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a> also and you can get it with&lt;/p>
+&lt;p>Install-Script -Name PublishPBIXFile&lt;/p>
+&lt;p>The source code is on &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/PublishPBIXFile.ps1" target="_blank" rel="noopener"
+>Github&lt;/a>&lt;/p>
+&lt;p>and the code to call it looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$folderName = &amp;#39;TestFolder&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ReportServerURI = &amp;#39;http://localhost/Reports&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$folderLocation = &amp;#39;/&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$pbixfile = &amp;#39;C:\Temp\test.pbix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$description = &amp;#34;Descriptions&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$publishPBIXFileSplat = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ReportServerURI = $ReportServerURI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderLocation = $folderLocation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description = $description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pbixfile = $pbixfile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderName = $folderName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AuthenticationType = &amp;#39;Windows&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ConnectionUserName = $UserName1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Secret = $Password1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Verbose = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Publish-PBIXFile @publishPBIXFileSplat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/code1.png"
+loading="lazy"
+alt="code1.PNG"
+>&lt;/p>
+&lt;p>which uploads the report to a folder which it will create if it does not exist. It will then upload pbix file, overwriting the existing one if it already exists&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/numbe3r1.png"
+loading="lazy"
+alt="numbe3r1.PNG"
+>&lt;/p>
+&lt;p>and uses the username and password specified&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/code2.png"
+loading="lazy"
+alt="code2.PNG"
+>&lt;/p>
+&lt;p>If I wanted to use a Domain reporting user instead I can do&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$UserName1 = &amp;#39;TheBeard\ReportingUser&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$publishPBIXFileSplat = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ReportServerURI = $ReportServerURI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderLocation = $folderLocation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description = $description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pbixfile = $pbixfile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderName = $folderName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AuthenticationType = &amp;#39;Windows&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ConnectionUserName = $UserName1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Secret = $Password1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Verbose = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Publish-PBIXFile @publishPBIXFileSplat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it changes&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/code4-reporting.png"
+loading="lazy"
+alt="code4 reporting"
+>&lt;/p>
+&lt;p>If we want to use a SQL Authenticated user then&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$UserName1 = &amp;#39;TheReportingUserOfBeard&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$publishPBIXFileSplat = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ReportServerURI = $ReportServerURI
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderLocation = $folderLocation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description = $description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pbixfile = $pbixfile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> folderName = $folderName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AuthenticationType = &amp;#39;SQL&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # credential = $cred
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ConnectionUserName = $UserName1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Secret = $Password1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Publish-PBIXFile @publishPBIXFileSplat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/sql-auth.png"
+loading="lazy"
+alt="sql auth.PNG"
+>&lt;/p>
+&lt;p>Excellent, it all works form the command line. You can pass in a credential object as well as username and password. The reason I enabled username and password? So that I can use TFS or VSTS and store my password as a secret variable.&lt;/p>
+&lt;p>Now I simply create a repository which has my pbix files and a PowerShell script and build a quick release process to deploy them whenever there is a change 🙂&lt;/p>
+&lt;p>The deploy script looks like&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">CmdletBinding&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Param&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">PBIXFolder&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">ConnectionStringPassword&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">VerbosePreference&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;continue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">ReportServerURI&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;http://TheBeardsAmazingReports/Reports&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Output&lt;/span> &lt;span class="s2">&amp;#34;Starting Deployment&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Publish&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">PBIXFile&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">CmdletBinding&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">DefaultParameterSetName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ByUserName&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">SupportsShouldProcess&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Param&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">FolderName&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">ReportServerURI&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">FolderLocation&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PBIXFile&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Description of Your report Should go here&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateSet&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Windows&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;SQL&amp;#39;&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">AuthenticationType&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ParameterSetName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ByUserName&amp;#39;&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">ConnectionUserName&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ParameterSetName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ByUserName&amp;#39;&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Secret&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ParameterSetName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ByCred&amp;#39;&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">pscredential&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">FolderPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">FolderLocation&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">FolderName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">PBIXName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">PBIXFile&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\&amp;#39;&lt;/span>&lt;span class="s1">)[-1].Replace(&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pbix&lt;/span>&lt;span class="s1">&amp;#39;, &amp;#39;&amp;#39;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Creating a session to the Report Server $ReportServerURI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># establish session w/ Report Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">session&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsRestSession&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ReportPortalUri&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ReportServerURI&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Created a session to the Report Server $ReportServerURI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;Failed to create a session to the report server $reportserveruri&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># create folder (optional)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PSCmdlet&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ShouldProcess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;$ReportServerURI&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Creating a folder called $FolderName at $FolderLocation&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Null&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsRestFolder&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">WebSession&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">session&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsFolder&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">FolderLocation&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">FolderName&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">FolderName&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ErrorAction&lt;/span> &lt;span class="n">Stop&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Exception&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">If&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Exception&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">InnerException&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Message&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s1">&amp;#39;The remote server returned an error: (409) Conflict.&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;The folder already exists - moving on&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;Failed to create a folder called $FolderName at $FolderLocation report server $ReportServerURI but not because it already exists&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PSCmdlet&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ShouldProcess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;$ReportServerURI&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Uploading the pbix from $PBIXFile to the report server &amp;#34;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># upload copy of PBIX to new folder&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsRestCatalogItem&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">WebSession&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">session&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">PBIXFile&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsFolder&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">folderPath&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Overwrite&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;Failed to upload the file $PBIXFile to report server $ReportServerURI&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Getting the datasources from the pbix file for updating&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># get data source object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">datasources&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsRestItemDataSource&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">WebSession&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">session&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsItem&lt;/span> &lt;span class="s2">&amp;#34;$FolderPath/$PBIXName&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Got the datasources for updating&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;Failed to get the datasources&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Updating Datasource&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">dataSourcein&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">datasources&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">AuthenticationType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s1">&amp;#39;SQL&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">dataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataModelDataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AuthType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;UsernamePassword&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">dataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataModelDataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AuthType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Windows&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">or&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">UserName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GetNetworkCredential&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Password&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ConnectionUserName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">dataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CredentialRetrieval&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Store&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">dataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataModelDataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Username&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">dataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataModelDataSource&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Secret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PSCmdlet&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ShouldProcess&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;$ReportServerURI&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Updating the data source for the report $PBIXName&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># update data source object on server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Set&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsRestItemDataSource&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">WebSession&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">session&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsItem&lt;/span> &lt;span class="s2">&amp;#34;$folderPath/$PBIXName&amp;#34;&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">RsItemType&lt;/span> &lt;span class="n">PowerBIReport&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">DataSources&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">datasource&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">catch&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Warning&lt;/span>&lt;span class="s2">&amp;#34;Failed to set the datasource&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Verbose&lt;/span>&lt;span class="s2">&amp;#34;Completed Successfully&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ChildItem&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">PBIXFolder&lt;/span>\&lt;span class="o">*.&lt;/span>&lt;span class="n">pbix&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Output&lt;/span>&lt;span class="s2">&amp;#34;Processing $($File.FullName)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">## to enable further filtering later&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">like&lt;/span> &lt;span class="s1">&amp;#39;*&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">folderName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;ThePlaceForReports&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">folderLocation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;TheBeard\ReportingUser&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ConnectionStringPassword&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">pbixfile&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">like&lt;/span> &lt;span class="s1">&amp;#39;\*dbachecks\*&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;This is the morning daily checks file that....... more info&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">like&lt;/span> &lt;span class="s1">&amp;#39;\*TheOtherReport\*&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;This is hte other report, it reports others&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">publishPBIXFileSplat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ReportServerURI&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ReportServerURI&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">folderLocation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">folderLocation&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">AuthenticationType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Windows&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pbixfile&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">pbixfile&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">folderName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">folderName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ConnectionUserName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">UserName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Secret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Verbose&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Publish&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">PBIXFile&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">publishPBIXFileSplat&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Write&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Output&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Results&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Although the function does not need to be embedded in the script and can be deployed in a module, I have included it in here to make it easier for people to use quickly. I&lt;/p>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/vsts/pipelines/release/variables?view=vsts&amp;amp;tabs=batch&amp;amp;WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Store the password for the user as a variable in TFS or VSTS&lt;/a>&lt;/p>
+&lt;p>Then create a PowerShell step in VSTS or TFS and call the script with the parameters as shown below and PowerBi files auto deploy to Power Bi Report Server&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/08/vsts.png"
+loading="lazy"
+alt="vsts.PNG"
+>&lt;/p>
+&lt;p>and I have my process complete 🙂&lt;/p>
+&lt;p>Happy Automating 🙂&lt;/p></description></item></channel></rss>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSV on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/csv/</link><description>Recent content in CSV on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 15 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/csv/index.xml" rel="self" type="application/rss+xml"/><item><title>Show AutoGrowth Events with PowerShell to CSV</title><link>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</link><pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</guid><description>&lt;p>This week I was reading Pinal Daves post about Autogrowth Events&lt;/p>
+&lt;p>&lt;a class="link" href="http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/" target="_blank" rel="noopener"
+>http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/&lt;/a>&lt;/p>
+&lt;p>as it happened I had a requirement to make use of the script only a few days later. I was asked to provide the information in a CSV so that the person who required the information could manipulate it in Excel.&lt;/p>
+&lt;p>I am a great believer in Automation. If you are going to do something more than once then automate it so I wrote two functions, added them to TFS and now they will be available to all of my team members next time they load PowerShell.&lt;/p>
+&lt;p>Why two functions? Well Pinal Daves script gets the information from the default trace for a single database but there may be times when you need to know the autogrowth events that happened on a server with multiple databases.&lt;/p>
+&lt;p>I use a very simple method for doing this as I have not found the correct way to parse the default trace with PowerShell. The functions rely on &lt;a class="link" href="https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1" target="_blank" rel="noopener"
+>Invoke-SQLCMD2&lt;/a> which I also have in my functions folder and pass the query from Pinal Daves Blog post as a here string&lt;/p>
+&lt;p>&lt;code>$Results = Invoke-Sqlcmd2 -ServerInstance $Server -Database master -Query $Query&lt;/code>&lt;/p>
+&lt;p>To output to CSV I use the &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849932.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Export-CSV cmdlet&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if($CSV)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Results| Export-Csv -Path $CSV
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And to open the CSV I add a &lt;code>[switch]&lt;/code> parameter. You can find out more about parameters &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh847743.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a> or by&lt;/p>
+&lt;p>&lt;code>Get-Help about_Functions_Advanced_Parameters&lt;/code>&lt;/p>
+&lt;p>so the parameter block of my function looks like&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$true)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$Server,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$true)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$Database,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$false)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$CSV,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$false)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[switch]$ShowCSV
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now when I am asked again to provide this information it is as easy as typing&lt;/p>
+&lt;p>&lt;code>Show-AutogrowthServer -Server SQL2014Ser12R2&lt;/code>&lt;/p>
+&lt;p>or&lt;/p>
+&lt;p>&lt;code>Show-AutogrowthDatabase -Server SQL2014Ser12R2 -Database Autogrowth&lt;/code>&lt;/p>
+&lt;p>and the results will be displayed as below&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/02/autogrowth.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/02/autogrowth.jpg?w=660"
+loading="lazy"
+alt="autogrowth"
+>&lt;/a>&lt;/p>
+&lt;p>just a side note. Pinal Daves script uses @@servername in the where clause and if you have renamed your host the script will be blank. The resolution to this is to runt he following T-SQL&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sp_dropserver &amp;#39;OLDSERVERNAME&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sp_addserver NEWSERVERNAME, local;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can find the scripts here&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Show-Autogrowth-Events-for-8798a8b0?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Show-AutoGrowthServer&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Show-Autogrowth-Events-and-f4833cc8?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Show-AutoGrowthDatabase&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=User&amp;amp;f%5B0%5D.Value=Rob%20Sewell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>and all of my Script Center Submissions are here&lt;/a>&lt;/p>
+&lt;p>As always - The internet lies, fibs and deceives and everything you read including this post  should be taken with a pinch of salt and examined carefully. All code should be understood and tested prior to running in a live environment.&lt;/p></description></item></channel></rss>

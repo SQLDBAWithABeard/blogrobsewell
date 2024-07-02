@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Auto Growth on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/auto-growth/</link><description>Recent content in Auto Growth on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 15 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/auto-growth/index.xml" rel="self" type="application/rss+xml"/><item><title>Show AutoGrowth Events with PowerShell to CSV</title><link>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</link><pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</guid><description>&lt;p>This week I was reading Pinal Daves post about Autogrowth Events&lt;/p>
+&lt;p>&lt;a class="link" href="http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/" target="_blank" rel="noopener"
+>http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/&lt;/a>&lt;/p>
+&lt;p>as it happened I had a requirement to make use of the script only a few days later. I was asked to provide the information in a CSV so that the person who required the information could manipulate it in Excel.&lt;/p>
+&lt;p>I am a great believer in Automation. If you are going to do something more than once then automate it so I wrote two functions, added them to TFS and now they will be available to all of my team members next time they load PowerShell.&lt;/p>
+&lt;p>Why two functions? Well Pinal Daves script gets the information from the default trace for a single database but there may be times when you need to know the autogrowth events that happened on a server with multiple databases.&lt;/p>
+&lt;p>I use a very simple method for doing this as I have not found the correct way to parse the default trace with PowerShell. The functions rely on &lt;a class="link" href="https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1" target="_blank" rel="noopener"
+>Invoke-SQLCMD2&lt;/a> which I also have in my functions folder and pass the query from Pinal Daves Blog post as a here string&lt;/p>
+&lt;p>&lt;code>$Results = Invoke-Sqlcmd2 -ServerInstance $Server -Database master -Query $Query&lt;/code>&lt;/p>
+&lt;p>To output to CSV I use the &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849932.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Export-CSV cmdlet&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if($CSV)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Results| Export-Csv -Path $CSV
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And to open the CSV I add a &lt;code>[switch]&lt;/code> parameter. You can find out more about parameters &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh847743.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here&lt;/a> or by&lt;/p>
+&lt;p>&lt;code>Get-Help about_Functions_Advanced_Parameters&lt;/code>&lt;/p>
+&lt;p>so the parameter block of my function looks like&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$true)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$Server,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$true)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$Database,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$false)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[string]$CSV,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[Parameter(Mandatory=$false)]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[switch]$ShowCSV
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now when I am asked again to provide this information it is as easy as typing&lt;/p>
+&lt;p>&lt;code>Show-AutogrowthServer -Server SQL2014Ser12R2&lt;/code>&lt;/p>
+&lt;p>or&lt;/p>
+&lt;p>&lt;code>Show-AutogrowthDatabase -Server SQL2014Ser12R2 -Database Autogrowth&lt;/code>&lt;/p>
+&lt;p>and the results will be displayed as below&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/02/autogrowth.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/02/autogrowth.jpg?w=660"
+loading="lazy"
+alt="autogrowth"
+>&lt;/a>&lt;/p>
+&lt;p>just a side note. Pinal Daves script uses @@servername in the where clause and if you have renamed your host the script will be blank. The resolution to this is to runt he following T-SQL&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sp_dropserver &amp;#39;OLDSERVERNAME&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sp_addserver NEWSERVERNAME, local;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can find the scripts here&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Show-Autogrowth-Events-for-8798a8b0?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Show-AutoGrowthServer&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Show-Autogrowth-Events-and-f4833cc8?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Show-AutoGrowthDatabase&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=User&amp;amp;f%5B0%5D.Value=Rob%20Sewell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>and all of my Script Center Submissions are here&lt;/a>&lt;/p>
+&lt;p>As always - The internet lies, fibs and deceives and everything you read including this post  should be taken with a pinch of salt and examined carefully. All code should be understood and tested prior to running in a live environment.&lt;/p></description></item><item><title>Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell</title><link>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</link><pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png" alt="Featured image of post Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell" />&lt;p>So you have read up on VLFs&lt;/p>
+&lt;p>No doubt you will have read &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/transaction-log-vlfs-too-many-or-too-few/" target="_blank" rel="noopener"
+>this post by Kimberly Tripp&lt;/a> and this &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/8-steps-to-better-transaction-log-throughput/" target="_blank" rel="noopener"
+>one&lt;/a> and maybe &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/sql-server-transaction-log-fragmentation-a-primer/" target="_blank" rel="noopener"
+>this one too&lt;/a> and you want to identify the databases in your environment which have a large number of VLFs and also the initial size and the autogrowth settings of the log files.&lt;/p>
+&lt;p>There are several posts about this and doing this with PowerShell &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/monitoring-sql-server-virtual-log-file-fragmentation/" target="_blank" rel="noopener"
+>like this one&lt;/a> or &lt;a class="link" href="http://www.youdidwhatwithtsql.com/audit-vlfs-on-your-sql-server/1358/" target="_blank" rel="noopener"
+>this one&lt;/a>. As is my wont I chose to output to Excel and colour code the cells depending on the number of VLFs or the type of Autogrowth.&lt;/p>
+&lt;p>There is not a pure SMO way of identifying the number of VLFs in a log file that I am aware of and it is simple to use DBCC LOGINFO to get that info.&lt;/p>
+&lt;p>I also wanted to input the autogrowth settings, size, space used, the logical name and the file path. I started by getting all of my servers into a $Servers Array as follows&lt;/p>
+&lt;pre>&lt;code>$Servers = Get-Content 'PATHTO\sqlservers.txt'
+&lt;/code>&lt;/pre>
+&lt;p>Whilst presenting at the Newcastle User Group, Chris Taylor &lt;a class="link" href="http://chrisjarrintaylor.co.uk/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sqlgeordie" target="_blank" rel="noopener"
+>t&lt;/a> asked a good question. He asked if that was the only way to do this or if you could use your DBA database.&lt;/p>
+&lt;p>It is much better to make use of the system you already use to record your databases. It will also make it much easier for you to be able to run scripts against more specific groups of databases without needing to keep multiple text files up to date. You can accomplish this as follows&lt;/p>
+&lt;pre>&lt;code>$Query = 'SELECT Name FROM dbo.databases WHERE CONDITION meets your needs'
+$Servers = Invoke-Sqlcmd -ServerInstance MANAGEMENTSERVER -Database DBADATABASE -Query $query
+&lt;/code>&lt;/pre>
+&lt;p>I then create a foreach loop and a server SMO object (Did you read my &lt;a class="link" href="https://blog.robsewell.com/powershell-snippets-a-great-learning-tool" target="_blank" rel="noopener"
+>blog post&lt;/a> about snippets? the code for a SMO Server snippet is there) returned the number of rows for DBCC LOGINFO and the information I wanted.&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>It’s not very pretty or particularly user friendly so I decided to put it into Excel&lt;/p>
+&lt;p>I did this by using my Excel Snippet&lt;/p>
+&lt;pre>&lt;code> $snippet = @{
+Title = 'Excel Object';
+Description = 'Creates a Excel Workbook and Sheet';
+Text = @'
+# Create a .com object for Excel
+`$xl = new-object -comobject excel.application
+`$xl.Visible = `$true # Set this to False when you run in production
+`$wb = `$xl.Workbooks.Add() # Add a workbook
+`$ws = `$wb.Worksheets.Item(1) # Add a worksheet
+`$cells=`$ws.Cells
+#Do Some Stuff - perhaps -
+`$cells.item(`$row,`$col)=`'Server`'
+`$cells.item(`$row,`$col).font.size=16
+`$Cells.item(`$row,`$col).Columnwidth = 10
+`$col++
+`$wb.Saveas(`'C:\temp\Test`$filename.xlsx`')
+`$xl.quit()
+Stop-Process -Name EXCEL
+'@
+}
+New-IseSnippet @snippet
+&lt;/code>&lt;/pre>
+&lt;p>and placed the relevant bits into the foreach loop&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$VLF = $DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$logFile = $db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+$Name = $DB.name
+$cells.item($row,$col)=$Server
+$col++
+$cells.item($row,$col)=$Name
+$col++
+$cells.item($row,$col)=$VLF
+$col++
+$col++
+$Type = $logFile.GrowthType.ToString()
+$cells.item($row,$col)=$Type
+$col++
+$cells.item($row,$col)=($logFile.Size)
+$col++
+$cells.item($row,$col)=($logFile.UsedSpace)
+$col++
+$cells.item($row,$col)=$logFile.Name
+$col++
+$cells.item($row,$col)=$logFile.FileName
+&lt;/code>&lt;/pre>
+&lt;p>I had to use the &lt;code>ToString()&lt;/code> method on the Type property to get Excel to display the text. I wanted to set the colour for the VLF cells to yellow or red dependant on their value and the colour of the growth type cell to red if the value was Percent. This was achieved like this&lt;/p>
+&lt;pre>&lt;code>if($VLF -gt $TooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 6 # Yellow
+}
+if($VLF -gt $WayTooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 # Red
+}
+if($Type -eq 'Percent')
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 #Red
+}
+&lt;/code>&lt;/pre>
+&lt;p>I also found &lt;a class="link" href="http://theolddogscriptingblog.wordpress.com/2010/06/01/powershell-excel-cookbook-ver-2/" target="_blank" rel="noopener"
+>this excellent post&lt;/a> by which has many many snippets of code to work with excel sheets.&lt;/p>
+&lt;p>I used&lt;/p>
+&lt;pre>&lt;code>$cells.item($row,$col).HorizontalAlignment = 3 #center
+$cells.item($row,$col).HorizontalAlignment = 4 #right
+$ws.UsedRange.EntireColumn.AutoFit()
+&lt;/code>&lt;/pre>
+&lt;p>although I had to move the Title so that it was after the above line so that it looked ok.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/wp-content/uploads/2014/10/image.png" target="_blank" rel="noopener"
+>&lt;br>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;br>
+&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Number-of-VLFs-and-7ee0182a" target="_blank" rel="noopener"
+>You can find the script here.&lt;/a> As always test it somewhere safe first, understand what it is doing and any questions get in touch.&lt;/p></description></item></channel></rss>

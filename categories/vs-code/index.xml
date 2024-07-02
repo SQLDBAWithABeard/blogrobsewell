@@ -1,0 +1,1180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VS Code on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/vs-code/</link><description>Recent content in VS Code on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/vs-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Changing to Upper Case in VS Code</title><link>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</link><pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/uppercase.png" alt="Featured image of post Changing to Upper Case in VS Code" />&lt;h1 id="now-i-know-this">Now I know this!&lt;/h1>
+&lt;p>I was using some code that I had written for Azure Pipelines for a Windows agent which had &lt;code>$(System.AgentToken)&lt;/code> as the variable name and all other pre-defined variables were the same PascalCase and separated by &lt;code>.&lt;/code> but the Linux agent needed all upper case and separated by &lt;code>_&lt;/code>&lt;/p>
+&lt;p>In VS Code &lt;code>CTRL SHIFT P&lt;/code> to open the command pallette and then search for uppercase :-)&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/0Hkh46dnC7Y"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>Simples&lt;/p></description></item><item><title>Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server" />&lt;h1 id="reusable-code">Reusable code&lt;/h1>
+&lt;p>We looked at a simple deployment of an Azure SQL Server and a database in the last blog post. You would like to reuse this code though, you will want to create more SQL Instances and SQL databases in the future. With Bicep, you can use modules and parameters to do this.&lt;/p>
+&lt;p>You can create a module for your SQL Instance. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the resource information from the documentation&lt;/a> and create a file named SQLInstance.bicep. I put it in a Resources directory.&lt;/p>
+&lt;h1 id="parameters">Parameters&lt;/h1>
+&lt;p>At the top of the file you need to define parameters to enabled you to pass in different values for the deployment. You can find information about &lt;a class="link" href="https://github.com/Azure/bicep/blob/main/docs/spec/parameters.md" target="_blank" rel="noopener"
+>Bicep parameters in the docs on GitHub&lt;/a>.&lt;/p>
+&lt;p>You define a parameter using the keyword &lt;code>param&lt;/code>. At a minimum you need a name and a datatype. An obvious one for this usecase would be the name of the SQL Instance which could be defined as&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param SqlInstanceName string
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Perhaps your organisation has a requirement for all of the data to be stored in a particular region. You might want to have a default value for your location parameter. You can define a default parameter by assigning it with an equals sign.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">param location string = &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Some parameters that you would like to use will only allow certain values. You can define those as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@allowed([
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;Disabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param transparentDataEncryption string = &amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">targetScope = &amp;#39;resourceGroup&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param SqlInstanceName string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param location string = &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param tags object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param administratorLogin string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param administratorLoginPassword string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param minimalTlsVersion string = &amp;#39;1.0&amp;#39; // 1.0,1.1,1.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param publicNetworkAccess string = &amp;#39;Disabled&amp;#39; // &amp;#39;Disabled&amp;#39;,&amp;#39;Enabled&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ActiveDirectoryAdminUser string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ActiveDirectoryAdminUserSid string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param tenantid string
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param azureADOnlyAuthentication bool = false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ExternalAdministratorPrincipalType string // User Application Group
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param sqlauditActionsAndGroups array //BATCH_COMPLETED_GROUP,,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP maybe some of these too but the logs will get large,APPLICATION_ROLE_CHANGE_PASSWORD_GROUP,BACKUP_RESTORE_GROUP,DATABASE_LOGOUT_GROUP,DATABASE_OBJECT_CHANGE_GROUP,DATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP,DATABASE_OBJECT_PERMISSION_CHANGE_GROUP,DATABASE_OPERATION_GROUP,DATABASE_PERMISSION_CHANGE_GROUP,DATABASE_PRINCIPAL_CHANGE_GROUP,DATABASE_PRINCIPAL_IMPERSONATION_GROUP,DATABASE_ROLE_MEMBER_CHANGE_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP,SCHEMA_OBJECT_ACCESS_GROUP,SCHEMA_OBJECT_CHANGE_GROUP,SCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP,SCHEMA_OBJECT_PERMISSION_CHANGE_GROUP,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,USER_CHANGE_PASSWORD_GROUP,BATCH_STARTED_GROUP,BATCH_COMPLETED_GROUP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param SqldatabaseNames array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param dbSkuName string // for example GP_Gen5_2, BC_Gen5_10, HS_Gen5_8, P5, S0 etc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param collation string = &amp;#39;SQL_Latin1_General_CP1_CI_AS&amp;#39; //
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param maxSizeBytes int // The max size of the database expressed in bytes.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param zoneRedundant bool = false // Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param licenseType string = &amp;#39;LicenseIncluded&amp;#39; // The license type to apply for this database. LicenseIncluded if you need a license, or BasePrice if you have a license and are eligible for the Azure Hybrid Benefit. - LicenseIncluded or BasePrice
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resource sql &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: SqlInstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: tags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> identity: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> type: &amp;#39;SystemAssigned&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: administratorLogin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: administratorLoginPassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;12.0&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minimalTlsVersion: minimalTlsVersion
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicNetworkAccess: publicNetworkAccess
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administrators: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorType: &amp;#39;ActiveDirectory&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> login: ActiveDirectoryAdminUser
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sid: ActiveDirectoryAdminUserSid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tenantId: tenantid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureADOnlyAuthentication: azureADOnlyAuthentication
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> principalType: ExternalAdministratorPrincipalType
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// SQL Databases
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resource symbolicname &amp;#39;Microsoft.Sql/servers/databases@2020-11-01-preview&amp;#39; = [for item in SqldatabaseNames:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> parent: sql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: location
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: tags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sku: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: dbSkuName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> collation: collation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> maxSizeBytes: maxSizeBytes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> zoneRedundant: zoneRedundant
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> licenseType: licenseType
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" />&lt;h1 id="an-error">An Error&lt;/h1>
+&lt;p>Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p>
+&lt;blockquote>
+&lt;p>Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p>
+&lt;/blockquote>
+&lt;p>Unfortunately that was all that I had. I had to find the inner error for details&lt;/p>
+&lt;h1 id="try-the-deployment-log-on-the-resource-group">Try the deployment log on the Resource Group&lt;/h1>
+&lt;p>As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p>
+&lt;p>So I navigated to the home page of the Azure Portal and searched for Activity log.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylog.png"
+loading="lazy"
+alt="activitylog"
+>&lt;/a>&lt;/p>
+&lt;p>I searched for the name of the deployment &lt;code>deploy_bicep003_20210505094331&lt;/code> and saw&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogsearch.png"
+loading="lazy"
+alt="activitylogsearch"
+>&lt;/a>&lt;/p>
+&lt;p>clicking on the link showed me this with the relevant information hidden in the JSON&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/activitylogdetails.png"
+loading="lazy"
+alt="activitylogdetails"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Resource name {&amp;rsquo;name&amp;rsquo;:&amp;lsquo;subnet1&amp;rsquo;,&amp;lsquo;addressPrefix&amp;rsquo;:&amp;lsquo;10.0.0.0/24&amp;rsquo;}.name is invalid.&lt;/p>
+&lt;/blockquote>
+&lt;p>Bingo.&lt;/p>
+&lt;p>I had made a mistake in my resource definition for the subnets. I had used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item}.name&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item}.addressPrefix&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where I should have used&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnets: [for item in subnets:{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;${item.name}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addressPrefix: &amp;#39;${item.addressPrefix}&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Every day is a learning day.&lt;/p></description></item><item><title>Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</link><pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC" />&lt;h1 id="starting-working-out">Starting working out?&lt;/h1>
+&lt;p>It is important to keep a healthy body and mind, especially when my life is so sedentary these days. Getting exercise is good for both. This blog post has nothing to do with exercise though (apart from maybe exercising the mind)&lt;/p>
+&lt;h1 id="project-bicep">Project Bicep&lt;/h1>
+&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Bicep&lt;/a> is a language for declaring and deploying Azure Resources. Like &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>Terraform&lt;/a> it enables you to define your infrastructure as code.&lt;/p>
+&lt;h2 id="why-use-bicep-instead">WHy use Bicep instead?&lt;/h2>
+&lt;p>I really like being able to control infrastructure with code. I have used &lt;a class="link" href="https://blog.robsewell.com/tags/#terraform" target="_blank" rel="noopener"
+>Terraform to deploy infrastructure&lt;/a> and almost exclusively on Azure. I have created and altered many environments for clients over the past couple of years using Terraform. I have also used ARM templates but found them confusing and unwieldly to use.&lt;/p>
+&lt;h2 id="existing-state">Existing State&lt;/h2>
+&lt;p>Terraform will deploy the required changes to your infrastructure by comparing the existing state which is stored in a state file with the expected state which is created by running the plan command. If someone alters the Azure resource via the portal, Azure CLI or Azure PowerShell all kinds of mayhem can occur normally failure in deployment and time spent troubleshooting. It is possible to use the &lt;a class="link" href="https://www.terraform.io/docs/cli/commands/import.html" target="_blank" rel="noopener"
+>&lt;code>import&lt;/code> command in Terraform&lt;/a> to get the existing resource state into the state file so that the comparison is performed against the existing state of the resource but this requires a lot of manual intervention.&lt;/p>
+&lt;p>Bicep deploys the changes by comparing the existing state of the Azure resources with the expected state in the code. This, for me, is a super benefit and reduces the complications of those type of errors.&lt;/p>
+&lt;h2 id="latest-api-support">Latest API support&lt;/h2>
+&lt;p>Terraform resources have a lag between features or properties from Azure being made available and those features or properties being incorporated into the Terraform resource. This has lead to me requiring my deployments to have additional Azure CLI, Azure PowerShell or worse both steps to achieve what I need.&lt;/p>
+&lt;p>Bicep immediately supports all preview and GA versions for Azure Services, I don&amp;rsquo;t have to wait and all the things I can do are available to me.&lt;/p>
+&lt;h2 id="authoring">Authoring&lt;/h2>
+&lt;p>I love &lt;a class="link" href="https://code.visualstudio.com" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> and there is a &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&amp;amp;WT.mc_id=devops-13338-abewan" target="_blank" rel="noopener"
+>super extension&lt;/a> that makes authoring a joy.&lt;/p>
+&lt;h2 id="what-if-support">What If Support&lt;/h2>
+&lt;p>I have written before about the &lt;a class="link" href="https://blog.robsewell.com/blog/powershell/how-to-write-a-powershell-function-to-use-confirm-verbose-and-whatif/" target="_blank" rel="noopener"
+>importance of WhatIf for PowerShell functions and how to implement it&lt;/a> and Bicep has &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-deploy-what-if?tabs=azure-powershell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>What If for deployments&lt;/a> so that you can validate that the code you have written will perform the tasks that you expect.&lt;/p>
+&lt;h2 id="deployments-recorded-in-azure">Deployments recorded in Azure&lt;/h2>
+&lt;p>The changes that I make with Bicep are recorded in Azure and I can find them in the deployments for the Resource Group&lt;/p>
+&lt;h2 id="cost">Cost&lt;/h2>
+&lt;p>Bicep is free :-)&lt;/p>
+&lt;h1 id="deploy-an-azure-sql-database-rob">Deploy an Azure SQL Database Rob&lt;/h1>
+&lt;p>OK, let&amp;rsquo;s see an example. I would like to deploy an Azure SQL Database into a Resource Group. I will need an Azure SQL Server resource and an Azure SQL Database resource. The &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Templates site&lt;/a> has the examples that I need. The &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure SQL Server page&lt;/a> shows the Bicep code I need and the explanations of the expected values.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">resource symbolicname &amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39; = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tags: {}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> identity: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> type: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> properties: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLogin: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorLoginPassword: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minimalTlsVersion: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> publicNetworkAccess: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> encryptionIdentityId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> keyId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administrators: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> administratorType: &amp;#39;ActiveDirectory&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> principalType: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> login: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sid: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tenantId: &amp;#39;string&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> azureADOnlyAuthentication: bool
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I create a file with a &lt;code>.bicep&lt;/code> extension in VS Code&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png"
+loading="lazy"
+alt="bicepfile"
+>&lt;/a>&lt;/p>
+&lt;p>and add only the required values. (NOTE - this is just an example and I would never recommend that you would put the password for anything in a file in plain text, we will cover how to handle secrets later. )&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">resource&lt;/span> &lt;span class="n">sql&lt;/span> &lt;span class="s1">&amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;beardsqlrand01&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">location&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;northeurope&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">properties&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">administratorLogin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;sysadmin&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">administratorLoginPassword&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;dbatools.IO&amp;#39;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">DON&lt;/span>&lt;span class="s1">&amp;#39;T DO THIS - EVER&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">version&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;12.0&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="validate-the-deployment-with-whatif">Validate the deployment with WhatIf&lt;/h2>
+&lt;p>I created an empty Resource Group for my test&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">New-AzResourceGroup -Name &amp;#39;BicepTest&amp;#39; -Location &amp;#39;northeurope&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, I am going to check that the code that I have written will perform the actions that I expect. I am hoping to get&lt;/p>
+&lt;ul>
+&lt;li>An Azure SQL Instance called beardsqlrand01&lt;/li>
+&lt;li>In the location North Europe&lt;/li>
+&lt;li>With an admin login and password as stated in the file (NO Don&amp;rsquo;t ever do this in Production)&lt;/li>
+&lt;/ul>
+&lt;p>I do this using the Azure PowerShell command &lt;code>New-AzResourceGroupDeployment&lt;/code> and give it the Resource Group Name and the path to the file&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Validate the deployment with Whatif
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The first thing this does is check the status of the resources in the resource group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatif.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatif.png"
+loading="lazy"
+alt="whatif"
+>&lt;/a>&lt;/p>
+&lt;p>then it provides a list of what it will do. In this example there is only one resource.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png"
+loading="lazy"
+alt="whatifresult"
+>&lt;/a>&lt;/p>
+&lt;p>This tells us that there will be a creation of 1 resource and that the values are as I expect them. As I am happy with that I can then deploy the infrastructure by changing the &lt;code>WhatIf&lt;/code> value to false&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Deploy the changes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="deployment-can-be-seen-in-the-azure-portal">Deployment can be seen in the Azure Portal&lt;/h1>
+&lt;p>If I look in the Azure Portal, I can see the deployment is happening.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploying.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploying.png"
+loading="lazy"
+alt="portaldeploying"
+>&lt;/a>&lt;/p>
+&lt;p>Once it has finished I get an output on the screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/deploymentresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/deploymentresult.png"
+loading="lazy"
+alt="deploymentresult"
+>&lt;/a>&lt;/p>
+&lt;p>and when I look in the portal at the deployment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploymentresult.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portaldeploymentresult.png"
+loading="lazy"
+alt="portaldeploymentresult"
+>&lt;/a>&lt;/p>
+&lt;p>and my resource has been created&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/portalsqlresource.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/portalsqlresource.png"
+loading="lazy"
+alt="portalsqlresource"
+>&lt;/a>&lt;/p>
+&lt;h2 id="add-a-database">Add a database&lt;/h2>
+&lt;p>I have my Azure SQL Instance, next I need a database. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>the resource information&lt;/a> and add the required information to my bicep file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">resource&lt;/span> &lt;span class="n">sql&lt;/span> &lt;span class="s1">&amp;#39;Microsoft.Sql/servers@2020-11-01-preview&amp;#39;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;beardsqlrand01&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">location&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;northeurope&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">properties&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">administratorLogin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;sysadmin&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">administratorLoginPassword&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;dbatools.IO&amp;#39;&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="n">DON&lt;/span>&lt;span class="s1">&amp;#39;T DO THIS - EVER&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">version&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;12.0&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">publicNetworkAccess&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Disabled&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">resource&lt;/span> &lt;span class="n">bearddatabase&lt;/span> &lt;span class="s1">&amp;#39;databases@2020-11-01-preview&amp;#39;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;BicepDatabase&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">location&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;northeurope&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sku&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Basic&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">properties&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is a super simple example. The database resource is defined within the SQL Instance resource with a name and a SKU.&lt;/p>
+&lt;p>We validate it in exactly the same way as before. This time we will see that we can incrementally add or change resources to our deployment and validate what will happen.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Validate the deployment with Whatif
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This time the result looks a little different as we already have a resource in the Resource Group.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifdatabase.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifdatabase.png"
+loading="lazy"
+alt="whatifdatabase"
+>&lt;/a>&lt;/p>
+&lt;p>At the top it gives you three types of changes&lt;/p>
+&lt;ul>
+&lt;li>Create&lt;/li>
+&lt;li>NoChange&lt;/li>
+&lt;li>Ignore&lt;/li>
+&lt;/ul>
+&lt;p>It shows at the bottom that the changes are&lt;/p>
+&lt;blockquote>
+&lt;p>Resource changes: 1 to create, 1 no change, 1 to ignore.&lt;/p>
+&lt;/blockquote>
+&lt;p>This tells you that it will create the Azure SQL Database, it will not change the Azure SQL Server and there is no change to the master database.&lt;/p>
+&lt;p>I am happy with that validation, so I deploy the changes, again using the same code as before.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Deploy the changes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DeploymentConfig = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ResourceGroupName = &amp;#39;BicepTest&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TemplateFile = &amp;#39;.\SimpleSqlDatabase\SqlInstance.bicep&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WhatIf = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-AzResourceGroupDeployment @DeploymentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If I look in the portal I can see the deployment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployment.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployment.png"
+loading="lazy"
+alt="databasedeployment"
+>&lt;/a>&lt;/p>
+&lt;p>and once it has completed I can see the database in the Portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployed.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/databasedeployed.png"
+loading="lazy"
+alt="databasedeployed"
+>&lt;/a>&lt;/p>
+&lt;p>Thats all there is to Bicep.&lt;/p>
+&lt;ul>
+&lt;li>Find the resource information in the docs&lt;/li>
+&lt;li>Define your deployment in code&lt;/li>
+&lt;li>Validate your deployment with WhatIf&lt;/li>
+&lt;li>Deploy your changes&lt;/li>
+&lt;/ul>
+&lt;h1 id="remove-the-resource-group">Remove the Resource Group&lt;/h1>
+&lt;p>Now that my test has finished I will remove the Resource Group. If you are following along, this is how to do that&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Remove-AzResourceGroup -Name BicepTest -Force
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="all-of-the-code">All of the code&lt;/h1>
+&lt;p>I have added all of the code for this blog post to my GitHub here &lt;a class="link" href="https://github.com/SQLDBAWithABeard/BeardBicep/tree/main/SimpleSqlDatabase" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/BeardBicep/tree/main/SimpleSqlDatabase&lt;/a> so that you can follow along.&lt;/p>
+&lt;h1 id="next-steps">Next steps&lt;/h1>
+&lt;p>Now that you have an introduction to Bicep and can see how useful and powerful it can be, we will expand on this in the following blog posts.&lt;/p></description></item><item><title>My current VS Code Extensions and using a workspace file</title><link>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" />&lt;p>I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p>
+&lt;h2 id="listing-extensions">Listing Extensions&lt;/h2>
+&lt;p>From the command line you can list your extensions using&lt;/p>
+&lt;pre>&lt;code>code --list-extensions
+code-insiders --list-extensions
+&lt;/code>&lt;/pre>
+&lt;p>My list looks like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-31.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-extensions">Installing Extensions&lt;/h2>
+&lt;p>You can install extensions by opening the Extensions view in Visual Studio Code and searching for the extension. The list I have below has the precise names for each extension which you can use to search&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-24.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can also install extensions from the command-line with&lt;/p>
+&lt;pre>&lt;code>code --install-extension &amp;lt;extensionid&amp;gt;
+code-insiders --install-extension &amp;lt;extensionid&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;h2 id="my-extensions">My Extensions&lt;/h2>
+&lt;p>I am going to list these in alphabetical order by display name for ease (my ease that is!)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Because Chrissy LeMaire and I are writing &lt;a class="link" href="https://beard.media/book" target="_blank" rel="noopener"
+>dbatools in a Month of Lunches&lt;/a> using AsciiDoc, it makes sense to have an extension enabling previewing and syntax, you can find it &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=stayfool.vscode-asciidoc" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure I use the Azure Account Extension – ms-vscode.azure-account&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I use Azure CLI so I make use of the functionality of the Azure CLI Tools extension ms-vscode.azurecli&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure Repos I use the ms-vsts.team extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When creating ARM templates, this extension is very useful msazurermtools.azurerm-vscode-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have a few theme extensions, this one is for fun in demos 😉 beardedbear.beardedtheme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The blackboard theme is my default one gerane.theme-blackboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Chasing closing brackets is much easier with the Bracket Pair Colorizer, I use the beta version coenraads.bracket-pair-colorizer-2&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am rubbish at spelling and typing so I use this to help point out the issues! streetsidesoftware.code-spell-checker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Using the Docker extension adds another view to Visual Studio Code to ease working with containers ms-azuretools.vscode-docker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>As an open-source project maintainer it is good to be able to work with GitHub pull requests without leaving Visual Studio Code github.vscode-pull-request-github_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>GitLens is absolutely invaluable when working with source control. It has so many features. This is an absolute must eamodio.gitlens&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Working with Kubernetes? This extension adds another view for interacting with your cluster ms-kubernetes-tools.vscode-kubernetes-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Visual Studio Live Share enables you to collaborate in real-time in Visual Studio Code with your colleagues or friends. I blogged about this &lt;a class="link" href="https://blog.robsewell.com/visual-studio-code-live-sharing-set-up/" target="_blank" rel="noopener"
+>here&lt;/a> ms-vsliveshare.vsliveshare&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I love writing markdown and this linter assists me to ensure that my markdown is correct davidanson.vscode-markdownlint&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The Material Icon Theme ensures that there are pretty icons in my editor! pkief.material-icon-theme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have both the PowerShell extension ms-vscode.powershell and the PowerShell preview extension ms-vscode.powershell-preview installed but only one can be enabled at a time&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This suite of extensions enables easy remote development so that you can develop your PowerShell scripts, for example, inside a ubuntu container running PowerShell 7 or inside Windows Subsystem for LInux ms-vscode-remote.vscode-remote-extensionpack_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-20.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Writing for cross-platform means looking out for line endings and this extension will display them and any whitespace in your editor medo64.render-crlf&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-21.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>An absolutely essential extension which enables me to backup all of my Visual Studio Code settings, shortcuts, extensions into a GitHub gist and keep all of my machines feeling the same. shan.code-settings-sync&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-22.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For working with SQL Server within Visual Studio Code and having a view for my instances as well as a linter and intellisense I use ms-mssql.mssql&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-23.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yaml files and spaces! I no longer get so confused with this extension to help me 🙂 redhat.vscode-yaml&lt;/p>
+&lt;h2 id="workspaces">Workspaces&lt;/h2>
+&lt;p>Now that is a lot of extensions and I dont need all of them everytime. I use workspaces to help with this. I will create a workspace file for the project I am working on.&lt;/p>
+&lt;p>I open or create the folders I will be working on and then click File and Save Workspace As and save the file in the root of the folder.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-25.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now, the next time I want to open the workspace, I can open the workspace file or if I open the folder Visual Studio Code will helpfully prompt me&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now I can have all of my settings retained for that workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-27.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For this folder, I am ensuring that the PowerShell extension uses the PSScriptAnalyzer Settings file that I have created so that it will show if the code is compatible with the versions of PowerShell I have chosen. I can define settings for a workspace in the settings file, which you can open using CTRL and ,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-28.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>But I can also enable or disable extensions for a workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-29.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So everytime I open this workspace I am only loading the extensions I want&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-30.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Building Azure SQL Db with Terraform with Visual Studio Code</title><link>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</link><pubDate>Wed, 17 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png" alt="Featured image of post Building Azure SQL Db with Terraform with Visual Studio Code" />&lt;p>I have been using &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>Terraform&lt;/a> for the last week or so to create some infrastructure and decided to bring that knowledge back to a problem that I and others suffer from – building environments for presentations, all for the sake of doing some learning.&lt;/p>
+&lt;h2 id="what-is-terraform">What is Terraform?&lt;/h2>
+&lt;p>According to the website&lt;/p>
+&lt;blockquote>
+&lt;p>HashiCorp Terraform enables you to safely and predictably create, change, and improve infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+>https://www.terraform.io/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>This means that I can define my infrastructure as code. If I can do that then I can reliably do the same thing again and again, at work to create environments that have the same configuration or outside of work to repeatedly build the environment I need.&lt;/p>
+&lt;h2 id="building-an-azure-sql-database-with-terraform">Building an Azure SQL Database with Terraform&lt;/h2>
+&lt;p>To understand how to build a thing the best place to start is the documentation &lt;a class="link" href="https://www.terraform.io/docs" target="_blank" rel="noopener"
+>https://www.terraform.io/docs&lt;/a> . For an &lt;a class="link" href="https://www.terraform.io/docs/providers/azurerm/r/sql_database.html" target="_blank" rel="noopener"
+>Azure SQL Db in the docs&lt;/a> you will find a block of code that looks like this&lt;/p>
+&lt;pre>&lt;code> resource &amp;quot;azurerm_resource_group&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;acceptanceTestResourceGroup1&amp;quot;
+location = &amp;quot;West US&amp;quot;
+}
+resource &amp;quot;azurerm_sql_server&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;mysqlserver&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group.test.name}&amp;quot;
+location = &amp;quot;West US&amp;quot;
+version = &amp;quot;12.0&amp;quot;
+administrator_login = &amp;quot;4dm1n157r470r&amp;quot;
+administrator_login_password = &amp;quot;4-v3ry-53cr37-p455w0rd&amp;quot;
+}
+resource &amp;quot;azurerm_sql_database&amp;quot; &amp;quot;test&amp;quot; {
+name = &amp;quot;mysqldatabase&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group.test.name}&amp;quot;
+location = &amp;quot;West US&amp;quot;
+server_name = &amp;quot;${azurerm_sql_server.test.name}&amp;quot;
+tags = {
+environment = &amp;quot;production&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>If you read the code, you can see that there are key value pairs defining information about the resource that is being created. Anything inside a ${} is a dynamic reference. So&lt;/p>
+&lt;p>resource_group_name = &amp;ldquo;${azurerm_resource_group.test.name}&amp;rdquo;
+refers to the name property in the azure_resource_group block called test (or the name of the resource group 🙂 )&lt;/p>
+&lt;h2 id="infrastructure-as-code">Infrastructure As Code&lt;/h2>
+&lt;p>So I can put that code into a file (name it main.tf) and alter it with the values and “run Terraform” and what I want will be created. Lets take it a step further though because I want to be able to reuse this code. Instead of hard-coding all of the values I am going to use variables. I can do this by creating another file called variables.tf which looks like&lt;/p>
+&lt;pre>&lt;code> variable &amp;quot;presentation&amp;quot; {
+description = &amp;quot;The name of the presentation - used for tagging Azure resources so I know what they belong to&amp;quot;
+default = &amp;quot;dataindevon&amp;quot;
+}
+variable &amp;quot;ResourceGroupName&amp;quot; {
+description = &amp;quot;The Resource Group Name&amp;quot;
+default = &amp;quot;beardrules&amp;quot;
+}
+variable &amp;quot;location&amp;quot; {
+description = &amp;quot;The Azure Region in which the resources in this example should exist&amp;quot;
+default = &amp;quot;uksouth&amp;quot;
+}
+variable &amp;quot;SqlServerName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;jeremy&amp;quot;
+}
+variable &amp;quot;SQLServerAdminUser&amp;quot; {
+description = &amp;quot;The name of the Azure SQL Server Admin user for the Azure SQL Database&amp;quot;
+default = &amp;quot;Beard&amp;quot;
+}
+variable &amp;quot;SQLServerAdminPassword&amp;quot; {
+description = &amp;quot;The Azure SQL Database users password&amp;quot;
+default = &amp;quot;JonathanlovesR3ge%&amp;quot;
+}
+variable &amp;quot;SqlDatabaseName&amp;quot; {
+description = &amp;quot;The name of the Azure SQL database on - needs to be unique, lowercase between 3 and 24 characters including the prefix&amp;quot;
+default = &amp;quot;jsdb&amp;quot;
+}
+variable &amp;quot;Edition&amp;quot; {
+description = &amp;quot;The Edition of the Database - Basic, Standard, Premium, or DataWarehouse&amp;quot;
+default = &amp;quot;Standard&amp;quot;
+}
+variable &amp;quot;ServiceObjective&amp;quot; {
+description = &amp;quot;The Service Tier S0, S1, S2, S3, P1, P2, P4, P6, P11 and ElasticPool&amp;quot;
+default = &amp;quot;S0&amp;quot;
+}
+&lt;/code>&lt;/pre>
+&lt;p>and my main.tf then looks like this.&lt;/p>
+&lt;pre>&lt;code>provider &amp;quot;azurerm&amp;quot; {
+version = &amp;quot;=1.24.0&amp;quot;
+}
+resource &amp;quot;azurerm_resource_group&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.ResourceGroupName}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_server&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlServerName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_resource_group. presentation.name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+version = &amp;quot;12.0&amp;quot;
+administrator_login = &amp;quot;${var.SQLServerAdminUser}&amp;quot;
+administrator_login_password = &amp;quot;${var.SQLServerAdminPassword} &amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+resource &amp;quot;azurerm_sql_database&amp;quot; &amp;quot;presentation&amp;quot; {
+name = &amp;quot;${var.SqlDatabaseName}&amp;quot;
+resource_group_name = &amp;quot;${azurerm_sql_server.presentation. resource_group_name}&amp;quot;
+location = &amp;quot;${var.location}&amp;quot;
+server_name = &amp;quot;${azurerm_sql_server.presentation. name}&amp;quot;
+edition = &amp;quot;${var.Edition}&amp;quot;
+requested_service_objective_name = &amp;quot;${var.ServiceObjective}&amp;quot;
+tags = {
+environment = &amp;quot;${var.presentation}&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>You can find these files in my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB/tree/master/Manual" target="_blank" rel="noopener"
+>GitHub Repository&lt;/a> here.&lt;/p>
+&lt;h2 id="alright--deploy-something">Alright – deploy something&lt;/h2>
+&lt;p>To deploy the code that I have written I need to download Terraform from &lt;a class="link" href="https://www.terraform.io/downloads.html" target="_blank" rel="noopener"
+>https://www.terraform.io/downloads.html&lt;/a> and then extract the exe to a folder in my PATH. (I chose C:\Windows). Then in Visual Studio Code I installed two extensions The &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=mauve.terraform" target="_blank" rel="noopener"
+>Terraform Extension by Mikael Olenfalk&lt;/a> which enables syntax highlighting and auto-completion for the tf files and the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform" target="_blank" rel="noopener"
+>Azure Terraform&lt;/a> extension. You will need also need &lt;a class="link" href="https://nodejs.org/en/" target="_blank" rel="noopener"
+>Node.js from here&lt;/a>.&lt;/p>
+&lt;p>With those in place I navigated to the directory holding my files in Visual Studio Code and pressed F1 and started typing azure terraform and chose Azure Terraform Init&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-39.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-39.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I was then prompted to use Cloud Shell and a browser opened to login. Once I had logged in I waited until I saw this&lt;/p>
+&lt;p>&lt;a class="link" href="blob:https://blog.robsewell.com/787b935b-930a-45c4-ac43-18a18193e01f" >&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-40.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I press F1 again and this time choose Azure Terraform plan. This is going to show me what Terraform is going to do if it applies this configuration.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-41.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-41.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can see the what is going to be created. It is going to create 3 things&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have checked that the plan is what you want, press F1 again and choose Azure Terraform Apply&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-43.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-43.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You are then asked to confirm that this is what you want. Only “yes” will be accepted. Then you will see the infrastructure being created&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-44.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and a minute later&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-45.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-45.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and Jeremy exists in the beardrules resource group&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then once I have finished with using the sqlinstance. I can press F1 again and choose Azure Terraform Destroy. Again there is a confirmation required.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/04/image-47.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-47.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and you will see the progress for 46 seconds&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-50.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and all of the resources have gone.&lt;/p>
+&lt;p>Thats a good start. This enables me to create resources quickly and easily and keep the configuration for them safely in source control and easy to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>In my next post I will create an Azure DevOps pipeline to deploy an AZure SQL Db withTerraform&lt;/a>.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>The post after will show how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/" target="_blank" rel="noopener"
+>The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster&lt;/a>&lt;/p></description></item><item><title>Visual Studio Code Live Sharing Set-Up</title><link>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/07-sign-in.png" alt="Featured image of post Visual Studio Code Live Sharing Set-Up" />&lt;p>There was an &lt;a class="link" href="https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview" target="_blank" rel="noopener"
+>announcement on the Visual Studio Code blog&lt;/a> about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.&lt;/p>
+&lt;p>It is remarkably easy to set up 🙂&lt;/p>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>Open Visual Studio Code, open the Extensions side bar (CTRL + SHIFT + X)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/01-open-extensions.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-open-extensions.png"
+loading="lazy"
+alt="01 - open extensions"
+>&lt;/a>&lt;/p>
+&lt;p>Search for Live Share&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/02-search.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/02-search.png"
+loading="lazy"
+alt="02 - search.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Install and then reload when it has done&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/03-reload.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/03-reload.png"
+loading="lazy"
+alt="03 - reload.png"
+>&lt;/a>&lt;/p>
+&lt;p>You will notice in the bottom bar it will say finishing the installation and if you open the terminal (CTRL + ‘) and click on Output and change the drop down on the right to Visual Studio Live Share you can see what it is doing&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/04-finishing-installation.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/04-finishing-installation.png"
+loading="lazy"
+alt="04 - finishing installation.png"
+>&lt;/a>&lt;/p>
+&lt;p>It is installing the dependancies as shown below&lt;/p>
+&lt;blockquote>
+&lt;p>[Client I] Installing dependencies for Live Share…&lt;/p>
+&lt;p>[Client I] Downloading package ‘.NET Core Runtime 2.0.5 for win7-x86’&lt;/p>
+&lt;p>[Client I] Download complete.&lt;/p>
+&lt;p>[Client I] Downloading package ‘OmniSharp for Windows (.NET 4.6)’&lt;/p>
+&lt;p>[Client I] Download complete.&lt;/p>
+&lt;p>[Client I] Installing package ‘.NET Core Runtime 2.0.5 for win7-x86’&lt;/p>
+&lt;p>[Client V] Extracted packed files&lt;/p>
+&lt;p>[Client I] Validated extracted files.&lt;/p>
+&lt;p>[Client I] Moved and validated extracted files.&lt;/p>
+&lt;p>[Client I] Finished installing.&lt;/p>
+&lt;p>[Client I] Installing package ‘OmniSharp for Windows (.NET 4.6)’&lt;/p>
+&lt;p>[Client V] Extracted packed files&lt;/p>
+&lt;p>[Client I] Validated extracted files.&lt;/p>
+&lt;p>[Client I] Finished installing.&lt;/p>
+&lt;p>[Client I] No workspace id found.&lt;/p>
+&lt;/blockquote>
+&lt;p>Incidentally, this will also show the location of the log file&lt;/p>
+&lt;p>You will see in the bottom bar it will now say sign in&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/06-sign-in.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/06-sign-in.png"
+loading="lazy"
+alt="06 - sign in.png"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking that will open a browser and give you a choice of accounts to sign in with, your GitHub or your Microsoft ID&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/07-sign-in.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/07-sign-in.png"
+loading="lazy"
+alt="07 - sign in.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the one that you want to use and do your 2FA.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/08-2FA.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/08-2FA.png"
+loading="lazy"
+alt="08 - 2FA.png"
+>&lt;/a>&lt;/p>
+&lt;p>You do have 2FA on your Microsoft and GitHub (and all the other services)? If not go and set it up now – &lt;a class="link" href="https://account.live.com/proofs/manage/additional?mkt=en-US&amp;amp;refd=account.microsoft.com&amp;amp;refp=security" target="_blank" rel="noopener"
+>here for Microsoft&lt;/a> and &lt;a class="link" href="https://github.com/settings/security" target="_blank" rel="noopener"
+>here for GitHub &lt;/a>&lt;/p>
+&lt;p>Once you have signed in you will get this notification which you can close&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/09-close-this-notification.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/09-close-this-notification.png"
+loading="lazy"
+alt="09 - close this notification.png"
+>&lt;/a>&lt;/p>
+&lt;p>The icon in the bottom will change and show your account name and if you click it it will open the menu&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/09-sharing-menu.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/09-sharing-menu.png"
+loading="lazy"
+alt="09 - sharing menu.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="sharing">Sharing&lt;/h2>
+&lt;p>To share your session you click on the Share icon in the bottom bar or the Start collaboration session in the menu above. The first time you do this there will be a pop-up as shown&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/05-firewall-popup.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/05-firewall-popup.png"
+loading="lazy"
+alt="05 - firewall popup.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can decide which way you (or your organisation) want to share. I chose to accept the firewall exception.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/10-invite-link.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/10-invite-link.png"
+loading="lazy"
+alt="10 - invite link.png"
+>&lt;/a>&lt;/p>
+&lt;p>The invite link is in your clipboard ready to share with your friends and colleagues (other open source contributors ??)&lt;/p>
+&lt;p>They can either open the link in a browser&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/11-join-via-browser.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/11-join-via-browser.png"
+loading="lazy"
+alt="11 - join via browser.png"
+>&lt;/a>&lt;/p>
+&lt;p>or by using the Join Collaboration Session in the menu in VS Code&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/12-Join-via-VS-COde.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/12-Join-via-VS-COde.png"
+loading="lazy"
+alt="12 - Join via VS COde.png"
+>&lt;/a>&lt;/p>
+&lt;p>Once they do the sharer will get a notification&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/13-notification-of-sharing.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/13-notification-of-sharing.png"
+loading="lazy"
+alt="13 - notification of sharing.png"
+>&lt;/a>&lt;/p>
+&lt;p>and the person who has joined will have the same workspace opened in their Visual Studio Code&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2018/05/14-shared-workspace.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/14-shared-workspace.png"
+loading="lazy"
+alt="14 -shared workspace.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can then collaborate on your code and share the session. In the video below the left hand side is running in my jump box in Azure and the right hand side on my laptop and you can see that if you highlight code in one side it is shown in the other and if you alter it in one side it is changed in the other. I also saved that file in the joined session rather than from the session that initialised the sharing and it then saved in both sessions 🙂&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>So that shows how easy it is to install and to use. You can dive deeper &lt;a class="link" href="https://docs.microsoft.com/en-us/visualstudio/liveshare/" target="_blank" rel="noopener"
+>using the documentation&lt;/a>.&lt;/p>
+&lt;p>Happy Collaborating 🙂&lt;/p></description></item><item><title>Setting the default file type for a new file in VS Code</title><link>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</guid><description>&lt;p>Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.&lt;/p>
+&lt;p>To change the language for the file use CTRL +K, M.&lt;/p>
+&lt;p>That’s CTRL and K together and then M afterwards separately.&lt;/p>
+&lt;p>then you can choose the language for the file. It looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-change-language.gif"
+loading="lazy"
+alt="01 - Change language"
+>&lt;/p>
+&lt;p>However, if you just want your new file to open as a particular language every time you can change this in the settings.&lt;/p>
+&lt;p>Click File –&amp;gt; Preferences –&amp;gt; Settings&lt;/p>
+&lt;p>or by clicking CTRL + ,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/02-open-preferences.png"
+loading="lazy"
+alt="02 - Open Preferences.PNG"
+>&lt;/p>
+&lt;p>This opens the settings.json file. Search in the bar for default and scroll down until you see file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/03-file-defaults.png"
+loading="lazy"
+alt="03 - File defaults.PNG"
+>&lt;/p>
+&lt;p>If you hover over the setting that you want to change, you will see a little pencil. Click on that and then Copy to Settings which will copy it to your user settings in the right hand pane.&lt;/p>
+&lt;p>NOTE – You will need to enter powershell and not PowerShell. For other languages, click on the language in the bottom bar and look at the value in the brackets next to the language name&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/04-langauge.png"
+loading="lazy"
+alt="04 - langauge.PNG"
+>&lt;/p>
+&lt;p>Once you have entered the new settings save the file (CTRL + S) and then any new file you open will be using the language you have chosen&lt;/p>
+&lt;p>It looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/05-change-settings.gif"
+loading="lazy"
+alt="05 - Change settings.gif"
+>&lt;/p>
+&lt;p>and now every new file that you open will be opened as a PowerShell file (or whichever language you choose)&lt;/p>
+&lt;p>You will still be able to change the language with CTRL K, m&lt;/p>
+&lt;p>Just to be clear, because people sometimes get this wrong. That’s CTRL and K, let go and then M. You will know you are doing correctly when you see&lt;/p>
+&lt;blockquote>
+&lt;p>(CTRL + K) was pressed waiting for second key of chord……&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/06-waiting-for-key.png"
+loading="lazy"
+alt="06 - waiting for key"
+>&lt;/p>
+&lt;p>If you get it wrong and Press CTRL + K + M then you will open the Extensions search for keymaps.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/07-incorrect.png"
+loading="lazy"
+alt="07 - incorrect.PNG"
+>&lt;/p>
+&lt;p>This is a brilliant feature enabling you to copy key mappings for the programmes you use all the time and save you from learning the Code key mappings. You can find the keymaps in the &lt;a class="link" href="https://marketplace.visualstudio.com/search?target=vscode&amp;amp;category=Keymaps&amp;amp;sortBy=Relevance" target="_blank" rel="noopener"
+>Extensions Marketplace&lt;/a> as well as by pressing CTRL + K + M&lt;/p></description></item><item><title>Using Twitter with VS Code</title><link>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</link><pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Running SQL Queries with Visual Studio Code</title><link>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</guid><description>&lt;p>Reading this blog post by &lt;a class="link" href="http://www.sqlshack.com/introduction-visual-studio-code-dbas/" target="_blank" rel="noopener"
+>Shawn Melton Introduction of Visual Studio Code for DBAs&lt;/a> reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code&lt;/p>
+&lt;p>To download Code go to this link &lt;a class="link" href="https://code.visualstudio.com/download" target="_blank" rel="noopener"
+>https://code.visualstudio.com/download&lt;/a> and choose your operating system. Code works on Windows, Linux and Mac&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/00-code-download.png"
+loading="lazy"
+alt="00-code-download"
+>&lt;/p>
+&lt;p>Once you have downloaded and installed hit CTRL SHIFT and P which will open up the command palette&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/01-ctrlshiftp.png"
+loading="lazy"
+alt="01-ctrlshiftp"
+>&lt;/p>
+&lt;p>Once you start typing the results will filter so type ext and then select Extensions : Install Extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/02-extensions.png"
+loading="lazy"
+alt="02-extensions"
+>&lt;/p>
+&lt;p>Which will open the Extensions tab ( You could have achieved the same end result just by clicking this icon)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/03-install-extensions.png"
+loading="lazy"
+alt="03-install-extensions"
+>&lt;/p>
+&lt;p>But then you would not have learned about the command palette 🙂&lt;/p>
+&lt;p>So, with the extensions tab open, search for mssql and then click install&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/04-search-mssql.png"
+loading="lazy"
+alt="04-search-mssql"
+>&lt;/p>
+&lt;p>Once it has installed the button will change to Reload so click it&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/05-reload.png"
+loading="lazy"
+alt="05-reload"
+>&lt;/p>
+&lt;p>And you will be prompted to Reload the window&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/06-reload-prompt.png"
+loading="lazy"
+alt="06-reload-prompt"
+>&lt;/p>
+&lt;p>Accept the prompt and then open a new file (CTRL N) and then change the language for the file.&lt;/p>
+&lt;p>You can do this by clicking CTRL K and then M (Not CTRL K CTRL M) or click the language button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/07-choose-langauga.png"
+loading="lazy"
+alt="07-choose-langauga"
+>&lt;/p>
+&lt;p>And then choose SQL&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/08-choose-sql.png"
+loading="lazy"
+alt="08-choose-sql"
+>&lt;/p>
+&lt;p>This will start a download so make sure you are connected (and allowed to connect to the internet)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/09-start-download.png"
+loading="lazy"
+alt="09-start-download"
+>&lt;/p>
+&lt;p>Once it has finished it will show this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/10-finished-downloading.png"
+loading="lazy"
+alt="10-finished-downloading"
+>&lt;/p>
+&lt;p>And offer you the chance to read the release notes&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/11-release-notes.png"
+loading="lazy"
+alt="11-release-notes"
+>&lt;/p>
+&lt;p>Which you can get for any extension anytime by finding the extension in the extensions tab and clicking on it. This has links to tutorials as well as information about the release&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/12-release-notes.png"
+loading="lazy"
+alt="12-release-notes"
+>&lt;/p>
+&lt;p>The mssql extension enables Intellisence for T-SQL when you open a .sql file or when you change the language to SQL as shown above for a new file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/13-intellisense.png"
+loading="lazy"
+alt="13-intellisense"
+>&lt;/p>
+&lt;p>Write your T-SQL Query and press CTRL SHIFT and E or Right Click and choose Execute Query. This will ask you to choose a Connection Profile (and display any existing profiles)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/14-execute.png"
+loading="lazy"
+alt="14-execute"
+>&lt;/p>
+&lt;p>Choose Create Connection Profile and answer the prompts&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/15-enter-servername.png"
+loading="lazy"
+alt="15-enter-servername"
+>&lt;/p>
+&lt;p>The query will then run&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/16-query-runs.png"
+loading="lazy"
+alt="16-query-runs"
+>&lt;/p>
+&lt;p>You can then output the results to csv or json if you wish&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/17-results.png"
+loading="lazy"
+alt="17-results"
+>&lt;/p>
+&lt;p>You can find a video showing this whole process with some typos and an error here&lt;/p>
+&lt;p>&lt;a class="link" href="https://youtu.be/_qTNKohFzPE" target="_blank" rel="noopener"
+>Using SQL with VS Code&lt;/a>&lt;/p></description></item></channel></rss>

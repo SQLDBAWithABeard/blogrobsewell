@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alerting on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/alerting/</link><description>Recent content in Alerting on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 04 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/alerting/index.xml" rel="self" type="application/rss+xml"/><item><title>Emailing Disk Space Alerting With Powershell</title><link>https://blog.robsewell.com/blog/emailing-disk-space-alerting-with-powershell/</link><pubDate>Tue, 04 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/emailing-disk-space-alerting-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png" alt="Featured image of post Emailing Disk Space Alerting With Powershell" />&lt;p>A DBA doesn’t want to run out of space on their servers, even in their labs! To avoid this happening I wrote a Powershell script to provide some alerts by email.&lt;/p>
+&lt;p>This is the script and how I worked my way through the solution. I hope it is of benefit to others.&lt;/p>
+&lt;p>The script works in the following way&lt;/p>
+&lt;ul>
+&lt;li>Iterates through a list of servers&lt;/li>
+&lt;li>Runs a WMI query to gather disk information&lt;/li>
+&lt;li>If the free space has fallen below a threshold, checks to see if it has emailed before and if not emails a warning&lt;/li>
+&lt;li>Resets if free space has risen above the threshold&lt;/li>
+&lt;li>Logs what it does but manages the space the logs use&lt;/li>
+&lt;/ul>
+&lt;p>As you will have seen before I use a Servers text file in my scripts. This is a text file with a single server name on each line. You could also use a query against a DBA or MDW database using Invoke-SQLCMD2, which ever is the most suitable for you.&lt;/p>
+&lt;pre>&lt;code>$Servers = Get-Content 'PATH\\TO\\Servers.txt' foreach($Server in $Servers) {
+&lt;/code>&lt;/pre>
+&lt;p>The WMI query is a very simple one to gather the disk information. I format the results and place them in variables for reuse&lt;/p>
+&lt;pre>&lt;code> $Disks = Get-WmiObject win32\_logicaldisk -ComputerName $Server | Where-Object {$\_.drivetype -eq 3}
+$TotalSpace=\[math\]::Round(($Disk.Size/1073741824),2)
+# change to gb and 2 decimal places
+$FreeSpace=\[Math\]::Round(($Disk.FreeSpace/1073741824),2)
+# change to gb and 2 decimal places
+$UsedSpace = $TotalSpace - $FreeSpace
+$PercentFree = \[Math\]::Round((($FreeSpace/$TotalSpace)*100),2)
+# change to gb and 2 decimal places
+&lt;/code>&lt;/pre>
+&lt;p>Use a bit of logic to check if the freespace is below a threshold and see if the email has already been sent&lt;/p>
+&lt;pre>&lt;code># Check if percent free below warning level
+if ($PercentFree -le $SevereLevel) {
+# if text file has been created (ie email should already have been sent) do nothing
+if(Test-Path $CheckFileSevere) {}
+# if percent free below warning level and text file doesnot exist create text file and email
+else {
+&lt;/code>&lt;/pre>
+&lt;p>If it has not create a unique named text file and create the email body using HTML and the values stored in the variables&lt;/p>
+&lt;pre>&lt;code>New-Item $CheckFileSevere -ItemType File #Create Email Body $EmailBody = '' $EmailBody += &amp;quot; &amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>and then send it&lt;/p>
+&lt;pre>&lt;code>$Subject = &amp;quot;URGENT Disk Space Alert 1%&amp;quot;
+$Body = $EmailBody
+$msg = new-object Net.Mail.MailMessage
+$smtp = new-object Net.Mail.SmtpClient($smtpServer)
+$smtp.port = '25'
+$msg.From = $From
+$msg.Sender = $Sender
+$msg.To.Add($To)
+$msg.Subject = $Subject
+$msg.Body = $Body
+$msg.IsBodyHtml = $True
+$smtp.Send($msg)
+&lt;/code>&lt;/pre>
+&lt;p>If the freespace is above all of the warning levels, check for existence of the text file and delete it if found so that the next time the script runs it will send an email.&lt;/p>
+&lt;pre>&lt;code>if(Test-Path $CheckFile) {
+Remove-Item $CheckFile -Force
+&lt;/code>&lt;/pre>
+&lt;p>To enable logging create a log file each day&lt;/p>
+&lt;pre>&lt;code> $Logdate = Get-Date -Format yyyyMMdd
+$LogFile = $Location + 'logfile' + $LogDate+ '.txt'
+# if daily log file does not exist create one
+if(!(Test-Path $LogFile)) {
+New-Item $Logfile -ItemType File
+}
+&lt;/code>&lt;/pre>
+&lt;p>And write the info to it at each action&lt;/p>
+&lt;pre>&lt;code> $logentrydate = (Get-Date).DateTime
+$Log = $logentrydate + ' ' + $ServerName + ' ' + $DriveLetter + ' ' + $VolumeName + ' ' + $PercentFree +' -- Severe Email Sent'
+Add-Content -Value $Log -Path $Logfile
+&lt;/code>&lt;/pre>
+&lt;p>Making sure that you clean up after&lt;/p>
+&lt;pre>&lt;code># any logfiles older than 7 days delete
+Get-ChildItem -Path $Location \*logfile\* |Where-Object {$_.LastWriteTime -gt (Get-Date).AddDays(7) }|Remove-Item -Force
+&lt;/code>&lt;/pre>
+&lt;p>I run the script in a Powershell Step in an SQL Agent Job every 5 minutes and now I know when my servers in my lab are running out of space with an email like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/OldCodeFromBlog/tree/master/EmailingDiskAlertPost" target="_blank" rel="noopener"
+>You can find the script here&lt;/a>&lt;/p></description></item></channel></rss>

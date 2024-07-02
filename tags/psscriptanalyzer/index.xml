@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PSScriptAnalyzer on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/psscriptanalyzer/</link><description>Recent content in PSScriptAnalyzer on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 Feb 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/psscriptanalyzer/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code – Terminal crashes when formatting script</title><link>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</link><pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" alt="Featured image of post VS Code – Terminal crashes when formatting script" />&lt;p>I love VS Code. I love being able to press ALT + SHIFT + F and format my code.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif"
+loading="lazy"
+alt="formatting.gif"
+>&lt;/a>&lt;/p>
+&lt;h2 id="the-problem">The Problem&lt;/h2>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png"
+loading="lazy"
+alt="format error.png"
+>&lt;/a>&lt;/p>
+&lt;p>I could reproduce it will. This was very frustrating.&lt;/p>
+&lt;h2 id="turning-on-verbose-logging">Turning on Verbose Logging&lt;/h2>
+&lt;p>To turn on verbose logging for the PowerShell Editor Services go the Cog in the bottom left, click it and then click User Settings.&lt;/p>
+&lt;p>Search for powershell.developer.editorServicesLogLevel&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png"
+loading="lazy"
+alt="powershell.developer.editorServicesLogLevel.png"
+>&lt;/a>&lt;/p>
+&lt;p>If you hover over the left hand channel a pencil will appear, click it and then click replace in settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/edit-settings.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/edit-settings.png"
+loading="lazy"
+alt="edit settings.png"
+>&lt;/a>&lt;/p>
+&lt;p>This will put the entry in the right hand side where you can change the value. Set it to Verbose and save&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/user-settigns.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/user-settigns.png"
+loading="lazy"
+alt="user settigns.png"
+>&lt;/a>&lt;/p>
+&lt;p>a prompt will come up asking if you want to restart PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/start-a-new-session.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/start-a-new-session.png"
+loading="lazy"
+alt="start a new session.png"
+>&lt;/a>&lt;/p>
+&lt;p>When you restart PowerShell, if you click on  Output and choose PowerShell Extension Logs you will see the path to the log file&lt;/p>
+&lt;h2 id="logfilepathpnghttpsblogrobsewellcomassetsuploads201802logfilepathpnghttpsblogrobsewellcomassetsuploads201802logfilepathpng">&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/logfilepath.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/logfilepath.png"
+loading="lazy"
+alt="logfilepath.png"
+>&lt;/a>&lt;/h2>
+&lt;h2 id="reproduce-the-error">Reproduce the error&lt;/h2>
+&lt;p>I then reproduced the error and opened the log file this is what I got&lt;/p>
+&lt;blockquote>
+&lt;p>10/02/2018 09:11:19 [ERROR] – Method “OnListenTaskCompleted” at line 391 of C:\projects\powershelleditorservices\src\PowerShellEditorServices.Protocol\MessageProtocol\ProtocolEndpoint.cs&lt;/p>
+&lt;p>ProtocolEndpoint message loop terminated due to unhandled exception:&lt;/p>
+&lt;p>System.AggregateException: One or more errors occurred. —&amp;gt; System.Management.Automation.CommandNotFoundException: The term ‘Invoke-Formatter’ is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.&lt;br>
+at System.Management.Automation.Runspaces.PipelineBase.Invoke(IEnumerable input)&lt;br>
+at System.Management.Automation.PowerShell.Worker.ConstructPipelineAndDoWork(Runspace rs, Boolean performSyncInvoke)&lt;br>
+at System.Management.Automation.PowerShell.Worker.CreateRunspaceIfNeededAndDoWork(Runspace rsToUse, Boolean isSync)&lt;br>
+at System.Management.Automation.PowerShell.CoreInvokeHelper[TInput,TOutput](PSDataCollection`1 input, PSDataCollection`1 output, PSInvocationSettings settings)&lt;br>
+at System.Management.Automation.PowerShell.CoreInvoke[TInput,TOutput](PSDataCollection`1 input, PSDataCollection`1 output, PSInvocationSettings settings)&lt;br>
+at System.Management.Automation.PowerShell.Invoke(IEnumerable input, PSInvocationSettings settings)&lt;br>
+at Microsoft.PowerShell.EditorServices.AnalysisService.InvokePowerShell(String command, IDictionary&lt;code>2 paramArgMap)
+at System.Threading.Tasks.Task&lt;/code>1.InnerInvoke()&lt;br>
+at System.Threading.Tasks.Task.Execute()&lt;br>
+— End of stack trace from previous location where exception was thrown —&lt;br>
+at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()&lt;br>
+at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&lt;br>
+at Microsoft.PowerShell.EditorServices.AnalysisService.&lt;!-- raw HTML omitted -->d__31.MoveNext()&lt;br>
+— End of stack trace from previous location where exception was thrown —&lt;br>
+at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()&lt;br>
+at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&lt;br>
+at Microsoft.PowerShell.EditorServices.AnalysisService.&lt;!-- raw HTML omitted -->d__22.MoveNext()&lt;br>
+— End of stack trace from previous location where exception was thrown —&lt;br>
+at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="open-an-issue-on-github">Open an issue on GitHub&lt;/h2>
+&lt;p>I couldnt quickly see what was happening so &lt;a class="link" href="https://github.com/PowerShell/vscode-powershell/issues/1193" target="_blank" rel="noopener"
+>I opened an issue&lt;/a> on the &lt;a class="link" href="https://github.com/PowerShell/vscode-powershell" target="_blank" rel="noopener"
+>vscode-powershell repo&lt;/a> by going to issues and clicking new issue and following the instructions&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/new-issue.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/new-issue.png"
+loading="lazy"
+alt="new issue.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="the-resolution">The Resolution&lt;/h2>
+&lt;p>Keith Hill &lt;a class="link" href="https://rkeithhill.wordpress.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/r_keith_hill" target="_blank" rel="noopener"
+>t&lt;/a> pointed me to the resolution. Thank you Keith.&lt;/p>
+&lt;p>Further up in the log file there is a line where the editor services is loading the PSScriptAnalyzer module and it should have the Invoke-Formatter command exported, but mine was not. It loaded the PsScriptAnalyzer module  from my users module directory&lt;/p>
+&lt;blockquote>
+&lt;p>10/02/2018 09:11:01 [NORMAL] – Method “FindPSScriptAnalyzerModule” at line 354 of C:\projects\powershelleditorservices\src\PowerShellEditorServices\Analysis\AnalysisService.cs&lt;/p>
+&lt;p>PSScriptAnalyzer found at C:\Users\XXXX\Documents\WindowsPowerShell\Modules\PSScriptAnalyzer\1.10.0\PSScriptAnalyzer.psd1&lt;/p>
+&lt;p>10/02/2018 09:11:01 [VERBOSE] – Method “EnumeratePSScriptAnalyzerCmdlets” at line 389 of C:\projects\powershelleditorservices\src\PowerShellEditorServices\Analysis\AnalysisService.cs&lt;/p>
+&lt;p>The following cmdlets are available in the imported PSScriptAnalyzer module:&lt;br>
+Get-ScriptAnalyzerRule&lt;br>
+Invoke-ScriptAnalyzer&lt;/p>
+&lt;/blockquote>
+&lt;p>I ran&lt;/p>
+&lt;p>$Env:PSModulePath.Split(&amp;rsquo;;')&lt;/p>
+&lt;p>to see the module paths&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/module-path.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/module-path.png"
+loading="lazy"
+alt="module path.png"
+>&lt;/a>&lt;/p>
+&lt;p>and looked in the .vscode-insiders\extensions\ms-vscode.powershell-1.5.1\modules directory. There was no PsScriptAnalyzer folder&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/no-module.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/no-module.png"
+loading="lazy"
+alt="no module.png"
+>&lt;/a>&lt;/p>
+&lt;p>So I copied the PSScriptAnalyzer folder from the normal VS Code PowerShell Extension module folder into that folder and restarted PowerShell and I had my formatting back again 🙂&lt;/p>
+&lt;p>I then reset the logging mode in my user settings back to Normal&lt;/p>
+&lt;p>Thank you Keith&lt;/p></description></item></channel></rss>

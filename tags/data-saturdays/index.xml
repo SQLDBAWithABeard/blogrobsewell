@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Data Saturdays on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/data-saturdays/</link><description>Recent content in Data Saturdays on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/data-saturdays/index.xml" rel="self" type="application/rss+xml"/><item><title>dbachecks v3 at Data Saturday Oslo</title><link>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-session.jpeg" alt="Featured image of post dbachecks v3 at Data Saturday Oslo" />&lt;h1 id="dbachecks-v3-at-data-saturday-oslo">dbachecks v3 at Data Saturday Oslo&lt;/h1>
+&lt;p>&lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/datasaturdayoslo-session.jpeg"
+loading="lazy"
+alt="dbachecksv3"
+>&lt;/a>&lt;/p>
+&lt;p>On Saturday September 2nd 2023, will be &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>Data Saturday Oslo&lt;/a> in Oslo, Norway.&lt;/p>
+&lt;p>For more information about this free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>DataSaturday0035&lt;/a> where you can sign up. Don&amp;rsquo;t wait, spaces are limited!&lt;/p>
+&lt;p>I will be presenting a session with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>Mastodon&lt;/a> and Cláudio Silva &lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+>Twitter&lt;/a> introducing dbachecks v3.&lt;/p>
+&lt;h2 id="abstract">abstract&lt;/h2>
+&lt;p>dbachecks v1 was released back in 2018, bringing together the DBA PowerShell magic of dbatools with pester, a PowerShell testing framework to create a powerful infrastructure validation tool.&lt;/p>
+&lt;p>dbachecks is able to answer questions such as:&lt;/p>
+&lt;ul>
+&lt;li>can I connect to all of my instances?&lt;/li>
+&lt;li>was my last full backup with 7 days&lt;/li>
+&lt;li>are my databases owned by the expected login&lt;/li>
+&lt;li>am I using &amp;lsquo;page verify&amp;rsquo; to detect corruption&lt;/li>
+&lt;li>are any of my certificates nearing expiration&lt;/li>
+&lt;li>and many more&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>v2 introduced the ability to store these results in a database and create a time series chart showing changes over time.&lt;/p>
+&lt;p>But now, we introduce v3!&lt;/p>
+&lt;p>dbachecks v3 takes advantage of Pester v5 - a total rewrite of the tool enabled us to not only increase the performance of the module but position it to be able to grow and expand in a controlled and predictable way in the future.&lt;/p>
+&lt;p>In this session, we&amp;rsquo;ll talk about the changes we&amp;rsquo;ve made to the module, demo the new features and prove the massive performance increase using Profiler.&lt;/p>
+&lt;p>Come and join us as we share the biggest release yet of the dbachecks module and learn how you can utilise it in your environments.&lt;/p>
+&lt;p>For more information about the free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+>DataSaturday0035&lt;/a>. Don&amp;rsquo;t wait, spaces are limited!&lt;/p>
+&lt;p>You can also join Jess and I on Friday 1st September 2023 for a power-packed day of learning, networking, and enhancing your DBA skills.&lt;/p>
+&lt;p>Ready to take your DBA skills to the next level in a hybrid environment? Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+>Register Here&lt;/a>.&lt;/p></description></item><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" />&lt;h1 id="a-different-method-for-my-own-site">A different method for my own site&lt;/h1>
+&lt;p>This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>b&lt;/a> and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+>b&lt;/a> after a twitter discussion a few weeks ago.&lt;/p>
+&lt;blockquote>
+&lt;p>How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="do-you-need-to">Do you need to?&lt;/h2>
+&lt;p>My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code>CTRL + K, V&lt;/code> and you can see a live preview of your post as you type.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>However, I appreciate that at some point you will probably want to see what your site looks like locally, so I decided to look at the blog posts in the theme locally for this blog. My &lt;a class="link" href="_posts%5c2021-04-10-locally-viewing-github-pages-new-data-saturdays.md" >last post&lt;/a> showed how I do this with the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site&lt;/a> but I get an error when running this for my site because it cant find the gem sources. This is because I am using a remote theme for my blog.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/nogemsources.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nogemsources.png"
+loading="lazy"
+alt="nogemsources"
+>&lt;/a>&lt;/p>
+&lt;p>What I could do is work out how to get these in the right place, but I am lazy! Whilst researching for the Data Saturdays site, I had found another docker container, the official Jekyll one &lt;a class="link" href="https://hub.docker.com/r/jekyll/jekyll" target="_blank" rel="noopener"
+>https://hub.docker.com/r/jekyll/jekyll&lt;/a>. I wondered if I could use that.&lt;/p>
+&lt;h2 id="which-version-to-use">Which version to use?&lt;/h2>
+&lt;p>First we need to know which version of Jekyll GitHub Pages is using. You can find all of that information here &lt;a class="link" href="https://pages.github.com/versions/" target="_blank" rel="noopener"
+>https://pages.github.com/versions/&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/githubpagesversions.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/githubpagesversions.jpg"
+loading="lazy"
+alt="ghpagesversions"
+>&lt;/a>&lt;/p>
+&lt;p>So we need to use 3.9.0&lt;/p>
+&lt;p>so I ran&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.9&lt;/code>&lt;/p>
+&lt;p>but&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/noimage.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/noimage.jpg"
+loading="lazy"
+alt="noimage"
+>&lt;/a>&lt;/p>
+&lt;p>so I tried 3.8.6 and it worked for me.&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.8.6&lt;/code>&lt;/p>
+&lt;h1 id="set-up">Set up&lt;/h1>
+&lt;p>Let&amp;rsquo;s back up a bit and set the environment up. I am using Docker on Windows Subsystem for Linux 2 (WSL2) I installed it &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>using this guide&lt;/a>. I believe this will work using native Docker, you would just need to replace the &lt;code>$PWD&lt;/code> in the example below with a dot &lt;code>.&lt;/code>&lt;/p>
+&lt;p>Once that is installed and the image is pulled, I can then run my blog locally using&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=$PWD:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>or if not using WSL2&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=.:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>The &lt;code>--rm&lt;/code> means that the container will be removed when it is stopped, &lt;code>--volume=&amp;quot;$PWD:/srv/jekyll&amp;quot;&lt;/code> maps the current directory locally to the &lt;code>/srv/jekyll&lt;/code> directory in the container so I need to change the directory to my local repository for my blog. &lt;code>-p 4001:4000&lt;/code> says map port 4001 on my machine to port 4000 on the container. This means that I can view the blog locally at https://localhost:4001. &lt;code>jekyll serve&lt;/code> will build the site and run it for me.&lt;/p>
+&lt;h2 id="of-course-there-is-tweaking">Of course, there is tweaking&lt;/h2>
+&lt;p>We have to make a few changes to make this work easily. When I run the site locally with this command I get the following error and the site would not build.&lt;/p>
+&lt;blockquote>
+&lt;p>Liquid Exception: No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to your github.com repository. in /_layouts/default.html&lt;br>
+ERROR: YOUR SITE COULD NOT BE BUILT:&lt;br>
+No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to yocom repository.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/jekyllerror.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/jekyllerror.jpg"
+loading="lazy"
+alt="jekyllerror"
+>&lt;/a>&lt;/p>
+&lt;p>to fix this add the following to your &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>repository: GITHUBUSERNAME/REPONAME&lt;/code>&lt;/p>
+&lt;p>mine is&lt;/p>
+&lt;p>&lt;code>repository: SQLDBAWithABeard/robsewell&lt;/code>&lt;/p>
+&lt;p>Then when I run the container I get another warning&lt;/p>
+&lt;blockquote>
+&lt;p>GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data.&lt;/p>
+&lt;/blockquote>
+&lt;p>This does not really matter as the site still builds but another warning&lt;/p>
+&lt;blockquote>
+&lt;p>Auto-regeneration may not work on some Windows versions.
+Please see: &lt;a class="link" href="https://github.com/Microsoft/BashOnWindows/issues/216" target="_blank" rel="noopener"
+>https://github.com/Microsoft/BashOnWindows/issues/216&lt;/a>
+If it does not work, please upgrade Bash on Windows or run Jekyll with &amp;ndash;no-watch.&lt;/p>
+&lt;/blockquote>
+&lt;p>means that the site will not auto-regenerate when you make a change and save the file.&lt;/p>
+&lt;p>We fix these errors by adding&lt;/p>
+&lt;p>&lt;code>github: [metadata]&lt;/code>&lt;/p>
+&lt;p>to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>and running the container with an extra switch for the jekyll command &lt;code>--force_polling&lt;/code>&lt;/p>
+&lt;h2 id="so-now-it-works">So now it works?&lt;/h2>
+&lt;p>So with the additional data in the &lt;code>_config.yml&lt;/code> file and the new command&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>the site will build. You will still get the warning for auto-regeneration but it works. The purple arrow and the yellow box show the file that was changed and that it regenerated.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/regenerate.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/regenerate.jpg"
+loading="lazy"
+alt="regenerate"
+>&lt;/a>&lt;/p>
+&lt;p>It will only regenerate whilst running for blog post changes and not for configuration changes, such as altering the &lt;code>_config.yml&lt;/code> file. If you want to see those, you will have to stop the container and re-run it.&lt;/p>
+&lt;p>There is one last problem however. When you write your blog posts in Jekyll you name the file YYYY-MM-DD-Nameoffile.md this will give the post time of YYYY-MM-DD but the file for this blog post is named with a date in the future and by default it doesn&amp;rsquo;t show. The green box shows the file name but there is no corresponding blog post.&lt;/p>
+&lt;p>To fix this we add another entry to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>future: true&lt;/code>&lt;/p>
+&lt;p>This will tell Jekyll to show the posts with a data in the future. Unless you wish to show future posts on your blog when it is live, you will have to remember to change this to&lt;/p>
+&lt;p>&lt;code>future: false&lt;/code>&lt;/p>
+&lt;p>when you push your changes to GitHub so that your blog behaves as expected but now you can see your current blog post and write away and be able to see how it will look in your theme&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/futureposts.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/futureposts.jpg"
+loading="lazy"
+alt="futureposts"
+>&lt;/a>&lt;/p>
+&lt;h1 id="lets-make-it-even-better">Let&amp;rsquo;s make it even better&lt;/h1>
+&lt;p>When you run the container, it will need to download all of the things it needs to run the site. This can take a little time.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/downloadingthings.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/downloadingthings.jpg"
+loading="lazy"
+alt="downloadingthings"
+>&lt;/a>&lt;/p>
+&lt;p>It would be better if we had our own image that had all of those already downloaded for us. Let&amp;rsquo;s create our own image. We need to run our container without the &lt;code>rm&lt;/code> option this time as we need it not to be removed when we stop it.&lt;/p>
+&lt;p>&lt;code>docker run -volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>Once it has finished downloading and installing all that it needs and generated the site press &lt;code>CTRL +C&lt;/code> to stop the container and run&lt;/p>
+&lt;p>&lt;code>docker ps -a&lt;/code>&lt;/p>
+&lt;p>which will show you all of containers.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/dockerps.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/dockerps.jpg"
+loading="lazy"
+alt="dockerps"
+>&lt;/a>&lt;/p>
+&lt;p>Use the first 3 characters of the container. In my example it is &lt;code>760&lt;/code>. If you have more than one, look for the one with the &lt;code>jekyll/jekyll:3.8.6&lt;/code> as the image.&lt;/p>
+&lt;p>Then we can create our own image using&lt;/p>
+&lt;p>&lt;code>docker commit 760 myblogimage&lt;/code>&lt;/p>
+&lt;p>replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;p>Once you have created the image, you can remove the stopped container with&lt;/p>
+&lt;p>&lt;code>docker rm 760&lt;/code>&lt;/p>
+&lt;p>Again, replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;h2 id="quicker-run">Quicker run&lt;/h2>
+&lt;p>Now you can use your own image and the container will not need to download and install all of the things. Replace &lt;code>jekyll/jekyll:3.8&lt;/code> with &lt;code>myblogimage&lt;/code>&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 myblogimage jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/muchquicker.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/muchquicker.jpg"
+loading="lazy"
+alt="muchquicker"
+>&lt;/a>&lt;/p>
+&lt;p>Happy local blog writing.&lt;/p></description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" />&lt;h1 id="data-saturdays-has-new-clothes">Data Saturdays Has New Clothes!&lt;/h1>
+&lt;p>The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+>&lt;/a>&lt;/p>
+&lt;p>Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+>https://www.dcac.com/&lt;/a> generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+>99designs.com&lt;/a>. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>blog&lt;/a> for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p>
+&lt;h1 id="now-we-have-to-update-the-web-site">Now we have to update the web-site&lt;/h1>
+&lt;p>The next challenge we face is to update the website. As the website is hosted on GitHub Pages using Jekyll, this means that we can easily update the website by updating the code and letting GitHub actions build the new site but we have no way of checking the way that it looks before we push the changes. With such a radical change required, I felt that it would be a good idea to explore how to do this locally.&lt;/p>
+&lt;h2 id="install-everything-you-need-locally">Install everything you need locally&lt;/h2>
+&lt;p>I examined the requirements to create a local development environment and this meant installing Jekyll and Ruby and a host of other things, there appeared to be a whole bundle of quirks and strange errors that may or may not need to be handled so I quickly went off that idea!!&lt;/p>
+&lt;h2 id="docker-to-the-rescue">Docker to the rescue&lt;/h2>
+&lt;p>This is a fantastic use case for using a Docker container. I can host all of the required bits inside a container, spin it up and down as I need it and I don&amp;rsquo;t have to worry about polluting my machine with software and settings or the pain of having to configure it to work.&lt;/p>
+&lt;p>Also, other people have already done a lot of the work so I dont have to.&lt;/p>
+&lt;p>I am running Docker in WSL2. I followed these &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>instructions&lt;/a> to set it up. It doesn&amp;rsquo;t take very long.&lt;/p>
+&lt;p>With thanks to Hans Kristian Flaatten &lt;a class="link" href="https://github.com/Starefossen" target="_blank" rel="noopener"
+>GitHub&lt;/a> - &lt;a class="link" href="https://twitter.com/Starefossen" target="_blank" rel="noopener"
+>Twitter&lt;/a> who has created &lt;a class="link" href="https://github.com/Starefossen/docker-github-pages" target="_blank" rel="noopener"
+>this docker image&lt;/a> it is as easy as running this from the local directory of the site repository&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v &amp;#34;$PWD&amp;#34;:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you are not using WSL but native Docker on Windows, then the command to run is slightly different&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v .:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>As soon as the container has started running and built the site I can see my changes locally in my browser at &lt;code>http://localhost:4000/&lt;/code> There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/localdev.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localdev.jpg"
+loading="lazy"
+alt="localdev"
+>&lt;/a>&lt;/p>
+&lt;h1 id="develop-and-test">Develop and Test&lt;/h1>
+&lt;p>Now I can make changes to the code in the website and save the file and the site will update. In the below video, you can see that I have updated the favicon so that the new logo appears.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>I shall go back to editing the site now.&lt;/p>
+&lt;h1 id="a-little-feature-if-you-are-working-on-your-event-page">A little &amp;lsquo;Feature&amp;rsquo; if you are working on your event page&lt;/h1>
+&lt;p>If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts &lt;code>http://0.0.0.0:4000/&lt;/code> like &lt;a class="link" href="http://0.0.0.0:4000/2021-04-17-datasaturday0005/" target="_blank" rel="noopener"
+>http://0.0.0.0:4000/2021-04-17-datasaturday0005/&lt;/a>. This will not work on a Windows machine so you will have to replace &lt;code>0.0.0.0&lt;/code> in the address bar with &lt;code>localhost&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/0000.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/0000.jpg"
+loading="lazy"
+alt="0000"
+>&lt;/a>&lt;/p>
+&lt;p>and then it will work&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg"
+loading="lazy"
+alt="localhostworks"
+>&lt;/a>&lt;/p>
+&lt;h1 id="data-saturdays">Data Saturdays&lt;/h1>
+&lt;p>You can find the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site here&lt;/a>. There is a list of all of the upcoming and past Data Saturdays events available.&lt;/p></description></item><item><title>Creating a New Data Saturdays event</title><link>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</link><pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturdays.png" alt="Featured image of post Creating a New Data Saturdays event" />&lt;h1 id="creating-a-new-data-saturdays-event">Creating a New Data Saturdays Event&lt;/h1>
+&lt;p>There&amp;rsquo;s a new process to create a Data Saturdays Event page, so I thought I would write an explanation and a run through&lt;/p>
+&lt;h2 id="what-is-data-saturdays-">What is Data Saturdays ?&lt;/h2>
+&lt;p>Firstly, not everyone will know what a Data Saturday event is, so lets start with that. There are two parts to it.&lt;/p>
+&lt;p>A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.&lt;/p>
+&lt;p>The Data Saturdays resource is an &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>open-source repository&lt;/a> which enables event organisers to easily build a web presence as an entry point into their event. It integrates with other free event management solutions such as &lt;a class="link" href="https://sessionize.com" target="_blank" rel="noopener"
+>Sessionize&lt;/a> enabling Call For Speakers, easily integrating the schedule, room links and speaker walls. The website is &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>https://datasaturdays.com&lt;/a>&lt;/p>
+&lt;p>Here is a screenshot of the first Data Saturday &amp;ldquo;in&amp;rdquo; Pordenone.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturday1.png"
+loading="lazy"
+alt="Pordenone"
+>&lt;/p>
+&lt;p>The marvelous &lt;a class="link" href="https://twitter.com/spaghettidba" target="_blank" rel="noopener"
+>Gianluca Sartori&lt;/a> and I started this to enable Pordenone to hold an event. We open-sourced the &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>code&lt;/a> and hosted it in the &lt;a class="link" href="https://github.com/sqlcollaborative/" target="_blank" rel="noopener"
+>SQL Collaborative GitHub organisation&lt;/a> alongside community tools such as &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> with a &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/blob/main/LICENSE" target="_blank" rel="noopener"
+>MIT licence&lt;/a> so that it is free for anyone to use and to collaborate with. The website is hosted on &lt;a class="link" href="https://pages.github.com/" target="_blank" rel="noopener"
+>GitHub Pages&lt;/a> which generates static pages using &lt;a class="link" href="https://docs.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll" target="_blank" rel="noopener"
+>Jekyll&lt;/a>. We figured that this not only enabled a quick free solution but also offered opportunities for people to enrich their skills by collaborating.&lt;/p>
+&lt;p>We wanted to include other community leaders to assist with guiding the project and we were proud that everyone we asked to be involved accepted. The people who are Admins of the project (who can approve changes to the code and therefore the website) in addition to Gianluca and I are : -&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Steve Jones&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlespresso" target="_blank" rel="noopener"
+>Monica Rathbun&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/_randolph_west" target="_blank" rel="noopener"
+>Randolph West&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/intoleranse" target="_blank" rel="noopener"
+>Johan Ludvig Brattås&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/amtwo" target="_blank" rel="noopener"
+>Andy Mallon&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlzelda" target="_blank" rel="noopener"
+>Elizabeth Noble&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/Warwick_Rudd" target="_blank" rel="noopener"
+>Warwick Rudd&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://twitter.com/sqlatspeed" target="_blank" rel="noopener"
+>Matt Gordon&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>We have now enabled 10 Data Saturday events to exist, which we still think is amazing! However with growth comes challenges.&lt;/p>
+&lt;h2 id="creating-an-event-the-old-way">Creating an event the old way&lt;/h2>
+&lt;p>The old method of creating an event involved the organiser providing the required information and an admin creating the static HTML page. Copying and pasting, ensuring that the template stayed the same but the detail was altered. Of course, when things are done manually humans can make errors and we made errors. The beauty of hosting the website in code in GitHub is that we can quickly change the code when we notice and fix them but this was not ideal.&lt;/p>
+&lt;h2 id="automation-automation-automation-">Automation Automation AUTOMATION !&lt;/h2>
+&lt;p>I love automation, I get a real buzz out of taking manual monotonous tasks and automating them. I looked at the process we were following and took the bait and decided to automate it. I have created a data-driven process for creating and updating the event web-page and the rest of this blog post is an accompaniment to &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/wiki" target="_blank" rel="noopener"
+>the official documentation in the Wiki in the Data Saturdays GitHub repository&lt;/a>. I might also blog about how I did it.&lt;/p>
+&lt;p>If you wish to just watch a video, you can find that here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/QdoZ7NNn32c"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;h2 id="creating-a-new-data-saturday-event">Creating a New Data Saturday Event&lt;/h2>
+&lt;p>How do you create a new event? The steps are laid out in the &lt;a class="link" href="https://github.com/sqlcollaborative/DataSaturdays/wiki" target="_blank" rel="noopener"
+>wiki&lt;/a>&lt;/p>
+&lt;h3 id="tooling">Tooling&lt;/h3>
+&lt;p>We suggest that you use &lt;a class="link" href="http://aka.ms/vscode" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> as the editor to make these changes. Visual Studio Code is a superb free lightweight cross-platform code editor. To reduce the frustration we also suggest that you add the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml" target="_blank" rel="noopener"
+>YAML Extension&lt;/a> to Visual Studio Code as this will help to identify any problems with YAML.&lt;/p>
+&lt;h3 id="fork-the-data-saturdays-repository">Fork the Data Saturdays Repository&lt;/h3>
+&lt;p>I have previously written a blog post that &lt;a class="link" href="https://blog.robsewell.com/blog/source%20control/jupyter%20notebooks/azure%20data%20studio/dbatools/dbachecks/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/" target="_blank" rel="noopener"
+>explains how to contribute to an open-source repository which you can also use as reference for some of these steps&lt;/a>&lt;/p>
+&lt;p>We are using GitHub as the source control for the website, so you will need to signup for a &lt;a class="link" href="https://github.com/" target="_blank" rel="noopener"
+>GitHub account&lt;/a> if you do not have one already. This is free. Once you have that, navigate to the &lt;a class="link" href="https://github.com/sqlcollaborative/datasaturdays" target="_blank" rel="noopener"
+>Data Saturdays repository&lt;/a> and click on the Fork button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/fork.png"
+loading="lazy"
+alt="fork"
+>&lt;/p>
+&lt;p>It will ask you where you want to fork it and you should choose your own GitHub account&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/forkwhere.png"
+loading="lazy"
+alt="forkwhere"
+>&lt;/p>
+&lt;p>It will only take a few seconds and you will have a fork of the repository in your own account.&lt;/p>
+&lt;h3 id="clone-the-repository-to-your-machine">Clone the Repository to your machine&lt;/h3>
+&lt;p>To work with the code, you need to clone it to your own machine (There are other options like &lt;a class="link" href="https://github.com/features/codespaces" target="_blank" rel="noopener"
+>codespaces&lt;/a> which I love, but we will leave that for another time) Click on the green Code button and copy the URL using the button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/cloneweb.png"
+loading="lazy"
+alt="cloneweb"
+>&lt;/p>
+&lt;p>then in Visual Studio Code &lt;code>CTRL + SHIFT + P&lt;/code> will open the Command Palette and search for clone&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/clonevs.png"
+loading="lazy"
+alt="clonevs"
+>&lt;/p>
+&lt;p>If you do not see Git:Clone you will need to install git from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+>https://git-scm.com/downloads&lt;/a>&lt;/p>
+&lt;h3 id="create-a-new-branch">Create a new branch&lt;/h3>
+&lt;p>You create a new branch to hold your changes by clicking on the branch name in the bottom left&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/branchchoose.png"
+loading="lazy"
+alt="branchchoose"
+>&lt;/p>
+&lt;p>and give it a new name&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newbranch.png"
+loading="lazy"
+alt="newbranch"
+>&lt;/p>
+&lt;h3 id="create-the-markdown-file">Create the Markdown File&lt;/h3>
+&lt;p>Now you can start to create the data for your event. First you need to see what the next available number is. Check the &lt;code>_data/events&lt;/code> directory to see what has gone before you.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/getnextnumber.png"
+loading="lazy"
+alt="getnextnumber"
+>&lt;/p>
+&lt;p>In the &lt;code>_posts&lt;/code> directory, create a new file with the following naming convention &lt;code>YYYY-MM-DD-datasaturdayXXXX.md&lt;/code> where &lt;code>XXXX&lt;/code> is the next number available. An example name is &lt;code>2021-06-12-datasaturday0007.md&lt;/code>&lt;/p>
+&lt;p>In the file you place the following content&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">layout: post
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;The Name of the Data Saturday in double quotes&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">subtitle: &amp;#34;Data Saturday&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tags: [event]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">comments: false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">data: datasaturdayXXXX
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The 3 dashes are important to keep. The name must be in double quotes and the data must match your number. It should look like this.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/markdown.png"
+loading="lazy"
+alt="markdown"
+>&lt;/p>
+&lt;p>Save the file.&lt;/p>
+&lt;h3 id="create-the-data-file">Create the data file.&lt;/h3>
+&lt;p>This is the most important file. This file is the one that will feed the page that you use. This is the file that you will update as your event timeline progresses.&lt;/p>
+&lt;p>In the &lt;code>_data/events&lt;/code> directory create a new file named &lt;code>datasaturdayXXXX.yml&lt;/code> (The XXXX is your number again) example &lt;code>datasaturday0007.yml&lt;/code>&lt;/p>
+&lt;p>In this file paste all the following&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: &amp;#34;This is the name of your event inside the double quotes&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: The date of your event in YYYY-MM-DD HH:mm:ss TZ IE 2021-06-12 08:00:00 -0000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: &amp;#34;Your event description inside double quotes, you may use HTML.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">You MUST escape double quotes with a backslash \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(Look in the repo or wiki for examples of how to enter images)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Line breaks need to be entered as &amp;lt;br&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">registrationurl: This is your registration URL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">join:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: Click on the room you want to join. You can change rooms at any time to attend the sessions that you prefer.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rooms:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Room 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> url: you can add more rooms if you have a virtual event. You can remove these if you do not know yet.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scheduleurl: This is your schedule URL from Sessionize. You can leave this blank until you have it.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sponsors:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - link: https://yoursponsorlink
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: your sponsor image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> height: image height if required
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">speakerlisturl: This is your Call For Speakers URL when you start, once you have chosen your sessions change this to your Sessionize SpeakerWall API URL
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">callforspeakers: true (until your call for speaker finishes!)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">volunteerrequesturl: If you want a link for people to volunteer place it here
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">organizers:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Your name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> twitter: https://twitter.com/TWITTERNAME
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> email: Contact email or not
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now you have to fill in your own data. The fields have explanations in them, the wiki has descriptions and you can always refer back to this blog post also. Some are obvious like name and date, some will take a little thought like description and some you won&amp;rsquo;t have yet like your Sessionize API URLs.&lt;/p>
+&lt;p>This file can be altered any time that you like during your event timeline as more information becomes available or you wish to change things. Each time, you can create a Pull Request to the Data Saturdays repository but before that &lt;strong>It is really important&lt;/strong> that you check your YAML.&lt;/p>
+&lt;p>Once your data file is ready&lt;/p>
+&lt;h3 id="check-your-yaml">Check your YAML&lt;/h3>
+&lt;p>If you have followed our advice and used Visual Studio Code and the YAML extension then you can check that your YAML is correctly formed by looking at the problems tab&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/noproblem.png"
+loading="lazy"
+alt="noproblem"
+>&lt;/p>
+&lt;p>The example above has no problems so the YAML is correct. If it is not you will see&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/problem.png"
+loading="lazy"
+alt="problem"
+>&lt;/p>
+&lt;p>Normally with YAML the problem is spaces, try to line up the text until the problem goes away.&lt;/p>
+&lt;h3 id="sync-your-local-repository-with-github">Sync your local repository with GitHub&lt;/h3>
+&lt;p>Once your changes have been made, you will need to commit them with a commit message. We suggest that it is something relevant to your event&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/commit.png"
+loading="lazy"
+alt="commit"
+>&lt;/p>
+&lt;p>Then you will need to press the publish button in Visual Studio Code to publish this branch to GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/publish.png"
+loading="lazy"
+alt="publish"
+>&lt;/p>
+&lt;h3 id="create-a-pull-request-in-the-data-saturdays-repository">Create a Pull Request in the Data Saturdays Repository&lt;/h3>
+&lt;p>Last step is to create a Pull Request. Open your browser at your local GitHub repository. You will see a green button saying compare and pull request.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/createpr.png"
+loading="lazy"
+alt="createpr"
+>&lt;/p>
+&lt;p>When you click that it will automatically open a pull request for you. Add some details about who you are and your event and an admin will then review it and merge it. Once it has been merged, the site will be rebuilt and will include your new event page.&lt;/p>
+&lt;h3 id="continue-to-update-your-event">Continue to update your event&lt;/h3>
+&lt;p>AS you progress along your event timeline, you will need to edit the data file and create a new Pull Request. You will do this&lt;/p>
+&lt;ul>
+&lt;li>When you get a new sponsor&lt;/li>
+&lt;li>When you have enough volunteers&lt;/li>
+&lt;li>When your Call for Speaker closes&lt;/li>
+&lt;li>When your event is published and you have your SpeakerWall and Schedule API URLs from Sessionize&lt;/li>
+&lt;li>To add links to your virtual rooms&lt;/li>
+&lt;li>To add your feedback links&lt;/li>
+&lt;li>After your event has finished&lt;/li>
+&lt;/ul>
+&lt;p>As you change those things, create new Pull Requests, and they are merged, your event page will be updated.&lt;/p></description></item></channel></rss>
