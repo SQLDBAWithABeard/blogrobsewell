@@ -1,6 +1,6 @@
 ---
 title: "Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook"
-date: "2019-11-21" 
+date: "2019-11-21"
 categories:
   - Blog
   - Jupyter Notebooks
@@ -20,7 +20,7 @@ tags:
 
 image: assets/uploads/2019/11/image-39.png
 ---
-Now that [Azure Data Studio](https://aka.ms/azuredatastudio) has [PowerShell Notebooks](https://docs.microsoft.com/en-us/sql/azure-data-studio/release-notes-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693) and there is a [PowerShell Module for creating notebooks](https://blog.robsewell.com/create-a-powershell-notebook-for-azure-data-studio-with-powershell/). I have been asked, more than once, what is the point? What is the use case? How does this help. I hope that this post will spark some ideas of one particular use-case.
+Now that [Azure Data Studio](https://aka.ms/azuredatastudio) has [PowerShell Notebooks](https://docs.microsoft.com/en-us/sql/azure-data-studio/release-notes-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693) and there is a [PowerShell Module for creating notebooks](https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/). I have been asked, more than once, what is the point? What is the use case? How does this help. I hope that this post will spark some ideas of one particular use-case.
 
 I showed my silly example PowerShell code to create a PowerShell Notebook that created a PowerShell Notebook to my good friend Nick.<FIGURE class="wp-block-video wp-block-embed is-type-video is-provider-videopress">
 <DIV class=wp-block-embed__wrapper><IFRAME title=2019-11-14_15-50-46-mp4 height=502 src="https://videopress.com/embed/5zyfyR2P?preloadContent=metadata&amp;hd=0" frameBorder=0 width=630 allowfullscreen></IFRAME>
@@ -90,7 +90,7 @@ A new workbook opens up, named with my name and the time and I can get to work ð
 </DIV></FIGURE>
 Thanks Nick.
 
-Maybe you can find him at SQL Bits next year. Did you know that SQL Bits 2020 was announced?  
-  
+Maybe you can find him at SQL Bits next year. Did you know that SQL Bits 2020 was announced?
+
 Check out [https://sqlbits.com](https://sqlbits.com) for more details
 
