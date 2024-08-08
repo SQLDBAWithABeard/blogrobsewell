@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Settings on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/settings/</link><description>Recent content in Settings on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 24 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/settings/index.xml" rel="self" type="application/rss+xml"/><item><title>Setting the default file type for a new file in VS Code</title><link>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</guid><description>&lt;p>Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.&lt;/p>
+&lt;p>To change the language for the file use CTRL +K, M.&lt;/p>
+&lt;p>That’s CTRL and K together and then M afterwards separately.&lt;/p>
+&lt;p>then you can choose the language for the file. It looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-change-language.gif"
+loading="lazy"
+alt="01 - Change language"
+>&lt;/p>
+&lt;p>However, if you just want your new file to open as a particular language every time you can change this in the settings.&lt;/p>
+&lt;p>Click File –&amp;gt; Preferences –&amp;gt; Settings&lt;/p>
+&lt;p>or by clicking CTRL + ,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/02-open-preferences.png"
+loading="lazy"
+alt="02 - Open Preferences.PNG"
+>&lt;/p>
+&lt;p>This opens the settings.json file. Search in the bar for default and scroll down until you see file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/03-file-defaults.png"
+loading="lazy"
+alt="03 - File defaults.PNG"
+>&lt;/p>
+&lt;p>If you hover over the setting that you want to change, you will see a little pencil. Click on that and then Copy to Settings which will copy it to your user settings in the right hand pane.&lt;/p>
+&lt;p>NOTE – You will need to enter powershell and not PowerShell. For other languages, click on the language in the bottom bar and look at the value in the brackets next to the language name&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/04-langauge.png"
+loading="lazy"
+alt="04 - langauge.PNG"
+>&lt;/p>
+&lt;p>Once you have entered the new settings save the file (CTRL + S) and then any new file you open will be using the language you have chosen&lt;/p>
+&lt;p>It looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/05-change-settings.gif"
+loading="lazy"
+alt="05 - Change settings.gif"
+>&lt;/p>
+&lt;p>and now every new file that you open will be opened as a PowerShell file (or whichever language you choose)&lt;/p>
+&lt;p>You will still be able to change the language with CTRL K, m&lt;/p>
+&lt;p>Just to be clear, because people sometimes get this wrong. That’s CTRL and K, let go and then M. You will know you are doing correctly when you see&lt;/p>
+&lt;blockquote>
+&lt;p>(CTRL + K) was pressed waiting for second key of chord……&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/06-waiting-for-key.png"
+loading="lazy"
+alt="06 - waiting for key"
+>&lt;/p>
+&lt;p>If you get it wrong and Press CTRL + K + M then you will open the Extensions search for keymaps.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/07-incorrect.png"
+loading="lazy"
+alt="07 - incorrect.PNG"
+>&lt;/p>
+&lt;p>This is a brilliant feature enabling you to copy key mappings for the programmes you use all the time and save you from learning the Code key mappings. You can find the keymaps in the &lt;a class="link" href="https://marketplace.visualstudio.com/search?target=vscode&amp;amp;category=Keymaps&amp;amp;sortBy=Relevance" target="_blank" rel="noopener"
+>Extensions Marketplace&lt;/a> as well as by pressing CTRL + K + M&lt;/p></description></item></channel></rss>

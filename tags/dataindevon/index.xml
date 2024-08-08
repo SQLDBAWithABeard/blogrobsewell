@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dataindevon on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dataindevon/</link><description>Recent content in Dataindevon on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dataindevon/index.xml" rel="self" type="application/rss+xml"/><item><title>#DataInDevon – Getting up to speed with PowerShell or spend a day with one of four other MVPs :-)</title><link>https://blog.robsewell.com/blog/%23dataindevon-getting-up-to-speed-with-powershell-or-spend-a-day-with-one-of-four-other-mvps-/</link><pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/%23dataindevon-getting-up-to-speed-with-powershell-or-spend-a-day-with-one-of-four-other-mvps-/</guid><description>&lt;p>Saturday 27th April is Global Azure Bootcamp day&lt;/p>
+&lt;p>What’s Global Azure Bootcamp?&lt;/p>
+&lt;p>The &lt;a class="link" href="https://global.azurebootcamp.net/" target="_blank" rel="noopener"
+>website&lt;/a> says it best&lt;/p>
+&lt;blockquote>
+&lt;p>…. communities will come together once again in the sixth great Global Azure Bootcamp event! Each user group will organize their own one day deep dive class on Azure the way they see fit and how it works for their members. The result is that thousands of people get to learn about Azure and join together online under the social hashtag &lt;a class="link" href="https://twitter.com/search?q=%23GlobalAzure" target="_blank" rel="noopener"
+>#GlobalAzure&lt;/a>!&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="saturday-is-free-learning">Saturday Is Free Learning&lt;/h2>
+&lt;p>I am a part of the team organising the event in Exeter. Now there is a little story here. We had chosen this date by chance to hold an event we call Data In Devon giving people in the South West (of UK) the chance to access a whole day of high quality data and technical sessions for free on a Saturday.&lt;/p>
+&lt;p>When the Global Azure Bootcamp was announced, we had a conversation with the organisers and they agreed that we could add Exeter as a venue as we had already decided to have a whole track dedicated to Azure. You can find our schedule here &lt;a class="link" href="https://sqlsouthwest.co.uk/data-in-devon-saturday-schedule/" target="_blank" rel="noopener"
+>https://sqlsouthwest.co.uk/data-in-devon-saturday-schedule/&lt;/a> and you can register to attend &lt;a class="link" href="https://www.eventbrite.com/e/data-in-devon-registration-50262066193v" target="_blank" rel="noopener"
+>via this form&lt;/a> &lt;/p>
+&lt;p>Now, we have some costs obviously, not a lot but venues are not free and neither is food 😉. We have a couple of sponsors (feel free to contact me if your company is interested in sponsoring the event) but we also have some paid training days on Friday 25th April.&lt;/p>
+&lt;h2 id="friday-is-training-day">Friday Is Training Day&lt;/h2>
+&lt;p>It’s a great opportunity to get cheap high-quality training from some of the best in their areas of expertise. There are still some tickets for £175 and the price will rise only to £200. I think that £200 is fantastic value to be able to spend a day learning from&lt;/p>
+&lt;p>Alex Whittles – Data Platform MVP – &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#BiinAzure" target="_blank" rel="noopener"
+>Bi in Azure&lt;/a>
+John Martin – Data Platform MVP – &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#InfrastructureAsCode" target="_blank" rel="noopener"
+>Infrastructure as Code with Terraform&lt;/a>
+Terry McCann – Data Platform MVP – &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#MachineLearning" target="_blank" rel="noopener"
+>Machine Learning: From model to production using the cloud, containers and Dev Ops &lt;/a>
+William Durkin – Data Platform MVP – &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#Performance" target="_blank" rel="noopener"
+>Performance Pain Reduction for Data Platform Projects&lt;/a>&lt;/p>
+&lt;p>and myself – &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#Powershell" target="_blank" rel="noopener"
+>Getting up to speed with PowerShell&lt;/a>&lt;/p>
+&lt;p>You can sign up for any of these sessions by following the instructions here &lt;a class="link" href="https://sqlsouthwest.co.uk/training-day-schedule/#Pricing" target="_blank" rel="noopener"
+>https://sqlsouthwest.co.uk/training-day-schedule/#Pricing&lt;/a> We don’t have a fancy website or booking system as we wanted to keep costs down.&lt;/p>
+&lt;p>The details of my training day are below&lt;/p>
+&lt;h1 id="getting-up-to-speed-with-powershells">Getting up to speed with PowerShell&lt;strong>S&lt;/strong>&lt;/h1>
+&lt;p>PowerShell is cross-platform, it works exactly the same on Windows, on Linux and Mac. It is awesome for automation and amazing for administration.&lt;/p>
+&lt;p>We will cover&lt;/p>
+&lt;ul>
+&lt;li>the basics about PowerShell, PowerShell security&lt;/li>
+&lt;li>how to open PowerShell , how to install PowerShell .&lt;/li>
+&lt;li>4 vital commands to enable you to be able to help yourself&lt;/li>
+&lt;li>The PowerShell Gallery and how to find, install and use additional modules&lt;/li>
+&lt;li>Reading the language&lt;/li>
+&lt;li>Working with output&lt;/li>
+&lt;li>Why Red text is a good thing and how to learn from the errors&lt;/li>
+&lt;li>We will even delve into scripting with PowerShell and how to validate your environment&lt;/li>
+&lt;/ul>
+&lt;p>There will also be the opportunity to learn about any areas of PowerShell, Automation, CI/CD that you have questions about. This is a beginner level session in which I will teach you to be comfortable with PowerShell and confident in being able to use it in the future&lt;/p>
+&lt;p>Attendees wanting to follow along should bring a laptop.&lt;/p></description></item></channel></rss>

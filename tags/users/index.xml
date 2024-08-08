@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Users on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/users/</link><description>Recent content in Users on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 23 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/users/index.xml" rel="self" type="application/rss+xml"/><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p>There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+>up to date version of this post here&lt;/a> using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> and the sqlserver module&lt;/p>
+&lt;p>But if you want to continue with this way read on!!&lt;/p>
+&lt;p>Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Windows Users&lt;/a> or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+>SQL Users&lt;/a> using the last two days posts, today we shall add them to a role on a database.&lt;/p>
+&lt;p>As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+>previously&lt;/a> I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p>
+&lt;p>So with each database having the correct roles created and the users created we just need to add the user to the database and to the role. This is easily done with PowerShell.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image70.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image70.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The &lt;code>Add-UserToRole&lt;/code> function takes four parameters Server,Database,User and Role and does a series of error checks.&lt;/p>
+&lt;p>With these functions you can easily create a number of Users and add them to database roles quickly and easily and repeatedly.&lt;/p>
+&lt;p>If the test team come to you and require 10 Test Users and 3 Test Administrators adding to the test database. I create 2 notepad files&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image71.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image71.png"
+loading="lazy"
+alt="image"
+>&lt;/a>  &lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image72.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image72.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and use them with the &lt;code>Add-SQLAccountToSQLRole&lt;/code> and &lt;code>Add-UserToRole&lt;/code> functions to create the users&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image73.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image73.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Here are the results in PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image74.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image74.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and in SSMS&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image75.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image75.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The Code is here&lt;/p>
+&lt;pre>&lt;code>############################################################# ################################
+#
+# NAME: Add-UserToRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to add user or group to a role on a database
+#
+# USAGE: Add-UserToRole fade2black Aerosmith Test db_owner
+#
+Function Add-UserToRole ([string] $server, [String] $Database , [string]$User, [string]$Role)
+{
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+#Check Database Name entered correctly
+$db = $svr.Databases[$Database]
+if($db -eq $null)
+{
+Write-Output &amp;quot; $Database is not a valid database on $Server&amp;quot;
+Write-Output &amp;quot; Databases on $Server are :&amp;quot;
+$svr.Databases|select name
+break
+}
+#Check Role exists on Database
+$Rol = $db.Roles[$Role]
+if($Rol -eq $null)
+{
+Write-Output &amp;quot; $Role is not a valid Role on $Database on $Server &amp;quot;
+Write-Output &amp;quot; Roles on $Database are:&amp;quot;
+$db.roles|select name
+break
+}
+if(!($svr.Logins.Contains($User)))
+{
+Write-Output &amp;quot;$User not a login on $server create it first&amp;quot;
+break
+}
+if (!($db.Users.Contains($User)))
+{
+# Add user to database
+$usr = New-Object ('Microsoft.SqlServer.Management. Smo.User') ($db, $User)
+$usr.Login = $User
+$usr.Create()
+#Add User to the Role
+$Rol = $db.Roles[$Role]
+$Rol.AddMember($User)
+Write-Output &amp;quot;$User was not a login on $Database on $server&amp;quot;
+Write-Output &amp;quot;$User added to $Database on $Server and $Role Role&amp;quot;
+}
+else
+{
+#Add User to the Role
+$Rol = $db.Roles[$Role]
+$Rol.AddMember($User)
+Write-Output &amp;quot;$User added to $Role Role in $Database on $Server &amp;quot;
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Dropping SQL Users with PowerShell</title><link>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</link><pubDate>Tue, 10 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</guid><description>&lt;p>As you may have noticed, I love PowerShell!&lt;/p>
+&lt;p>I have developed a series of functions over time which save me time and effort whilst still enabling me to provide a good service to my customers. I keep them all in a functions folder and call them whenever. I call it my &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+>PowerShell Box of Tricks&lt;/a>&lt;/p>
+&lt;p>I am going to write a short post about each one over the next few weeks as I write my presentation on the same subject which I will be presenting to SQL User Groups.&lt;/p>
+&lt;p>Todays post is not about a question but about a routine task DBAs do. Dropping Logins&lt;/p>
+&lt;p>Whilst best practice says add users to active directory groups, add the group to roles and give the roles the correct permissions there are many situations where this is not done and DBAs are required to manually remove logins. This can be a time consuming task but one that is essential. There was a time at MyWork when this was achieved via a script that identified which servers had a users login and the task was to connect to each server in SSMS and remove the user from each database and then drop the server login. As you can imagine it was not done diligently. Prior to an audit I was tasked with ensuring that users that had left MyWork did not have logins to any databases. It was this that lead to the &lt;a class="link" href="https://blog.robsewell.com/checking-for-sql-server-logins-with-powershell/" target="_blank" rel="noopener"
+>Checking for SQL Logins&lt;/a> script and to this one&lt;/p>
+&lt;p>It starts exactly the same as the Checking for SQL Logins script by grabbing the list of SQL Servers from the text file and creating an array of user names including all the domains as I work in a multi-domain environment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image51.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image51.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Then iterate through each database ignoring those that may need special actions due to the application and call the drop method&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image52.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image52.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Repeat the process for the servers and send or save the report as required. Simple and easy and has undoubtedly saved me many hours compared to the previous way of doing things 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image53.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image53.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h4 id="important-note">IMPORTANT NOTE&lt;/h4>
+&lt;p>This script will not delete logins if they have granted permissions to other users. I always recommend running the &lt;a class="link" href="https://blog.robsewell.com/checking-for-sql-server-logins-with-powershell/" target="_blank" rel="noopener"
+>Checking for SQL Logins&lt;/a> script after running this script to ensure all logins have been dropped&lt;/p>
+&lt;p>This script can be found&lt;/p>
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Drop-SQLUsers.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function to Display a list of server, database and login for SQL servers listed
+# in sqlservers.txt file and then drop the users
+#
+# I always recommend running the Checking for SQL Logins script after running this script to ensure all logins have been dropped
+#
+# Does NOT drop Users who have granted permissions
+#BE CAREFUL
+Function Drop-SQLUsers ($Usr) {
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer. SMO') | out-null
+# Suppress Error messages - They will be displayed at the end
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+# cls
+# Pull a list of servers from a local text file
+$servers = Get-Content 'c:\temp\sqlservers.txt'
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$usr&amp;quot;, &amp;quot;DOMAIN2\$usr&amp;quot;, &amp;quot;DOMAIN3\$usr&amp;quot; , &amp;quot;$usr&amp;quot;)
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;Dropping Logins for $Logins&amp;quot;
+#loop through each server and each database and
+Write-Output &amp;quot;#########################################&amp;quot;
+Write-Output &amp;quot;`n Database Logins`n&amp;quot;
+foreach ($server in $servers) {
+if (Test-Connection $Server -Count 1 -Quiet) {
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+#drop database users
+foreach ($database in $srv.Databases) {
+if ($database -notlike &amp;quot;*dontwant*&amp;quot;) {
+foreach ($login in $logins) {
+if ($database.Users.Contains($login)) {
+$database.Users[$login].Drop();
+Write-Output &amp;quot; $server , $database , $login - Database Login has been dropped&amp;quot;
+}
+}
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;`n Servers Logins`n&amp;quot;
+foreach ($server in $servers) {
+if (Test-Connection $Server -Count 1 -Quiet) {
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+#drop server logins
+foreach ($login in $logins) {
+if ($srv.Logins.Contains($login)) {
+$srv.Logins[$login].Drop();
+Write-Output &amp;quot; $server , $login Login has been dropped&amp;quot;
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Dropping Database and Server Logins for $usr - Completed &amp;quot;
+Write-Output &amp;quot;If there are no logins displayed above then no logins were found or dropped!&amp;quot;
+Write-Output &amp;quot;###########################################&amp;quot;
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

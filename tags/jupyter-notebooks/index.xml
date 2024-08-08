@@ -1,0 +1,1167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jupyter Notebooks on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/jupyter-notebooks/</link><description>Recent content in Jupyter Notebooks on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 13 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/jupyter-notebooks/index.xml" rel="self" type="application/rss+xml"/><item><title>TSQL2sDay - Do I use Notebooks?</title><link>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</link><pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post TSQL2sDay - Do I use Notebooks?" />&lt;h1 id="do-i-use-notebooks">Do I use Notebooks?&lt;/h1>
+&lt;p>T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+>Twitter&lt;/a>). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Twitter&lt;/a>) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>a website with all previous posts&lt;/a>. Everyone is welcome to participate in this monthly blog post.&lt;/p>
+&lt;p>This month’s T-SQL Tuesday is hosted by Steve. Steve says:&lt;/p>
+&lt;blockquote>
+&lt;p>I want you to write about how you have used, or would like to use, a Jupyter notebook. This seemed to be exciting for many people at first, but I haven’t seen a lot of uptake from users in general. So I’m curious if you are using them.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>The original post is here.&lt;/a>&lt;br>
+&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/a>&lt;/p>
+&lt;h1 id="am-i-using-notebooks-">Am I using Notebooks ?&lt;/h1>
+&lt;p>Hehe. I LOVE notebooks. I use them all of the time and every day.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://blog.robsewell.com/categories/#jupyter-notebooks" target="_blank" rel="noopener"
+>I have written a few posts about them as well&lt;/a>.&lt;/li>
+&lt;li>I have a repository on GitHub with many notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>https://beard.media/Notebooks&lt;/a>.&lt;/li>
+&lt;li>I have given presentations about notebooks &lt;a class="link" href="https://beard.media/presentations" target="_blank" rel="noopener"
+>https://beard.media/presentations&lt;/a>&lt;/li>
+&lt;li>I have videos on my youtube channel about notebooks &lt;a class="link" href="https://beard.media/notebooksyoutube" target="_blank" rel="noopener"
+>https://beard.media/notebooksyoutube&lt;/a>&lt;/li>
+&lt;li>I have written a &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook/0.0.20201008.1" target="_blank" rel="noopener"
+>PowerShell Module&lt;/a> to create Notebooks []&lt;/li>
+&lt;/ul>
+&lt;p>I have assisted clients with using notebooks to&lt;/p>
+&lt;ul>
+&lt;li>Integrate new team members&lt;/li>
+&lt;li>Create a repository of incident response notebooks &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/" target="_blank" rel="noopener"
+>dynamically created with Azure DevOps&lt;/a>&lt;/li>
+&lt;li>Create a repository of daily tasks notebooks&lt;/li>
+&lt;li>Create a repository of common large scale changes&lt;/li>
+&lt;li>Off-load DBA requests to Service Desk with notebooks&lt;/li>
+&lt;li>Use notebooks to demonstrate changes to Product Owners and other teams&lt;/li>
+&lt;li>Use notebooks for diagnosis by customers&lt;/li>
+&lt;li>Use notebooks to investigate Azure environments and Azure Data Services&lt;/li>
+&lt;li>and more&lt;/li>
+&lt;/ul>
+&lt;p>I use notebooks to validate dbachecks PRs, to demonstrate &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbachecks" target="_blank" rel="noopener"
+>dbachecks&lt;/a> and &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbatools" target="_blank" rel="noopener"
+>dbatools&lt;/a> with docker that anyone can use.&lt;/p>
+&lt;p>I am thoroughly looking forward to seeing what other people do with notebooks. I love how the community helps us all to develop and move forward by sharing.&lt;/p>
+&lt;h1 id="all-this-and">All this and&lt;/h1>
+&lt;p>&lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nodatascientist.png"
+loading="lazy"
+alt="nodatascientist"
+>&lt;/a>&lt;br>
+Thank you - &lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>https://www.advancinganalytics.co.uk/&lt;/a>&lt;/p></description></item><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" />&lt;h1 id="automation">Automation&lt;/h1>
+&lt;!-- raw HTML omitted -->
+&lt;p>This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted -->blog&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->twitter&lt;!-- raw HTML omitted -->.&lt;/p>
+&lt;p>Thank you Elizabeth&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/p>
+&lt;p>Elizabeth asks&lt;/p>
+&lt;blockquote>
+&lt;p>My invitation to you is I want to know what you have automated to make your life easier?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="from-the-past">From the Past&lt;/h2>
+&lt;p>I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>You have to start somewhere&lt;/a> In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>The Best Database Administrators Automate Everything&lt;/a> which I am pleased to see is still available nearly a decade later&lt;/p>
+&lt;p>Here is a quote from his blog entry&lt;/p>
+&lt;blockquote>
+&lt;h2 id="automate-everything">Automate Everything&lt;/h2>
+&lt;p>That’s right, I said everything. Just sit back and take the &lt;em>time&lt;/em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word &lt;em>potentially&lt;/em> from your vocabulary and evaluate how you could automate &lt;strong>e-v-e-r-y-t-h-i-n-g&lt;/strong> that you do.&lt;/p>
+&lt;p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important &lt;em>Proactive Mode&lt;/em> tasks/projects to be getting on with&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="i-love-automation">I love Automation&lt;/h2>
+&lt;p>I have tried my best at all times to follow this advice in the last decade and pretty much I am happy that I have managed it.&lt;/p>
+&lt;ul>
+&lt;li>I use PowerShell (a lot!) to automate all sorts of routine tasks including migrating this blog&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://blog.robsewell.com/tags/#jupyter-notebooks" target="_blank" rel="noopener"
+>Jupyter Notebooks&lt;/a> to enable myself and others to automate Run Books, Training, Documentation, Demonstrations, Incident Response. You can find my notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/li>
+&lt;li>I use Azure DevOps to automate infrastructure creation and changes with terraform and delivery of changes to code as well as unit testing.&lt;/li>
+&lt;li>I use GitHub actions to create this blog, publish the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+>ADSNotebook&lt;/a> module&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://chocolatey.org/" target="_blank" rel="noopener"
+>Chocolatey&lt;/a> to install and update software&lt;/li>
+&lt;li>I have used Desired State Configuration to ensure that infrastructure is as it is expected to be&lt;/li>
+&lt;/ul>
+&lt;p>At every point I am looking for a means to automate the thing that I am doing because it is almost guaranteed that there will be a time in the future after you have done a thing that there will be a need to do it again or to do it slightly differently.&lt;/p>
+&lt;h2 id="whats-the-last-thing-that-you-automated">Whats the last thing that you automated?&lt;/h2>
+&lt;p>Following my blog post about &lt;a class="link" href="https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/" target="_blank" rel="noopener"
+>Notifying a Teams Channel about a SQL Agent Job result&lt;/a> I was asked if this could be tweaked to reduce the time spent getting information about SSIS Execution failures.&lt;/p>
+&lt;h3 id="finding-ssis-failures">Finding SSIS failures&lt;/h3>
+&lt;p>When you run an SSIS package in an Agent Job and it fails, the Agent Job History shows something along these lines&lt;/p>
+&lt;blockquote>
+&lt;p>The job failed. The Job was invoked by User MyDomain\MyUserName. The last step to run was step 1 (scheduling ssis package).
+Executed as user: NT Service\SQLSERVERAGENT. Microsoft (R) SQL Server Execute Package Utility Version 11.0.5058.0 for 64-bit Copyright (C) Microsoft Corporation. All rights reserved. Started: 4:17:12 PM Package execution on IS Server failed. &lt;strong>Execution ID: 123456789&lt;/strong>, Execution Status:4. To view the details for the execution, right-click on the Integration Services Catalog, and open the [All Executions] report Started: 4:17:12 PM Finished: 4:17:12 PM Elapsed: 4.493 seconds. The package execution failed. The step failed.&lt;/p>
+&lt;/blockquote>
+&lt;p>The next step is to open SSMS, go to the SSISDb and click through to the SSIS reports and then scroll through to find the package and then the message. This is not particularly efficient and the SSIS reports are not known for their speedy executions!&lt;/p>
+&lt;p>This meant that the team member responsible for checking in the morning, could see which instance and which job had failed from the Teams message but then had to manually follow the above steps to find an error message that they could take action on.&lt;/p>
+&lt;h3 id="automate-it">Automate it&lt;/h3>
+&lt;p>In the SSISDB database there is an &lt;code>event_messages&lt;/code> view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)&lt;/p>
+&lt;p>In the code below, I&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>check if the failure comes from an SSIS instance
+if($Inst -in ($SSISInstances)){&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Execution ID from the Error message
+&lt;code>$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a query for the SSISDB&lt;/p>
+&lt;p>&lt;code>$SSISQuery = @&amp;quot;&lt;/code>
+&lt;code>SELECT * FROM catalog.event_messages em&lt;/code>
+&lt;code>WHERE em.operation_id = $ExecutionId&lt;/code>
+&lt;code>AND (em.event_name = 'OnError')&lt;/code>
+&lt;code>ORDER BY em.event_message_id;&lt;/code>
+&lt;code>&amp;quot;@&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the Error Message and the Execution Path to variables
+&lt;code>$errMessage = $SSISQueryResults.Message&lt;/code>
+&lt;code>$ExecutionPath = $SSISQueryResults.execution_path&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Error Message for none SSIS failures
+&lt;code>}else{&lt;/code>
+&lt;code>$errMessage = $j.group[-1].Message&lt;/code>
+&lt;code>$ExecutionPath = 'the job'&lt;/code>
+&lt;code>}&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Teams message&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>You will see that I used &lt;code>SELECT *&lt;/code> because someone will always ask for some extra information in the future!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/happyrob.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>The full script is below, Happy Automating!&lt;/p>
+&lt;pre>&lt;code>$webhookurl = &amp;quot;https://outlook.office.com/webhook/ the rest of it here&amp;quot;
+$SSISInstances = # to identify SSIS instances
+$ProdInstances = # ALL instances for checking
+$startdate = (Get-Date).AddHours(-1)
+$AllFailedJobs = foreach ($Instance in $ProdInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs # | Where-Object { $Psitem.Job -match '^Beard-\d\d\d\d\d' -or $Psitem.Job -like 'BeardJob*' } # if you need to filter
+$FailedJobs = $jobs | Where-Object { $Psitem.Status -ne 'Succeeded' }
+$FailedJobs | Group-Object Job
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;We have $($AllFailedJobs.Count) Failed Jobs&amp;quot;
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+foreach ($j in $AllFailedJobs) {
+$Inst = $j.group[-1].SqlInstance
+$jName = $j.name
+$sname = $j.group[-1].StepName
+$edate = $j.group[-1].EndDate
+if($Inst -in ($SSISInstances)){
+$BaseerrMessage = $j.group[-1].Message
+$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value
+$SSISQuery = @&amp;quot;
+SELECT * FROM catalog.event_messages em
+WHERE em.operation_id = $ExecutionId
+AND (em.event_name = 'OnError')
+ORDER BY em.event_message_id;
+&amp;quot;@
+$SSISQueryResults = Invoke-DbaQuery -SqlInstance $Inst -Database SSISDB -Query $SSISQuery
+$errMessage = $SSISQueryResults.Message
+$ExecutionPath = $SSISQueryResults.execution_path
+}else{
+$errMessage = $j.group[-1].Message
+$ExecutionPath = 'the job'
+}
+$Text = @&amp;quot;
+# **$Inst**
+## **$JName**
+- The Job step that failed is - **$sname**
+- It failed at - **$edate**
+- It failed in $ExecutionPath with the message
+- $errMessage
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There was a Job Failure&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Job Failures &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last 1 hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/sobrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+if(-not $AllFailedJobs){
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There were no job failures in the last hour at $ (Get-Date)&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;There were no job failures at $ (Get-Date)&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/happyrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = &amp;quot;All is well&amp;quot;
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+&lt;/code>&lt;/pre></description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" />&lt;p>Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;h2 id="jaap-is-awesome">Jaap is awesome&lt;/h2>
+&lt;p>&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+>t&lt;/a> blog post&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a>&lt;/p>
+&lt;h2 id="joel-is-also-awesome">Joel is also awesome!&lt;/h2>
+&lt;p>When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+>t&lt;/a> module BetterCredentials which uses the Windows Credential Manager&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.powershellgallery.com/packages/BetterCredentials/4.5" target="_blank" rel="noopener"
+>https://www.powershellgallery.com/packages/BetterCredentials/4.5&lt;/a>&lt;/p>
+&lt;h2 id="microsoft-also-awesome">Microsoft? Also awesome!&lt;/h2>
+&lt;p>In February, Microsoft released the SecretManagement module for preview.&lt;/p>
+&lt;p>&lt;a class="link" href="https://devblogs.microsoft.com/powershell/secrets-management-development-release?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://devblogs.microsoft.com/powershell/secrets-management-development-release/&lt;/a>&lt;/p>
+&lt;p>Sydney &lt;a class="link" href="https://twitter.com/sydneysmithreal" target="_blank" rel="noopener"
+>t&lt;/a> gave a presentation at the European PowerShell Conference which you can watch on Youtube.&lt;/p>
+&lt;h2 id="good-bye-import-clixml">Good Bye Import-CliXML&lt;/h2>
+&lt;p>So now I say, it is time to stop using Import-Clixml for storing secrets and use the Microsoft.PowerShell.SecretsManagement module instead for storing your secrets.&lt;/p>
+&lt;h2 id="notebooks-are-as-good-as-blog-posts">Notebooks are as good as blog posts&lt;/h2>
+&lt;p>I love notebooks and to show some people who had asked about storing secrets, I have created some. So, because I am efficient lazy I have embedded them here for you to see. You can find them in my Jupyter Notebook repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;p>in the Secrets folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png?resize=630%2C349&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-and-using-the-secrets-management-module">Installing and using the Secrets Management Module&lt;/h2>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="using-the-secret-management-module-in-your-scripts">Using the Secret Management Module in your scripts&lt;/h2>
+&lt;p>Here is a simple example of using the module to provide the credential for a docker container and then to dbatools to query the container&lt;/p>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>Running Jupyter Notebooks as Agent Jobs</title><link>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</link><pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-22.png" alt="Featured image of post Running Jupyter Notebooks as Agent Jobs" />&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> is a great tool for connecting with your data platform whether it is in Azure or on your hardware. &lt;a class="link" href="https://blog.robsewell.com/?s=notebooks" target="_blank" rel="noopener"
+>Jupyter Notebooks&lt;/a> are fantastic, you can have words, pictures, code and code results all saved in one document.&lt;/p>
+&lt;p>I have created a repository in my GitHub &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>https://beard.media/Notebooks&lt;/a> where I have stored a number of Jupyter notebooks both for Azure Data Studio and the &lt;a class="link" href="https://blog.robsewell.com/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+>new .NET interactive&lt;/a> notebooks.&lt;/p>
+&lt;p>Another thing that you can do with notebooks is run them as Agent Jobs and save the results of the run.&lt;/p>
+&lt;h3 id="notebooks-running-t-sql">Notebooks running T-SQL&lt;/h3>
+&lt;p>This works easily for T-SQL notebooks. I am going to &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/blob/master/notebooks/NotDotNet/Audit/AUDIT%20-%20T-SQL%20Gather%20Permissions%20Notebook%20Template.ipynb" target="_blank" rel="noopener"
+>use this one&lt;/a> that I created that uses T-SQL to gather permissions using old code that was in a share somewhere. We can run the notebook and get the permissions and save the notebook and the results will be available for all time (unless you delete the notebook!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image.png?fit=630%2C327&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h3 id="sql-agent-extension-in-azure-data-studio">SQL Agent Extension in Azure Data Studio&lt;/h3>
+&lt;p>In Azure Data Studio, if you press CTRL + SHIFT + X it will open the Extensions tab&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-1.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-1.png?resize=188%2C300&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can add extra functionality to Azure Data Studio. Search in the top bar for Agent and press the install button to install the extension. You can connect to and instance in the connections tab (CTRL + SHIFT + D) and right click on it and click Manage. This will open up the server dashboard (why isn’t it instance dashboard?)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/7e393013-e088-4dfb-93e4-5e4961931999" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-2.png?fit=630%2C297&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and you will also have the SQL Agent dashboard available&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-3.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-3.png?fit=630%2C353&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Its pretty neat, it has green and red bars against the jobs showing success or failure and the larger the bar the longer the run time. On the left you will see a book. Click that&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-4.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-4.png?fit=630%2C295&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h3 id="notebooks-in-agent-jobs">Notebooks in Agent Jobs&lt;/h3>
+&lt;p>You can create an Agent Job to run a notebook. As a notebook is just a json file, it can be stored in a database table. This interface will create two tables one to store the templates and one for the results. Click New Notebook Job&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-5.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-5.png?fit=630%2C989&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then navigate to the notebook and select it.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/d312799d-0cf7-4e9f-86ac-11c7f6e4977b" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-6.png?fit=630%2C379&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Choose a database for the storage of the template and the results and one for the execution context.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/a70ffec6-6ed9-43f5-8b4b-b3eed86abecd" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-7.png?fit=630%2C991&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The name of the job will be the file name of the notebook. You can change this but there is a bug where you can only enter one character at a time in the name before it changes focus so beware!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/03d25ab1-ccd9-4c8b-a880-1f6bf1641b42" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-8.png?fit=630%2C157&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Once the job is created, you will see two tables in the storage database notebooks.nb_materialized and notebooks.nb_template&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-9.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-9.png?fit=630%2C790&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The materialised table is empty right now&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-10.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-10.png?fit=630%2C405&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>but the template table has a row for the job which includes the notebook in json format.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/6b019c65-cd07-4295-9b8e-609456829574" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-11.png?fit=630%2C218&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>If you click on the jobs in the Notebook Jobs window in the SQL Agent extension, you can see more information about the job run&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/5f93224f-b2a6-4c9c-9e71-a5f3668dcab9" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-12.png?fit=630%2C321&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can also run the job from here. It doesn’t have to be run from here, it is just a normal agent job which you can run or schedule in any normal manner. Running it from here gives a pop-up&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-13.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-13.png?fit=630%2C106&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You have to refresh to see when the job is finished and it will be red if the job failed, green if it succeeded or orange if some cells failed like this!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-14.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-14.png?fit=630%2C270&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>But this is the good bit. Clicking on that icon will open the notebook that was created by that agent job run. Lets see what we get&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/f5376e7e-4150-471c-b018-f7ae440427b1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-15.png?fit=630%2C339&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can see that we have the results of the queries that we wrote in the notebook alongside the documentation (or maybe explanation of the expected results)&lt;br>
+If we scroll down a little (and change the theme colour so that you can see the error)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-18.png?fit=630%2C135&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Msg , Level , State , Line
+Duplicate column names are not permitted in SQL PowerShell. To repeat a column, use a column alias for the duplicate column in the format Column_Name AS New_Name.&lt;/p>
+&lt;p>We have got an error from running the code via SQL PowerShell which is how the job is run. This error is also inserted into the notebooks.nb_template table&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/391f8b82-204d-4331-9084-2eefa33a5bc8" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-21.png?fit=630%2C246&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I edited the notebook locally to remove that block of code&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/51b34091-962f-4e8b-bc3c-b4b33866ef93" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-19.png?fit=630%2C283&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then edited the job and selected the updated notebook&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/063630fc-98a5-4c82-b6ad-e814bc33324e" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-20.png?fit=630%2C338&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and re-ran the job and got a green tick.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/5ad81496-c6c8-4ddf-8384-d0087f71dd38" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-22.png?fit=630%2C279&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now I can open the notebook from the latest run, but notice that from this view I can also open the previous notebook.&lt;/p>
+&lt;p>If I look in the nb_template table, the last_run_notebook_error has cleared&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2020/03/image-23.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-23.png?fit=630%2C450&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and if I look in the nb materialized table I can see two rows, one for each job run. The error from the first run is also stored in this table. The notebook column has the json for the notebook if you wish to access it in a different manner.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/25685dd2-78d6-40cd-8dc8-18e0149feb86" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-24.png?fit=630%2C267&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Tomorrow, we will see what the job steps look like and how to make this run on an instance which does not and cannot have the required PowerShell.&lt;/p>
+&lt;p>Spoiler Alert – May contain dbatools 🙂&lt;/p></description></item><item><title>.NET PowerShell Notebooks – Using Pester</title><link>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post .NET PowerShell Notebooks – Using Pester" />&lt;p>&lt;a class="link" href="http://localhost:4001/blog/jupyter%20notebooks/azure%20data%20studio/powershell/pwsh/dbatools/dbachecks/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+>My last post&lt;/a> had a lot of information about the new .NET PowerShell notebooks including installation instructions.&lt;/p>
+&lt;p>.NET Notebooks are Jupyter Notebooks that use .NET core to enable C#, F# and PowerShell kernels.&lt;/p>
+&lt;h2 id="use-cases">Use Cases&lt;/h2>
+&lt;p>One of the main benefits that I see for Jupyter Notebooks for Ops folk is that the results of the query are saved with the notebook. This makes them fantastic for Incident resolution.&lt;/p>
+&lt;p>If you have an incident at 3am and you know that you will need that information in the wash up meeting the next day instead of copying and pasting results into a OneNote document or a text file, you can simply run the queries in a notebook and save it.&lt;/p>
+&lt;p>In the meeting, you can simply open the notebook and the results will be available for everyone to see.&lt;/p>
+&lt;p>Even better, if you have a template notebook for those scenarios and you can then compare them to previous occurrences.&lt;/p>
+&lt;h2 id="using-pester">Using Pester&lt;/h2>
+&lt;p>Using Pester to validate that an environment is as you expect it is a good resource for incident resolution, potentially enabling you to quickly establish an area to concentrate on for the issue. However, if you try to run Pester in a .NET Notebook you will receive an error&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code> | ^ The term 'Get-CimInstance' is not recognized as the name of a
+| cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included,
+| verify that the path is correct and try again.
+&lt;/code>&lt;/pre>
+&lt;p>Import-Module: The module to process &amp;lsquo;Pester.psm1&amp;rsquo;, listed in field &amp;lsquo;ModuleToProcess/RootModule&amp;rsquo; of module manifest &amp;lsquo;C:\Users\mrrob\Documents\PowerShell\Modules\Pester\4.9.0\Pester.psd1&amp;rsquo; was not processed because no valid module was found in any module directory. &lt;!-- raw HTML omitted -->
+Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>in the issue that I raised&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Yes, it was the CimCmdlets module from the system32 module path that got imported (via the &lt;code>WinCompat&lt;/code> feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …&lt;br>
+The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue &lt;a class="link" href="https://github.com/PowerShell/PowerShell/issues/11783" target="_blank" rel="noopener"
+>PowerShell/PowerShell#11783&lt;/a> to track this work.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/DotNet%20Notebook/01-PesterWontRun.ipynb" target="_blank" rel="noopener"
+>You can see all of this including all the results in this notebook that I have created and shared on GitHub and also below as a gist to embed in this blog post&lt;/a>&lt;/p>
+&lt;h2 id="sharing-code-and-results-">Sharing Code AND Results 🙂&lt;/h2>
+&lt;p>Notebooks – A brilliant way of sharing what you did and the results that you got enabling others to follow along. You can do this with this Notebook. Download it and open it in your Jupyter Lab and you will be able to run it and see all of the errors and the fix on your machine.&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>Use Jupyter Notebooks to Help People on StackOverFlow</title><link>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post Use Jupyter Notebooks to Help People on StackOverFlow" />&lt;p>I am sat in the PowerShell Saturday in Hamburg. You can see me on the right of this picture writing &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/pester/net-powershell-notebooks-using-pester/" target="_blank" rel="noopener"
+>my previous blog post!&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://twitter.com/JanDamaschke?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@JanDamaschke&lt;/a> spricht über Asynchrones Logging in &lt;a class="link" href="https://twitter.com/hashtag/powershell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#powershell&lt;/a> mit Classes und Runspaces &lt;img src="https://pbs.twimg.com/media/ERYdg-6XUAAbwBk?format=jpg"
+loading="lazy"
+> (&lt;a class="link" href="https://twitter.com/hhpsug?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>https://twitter.com/hhpsug?ref_src=twsrc%5Etfw&lt;/a>) &lt;a class="link" href="https://twitter.com/hashtag/pssaturday?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#pssaturday&lt;/a>&lt;/p>
+&lt;p>— Christoph Burmeister (@chrburmeister) &lt;a class="link" href="https://twitter.com/chrburmeister/status/1231204011270909954?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 22, 2020&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>I was talking with my friend Mathias Jessen &lt;a class="link" href="https://twitter.com/IISResetMe" target="_blank" rel="noopener"
+>@IISResetMe on Twitter&lt;/a> about notebooks and he said that another great use case was to use them on Stack OverFlow&lt;/p>
+&lt;p>Now Mathias is an active answerer on Stack OverFlow&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and he puts a lot of effort into writing his answers, formatting them, including code and results. Basically exactly the same as a Notebook. However, with a Notebook, you can enable people to &lt;strong>&lt;em>run&lt;/em>&lt;/strong> the code as well on their own machines.&lt;/p>
+&lt;p>Mathias says he will use notebooks to help people when he answers their PowerShell questions on Stack OverFlow. If you are a Stack OverFlow Answerer then you can too.&lt;/p></description></item><item><title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</title><link>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</link><pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png" alt="Featured image of post New .NET Notebooks are here – PowerShell 7 notebooks are here." />&lt;p>Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and &lt;a class="link" href="https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>added SQL&lt;/a> kernel where &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//" target="_blank" rel="noopener"
+>with a little bit of faffing you could run PowerShell&lt;/a> and then a &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+>Python kernel that enabled PowerShell&lt;/a>. It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.&lt;/p>
+&lt;blockquote>
+&lt;p>.NET Notebooks Preview 2 is here! Preview 2 includes 🎉&lt;a class="link" href="https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@PowerShell_Team&lt;/a>, &lt;a class="link" href="https://twitter.com/nteractio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@nteractio&lt;/a>, and a new tool. Check out our blog to learn more. Congratulations to &lt;a class="link" href="https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@jonsequitur&lt;/a> &lt;a class="link" href="https://twitter.com/colombod?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@colombod&lt;/a> and our entire team&lt;a class="link" href="https://t.co/WqNWQWR3Bo" target="_blank" rel="noopener"
+>https://t.co/WqNWQWR3Bo&lt;/a>&lt;a class="link" href="https://twitter.com/dotnet?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@dotnet&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/jupyter?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#jupyter&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/PowerShell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#PowerShell&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/interactiveprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#interactiveprogramming&lt;/a>.&lt;/p>
+&lt;p>— Maria Naggaga (@LadyNaggaga) &lt;a class="link" href="https://twitter.com/LadyNaggaga/status/1225464258823163906?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="powershell-7-notebooks-">PowerShell 7 Notebooks 🙂&lt;/h2>
+&lt;p>A notebook experience for PowerShell 7 that sounds amazing. This will enable a true cross-platform PowerShell Notebook experience which is lacking from the Python version as it uses Windows PowerShell on Windows and PowerShell Core on other OS’s&lt;/p>
+&lt;p>The first thing I asked was – Will this come to Azure Data Studio. I got an immediate response from Sydney Smith PowerShell Program Manager saying it is on the roadmap&lt;/p>
+&lt;blockquote>
+&lt;p>Moving this kernel into ADS is on our roadmap! Right now our kernel uses hosted pwsh 7 but we would love to know if you have scenarios that don&amp;rsquo;t work with 7&lt;/p>
+&lt;p>— Sydney Smith (@sydneysmithreal) &lt;a class="link" href="https://twitter.com/sydneysmithreal/status/1225488719567818752?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="install-dependencies">Install dependencies&lt;/h2>
+&lt;p>To be able to run the notebook, you need to install some dependencies. First install the .NET CORE SDK which you can download from &lt;a class="link" href="https://dotnet.microsoft.com/download?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://dotnet.microsoft.com/download&lt;/a> This needs admin permissions to install.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image.png?resize=620%2C418&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You also need a Python installation – You can use Anaconda, which you can download from here &lt;a class="link" href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener"
+>https://www.anaconda.com/distribution/&lt;/a> This does not need admin to install&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-1.png?resize=531%2C232&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-2.png?fit=630%2C490&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="add-anaconda-to-windows-terminal">Add Anaconda to Windows Terminal&lt;/h2>
+&lt;p>I have added the Anaconda prompt to Windows Terminal so that I have one entry point for all my CLIs. Open the settings file and add the code below. (It will also give you an icon and background.&lt;/p>
+&lt;pre>&lt;code> {
+// Make changes here to the Anaconda.exe profile
+&amp;quot;guid&amp;quot;: &amp;quot;{0caa0dad-35be-5f56-a7ff-afceeeaa6101}&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Anaconda&amp;quot;,
+&amp;quot;commandline&amp;quot;: &amp;quot;cmd.exe /K C:\\Users\\mrrob\\Anaconda3\\Scripts\\activate.bat&amp;quot;,
+&amp;quot;hidden&amp;quot;: false,
+&amp;quot;backgroundImage&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;icon&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;backgroundImageAlignment&amp;quot;: &amp;quot;topRight&amp;quot;,
+&amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniform&amp;quot;,
+&amp;quot;backgroundImageOpacity&amp;quot;: 0.1
+}
+&lt;/code>&lt;/pre>
+&lt;p>and it appears in the drop down&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-3.png?resize=509%2C409&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>With Anaconda installed, check that that the kernel is available on your path. If like me you have Azure Data Studio installed, you will have additional kernels but the important one line here is&lt;/p>
+&lt;p>&lt;code>python3 C:\Users\USERNAME\Anaconda3\share\jupyter\kernels\python3&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-4.png?resize=630%2C210&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>In Windows Terminal move to a PowerShell 7 prompt and install the dotnet interactive tool&lt;/p>
+&lt;pre>&lt;code>dotnet tool install --global Microsoft.dotnet-interactive
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-5.png?resize=630%2C259&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can install the .NET kernel in your Anaconda prompt using this command&lt;/p>
+&lt;pre>&lt;code>dotnet interactive jupyter install
+&lt;/code>&lt;/pre>
+&lt;h2 id="sometimes-new-things-have-errors">Sometimes new things have errors&lt;/h2>
+&lt;p>I had an error when I tried this first time&lt;/p>
+&lt;blockquote>
+&lt;p>Could not execute because the specified command or file was not found.&lt;br>
+Possible reasons for this include:&lt;br>
+* You misspelled a built-in dotnet command.&lt;br>
+* You intended to execute a .NET Core program, but dotnet-interactive does not exist.&lt;br>
+* You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.&lt;/p>
+&lt;/blockquote>
+&lt;p>This is easily fixed by adding &lt;code>%USERPROFILE%\.dotnet\tools&lt;/code> to my path with &lt;code>set PATH=%PATH%;%USERPROFILE%\.dotnet\tools&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-6.png?fit=630%2C369&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Running &lt;code>jupyter kernelspec list&lt;/code> shows that the .NET kernel is installed for C Sharp, F Sharp and .NET PowerShell&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-7.png?resize=630%2C197&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="lets-open-a-notebook">Lets open a Notebook&lt;/h2>
+&lt;p>Now you want to play with it!&lt;br>
+You can run the lab environment using `jupyter lab`&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-8.png?fit=630%2C194&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>This opens a browser&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-9.png?fit=630%2C272&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can open existing Azure Data Studio PowerShell notebooks (but not SQL ones)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-10.png?fit=630%2C492&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="sometimes-new-things-have-errors-part-2">Sometimes new things have errors Part 2&lt;/h2>
+&lt;p>Unfortunately, I get errors when trying to import Pester which means I can not use my dbachecks notebooks in this blog post. &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>I have raised an issue on the repo here&lt;/a>.&lt;/p>
+&lt;h2 id="create-a-new-notebook">Create a New Notebook&lt;/h2>
+&lt;p>But it is easy to create a new Notebook&lt;/p>
+&lt;p>In the launcher page click the .NET PowerShell button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-12.png?resize=567%2C171&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Which will open a new Notebook in the directory that you launched the lab from. You can then add Code or Markdown as I have &lt;a class="link" href="https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>described before here&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-11.png?resize=316%2C195&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can add code, markdown and images to create your notebook.&lt;/p>
+&lt;p>Once you have finished using the notebook lab, you can shut it down in the Anaconda prompt with &lt;code>CTRL + C&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-15.png?fit=630%2C103&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Here is a video of running a notebook which anyone can use to create a couple of Docker containers running SQL 2019 and query them with dbatools. You can find the notebook further down this post.&lt;/p>
+&lt;h2 id="sharing-notebooks">Sharing Notebooks&lt;/h2>
+&lt;p>You can create notebooks to run common tasks. Even better, from the lab you can convert the notebook including the results to a variety of formats to share with other none-technical people. I used this functionality this week to export Azure Data Studio Notebooks to HTML and PDF for a Project manager 🙂&lt;/p>
+&lt;p>You can find the Export Notebook command in the File menu&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png?resize=610%2C542&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Exporting to HTML did not export the images but it does include the results&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-14.png?fit=630%2C476&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can share notebooks via GitHub – Either in a gist like this&lt;/p>
+&lt;p>or by providing a straight link to the notebook in GitHub &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb&lt;/a>&lt;/p>
+&lt;p>You can also use Binder &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a>&lt;/p>
+&lt;p>This uses Docker to create an interactive Notebook. Create a GitHub repo like &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks&lt;/a> (or just clone it) Copy your notebooks into the notebooks folder and push the changes to GitHub and then go to &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a> and add your URL to the repository.&lt;/p>
+&lt;p>You can see what it looks like by clicking the button below which Binder creates for you&lt;/p>
+&lt;p>&lt;a class="link" href="https://mybinder.org/v2/gh/SQLDBAWithABeard/Notebooks/master" target="_blank" rel="noopener"
+>&lt;img src="https://mybinder.org/badge_logo.svg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Unfortunately the kernel only supports Python for the moment but you can see the possibilities 🙂&lt;/p></description></item><item><title>Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps</title><link>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</link><pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-40.png" alt="Featured image of post Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps" />&lt;h1 id="fixing-the-failed-to-generate-the-compressed-file-for-module-cprogram-filesdotnetdotnetexe-error-when-deploying-to-the-powershell-gallery-using-azure-devops">Fixing the Failed to generate the compressed file for module C:\Program Files\dotnet\dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps&lt;/h1>
+&lt;p>The PowerShell module for validating your SQL Server estate &lt;a class="link" href="http://beard.media/dbachecks" target="_blank" rel="noopener"
+>dbachecks&lt;/a> is deployed via &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&amp;amp;view=mine&amp;amp;definitionId=2" target="_blank" rel="noopener"
+>Azure DevOps, you can see how it is working (or not) via this link&lt;/a>&lt;/p>
+&lt;h2 id="grrr-automation-for-the-lose">Grrr Automation for the Lose!&lt;/h2>
+&lt;p>Until recently, this had worked successfully. In the last few weeks I have been receiving errors&lt;/p>
+&lt;pre>&lt;code>Exception : Microsoft.PowerShell.Commands.WriteErrorException: Failed to generate the compressed file for module 'C:\Program Files\dotnet\dotnet.exe failed to pack: error
+C:\Program Files\dotnet\sdk\3.0.100\Sdks\NuGet.Build.Tasks.Pack\build\NuGet.Build.Tasks.Pack.targets(198,5): error :
+2 Index was outside the bounds of the array.
+[C:\Users\VssAdministrator\AppData\Local\Temp\cbc14ba6-5832-46fd-be89-04bb552a83ac\Temp.csproj]
+'.
+At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2.1\PSModule.psm1:10944 char:17
+20 Publish-PSArtifactUtility @PublishPSArtifactUtility_Param ...
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : InvalidOperation: (:) [Write-Error], WriteErrorException
+2019-11-25T22:44:46.8459493Z + FullyQualifiedErrorId : FailedToCreateCompressedModule,Publish-PSArtifactUtility
+&lt;/code>&lt;/pre>
+&lt;p>You can see these errors in the &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_apps/hub/ms.vss-releaseManagement-web.cd-release-progress?_a=release-environment-logs&amp;amp;releaseId=127&amp;amp;environmentId=127" target="_blank" rel="noopener"
+>release pipeline logs here&lt;/a>&lt;/p>
+&lt;h2 id="confusion">Confusion&lt;/h2>
+&lt;p>This was very frustrating as it was stopping the continuous delivery to the PowerShell Gallery. It was even more confusing as I was successfully deploying the &lt;a class="link" href="http://beard.media/ADSNotebook" target="_blank" rel="noopener"
+>ADSNotebook module&lt;/a> to the gallery using the same method as &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_build/results?buildId=541" target="_blank" rel="noopener"
+>you can see here&lt;/a>.&lt;/p>
+&lt;h2 id="raise-an-issue-on-github">Raise an Issue on GitHub&lt;/h2>
+&lt;p>I went and looked at the &lt;a class="link" href="https://github.com/PowerShell/PowerShellGet/" target="_blank" rel="noopener"
+>PowerShellGet GitHub repository&lt;/a> and opened an &lt;a class="link" href="https://github.com/PowerShell/PowerShellGet/issues/554" target="_blank" rel="noopener"
+>issue&lt;/a> I also found &lt;a class="link" href="https://github.com/PowerShell/PowerShellGet/issues/551" target="_blank" rel="noopener"
+>another issue regarding Required Modules&lt;/a>&lt;/p>
+&lt;p>But this doesn&amp;rsquo;t help to get dbachecks released.&lt;/p>
+&lt;h2 id="just-try-to-make-it-work">Just Try to Make it Work&lt;/h2>
+&lt;p>I asked the wonderful folk in the &lt;a class="link" href="http://powershell.slack.com" target="_blank" rel="noopener"
+>PowerShell Slack channel&lt;/a> – Through the magic of automation, you can also interact with them via the powershellhelp channel in the &lt;a class="link" href="http://beard.media/sqlslack" target="_blank" rel="noopener"
+>SQL Server Slack&lt;/a> as well but there were no answers that could assist.&lt;/p>
+&lt;p>So I had to go searching for an answer. PowerShellGet uses &lt;a class="link" href="https://www.nuget.org/" target="_blank" rel="noopener"
+>nuget&lt;/a> for package management. I found that if I downloaded an earlier version and placed it in my user profile (in the right location) I could publish the module.&lt;/p>
+&lt;p>I found this out by removing the nuget.exe from anywhere useful on the machine and trying to publish the module. The error message says&lt;/p>
+&lt;pre>&lt;code>NuGet.exe upgrade is required to continue
+This version of PowerShellGet requires minimum version '4.1.0' of NuGet.exe to publish an item to the NuGet-based repositories. NuGet.exe must be available in
+'C:\ProgramData\Microsoft\Windows\PowerShell\PowerShellGet\' or 'C:\Users\BeardyMcBeardFace\AppData\Local\Microsoft\Windows\PowerShell\PowerShellGet\', or under
+one of the paths specified in PATH environment variable value. NuGet.exe can be downloaded from https://aka.ms/psget-nugetexe. For more information, see
+https://aka.ms/installing-powershellget . Do you want PowerShellGet to upgrade to the latest version of NuGet.exe now?
+&lt;/code>&lt;/pre>
+&lt;p>If I said yes then I got the latest version and the error continued.&lt;/p>
+&lt;p>However, on my laptop I can go to the &lt;a class="link" href="https://www.nuget.org/downloads" target="_blank" rel="noopener"
+>nuget downloads page&lt;/a> and download an earlier version and place it in one of those paths then I could publish the module.&lt;/p>
+&lt;h2 id="can-i-automate-it">Can I Automate it?&lt;/h2>
+&lt;p>I would rather not have to deploy manually though, and as I use hosted agents my access to the operating system is limited so I wondered if I could place the nuget.exe in the user profile and it would get used or if it would look for the the latest one. Turns out it uses the one in the user profile 🙂&lt;/p>
+&lt;p>So now I have this code as a step in my Azure DevOps Release pipeline before calling &lt;code>Publish-Module&lt;/code> and we have automated the releases again.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>and now deployments to the PowerShell Gallery are just triggered by the build and the pipeline is green again 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_releaseProgress?_a=release-environment-logs&amp;amp;releaseId=129&amp;amp;environmentId=129" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-40.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>test&lt;/p></description></item><item><title>Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook</title><link>https://blog.robsewell.com/blog/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/</link><pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-39.png" alt="Featured image of post Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook" />&lt;p>Now that &lt;a class="link" href="https://aka.ms/azuredatastudio" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> has &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/release-notes-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>PowerShell Notebooks&lt;/a> and there is a &lt;a class="link" href="https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/" target="_blank" rel="noopener"
+>PowerShell Module for creating notebooks&lt;/a>. I have been asked, more than once, what is the point? What is the use case? How does this help. I hope that this post will spark some ideas of one particular use-case.&lt;/p>
+&lt;p>I showed my silly example PowerShell code to create a PowerShell Notebook that created a PowerShell Notebook to my good friend Nick.&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Thanks Nick.&lt;/p>
+&lt;h2 id="the-use-case">The Use Case&lt;/h2>
+&lt;p>The use case that Nick has is that he is converting some troubleshooting runbooks from their original locations (you know the sort of places – Sharepoint Docs, OneNote Notebooks, Shared Folders, the desktop of the Bastion Host) into a single repository of Azure Data Studio SQL or PowerShell Notebooks.&lt;/p>
+&lt;p>The idea is to have a single entry point into the troubleshooting steps and for the on-call DBA to create a Notebook from a template for the issue at hand which could be attached to an incident in the incident management solution. I suppose you could call it an Index Notebook.&lt;/p>
+&lt;h2 id="work-flow">Work Flow&lt;/h2>
+&lt;p>When the DBA (or another team) opens this Notebook, they can choose the task that they are going to perform and click the link which will&lt;/p>
+&lt;ul>
+&lt;li>copy the Notebook to the local machine&lt;/li>
+&lt;li>Rename the Notebook with the username and date&lt;/li>
+&lt;li>Open it ready for the work.&lt;/li>
+&lt;/ul>
+&lt;p>Once the work has been completed, the DBA can then attach the Notebook to the task or incident that has been created or use it in the Wash-Up/ Post Incident meeting.&lt;/p>
+&lt;p>This ensures that the original template notebook stays intact and unchanged and it is easy (which is always good when you are called out at 3am!) to create a uniquely named notebook .&lt;/p>
+&lt;h2 id="azure-devops">Azure DevOps&lt;/h2>
+&lt;p>Nick has placed this code into the deploy step in Azure DevOps which will deploy the template Notebooks from source control into the common folder and then this code will dynamically create the index Notebook each time there is a release.&lt;/p>
+&lt;p>Whilst the initial use case is incident response, this could easily be adapted for Notebooks used for Common Tasks or Run Books.&lt;/p>
+&lt;h2 id="notebooks">Notebooks&lt;/h2>
+&lt;p>There are a number of Notebooks for different issue stored in directories. For this post, I have used the Notebooks from Microsoft that explain SQL 2019 features and troubleshooting which you can find in their GitHub repositories by &lt;a class="link" href="https://github.com/microsoft/sql-server-samples/tree/master/samples/features/sql2019notebooks" target="_blank" rel="noopener"
+>following this link&lt;/a>&lt;/p>
+&lt;p>The Azure DevOps deploys the Notebooks to a directory which then looks something like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-38.png?resize=494%2C195&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Some directories of Notebooks in a directory&lt;/p>
+&lt;h2 id="create-an-index-notebook">Create an Index Notebook&lt;/h2>
+&lt;p>Here is the code to create an index Notebook&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>This creates a Notebook in the root of the folder. It also uses the new &lt;code>-Collapse&lt;/code> parameter in &lt;code>New-AdsNoteBookCell&lt;/code> that creates the code blocks with the code collapsed so that it looks neater. The index Notebook looks like this in the root of the folder&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image-39.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-39.png?resize=630%2C680&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h2 id="three-oclock-in-the-morning">Three O’Clock in the Morning&lt;/h2>
+&lt;p>It’s 3am and I have been called out. I can open up the Index Notebook, find the set of queries I want to run and click the run button.&lt;/p>
+&lt;p>A new workbook opens up, named with my name and the time and I can get to work 🙂 I think it’s neat.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Maybe you can find him at SQL Bits next year. Did you know that SQL Bits 2020 was announced?&lt;/p>
+&lt;p>Check out &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>https://sqlbits.com&lt;/a> for more details&lt;/p></description></item><item><title>Create a PowerShell Notebook for Azure Data Studio with PowerShell</title><link>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</link><pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</guid><description>&lt;p>The latest update to the ADSNotebook PowerShell module &lt;a class="link" href="https://blog.robsewell.com/create-azure-data-studio-sql-notebooks-with-powershell/" target="_blank" rel="noopener"
+>I blogged about here&lt;/a> now enables the creation of PowerShell notebooks with PowerShell.&lt;/p>
+&lt;p>You can install the module with&lt;/p>
+&lt;pre>&lt;code>Install-Module ADSNotebook
+&lt;/code>&lt;/pre>
+&lt;p>or if you have already installed it you can use&lt;/p>
+&lt;pre>&lt;code>Update-Module ADSNotebook
+&lt;/code>&lt;/pre>
+&lt;p>In the latest release, there is an extra parameter for &lt;code>New-AdsWorkBook&lt;/code> of &lt;code>-Type&lt;/code> which will accept either SQL or PowerShell&lt;/p>
+&lt;h2 id="create-a-powershell-notebook-with-powershell-rob">Create a PowerShell Notebook with PowerShell Rob&lt;/h2>
+&lt;p>OK!&lt;/p>
+&lt;p>Here is some code to create a PowerShell Notebook. First we will create some cells using &lt;code>New-AdsWorkBookCell&lt;/code> including all the markdown to add images and links. You can find my notebooks which explain how to write the markdown for your notebooks in my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/tree/master/2019/PASS%20Summit/SQL%20Notebooks%20in%20Azure%20Data%20Studio%20for%20the%20DBA" target="_blank" rel="noopener"
+>GitHub Presentations Repository&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>Then we will create a new workbook using those cells&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>Then, when that code is run we can open the Notebook and ta-da&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image-33.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-33.png?fit=630%2C505&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>And it is super quick to run as well&lt;/p>
+&lt;p>UPDATE – Tyler Leonhardt &lt;a class="link" href="https://twitter.com/TylerLeonhardt" target="_blank" rel="noopener"
+>t&lt;/a> from the PowerShell team asked&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-36.png?resize=597%2C284&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Challenge accepted, with extra meta, here is the PowerShell to create a PowerShell Notebook which will create a PowerShell Notebook!!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted --></description></item><item><title>Create Azure Data Studio SQL Notebooks with PowerShell</title><link>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</link><pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</guid><description>&lt;p>At PASS Summit today I gave a presentation about SQL Notebooks in Azure Data Studio for the DBA. I demo’d the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+>PowerShell module ADSNotebook&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-32.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+>which you can also find on GitHub&lt;/a> (where I will be glad to take PR’s to improve it 🙂 )&lt;/p>
+&lt;p>This module has 3 functions&lt;/p>
+&lt;p>This module contains only 3 commands at present&lt;/p>
+&lt;ul>
+&lt;li>Convert-ADSPowerShellForMarkdown&lt;/li>
+&lt;/ul>
+&lt;p>This will create the markdown link for embedding PowerShell code in a Text Cell for a SQL Notebook as described &lt;a class="link" href="https://blog.robsewell.com/powershell-in-sql-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+>in this blog post&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>New-ADSWorkBookCell&lt;/li>
+&lt;/ul>
+&lt;p>This command will create a workbook text cell or a code cell for adding to the New-ADSWorkBook command&lt;/p>
+&lt;ul>
+&lt;li>New-ADSWorkBook&lt;/li>
+&lt;/ul>
+&lt;p>This will create a new SQL Notebook using the cell objects created by New-ADSWorkBookCell&lt;/p>
+&lt;h2 id="usage">Usage&lt;/h2>
+&lt;p>Convert-ADSPowerShellForMarkdown&lt;/p>
+&lt;pre>&lt;code>Convert-ADSPowerShellForMarkdown -InputText &amp;quot;Get-ChildItem&amp;quot; -LinkText 'This will list the files' -ToClipBoard
+Converts the PowerShell so that it works with MarkDown and sets it to the clipboard for pasting into a workbook cell
+&lt;/code>&lt;/pre>
+&lt;p>New-ADSWorkBookCell&lt;/p>
+&lt;pre>&lt;code>$introCelltext = &amp;quot;# Welcome to my Auto Generated Notebook
+## Automation
+Using this we can automate the creation of notebooks for our use
+&amp;quot;
+$Intro = New-ADSWorkBookCell -Type Text -Text $introCelltext
+Creates an Azure Data Studio Text cell and sets it to a variable for passing to New-AdsWorkBook
+&lt;/code>&lt;/pre>
+&lt;p>New-ADSWorkBook&lt;/p>
+&lt;pre>&lt;code>$introCelltext = &amp;quot;# Welcome to my Auto Generated Notebook
+## Automation
+Using this we can automate the creation of notebooks for our use
+&amp;quot;
+$SecondCelltext = &amp;quot;## Running code
+The next cell will have some code in it for running
+## Server Principals
+Below is the code to run against your instance to find the server principals that are enabled&amp;quot;
+$thirdcelltext = &amp;quot;SELECT Name
+FROM sys.server_principals
+WHERE is_disabled = 0&amp;quot;
+$Intro = New-ADSWorkBookCell -Type Text -Text $introCelltext
+$second = New-ADSWorkBookCell -Type Text -Text $SecondCelltext
+$third = New-ADSWorkBookCell -Type Code -Text $thirdcelltext
+$path = 'C:\temp\AutoGenerated.ipynb'
+New-ADSWorkBook -Path $path -cells $Intro,$second,$third
+Creates 3 cells with New-AdsWorkBookCells to add to the workbook,
+two text ones and a code one, then creates a SQL Notebook with
+those cells and saves it as C:\temp\AutoGenerated.ipynb
+&lt;/code>&lt;/pre>
+&lt;h1 id="installation">Installation&lt;/h1>
+&lt;p>You can install this Module from the PowerShell Gallery using&lt;/p>
+&lt;p>&lt;code>Install-Module ADSNotebook&lt;/code>&lt;/p>
+&lt;h1 id="compatability">Compatability&lt;/h1>
+&lt;p>This module has been tested on Windows PowerShell 5.1, PowerShell Core 6 and PowerShell 7 on Windows 10 and Ubuntu&lt;/p>
+&lt;h2 id="demo">Demo&lt;/h2>
+&lt;!-- raw HTML omitted --></description></item><item><title>PowerShell Notebooks in Azure Data Studio</title><link>https://blog.robsewell.com/blog/powershell-notebooks-in-azure-data-studio/</link><pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-notebooks-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-8.png" alt="Featured image of post PowerShell Notebooks in Azure Data Studio" />&lt;p>The latest release of the &lt;a class="link" href="https://github.com/microsoft/azuredatastudio#try-out-the-latest-insiders-build-from-master" target="_blank" rel="noopener"
+>insiders edition of Azure Data Studio&lt;/a> brings the first edition of PowerShell Notebooks!&lt;/p>
+&lt;p>You can download the latest insiders edition from the link above, it can be installed alongside the stable release.&lt;/p>
+&lt;p>To access many of the commands available use F1 to open the command palette (like many of my tips this also works in Visual Studio Code). You can then start typing to get the command that you want.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can then hit enter with the command that you want highlighted, use the mouse or use the shortcut which is displayed to the right.&lt;/p>
+&lt;p>In a new notebook, you can click the drop down next to kernel and now you can see that PowerShell is available&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-9.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When you choose the PowerShell kernel, you will get a prompt asking you to configure the Python installation&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If you have Python already installed you can browse to the location that it is installed or you can install Python. In the bottom pane you will be able to see the progress of the installation.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When it has completed, you will see&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You may also get a prompt asking if you would like to upgrade some packages&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Again this will be displayed in the tasks pane&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="addingpowershell">&lt;strong>Adding PowerShell&lt;/strong>&lt;/h2>
+&lt;p>To add PowerShell Code to the notebook click the Code button at the top of the file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>or the one you can find by highlighting above or below a block&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I did not have intellisense, but you can easily write your code in Azure Data Studio or Visual Studio Code and paste it in the block.&lt;/p>
+&lt;p>Interestingly Shawn Melton ( &lt;a class="link" href="https://twitter.com/wsmelton" target="_blank" rel="noopener"
+>t&lt;/a> ) did&lt;/p>
+&lt;blockquote>
+&lt;p>Curious, you state &amp;ldquo;There is not any intellisense, but you can easily write your code in Azure Data Studio or Visual Studio Code and paste it in the block&amp;rdquo;…&lt;/p>
+&lt;p>It works flawlessly for me on Windows. &lt;a class="link" href="https://t.co/Lx6fGH9F5L" target="_blank" rel="noopener"
+>pic.twitter.com/Lx6fGH9F5L&lt;/a>&lt;/p>
+&lt;p>— Shawn Melton (@wsmelton) &lt;a class="link" href="https://twitter.com/wsmelton/status/1184819132598013952?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>October 17, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>This was because he had the PowerShell extension installed and I did not (I know !!)&lt;br>
+If you find you dont have intellisense then install the PowerShell extension!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Clicking the play button (which is only visible when you hover the mouse over it) will run the code&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>You can clear the results from every code block using the clear results button at the top&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Otherwise, you can save the results with the Notebook by saving it. This is the part that is missing from running PowerShell in the Markdown blocks in a &lt;a class="link" href="https://blog.robsewell.com/powershell-in-sql-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+>SQL Notebook as I described here&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am looking forward to how this develops. You can find my sample PowerShell notebook (with the code results) &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/powershell.ipynb" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p></description></item><item><title>PowerShell in SQL Notebooks in Azure Data Studio</title><link>https://blog.robsewell.com/blog/powershell-in-sql-notebooks-in-azure-data-studio/</link><pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-in-sql-notebooks-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-4.png" alt="Featured image of post PowerShell in SQL Notebooks in Azure Data Studio" />&lt;p>I have done a lot of writing in the last few months but you see no blog posts! My wonderful friend Chrissy and I are writing “dbatools in a Month of Lunches” to be published by Manning. That has taken up a lot of my writing mojo. We have hit a little break whilst we have some reviews done ready for the &lt;a class="link" href="https://www.manning.com/meap-program" target="_blank" rel="noopener"
+>MEAP&lt;/a> (For everyone who asks, the answer is the unfulfilling ‘soon’) so it’s time for a blog post!&lt;/p>
+&lt;h2 id="sql-notebooks-are-cool">SQL Notebooks are cool&lt;/h2>
+&lt;p>I have had a lot of fun with SQL Notebooks recently. I have presented a session about them at a couple of events this month &lt;a class="link" href="http://datagrillen.com" target="_blank" rel="noopener"
+>DataGrillen&lt;/a> and SQL Saturday Cork. Here is a little snippet&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://twitter.com/hashtag/dbatools?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbatools&lt;/a> in PowerShell in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> SQL Notebooks for creating the containers and restoring the &lt;a class="link" href="https://twitter.com/hashtag/dbachecks?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbachecks&lt;/a> historical database for running queries in 🙂
+Getting ready for presentation for &lt;a class="link" href="https://twitter.com/hashtag/DataGrillen?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#DataGrillen&lt;/a> &lt;a class="link" href="https://t.co/wiQ41bblQV" target="_blank" rel="noopener"
+>pic.twitter.com/wiQ41bblQV&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1130871277449875456?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>May 21, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Yes, you can run PowerShell in a SQL Notebook in Azure Data Studio just by clicking a link in the markdown cell. This opens up a lot of excellent possibilities.&lt;/p>
+&lt;p>I have had several discussions about how SQL Notebooks can be used by SQL DBAs within their normal everyday roles. (Mainly because I don’t really understand what the sorcerers of data science do with notebooks!). I have helped clients to look at some of their processes and use SQL Notebooks to help with them. Creating Disaster Recovery or Change Run-books or Incident Response Templates or using them for product demonstrations. Of course, I needed to use PowerShell in that 🙂&lt;/p>
+&lt;p>I have really enjoyed working out how to run PowerShell in the markdown in a SQL Notebook in Azure Data Studio and I think &lt;a class="link" href="http://www.centinosystems.com/blog/author/aencentinosystems-com/" target="_blank" rel="noopener"
+>Anthony the kubernetes magician&lt;/a> did too!&lt;/p>
+&lt;blockquote>
+&lt;p>I think &lt;a class="link" href="https://twitter.com/sqldbawithbeard?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@sqldbawithbeard&lt;/a> is an actual wizard! You should see the things he can do with &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/DataGrillen?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#DataGrillen&lt;/a> &lt;a class="link" href="https://t.co/KMeZR3CrPK" target="_blank" rel="noopener"
+>pic.twitter.com/KMeZR3CrPK&lt;/a>&lt;/p>
+&lt;p>— Anthony E. Nocentino (@nocentino) &lt;a class="link" href="https://twitter.com/nocentino/status/1141709511700467712?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>June 20, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>OK enough magic puns lets talk about PowerShell in SQL Notebooks. You can read about &lt;a class="link" href="https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>how to create a SQL Notebook and run T-SQL queries here&lt;/a>, (you no longer need the Insider Edition by the way)&lt;/p>
+&lt;h2 id="powershell-in-markdown">PowerShell in Markdown!&lt;/h2>
+&lt;p>First, before I go any further, I must say this. I was at the European PowerShell Conference when I was working this out and creating my sessions and I said the words&lt;/p>
+&lt;blockquote>
+&lt;p>“Cool, I can click a link and run PowerShell, this is neat”&lt;/p>
+&lt;p>A Beardy fellow in Hannover&lt;/p>
+&lt;/blockquote>
+&lt;p>This stopped some red team friends of mine in their tracks and they said “Show me”. One of them was rubbing their hands with glee! You can imagine the sort of wicked, devious things that they were immediately considering doing.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yes, it’s funny but also it carries a serious warning. Without understanding what it is doing, please don’t enable PowerShell to be run in a SQL Notebook that someone sent you in an email or you find on a GitHub. In the same way as you don’t open the word document attachment which will get a thousand million trillion europounddollars into your bank account or run code you copy from the internet on production without understanding what it does, this could be a very dangerous thing to do.&lt;/p>
+&lt;p>With that warning out of the way, there are loads of really useful and fantastic use cases for this. SQL Notebooks make great run-books or incident response recorders and PowerShell is an obvious tool for this. (If only we could save the PowerShell output in a SQL Notebook, this would be even better)&lt;/p>
+&lt;h2 id="how-on-earth-did-you-work-this-out">How on earth did you work this out?&lt;/h2>
+&lt;p>Someone asked me how I worked it out. I didn’t! It began with Vicky Harp PM lead for the SQL Tools team at Microsoft&lt;/p>
+&lt;blockquote>
+&lt;p>Did you know you can add markdown links to open a terminal and paste in a command in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a> notebooks? &lt;a class="link" href="https://t.co/YHX9pIVQco" target="_blank" rel="noopener"
+>pic.twitter.com/YHX9pIVQco&lt;/a>&lt;/p>
+&lt;p>— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1128359827128950784?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>May 14, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>I then went and looked at &lt;a class="link" href="https://twitter.com/kevcunnane" target="_blank" rel="noopener"
+>Kevin Cunnane&lt;/a>‘s notebook. Kevin is a member of the tools team working on Azure Data Studio. With SQL Notebooks, you can double click the markdown cell and see the code that is behind it. To understand how it is working, lets deviate a little.&lt;/p>
+&lt;h2 id="keyboard-shortcuts">Keyboard Shortcuts&lt;/h2>
+&lt;p>IF you click the cog at the bottom left of Azure Data Studio and choose Keyboard Shortcuts&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>you can make Azure Data Studio (and Visual Studio Code) work exactly how you want it to. Typing in the top box will find a command and you can then set the shortcuts that you want to use to save yourself time.&lt;/p>
+&lt;p>&lt;img src="https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>](&lt;a class="link" href="https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?ssl=1" target="_blank" rel="noopener"
+>https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?ssl=1&lt;/a>)&lt;/p>
+&lt;p>This also enables you to see the command that is called when you use a keyboard shortcut. For example, you can see that for the focus terminal command it says &lt;code>workbench.action.terminal.focus&lt;/code>.&lt;/p>
+&lt;p>It turns out that you can call this as a link in a Markdown document using HTML with &lt;code>&amp;lt;a href=&amp;quot;&amp;quot;&amp;gt;&lt;/code> and adding &lt;code>command:&lt;/code> prior to the command text. When the link is clicked the command will run. Cool 🙂&lt;/p>
+&lt;p>For this to be able to work (you read the warning above?) you need to set the Notebook to be trusted by clicking this button.&lt;/p>
+&lt;p>&lt;img src="https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>](&lt;a class="link" href="https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?ssl=1" target="_blank" rel="noopener"
+>https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?ssl=1&lt;/a>)&lt;/p>
+&lt;p>This will allow any command to be run. Of course, people with beards will helpfully advise when this is required for a &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/05%20-Working%20with%20dbachecks%20Validation%20Results.ipynb" target="_blank" rel="noopener"
+>SQL Notebook&lt;/a>. (Safe to say people attempting nefarious actions will try the same with your users)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now that we know how to run an Azure Data Studio command using a link in a markdown cell the next step is to run a PowerShell command. I headed to the &lt;a class="link" href="https://code.visualstudio.com/docs/editor/integrated-terminal" target="_blank" rel="noopener"
+>Visual Studio Code documentation&lt;/a> and found&lt;/p>
+&lt;blockquote>
+&lt;p>Send text from a keybinding
+The &lt;code>workbench.action.terminal.sendSequence&lt;/code> command can be used to send a specific sequence of text to the terminal, including escape sequence&lt;/p>
+&lt;/blockquote>
+&lt;p>That’s the command we need, however, we still need to craft the command so that it will work as a link. It needs to be converted into a URL.&lt;/p>
+&lt;p>I started by using this website &lt;a class="link" href="https://www.url-encode-decode.com/" target="_blank" rel="noopener"
+>https://www.url-encode-decode.com/&lt;/a> to do this. This is &lt;strong>how you can check the code in other peoples notebook, use the decode capability.&lt;/strong>&lt;/p>
+&lt;p>Encoding &lt;code>Set-Location C:\dbachecks&lt;/code> gives `Set-Location+C%3A%5Cdbacheck``&lt;/p>
+&lt;p>&lt;img src="https://i0.wp.com/user-images.githubusercontent.com/6729780/59567164-e5044300-9061-11e9-802b-7b28c3aee345.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>So I can just put that code into the href link and bingo!&lt;/p>
+&lt;p>If only it was that easy!!&lt;/p>
+&lt;h2 id="some-replacing-is-required">Some Replacing is required&lt;/h2>
+&lt;p>The + needs to be replaced with a space or &lt;code>%20&lt;/code>&lt;/p>
+&lt;p>You also need to double the &lt;code>\&lt;/code> and replace the &lt;code>%3A&lt;/code> with a &lt;code>:&lt;/code>
+The &lt;code>&amp;quot;&lt;/code> needs to be replaced with &lt;code>\u022&lt;/code>, the &lt;code>'&lt;/code> with &lt;code>\u027&lt;/code>, the curly braces won’t work unless you remove the &lt;code>%0D%0A&lt;/code>. Got all that? Good!&lt;/p>
+&lt;p>Once you have written your PowerShell, encoded it, performed the replacements, you add &lt;code>\u000D&lt;/code> at the end of the code to pass an enter to run the code and then place all of that into a link like this&lt;/p>
+&lt;p>&lt;code>&amp;lt;a href=&amp;quot;command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 PLACE THE ENCODED CODE HERE %22%7D&amp;quot;&amp;gt;Link Text&amp;lt;/a&amp;gt;&lt;/code>&lt;/p>
+&lt;p>This means that if you want to add the PowerShell code to set a location and then list the files and folders in that location to a Markdown cell using PowerShell like this&lt;/p>
+&lt;pre>&lt;code>Set-Location C:\dbachecks
+Get-ChildItem
+&lt;/code>&lt;/pre>
+&lt;p>You would end up with a link like this&lt;/p>
+&lt;p>&lt;code>`&amp;lt;a href=&amp;quot;command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 Set-Location C:%5C%5Cdbachecks \u000D Get-ChildItem \u000D %22%7D&amp;quot;&amp;gt;Set Location and list files&amp;lt;/a`&lt;/code>&amp;gt;&lt;/p>
+&lt;h2 id="doing-something-more-than-once">Doing something more than once?&lt;/h2>
+&lt;p>I don’t want to remember that all of the time so I wrote a PowerShell function. You can find it on GitHub &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1&lt;/a>&lt;/p>
+&lt;p>This will take a PowerShell command and turn it into a link that will work in an Azure Data Studio markdown. It’s not magic, it’s PowerShell. There is a –&lt;code>ToClipboard&lt;/code> parameter which will copy the code to the clipboard ready for you to paste into the cell (On Windows machines only)&lt;/p>
+&lt;h2 id="giants">Giants&lt;/h2>
+&lt;p>There are many uses for this but here’s one I think is cool.&lt;/p>
+&lt;p>The link below will go to a notebook, which will show how you the giants upon whose shoulders I stand&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/GlennAlanBerry" target="_blank" rel="noopener"
+>Glenn Berry&lt;/a>,
+&lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy LeMaire&lt;/a>,
+&lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>André&lt;/a> &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>Kamman&lt;/a>,
+&lt;a class="link" href="https://twitter.com/spaghettidba" target="_blank" rel="noopener"
+>Gianluca Sartori&lt;/a>&lt;/p>
+&lt;p>have enabled me to create a SQL Notebook with a link which will run some PowerShell to create a SQL Notebook which will have all of the Diagnostic Queries in it.&lt;/p>
+&lt;p>You could possibly use something like it for your incident response SQL Notebook.&lt;/p>
+&lt;p>It’s also cool that GitHub renders the notebook in a browser (You can’t run PowerShell or T-SQL from there though, you need Azure Data Studio!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-4.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Whats a SQL Notebook in Azure Data Studio?</title><link>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</link><pubDate>Wed, 13 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png" alt="Featured image of post Whats a SQL Notebook in Azure Data Studio?" />&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> is a cross-platform database tool for data professionals using the Microsoft family of on-premises and cloud data platforms on Windows, MacOS, and Linux.&lt;/p>
+&lt;p>Recently Vicky Harp tweeted&lt;/p>
+&lt;blockquote>
+&lt;p>We&amp;rsquo;re getting very close to release of SQL Notebooks in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a>! You can give the feature an early spin today with the insider build. &lt;a class="link" href="https://t.co/SEZp7ZdxCp" target="_blank" rel="noopener"
+>pic.twitter.com/SEZp7ZdxCp&lt;/a>&lt;/p>
+&lt;p>— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1104127412944551936?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 8, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>By the way, you can watch a recording from SQLBits of Vicky’s session&lt;/p>
+&lt;blockquote>
+&lt;p>If you missed &lt;a class="link" href="https://twitter.com/hashtag/sqlbits?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>, you will definitely want to watch this demo by &lt;a class="link" href="https://twitter.com/vickyharp?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@vickyharp&lt;/a> and &lt;a class="link" href="https://twitter.com/MGoCODE?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@MGoCODE&lt;/a> about &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a>. Learn the latest about our cross-platform tool, including a new feature, SQL Notebooks &lt;a class="link" href="https://twitter.com/hashtag/SQLServer?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#SQLServer&lt;/a> &lt;a class="link" href="https://t.co/diubYwQckn" target="_blank" rel="noopener"
+>https://t.co/diubYwQckn&lt;/a>&lt;/p>
+&lt;p>— Azure Data Studio (@AzureDataStudio) &lt;a class="link" href="https://twitter.com/AzureDataStudio/status/1103806327065722880?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 7, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>So in the interest of learning about something new I decided to give it a try.&lt;/p>
+&lt;h2 id="install-the-insiders-edition">Install The Insiders Edition&lt;/h2>
+&lt;p>Unlike &lt;a class="link" href="https://code.visualstudio.com/" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> which has a link to the insiders download on the front page, you will have to &lt;a class="link" href="https://github.com/Microsoft/azuredatastudio#azure-data-studio" target="_blank" rel="noopener"
+>visit the GitHub repository for the links to download the insiders release of Azure Data Studio&lt;/a>. Scroll down and you will see&lt;/p>
+&lt;p>Try out the latest insiders build from &lt;code>master&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64-user/insider" target="_blank" rel="noopener"
+>Windows User Installer – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64/insider" target="_blank" rel="noopener"
+>Windows System Installer – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64-archive/insider" target="_blank" rel="noopener"
+>Windows ZIP – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/darwin/insider" target="_blank" rel="noopener"
+>macOS ZIP – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/linux-x64/insider" target="_blank" rel="noopener"
+>Linux TAR.GZ – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>See the &lt;a class="link" href="https://github.com/Microsoft/azuredatastudio/blob/master/CHANGELOG.md" target="_blank" rel="noopener"
+>change log&lt;/a> for additional details of what’s in this release.
+Once you have installed you can connect to an instance, right click and choose New Notebook or you can use File – New Notebook
+&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Incidentally, I use the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG" target="_blank" rel="noopener"
+>docker-compose file here&lt;/a> to create the containers and I map &lt;code>C:\MSSQL\BACKUP\KEEP&lt;/code> on my local machine (where my backups are) to &lt;code>/var/opt/mssql/backups&lt;/code> on the containers on lines 10 and 17 of the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.
+The &lt;code>Create-Ag.ps1&lt;/code> shows the code and creates an AG with &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools.&lt;/a> But I digress!&lt;/p>
+&lt;h2 id="install-notebook-dependencies">Install Notebook Dependencies&lt;/h2>
+&lt;p>Once you click New Notebook you will get a prompt to install the dependencies.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It will show its output&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and take a few minutes to run&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It took all but 11 minutes on my machine&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="create-a-notebook">Create a Notebook&lt;/h2>
+&lt;p>OK, so now that we have the dependencies installed we can create a notebook. I decided to use the ValidationResults database that &lt;a class="link" href="https://blog.robsewell.com/dbachecks-save-the-results-to-a-database-for-historical-reporting/" target="_blank" rel="noopener"
+>I use for my dbachecks demos and describe here&lt;/a>. I need to restore it from my local folder that I have mapped as a volume to my container. Of course, I use dbatools for this 🙂&lt;/p>
+&lt;pre>&lt;code># U: sqladmin P: dbatools.IO
+$cred = Get-Credential
+$restoreDbaDatabaseSplat = @{
+SqlInstance = $sqlinstance1
+SqlCredential = $cred
+UseDestinationDefaultDirectories = $true
+Path = '/var/opt/mssql/backups/ValidationResults.bak'
+}
+Restore-DbaDatabase @restoreDbaDatabaseSplat
+&lt;/code>&lt;/pre>
+&lt;p>I had already got a connection saved to the instance in Azure Data Studio, you may need to create a new one using the new connection icon at the top left and filling in the details. The password is in the code above.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now I can start with my notebook. I am faced with this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I click on text and provide an intro&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Once I had written that and clicked out, I couldn’t see what to do straight away!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then I saw the code and text buttons at the top 🙂 Right, lets get on with it 🙂 I hit the code button and paste in the T-SQL to reset the dates in the database to simulate dbachecks having been run this morning.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-9.png"
+loading="lazy"
+>
+There’s a run cell button on the right and when I press it&amp;gt;&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->
+Cool 🙂&lt;/p>
+&lt;p>If the SQL query has results then they are shown as well&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This is fun and I can see plenty of uses for it. Go and have a play with SQL notebooks 🙂&lt;/p>
+&lt;h2 id="source-control">Source Control&lt;/h2>
+&lt;p>I used CTRL K, CTRL O to open a folder and saved my notebook in my local Presentations folder which is source controlled. When I opened the explorer CTRL + SHIFT + E I can see that the folder and the file are colour coded green and have a U next to them marking them as Untracked. I can also see that the source control icon has a 1 for the number of files with changes and in the bottom left that I am in the master branch.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I click on the source control icon (or CTRL + SHIFT + G) I can see the files with the changes and can enter a commit message&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I then press CTRL + ENTER to commit my change and get this pop-up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>As I only have one file and it has all the changes for this commit I click yes. If I had changed more than one file and only wanted to commit a single one at a time I would hover my mouse over the file and click the + to stage my change.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I make a further change to the notebook and save it, I can see that the source control provider recognises the change but this time the folder the file is in and the file are colour coded brown with an M to show that they have been modified.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Unlike Visual Studio Code, when you then click on the source control icon and click on the change it does not show the differences in the notebook although this works with SQL files.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When I have made all my changes and committed them with good commit messages&lt;/p>
+&lt;p>&lt;img src="https://i2.wp.com/imgs.xkcd.com/comics/git_commit.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can see that there are 3 local changes ready to be pushed to by remote repository (GitHub in this case) and 0 remote commits in this branch by looking at the bottom left&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can click on the “roundy roundy” icon (I don&amp;rsquo;t know its proper name 😊) and synchronise my changes. This comes with a pop-up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Personally I never press OK, Don’t Show Again because I like the double check and to think “Is this really what I want to do right now”. Once I press OK my changes will be synched with the remote repository. Explaining this means that you can find the notebook I have used in my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/tree/master/Notebooks" target="_blank" rel="noopener"
+>Presentations GitHub Repository&lt;/a> which means that you can run the Notebook too using the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG" target="_blank" rel="noopener"
+>docker-compose file here&lt;/a> and the instructions further up in the post.&lt;/p></description></item></channel></rss>

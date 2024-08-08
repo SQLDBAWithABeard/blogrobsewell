@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Splatting on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/splatting/</link><description>Recent content in Splatting on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 11 Mar 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/splatting/index.xml" rel="self" type="application/rss+xml"/><item><title>Easily Splatting PowerShell with VS Code</title><link>https://blog.robsewell.com/blog/easily-splatting-powershell-with-vs-code/</link><pubDate>Sun, 11 Mar 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/easily-splatting-powershell-with-vs-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/dbachecks.jpg" alt="Featured image of post Easily Splatting PowerShell with VS Code" />&lt;p>So I always like to show splatting PowerShell commands when I am presenting sessions or workshops and realised that I had not really blogged about it. (This blog is for &lt;a class="link" href="https://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>@dbafromthecold&lt;/a> who asked me to 🙂 )&lt;/p>
+&lt;h2 id="what-is-splatting">What is Splatting?&lt;/h2>
+&lt;p>Well you will know that when you call a PowerShell function you can use intellisense to get the parameters and sometimes the parameter values as well. This can leave you with a command that looks like this on the screen&lt;/p>
+&lt;pre>&lt;code>Start-DbaMigration -Source $Source -Destination $Destination -BackupRestore -NetworkShare $Share -WithReplace -ReuseSourceFolderStructure -IncludeSupportDbs -NoAgentServer -NoAudits -NoResourceGovernor -NoSaRename -NoBackupDevices
+&lt;/code>&lt;/pre>
+&lt;p>It goes on and on and on and while it is easy to type once, it is not so easy to see which values have been chosen. It is also not so easy to change the values.&lt;/p>
+&lt;p>By Splatting the parameters it makes it much easier to read and also to alter. So instead of the above you can have&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$startDbaMigrationSplat = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Source = $Source
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NetworkShare = $Share
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoAgentServer = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoResourceGovernor = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WithReplace = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ReuseSourceFolderStructure = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Destination = $Destination
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoAudits = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BackupRestore = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoSaRename = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">IncludeSupportDbs = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoBackupDevices = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Start-DbaMigration @startDbaMigrationSplat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is much easier on the eye, but if you dont know what the parameters are (and are too lazy to use &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help?view=powershell-6" target="_blank" rel="noopener"
+>Get-Help&lt;/a> – Hint You should always use &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help?view=powershell-6" target="_blank" rel="noopener"
+>Get-Help&lt;/a> ) or like the convenience and efficiency of using the intellisense, this might feel like a backward step that slows your productivity in the cause of easy on the eye code.&lt;/p>
+&lt;p>Enter &lt;a class="link" href="https://github.com/SeeminglyScience/EditorServicesCommandSuite" target="_blank" rel="noopener"
+>EditorServicesCommandSuite&lt;/a> by SeeminglyScience for VS Code. Amongst the things it makes available to you is easy splatting and people are always impressed when I show it&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>You can install it from the PowerShell Gallery like all good modules using&lt;/p>
+&lt;pre>&lt;code>Install-Module EditorServicesCommandSuite -Scope CurrentUser
+&lt;/code>&lt;/pre>
+&lt;p>and then add it to your VSCode PowerShell profile usually found at &lt;code>C:\Users\USERNAME\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\# Place this in your VSCode profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module EditorServicesCommandSuite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-EditorCommand -Module EditorServicesCommandSuite
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and now creating a splat is as easy as this.&lt;/p>
+&lt;p>Write the command, leave the cursor on a parameter, hit F1 – Choose PowerShell : Show Additional Commands (or use a keyboard shortcut) type splat press enter. Done 🙂&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>So very easy 🙂&lt;/p>
+&lt;p>Happy Splatting 🙂&lt;/p></description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p>When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+>PowerShell Conference EU&lt;/a> in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+>click here&lt;/a> and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+>slides and code here&lt;/a>) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+>Irwin Strachans Active Directory Operations Test&lt;/a> which got me thinking.&lt;/p>
+&lt;p>I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p>
+&lt;p>I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> It &amp;#39;Should have a default Backup Directory of F:\SQLBACKUP\BACKUPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SqlServer.Management.Smo.Server .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">return $srv.BackupDirectory}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$State = Invoke-Command -ComputerName ROB-SURFACEBOOK -ScriptBlock $Scriptblock
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$State |Should Be &amp;#39;F:\SQLBACKUP\BACKUPS&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is the how to find the properties that you want&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ## Load the Assemblies
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Create a Server SMO object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SqlServer.Management.Smo.Server SERVERNAME
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Explore it
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv|gm
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## If you find an array pick the first one and expand and then explore that
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases[0] | select *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases[0] | gm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I quickly found as I added more tests that it was taking a long time to perform the tests (about 5 seconds each test) and that it took an age to fail each of the tests if the server name was incorrect or the server unavailable.&lt;/p>
+&lt;p>I fixed the first one by testing with a ping before running the tests&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ## Check for connectivity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if((Test-Connection $Server -count 1 -Quiet) -eq $false){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Error &amp;#39;Could not connect to $Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The continue is there because I wanted to loop through an array of servers&lt;/p>
+&lt;p>I improved the performance using a remote session and a custom object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> Describe &amp;#34;$Server&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BeforeAll {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Scriptblock = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[pscustomobject]$Return = @{}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = &amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SQLAdmins = $Using:SQLAdmins
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[void][reflection.assembly]::LoadWithPartialName(&amp;#39;Microsoft.SqlServer.Smo&amp;#39;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.DBAAdminDb = $Srv.Databases.Name.Contains(&amp;#39;DBA-Admin&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Logins = $srv.Logins.Where{$_.IsSystemObject -eq $false}.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SQLAdmins = @(Compare-Object $Logins $SQLAdmins -SyncWindow 0).Length - $Logins.count -eq $SQLAdmins.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SysAdmins = $Srv.Roles[&amp;#39;sysadmin&amp;#39;].EnumMemberNames()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SQLAdmin = @(Compare-Object $SysAdmins $SQLAdmins -SyncWindow 0).Length - $SysAdmins.count -eq $SQLAdmins.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.BackupDirectory = $srv.BackupDirectory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.DataDirectory = $srv.DefaultFile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The BeforeAll script block is run, as it sounds like it should, once before all of the tests, BeforeEach would run once before each of the tests. I define an empty custom object and then create an SMO object and add the properties I am interested in testing to it. I then return the custom object at the end&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Return.Alerts82345Exist = ($srv.JobServer.Alerts |Where {$_.Messageid -eq 823 -or $_.Messageid -eq 824 -or $_.Messageid -eq 825}).Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Enabled = ($srv.JobServer.Alerts |Where {$_.Messageid -eq 823 -or $_.Messageid -eq 824 -or $_.Messageid -eq 825 -and $_.IsEnabled -eq $true}).Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.SysDatabasesFullBackupToday = $srv.Databases.Where{$_.IsSystemObject -eq $true -and $_.Name -ne &amp;#39;tempdb&amp;#39; -and $_.LastBackupDate -lt (Get-Date).AddDays(-1)}.Count
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Return $Return
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return = Invoke-Command -ScriptBlock $Scriptblock -ComputerName $Server -ErrorAction Stop
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">catch {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Error &amp;#34;Unable to Connect to $Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">I was then able to test against the property of the custom object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#39;Should have Alerts for Severity 20 and above&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts20SeverityPlusExist | Should Be 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Severity 20 and above Alerts should be enabled&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts20SeverityPlusEnabled | Should Be 6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Should have alerts for 823,824 and 825&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Exist |Should Be 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Alerts for 823,824 and 825 should be enebled&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.Alerts82345Enabled |Should Be 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Occasionally, for reasons I haven’t explored I had to test against the value property of the returned object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;The Full User Database Backup should be scheduled Weekly $OlaUserFullSchedule&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Return.OlaUserFullSchedule.value | Should Be $OlaUserFullSchedule
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I wanted to be able to run the tests against environments or groups of servers with different default values so I parameterised the Test Results as well and then the logical step was to turn it into a function and then I could do some parameter splatting. This also gives me the opportunity to show all of the things that I am currently giving parameters to the test for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Parms = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Servers = &amp;#39;SQLServer1&amp;#39;,&amp;#39;SQLServer2&amp;#39;,&amp;#39;SQLServer3&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SQLAdmins = &amp;#39;THEBEARD\Rob&amp;#39;,&amp;#39;THEBEARD\SQLDBAsAlsoWithBeards&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BackupDirectory = &amp;#39;C:\MSSQL\Backup&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DataDirectory = &amp;#39;C:\MSSQL\Data\&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogDirectory = &amp;#39;C:\MSSQL\Logs\&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MaxMemMb = &amp;#39;4096&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Collation = &amp;#39;Latin1_General_CI_AS&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TempFiles = 4 ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaSysFullFrequency = &amp;#39;Daily&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaSysFullStartTime = &amp;#39;21:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullFrequency = 1 ;## 1 for Sunday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserFullStartTime = &amp;#39;22:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffFrequency = 126; ## 126 for every day except Sunday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserDiffStartTime = &amp;#39;22:00:00&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserLogSubDayInterval = 15;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OlaUserLoginterval = &amp;#39;Minute&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitz = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitzCache = $True;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPBlitzIndex = $True;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPAskBrent = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HASSPBlitzTrace = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">HasSPWhoisActive = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogWhoIsActiveToTable = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTable = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableEnabled = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableScheduled = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableSchedule = &amp;#39;Weekly&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableFrequency = 2 ; # 2 means Monday
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">LogSPBlitzToTableStartTime = &amp;#39;03:00:00&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-SQLDefault @Parms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have some other tests which always return what I want, particularly the firewall rules which you will have to modify to suit your own environment&lt;/p>
+&lt;p>To be able to run this you will need to have the Pester Module. If you are using Windows 10 then it is installed by default, if not&lt;/p>
+&lt;p>&lt;code>Find-Module –Name 'Pester' | Install-Module&lt;/code>&lt;/p>
+&lt;p>You can find more about Pester &lt;a class="link" href="https://mcpmag.com/articles/2016/05/11/testing-powershell-scripts-with-pester.aspx?utm_content=buffer5606b&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer" target="_blank" rel="noopener"
+>here&lt;/a> and &lt;a class="link" href="http://mikefrobbins.com/category/pester/" target="_blank" rel="noopener"
+>here&lt;/a> and also these &lt;a class="link" href="https://www.youtube.com/channel/UCxgrI58XiKnDDByjhRJs5fg/search?query=pester" target="_blank" rel="noopener"
+>videos from the conference&lt;/a>&lt;br>
+You can find the tests on &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Test-SQLDefaults.ps1" target="_blank" rel="noopener"
+>GitHub here&lt;/a> and I will continue to add to the defaults that I check.&lt;br>
+This is not a replacement for other SQL configuration tools such as PBM but it is a nice simple way of giving a report on the current status of a SQL installation either at a particular point in time when something is wrong or after an installation prior to passing the server over to another team or into service&lt;/p></description></item></channel></rss>

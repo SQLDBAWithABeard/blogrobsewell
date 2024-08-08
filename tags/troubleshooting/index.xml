@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Troubleshooting on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/troubleshooting/</link><description>Recent content in Troubleshooting on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 03 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/troubleshooting/index.xml" rel="self" type="application/rss+xml"/><item><title>Making Notebook Agent Jobs on Named Instances work</title><link>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</link><pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2024/ads.png" alt="Featured image of post Making Notebook Agent Jobs on Named Instances work" />&lt;h2 id="can-you-help-erland-said">Can you help? Erland said&lt;/h2>
+&lt;p>The first I realised about this problem was when Erland Sommarskog &lt;a class="link" href="https://www.sommarskog.se/" target="_blank" rel="noopener"
+>b&lt;/a> asked me if I could help with &lt;a class="link" href="https://learn.microsoft.com/en-us/answers/questions/1465685/scheduling-python-notebook-using-sql-server-agent?wt.mc_id=dp-mvp-5002693" target="_blank" rel="noopener"
+>this forum post&lt;/a> The poster was getting an error when trying to run a Notebook Agent Job. The error was a very generic instance not found error&lt;/p>
+&lt;blockquote>
+&lt;p>A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider&lt;!-- raw HTML omitted --> error: 40 - Could not open a connection to SQL Server) The system cannot find the file specified&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="reproduce-the-issue">Reproduce the issue&lt;/h2>
+&lt;p>How very odd I thought. I noticed that it was a named instance, so I tried to recreate the issue on my own named instance DAVE. &lt;a class="link" href="https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/" target="_blank" rel="noopener"
+>I added a new notebook job&lt;/a> and when I tried to run it. It failed&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/newjob.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/newjob.png"
+loading="lazy"
+alt="notebookjob"
+>&lt;/a>&lt;/p>
+&lt;h3 id="huh-">Huh ?&lt;/h3>
+&lt;p>Hmm. But I got a different error.&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/joberror.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/joberror.png"
+loading="lazy"
+alt="notebookjob"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;lsquo;Login failed for user &amp;lsquo;NT Service\SQLAGENT$DAVE&amp;rsquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>That doesn&amp;rsquo;t make a lot of sense. Why is the login failing?&lt;/p>
+&lt;h3 id="where-is-the-logon-">Where is the logon ?&lt;/h3>
+&lt;p>I checked the error log using&lt;/p>
+&lt;p>&lt;code>Get-DbaErrorLog -SqlInstance $SqlInstance -Source logon&lt;/code>&lt;/p>
+&lt;p>but there were no results.&lt;/p>
+&lt;p>Wait a minute.&lt;/p>
+&lt;h2 id="bingo">Bingo&lt;/h2>
+&lt;p>I have the default instance running on this machine. Lets check the error log on that instance as well.&lt;/p>
+&lt;p>&lt;code>Get-DbaErrorLog -SqlInstance $ENV:COMPUTERNAME -Source logon&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/logonfailed.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/logonfailed.png"
+loading="lazy"
+alt="failedlogin"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Login failed for user &amp;lsquo;NT Service\SQLAgent$DAVE&amp;rsquo;. Reason: Could not find a login matching the name provided. [CLIENT: &lt;!-- raw HTML omitted -->]&lt;/p>
+&lt;/blockquote>
+&lt;p>So the Agent service for the named instance is failing to logon to the default instance on the host.&lt;/p>
+&lt;h2 id="lets-recreate-the-error-properly-this-time">Let&amp;rsquo;s recreate the error properly this time&lt;/h2>
+&lt;p>Stop the default instance&lt;/p>
+&lt;p>&lt;code>Stop-Service MSSQLSERVER -Force&lt;/code>&lt;/p>
+&lt;p>and rerun the job, which fails, and get the error message&lt;/p>
+&lt;p>&lt;code>Get-DbaAgentJobHistory -SqlInstance $SqlInstance -Job $JobName&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/noinstance.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/noinstance.png"
+loading="lazy"
+alt="no instance"
+>&lt;/a>&lt;/p>
+&lt;p>So I have recreated the error.&lt;/p>
+&lt;h2 id="now-to-solve-it">Now to solve it&lt;/h2>
+&lt;p>First we need to understand what is happening. If we look at the Job Step for the Agent Job in Azure Data Studio&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/--rkQiLIPCM"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>There is some PowerShell running to execute the cells of the notebook and gather the results and place them in the database for later use.&lt;/p>
+&lt;p>The code uses &lt;code>$(ESCAPE_SQUOTE(A THING))&lt;/code> which is passing the Agent Job tokens to the script. &lt;a class="link" href="https://learn.microsoft.com/en-us/sql/ssms/agent/use-tokens-in-job-steps?view=sql-server-ver16&amp;amp;WT.mc_id=DP-MVP-5002693#sql-server-agent-tokens" target="_blank" rel="noopener"
+>you can find the list of Agent Job tokens here&lt;/a>&lt;/p>
+&lt;p>Then it calls &lt;code>Invoke-SqlCmd&lt;/code> without a &lt;code>ServerInstance&lt;/code> parameter. If you look at the documentation for the parameter &lt;a class="link" href="https://learn.microsoft.com/en-us/powershell/module/sqlserver/invoke-sqlcmd?view=sqlserver-ps&amp;amp;WT.mc_id=DP-MVP-5002693#-serverinstance" target="_blank" rel="noopener"
+>web&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/serverinstancehelp.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/serverinstancehelp.png"
+loading="lazy"
+alt="halp instance"
+>&lt;/a>&lt;/p>
+&lt;p>it shows the Default Value as &lt;code>None&lt;/code> but this does not explain what it does. With no value set for the &lt;code>ServerInstance&lt;/code> parameter, &lt;code>Invoke-SqlCmd&lt;/code> will try to connect to the default instance as we can see below.&lt;/p>
+&lt;p>&lt;a class="link" href="../assets/uploads/2024/instanceconnect.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2024/instanceconnect.png"
+loading="lazy"
+alt="halp instance"
+>&lt;/a>&lt;/p>
+&lt;h2 id="solution">Solution&lt;/h2>
+&lt;p>So we can get the Agent Job Tokens for the host and the instance name and set them as a variable and pass them to the ServerInstance paramater every time that it is called.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-PowerShell" data-lang="PowerShell">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$SqlInstance&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s1">&amp;#39;{0}\{1}&amp;#39;&lt;/span> &lt;span class="o">-f&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$(&lt;/span>&lt;span class="n">ESCAPE_SQUOTE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MACH&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$(&lt;/span>&lt;span class="n">ESCAPE_SQUOTE&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INST&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="better-solution">Better Solution&lt;/h2>
+&lt;p>To save a load of copy pasta, the risk of not identifying all of the calls to the cmdlet, and keep the exising coding standards we can instead use &lt;a class="link" href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parameters_default_values?view=powershell-7.4&amp;amp;WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>PsDefaultParameters&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$SqlInstance = &amp;#39;{0}\{1}&amp;#39; -f &amp;#34;$(ESCAPE_SQUOTE(MACH))&amp;#34;, &amp;#34;$(ESCAPE_SQUOTE(INST))&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PSDefaultParameterValues = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Invoke-SqlCmd:ServerInstance&amp;#34; = $SqlInstance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="what-is-this-doing">What is this doing?&lt;/h3>
+&lt;p>It is creating a variable named &lt;code>SqlInstance&lt;/code> that is made up of the SQL Agent Job Tokens for the machine and the instance name&lt;/p>
+&lt;p>Then it is setting that variable as the default value for the &lt;code>ServerInstance&lt;/code> paramater of the &lt;code>Invoke-SqlCmd&lt;/code> cmdlet for this session only&lt;/p>
+&lt;p>This means that all of the times that the &lt;code>Invoke-SqlCmd&lt;/code> cmdlet is called it will use the correct value whether it is on a default or a named instance.&lt;/p>
+&lt;h2 id="most-best-solution">Most best solution&lt;/h2>
+&lt;p>As this code is &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice" target="_blank" rel="noopener"
+>available on GitHub&lt;/a> and anyone can create an issue or a Pull Request, I did just that :-)&lt;/p>
+&lt;p>Issue - &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice/issues/2305" target="_blank" rel="noopener"
+>https://github.com/microsoft/sqltoolsservice/issues/2305&lt;/a>&lt;br>
+Pull request - &lt;a class="link" href="https://github.com/microsoft/sqltoolsservice/pull/2306" target="_blank" rel="noopener"
+>https://github.com/microsoft/sqltoolsservice/pull/2306&lt;/a>&lt;/p></description></item></channel></rss>

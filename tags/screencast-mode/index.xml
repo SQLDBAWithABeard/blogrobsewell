@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Screencast Mode on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/screencast-mode/</link><description>Recent content in Screencast Mode on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/screencast-mode/index.xml" rel="self" type="application/rss+xml"/><item><title>How Do You Show Keystrokes On Screen</title><link>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post How Do You Show Keystrokes On Screen" />&lt;p>It started with a tweet from Benni De Jagere &lt;a class="link" href="https://bennidejagere.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/BenniDeJagere" target="_blank" rel="noopener"
+>Twitter&lt;/a> about how to show the keystrokes on the screen.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h1 id="it-depends">It depends&lt;/h1>
+&lt;p>The best answer is always &amp;ldquo;it depends&amp;rdquo; and the correct response to this to determine how much to trust this information is &amp;ldquo;what does it depend uponW&amp;rdquo;&lt;/p>
+&lt;h1 id="what-does-it-depend-upon">what does it depend upon?&lt;/h1>
+&lt;p>It depends upon which programme you are using and wish to demonstrate.&lt;/p>
+&lt;h2 id="visual-studio-code-or-azure-data-studio">Visual Studio Code or Azure Data Studio&lt;/h2>
+&lt;p>If you are using &lt;a class="link" href="https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> or &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is-azure-data-studio?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> then you have it built in.&lt;/p>
+&lt;p>You can press &lt;code>CTRL+SHIFT+P&lt;/code> and search for screencast&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/screencast.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/screencast.png"
+loading="lazy"
+alt="screencast"
+>&lt;/a>&lt;/p>
+&lt;p>if you toggle this on then the keystrokes are displayed on the screen as you type&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/display.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/display.png"
+loading="lazy"
+alt="displaying the keystrokes"
+>&lt;/a>&lt;/p>
+&lt;p>If you &lt;code>CTRL+,&lt;/code> or click on the cog and then settings, you can search for screencast and there are a number of options available. In the screenshot below you can see that the mouse click is highlighted as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/withmouse.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/withmouse.png"
+loading="lazy"
+alt="screencast settings with mouse"
+>&lt;/a>&lt;/p>
+&lt;h2 id="something-else">Something else&lt;/h2>
+&lt;p>If you are wanting to demonstrate in a different application or when switching applications, you can use Carnac - &lt;a class="link" href="http://carnackeys.com/" target="_blank" rel="noopener"
+>http://carnackeys.com/&lt;/a>&lt;/p>
+&lt;p>Download the latest release and then run setup.exe and there will be a beautiful purple icon in the taskbar which if you click it will open the settings screen.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacsettings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/carnacsettings.png"
+loading="lazy"
+alt="carnac settings"
+>&lt;/a>&lt;/p>
+&lt;p>You can click in any of the squares to decide where you would like the key presses to be displayed and as you can see it works with multiple monitors (although I had some issues with that). You can use the sliders to offset in any direction from the box as well and change the appearance.&lt;/p>
+&lt;p>You can even change the colour of the text as well.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/carnacdisplays.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/carnacdisplays.png"
+loading="lazy"
+alt="change colour"
+>&lt;/a>&lt;/p>
+&lt;p>To leave the application simple right click on the icon in the task bar and click Exit.&lt;/p>
+&lt;p>Happy demonstrating!&lt;/p></description></item></channel></rss>

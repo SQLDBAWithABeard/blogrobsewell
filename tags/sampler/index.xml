@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sampler on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sampler/</link><description>Recent content in Sampler on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 10 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sampler/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" />&lt;h1 id="what-is-sqlbits">What is SQLBits?&lt;/h1>
+&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="where-and-when">Where and when?&lt;/h2>
+&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p>
+&lt;h2 id="what-is-there-at-sqlbits">What is there at SQLBits?&lt;/h2>
+&lt;p>Tuesday and Wednesday are training days with all day sessions provided by subject matter experts including Microsoft Product Group members, Microsoft Valued Professionals, Microsoft Certified Trainers, and other experts. There are 30 options covering all areas of the Data Platform and none-technical sessions as well.&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/training-days" target="_blank" rel="noopener"
+>training day agenda here&lt;/a>&lt;/p>
+&lt;p>Thursday and Friday have 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>Saturday is the &lt;strong>FREE to attend&lt;/strong> day. It also has 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>There are about 250 sessions on Thursday, Friday and Saturday&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/agenda" target="_blank" rel="noopener"
+>general session agenda here&lt;/a>&lt;/p>
+&lt;h2 id="what-else-is-there-outside-of-technical-stuff">What else is there outside of technical stuff?&lt;/h2>
+&lt;p>Oh My!!&lt;/p>
+&lt;p>The biggest benefit is the people, for networking, for answering questions, building relationships with Microsoft product group or local Microsoft, meeting companies who are sponsoring, finding your new job or your new team members, learning and sharing with your peers.&lt;/p>
+&lt;p>There is also a pub quiz on Thursday evening, the Friday night costume party, the community zone.&lt;/p>
+&lt;h1 id="how-do-i-find-the-sessions">How do I find the sessions?&lt;/h1>
+&lt;p>With so many sessions, its hard to find the ones that you want or to get a good overview in the format that you want. So I built a PowerShell module to get that information for you easily in any format you like. (Editor - thats a fib, he built it so that he could write Pester to ensure that speakers were not scheduled when they were not available)&lt;/p>
+&lt;h1 id="the-sqlbitsps-module">The SQLBitsPS module&lt;/h1>
+&lt;p>You can find the SQLBitsPS PowerShell module on the &lt;a class="link" href="https://www.powershellgallery.com/packages/SQLBitsPS" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>As with all PowerShell modules from the Gallery, you can install it by running&lt;/p>
+&lt;p>&lt;code>Install-Module SQLBitsPS&lt;/code>&lt;/p>
+&lt;p>I find that a lot of people like to use the &lt;code>ShowWindow&lt;/code> parameter to have the help in another searchable window.&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule -ShowWindow&lt;/code>
+&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="use-the-help">Use the help&lt;/h2>
+&lt;p>to find out how to use any PowerShell command you should use Get-Help and this module is no different. The help for the commands is built in and can be accessed with&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule&lt;/code>&lt;/p>
+&lt;h2 id="getting-the-schedule">Getting the schedule&lt;/h2>
+&lt;p>You can just run &lt;code>Get-SQLBitsSchedule&lt;/code> and by default it will get the schedule and if you have the &lt;code>ImportExcel&lt;/code> module available it will write an Excel Workbook with each days agenda on a different sheet and colour code the service sessions like Registration, lunch and coffee breaks&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>To save you having to click to open Excel I have added a &lt;code>Show&lt;/code> parameter which will open it for you!&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-csv-instead">I would like a csv instead&lt;/h2>
+&lt;p>The &lt;code>output&lt;/code> parameter gives you a number of options for the format of the output. If you do not have the &lt;code>ImportExcel&lt;/code> module it will default to &lt;code>-output csv&lt;/code> which you can also combine with the &lt;code>Show&lt;/code> parameter&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output csv -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-html-page-instead">I would like a html page instead&lt;/h2>
+&lt;p>It&amp;rsquo;s not awesome but you can also create an HTML page. This may be useful if you wish to print the agenda yourself so that you have a hard copy.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output html -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="let-me-decide-what-format-i-want">Let me decide what format I want&lt;/h2>
+&lt;p>You can also output a &lt;code>[pscustomobject]&lt;/code> which you may use to PowerShell to your hearts content!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Format-Table&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Maybe you would like to see the sessions that are on Friday at 16:50&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Where-Object {$_.Day -eq 'Friday' -and $_.StartTime -eq '16:50'} &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They look amazing, I recommend Mladen Prajdic session. That one blew me away at Data Grillen and I may very well attend that again.&lt;/p>
+&lt;h2 id="i-cant-do-anything-fancy-just-let-me-search">I can&amp;rsquo;t do anything fancy, just let me search&lt;/h2>
+&lt;p>If all you want is to search for your favourite speaker then you can use the &lt;code>search&lt;/code> parameter which will perform a wildcard search.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Cathrine -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Monica -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You can also use it search for topics&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search 'Mental Health' -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and even to search for wisdom!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search wisdom -output object &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h1 id="i-want-to-make-it-better">I want to make it better&lt;/h1>
+&lt;p>Awesome, thank you.&lt;/p>
+&lt;p>This is all open-source and you can find it on GitHub at&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS&lt;/a>&lt;/p>
+&lt;p>There are some brief instructions here&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md&lt;/a>&lt;/p>
+&lt;h1 id="join-us">Join us&lt;/h1>
+&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform.&lt;/p>
+&lt;h2 id="where-and-when-1">Where and when?&lt;/h2>
+&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p></description></item></channel></rss>

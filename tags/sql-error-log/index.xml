@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sql-Error-Log on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-error-log/</link><description>Recent content in Sql-Error-Log on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 03 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-error-log/index.xml" rel="self" type="application/rss+xml"/><item><title>How to break a SQL 2019 container on my laptop</title><link>https://blog.robsewell.com/blog/how-to-break-a-sql-2019-container-on-my-laptop/</link><pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-break-a-sql-2019-container-on-my-laptop/</guid><description>&lt;p>Just a very quick post today. At the weekend I blogged about &lt;a class="link" href="https://sqldbawithabeard.com/2019/03/26/persisting-databases-with-named-volumes-on-windows-with-docker-compose/" target="_blank" rel="noopener"
+>creating SQL 2019 containers with named volumes enabling&lt;/a> you to persist your data and yesterday about &lt;a class="link" href="https://sqldbawithabeard.com/2019/04/02/generating-a-workload-against-adventureworks-with-PowerShell/" target="_blank" rel="noopener"
+>creating a random workload using PowerShell&lt;/a> and a big T-SQL script.&lt;/p>
+&lt;p>The interesting thing about creating workload is that you can break things :-)&lt;/p>
+&lt;p>When I created a SQL 2019 container with the data files mapped to a directory on my laptops C Drive with a docker-compose like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">version&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;3.7&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">services&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">CTP23&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">mcr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">server&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">CTP2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ubuntu&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ports&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="s2">&amp;#34;15591:1433&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="s2">&amp;#34;5022:5022&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">environment&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SA_PASSWORD&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Password0!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ACCEPT_EULA&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Y&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">volumes&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">BACKUP&lt;/span>\&lt;span class="n">KEEP&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">backups&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">DockerFiles&lt;/span>\&lt;span class="n">datafiles&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">sqlserver&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">DockerFiles&lt;/span>\&lt;span class="n">system&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>restore the AdventureWorks database to use the /var/opt/sqlserver directory and run a workload after a while the container stops and when you examine the logs you find&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/D26g3dPXgAAso28.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/D26g3dPXgAAso28.png?fit=630%2C214&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I had a whole load of these errors&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.73 spid58 Error: 17053, Severity: 16, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.73 spid58 FCB::MakePreviousWritesDurable: Operating system error (null) encountered.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.74 spid58 Error: 9001, Severity: 21, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.74 spid58 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.05 spid58 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.05 spid58 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.06 spid52 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.06 spid52 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then some of these&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="mi">019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">02&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">55&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mf">16.26&lt;/span> &lt;span class="n">spid53&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">17053&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Severity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">16&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">State&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">02&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">55&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mf">16.26&lt;/span> &lt;span class="n">spid53&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">sqlserver&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">AdventureWorks2014_Data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mdf&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Operating&lt;/span> &lt;span class="n">system&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="mi">31&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">A&lt;/span> &lt;span class="n">device&lt;/span> &lt;span class="n">attached&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">system&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">functioning&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">encountered&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then it went really bad&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.35 spid53 Error: 3314, Severity: 21, State: 3.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.35 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:25). Typically, the specific failure is logged previously as an error in the operating system error log. Restore the database or file from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.37 spid53 Database AdventureWorks2014 was shutdown due to error 3314 in routine &amp;#39;XdesRMReadWrite::RollbackToLsn&amp;#39;. Restart for non-snapshot databases will be attempted after all connections to the database are aborted.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart packet created for dbid 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.41 spid53 Error during rollback. shutting down database (location: 1).
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">after that it tried to restart the database
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.44 spid53 Error: 3314, Severity: 21, State: 3.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.44 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:25). Typically, the specific failure is logged previously as an error in the operating system error log. Restore the database or file from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.49 spid53 Error: 3314, Severity: 21, State: 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.49 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:1). Typically, the specific failure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">is logged previously as an error in the operating system error log. Restore the database or file from a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart packet processing for dbid 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.04 spid52 [5]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 0.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.06 spid52 Starting up database &amp;#39;AdventureWorks2014&amp;#39;.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>But that caused&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.90 spid76 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.90 spid76 The log for database &amp;#39;master&amp;#39; is not available. Check the operating
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Master eh? Now what will you do?&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.55 spid52 29 transactions rolled forward in database &amp;#39;AdventureWorks2014&amp;#39; (5:0). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.90 spid52 1 transactions rolled back in database &amp;#39;AdventureWorks2014&amp;#39; (5:0). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.90 spid52 Recovery is writing a checkpoint in database &amp;#39;AdventureWorks2014&amp;#39; (5). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.16 spid52 Recovery completed for database AdventureWorks2014 (database ID 5) in 7 second(s) (analysis 424 ms, redo 5305 ms, undo 284 ms.) This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.21 spid52 Parallel redo is shutdown for database &amp;#39;AdventureWorks2014&amp;#39; with worker pool size [1].
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.27 spid52 CHECKDB for database &amp;#39;AdventureWorks2014&amp;#39; finished without errors on 2018-03-24 00:38:39.313 (local time). This is an informational message only; no user action is required.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Interesting, then back to this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.57 spid51 Error: 17053, Severity: 16, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.57 spid51 FCB::MakePreviousWritesDurable: Operating system error (null) encountered.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.62 spid51 Error: 9001, Severity: 21, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.62 spid51 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.64 spid51 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It did all that again before&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">This&lt;/span> &lt;span class="n">program&lt;/span> &lt;span class="n">has&lt;/span> &lt;span class="n">encountered&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">fatal&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">cannot&lt;/span> &lt;span class="k">continue&lt;/span> &lt;span class="n">running&lt;/span> &lt;span class="n">at&lt;/span> &lt;span class="n">Tue&lt;/span> &lt;span class="n">Apr&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="mi">21&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">08&lt;/span> &lt;span class="mi">2019&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">The&lt;/span> &lt;span class="n">following&lt;/span> &lt;span class="n">diagnostic&lt;/span> &lt;span class="n">information&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">available&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Reason&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">0x00000004&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">RETAIL&lt;/span> &lt;span class="n">ASSERT&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Expression&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="ne">File&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="ne">Thread&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpp&lt;/span> &lt;span class="n">Line&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4643&lt;/span> &lt;span class="n">Description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">Timed&lt;/span> &lt;span class="n">out&lt;/span> &lt;span class="n">waiting&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">thread&lt;/span> &lt;span class="n">terminate&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">suspend&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">resume&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Stacktrace&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af30187&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af2836a&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">ae4a4d1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">ae48c55&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af6ab5e&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af6ac04&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">00000002809528&lt;/span>&lt;span class="n">df&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Process&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">sqlservr&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">Thread&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">129&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">application&lt;/span> &lt;span class="n">thread&lt;/span> &lt;span class="mh">0x1e8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Instance&lt;/span> &lt;span class="n">Id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">215&lt;/span>&lt;span class="n">cfcc9&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="n">f69&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">4869&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="n">a52&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="n">aa44a415a83&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Crash&lt;/span> &lt;span class="n">Id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">53e98400&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">33&lt;/span>&lt;span class="n">f1&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">4786&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">98&lt;/span>&lt;span class="n">fd&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">484&lt;/span>&lt;span class="n">f0c8d9a7e&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Build&lt;/span> &lt;span class="n">stamp&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0e53295&lt;/span>&lt;span class="n">d0e1704ae5b221538dd6e2322cd46134e0cc32be49c887ca84cdb8c10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Distribution&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Ubuntu&lt;/span> &lt;span class="mf">16.04&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">6&lt;/span> &lt;span class="n">LTS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Processors&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Total&lt;/span> &lt;span class="n">Memory&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4906205184&lt;/span> &lt;span class="n">bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Timestamp&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Tue&lt;/span> &lt;span class="n">Apr&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="mi">21&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">08&lt;/span> &lt;span class="mi">2019&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Ubuntu&lt;/span> &lt;span class="mf">16.04&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">6&lt;/span> &lt;span class="n">LTS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Capturing&lt;/span> &lt;span class="n">core&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">information&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bin&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;/proc/7/task/516&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">No&lt;/span> &lt;span class="n">such&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dmesg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">read&lt;/span> &lt;span class="n">kernel&lt;/span> &lt;span class="n">buffer&lt;/span> &lt;span class="n">failed&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Operation&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">permitted&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">No&lt;/span> &lt;span class="n">journal&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="n">were&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">No&lt;/span> &lt;span class="n">journal&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="n">were&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">paldumper&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Capture&lt;/span> &lt;span class="n">attempt&lt;/span> &lt;span class="n">failure&lt;/span> &lt;span class="n">detected&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">filtered&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">paldumper&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Attempt&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">failed&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="ne">Reference&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sqlservr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">7.&lt;/span>&lt;span class="n">temp&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">paldumper&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">debug&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">details&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">gdb&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Unable&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">crash&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">GDB&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">You&lt;/span> &lt;span class="n">may&lt;/span> &lt;span class="n">need&lt;/span> &lt;span class="n">to&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">allow&lt;/span> &lt;span class="n">ptrace&lt;/span> &lt;span class="n">debugging&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">enable&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">CAP_SYS_PTRACE&lt;/span> &lt;span class="n">capability&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="ow">or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">run&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">root&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>failing to capture it&amp;rsquo;s dump!! Oops :-)&lt;/p>
+&lt;p>I had to recreate the containers without using the named volumes and then I could run my workload :-)&lt;/p>
+&lt;p>Nothing particularly useful about this blog post other than an interesting look at the error log when things go wrong :-)&lt;/p></description></item></channel></rss>

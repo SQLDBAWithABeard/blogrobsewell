@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Slack on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/slack/</link><description>Recent content in Slack on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 03 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/slack/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting SQL Services, Starting, Stopping and Restarting them with dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</link><pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</guid><description>&lt;p>There was a question in the &lt;a class="link" href="https://sqlcommunity.slack.com/#dbatools" target="_blank" rel="noopener"
+>#dbatools slack channel &lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png"
+loading="lazy"
+alt="dbatools question"
+>&lt;/a>&lt;/p>
+&lt;h3 id="getting-dbatools">Getting dbatools&lt;/h3>
+&lt;p>dbatools enables you to administer SQL Server with PowerShell. To get it simply open PowerShell run&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You can find more details on &lt;a class="link" href="http://dbatools.io/install" target="_blank" rel="noopener"
+>the web-site&lt;/a>&lt;/p>
+&lt;h3 id="finding-the-command">Finding the Command&lt;/h3>
+&lt;p>To find a command you can use the dbatools command &lt;a class="link" href="https://docs.dbatools.io/#Find-DbaCommand" target="_blank" rel="noopener"
+>Find-DbaCommand&lt;/a>
+For commands for service run&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand Service&lt;/code>&lt;/p>
+&lt;p>There are a whole bundle returned&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png"
+loading="lazy"
+alt="find services.png"
+>&lt;/a>&lt;/p>
+&lt;p>This is how you can find any dbatools command. There is also a -Tag parameter on Find-DbaCommand.&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand -Tag Service&lt;/code>&lt;/p>
+&lt;p>This returns&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/find-services-tag.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/find-services-tag.png"
+loading="lazy"
+alt="find services tag.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="how-to-use-any-powershell-command">How to use any PowerShell command&lt;/h3>
+&lt;p>Always always start with &lt;code>Get-Help&lt;/code>&lt;/p>
+&lt;p>&lt;code>Get-Help Get-DbaService -Detailed&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/get-help.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/get-help.png"
+loading="lazy"
+alt="get help.png"
+>&lt;/a>&lt;/p>
+&lt;p>This will show you all the information about the command including examples 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/help-examples.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/help-examples.png"
+loading="lazy"
+alt="help examples.png"
+>&lt;/a>&lt;/p>
+&lt;p>All of these commands below require that the account running the PowerShell is a Local Admin on the host.&lt;/p>
+&lt;h3 id="one-host-many-hosts">One Host Many Hosts&lt;/h3>
+&lt;p>Now I have used just one host for all of the examples on this page. Do not be fooled, you can always use an array of hosts wherever I have $ComputerName you can set it to as many hosts as you like&lt;/p>
+&lt;p>&lt;code>$ComputerName = 'SQL0','SQL1'&lt;/code>&lt;/p>
+&lt;p>You can even get those names form a database, Excel sheet, CMS.&lt;/p>
+&lt;h3 id="getting-the-services">Getting the Services&lt;/h3>
+&lt;p>So to get the services on a machine run&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ComputerName = &amp;#39;Name of Computer&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-DbaService -ComputerName $ComputerName
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/getting-servies-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/getting-servies-1.png"
+loading="lazy"
+alt="getting servies 1.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can output into a table format.&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName | Format-Table&lt;/code>&lt;/p>
+&lt;p>I will use the alias &lt;code>ft&lt;/code> for this in some of the examples, that is fine for the command line but use the full command name in any code that you write that other people use&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/services-table.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/services-table.png"
+loading="lazy"
+alt="services table.png"
+>&lt;/a>&lt;/p>
+&lt;p>You have an object returned so you can output to anything if you want – CSV, JSON, text file, email, azure storage, database, the world is your oyster.&lt;/p>
+&lt;h3 id="getting-the-services-for-one-instance">Getting the Services for one instance&lt;/h3>
+&lt;p>The &lt;a class="link" href="https://docs.dbatools.io/#Get-DbaService" target="_blank" rel="noopener"
+>Get-DbaService&lt;/a> command has a number of parameters. There is an InstanceName parameter enabling you to get only the services for one instance. If we just want the default instance services&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -InstanceName MSSQLSERVER| Format-Table&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/default-instances.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/default-instances.png"
+loading="lazy"
+alt="default instances.png"
+>&lt;/a>&lt;/p>
+&lt;p>Just the MIRROR instance services&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -InstanceName MIRROR| Format-Table&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/mirror-instances.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/mirror-instances.png"
+loading="lazy"
+alt="mirror instances.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="getting-just-the-engine-or-agent-services">Getting just the Engine or Agent services&lt;/h3>
+&lt;p>You can also use the -Type parameter to get only services of a particular type. You can get one of the following: “Agent”,”Browser”,”Engine”,”FullText”,”SSAS”,”SSIS”,”SSRS”, “PolyBase”&lt;/p>
+&lt;p>So to get only the Agent Services&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -Type Agent&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/agent-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/agent-services.png"
+loading="lazy"
+alt="agent services.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can combine the InstanceName and the Type parameters to get say only the default instance engine service&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -InstanceName MSSQLSERVER -Type Engine&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/default-engine-service.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/default-engine-service.png"
+loading="lazy"
+alt="default engine service.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="starting-and-stopping-and-restarting-services">Starting and stopping and restarting services&lt;/h3>
+&lt;p>You can use &lt;a class="link" href="https://docs.dbatools.io/#Start-DbaService" target="_blank" rel="noopener"
+>&lt;code>Start-DbaService&lt;/code>&lt;/a> and &lt;a class="link" href="https://docs.dbatools.io/#Stop-DbaService" target="_blank" rel="noopener"
+>&lt;code>Stop-DbaService&lt;/code>&lt;/a> to start and stop the services. They each have &lt;code>ComputerName&lt;/code>, &lt;code>InstanceName &lt;/code>and &lt;code>Type &lt;/code>parameters like &lt;code>Get-DbaService&lt;/code>.&lt;/p>
+&lt;p>So if after running&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName | Format-Table&lt;/code>&lt;/p>
+&lt;p>you find that all services are stopped&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/all-stopped.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/all-stopped.png"
+loading="lazy"
+alt="all stopped.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="start-all-the-services">Start All the Services&lt;/h3>
+&lt;p>You can run&lt;/p>
+&lt;p>&lt;code>Start-DbaService -ComputerName $ComputerName | Format-Table&lt;/code>&lt;/p>
+&lt;p>and start them all&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/start-them-all.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/start-them-all.png"
+loading="lazy"
+alt="start them all.png"
+>&lt;/a>&lt;/p>
+&lt;p>The full text service was started with the engine service which is why it gave a warning. You can see this if you have all of the services stopped and just want to start the engine services with the type parameter.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Get-DbaService -ComputerName $ComputerName | Format-Table
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Start-DbaService -ComputerName $ComputerName -Type Engine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-DbaService -ComputerName $ComputerName | Format-Table
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/all-stopped-start-engine.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/all-stopped-start-engine.png"
+loading="lazy"
+alt="all stopped - start engine.png"
+>&lt;/a>&lt;/p>
+&lt;p>If you just want to start the Agent services, you can use&lt;/p>
+&lt;p>&lt;code>Start-DbaService -ComputerName $ComputerName -Type Agent&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/start-agent.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/start-agent.png"
+loading="lazy"
+alt="start agent.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can start just the services for one instance&lt;/p>
+&lt;p>&lt;code>Start-DbaService -ComputerName $ComputerName -InstanceName MIRROR&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/start-instance-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/start-instance-services.png"
+loading="lazy"
+alt="start instance services.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="stopping-the-services">Stopping the services&lt;/h3>
+&lt;p>Stopping the services works in the same way. Lets stop the MIRROR instance services we have just started. This will stop the services for an instance&lt;/p>
+&lt;p>&lt;code>Stop-DbaService -ComputerName $ComputerName -InstanceName MIRROR&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/stopping-instance-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/stopping-instance-services.png"
+loading="lazy"
+alt="stopping instance services.png"
+>&lt;/a>&lt;/p>
+&lt;p>We can stop them by type as well, although this will show an extra requirement. If we start our MIRROR instance services again and then try to stop just the engine type.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Start-DbaService -ComputerName $ComputerName -InstanceName MIRROR | ft
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stop-DbaService -ComputerName $ComputerName -Type Engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/cant-stop.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/cant-stop.png"
+loading="lazy"
+alt="cant stop.png"
+>&lt;/a>&lt;/p>
+&lt;p>You will get a warning due to the dependant services&lt;/p>
+&lt;blockquote>
+&lt;p>WARNING: [10:31:02][Update-ServiceStatus] (MSSQL$MIRROR on SQL0) The attempt to stop the service returned the following error: The service cannot be stopped because other services that are running are dependent on it.
+WARNING: [10:31:02][Update-ServiceStatus] (MSSQL$MIRROR on SQL0) Run the command with ‘-Force’ switch to force the restart of a dependent SQL Agent&lt;/p>
+&lt;/blockquote>
+&lt;p>So all you have to do is use the force Luke (or whatever your name is!)&lt;/p>
+&lt;p>&lt;code>Stop-DbaService -ComputerName $ComputerName -Type Engine -Force&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/Use-the-force.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/Use-the-force.png"
+loading="lazy"
+alt="Use the force.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can also stop the services for an entire host, again you will need the Force parameter.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Start-DbaService -ComputerName $ComputerName |ft
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stop-DbaService -ComputerName $ComputerName -Force | ft
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/stop-all-of-them.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/stop-all-of-them.png"
+loading="lazy"
+alt="stop all of them.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="restarting-services">Restarting Services&lt;/h3>
+&lt;p>It will come as no surprise by now to learn that &lt;a class="link" href="https://docs.dbatools.io/#Restart-DbaService" target="_blank" rel="noopener"
+>&lt;code>Restart-DbaService&lt;/code>&lt;/a> follows the same pattern. It also has &lt;code>ComputerName&lt;/code>, &lt;code>InstanceName&lt;/code> and &lt;code>Type&lt;/code> parameters like &lt;code>Get-DbaService&lt;/code>, &lt;code>Start-DbaService&lt;/code> and &lt;code>Stop-DbaService&lt;/code> (Consistency is great, It’s one of the things that is being worked on towards 1.0 as you can see in the &lt;a class="link" href="https://sqlcollaborative.github.io/boh.html" target="_blank" rel="noopener"
+>Bill of Health&lt;/a>)&lt;/p>
+&lt;p>Again you will need the &lt;code>-Force&lt;/code> for dependant services, you can restart all of the services on a host with&lt;/p>
+&lt;p>&lt;code>Restart-DbaService -ComputerName $ComputerName -Force&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/restart-tehm-all.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/restart-tehm-all.png"
+loading="lazy"
+alt="restart tehm all.png"
+>&lt;/a>&lt;/p>
+&lt;p>or just the services for an instance&lt;/p>
+&lt;p>&lt;code>Restart-DbaService -ComputerName $ComputerName -InstanceName MIRROR -Force&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/restart-instance.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/restart-instance.png"
+loading="lazy"
+alt="restart instance.png"
+>&lt;/a>&lt;/p>
+&lt;p>or just the Agent Services&lt;/p>
+&lt;p>&lt;code>Restart-DbaService -ComputerName $ComputerName -Type Agent&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/restart-agent.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/restart-agent.png"
+loading="lazy"
+alt="restart agent.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="doing-a-bit-of-coding">Doing a bit of coding&lt;/h3>
+&lt;p>Now none of that answers @g-kannan’s question. Restarting only services with a certain service account.&lt;/p>
+&lt;p>With PowerShell you can pipe commands together so that the results of the first command are piped into the second. So we can get all of the engine services on a host for an instance with &lt;code>Get-DbaService&lt;/code> and start them with &lt;code>Start-DbaService&lt;/code> like this&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -Type Engine | Start-DbaService&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/start.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/start.png"
+loading="lazy"
+alt="start.png"
+>&lt;/a>&lt;/p>
+&lt;p>or get all of the engine services for an instance on a host and stop them&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -Type Engine  -InstanceName Mirror| Stop-DbaService&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/stop-one-isntance.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/stop-one-isntance.png"
+loading="lazy"
+alt="stop one isntance.png"
+>&lt;/a>&lt;/p>
+&lt;p>or maybe you want to get all of the service that have stopped&lt;/p>
+&lt;p>&lt;code>(Get-DbaService -ComputerName $ComputerName -Type Engine).Where{$_.State -eq 'Stopped'}&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/stopped-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/stopped-services.png"
+loading="lazy"
+alt="stopped services.png"
+>&lt;/a>&lt;/p>
+&lt;p>You can do the same thing with syntax that may make more sense to you if you are used to T-SQL as follows&lt;/p>
+&lt;p>&lt;code>(Get-DbaService -ComputerName $ComputerName -Type Engine) | Where State -eq 'Stopped'&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/T-SQL-syntax-powershell.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/T-SQL-syntax-powershell.png"
+loading="lazy"
+alt="T SQL syntax powershell.png"
+>&lt;/a>&lt;/p>
+&lt;p>and then start only those services you could do&lt;/p>
+&lt;p>&lt;code>(Get-DbaService -ComputerName $ComputerName -Type Engine) | Where State -eq 'Stopped' | Start-DbaService&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/start-the-stopped-ones.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/start-the-stopped-ones.png"
+loading="lazy"
+alt="start the stopped ones.png"
+>&lt;/a>&lt;/p>
+&lt;p>(note – you would just use &lt;code>Start-DbaService&lt;/code> in this case as it wont start services that are already started!)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\# Stop just one of the engine services
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stop-DbaService -ComputerName $ComputerName -InstanceName MIRROR -Type Engine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\# Get the engine services
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-DbaService -ComputerName $ComputerName -Type Engine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\# This will only start the one engine service that is stopped
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Start-DbaService -ComputerName $ComputerName -Type Engine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/only-one-service.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/only-one-service.png"
+loading="lazy"
+alt="only one service.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="come-on-rob-answer-the-question">Come On Rob! Answer the question!&lt;/h3>
+&lt;p>So now that you know a lot more about these commands, you can restart only the services using a particular service account by using Get-DbaService to get the services&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -Type Engine | Where StartName -eq 'thebeard\\sqlsvc'&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/services-by-start-name.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/services-by-start-name.png"
+loading="lazy"
+alt="services by start name.png"
+>&lt;/a>&lt;/p>
+&lt;p>and then once you know that you have the right ‘query’ you can pipe that to &lt;code>Restart-DbaService&lt;/code> (Like making sure your &lt;code>SELECT&lt;/code> query returns the correct rows for your &lt;code>WHERE&lt;/code> clause before running the &lt;code>DELETE&lt;/code> or &lt;code>UPDATE&lt;/code>)&lt;/p>
+&lt;p>&lt;code>Get-DbaService -ComputerName $ComputerName -Type Engine | Where StartName -eq 'thebeard\\sqlsvc' | Restart-DbaService&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/restarting-only-one.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/restarting-only-one.png"
+loading="lazy"
+alt="restarting only one.png"
+>&lt;/a>&lt;/p>
+&lt;p>Happy Automating !&lt;/p></description></item><item><title>Remove-SQLDatabaseSafely My First Contribution to DBATools</title><link>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</link><pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</guid><description>&lt;p>What is DBA Tools?&lt;/p>
+&lt;blockquote>
+&lt;p>A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.&lt;/p>
+&lt;/blockquote>
+&lt;p>You can read more about &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>here&lt;/a> and it is &lt;a class="link" href="https://github.com/ctrlbold/dbatools" target="_blank" rel="noopener"
+>freely available for download on GitHub&lt;/a> I thoroughly recommend that [you watch this quick video]&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/PciYdDEBiDM"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>to see just how easy it is to migrate an entire SQL instance in one command Longer session here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/kQYUrSlb0wg"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>Installing it is as easy as&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>which will get you over 80 commands . Visit &lt;a class="link" href="https://dbatools.io/functions/" target="_blank" rel="noopener"
+>https://dbatools.io/functions/&lt;/a> to find out more information about them&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/07/cmdlets.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/07/cmdlets.png"
+loading="lazy"
+alt="cmdlets"
+>&lt;/a>&lt;/p>
+&lt;p>The journey to &lt;code>Remove-SQLDatabaseSafely&lt;/code> started with William Durkin &lt;a class="link" href="http://williamdurkin.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sql_williamd" target="_blank" rel="noopener"
+>t&lt;/a> who presented to the &lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>SQL South West User Group&lt;/a>  (&lt;a class="link" href="http://www.sqlsaturday.com/269/Sessions/Details.aspx?sid=28201" target="_blank" rel="noopener"
+>You can get his slides here)&lt;/a>&lt;/p>
+&lt;p>Following that session  I wrote a Powershell Script to gather information about the last used date for databases &lt;a class="link" href="https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-one/" >which I blogged about here&lt;/a> and then a T-SQL script to take a final backup and create a SQL Agent Job to restore from that back up &lt;a class="link" href="https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-two-2/" >which I blogged about here&lt;/a> The team have used this solution (updated to load the DBA Database and a report instead of using Excel) ever since and it proved invaluable when a read-only database was dropped and could quickly and easily be restored with no fuss.&lt;/p>
+&lt;p>I was chatting with Chrissy LeMaire who founded DBATools &lt;a class="link" href="https://blog.netnerds.net/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>t&lt;/a> about this process and when she asked for contributions in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a> I offered my help and she suggested I write this command. I have learnt so much. I thoroughly enjoyed and highly recommend working on projects collaboratively to improve your skills. It is amazing to work with such incredible professional PowerShell people.&lt;/p>
+&lt;p>I went back to the basics and thought about what was required and watched one of my favourite videos again. &lt;a class="link" href="https://sqlps.io/backuprant" target="_blank" rel="noopener"
+>Grant Fritcheys Backup Rant&lt;/a>&lt;/p>
+&lt;p>I decided that the process should be as follows&lt;/p>
+&lt;ol>
+&lt;li>Performs a DBCC CHECKDB&lt;/li>
+&lt;li>Database is backed up WITH CHECKSUM&lt;/li>
+&lt;li>Database is restored with VERIFY ONLY on the source&lt;/li>
+&lt;li>An Agent Job is created to easily restore from that backup&lt;/li>
+&lt;li>The database is dropped&lt;/li>
+&lt;li>The Agent Job restores the database&lt;/li>
+&lt;li>performs a DBCC CHECKDB and drops the database for a final time&lt;/li>
+&lt;/ol>
+&lt;p>This (hopefully) passes all of Grants checks. This is how I created the command&lt;/p>
+&lt;p>I check that the SQL Agent is running otherwise we wont be able to run the job. I use a while loop with a timeout like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$agentservice = Get-Service -ComputerName $ipaddr -Name $serviceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($agentservice.Status -ne &amp;#39;Running&amp;#39;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $agentservice.Start()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $timeout = new-timespan -seconds 60
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $sw = [diagnostics.stopwatch]::StartNew()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $agentstatus = (Get-Service -ComputerName $ipaddr -Name $serviceName).Status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while ($dbStatus -ne &amp;#39;Running&amp;#39; -and $sw.elapsed -lt $timeout) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $dbStatus = (Get-Service -ComputerName $ipaddr -Name $serviceName).Status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a lot more checks and logic than I will describe here to make sure that the process is as robust as possible. For example, the script can exit after errors are found using DBCC CHECKDB or continue and label the database backup file and restore job appropriately. Unless the force option is used it will exit if the job name already exists. We have tried to think of everything but if something has been missed or you have suggestions let us know (details at end of post)&lt;/p>
+&lt;p>The only thing I didn’t add was a LARGE RED POP UP SAYING ARE YOU SURE YOU WANT TO DROP THIS DATABASE but I considered it!!&lt;/p>
+&lt;h2 id="performs-a-dbcc-checkdb">Performs a DBCC CHECKDB&lt;/h2>
+&lt;p>Running DBCC CHECKDB with Powershell is as easy as this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$sourceserver = New-Object Microsoft.SQLServer.Management.Smo.Server &amp;#34;ServerName&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db = $sourceserver.databases[$dbname]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$null = $db.CheckTables(&amp;#39;None&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.database.checktables.aspx" target="_blank" rel="noopener"
+>you can read more on MSDN&lt;/a>&lt;/p>
+&lt;h2 id="database-is-backed-up-with-checksum">Database is backed up WITH CHECKSUM&lt;/h2>
+&lt;p>Stuart Moore is my go to for doing &lt;a class="link" href="http://stuart-moore.com/category/31-days-of-sql-server-backup-and-restore-with-powershell/" target="_blank" rel="noopener"
+>backups and restores with SMO&lt;/a>&lt;/p>
+&lt;p>I ensured that the backup was performed with checksum like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$backup = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Backup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Action = [Microsoft.SqlServer.Management.SMO.BackupActionType]::Database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.BackupSetDescription = &amp;#34;Final Full Backup of $dbname Prior to Dropping&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Database = $dbname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Checksum = $True
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="database-is-restored-with-verify-only-on-the-source">Database is restored with VERIFY ONLY on the source&lt;/h2>
+&lt;p>I used SMO all the way through this command and performed the restore verify only like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$restoreverify = New-Object &amp;#39;Microsoft.SqlServer.Management.Smo.Restore&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$restoreverify.Database = $dbname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$restoreverify.Devices.AddDevice($filename, $devicetype)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$result = $restoreverify.SqlVerify($sourceserver)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="an-agent-job-is-created-to-easily-restore-from-that-backup">An Agent Job is created to easily restore from that backup&lt;/h2>
+&lt;p>First I created a category for the Agent Job&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Function New-SqlAgentJobCategory {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> param ([string]$categoryname,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [object]$jobServer)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!$jobServer.JobCategories[$categoryname]) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($Pscmdlet.ShouldProcess($sourceserver, &amp;#34;Creating Agent Job Category $categoryname&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;#34;Creating Agent Job Category $categoryname&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category = New-Object Microsoft.SqlServer.Management.Smo.Agent.JobCategory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Parent = $jobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Name = $categoryname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Create()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;#34;Created Agent Job Category $categoryname&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> catch {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Exception $_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw &amp;#34;FAILED : To Create Agent Job Category $categoryname - Aborting&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then generated the TSQL for the restore step by using the &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.restore.script.aspx" target="_blank" rel="noopener"
+>script method on the Restore SMO object&lt;/a>&lt;/p>
+&lt;p>This is how to create an Agent Job&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$job = New-Object Microsoft.SqlServer.Management.Smo.Agent.Job $jobServer, $jobname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.Name = $jobname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.OwnerLoginName = $jobowner
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.Description = &amp;#34;This job will restore the $dbname database using the final backup located at $filename&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then to add a job step to run the restore command&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$jobStep = new-object Microsoft.SqlServer.Management.Smo.Agent.JobStep $job, $jobStepName $jobStep.SubSystem = &amp;#39;TransactSql&amp;#39; # &amp;#39;PowerShell&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.DatabaseName = &amp;#39;master&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.Command = $jobStepCommmand
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.OnSuccessAction = &amp;#39;QuitWithSuccess&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.OnFailAction = &amp;#39;QuitWithFailure&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($Pscmdlet.ShouldProcess($destination, &amp;#34;Creating Agent JobStep on $destination&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $null = $jobStep.Create()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.ApplyToTargetServer($destination)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.StartStepID = $jobStartStepid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Alter()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="the-database-is-dropped">The database is dropped&lt;/h2>
+&lt;p>We try 3 different methods to drop the database&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$server.KillDatabase($dbname)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$server.databases[$dbname].Drop()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$null = $server.ConnectionContext.ExecuteNonQuery(&amp;#34;DROP DATABASE &amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="the-agent-job-restores-the-database">The Agent Job restores the database&lt;/h2>
+&lt;p>To run the Agent Job I call the start method of the Job SMO Object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $job = $destserver.JobServer.Jobs[$jobname]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Start()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $status = $job.CurrentRunStatus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while ($status -ne &amp;#39;Idle&amp;#39;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;amp;quot; Restore Job for $dbname on $destination is $status&amp;amp;quot;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Refresh()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $status = $job.CurrentRunStatus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Start-Sleep -Seconds 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we drop the database for the final time with the confidence that we have a safe backup and an easy one click method to restore it from that backup (as long as the backup is in the same location)&lt;/p>
+&lt;p>There are further details on the &lt;a class="link" href="https://dbatools.io/functions/remove-sqldatabasesafely/" target="_blank" rel="noopener"
+>functions page on dbatools&lt;/a>&lt;/p>
+&lt;p>Some videos of it in action are on YouTube &lt;a class="link" href="http://dbatools.io/video" target="_blank" rel="noopener"
+>http://dbatools.io/video&lt;/a>&lt;/p>
+&lt;p>You can take a look at &lt;a class="link" href="https://github.com/ctrlbold/dbatools/blob/fbd2f19b4442a8065f3cb133d385fde9b2cddea0/functions/Remove-SqlDatabaseSafely.ps1" target="_blank" rel="noopener"
+>the code on GitHub here&lt;/a>&lt;/p>
+&lt;p>You can install it with&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You can provide feedback via the &lt;a class="link" href="https://dbatools.io/trello" target="_blank" rel="noopener"
+>Trello Board&lt;/a> or discuss it in the #dbatools channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>Sqlserver Community Slack&lt;/a>&lt;/p>
+&lt;p>You too can also become a contributor &lt;a class="link" href="https://dbatools.io/join-us/" target="_blank" rel="noopener"
+>https://dbatools.io/join-us/&lt;/a> Come and write a command to make it easy for DBAs to (this bit is up to your imagination).&lt;/p></description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>
+&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p>
+&lt;blockquote>
+&lt;p>This means that if you have a PowerShell script doing &lt;em>Import-Module SQLPS&lt;/em>, it will need to be changed to be &lt;em>Import-Module SqlServer&lt;/em> in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to &lt;em>“%Program Files\WindowsPowerShell\Modules\SqlServer&lt;/em>” and hence no update to $env:PSModulePath is required.&lt;/p>
+&lt;/blockquote>
+&lt;p>So SQLPS will still continue to work but will not be updated and will not contain the new CMDlets or the future new CMDlets.&lt;/p>
+&lt;h2 id="so-what-new-things-do-we-have">So what new things do we have?&lt;/h2>
+&lt;blockquote>
+&lt;p>This month we introduce CMDLETs for the following areas:&lt;/p>
+&lt;ul>
+&lt;li>Always Encrypted&lt;/li>
+&lt;li>SQL Agent&lt;/li>
+&lt;li>SQL Error Logs&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>Chrissy LeMaire has written about the &lt;a class="link" href="https://blog.netnerds.net/2016/06/the-sql-server-PowerShell-module-formerly-known-as-sqlps/" target="_blank" rel="noopener"
+>new SQL Agent cmdlets&lt;/a>&lt;/p>
+&lt;p>Aaron Nelson has written about the &lt;a class="link" href="http://sqlvariant.com/2016/06/webinar-on-25-new-PowerShell-cmdlets-for-sql-server-and-more/" target="_blank" rel="noopener"
+>new Get-SqlErrorLog cmdlet&lt;/a>&lt;/p>
+&lt;p>Laerte Junior has written about &lt;a class="link" href="https://www.simple-talk.com/blogs/2016/06/30/invoke-sqlcmd-just-got-better/" target="_blank" rel="noopener"
+>Invoke-SQLCmd&lt;/a>&lt;/p>
+&lt;p>All four of us will be presenting a webinar on the new CMDlets via the &lt;a class="link" href="http://PowerShell.sqlpass.org/" target="_blank" rel="noopener"
+>PowerShell Virtual Chapter&lt;/a> Wed, Jul 06 2016 12:00 Eastern Daylight Time If you cant make it a recording will be made available on YouTube on the VC Channel &lt;a class="link" href="https://sqlps.io/video" target="_blank" rel="noopener"
+>https://sqlps.io/video&lt;/a>&lt;/p>
+&lt;h2 id="always-encrypted-cmdlets">Always Encrypted CMDlets&lt;/h2>
+&lt;p>That leaves the Always Encrypted CMDLets and there are 17 of those!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p> &lt;/p>
+&lt;p>That seems to cover setting up Always Encrypted with PowerShell , removing it and getting information about it. When the new SSMS update is dropped you will be able to start using all of this new functionality.&lt;/p>
+&lt;p>Just remember Import-Module sqlserver&lt;/p>
+&lt;h2 id="call-to-action">CALL TO ACTION&lt;/h2>
+&lt;p>Microsoft are engaging with the community to improve the tools we all use in our day to day work. There is are two Trello boards set up for &lt;strong>YOU&lt;/strong> to use to contribute&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/vote" target="_blank" rel="noopener"
+>https://sqlps.io/vote&lt;/a>  for SQLPS  sqlserver PowerShell module&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/ssms" target="_blank" rel="noopener"
+>https://sqlps.io/ssms&lt;/a> for SSMS&lt;/p>
+&lt;p>Go and join them and upvote &lt;strong>YOUR&lt;/strong> preferred choice of the next lot of CMDlets&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/trellocount.png"
+loading="lazy"
+alt="trellocount"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>We have also set up a SQL Community Slack for anyone in the community to discuss all things related to SQL including the Trello board items and already it seems a good place for people to get help with 150+ members in a few days. You can get an invite here &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Come and join us&lt;/p></description></item></channel></rss>

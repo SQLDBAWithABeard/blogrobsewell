@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ola Hallengren on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/ola-hallengren/</link><description>Recent content in Ola Hallengren on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 24 Sep 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/ola-hallengren/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerShell, Pester and Ola Hallengrens Maintenance Solution</title><link>https://blog.robsewell.com/blog/powershell-pester-and-ola-hallengrens-maintenance-solution/</link><pubDate>Sat, 24 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-pester-and-ola-hallengrens-maintenance-solution/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/pester-ola-check.png" alt="Featured image of post PowerShell, Pester and Ola Hallengrens Maintenance Solution" />&lt;p>If you are a SQL DBA you will have heard of &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>Ola Hallengrens Maintenance solution&lt;/a> If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also &lt;a class="link" href="https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>watch a video from Ola at SQL Bits&lt;/a>
+Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> You can find a great &lt;a class="link" href="https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx" target="_blank" rel="noopener"
+>how to get started here&lt;/a> which will show you how to get Pester and how to get started with TDD.
+This isn’t TDD though this is Environment Validation and this is how I went about creating my test.
+First I thought about what I would look for in SSMS when I had installed the maintenance solution and made a list of the things that I would check which looked something like this. This would be the checklist you would create (or have already created) for yourself or a junior following this install. This is how easy you can turn that checklist into a Pester Test and remove the human element and open your install for automated testing&lt;/p>
+&lt;ul>
+&lt;li>SQL Server Agent is running – Otherwise the jobs won’t run 🙂&lt;/li>
+&lt;li>We should have 4 backup jobs with a name of&lt;/li>
+&lt;li>DatabaseBackup – SYSTEM_DATABASES – FULL&lt;/li>
+&lt;li>DatabaseBackup – USER_DATABASES – FULL&lt;/li>
+&lt;li>DatabaseBackup – USER_DATABASES – DIFF&lt;/li>
+&lt;li>DatabaseBackup – USER_DATABASES – LOG&lt;/li>
+&lt;li>We should have Integrity Check and Index Optimisation Jobs&lt;/li>
+&lt;li>We should have the clean up jobs&lt;/li>
+&lt;li>All jobs should be scheduled&lt;/li>
+&lt;li>All jobs should be enabled&lt;/li>
+&lt;li>The jobs should have succeeded&lt;/li>
+&lt;/ul>
+&lt;p>I can certainly say that I have run through that check in my head and also written it down in an installation guide in the past. If I was being more careful I would have checked if there were the correct folders in the folder I was backing up to.&lt;/p>
+&lt;p>Ola’s script uses a default naming convention so this makes it easy. There should be a &lt;code>SERVERNAME&lt;/code> or &lt;code>SERVERNAME$INSTANCENAME&lt;/code> folder or if there is an Availability Group a &lt;code>CLUSTERNAME$AGNAME&lt;/code> and in each of those a FULL DIFF and LOG folder which I can add to my checklist&lt;/p>
+&lt;p>So now we have our checklist we just need to turn in into a Pester Environmental Validation script&lt;/p>
+&lt;p>It would be useful to be able to pass in a number of instances so we will start with a foreach loop and then a &lt;a class="link" href="https://github.com/pester/Pester/wiki/Describe" target="_blank" rel="noopener"
+>Describe Block&lt;/a> then split the server name and instance name, get the agent jobs and set the backup folder name&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ServerName = $Server.Split(&amp;#39;\&amp;#39;)[0]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$InstanceName = $Server.Split(&amp;#39;\&amp;#39;)[1]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerName = $ServerName.ToUpper()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing $Server Backup solution&amp;#39;{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BeforeAll {$Jobs = Get-SqlAgentJob -ServerInstance $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$dbs = $Srv.Databases.Where{$_.status -eq &amp;#39;Normal&amp;#39;}.name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($InstanceName)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DisplayName = &amp;#39;SQL Server Agent ($InstanceName)&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Folder = $ServerName + &amp;#39;$&amp;#39; + $InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DisplayName = &amp;#39;SQL Server Agent (MSSQLSERVER)&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Folder = $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($CheckForBackups -eq $true)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CheckForDBFolders -eq $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Root = $Share + &amp;#39;\&amp;#39; + $Folder
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I also set the Agent service display name so I can get its status. I split the jobs up using a &lt;a class="link" href="https://github.com/pester/Pester/wiki/Context" target="_blank" rel="noopener"
+>Context block&lt;/a>, one each for Backups, Database maintenance and solution clean up but they all follow the same pattern. .First get the jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Jobs = $Jobs.Where{($_.Name -like &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL*&amp;#39; + $JobSuffix + &amp;#39;*&amp;#39;) -or ($_.Name -like &amp;#39;DatabaseBackup - USER_DATABASES - FULL*&amp;#39; + $JobSuffix + &amp;#39;*&amp;#39;) -or ($_.Name -like &amp;#39;DatabaseBackup - USER_DATABASES - DIFF*&amp;#39; + $JobSuffix + &amp;#39;*&amp;#39;) -or ($_.Name -like &amp;#39;DatabaseBackup - USER_DATABASES - LOG*&amp;#39; + $JobSuffix + &amp;#39;*&amp;#39;)}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can iterate through them and check them but first lets test the Agent Service. You do this with an &lt;a class="link" href="https://github.com/pester/Pester/wiki/It" target="_blank" rel="noopener"
+>It Block&lt;/a> and in it put a single test like this&lt;/p>
+&lt;p>&lt;code>actual-value | Should Be expected-value&lt;/code>&lt;/p>
+&lt;p>So to check the Agent Job is running we can do this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(Get-service -ComputerName $ServerName -DisplayName $DisplayName).Status | Should Be &amp;#39;Running&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To find out how to get the right values for any test I check using get member so to see what is available for a job I gathered the Agent Jobs into a variable using the &lt;code>Get-SQLAgentJob&lt;/code> command in the new sqlserver module (which you can get by installing the &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/mt238290.aspx" target="_blank" rel="noopener"
+>latest SSMS from here&lt;/a>) and then explored their properties using &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849928.aspx" target="_blank" rel="noopener"
+>Get-Member&lt;/a> and the values using &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849895.aspx" target="_blank" rel="noopener"
+>Select Object&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$jobs = Get-SqlAgentJob -ServerInstance $server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">($Jobs | Get-Member -MemberType Property).name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs[0] | Select-Object *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>then using a foreach to loop through them I can check that the jobs, exists, is enabled, has a schedule and succeeded last time it ran like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Jobs = $Jobs.Where{($_.Name -eq &amp;#39;DatabaseIntegrityCheck - SYSTEM_DATABASES&amp;#39;) -or ($_.Name -eq &amp;#39;DatabaseIntegrityCheck - USER_DATABASES&amp;#39;) -or ($_.Name -eq &amp;#39;IndexOptimize - USER_DATABASES&amp;#39;)}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach($job in $Jobs)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$JobName = $Job.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;$JobName Job Exists&amp;#39;{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job | Should Not BeNullOrEmpty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;$JobName Job is enabled&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.IsEnabled | Should Be &amp;#39;True&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;$JobName Job has schedule&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.HasSchedule | Should Be &amp;#39;True&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($DontCheckJobOutcome -eq $false)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;$JobName Job succeeded&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.LastRunOutCome | Should Be &amp;#39;Succeeded&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So I have checked the agent and the jobs and now I want to check the folders exist. First for the instance using &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849776.aspx" target="_blank" rel="noopener"
+>&lt;code>Test-Path&lt;/code>&lt;/a> so the user running the PowerShell session must have privileges and access to list the files and folders&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Context &amp;#39;$Share Share For $Server&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Should have the root folder $Root&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-Path $Root | Should Be $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The for every database we need to set some variables for the Folder path. We don’t back up tempdb so we ignore that and then check if the server is SQL2012 or above and if it is check if the database is a member of an availability group and set the folder name appropriately&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">  foreach($db in $dbs.Where{$_ -ne &amp;#39;tempdb&amp;#39;})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Srv.VersionMajor -ge 11)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If($srv.Databases[$db].AvailabilityGroupName)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$AG = $srv.Databases[$db].AvailabilityGroupName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Cluster = $srv.ClusterName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$OLAAg = $Cluster + &amp;#39;$&amp;#39; + $AG
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Share.StartsWith(&amp;#39;\\&amp;#39;) -eq $False)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$UNC = $Share.Replace(&amp;#39;:&amp;#39;,&amp;#39;$&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Root = &amp;#39;\\&amp;#39; + $ServerName + &amp;#39;\&amp;#39; + $UNC + &amp;#39;\&amp;#39; + $OlaAG
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Root = &amp;#39;\\&amp;#39; + $ServerName + &amp;#39;\&amp;#39; + $UNC + &amp;#39;\&amp;#39; + $Folder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Share.StartsWith(&amp;#39;\\&amp;#39;) -eq $False)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$UNC = $Share.Replace(&amp;#39;:&amp;#39;,&amp;#39;$&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Root = &amp;#39;\\&amp;#39; + $ServerName + &amp;#39;\&amp;#39; + $UNC + &amp;#39;\&amp;#39; + $Folder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Root = $Share + &amp;#39;\&amp;#39; + $Folder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db = $db.Replace(&amp;#39; &amp;#39;,&amp;#39;&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Dbfolder = $Root + &amp;amp;amp;quot;\$db&amp;amp;amp;quot;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Full = $Dbfolder + &amp;#39;\FULL&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Diff = $Dbfolder + &amp;#39;\DIFF&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Log  = $Dbfolder + &amp;#39;\LOG&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If($CheckForDBFolders -eq $True)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Context &amp;amp;amp;quot;Folder Check for $db on $Server on $Share&amp;amp;amp;quot; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;amp;amp;quot;Should have a folder for $db database&amp;amp;amp;quot; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-Path $Dbfolder |Should Be $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>But we need some logic for checking for folders because Ola is smart and checks for Log Shipping databases so as not to break the LSN chain and system databases only have full folders and simple recovery databases only have full and diff folders. I used the &lt;code>System.IO.Directory&lt;/code> Exists method as I found it slightly quicker for UNC Shares&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If($CheckForDBFolders -eq $True)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Context &amp;#39;Folder Check for $db on $Server on $Share&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Should have a folder for $db database&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-Path $Dbfolder |Should Be $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Db -notin (&amp;#39;master&amp;#39;,&amp;#39;msdb&amp;#39;,&amp;#39;model&amp;#39;) -and ($Srv.Databases[$db].RecoveryModel -ne &amp;#39;Simple&amp;#39;) -and ( $LSDatabases -notcontains $db))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Full Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Full) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Diff Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Diff) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Log Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Log) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">} #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">elseif(($Srv.Databases[$db].RecoveryModel -eq &amp;#39;Simple&amp;#39;) -and $Db -notin (&amp;#39;master&amp;#39;,&amp;#39;msdb&amp;#39;,&amp;#39;model&amp;#39;) -or ( $LSDatabases -contains $db) )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Full Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Full) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Diff Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Diff) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">} #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has a Full Folder&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[System.IO.Directory]::Exists($Full) | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">} # End Check for db folders
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and a similar thing for the files in the folders although this caused me some more issues with performance. I first used Get-ChildItem but in folders where a log backup is running every 15 minutes it soon became very slow. So I then decided to compare the create time of the folder with the last write time which was significantly quicker for directories with a number of files but then fell down when there was a single file in the directory so if the times match I revert back to &lt;code>Get-ChildItem&lt;/code>.&lt;/p>
+&lt;p>If anyone has a better more performant option I would be interested in knowing. I used Øyvind Kallstad PowerShell Conference session Chasing the seconds &lt;a class="link" href="https://github.com/psconfeu/2016/tree/master/%C3%98yvind%20Kallstad" target="_blank" rel="noopener"
+>Slides&lt;/a> and Video&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/erwAsXZnQ58"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>and tried the methods in there with &lt;a class="link" href="https://technet.microsoft.com/en-us/library/hh849910.aspx" target="_blank" rel="noopener"
+>Measure-Command&lt;/a> but this was the best I came up with&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If($CheckForBackups -eq $true)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Context &amp;#39; File Check For $db on $Server on $Share&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Fullcreate = [System.IO.Directory]::GetCreationTime($Full)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$FullWrite = [System.IO.Directory]::GetLastWriteTime($Full)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Fullcreate -eq $FullWrite)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the FULL folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-ChildItem $Full*.bak | Should Not BeNullOrEmpty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the FULL folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$FullCreate | Should BeLessThan $FullWrite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Full File Folder was written to within the last 7 days&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Fullwrite |Should BeGreaterThan (Get-Date).AddDays(-7)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Db -notin (&amp;#39;master&amp;#39;,&amp;#39;msdb&amp;#39;,&amp;#39;model&amp;#39;))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Diffcreate = [System.IO.Directory]::GetCreationTime($Diff)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DiffWrite = [System.IO.Directory]::GetLastWriteTime($Diff)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Diffcreate -eq $DiffWrite)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the DIFF folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-ChildItem $Diff*.bak | Should Not BeNullOrEmpty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the DIFF folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DiffCreate | Should BeLessThan $DiffWrite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&amp;amp;amp;amp;amp;amp;lt;/div&amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;lt;div&amp;amp;amp;amp;amp;amp;gt;It &amp;#39;Diff File Folder was written to within the last 24 Hours&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Diffwrite |Should BeGreaterThan (Get-Date).AddHours(-24)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Db -notin (&amp;#39;master&amp;#39;,&amp;#39;msdb&amp;#39;,&amp;#39;model&amp;#39;) -and ($Srv.Databases[$db].RecoveryModel -ne &amp;#39;Simple&amp;#39;) -and ( $LSDatabases -notcontains $db))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Logcreate = [System.IO.Directory]::GetCreationTime($Log)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogWrite = [System.IO.Directory]::GetLastWriteTime($Log)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Logcreate -eq $LogWrite)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the LOG folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-ChildItem $Log*.trn | Should Not BeNullOrEmpty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Has Files in the LOG folder for $db&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogCreate | Should BeLessThan $LogWrite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It &amp;#39;Log File Folder was written to within the last 30 minutes&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Logwrite |Should BeGreaterThan (Get-Date).AddMinutes(-30)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}# Simple Recovery
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}# Check for backups
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You could just run the script you have just created from your check-list, hopefully this blog post can help you see that you  can do so.&lt;/p>
+&lt;p>But I like the message showing number of tests and successes and failures at the bottom and I want to use parameters in my script. I can do this like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[CmdletBinding()]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Pester Test to check OLA
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Param(
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instance,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CheckForBackups,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CheckForDBFolders,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$JobSuffix ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Share ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[switch]$NoDatabaseRestoreCheck,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[switch]$DontCheckJobOutcome
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then call it using &lt;a class="link" href="https://github.com/pester/Pester/wiki/Invoke-Pester" target="_blank" rel="noopener"
+>&lt;code>Invoke-Pester&lt;/code>&lt;/a> with the parameters like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Script = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Path = $Path;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Parameters = @{ Instance = Instance;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CheckForBackups = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CheckForDBFolders = $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">JobSuffix = &amp;#39;BackupShare1&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Share = &amp;#39;\\Server1\BackupShare1&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NoDatabaseRestoreCheck= $true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DontCheckJobOutcome = $true}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-Pester -Script $Script
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>but that’s a bit messy, hard to remember and won’t encourage people newer to Powershell to use it so I wrapped it in a function with some help and examples and put it in GitHub &lt;code>Test-OlaInstance.ps1&lt;/code> and &lt;code>Test-Ola&lt;/code>. There is one thing to remember. You will need to add the path to &lt;code>Test-Ola.ps1&lt;/code> on Line 90 of &lt;code>Test-OlaInstance &lt;/code>so that the script can find it&lt;/p>
+&lt;p>Once you have that you can call it for a single instance or a number of instances like so. Here I check for Folders and Backup files&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Servers =  &amp;#39;SQL2008Ser2008&amp;#39;,&amp;#39;SQL2012Ser08AG1&amp;#39;,&amp;#39;SQL2012Ser08AG2&amp;#39;,&amp;#39;SQL2014Ser12R2&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Test-OLAInstance -Instance $Servers -Share &amp;#39;H:\&amp;#39; -CheckForBackups
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and get  a nice result like this. In a little under 20 seconds I completed my checklist for 4 servers including checking if the files and folders exist for 61 databases 🙂 (The three failures were my Integrity Check jobs holding some test corrupt databases)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/pester-ola-check.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/pester-ola-check.png"
+loading="lazy"
+alt="pester ola check.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>This gives me a nice and simple automated method of checking if Ola’s maintenance script has been correctly installed. I can use this for one server or many by passing in an array of servers (although they must use the same folder for backing up whether that is UNC or local) I can also add this to an automated build process to ensure that everything has been deployed correctly.&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Functions" target="_blank" rel="noopener"
+>You can find the two scripts on GitHub here&lt;/a>&lt;/p>
+&lt;p>I hope you find it useful&lt;/p></description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p>If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p>
+&lt;p>If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>https://ola.hallengren.com/&lt;/a>&lt;/p>
+&lt;p>You can also watch his presentation at SQLBits at this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a>&lt;/p>
+&lt;p>where he talks about and demonstrates the solution.&lt;/p>
+&lt;p>It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p>
+&lt;p>I particularly like the parameter @ChangeBackupType which when running the transaction log or differential backup will change the backup type to full if the backup type cannot be taken. This is excellent for picking up new databases and backing them up soon after creation&lt;/p>
+&lt;p>When you run the script the jobs are created but not scheduled and it is for this reason I created this function. All it does it schedule the jobs so that I know that they will be run when a new server is created and all the databases will be backed up. I can then go back at a later date and schedule them correctly for the servers workload or tweak them according to specific needs but this allows me that fuzzy feeling of knowing that the backups and other maintenance will be performed.&lt;/p>
+&lt;p>To accomplish this I pass a single parameter $Server to the function this is the connection string and should be in the format of &lt;code>SERVERNAME&lt;/code>, &lt;code>SERVERNAME\INSTANCENAME &lt;/code>or &lt;code>SERVERNAME\INSTANCENAME,Port&lt;/code>&lt;/p>
+&lt;p>I then create a &lt;code>$srv&lt;/code> SMO object as usual&lt;/p>
+&lt;p>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server&lt;/code>&lt;/p>
+&lt;p>Create a JobServer object and a Jobs array which holds the Jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$JobServer = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs = $JobServer.Jobs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And set the schedule for each job. I pick each Job using the Where-Object Cmdlet and break out if the job does not exist&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job = $Jobs|Where-Object {$_.Name -eq &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       if ($Job -eq $Null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       {Write-Output &amp;#34;No Job with that name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       break}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I create a Schedule object and set its properties and create the schedule&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Schedule = new-object Microsoft.SqlServer.Management.Smo.Agent.JobSchedule ($job, &amp;#39;Daily - Midnight ++ Not Sunday&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndDate = Get-Date -Month 12 -Day 31 -Year 9999
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndTimeOfDay = &amp;#39;23:59:59&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyTypes = &amp;#34;Weekly&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyRecurrenceFactor = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencySubDayTypes = &amp;#34;Once&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyInterval = 126 # Weekdays 62 + Saturdays 64 - &amp;lt;a href=&amp;#34;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;#34;&amp;gt;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveStartDate = get-date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$schedule.ActiveStartTimeOfDay = &amp;#39;00:16:00&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.IsEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>MSDN&lt;/a> which is always my first port of call when writing these scripts&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>WeekDays.Sunday = 1&lt;/li>
+&lt;li>WeekDays.Monday = 2&lt;/li>
+&lt;li>WeekDays.Tuesday = 4&lt;/li>
+&lt;li>WeekDays.Wednesday = 8&lt;/li>
+&lt;li>WeekDays.Thursday = 16&lt;/li>
+&lt;li>WeekDays.Friday = 32&lt;/li>
+&lt;li>WeekDays.Saturday = 64&lt;/li>
+&lt;li>WeekDays.WeekDays = 62&lt;/li>
+&lt;li>WeekDays.WeekEnds = 65&lt;/li>
+&lt;li>WeekDays.EveryDay = 127&lt;/li>
+&lt;/ul>
+&lt;p>Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.&lt;/p>
+&lt;/blockquote>
+&lt;p>It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.&lt;/p>
+&lt;p>You can tweak this script or use the code to work with any Agent Jobs and set the schedules accordingly and you can check that you have set the schedules correctly with this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">   $srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObserver = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObs = $JObserver.Jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $ActiveStartTimeOfDay = @{Name = &amp;#34;ActiveStartTimeOfDay&amp;#34;; Expression = {$_.JobSchedules.ActiveStartTimeOfDay}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyInterval = @{Name = &amp;#34;FrequencyInterval&amp;#34;; Expression = {$_.JobSchedules.FrequencyInterval}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyTypes = @{Name = &amp;#34;FrequencyTypes&amp;#34;; Expression = {$_.JobSchedules.FrequencyTypes}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $IsEnabled = @{Name = &amp;#34;IsEnabled&amp;#34;; Expression = {$_.JobSchedules.IsEnabled}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $Jobs|Where-Object{$_.Category -eq &amp;#39;Database Maintenance&amp;#39;}|select name,$IsEnabled,$FrequencyTypes,$FrequencyInterval,$ActiveStartTimeOfDay|Format-Table -AutoSize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can get the script from Script Center via the link below or by searching for &amp;ldquo;Ola&amp;rdquo; using the &lt;a class="link" href="http://www.microsoft.com/en-us/download/details.aspx?id=42525?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>script browser add-in&lt;/a> straight from ISE&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg?w=300"
+loading="lazy"
+alt="browser"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89&lt;/a>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,1662 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQLBits on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sqlbits/</link><description>Recent content in SQLBits on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sqlbits/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLBits 2023 in Newport - A beards viewpoint</title><link>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</link><pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits 2023 in Newport - A beards viewpoint" />&lt;h1 id="what-is-sqlbits">What is SQLBits?&lt;/h1>
+&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="committee">Committee&lt;/h2>
+&lt;p>The SQLBits committee is responsible for the running of the conference, the selection of general sessions and training days, helpers, sponsors, venue, dates, child care, theme, logo, the party, the website, charity support, hotels, bars, delegate app, helpers app, sponsors app, food, drinks, entertainment, prizes, swag, t-shirts, mugs, code of conduct, badges, printing, freight, stickers, lanyards, bags,on-site therapist, pens, notepads&amp;hellip; and everything else that goes into making SQLBits the best conference it can be!!&lt;/p>
+&lt;h2 id="before-the-conference">Before the conference&lt;/h2>
+&lt;p>We have been meeting every week as a committee to plan the conference. Every committee member has also spent a lot of time in meetings, dealing with correspondence, answering questions, and then feeding this back to the whole committee. We received some feedback from one of our largest sponsors that one of the things that the liked about SQLBits was that we are all so passionate about the conference and that it really shows. We are all volunteers and we all have full time jobs, families, and other commitments but we are also determined to make SQLBits the best Microsoft Data Platform conference in the world.&lt;/p>
+&lt;h2 id="set-up">Set up&lt;/h2>
+&lt;p>We all arrived in Newport on the Sunday or the Monday before the conference to set up. Set up is a massive operation involving a significant number of people who turn the big empty room into the exhibition hall, build all of the sponsor booths, set up all of the rooms with a stage, screens, signage and projectors, ensure that there is wifi, power, and hard-wired internet access in them all. There was also a team taking all of the output from the speakers desk and ensuring that it will be available for the live streams for the online delegates. Whilst all of that is happening, we were unpacking all of the things that had been in storage (or peoples garages) getting all of the t-shirts for the helpers, for the speakers and for the committee. All of the speaker swag and delegate swag was put into a box or a bag by some of the orange shirted helpers.
+We also had a &amp;ldquo;Meet the trainer&amp;rdquo; event in the evening which allowed delegates to come and interact with the speakers. This was a great opportunity for delegates to ask questions and get to know the trainers before the training days.&lt;/p>
+&lt;p>That was all expected.&lt;/p>
+&lt;p>However, there are also things that happens behind the scenes during this time. For example, due to a storm over Northern Europe which impacted flights into and out of Schiphol, London and Bristol Airports as well as the trains running from London to Newport, there was a point on Monday afternoon where we were not sure that over half of our training day speakers for the next day would be able to make it. This lead to a couple of hours of manic phone calls and communication with the speakers as we tried our best to get them to the conference. We were very lucky that with only one exception, everyone made it to the conference. Unfortunately, despite best efforts and a lot of searching, one speaker was unable to get to the UK in time and so we had to switch their rooms to a room with virtual speakers enabled and update all of the schedules and teams involved in providing the content. These are the things that you don&amp;rsquo;t see, but that are part of the magic of ensuring that the conference runs smoothly. I hope all of the delegates and most of the speakers and sponsors have no idea of the things that were happening behind the scenes. I always describe it like a swan, it looks calm and serene on the surface, but underneath the water, there is a lot of paddling going on!&lt;/p>
+&lt;h1 id="tuesday">Tuesday&lt;/h1>
+&lt;p>For me, Tuesday was a training day. With my fantastic partner in fun and games and sharing - Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>B&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>M&lt;/a> we spent the whole day with about 75 people both in person and online and talked about how to manage large SQL estates. We had a lot of fun and I hope that everyone who attended enjoyed it as much as we did. We had a lot of questions and a lot of interaction with the delegates in both formats and it showed that the system that we had to enable virtual delegates for SQLBits really managed to work well.&lt;/p>
+&lt;h1 id="equity-and-inclusivity">Equity and Inclusivity&lt;/h1>
+&lt;p>We had a lot of positive feedback from the delegates and we are really pleased that we were able to provide this opportunity for even more people to attend the conference. We are passionate about Diversity, Equity and Inclusivity and the feedback that we have received is that allowing virtual attendees enabled more people to attend the conference and to learn from the speakers. People who would not have been able to attend because of their family commitments or because of the cost of travel and accommodation were able to attend and this is one of our goals for the conference.&lt;/p>
+&lt;p>Concentrating on Inclusion and Equity will naturally have a positive impact on our Diversity and our goal is to make SQLBits a conference that is welcoming to everyone. The DE and I teams initiatives such as childcare are beginning to bear fruit and we are seeing more and more people attending the conference with their families, as well as more people from underrepresented groups attending the conference and we are working hard to ensure that we are providing a safe and welcoming environment for everyone.&lt;/p>
+&lt;h1 id="getting-everyone-in">Getting everyone in&lt;/h1>
+&lt;p>Whilst Jess and I were doing the training day, the rest of the team were ensuring that everyone was able to get in, with a badge, registered with the session that they expected, or the one they wished to change to. Some sessions had a limited number of places and so we had to ensure that the people who were on the waiting list were able to get into the session that they wanted to attend if places became available. We had to print the badges for the people who had signed up in the days before we sent the information to the printers. We had people paying for new tickets right up until Friday!&lt;/p>
+&lt;h1 id="wednesday">Wednesday&lt;/h1>
+&lt;p>There was another &amp;ldquo;Meet the trainer&amp;rdquo; event on the Tuesday evening and another set of speakers and delegates who were arriving as well as sponsor teams and their freight. Wednesday morning did not see as much of a rush as Tuesday morning, but there was still a lot of people arriving and needing processing or having questions that needed answering. At events like SQLBits there is also a lot of communication and conversation with the venue. Ensuring that there is coffee at the times that everyone comes out of the rooms for breaks and that there is lunch at the right time. When you are thinking about lunch, you also need to think about the sponsors. On General sessions days we need to ensure that they can have lunch before all of the delegates come out of their sessions and they need to spend their time talking with them and demonstrating their products. Wednesday evening was also when the sponsors were able to setup their booths. This, of course, generates a large number of questions that need answering and boxes that need finding and then unpacking.&lt;/p>
+&lt;h1 id="evening-events">Evening events&lt;/h1>
+&lt;p>Wednesday saw the first of the large evening events. We provided a games night with food. Thursday there was a quiz night with curry and Friday was the Party. As you can imagine, there is a significant amount of organisation required behind the scenes for all of these additional events. Food, drinks, prizes, the folks providing the entertainment and the helpers. The venue, security, transport from the hotels to the venue and back again. All of this needs to be organised and then managed on the day. We had a lot of fun at these events though and find them a great way to end each day and enable delegates who want to, to be able to network with each other and with the sponsors all whilst doing something fun. The party is organised by the wonderful, sparkly Julia and her team and they do a fantastic job of making sure that everyone has a great time.&lt;/p>
+&lt;h1 id="general-sessions">General sessions&lt;/h1>
+&lt;p>General sessions then add further complexity, more delegates, more speakers, more moving parts that always have the possibility for things to require fixing. I have been a SQLBits helper and runner enough times to know that there were many things requiring attention, this year my responsibility was the agenda and updating the processes behind that when things changed and answering the myriad of questions that come up at the information desk. It is a lot of fun but also a lot of work.&lt;/p>
+&lt;h1 id="wrap-up">Wrap up&lt;/h1>
+&lt;p>This is a totally raw outpouring of my experience this year, pretty much without filter. Just so that I had it down somewhere in words.&lt;/p></description></item><item><title>#NewStarNovember - Being a mentor</title><link>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</link><pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars.jpg" alt="Featured image of post #NewStarNovember - Being a mentor" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="who-was-your-mentor">Who was your mentor?&lt;/h1>
+&lt;p>I have never had an official mentor but I am so very very grateful to all of the people who have helped, supported and inspired me throughout my career.&lt;/p>
+&lt;p>I feel so privileged to be able to reach out to so many wonderful people and ask questions and receive advice.&lt;/p>
+&lt;h2 id="so-rob-why-do-you-mentor-others">So Rob, Why do you mentor others?&lt;/h2>
+&lt;p>I have always been willing to share everything that I know and have been doing so in various formats for many years now. I have officially mentored many people for presentations, through events such as New Stars of Data, Data (née SQL) Grillen, Data Minds, Data Scotland, as well as unofficially because they have asked me.&lt;/p>
+&lt;p>Why do I do this? because I enjoy it, because I believe that anyone can give a good presentation and because the more voices we have giving presentations the better that it is for us all.&lt;/p>
+&lt;h2 id="whats-the-best-thing-about-mentoring">What&amp;rsquo;s the best thing about mentoring?&lt;/h2>
+&lt;p>So many things are fantastic about mentoring.&lt;/p>
+&lt;p>You learn so many things. Getting the opinions of different people or watching how others perform similar tasks to you almost always leads to you learning something new. Whether it is the subject they are talking about, or just the way that they use PowerPoint or VS Code, or even the way they have Windows set up there is always something to learn.&lt;/p>
+&lt;p>I also get such a warm fuzzy feeling from seeing people blossom as they gain confidence and realise that they can do a fantastic presentation and that it is a mainly a case of learning and practicing new skills.&lt;/p>
+&lt;p>I am super proud of the people that I have mentored who have continued to present and have since presented at international conferences.&lt;/p>
+&lt;p>I am also equally proud of those who have decided that it was not for them right now and are currently taking a break from presenting.&lt;/p>
+&lt;p>I am delighted to see people who deserve it, become MVPs, or get promoted or change jobs. I hope that maybe I had a little impact, although I tell everyone I mentor, they are doing all of the hard work I am just listening and commenting.&lt;/p>
+&lt;h2 id="doesnt-it-take-a-lot-of-time">Doesn&amp;rsquo;t it take a lot of time?&lt;/h2>
+&lt;p>There is, of course, a time element to being a mentor but I am always happy to give up a few hours each month to help and I am also careful that I don&amp;rsquo;t take on too much and over burden myself.&lt;/p>
+&lt;p>For me, being a mentor means giving guidance and setting goals and with a bit of careful planning you can be efficient about it.&lt;/p>
+&lt;h2 id="what-else-have-you-learnt">What else have you learnt?&lt;/h2>
+&lt;p>I have learnt that everyone is different and that, as a mentor, some of your tactics and procedures will not work for every person. As an example, I have learnt that some people like to have a script that they can use to memorise or to have as an aide whilst others are much happier just with key words.&lt;/p>
+&lt;p>I have learnt that time zones make it harder. If it is Sunday evening for me, it is Sunday morning on the west coast of the US. This can make it harder to find times that fit well for both parties.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?&lt;/h1>
+&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> CFP are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>Whats a SQL Notebook in Azure Data Studio?</title><link>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</link><pubDate>Wed, 13 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png" alt="Featured image of post Whats a SQL Notebook in Azure Data Studio?" />&lt;p>&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Data Studio&lt;/a> is a cross-platform database tool for data professionals using the Microsoft family of on-premises and cloud data platforms on Windows, MacOS, and Linux.&lt;/p>
+&lt;p>Recently Vicky Harp tweeted&lt;/p>
+&lt;blockquote>
+&lt;p>We&amp;rsquo;re getting very close to release of SQL Notebooks in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a>! You can give the feature an early spin today with the insider build. &lt;a class="link" href="https://t.co/SEZp7ZdxCp" target="_blank" rel="noopener"
+>pic.twitter.com/SEZp7ZdxCp&lt;/a>&lt;/p>
+&lt;p>— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1104127412944551936?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 8, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>By the way, you can watch a recording from SQLBits of Vicky’s session&lt;/p>
+&lt;blockquote>
+&lt;p>If you missed &lt;a class="link" href="https://twitter.com/hashtag/sqlbits?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>, you will definitely want to watch this demo by &lt;a class="link" href="https://twitter.com/vickyharp?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@vickyharp&lt;/a> and &lt;a class="link" href="https://twitter.com/MGoCODE?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@MGoCODE&lt;/a> about &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@AzureDataStudio&lt;/a>. Learn the latest about our cross-platform tool, including a new feature, SQL Notebooks &lt;a class="link" href="https://twitter.com/hashtag/SQLServer?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#SQLServer&lt;/a> &lt;a class="link" href="https://t.co/diubYwQckn" target="_blank" rel="noopener"
+>https://t.co/diubYwQckn&lt;/a>&lt;/p>
+&lt;p>— Azure Data Studio (@AzureDataStudio) &lt;a class="link" href="https://twitter.com/AzureDataStudio/status/1103806327065722880?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 7, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>So in the interest of learning about something new I decided to give it a try.&lt;/p>
+&lt;h2 id="install-the-insiders-edition">Install The Insiders Edition&lt;/h2>
+&lt;p>Unlike &lt;a class="link" href="https://code.visualstudio.com/" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> which has a link to the insiders download on the front page, you will have to &lt;a class="link" href="https://github.com/Microsoft/azuredatastudio#azure-data-studio" target="_blank" rel="noopener"
+>visit the GitHub repository for the links to download the insiders release of Azure Data Studio&lt;/a>. Scroll down and you will see&lt;/p>
+&lt;p>Try out the latest insiders build from &lt;code>master&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64-user/insider" target="_blank" rel="noopener"
+>Windows User Installer – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64/insider" target="_blank" rel="noopener"
+>Windows System Installer – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/win32-x64-archive/insider" target="_blank" rel="noopener"
+>Windows ZIP – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/darwin/insider" target="_blank" rel="noopener"
+>macOS ZIP – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://azuredatastudio-update.azurewebsites.net/latest/linux-x64/insider" target="_blank" rel="noopener"
+>Linux TAR.GZ – &lt;strong>Insiders build&lt;/strong>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>See the &lt;a class="link" href="https://github.com/Microsoft/azuredatastudio/blob/master/CHANGELOG.md" target="_blank" rel="noopener"
+>change log&lt;/a> for additional details of what’s in this release.
+Once you have installed you can connect to an instance, right click and choose New Notebook or you can use File – New Notebook
+&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Incidentally, I use the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG" target="_blank" rel="noopener"
+>docker-compose file here&lt;/a> to create the containers and I map &lt;code>C:\MSSQL\BACKUP\KEEP&lt;/code> on my local machine (where my backups are) to &lt;code>/var/opt/mssql/backups&lt;/code> on the containers on lines 10 and 17 of the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.
+The &lt;code>Create-Ag.ps1&lt;/code> shows the code and creates an AG with &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools.&lt;/a> But I digress!&lt;/p>
+&lt;h2 id="install-notebook-dependencies">Install Notebook Dependencies&lt;/h2>
+&lt;p>Once you click New Notebook you will get a prompt to install the dependencies.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It will show its output&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and take a few minutes to run&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It took all but 11 minutes on my machine&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="create-a-notebook">Create a Notebook&lt;/h2>
+&lt;p>OK, so now that we have the dependencies installed we can create a notebook. I decided to use the ValidationResults database that &lt;a class="link" href="https://blog.robsewell.com/dbachecks-save-the-results-to-a-database-for-historical-reporting/" target="_blank" rel="noopener"
+>I use for my dbachecks demos and describe here&lt;/a>. I need to restore it from my local folder that I have mapped as a volume to my container. Of course, I use dbatools for this 🙂&lt;/p>
+&lt;pre>&lt;code># U: sqladmin P: dbatools.IO
+$cred = Get-Credential
+$restoreDbaDatabaseSplat = @{
+SqlInstance = $sqlinstance1
+SqlCredential = $cred
+UseDestinationDefaultDirectories = $true
+Path = '/var/opt/mssql/backups/ValidationResults.bak'
+}
+Restore-DbaDatabase @restoreDbaDatabaseSplat
+&lt;/code>&lt;/pre>
+&lt;p>I had already got a connection saved to the instance in Azure Data Studio, you may need to create a new one using the new connection icon at the top left and filling in the details. The password is in the code above.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now I can start with my notebook. I am faced with this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I click on text and provide an intro&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Once I had written that and clicked out, I couldn’t see what to do straight away!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then I saw the code and text buttons at the top 🙂 Right, lets get on with it 🙂 I hit the code button and paste in the T-SQL to reset the dates in the database to simulate dbachecks having been run this morning.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-9.png"
+loading="lazy"
+>
+There’s a run cell button on the right and when I press it&amp;gt;&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->
+Cool 🙂&lt;/p>
+&lt;p>If the SQL query has results then they are shown as well&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This is fun and I can see plenty of uses for it. Go and have a play with SQL notebooks 🙂&lt;/p>
+&lt;h2 id="source-control">Source Control&lt;/h2>
+&lt;p>I used CTRL K, CTRL O to open a folder and saved my notebook in my local Presentations folder which is source controlled. When I opened the explorer CTRL + SHIFT + E I can see that the folder and the file are colour coded green and have a U next to them marking them as Untracked. I can also see that the source control icon has a 1 for the number of files with changes and in the bottom left that I am in the master branch.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I click on the source control icon (or CTRL + SHIFT + G) I can see the files with the changes and can enter a commit message&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I then press CTRL + ENTER to commit my change and get this pop-up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>As I only have one file and it has all the changes for this commit I click yes. If I had changed more than one file and only wanted to commit a single one at a time I would hover my mouse over the file and click the + to stage my change.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>If I make a further change to the notebook and save it, I can see that the source control provider recognises the change but this time the folder the file is in and the file are colour coded brown with an M to show that they have been modified.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Unlike Visual Studio Code, when you then click on the source control icon and click on the change it does not show the differences in the notebook although this works with SQL files.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When I have made all my changes and committed them with good commit messages&lt;/p>
+&lt;p>&lt;img src="https://i2.wp.com/imgs.xkcd.com/comics/git_commit.png?w=630&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can see that there are 3 local changes ready to be pushed to by remote repository (GitHub in this case) and 0 remote commits in this branch by looking at the bottom left&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can click on the “roundy roundy” icon (I don&amp;rsquo;t know its proper name 😊) and synchronise my changes. This comes with a pop-up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Personally I never press OK, Don’t Show Again because I like the double check and to think “Is this really what I want to do right now”. Once I press OK my changes will be synched with the remote repository. Explaining this means that you can find the notebook I have used in my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/tree/master/Notebooks" target="_blank" rel="noopener"
+>Presentations GitHub Repository&lt;/a> which means that you can run the Notebook too using the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG" target="_blank" rel="noopener"
+>docker-compose file here&lt;/a> and the instructions further up in the post.&lt;/p></description></item><item><title>#tsql2sday – Giving Back – Reprise</title><link>https://blog.robsewell.com/blog/tsql2sday-giving-back-reprise/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-giving-back-reprise/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg" alt="Featured image of post #tsql2sday – Giving Back – Reprise" />&lt;p>&lt;a class="link" href="https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/a>&lt;/p>
+&lt;p>It’s TSQL Tuesday again! This month our host is Riley Major (&lt;a class="link" href="https://scribnasium.com/about-me/" target="_blank" rel="noopener"
+>b&lt;/a>/&lt;a class="link" href="https://twitter.com/RileyMajor" target="_blank" rel="noopener"
+>t&lt;/a>) and the subject is &lt;em>Giving Back&lt;/em>. He’s given us two options here (as well as the side option of &lt;em>your favorite 2017 improvement&lt;/em>). Pick a way that you’d like to give back to the community and talk about it, or if you already give back,  tell us how and why you started.&lt;/p>
+&lt;p>There will be a lot of excellent posts on this subject and one of the things that I like is that you can go to &lt;a class="link" href="http://tsqltuesday.com" target="_blank" rel="noopener"
+>http://tsqltuesday.com&lt;/a> and look up all of the entries which means that for a particular topic you can find a bunch of blog posts from different angles (I miss-typed that as angels first and yes they are all angels!) whether it is &lt;a class="link" href="http://tsqltuesday.com/tag/career-improvement/" target="_blank" rel="noopener"
+>career improvement&lt;/a> or technical like say &lt;a class="link" href="http://tsqltuesday.com/tag/extended-events/" target="_blank" rel="noopener"
+>Extended Events&lt;/a> it is all there waiting for you 🙂&lt;/p>
+&lt;p>I wrote about &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-giving-back-some-examples-and-encouragement/" target="_blank" rel="noopener"
+>giving back in 2014&lt;/a> when I was about to help organise SQL Saturday Exeter for the first time. Last year I blogged about a &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-folks-who-have-made-a-difference/" target="_blank" rel="noopener"
+>few of the wonderful people&lt;/a> who made a difference to me. So this post is a little about how I give back and also hopefully some hints that can help you to do the same as well.&lt;/p>
+&lt;h2 id="how">How&lt;/h2>
+&lt;p>There are so many ways that you can give back to the community as Riley’s post shows.&lt;/p>
+&lt;p>Sharing your knowledge is a good way. I share my knowledge in blog posts and in sessions at user groups and at conferences. You can too.&lt;/p>
+&lt;p>From beginner, introductory posts and talks to expert level deep dives every single one of us has learned from the blog posts that other people have spent their time and effort creating.&lt;/p>
+&lt;p>YOU can share your knowledge, even if you have only been using a technology for a few months, you have knowledge of the things you have learned and the things that would have made it easier. Write a post about those things.&lt;/p>
+&lt;p>Answering questions is another way. You can do this on &lt;a class="link" href="https://stackoverflow.com/" target="_blank" rel="noopener"
+>Stack Overflow,&lt;/a> &lt;a class="link" href="http://www.sqlservercentral.com/" target="_blank" rel="noopener"
+>SQL Server Central&lt;/a>, &lt;a class="link" href="http://PowerShell.Org" target="_blank" rel="noopener"
+>PowerShell.Org&lt;/a> , Reddit, Facebook , on &lt;a class="link" href="https://twitter.com/hashtag/SQLHelp" target="_blank" rel="noopener"
+>Twitter using the #sqlhelp&lt;/a> or #PowerShellHelp or just in person. I try to answer questions when I see them on twitter or in the &lt;a class="link" href="http://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Community Slack&lt;/a>&lt;/p>
+&lt;p>Mentoring or just providing feedback to people. You can offer to proof read blog posts or abstract submissions or you can listen to peoples presentations. I do this and it is a lot of fun&lt;/p>
+&lt;p>I also share my knowledge via &lt;a class="link" href="https://github.com/sqldbawithabeard" target="_blank" rel="noopener"
+>my GitHub&lt;/a>. All of my &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations" target="_blank" rel="noopener"
+>presentations slides and code&lt;/a> are available as well as other code that I use. I also contribute to open-source projects such as &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+>dbachecks&lt;/a>.  You can do this too. You could open an issue for an improvement or bug. You can contribute your code, even if you are not confident writing the code you can fix spelling mistakes or add documentation., everything helps&lt;/p>
+&lt;p>You can help with organisation of events. I have helped to organise the PowerShell Europe Conference, PSDay.UK, SQL Saturday Exeter, SQL SouthWest user group, PASS PowerShell Virtual Group. I have also helped with session choices for a number of other events like &lt;a class="link" href="http://sqlgrillen.de" target="_blank" rel="noopener"
+>SQL Grillen&lt;/a> and &lt;a class="link" href="https://sqlgla.co.uk/" target="_blank" rel="noopener"
+>SQLGLA&lt;/a> and I have volunteered at many events from SQL Saturdays to SQL Bits. Everything from setting up and tearing down (IE moving heavy things and cleaning up rubbish) to sitting on the information desk, giving out badges, making sure the speakers are on time in their sessions. You can do this too. Just ask the organisers of the events what they need. It is better to do this prior to the event than on the day but I am sure all help is welcomed. &lt;a class="link" href="https://twitter.com/sql_unicorn" target="_blank" rel="noopener"
+>Richard Munn&lt;/a> and &lt;a class="link" href="https://sqlbits.com/Sessions/Event17/Advice_and_guidance_on_becoming_a_speaker_or_volunteer" target="_blank" rel="noopener"
+>I talked (waffled?) about this at SQL Bits this year&lt;/a>&lt;/p>
+&lt;p>If you would like to be considered as a volunteer for next years SQL Bits please email helpers at sqlbits.com&lt;/p>
+&lt;h2 id="why">Why&lt;/h2>
+&lt;p>So why did I start giving back?&lt;/p>
+&lt;p>I wanted to be useful. I saw the amount of work that Jonathan and Annette were doing organising SQL Saturday Exeter and SQL South West. I hoped that I could help them with that.&lt;/p>
+&lt;p>Why do I carry on doing it?&lt;/p>
+&lt;p>Because it is fun 🙂 I enjoy speaking, I enjoy sharing my knowledge and talking to people&lt;/p>
+&lt;p>That is good but there is more to it as well&lt;/p>
+&lt;p>You learn so much by writing a presentation or a blog post because you will do research.&lt;/p>
+&lt;p>You will learn even more when people ask you questions in your sessions or leave comments on your blog posts and you have to go and find the answers&lt;/p>
+&lt;p>You learn new and useful skills and demonstrate your knowledge to potential employers&lt;/p>
+&lt;p>My blog is a scrapbook of knowledge that I go back to and use all the time (and sometimes I forget that I have written something and find my own post in the search results!)&lt;/p>
+&lt;p>But the most important reason is that I feel that it pays back some of the benefit that I have gained from all of those people who’s time and effort I made use of for free when I was learning and continue to do so to this day. All of those blog posts and videos and presentations that I consumed have helped to make me the technician I am today. I have skills and abilities that I would not have without them all and by giving back I hope that I am enabling others to develop and see the benefit of sharing so that they will continue to do so in the future and I can learn from them.&lt;/p></description></item><item><title>Using the AST in Pester for dbachecks</title><link>https://blog.robsewell.com/blog/using-the-ast-in-pester-for-dbachecks/</link><pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-the-ast-in-pester-for-dbachecks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Pester-results-1.png" alt="Featured image of post Using the AST in Pester for dbachecks" />&lt;p>TagLine – My goal – Chrissy will appreciate Unit Tests one day 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/new-module-coming-soon/" target="_blank" rel="noopener"
+>Chrissy has written about dbachecks&lt;/a> the new up and coming community driven open source PowerShell module for SQL DBAs to validate their SQL Server estate. we have taken some of the ideas that we have presented about a way of using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> with &lt;a class="link" href="https://github.com/Pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> to validate that everything is how it should be and placed them into a meta data driven framework to make things easy for anyone to use. It is looking really good and I am really excited about it. It will be released very soon.&lt;/p>
+&lt;p>Chrissy and I will be doing a pre-con at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> where we will talk in detail about how this works. &lt;a class="link" href="http://sqlbits.com/information/event17/Reliable_Repeatable__Automated_PowerShell_for_DBAs/trainingdetails.aspx" target="_blank" rel="noopener"
+>You can find out more and sign up here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>Cláudio Silva&lt;/a> has improved my &lt;a class="link" href="https://blog.robsewell.com/a-pretty-powerbi-pester-results-template-file/" target="_blank" rel="noopener"
+>PowerBi For Pester&lt;/a> file and made it beautiful and whilst we were discussing this we found that if the Pester Tests were not formatted correctly the Power Bi looked … well rubbish to be honest! Chrissy asked if we could enforce some rules for writing our Pester tests.&lt;/p>
+&lt;p>The rules were&lt;/p>
+&lt;p>The Describe title should be in double quotes&lt;br>
+The Describe should use the plural Tags parameter&lt;br>
+The Tags should be singular&lt;br>
+The first Tag should be a unique tag in Get-DbcConfig&lt;br>
+The context title should end with $psitem&lt;br>
+The code should use Get-SqlInstance or Get-ComputerName&lt;br>
+The Code should use the forEach method&lt;br>
+The code should not use $_&lt;br>
+The code should contain a Context block&lt;/p>
+&lt;p>She asked me if I could write the Pester Tests for it and this is how I did it. I needed to look at the Tags parameter for the Describe. It occurred to me that this was a job for the Abstract Syntax Tree (AST). I don’t know very much about the this but I sort of remembered reading a blog post by &lt;a class="link" href="http://www.lazywinadmin.com/2016/08/powershellpester-make-sure-your.html" target="_blank" rel="noopener"
+>Francois-Xavier Cat about using it with Pester&lt;/a> so I went and read that and &lt;a class="link" href="https://stackoverflow.com/questions/39909021/parsing-powershell-script-with-ast" target="_blank" rel="noopener"
+>found an answer on Stack Overflow&lt;/a> as well. These looked just like what I needed so I made use of them. Thank you very much to Francois-Xavier and wOxxOm for sharing.&lt;/p>
+&lt;p>The first thing I did was to get the Pester Tests which we have located in a checks folder and loop through them and get the content of the file with the Raw parameter&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Describes titles and tags&amp;quot; {
+&lt;/code>&lt;/pre>
+&lt;p>Then I decided to look at the Describes using the method that wOxxOm (I know no more about this person!) showed.&lt;/p>
+&lt;pre>&lt;code>$Describes = \[Management.Automation.Language.Parser\] ::ParseInput($check, \[ref\]$tokens, \[ref\]$errors).
+FindAll(\[Func\[Management.Automation.Language.Ast, bool\]\] {
+param($ast)
+$ast.CommandElements -and
+$ast.CommandElements\[0\].Value -eq 'describe'
+}, $true) |
+ForEach {
+$CE = $_.CommandElements
+$secondString = ($CE |Where { $_.StaticType.name -eq 'string' })\[1\]
+$tagIdx = $CE.IndexOf(($CE |Where ParameterName -eq'Tags') ) + 1
+$tags = if ($tagIdx -and $tagIdx -lt $CE.Count) {
+$CE\[$tagIdx\].Extent
+}
+New-Object PSCustomObject -Property @{
+Name = $secondString
+Tags = $tags
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>As I understand it, this code is using the Parser on the $check (which contains the code from the file) and finding all of the Describe commands and creating an object of the title of the Describe with the StaticType equal to String and values from the Tag parameter.&lt;/p>
+&lt;p>When I ran this against the database tests file I got the following results&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/01-describes-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then it was a simple case of writing some tests for the values&lt;/p>
+&lt;pre>&lt;code>@($describes).Foreach{
+$title = $PSItem.Name.ToString().Trim('&amp;quot;').Trim('''')
+It &amp;quot;$title Should Use a double quote after the Describe&amp;quot; {
+$PSItem.Name.ToString().Startswith('&amp;quot;')| Should be $true
+$PSItem.Name.ToString().Endswith('&amp;quot;')| Should be $true
+}
+It &amp;quot;$title should use a plural for tags&amp;quot; {
+$PsItem.Tags| Should Not BeNullOrEmpty
+}
+# a simple test for no esses apart from statistics and Access!!
+if ($null -ne $PSItem.Tags) {
+$PSItem.Tags.Text.Split(',').Trim().Where{($_ -ne '$filename') -and ($_ -notlike '\*statistics\*') -and ($_ -notlike '\*BackupPathAccess\*') }.ForEach{
+It &amp;quot;$PsItem Should Be Singular&amp;quot; {
+$_.ToString().Endswith('s')| Should Be $False
+}
+}
+It &amp;quot;The first Tag Should Be in the unique Tags returned from Get-DbcCheck&amp;quot; {
+$UniqueTags -contains $PSItem.Tags.Text.Split(',') \[0\].ToString()| Should Be $true
+}
+}
+else {
+It &amp;quot;You haven't used the Tags Parameter so we can't check the tags&amp;quot; {
+$false| Should be $true
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>The Describes variable is inside @() so that if there is only one the ForEach Method will still work. The unique tags are returned from our command Get-DbcCheck which shows all of the checks. We will have a unique tag for each test so that they can be run individually.&lt;/p>
+&lt;p>Yes, I have tried to ensure that the tags are singular by ensuring that they do not end with an s (apart from statistics) and so had to not check  BackupPathAccess and statistics. Filename is a variable that we add to each Describe Tags so that we can run all of the tests in one file. I added a little if block to the Pester as well so that the error if the Tags parameter was not passed was more obvious&lt;/p>
+&lt;p>I did the same with the context blocks as well&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Contexts&amp;quot; {
+## Find the Contexts
+$Contexts = \[Management.Automation.Language.Parser\] ::ParseInput($check, \[ref\]$tokens, \[ref\]$errors).
+FindAll(\[Func\[Management.Automation.Language.Ast, bool\] \] {
+param($ast)
+$ast.CommandElements -and
+$ast.CommandElements\[0\].Value -eq 'Context'
+}, $true) |
+ForEach {
+$CE = $_.CommandElements
+$secondString = ($CE |Where { $_.StaticType.name -eq 'string' })\[1\]
+New-Object PSCustomObject -Property @{
+Name = $secondString
+}
+}
+@($Contexts).ForEach{
+$title = $PSItem.Name.ToString().Trim('&amp;quot;').Trim('''')
+It &amp;quot;$Title Should end with `$psitem So that the PowerBi will work correctly&amp;quot; {
+$PSItem.Name.ToString().Endswith('psitem&amp;quot;')| Should Be $true
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>This time we look for the Context command and ensure that the string value ends with psitem as the PowerBi parses the last value when creating columns&lt;/p>
+&lt;p>Finally I got all of the code and check if it matches some coding standards&lt;/p>
+&lt;pre>&lt;code>Context &amp;quot;$($_.Name) - Checking Code&amp;quot; {
+## This just grabs all the code
+$AST = \[System.Management.Automation.Language.Parser\] ::ParseInput($Check, \[ref\]$null, \[ref\]$null)
+$Statements = $AST.EndBlock.statements.Extent
+## Ignore the filename line
+@($Statements.Where{$_.StartLineNumber -ne 1}).ForEach{
+$title = \[regex\]::matches($PSItem.text, &amp;quot;Describe(. *)-Tag&amp;quot;).groups\[1\].value.Replace('&amp;quot;', '').Replace ('''', '').trim()
+It &amp;quot;$title Should Use Get-SqlInstance or Get-ComputerName&amp;quot; {
+($PSItem.text -Match 'Get-SqlInstance') -or ($psitem.text -match 'Get-ComputerName')| Should be $true
+}
+It &amp;quot;$title Should use the ForEach Method&amp;quot; {
+($Psitem.text -match 'Get-SqlInstance\\).ForEach {') -or ($Psitem.text -match 'Get-ComputerName\\). ForEach{')| Should Be $true# use the \ to escape the )
+}
+It &amp;quot;$title Should not use `$_&amp;quot; {
+($Psitem.text -match '$_')| Should Be $false
+}
+It &amp;quot;$title Should Contain a Context Block&amp;quot; {
+$Psitem.text -match 'Context'| Should Be $True
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>I trim the title from the Describe block so that it is easy to see where the failures (or passes) are with some regex and then loop through each statement apart from the first line to ensure that the code is using our internal commands Get-SQLInstance or Get-ComputerName to get information, that we are looping through each of those arrays using the ForEach method rather than ForEach-Object and using $psitem rather than $_ to reference the “This Item” in the array and that each Describe block has a context block.&lt;/p>
+&lt;p>This should ensure that any new tests that are added to the module follow the guidance we have set up on the Wiki and ensure that the Power Bi results still look beautiful!&lt;/p>
+&lt;p>Anyone can run the tests using&lt;/p>
+&lt;pre>&lt;code>Invoke-Pester .\\tests\\Unit.Tests.ps1 -show Fails
+&lt;/code>&lt;/pre>
+&lt;p>before they create a Pull request and it looks like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Pester-results-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>if everything is Green then they can submit their Pull Request 🙂 If not they can see quickly that something needs to be fixed. (fail early 🙂 )&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/03-fails.png"
+loading="lazy"
+alt="03 fails.png"
+>&lt;/p></description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p>In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>how to write your first Pester test&lt;/a> to validate something. Here’s a recap&lt;/p>
+&lt;ul>
+&lt;li>Decide the information you wish to test&lt;/li>
+&lt;li>Understand how to get it with PowerShell&lt;/li>
+&lt;li>Understand what makes it pass and what makes it fail&lt;/li>
+&lt;li>Write a Pester Test&lt;/li>
+&lt;/ul>
+&lt;p>You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p>
+&lt;h2 id="getting-the-latest-version-of-the-module">Getting the Latest Version of the Module&lt;/h2>
+&lt;p>Steve Jones wrote about getting the latest version of Pester and the correct way to do it. You can &lt;a class="link" href="https://voiceofthedba.com/2017/11/27/installing-pester/" target="_blank" rel="noopener"
+>find the important information here&lt;/a>&lt;/p>
+&lt;h2 id="test-cases">Test Cases&lt;/h2>
+&lt;p>The first way is to use the Test Case parameter of the It command (the test) which I have written about when &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>using TDD for Pester here&lt;/a>&lt;/p>
+&lt;p>Lets write a test first to check if we can successfully connect to a SQL Instance. Running&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand connection&lt;/code>&lt;/p>
+&lt;p>shows us that the &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a> command is the one that we want from the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>. We should always run Get-Help to understand how to use any PowerShell command. This shows us that the results will look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-gethelp-test-dbaconnection.png"
+loading="lazy"
+alt="01 - gethelp test-dbaconnection"
+>&lt;/p>
+&lt;p>So there is a ConnectSuccess result which returns True or false. Our test can look like this for a single instance&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to ROB-XPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    It &amp;#34;Connects successfully to ROB-XPS&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        (Test-DbaConnection-SqlInstance ROB-XPS).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gives us some test results that look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/successful-test.png"
+loading="lazy"
+alt="successful test.png"
+>&lt;/p>
+&lt;p>which is fine for one instance but we want to check many.&lt;/p>
+&lt;p>We need to gather the instances into a $Instances variable. In my examples I have hard coded a list of SQL Instances but you can, and probably should, use a more dynamic method, maybe the results of a query to a configuration database. Then we can fill our TestCases variable which can be done like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can write our test like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to SQL Instances&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Put the TestCases &amp;#39;Name&amp;#39; in &amp;lt;&amp;gt; and add the TestCases parameter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Connects successfully to &amp;lt;Instance&amp;gt;&amp;#34; -TestCases $TestCases {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add a Parameter to the test with the same name as the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param($Instance)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write the test using the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Test-DbaConnection -SqlInstance $Instance).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Within the title of the test we refer to the instance inside &amp;lt;&amp;gt; and add the parameter TestCases with a value of the $TestCases variable. We also need to add a Param() to the test with the same name and then use that variable in the test.&lt;/p>
+&lt;p>This looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/Testcases-test.png"
+loading="lazy"
+alt="Testcases test.png"
+>&lt;/p>
+&lt;h2 id="pester-is-powershell">Pester is PowerShell&lt;/h2>
+&lt;p>The problem with  Test Cases is that we can only easily loop through one collection, but as Pester is just PowerShell we can simply use ForEach if we wanted to loop through multiple ones, like instances and then databases.&lt;/p>
+&lt;p>I like to use the ForEach method as it is slightly quicker than other methods. It will only work with PowerShell version 4 and above. Below that version you need to pipe the collection to For-EachObject.&lt;/p>
+&lt;p>Lets write a test to see if our databases have trustworthy set on. We can do this using the Trustworthy property returned from &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase/" target="_blank" rel="noopener"
+>&lt;code>Get-DbaDatabase&lt;/code>&lt;/a>&lt;/p>
+&lt;p>We loop through our Instances using the ForEach method and create a Context for each Instance to make the test results easier to read. We then place the call to &lt;code>Get-DbaDatabase &lt;/code>inside braces and loop through those and check the Trustworthy property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing user databases&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the instances
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create a Context for each Instance.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Testing User Databases on $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the User databases on the instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Get-DbaDatabase -SqlInstance $_ -ExcludeAllSystemDb).ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Refer to the database name and Instance name inside a $()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Database $($_.Name) on Instance $($_.Parent.Name) should not have TRUSTWORTHY ON&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $_.Trustworthy | Should Be $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it looks like this&lt;/p>
+&lt;h2 id="testdatabasetrustworthypnghttpsblogrobsewellcomassetsuploads201711testdatabasetrustworthypng">&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/testdatabasetrustworthy.png"
+loading="lazy"
+alt="testdatabasetrustworthy.png"
+>&lt;/h2>
+&lt;p>So there you have two different ways to loop through collections in your Pester tests. Hopefully this can help you to write some good tests to validate your environment.&lt;/p>
+&lt;p>Happy Pestering&lt;/p>
+&lt;h2 id="spend-a-whole-day-with-chrissy--i-at-sqlbits">Spend a Whole Day With Chrissy &amp;amp; I at SQLBits&lt;/h2>
+&lt;p>If you would like to spend a whole day with Chrissy LeMaire and I at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> in London in February – we have a pre-con on the Thursday&lt;/p>
+&lt;p>You can find out more about the pre-con &lt;a class="link" href="http://sqlps.io/bitsprecon" target="_blank" rel="noopener"
+>sqlps.io/bitsprecon&lt;/a>&lt;/p>
+&lt;p>and you can register at &lt;a class="link" href="http://sqlps.io/bitsreg" target="_blank" rel="noopener"
+>sqlps.io/bitsreg&lt;/a>&lt;/p></description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p>In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>how to write your first Pester test&lt;/a> to validate something. Here’s a recap&lt;/p>
+&lt;ul>
+&lt;li>Decide the information you wish to test&lt;/li>
+&lt;li>Understand how to get it with PowerShell&lt;/li>
+&lt;li>Understand what makes it pass and what makes it fail&lt;/li>
+&lt;li>Write a Pester Test&lt;/li>
+&lt;/ul>
+&lt;p>You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p>
+&lt;h2 id="getting-the-latest-version-of-the-module">Getting the Latest Version of the Module&lt;/h2>
+&lt;p>Steve Jones wrote about getting the latest version of Pester and the correct way to do it. You can &lt;a class="link" href="https://voiceofthedba.com/2017/11/27/installing-pester/" target="_blank" rel="noopener"
+>find the important information here&lt;/a>&lt;/p>
+&lt;h2 id="test-cases">Test Cases&lt;/h2>
+&lt;p>The first way is to use the Test Case parameter of the It command (the test) which I have written about when &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>using TDD for Pester here&lt;/a>&lt;/p>
+&lt;p>Lets write a test first to check if we can successfully connect to a SQL Instance. Running&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand connection&lt;/code>&lt;/p>
+&lt;p>shows us that the &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a> command is the one that we want from the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>. We should always run Get-Help to understand how to use any PowerShell command. This shows us that the results will look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-gethelp-test-dbaconnection.png"
+loading="lazy"
+alt="01 - gethelp test-dbaconnection"
+>&lt;/p>
+&lt;p>So there is a ConnectSuccess result which returns True or false. Our test can look like this for a single instance&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to ROB-XPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    It &amp;#34;Connects successfully to ROB-XPS&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        (Test-DbaConnection-SqlInstance ROB-XPS).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gives us some test results that look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/successful-test.png"
+loading="lazy"
+alt="successful test.png"
+>&lt;/p>
+&lt;p>which is fine for one instance but we want to check many.&lt;/p>
+&lt;p>We need to gather the instances into a $Instances variable. In my examples I have hard coded a list of SQL Instances but you can, and probably should, use a more dynamic method, maybe the results of a query to a configuration database. Then we can fill our TestCases variable which can be done like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can write our test like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to SQL Instances&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Put the TestCases &amp;#39;Name&amp;#39; in &amp;lt;&amp;gt; and add the TestCases parameter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Connects successfully to &amp;lt;Instance&amp;gt;&amp;#34; -TestCases $TestCases {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add a Parameter to the test with the same name as the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param($Instance)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write the test using the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Test-DbaConnection -SqlInstance $Instance).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Within the title of the test we refer to the instance inside &amp;lt;&amp;gt; and add the parameter TestCases with a value of the $TestCases variable. We also need to add a Param() to the test with the same name and then use that variable in the test.&lt;/p>
+&lt;p>This looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/Testcases-test.png"
+loading="lazy"
+alt="Testcases test.png"
+>&lt;/p>
+&lt;h2 id="pester-is-powershell">Pester is PowerShell&lt;/h2>
+&lt;p>The problem with  Test Cases is that we can only easily loop through one collection, but as Pester is just PowerShell we can simply use ForEach if we wanted to loop through multiple ones, like instances and then databases.&lt;/p>
+&lt;p>I like to use the ForEach method as it is slightly quicker than other methods. It will only work with PowerShell version 4 and above. Below that version you need to pipe the collection to For-EachObject.&lt;/p>
+&lt;p>Lets write a test to see if our databases have trustworthy set on. We can do this using the Trustworthy property returned from &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase/" target="_blank" rel="noopener"
+>&lt;code>Get-DbaDatabase&lt;/code>&lt;/a>&lt;/p>
+&lt;p>We loop through our Instances using the ForEach method and create a Context for each Instance to make the test results easier to read. We then place the call to &lt;code>Get-DbaDatabase &lt;/code>inside braces and loop through those and check the Trustworthy property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing user databases&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the instances
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create a Context for each Instance.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Testing User Databases on $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the User databases on the instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Get-DbaDatabase -SqlInstance $_ -ExcludeAllSystemDb).ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Refer to the database name and Instance name inside a $()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Database $($_.Name) on Instance $($_.Parent.Name) should not have TRUSTWORTHY ON&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $_.Trustworthy | Should Be $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it looks like this&lt;/p>
+&lt;h2 id="testdatabasetrustworthypnghttpsblogrobsewellcomassetsuploads201711testdatabasetrustworthypng">&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/testdatabasetrustworthy.png"
+loading="lazy"
+alt="testdatabasetrustworthy.png"
+>&lt;/h2>
+&lt;p>So there you have two different ways to loop through collections in your Pester tests. Hopefully this can help you to write some good tests to validate your environment.&lt;/p>
+&lt;p>Happy Pestering&lt;/p>
+&lt;h2 id="spend-a-whole-day-with-chrissy--i-at-sqlbits">Spend a Whole Day With Chrissy &amp;amp; I at SQLBits&lt;/h2>
+&lt;p>If you would like to spend a whole day with Chrissy LeMaire and I at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> in London in February – we have a pre-con on the Thursday&lt;/p>
+&lt;p>You can find out more about the pre-con &lt;a class="link" href="http://sqlps.io/bitsprecon" target="_blank" rel="noopener"
+>sqlps.io/bitsprecon&lt;/a>&lt;/p>
+&lt;p>and you can register at &lt;a class="link" href="http://sqlps.io/bitsreg" target="_blank" rel="noopener"
+>sqlps.io/bitsreg&lt;/a>&lt;/p></description></item><item><title>Write Your first Pester Test Today</title><link>https://blog.robsewell.com/blog/write-your-first-pester-test-today/</link><pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/write-your-first-pester-test-today/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Why Volunteer at SQLBits ?</title><link>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</link><pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</guid><description>&lt;p>WARNING – Contains Orange and light-hearted photos 😉&lt;/p>
+&lt;p>I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?&lt;/p>
+&lt;h2 id="many-months-of-work">Many months of work&lt;/h2>
+&lt;p>First though, you need to know that the SQLBits conference is organised and run by volunteers. All of the committee spend many, many long hours, out of their own free time, for many months before and after the event to ensure that the attendees, sponsors, speakers and volunteers experience is trouble free. I think that they do an amazing and fantastic job and repeatedly pull off the best, most enjoyable conference that I have been to.&lt;/p>
+&lt;p>&lt;strong>Thank you&lt;/strong> Simon, Chris, Darren, Allan, Alex, Jonathan, Annette&lt;/p>
+&lt;p>Thank you also to their families as well, who undoubtedly miss out on time with them whilst they are organising everything to do with the event, from finding venues, organising dates, speakers, marketing, website, sponsors, printing, audio visual, THE PARTY!! and all the other big and small things that it takes to make an event of that size occur.&lt;/p>
+&lt;h2 id="orange-shirted-wonderful-folk">Orange Shirted Wonderful Folk&lt;/h2>
+&lt;p>There is another group of volunteers that you will have seen at SQLBits. For the last couple of years we have been the ones in the orange shirts.&lt;/p>
+&lt;p>Here is the Class of 2017&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_17_27_05_pro.jpg"
+loading="lazy"
+alt="WP_20170406_17_27_05_Pro.jpg"
+>&lt;/p>
+&lt;p>I think this is a brilliant colour as it makes us easy to spot (although a couple of attendees who also had orange tops on did get stopped and asked for directions 🙂 )&lt;/p>
+&lt;h2 id="what-do-they-do">What do they do?&lt;/h2>
+&lt;p>These folk come in early and get everything set up. Sometimes we have to explain that the event isn’t ready for you yet&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_07_31_20_pro.jpg"
+loading="lazy"
+alt="WP_20170406_07_31_20_Pro.jpg"
+>We sort out the registration desk and greet every attendee, speaker and sponsor and assist them.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_11_25_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_11_25_Pro.jpg"
+>&lt;/p>
+&lt;p>We help the speakers get set up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_15_38_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_15_38_Pro.jpg"
+>&lt;/p>
+&lt;p>and ensure they have everything they need.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/aaron-bertrand.jpg"
+loading="lazy"
+alt="aaron bertrand.jpg"
+>&lt;/p>
+&lt;p>Aaron Bertrand (above) and John Martin from SentryOne said that it is the best experience for a speaker that they have had anywhere.&lt;/p>
+&lt;p>We direct and assist the attendees to be in the right place, sometimes with some flair!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_21_13_03_pro.jpg"
+loading="lazy"
+alt="WP_20170404_21_13_03_Pro.jpg"
+>&lt;/p>
+&lt;p>We ensure that any issues are resolved quickly and with as little distraction as possible. The room is too hot, too cold, too noisy or too quiet. The projector isn’t working or the speakers microphone has a buzz, there is too much light or too little. The water coolers are empty. The rubbish needs picking up. All these and many other minor complications are communicated and passed to the correct people to get resolved.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_17_51_33_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_17_51_33_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Sometimes we have to resolve our own issues. We had folks who were called by their work and had to stop helping and go back to their day jobs for a few hours. We all understand what it is like for people working in technology and adapt and manage accordingly. In almost every photo I took, there is someone in an orange shirt to be seen.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_43_41_pro.jpg"
+loading="lazy"
+alt="WP_20170406_10_43_41_Pro.jpg"
+>&lt;/p>
+&lt;p>We answer numerous questions from the 1500 or so attendees (and the odd sheep) who came this year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rchard.jpg"
+loading="lazy"
+alt="rchard.jpg"
+>&lt;/p>
+&lt;p>From timings and locations to taxi numbers or restaurants. Unfortunately I did &lt;a class="link" href="https://blog.robsewell.com/a-day-in-the-life-of-a-sqlbits-volunteer/" target="_blank" rel="noopener"
+>not beat last years&lt;/a> “Best question I have been asked at SQLBits” which was&lt;/p>
+&lt;blockquote>
+&lt;p>Excuse me, I have a Dalek in the van . What would you like me to do with it?&lt;/p>
+&lt;/blockquote>
+&lt;p>I was even asked questions on the way back to the hotel gone midnight on Saturday!!&lt;/p>
+&lt;p>We stay afterwards and help to get ready for the next day, putting out the new signs for the domes and the required paperwork.&lt;/p>
+&lt;h2 id="so-why-do-we-do-it">So why do we do it?&lt;/h2>
+&lt;p>I asked the guys and gals this question and in their own words, this is why they do it&lt;/p>
+&lt;blockquote>
+&lt;p>Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days are 11 hours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.&lt;/p>
+&lt;p>You do get to attend sessions but you might not always get your first choice. This can be both a good and bad thing. Very often I have filled in on sessions that I normally wouldn’t attend as they are outside my direct area of work, only to find them the most interesting as I get to see how the other half lives.&lt;/p>
+&lt;p>So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is a 150 miles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.&lt;/p>
+&lt;p>All because of the of the experience that is being a volunteer.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sqldub" target="_blank" rel="noopener"
+>Conan Farrell&lt;/a>&lt;/p>
+&lt;p>![WP_20170406_10_33_15_Pro (2).jpg](&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg" target="_blank" rel="noopener"
+>https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I owe a lot to the SQL Community. It was at SQLBits a few years ago that someone convinced me to start speaking. That encouragement and acceptance from the #SQLFamily put into motion a series of events that lead to me &lt;a class="link" href="http://workingwithdevs.com/im-leaving-redgate/" target="_blank" rel="noopener"
+>quitting the best job of my life&lt;/a> last year in favour of &lt;a class="link" href="http://workingwithdevs.com/introducing-dlm-consultants-mission/" target="_blank" rel="noopener"
+>an adventure to set up my own company&lt;/a>. It’s been a wonderful journey and if it had not been for SQLBits (and SQL Relay, and SQL Saturdays, and others) I wouldn’t have taken it.&lt;/p>
+&lt;p>I have a debt to pay. And it’s wonderful to be able to contribute towards giving other people the same opportunities that the community has given me.&lt;/p>
+&lt;p>Also, for similar reasons, I recently joined the committee for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>. While I’ve been a sponsor and a speaker a lot before, I am fairly inexperienced at organising events. Helping out with the awesome SQLBits team has been a great learning curve. I hope to take what I have learned and apply it to my role for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>.&lt;/p>
+&lt;p>Finally, frankly, there are so many great people in the SQL Community it is just wonderful to be able to work with them during the day. (And share some beers with them in the evening!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/_AlexYates_" target="_blank" rel="noopener"
+>Alex Yates&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/alex2.jpg"
+loading="lazy"
+alt="alex2"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer at SQLBits and in the wider Data Platform community for various reasons. The community is the glue in our industry and being part of that glue is both a privilege and an honour. Without volunteers these awesome events couldn’t function and we couldn’t share knowledge as freely. There also would not be the same opportunities to network with such great people and experts in the same field. I am proud to be part of the SQL Family and facilitate the learning that being a volunteer offers to professionals just like me. Stronger together.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+>Paul Andrew&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_16_03_17_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_16_03_17_Pro (2).jpg"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>When I volunteered, I felt I’d like to give back to the SQL Community a bit of the much I’ve received from them. I wanted to become more engaged.
+I didn’t even dream it would be like this, the terrific team I found here was so great that I can barely wait for the next one.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/moliveira_xpto" target="_blank" rel="noopener"
+>Miguel Oliveira&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Volunteering gives you the experience of the effort &amp;amp; reward of running an event.. You build an appreciation of generating success, creating networks of colleagues and friends, being quick to react, and helps you walk away with the feeling of “I contributed to this”. Everyone should volunteer, even if its just once.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/benrebooted?lang=en" target="_blank" rel="noopener"
+>Ben Watt&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_09_31_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20170405_09_31_24_Pro (2).jpg"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>This year was my 10th sqlbits (remembering we skipped unlucky 13) and 7th I’ve been on the helping team for. I started helping when I learned my original conference companions were moving on to different technologies. Something I’ve never understood.&lt;/p>
+&lt;p>Historically I’ve worked in multiple companies as a lone dba, something I’ve found many at SQLBits can relate to. Through user groups and SQLBits I’ve met lots of others in the same boat over the years. It can be a frustrating job defending servers, implementing best practice and writing sql when all your application team want to do is add columns and ship the next release!&lt;/p>
+&lt;p>Yes, there are good networking opportunities and the parties are great but at the core is great quality training. I’ve had a great time playing a small part in helping deliver the experience over the years. Occasionally I have to shout about feedback forms or seating arrangements but on the whole folk are fine with it.  If I’m honest they are long days. A typical day involves a start and end meeting in addition to sessions you are monitoring. Add to that hotel commutes, catching up with the friends you made last year, meals, drinks etc and its 1am. Oh, and tomorrow’s meeting is 7.30 eek….&lt;/p>
+&lt;p>It’s been a great journey watching the progression of events. Each one adds to the last, they run a lot slicker now. The sponsors are first class and always embrace the theme with their stalls and giveaways. I do wish more folk would enter the prize draws and stop me winning though, it’s getting embarrassing now 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/r5d4" target="_blank" rel="noopener"
+>Richard Doering&lt;/a> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rich2.jpg"
+loading="lazy"
+alt="rich2"
+>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>The best Data Platform conference in Europe! I couldn’t miss the opportunity to be much more than just an attendee.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/DataHubert" target="_blank" rel="noopener"
+>Hubert Kobierzewski&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer for sqlbits, to get experience from a multi day event that has a lot of attendees. Lots of take aways to make local community events run smoother for the delegates.
+Thats my main reason&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/vestergaardj" target="_blank" rel="noopener"
+>Jens Vestergard&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>There is no way I could not use this next photo celebrate this years Most Valuable Helper.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_45_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20170407_20_45_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Thank you &lt;a class="link" href="https://twitter.com/wheeliedba" target="_blank" rel="noopener"
+>Shaun Atkinson&lt;/a> you were amazing and thank you for looking after my former intern James as a first time volunteer&lt;/p>
+&lt;h2 id="how-can-i-do-it-next-year">How can I do it next year?&lt;/h2>
+&lt;p>We always welcome new people to our team. If you would like to volunteer your time to help at the next SQLBits please send an email to &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with a subject of I would like to volunteer or something similar. Nearer the time of next years SQLBits (No I don’t know when or where it is, I will know when you do) the awesome, amazing, fantastic, brilliant, organising amazeballs also known as &lt;a class="link" href="https://twitter.com/mrs_fatherjack" target="_blank" rel="noopener"
+>Annette&lt;/a> will get in touch with you with further details&lt;/p>
+&lt;p>You can expect to have a lot of fun, make new friends and help make the best data platform conference the best data platform conference&lt;/p>
+&lt;p>Oh and sometimes theres free pizza 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_18_31_58_pro.jpg"
+loading="lazy"
+alt="WP_20170404_18_31_58_Pro"
+>&lt;/p>
+&lt;h2 id="another-thank-you">Another Thank You&lt;/h2>
+&lt;p>Some lovely people, (I am really sorry but I didn’t get everyones name) brought sweets, biscuits, cakes and other goodies for the crew. Thank you, they were very much appreciated.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170408_08_03_34_pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="pictures-because-smiles-">Pictures because smiles 🙂&lt;/h2>
+&lt;p>Not all of the volunteers wanted to give feedback publically but I had some cracking photos so I thought I would share them as well. Enjoy&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_22_41_36_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_51_50_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_12_55_59_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_05_52_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_43_45_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_37_17_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_16_52_49_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_09_57_06_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_12_48_46_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_16_05_06_pro.jpg"
+loading="lazy"
+>&lt;/p></description></item><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p>Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+>I wrote about using Power Bi to display my checkins&lt;/a>. I only started this in June and this is where I have been :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/swarm.png"
+loading="lazy"
+alt="swarm"
+>&lt;/p>
+&lt;p>I learnt about &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> and ended the year incorporating it into &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>. I also started using &lt;a class="link" href="https://github.com/SQLDBAWithABeard" target="_blank" rel="noopener"
+>GitHub&lt;/a> It is quite surprising to me how much time I now spend using both. I also had to start learning &lt;a class="link" href="https://msdn.microsoft.com/en-us/PowerShell/dsc/overview" target="_blank" rel="noopener"
+>DSC&lt;/a> for the client I was working with because as &amp;rsquo;the PowerShell guy&amp;rsquo; I was the one who could the easiest. I learnt things and &lt;a class="link" href="http://sqldbawithabeard.com/2016/01/31/PowerShell-pester-the-script-failed-due-to-call-depth-overflow/" target="_blank" rel="noopener"
+>then forgot them causing me to find this Pester post via google later in the year!!&lt;/a> (That&amp;rsquo;s a big reason for blogging by the way)&lt;/p>
+&lt;p>Early in the year we organised with &lt;a class="link" href="http://www.sqlsaturday.com/496/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section" target="_blank" rel="noopener"
+>https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>The Beard says&lt;/p>
+&lt;blockquote>
+&lt;p>When you go to an event -  Say thank you to the organisers and volunteers&lt;/p>
+&lt;/blockquote>
+&lt;p>and a TERRIBLE thing happened - I broke my DBA Team mug&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/WP_20160223_07_51_03_Pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Luckily the fine folk at &lt;a class="link" href="http://www.red-gate.com/" target="_blank" rel="noopener"
+>redgate&lt;/a> sorted me out with a replacement from deep in the stores somewhere and gave it to me at SQL Saturday Exeter :-) Thank you.&lt;/p>
+&lt;p>I spoke at the PowerShell Conference Europe and met and made some great friends which lead to me speaking at the PowerShell Monday in Munich and the Dutch PowerShell Usergroup. SQL Saturday Dublin was a blast, its a wonderful city, Manchester had a whole PowerShell Track :-) and Cambridge was memorable for the appalling journey as well as the chance to share a stage with &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy&lt;/a>. PowerShell Conference Asia in the sovereign city-state of Singapore was such a good event and place. Lastly of course was Slovenia with its fantastic Christmas lights and awesome event organisation. I visited some user groups too. Southampton run by my good friends &lt;a class="link" href="https://twitter.com/sqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> and &lt;a class="link" href="https://twitter.com/steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> Congratulations to John on his first MVP award yesterday, Cardiff for the Return of the Battle of the Beards with Terry McCann and Tobiasz Koprowski where the projector threw its toys out of the pram and Birmingham in the school hall which was slightly chilly (theres a joke there for some people)&lt;/p>
+&lt;p>Amazing things happened&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>And that&amp;rsquo;s the biggest and bestest thing about this year. Some amazing new friends and spending time with all my other friends. I started writing out a list but was terrified I would have missed someone out, so to all my friends&lt;/p>
+&lt;p>THANK YOU for a brilliant 2016 and 2017 shall be just as good :-)&lt;/p>
+&lt;p>Here are a few of my pics from the year with a lot of my friends&lt;/p>
+&lt;p>[gallery type=&amp;ldquo;circle&amp;rdquo; columns=&amp;ldquo;9&amp;rdquo; ids=&amp;ldquo;3082,3083,3084,3085,3086,3087,3088,3089,3090,3091,3092,3093,3094,3095,3096,3097,3098,3099,3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3133,3134,3077,3075,3074,3073,3067,3068,3069,3070,3071,3072,3066,3065,3064,3063,3062,3061,3055,3056,3057,3058,3059,3060,3054,3053,3052,3051,3050,3049,2943,2950,2897,2923,3046,2924,2927,3047,2933,3048&amp;rdquo;]&lt;/p></description></item><item><title>A Day In The Life of a SQLBits Volunteer</title><link>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</link><pubDate>Tue, 10 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" alt="Featured image of post A Day In The Life of a SQLBits Volunteer" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So SQLBits has finished for another year. About 1500 people registered for the largest SQL Conference in Europe held over 4 days in Liverpool last week. 2 days of full day sessions and 2 days of shorter sessions, a pub quiz, a party (literally) out of this world.&lt;/p>
+&lt;p>It is organised and run by volunteers&lt;/p>
+&lt;p>Yes, you’re right.&lt;/p>
+&lt;p>Wow.&lt;/p>
+&lt;p>Of course we must pay special thanks to Simon, Darren, Chris, Jonathan, Annette, Allan and Alex without forgetting all that JRJ has done. They ensured that the venue, sessions, speakers, sponsors, audio visual and not forgetting the amazing party by &lt;!-- raw HTML omitted -->Sneaky Experience (Thank you Julia),&lt;!-- raw HTML omitted --> all occurred at the right time in the right place with the right people and the work and effort they have put in cannot be over-estimated but this post isn’t about those generous, inspiring, amazing folk
+Several people asked me what a volunteer does and how they can become one and hopefully this post will answer both of those questions. More than 40 people volunteered to help at SQL Bits&lt;/p>
+&lt;p>Some volunteers arrived on Tuesday to help with the set up. Making sure that we knew where everything was and helping to lift and carry all of the things that needed moving.
+&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>We wanted to begin the process of packing the swag bags so that all the attendees on Wednesday could have them as they arrived but unfortunately we were let down by a delivery firm and that was not possible. That job was completed by some very dedicated helpers during all of Wednesday and finished off by all helpers after Wednesdays sessions had finished. Many, many thanks and respect particularly to Bob and Conan for their dedication to the bag-packing cause, although I did hear “If I ever see another bag again ……..”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>All of the registration desks with badges, lanyards and booklets were set up ready for the next day, the covers were put on the tables, the bean bags put out. (They were needed later!!)&lt;/p>
+&lt;p>We started every morning with a helpers briefing at 7am&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>where we ensured that everyone knew what was happening that day. Most helpers took some part in registration whether it was being at the desks handing out badges, assisting speakers and sponsors on arrival with questions and some the other jobs that needed doing such as putting the table cloths on the tables in the domes and getting out the bags.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>During every session there were two room monitors. Their responsibility was to ensure that everything went smoothly during the day and during each of the sessions on Friday and Saturday. They assisted the speaker with drinks, timings and the other foibles that technology can throw, they would have known what to do if there were issues with the domes.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They also made sure that everyone was in the correct session and answered lots of questions. The bit that hopefully most attendees missed was that in the case of any issues they called in one of the 5 or 6 super helpers who were patrolling the arena, who could go and get the AV guys or the venue staff to iron out the wrinkles, making sure that the water coolers got re-filled etc
+They took all of your feedback forms and took them to the main desk. There were always people at the front desk helping, although Alex, Annette and Terri spent almost all of their time there.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course it doesn’t stop there. During the breaks and particularly at lunchtime the helpers were available and indeed noticeable. They assisted with the queues at lunchtime and for the key-note&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>answered questions and they helped attendees with session choices. There were always people and questions that they were willing to answer or to find someone who could.
+Once the sessions had finished, the helpers didn’t. They manned and womanned the registration desks in the evening. Returned all of the feedback forms and helped with sorting out the venue ready for the next day. There was also a de-brief for any lessons learned.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They even gave out the free drinks tokens at the entrance to the party!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So why do they do it? They are all part of this amazing community dedicated to providing great events for people to learn. Many of them are volunteers at other events and/or user group leaders and attendees and want to give something back to the community.) . They were able to choose the full day and hour sessions that they attended so were still able to learn from the amazing speakers at the brilliant sessions available. Everyone was able to choose which days they helped it doesn’t have to be for every day you are at the conference. They are a wonderful group of people and I have made some fantastic friendships by volunteering and get great hugs 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You also get asked the most brilliant questions like “Excuse me, I have a Dalek in my van, what would you like me to do with it?”
+If that sounds like something you would like to do, you just need to email &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with ‘I would like to be a helper next year at SQLBits’ in the subject. You can also offer to help at your local user group or at other events, speak to your user group leaders for more details on that
+If it’s not for you, that’s cool but please, for me, the next time you see them at an event just say thank you. It really means a lot and they thoroughly deserve every word of thanks that we give them.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p>If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p>
+&lt;p>If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>https://ola.hallengren.com/&lt;/a>&lt;/p>
+&lt;p>You can also watch his presentation at SQLBits at this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+>http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a>&lt;/p>
+&lt;p>where he talks about and demonstrates the solution.&lt;/p>
+&lt;p>It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p>
+&lt;p>I particularly like the parameter @ChangeBackupType which when running the transaction log or differential backup will change the backup type to full if the backup type cannot be taken. This is excellent for picking up new databases and backing them up soon after creation&lt;/p>
+&lt;p>When you run the script the jobs are created but not scheduled and it is for this reason I created this function. All it does it schedule the jobs so that I know that they will be run when a new server is created and all the databases will be backed up. I can then go back at a later date and schedule them correctly for the servers workload or tweak them according to specific needs but this allows me that fuzzy feeling of knowing that the backups and other maintenance will be performed.&lt;/p>
+&lt;p>To accomplish this I pass a single parameter $Server to the function this is the connection string and should be in the format of &lt;code>SERVERNAME&lt;/code>, &lt;code>SERVERNAME\INSTANCENAME &lt;/code>or &lt;code>SERVERNAME\INSTANCENAME,Port&lt;/code>&lt;/p>
+&lt;p>I then create a &lt;code>$srv&lt;/code> SMO object as usual&lt;/p>
+&lt;p>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server $Server&lt;/code>&lt;/p>
+&lt;p>Create a JobServer object and a Jobs array which holds the Jobs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$JobServer = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Jobs = $JobServer.Jobs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And set the schedule for each job. I pick each Job using the Where-Object Cmdlet and break out if the job does not exist&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job = $Jobs|Where-Object {$_.Name -eq &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       if ($Job -eq $Null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       {Write-Output &amp;#34;No Job with that name&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">       break}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I create a Schedule object and set its properties and create the schedule&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Schedule = new-object Microsoft.SqlServer.Management.Smo.Agent.JobSchedule ($job, &amp;#39;Daily - Midnight ++ Not Sunday&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndDate = Get-Date -Month 12 -Day 31 -Year 9999
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveEndTimeOfDay = &amp;#39;23:59:59&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyTypes = &amp;#34;Weekly&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyRecurrenceFactor = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencySubDayTypes = &amp;#34;Once&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.FrequencyInterval = 126 # Weekdays 62 + Saturdays 64 - &amp;lt;a href=&amp;#34;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;#34;&amp;gt;https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx&amp;lt;/a&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.ActiveStartDate = get-date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$schedule.ActiveStartTimeOfDay = &amp;#39;00:16:00&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.IsEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Schedule.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>MSDN&lt;/a> which is always my first port of call when writing these scripts&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>WeekDays.Sunday = 1&lt;/li>
+&lt;li>WeekDays.Monday = 2&lt;/li>
+&lt;li>WeekDays.Tuesday = 4&lt;/li>
+&lt;li>WeekDays.Wednesday = 8&lt;/li>
+&lt;li>WeekDays.Thursday = 16&lt;/li>
+&lt;li>WeekDays.Friday = 32&lt;/li>
+&lt;li>WeekDays.Saturday = 64&lt;/li>
+&lt;li>WeekDays.WeekDays = 62&lt;/li>
+&lt;li>WeekDays.WeekEnds = 65&lt;/li>
+&lt;li>WeekDays.EveryDay = 127&lt;/li>
+&lt;/ul>
+&lt;p>Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.&lt;/p>
+&lt;/blockquote>
+&lt;p>It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.&lt;/p>
+&lt;p>You can tweak this script or use the code to work with any Agent Jobs and set the schedules accordingly and you can check that you have set the schedules correctly with this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">   $srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObserver = $srv.JobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $JObs = $JObserver.Jobs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $ActiveStartTimeOfDay = @{Name = &amp;#34;ActiveStartTimeOfDay&amp;#34;; Expression = {$_.JobSchedules.ActiveStartTimeOfDay}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyInterval = @{Name = &amp;#34;FrequencyInterval&amp;#34;; Expression = {$_.JobSchedules.FrequencyInterval}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $FrequencyTypes = @{Name = &amp;#34;FrequencyTypes&amp;#34;; Expression = {$_.JobSchedules.FrequencyTypes}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $IsEnabled = @{Name = &amp;#34;IsEnabled&amp;#34;; Expression = {$_.JobSchedules.IsEnabled}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">   $Jobs|Where-Object{$_.Category -eq &amp;#39;Database Maintenance&amp;#39;}|select name,$IsEnabled,$FrequencyTypes,$FrequencyInterval,$ActiveStartTimeOfDay|Format-Table -AutoSize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can get the script from Script Center via the link below or by searching for &amp;ldquo;Ola&amp;rdquo; using the &lt;a class="link" href="http://www.microsoft.com/en-us/download/details.aspx?id=42525?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>script browser add-in&lt;/a> straight from ISE&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/05/browser.jpg?w=300"
+loading="lazy"
+alt="browser"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Schedule-Ola-Hallengrens-a66a3c89&lt;/a>&lt;/p></description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>#TSQL2sDay Why My Head is Always in The Cloud</title><link>https://blog.robsewell.com/blog/tsql2sday-why-my-head-is-always-in-the-cloud/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-why-my-head-is-always-in-the-cloud/</guid><description>&lt;p>&lt;a class="link" href="http://www.sqlchicken.com/2013/11/t-sql-tuesday-48-cloud-atlas/" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/www.sqlchicken.com/wp-content/uploads/2013/11/20121003200545_thumb.jpg?resize=175%2C175"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Todays post is my first for the TSQL2sDay series. For those not familiar this is rotating blog party that was started by Adam Machanic &lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+>(@AdamMachanic&lt;/a> &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>blog&lt;/a>) back in 2009. If you want to catch up on all the fun to date check out this nice archive (&lt;a class="link" href="http://t.co/g3tzA9nP27" target="_blank" rel="noopener"
+>link&lt;/a>) put together by Steve Jones &lt;a class="link" href="http://twitter.com/way0utwest" target="_blank" rel="noopener"
+>(@way0utwest&lt;/a> &lt;a class="link" href="http://voiceofthedba.com/" target="_blank" rel="noopener"
+>blog&lt;/a>). Thank you Steve!!!&lt;/p>
+&lt;p>&lt;a class="link" href="http://owenrichardson.com/2011/07/07/cloud-computing/" target="_blank" rel="noopener"
+>&lt;img src="https://owenrichardson.files.wordpress.com/2011/07/wpid-photo-jul-7-2011-1738.jpg?w=432&amp;amp;h=650&amp;amp;resize=207%2C310"
+loading="lazy"
+alt="Azure Ballon - Credit http://owenrichardson.com/"
+>&lt;/a>&lt;/p>
+&lt;p>This one is hosted by Jorge Segarra &lt;a class="link" href="https://twitter.com/SQLChicken" target="_blank" rel="noopener"
+>@SQLChicken:&lt;/a>  &lt;a class="link" href="http://www.sqlchicken.com/2013/11/t-sql-tuesday-48-cloud-atlas/" target="_blank" rel="noopener"
+>who said&lt;/a> This month’s topic is all about the cloud. What’s your take on it? Have you used it? If so, let’s hear your experiences. Haven’t used it? Let’s hear why or why not? Do you like/dislike recent changes made to cloud services? It’s clear skies for writing! So let’s hear it folks, where do you stand with the cloud?&lt;/p>
+&lt;p>My wife would tell you that my head is always in the cloud and she’s right (she usually is) just not like that picture! I would love to float gracefully above the land and gaze upon the view but its the landing that bothers me and will always stop me from trying it&lt;/p>
+&lt;p>Credit &lt;a class="link" href="http://owenrichardson.com/" target="_blank" rel="noopener"
+>http://owenrichardson.com/&lt;/a>&lt;/p>
+&lt;p>She’s right, pedantically and literally too, because this year I have spent a lot of time with my head and my fingers and my thinking in &lt;a class="link" href="http://www.windowsazure.com/" target="_blank" rel="noopener"
+>Virtual Machines using Windows Azure&lt;/a>. That is where I have learnt a lot of my SQL and Powershell this year. After &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/12-things-i-learnt-at-sqlbits-xi/" target="_blank" rel="noopener"
+>SQL Bits in Nottingham&lt;/a> this year I have needed a place to practice and learn, an environment to try things and break things and mend them again and experiment.&lt;/p>
+&lt;p>I learn just as well by doing things as I do reading about them. Stuart Moore  &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>@napalmgram&lt;/a> has a great post called &lt;a class="link" href="http://stuart-moore.com/learning-play-sql-server/" title="http://stuart-moore.com/learning-play-sql-server/"
+target="_blank" rel="noopener"
+>Learning to Play with SQL Server&lt;/a> and whist I haven’t been as rough with my Azure SQL instances as he suggests I have been able to practice at will without worry and thanks to my MSDN subscription without cost. I have taken examples from blog posts and demos from User Group Sessions and run them on my Windows Azure VMs&lt;/p>
+&lt;p>Every single blog post I have written this year that has examples has been written in Azure and screen shots from Azure. Whilst some of my Powershell scripts in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+>PowerShell Box of Tricks&lt;/a> series had already been written to solve one particular problem or another at MyWork, every single one was refined and demo’d and all the screen shots were from Azure and several were developed on Azure too&lt;/p>
+&lt;p>My first ever session to the SQL South West user group was about &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>Spinning up and Shutting Down VMS in Azure&lt;/a> was about Azure and was an interesting experience in &lt;a class="link" href="http://en.wikipedia.org/wiki/Murphy%27s_law" target="_blank" rel="noopener"
+>Murphys Law&lt;/a> which meant I &lt;a class="link" href="https://blog.robsewell.com/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>ended up having to deliver it  on Azure&lt;/a>.&lt;/p>
+&lt;p>The second time I have talked was about the PowerShell Box of Tricks series to the Cardiff User Group. Having learnt my lesson from the first time I had bought a mini HDMI to VGA converter and I had tested it using a couple of monitors at home and it worked wonderfully. However, when I got to Cardiff my little Asus convertible didn’t provide enough grunt to power the funky presentation screen. Luckily thanks to Stuart Moore &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>@napalmgram&lt;/a> who was also there doing his &lt;a class="link" href="http://stuart-moore.com/category/31-days-of-sql-server-backup-and-restore-with-powershell/" target="_blank" rel="noopener"
+>excellent PowerShell Back Up and Restore Sessio&lt;/a>n who let me use his Mac I was able to deliver the session using Office Web App to run the PowerPoint from my SkyDrive whilst all the demos were on ………Yup you guessed it Windows Azure !!!&lt;/p>
+&lt;p>So I feel qualified to answer Jorge’s questions and take part in T-SQL Tuesday this time round.&lt;/p>
+&lt;p>I like Azure. I like the ease I can spin up and down machines or any PaaS services at will. I love that I can do it with PowerShell because I really enjoy using PowerShell in my day to day work and at home too. Living as I do in a beautifully convenient bungalow in the country, I still enjoy the frustration of watching that spinning ring as my videos buffer on our 1.8Mbs at best internet connection. Whilst that does have an impact on using Azure it is a damn sight better than waiting many days trying to download one single file. Something like an ISO file for the latest SQL Server CTP for example.&lt;/p>
+&lt;p>There is no way I would have got a look at SQL Server 2014 if it wasn’t for Azure. I was able to spin up a SQL Server 2014 machine in only a few minutes and log in and have a play and then delete it. I have done the same with Server 2012 and 2012 R2. It has enabled me to try setting up Availability Groups and other technologies not yet implemented at MyWork&lt;/p>
+&lt;p>I wouldn’t have been able to do any of that on my machines at home as I don’t have anything capable of running Hyper-V whilst this 8 year old desktop still keeps hanging on despite the odd noises. (Negotiations are currently in place to replace it with something shiny and new. &lt;a class="link" href="https://blog.robsewell.com/?p=513" target="_blank" rel="noopener"
+>Just need that lottery win now !!)&lt;/a>&lt;/p>
+&lt;p>I have also transferred my Cricket Averages database to WASD and am talking with a friend of mine about developing an app that will use the mobile service as well.&lt;/p>
+&lt;p>The rate of change is much quicker in the cloud, things change and change quickly. As quickly as I had written my post about &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>Spinning up and Shutting Down VMS in Azure&lt;/a> Microsoft changed the rules and didn’t charge for machines that were turned off. New services appear all the time. New services move quickly through from Preview to release and as &lt;a class="link" href="http://www.scarydba.com/2013/11/05/more-azure-goodies/" target="_blank" rel="noopener"
+>Grant Fritchey noticed this week&lt;/a> new views have been added to to Windows Azure SQL Database under the covers. I think this is something we are just going to have to live with. The scale of the cloud means it is much easier to test improvements at large scale and that means they can be released quicker.  It makes it more challenging to keep up I admit but it’s a constant drip of new things rather than a big bang all at once.&lt;/p>
+&lt;p>Azure has brought me to where I am today and I think it will continue to be part of my future. If I remember to submit my PowerShell session for SQL Saturday Exeter (&lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>Submit yours here&lt;/a>) and it gets chosen then you will be able to see me there &lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>(if you register here&lt;/a>) using Azure to give back to the SQL Community&lt;/p></description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p> &lt;/p>
+&lt;p>Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a> and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+>#SQLSatExeter&lt;/a> on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p>
+&lt;p>In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p>
+&lt;h4 id="sql-saturday-pre-cons-are-exceptional-value">SQL SATURDAY PRE-CONS ARE EXCEPTIONAL VALUE&lt;/h4>
+&lt;p>It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry &lt;a class="link" href="https://twitter.com/@mrdenny" target="_blank" rel="noopener"
+>@mrdenny&lt;/a>. The conversation went along the lines of&lt;/p>
+&lt;p>“I want to go to this training session being delivered by this guy. &lt;a class="link" href="https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link to MVP page&lt;/a>. It’s £150 and is in Exeter so no other costs required”&lt;/p>
+&lt;p>My boss – “OK”&lt;/p>
+&lt;p>Of course there was a little more fun and games to be had with the payment but it was easy for me to get training sorted and £150 is not going to break the training budget.&lt;/p>
+&lt;p>Looking back through my notes from the session today I realise quite how much I have taken from it into my role at work. I can’t really comment which and what though that wouldn’t be good security!!&lt;/p>
+&lt;p>I remember an enjoyable day with plenty of technical learning, a lot of questions and answers and plenty of laughs as well. But more than that was the opportunity to mix with other professionals and talk with them. During the breaks and at lunch there were plenty of opportunities to chew the fat, learn how others do things, make new friends and put faces to twitter handles. (NOTE : I do look pretty much like my &lt;a class="link" href="https://pbs.twimg.com/profile_images/75950380/n675059923_1450.jpg" target="_blank" rel="noopener"
+>twitter profile picture&lt;/a> so if you see me at SQL Community events I expect you to come up and say hi, that&amp;rsquo;s part of the benefit of attending these events, having a good natter)&lt;/p>
+&lt;p>Take a look at the end of this post for details of 2014 Pre-Cons&lt;/p>
+&lt;h4 id="sql-saturday--cant-get-cheaper-than-free">SQL SATURDAY – CAN’T GET CHEAPER THAN FREE&lt;/h4>
+&lt;p>SQL Saturdays are FREE&lt;/p>
+&lt;p>SQL Saturdays offer sessions from internationally renowned and local SQL speakers on subjects relevant to you and your job, your future career, your development plan or just to challenge yourself by learning about something outside of your comfort zone. For Nothing. Add in the networking opportunities, the prizes from the sponsors, (if you were at Exeter this year the beer and the pasty) and if you added it up its a sizeable investment in yourself, your career and your development (did I mention a free beer and pasty?)&lt;/p>
+&lt;p>NOT BAD FOR FREE!!&lt;/p>
+&lt;p>To enable that, SQL Saturday organisers have to go out and talk sponsors into putting their hands into their pockets. They will only do that if it is worthwhile to them. You can make it easier for the organisers by going and spending time with the sponsors during the breaks, chatting with them and giving them your details. Also, if you choose to use one of their products please tell the sponsors you spoke to them at a SQL Saturday. They are (usually) data professionals who will record that and use that to make future decisions which will we hope include sponsoring SQL Saturdays.&lt;/p>
+&lt;p>This year on the Saturday I went to the following sessions&lt;/p>
+&lt;p>A temporary fix for a short term problem by Ian Meade Advanced SQL Server 2012 HA and DR Architectures by Christian Bolton Busting common T-SQL myths by Dave Morrison Power View and the Cube by Régis Baccaro Natural Born Killers, performance issues to avoid by Richard Douglas Tracking server performance without slowing it down by Jonathan Allen which I also Room Monitored Increasing Business and IT collaboration by Chris Testa-O&amp;rsquo;Neill&lt;/p>
+&lt;p>It was a really good day. I learnt so much from all those knowledgeable and talented people. It really kicked me on in my development at work. I was able to take from each of those sessions and use that knowledge to do my job better and I made new friends and new contacts. Just going back to my notes today has reminded me of something that I need to look into for work.
+Some of the conversations I have had at events this year have been fascinating - learning how other people do the same thing you do in a completely different but equally valid way,  problem-solving with a different set and type of minds than the ones at MyWork, laughing at the same things and moaning about similar frustrations. All have been both entertaining and rewarding and I think are worth mentioning as things I enjoyed about going to SQL Community events this year and play a part in the reason I shall continue to go to them (Just hope my boss doesn&amp;rsquo;t read this and think he won’t have to pay as I will go anyway!)&lt;/p>
+&lt;p>It’s busy and hectic, the sessions come along thick and fast and there are lots of people around to talk to. I wish I had made use of the SQL Saturday mobile phone app and I definitely recommend researching ahead of time and planning your day out.&lt;/p>
+&lt;p>This years sessions have not been decided yet but I have seen some of the submissions and there are some fabulous sessions there. You could also submit a session yourself. Choosing the sessions will be tough, but we want to offer the opportunity to speak to as many people as possible both new and experienced speakers.&lt;/p>
+&lt;p>You can submit your sessions at this link &lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/callforspeakers.aspx&lt;/a>&lt;/p>
+&lt;h4 id="round-up-sql-saturday-exeter-why-wouldnt-you-come">ROUND-UP SQL SATURDAY EXETER WHY WOULDN’T YOU COME&lt;/h4>
+&lt;p>For a newbie, as I was last time, SQL Saturday Exeter was a revelation.&lt;/p>
+&lt;p>An opportunity to learn without spending thousands of my own or MyWorks money to sit in a lecture room and listen to a trainer.&lt;/p>
+&lt;p>A chance to develop my understanding in a friendly environment amongst my peers where I could ask questions.&lt;/p>
+&lt;p>A place to meet new people and build relationships who have helped me with situations at work throughout the year. I reckon I&amp;rsquo;m in credit already&lt;/p>
+&lt;p>This year I have attended SQL Bits and SQL Saturday Cambridge and this month I shall be at SQL Relay in Cardiff and in Bristol. That all started with SQL Saturday 194 in Exeter 2013&lt;/p>
+&lt;h4 id="what-about-next-years-sql-saturday-exeter">WHAT ABOUT NEXT YEARS SQL SATURDAY EXETER?&lt;/h4>
+&lt;p>Next years SQL Saturday in Exeter, SQL Saturday #269, will be held at the same place - &lt;a class="link" href="http://www.jurysinns.com/hotels/exeter" target="_blank" rel="noopener"
+>Jury’s Inn Hotel Exeter&lt;/a> on March 21/22nd 2014.&lt;/p>
+&lt;p>We had such amazing submissions for our pre-cons that we have had to find more rooms to be able to fit them all in.. You can see for yourself the quality of the sessions and speakers for SQL Saturday Exeter 2014 at the following link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>What do you think? I want to split myself into 8 and go to every one!&lt;/p>
+&lt;h4 id="what-should-you-do-now">WHAT SHOULD YOU DO NOW?&lt;/h4>
+&lt;p>I suggest that you should book Saturday 22nd March 2014 out in your calendar right this minute. Done that? Good.&lt;/p>
+&lt;p>Now go to this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/&lt;/a>&lt;/p>
+&lt;p>and register for FREE to attend and let us know &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a>&lt;/p>
+&lt;p>Next make yourself a coffee (Other beverages are available) and head to the pre-con page&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>This bit is up to you, the choice is hard. I can’t tell you which one of our eight fabulous sessions you want to go to. It’s not for me to say which amazing speaker you want to spend a day with for a bargain price but if you need further info please get in touch and we will try and help. Unfortunately our human cloning experiment is not stable enough to allow you to go to more than one!&lt;/p>
+&lt;p>Then, let me know you have done so and come and say hi when you are here.&lt;/p></description></item><item><title>Spinning up and shutting down Windows Azure Lab with Powershell</title><link>https://blog.robsewell.com/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/</link><pubDate>Tue, 14 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/</guid><description>&lt;p>So at SQL Bits I went to &lt;a class="link" href="http://sqlbits.com/Speakers/Chris_Testa-O_Neill" target="_blank" rel="noopener"
+>Chris Testa-O’Neill’s&lt;/a> session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!!&lt;/p>
+&lt;p>So I looked at &lt;a class="link" href="http://www.windowsazure.com/en-us/" target="_blank" rel="noopener"
+>Windows Azure&lt;/a> as a means of having some servers to play with. After watching &lt;a class="link" href="http://blogs.msdn.com/b/plankytronixx/archive/2013/03/19/video-explanation-of-pop-up-labs-in-the-cloud.aspx" target="_blank" rel="noopener"
+>this video&lt;/a> and then &lt;a class="link" href="http://channel9.msdn.com/Series/Windows-Azure-Virtual-Machines-and-Networking-Tutorials/Creating-Windows-Azure-Virtual-Machines-with-PowerShell" target="_blank" rel="noopener"
+>this video&lt;/a> I took the plunge and dived in.&lt;/p>
+&lt;p>After setting up my account I read a few blogs about Powershell and Windows Azure.&lt;/p>
+&lt;p>&lt;a class="link" href="http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/" target="_blank" rel="noopener"
+>http://adminian.com/2013/04/16/how-to-setup-windows-azure-powershell/&lt;/a>&lt;/p>
+&lt;p>Note – Here I only spin up extra small instances and don’t configure SQL as per Microsoft’s recommendations. I am only using these VMs for learning and talking at my user group your needs may be different&lt;/p>
+&lt;p>First you’ll need &lt;a class="link" href="http://www.microsoft.com/web/downloads/platform.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Microsoft Web Platform Installer&lt;/a>. Then download and install Windows Azure PowerShell,&lt;/p>
+&lt;pre>&lt;code>Import-Module c:\Program Files\Microsoft SDKs\Windows Azure\PowerShell\Azure\Azure.psd1
+&lt;/code>&lt;/pre>
+&lt;p>This gives you all the Windows Azure Powershell Cmdlets.&lt;/p>
+&lt;p>&lt;code>Get-AzurePublishSettingsFile&lt;/code> which will give you a download for a file.  PowerShell will use this to control your Windows Azure so although you need it now, keep it safe and probably out of your usual directories so it doesn’t get compromised.&lt;/p>
+&lt;p>&lt;code>Import-AzurePublishSettingsFile&lt;/code> and the file path to import it into Powershell.&lt;/p>
+&lt;p>&lt;code>Get-AzureSubscription&lt;/code> to see the results and note the subscription name.&lt;/p>
+&lt;p>Now we create a storage account&lt;/p>
+&lt;pre>&lt;code>New-AzureStorageAccount -StorageAccountName chooseaname -label 'a label' -Description 'The Storage Account for the Lab Spin Up and Down' -Location 'West Europe'
+&lt;/code>&lt;/pre>
+&lt;p>&lt;code>Get-AzureLocation &lt;/code>will show you the available locations if you want a different one.I then set the storage account to be default for my subscription&lt;/p>
+&lt;pre>&lt;code>Set-AzureSubscription -SubscriptionName 'Subscription Name from Earlier' -CurrentStorageAccount 'theoneyouchose'
+&lt;/code>&lt;/pre>
+&lt;p>I spent a couple of days sorting out the following scripts. They set up three SQL Servers, configure them to allow SSMS, Powershell and RDP connections and also remove them all. The reasoning behind this is that you will be charged for servers even when they are turned off&lt;/p>
+&lt;p>First we set some variables&lt;/p>
+&lt;pre>&lt;code>$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2'
+$SQL3 = 'SQL3'
+$size = 'ExtraSmall'
+$AdminUser = 'ChoosePCAdminName'
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose'
+$Location = 'West Europe'
+&lt;/code>&lt;/pre>
+&lt;p>To choose an image run &lt;code>Get-AzureVMImage|select name&lt;/code> and pick the one for you. I chose a size of extra small as it is cheaper. As I won’t be pushing the servers very hard I don’t need any extra grunt. Set up a service the first time and use the location switch but then to use the same service again remove the location switch otherwise you will get an error stating DNS name already in use which is a little confusing until you know.&lt;/p>
+&lt;pre>&lt;code>$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57502 -LocalPort 1433|
+Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986\
+&lt;/code>&lt;/pre>
+&lt;p>This creates a VM object and adds two endpoints for the server, one for Powershell and one for SSMS. When you provision more than one server you will need to make sure you use a different Public Port for each server otherwise you will get an error. You will need to note which server has which port when you need to connect with SSMS.&lt;/p>
+&lt;p>Once you have your VM object just pass it to New-AzureVM as shown&lt;/p>
+&lt;pre>&lt;code>New-AzureVM -ServiceName $Service -VMs $vm
+&lt;/code>&lt;/pre>
+&lt;p>Providing you have no errors you can then just wait until you see this.&lt;/p>
+&lt;p>&lt;a class="link" href="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb1.png" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/image_thumb_thumb.png"
+loading="lazy"
+alt="image_thumb"
+>&lt;/a>&lt;/p>
+&lt;p>It will take a few minutes. Long enough to get a cuppa. Even then you won’t be able to connect straightaway as Azure will be provisioning the server still.&lt;/p>
+&lt;p>The next bit of the script downloads the RDP shortcut to a folder on the desktop and assigns a variable for the clean up script. I use this because the next time you spin up a server it may not use exactly the same port for RDP.&lt;/p>
+&lt;pre>&lt;code>$SQL1RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&amp;quot;
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
+Invoke-Expression $SQL1RDP
+&lt;/code>&lt;/pre>
+&lt;p>The &lt;code>Invoke-Expression&lt;/code> will open up a RDP connection but unless you have gone to get a cuppa I would check in your management portal before trying to connect as the server may still be provisioning. In fact,I would go to your Windows Azure Management Portal and check your virtual machine tab where you will see your VMs being provisioned&lt;/p>
+&lt;p>Now you have three servers but to be able to connect to them from your desktop and practice managing them you still need to do a bit of work. RDP to each server run the following script in Powershell.&lt;/p>
+&lt;pre>&lt;code># Configure PowerShell Execution Policy to Run all Scripts – It’s a one time Progress
+Set-ExecutionPolicy –ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes\
+&lt;/code>&lt;/pre>
+&lt;p>I use netsh advfirewall as I find it easy and I understand it. I know you can do it with &lt;code>Set-NetFirewallProfile&lt;/code> but that’s the beauty of Powershell you can still use all your old cmd knowledge as well. This will allow you to remote manage the servers. You can do it from your laptop with the creation of some more endpoints but I just use one server as a management server for my learning.&lt;/p>
+&lt;p>The last part of the script changes SQL to Mixed authentication mode and creates a SQL user with sysadmin and restarts the SQL service on each server and that’s it. Its ready to go.&lt;/p>
+&lt;p>Open up SSMS on your desktop and connect to &lt;code>YourServiceName.Cloudapp.Net, PortNumber&lt;/code> (57500-5702 in this example)
+To remove all of the implementation run the code that is commented out in steps. First it assigns a variable to each VHD, then it removes the VM. You should then wait a while before removing the VHDs as it takes a few minutes to remove the lease and finally remove the RDP shortcuts as next time they will be different.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.NOTES
+Name: CreateLab.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires: Get the Windows Azures CmdLets then run this
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+This script will create 3 Windows Azure SQL Servers and open up RDP connections
+ready for use. There is also the scripts to remove the Windows Azure Objects to save on
+usage costs
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+# Get the Subscription File and Import it
+Get-AzurePublishSettingsFile
+Import-AzurePublishSettingsFile FilepathtoPublishSettingsFile
+&amp;lt;# Run this once to set up a Storage Account
+New-AzureStorageAccount -StorageAccountName storageaccountname -location 'West Europe' -Label 'Storage Account for My Lab'
+#&amp;gt;
+Get-AzureSubscription #Note the name
+#Set the storage account to the subscription
+Set-AzureSubscription -SubscriptionName SubscriptionName -CurrentStorageAccount storageaccountname
+#Some variables
+# Use Get-AzureVMimage to find the one you want ie Get-AzureVMImage | where { ($_.ImageName -like &amp;quot;*SQL*&amp;quot;) }|select ImageName
+$image = 'fb83b3509582419d99629ce476bcb5c8__Microsoft-SQL-Server-2012SP1-Standard-CY13SU04-SQL11-SP1-CU3-11.0.3350.0-B'
+$SQL1 = 'SQL1'
+$SQL2 = 'SQL2'
+$SQL3 = 'SQL3'
+$size = 'ExtraSmall'
+$AdminUser = 'ChoosePCAdminName'
+$password = 'SUPERCOMpl1c@teDPassword'
+$Service = 'theservicenameyouchoose'
+$Location = 'West Europe'
+&amp;lt;# Run this the first time to create a Service
+New-AzureService -ServiceName $Service -Location $Location -Label 'SQLDBA with a Beard Service'
+#&amp;gt;
+#Configure the VMs
+$vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows|
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57500 -LocalPort 1433
+$vm2 = New-AzureVMConfig -Name $SQL2 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57501 -LocalPort 1433
+$vm3 = New-AzureVMConfig -Name $SQL3 -InstanceSize $size -ImageName $image |
+Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
+Add-AzureEndpoint -Name &amp;quot;SQL&amp;quot; -Protocol &amp;quot;tcp&amp;quot; -PublicPort 57502 -LocalPort 1433|
+Add-AzureEndpoint -Name PS-HTTPS -Protocol TCP -LocalPort 5986 -PublicPort 5986
+#Provision the VMs
+New-AzureVM -ServiceName $Service -VMs $vm, $vm2,$vm3
+# Get the RDP Files
+$SQL1RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL1.rdp&amp;quot;
+$SQL2RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL2.rdp&amp;quot;
+$SQL3RDP = &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\$SQL3.rdp&amp;quot;
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL2 -LocalPath $SQL2RDP
+Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL3 -LocalPath $SQL3RDP
+# Open the RDP Fies - Check the machine is up in your Management Portal
+Invoke-Expression $SQL1RDP
+Invoke-Expression $SQL2RDP
+Invoke-Expression $SQL3RDP
+# Now run the SetupVM script for each server
+&amp;lt;#
+This is the clean up script to remove the servers and services
+Run this first
+$SQL1Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL1}
+$SQL2Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL2}
+$SQL3Disk = Get-AzureDisk|where {$_.attachedto.rolename -eq $SQL3}
+#Then This
+Remove-AzureVM -Name $SQL1 -ServiceName $Service
+Remove-AzureVM -Name $SQL2 -ServiceName $Service
+Remove-AzureVM -Name $SQL3 -ServiceName $Service
+Then wait a while and run this
+$SQL1Disk|Remove-AzureDisk -DeleteVHD
+$SQL2Disk|Remove-AzureDisk -DeleteVHD
+$SQL3Disk|Remove-AzureDisk -DeleteVHD
+#Remove-AzureService $Service
+Get-ChildItem &amp;quot;$ENV:userprofile\Desktop\Azure\RDP\*.rdp&amp;quot;|Remove-Item
+#&amp;gt;
+&amp;lt;#
+This is the clean up script for variables
+Remove-Variable [a..z]* -Scope Global
+Remove-Variable [1..9]* -Scope Global
+#&amp;gt;
+.NOTES
+Name: SetUpVMSQL1.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+This script will set up the SQL1 VM ready for use and enable SQL Authentication
+Add a user called SQLAdmin with a password of P@ssw0rd
+Restart SQL Service.Run on SQL1
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL1'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force\
+&amp;lt;#
+.NOTES
+Name: SetUpVMSQL2.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+#############################################################################################
+#
+# NAME: SetupVMSQL2.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL1 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# Restart SQL Service
+# ------------------------------------------------------------------------
+# Run on SQL2
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL2'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force\
+&amp;lt;#
+.NOTES
+Name: SetUpVMSQL3.ps1
+Author: Rob Sewell https://blog.robsewell.com
+Requires:
+Version History:
+Added New Header 23 August 2014
+.SYNOPSIS
+.DESCRIPTION
+.PARAMETER
+.PARAMETER
+.PARAMETER
+.EXAMPLE
+#&amp;gt;
+#############################################################################################
+#
+# NAME: SetupVMSQL3.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:10/05/2013
+#
+#
+# COMMENTS: This script will set up the SQL3 VM ready for use and enable SQL Authentication
+# Add a user called SQLAdmin with a password of P@ssw0rd
+# and enable PS Remoting
+# Restart SQL Service
+# ------------------------------------------------------------------------
+# Run on SQL3
+# Configure PowerShell Execution Policy to Run all Scripts � It�s a one time Progress
+Set-ExecutionPolicy �ExecutionPolicy Unrestricted
+netsh advfirewall firewall add rule name=SQL-SSMS dir=in action=allow enable=yes profile=any
+netsh advfirewall firewall add rule name=SQL-SSMS dir=out action=allow program=any enable=yes profile=any
+netsh advfirewall firewall set rule group=&amp;quot;Remote Administration&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;File and Printer Sharing&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Service Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Performance Logs and Alerts&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Event Log Management&amp;quot; new enable=yes
+Netsh advfirewall firewall set rule group=&amp;quot;Remote Scheduled Tasks Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Volume Management&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Remote Desktop&amp;quot; new enable=yes
+netsh advfirewall firewall set rule group=&amp;quot;Windows Firewall Remote Management&amp;quot; new enable =yes
+netsh advfirewall firewall set rule group=&amp;quot;windows management instrumentation (wmi)&amp;quot; new enable =yes
+#Extra one for PS Remoting
+netsh advfirewall firewall add rule name=&amp;quot;Port 5986&amp;quot; dir=in action=allow protocol=TCP localport=5986
+# To Load SQL Server Management Objects into PowerShell
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMO�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SMOExtended�) | out-null
+[System.Reflection.Assembly]::LoadWithPartialName(�Microsoft.SqlServer.SqlWmiManagement�) | out-null
+SQLPS
+$Name = 'SQL3'
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+EXEC xp_instance_regwrite N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode', REG_DWORD, 2
+GO
+&amp;quot;
+Invoke-Sqlcmd -ServerInstance $Name -Database master -Query &amp;quot;USE [master]
+GO
+CREATE LOGIN [SQLAdmin] WITH PASSWORD=N'P@ssw0rd', DEFAULT_DATABASE=[master]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SQLAdmin]
+GO
+&amp;quot;
+get-Service -ComputerName $Name -Name MSSQLSERVER|Restart-Service -force
+Enable-PSRemoting -force
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item><item><title>Powershell won’t save when running as a scheduled job</title><link>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</guid><description>&lt;h3 id="or-how-sqlbits-put-me-in-touch-with-laerte-and-solved-a-problem">Or, How SQLBits put me in touch with Laerte and solved a problem&lt;/h3>
+&lt;p>I have a scheduled Powershell job which I use to create an Excel file colour coded for backup checks. (I will blog about it another time) It works brilliantly on my desktop and saves the file to a UNC path and emails the team the location. It works brilliantly when run in Powershell on the server. When I schedule it to run though it doesn’t do so well. The job completes without errors but no file is saved.&lt;/p>
+&lt;p>If you examine the processes running at the time you can see the excel process is running  so I knew it was doing something but couldn’t work out why it was failing.&lt;/p>
+&lt;p>It was one of those jobs that gets put to the bottom of the list because the service worked ok I just needed to have it running on the server rather than a desktop for resilience, recovery and security purposes. Every now and then I would try and work out what was going on but new work and new problems would always arrive and it has been like that for 6 or maybe even 9 months.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/12-things-i-learnt-at-sqlbits-xi/" target="_blank" rel="noopener"
+>As you know&lt;/a> I attended SQLBits this weekend and I went into a session with Laerte Junior. Laerte is a SQL Server MVP and can be found at &lt;a class="link" href="https://www.simple-talk.com/author/laerte-junior/" target="_blank" rel="noopener"
+>simple-talk&lt;/a> as well as his own blog &lt;a class="link" href="http://shellyourexperience.com/" target="_blank" rel="noopener"
+>http://shellyourexperience.com/&lt;/a> or on twitter &lt;a class="link" href="https://twitter.com/LaerteSQLDBA" target="_blank" rel="noopener"
+>@LaerteSQLDBA&lt;/a> Oh and He loves Star Wars 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1_thumb.jpg?resize=168%2C223"
+loading="lazy"
+alt="Laerte_Junior[1]"
+>&lt;/a>After a fascinating session I asked him if I could show him my problem. He very graciously said yes and after looking at the code and listening to me explain the problem he suggested this very simple solution which he said had taken him a great deal of searching to find. It’s a bug with COM objects and requires the creation of folders as shown below. I cam into work today, tried it and it worked. HOORAY another thing off my list and big thanks to Laerte&lt;/p>
+&lt;pre>&lt;code>#Region Bug_Jobs_ComObjects #(32Bit, always)
+# Create Folder #
+New-Item –name C:\Windows\System32\config\systemprofile\Desktop  –itemtype directory
+# #(64Bit)
+# Create folder #
+New-Item –name C:\Windows\SysWOW64\config\systemprofile\Desktop  –itemtype directory
+#EndRegion Bug_Jobs_ComObjects
+&lt;/code>&lt;/pre>
+&lt;p>This worked for me however I had already implemented another fix for a possible gotcha so I will tell you of that one too&lt;/p>
+&lt;p>Sometimes Powershell cannot save to UNC paths because of  IE enhanced security.&lt;/p>
+&lt;p>Either log in as user and add server to intranet site zones or disable the warning in registry as follows&lt;/p>
+&lt;pre>&lt;code>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap] &amp;quot;UNCAsIntranet&amp;quot;=dword:00000000
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item></channel></rss>
