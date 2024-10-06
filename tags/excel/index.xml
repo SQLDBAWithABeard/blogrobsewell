@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Excel on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/excel/</link><description>Recent content in Excel on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/excel/index.xml" rel="self" type="application/rss+xml"/><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Taking dbatools Test-DbaLastBackup a little further</title><link>https://blog.robsewell.com/blog/taking-dbatools-test-dbalastbackup-a-little-further/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/taking-dbatools-test-dbalastbackup-a-little-further/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>VS Code PowerShell Snippets</title><link>https://blog.robsewell.com/blog/vs-code-powershell-snippets/</link><pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/vs-code-powershell-snippets/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</link><pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</guid><description>&lt;p>Following on from my &lt;a class="link" href="http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/" title="Parsing XML Child Nodes and Converting to DateTime with PowerShell"
+target="_blank" rel="noopener"
+>previous pos&lt;/a>t about parsing XML where I used the information from &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+>Steve Jones blog post&lt;/a> to get information from the &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+>SQL Saturday web site&lt;/a> I thought that this information and script may be useful for others performing the same task.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.&lt;/p>
+&lt;p>We are looking at using &lt;a class="link" href="https://guidebook.com/" target="_blank" rel="noopener"
+>the Guidebook app&lt;/a> to provide an app for our attendees with all the session details for &lt;a class="link" href="https://www.sqlsaturday.com/372" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>The Guidebook admin website requires the data for the sessions in a certain format. You can choose CSV or XLS.&lt;/p>
+&lt;p>In the admin portal you can download the template&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg?w=300"
+loading="lazy"
+alt="down"
+>&lt;/a>&lt;/p>
+&lt;p>which gives an Excel file like this&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg?w=300"
+loading="lazy"
+alt="-excel"
+>&lt;/a>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>So now all we need to do is to fill it with data.&lt;/p>
+&lt;p>I have an Excel Object Snippet which I use to create new Excel Objects when using PowerShell to manipulate Excel. Here it is for you. Once you have run the code you will be able to press CTRL + J and be able to choose the New Excel Object Snippet any time.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$snippet = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Title = &amp;#34;New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description = &amp;#34;Creates a New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Text = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a .com object for Excel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl = new-object -comobject excel.application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.Visible = \`$true # Set this to False when you run in production
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb = \`$xl.Workbooks.Add() # Add a workbook
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$ws = \`$wb.Worksheets.Item(1) # Add a worksheet
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells=\`$ws.Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Do Some Stuff
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">perhaps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col)=&amp;#34;Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col).font.size=16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$Cells.item(\`$row,\`$col).Columnwidth = 10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb.Saveas(&amp;#34;C:\temp\Test\`$filename.xlsx&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.quit()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-IseSnippet @snippet
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I needed to change this to open the existing file by using&lt;/p>
+&lt;p>&lt;code>$wb = $xl.Workbooks.Open($GuideBookPath)&lt;/code>&lt;/p>
+&lt;p>In the more help tab of the Excel workbook it says&lt;/p>
+&lt;blockquote>
+&lt;!-- raw HTML omitted -->
+&lt;/blockquote>
+&lt;p>So we need to do some manipulation of the data we gather. As before I selected the information from the XML as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Speaker = @{Name=&amp;#34;Speaker&amp;#34;; Expression = {$_.speakers.speaker.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = @{Name=&amp;#34;Room&amp;#34;; Expression = {$_.location.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$startTime = @{Name=&amp;#34;StartTime&amp;#34;; Expression = {[datetime]($_.StartTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Endtime = @{Name =&amp;#34;EndTime&amp;#34;; Expression = {[datetime]($_.EndTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Talks = $Sessions.event|Where-Object {$_.title -ne &amp;#39;Coffee Break&amp;#39; -and $_.title -ne &amp;#39;Room Change&amp;#39; -and $_.title -ne &amp;#39;Lunch Break&amp;#39; -and $_.title -ne &amp;#39;Raffle and Cream Tea&amp;#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then looped through the $Talks array and wrote each line to Excel like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($Talk in $Talks)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Date = $Talk.StartTime.ToString(&amp;#39;MM/dd/yyyy&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Start = $talk.StartTime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$End = $Talk.Endtime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Title = $Talk.Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Description = $Talk.Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = $Talk.Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $End
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I know that I converted the String to DateTime and then back to a String again but that was the easiest (quickest) way to obtain the correct format for the Excel file&lt;/p>
+&lt;p>Then to finish save the file and quit Excel&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$wb.Save()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.quit()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then you upload the file in the Guidebook admin area &lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg?w=300"
+loading="lazy"
+alt="import"
+>&lt;/a>&lt;/p>
+&lt;p>wait for the email confirmation and all your sessions are available in the guidebook&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg?w=300"
+loading="lazy"
+alt="sched"
+>&lt;/a>&lt;/p>
+&lt;p>I hope that is useful to others. The full script is below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">## From http://www.sqlservercentral.com/blogs/steve_jones/2015/01/26/downloading-sql-saturday-data/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">372&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">baseURL&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">www&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sqlsaturday&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">eventxml&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">aspx&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="n">sat&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">DestinationFile&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">E&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">SQLSatData&lt;/span>\&lt;span class="n">SQLSat&lt;/span>&lt;span class="err">”&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">xml&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">GuideBookPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;C:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s1">emp\Guidebook_Schedule_Template.xls&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">sourceURL&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">baseURL&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Xml&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">XmlDocument&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">sourceURL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">DestinationFile&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Sessions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GuidebookXML&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">events&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Speaker&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Speaker&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">speakers&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">speaker&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Room&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">location&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">startTime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;StartTime&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="p">)}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Endtime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;EndTime&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">EndTime&lt;/span>&lt;span class="p">)}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Talks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Sessions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">event&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">Where&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Coffee Break&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Room Change&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Lunch Break&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Raffle and Cream Tea&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">|&lt;/span> &lt;span class="n">select&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Speaker&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Starttime&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Endtime&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">Title&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">|&lt;/span>&lt;span class="n">Sort&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="n">StartTime&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a .com object for Excel&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">object&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">comobject&lt;/span> &lt;span class="n">excel&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Visible&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span> &lt;span class="c1"># Set this to False when you run in production&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Workbooks&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">GuideBookPath&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Worksheets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cells&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="c1"># To clear that entry&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="c1"># To clear that entry&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talks&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MM/dd/yyyy&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hh:mm tt&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">End&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Endtime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hh:mm tt&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Title&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Room&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Date&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Start&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">End&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Save&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">quit&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell</title><link>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</link><pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png" alt="Featured image of post Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell" />&lt;p>So you have read up on VLFs&lt;/p>
+&lt;p>No doubt you will have read &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/transaction-log-vlfs-too-many-or-too-few/" target="_blank" rel="noopener"
+>this post by Kimberly Tripp&lt;/a> and this &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/8-steps-to-better-transaction-log-throughput/" target="_blank" rel="noopener"
+>one&lt;/a> and maybe &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/sql-server-transaction-log-fragmentation-a-primer/" target="_blank" rel="noopener"
+>this one too&lt;/a> and you want to identify the databases in your environment which have a large number of VLFs and also the initial size and the autogrowth settings of the log files.&lt;/p>
+&lt;p>There are several posts about this and doing this with PowerShell &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/monitoring-sql-server-virtual-log-file-fragmentation/" target="_blank" rel="noopener"
+>like this one&lt;/a> or &lt;a class="link" href="http://www.youdidwhatwithtsql.com/audit-vlfs-on-your-sql-server/1358/" target="_blank" rel="noopener"
+>this one&lt;/a>. As is my wont I chose to output to Excel and colour code the cells depending on the number of VLFs or the type of Autogrowth.&lt;/p>
+&lt;p>There is not a pure SMO way of identifying the number of VLFs in a log file that I am aware of and it is simple to use DBCC LOGINFO to get that info.&lt;/p>
+&lt;p>I also wanted to input the autogrowth settings, size, space used, the logical name and the file path. I started by getting all of my servers into a $Servers Array as follows&lt;/p>
+&lt;pre>&lt;code>$Servers = Get-Content 'PATHTO\sqlservers.txt'
+&lt;/code>&lt;/pre>
+&lt;p>Whilst presenting at the Newcastle User Group, Chris Taylor &lt;a class="link" href="http://chrisjarrintaylor.co.uk/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sqlgeordie" target="_blank" rel="noopener"
+>t&lt;/a> asked a good question. He asked if that was the only way to do this or if you could use your DBA database.&lt;/p>
+&lt;p>It is much better to make use of the system you already use to record your databases. It will also make it much easier for you to be able to run scripts against more specific groups of databases without needing to keep multiple text files up to date. You can accomplish this as follows&lt;/p>
+&lt;pre>&lt;code>$Query = 'SELECT Name FROM dbo.databases WHERE CONDITION meets your needs'
+$Servers = Invoke-Sqlcmd -ServerInstance MANAGEMENTSERVER -Database DBADATABASE -Query $query
+&lt;/code>&lt;/pre>
+&lt;p>I then create a foreach loop and a server SMO object (Did you read my &lt;a class="link" href="https://blog.robsewell.com/powershell-snippets-a-great-learning-tool" target="_blank" rel="noopener"
+>blog post&lt;/a> about snippets? the code for a SMO Server snippet is there) returned the number of rows for DBCC LOGINFO and the information I wanted.&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>It’s not very pretty or particularly user friendly so I decided to put it into Excel&lt;/p>
+&lt;p>I did this by using my Excel Snippet&lt;/p>
+&lt;pre>&lt;code> $snippet = @{
+Title = 'Excel Object';
+Description = 'Creates a Excel Workbook and Sheet';
+Text = @'
+# Create a .com object for Excel
+`$xl = new-object -comobject excel.application
+`$xl.Visible = `$true # Set this to False when you run in production
+`$wb = `$xl.Workbooks.Add() # Add a workbook
+`$ws = `$wb.Worksheets.Item(1) # Add a worksheet
+`$cells=`$ws.Cells
+#Do Some Stuff - perhaps -
+`$cells.item(`$row,`$col)=`'Server`'
+`$cells.item(`$row,`$col).font.size=16
+`$Cells.item(`$row,`$col).Columnwidth = 10
+`$col++
+`$wb.Saveas(`'C:\temp\Test`$filename.xlsx`')
+`$xl.quit()
+Stop-Process -Name EXCEL
+'@
+}
+New-IseSnippet @snippet
+&lt;/code>&lt;/pre>
+&lt;p>and placed the relevant bits into the foreach loop&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$VLF = $DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$logFile = $db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+$Name = $DB.name
+$cells.item($row,$col)=$Server
+$col++
+$cells.item($row,$col)=$Name
+$col++
+$cells.item($row,$col)=$VLF
+$col++
+$col++
+$Type = $logFile.GrowthType.ToString()
+$cells.item($row,$col)=$Type
+$col++
+$cells.item($row,$col)=($logFile.Size)
+$col++
+$cells.item($row,$col)=($logFile.UsedSpace)
+$col++
+$cells.item($row,$col)=$logFile.Name
+$col++
+$cells.item($row,$col)=$logFile.FileName
+&lt;/code>&lt;/pre>
+&lt;p>I had to use the &lt;code>ToString()&lt;/code> method on the Type property to get Excel to display the text. I wanted to set the colour for the VLF cells to yellow or red dependant on their value and the colour of the growth type cell to red if the value was Percent. This was achieved like this&lt;/p>
+&lt;pre>&lt;code>if($VLF -gt $TooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 6 # Yellow
+}
+if($VLF -gt $WayTooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 # Red
+}
+if($Type -eq 'Percent')
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 #Red
+}
+&lt;/code>&lt;/pre>
+&lt;p>I also found &lt;a class="link" href="http://theolddogscriptingblog.wordpress.com/2010/06/01/powershell-excel-cookbook-ver-2/" target="_blank" rel="noopener"
+>this excellent post&lt;/a> by which has many many snippets of code to work with excel sheets.&lt;/p>
+&lt;p>I used&lt;/p>
+&lt;pre>&lt;code>$cells.item($row,$col).HorizontalAlignment = 3 #center
+$cells.item($row,$col).HorizontalAlignment = 4 #right
+$ws.UsedRange.EntireColumn.AutoFit()
+&lt;/code>&lt;/pre>
+&lt;p>although I had to move the Title so that it was after the above line so that it looked ok.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/wp-content/uploads/2014/10/image.png" target="_blank" rel="noopener"
+>&lt;br>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;br>
+&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Number-of-VLFs-and-7ee0182a" target="_blank" rel="noopener"
+>You can find the script here.&lt;/a> As always test it somewhere safe first, understand what it is doing and any questions get in touch.&lt;/p></description></item><item><title>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</title><link>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</link><pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png" alt="Featured image of post How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell" />&lt;h2 id="editors-note">Editors Note
+&lt;/h2>&lt;p>This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)&lt;/p>
+&lt;h1 id="original-post">Original Post
+&lt;/h1>&lt;p>Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked. In a large estate this can be very time consuming and if done manually prone to human error. I have repeatedly mentioned &lt;!-- raw HTML omitted -->John Sansoms Blog Post entitled “The Best DBAs Automate Everything” &lt;!-- raw HTML omitted -->and I follow that advice. Today I will share with you one fo the first scripts that I wrote.&lt;/p>
+&lt;p>When I started as a DBA I was told that my first job every morning was to check the Agent Jobs and resolve any errors. This is still something I do first before anything else. (Except coffee, experience has taught me that you get your coffee before you log into your computer otherwise on the bad days you can miss out on coffee for many an hour) I have two scripts to do this. The first sends me an email if the number of failed jobs on a server is greater than zero. This helps me to quickly and simply identify where to start in the case of multiple failures and is also a backup to the second script.&lt;/p>
+&lt;p>The second script runs on a different server and creates an excel worksheet and colour codes it. This makes it very simple to quickly scroll through the sheet and spot any red cells which designate failed jobs and also provides a nice easy to understand method to show management that on that specific day everything went well (or badly)&lt;/p>
+&lt;p>As with any Powershell script which manipulates Office applications you first need to create an object and add the workbook and worksheet to it. I also set a filename date variable and a Date variable for the Sheet.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu1.png"
+loading="lazy"
+alt="howicheckhu1"
+>&lt;/a>&lt;/p>
+&lt;p>When you use Powershell to manipulate Excel you can access individual cells by identifying them by Row and Column. I use this to create a description for the work book as follows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu2.png"
+loading="lazy"
+alt="howicheckhu2"
+>&lt;/a>&lt;/p>
+&lt;p>There are lots of properties that you can play with within Excel. As with any Powershell the best way to find what you need is to use the &lt;code>Get-Member&lt;/code> Cmdlet. If you run&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">($cells.item(1,3)|Get-Member).Count
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You will see that there are 185 Methods and Properties available to you (in Office 2013 on Windows 8.1)
+The snippet above creates the following&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu3.png"
+loading="lazy"
+alt="howicheckhu3"
+>&lt;/a>&lt;/p>
+&lt;p>As you can see we are going to colour code the Job Status according to the three available results Successful, Failed and Unknown. We are also going to colour code the date column to see when the job was last run, this will enable you to easily identify if the last time the job ran it was successful but last night it didn’t kick off for some reason.&lt;/p>
+&lt;p>The next step is a fairly standard loop through available servers by picking them from a SQLServers text file, a list of the server names (ServerName\Instance if required) that you wish to check. You could also just create an array of server names or pick them from a table with &lt;code>Invoke-SQLCmd&lt;/code> but which ever way you do it you need to be able to iterate through the array and then the &lt;code>.Jobs&lt;/code> Collection in the &lt;code>JobServer&lt;/code> Namespace as follows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu4.png"
+loading="lazy"
+alt="howicheckhu4"
+>&lt;/a>&lt;/p>
+&lt;p>What the script then does is to use the following properties of the &lt;code>$Job&lt;/code> object and write the Excel File according to the logic in the description&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Job.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.IsEnabled
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.LastRunOutcome
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Job.LastRunDate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To finish up save the workbook to a share available to all of the DBA Team and quit Excel. Notice that I use a double whammy to make sure Excel is really gone. First I quit the .com object and then I stop the process. I do this because I found that on my server quitting the .com object left the Excel process running and I ended up with dozens and dozens of them. If you have Excel open before you run this script either comment out the last line or save your work (You should save your work anyway regulary!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu5.png"
+loading="lazy"
+alt="howicheckhu5"
+>&lt;/a>&lt;/p>
+&lt;p>As always I take no responsibility for your environment, that’s your Job! Don’t run this on Production unless you know what it is doing and are happy that you have first tested it somewhere safely away from any important systems. Make sure that you understand the correct time to run this job and have qualified the impact on the box it is running on.
+Here is a screen shot of the finished Excel Sheet&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png"
+loading="lazy"
+alt="howicheckhu6"
+>&lt;/a>&lt;/p>
+&lt;p>As you can see the Data Transfer Job needs investigation! The reason I add to yellow rows above and below each servers list of jobs is to help me identify any server that is not responding as that will be easily recognised as two lots of yellow with nothing between them
+I have considered improving this script by inputting the data into a database and running a report from that database but have not had the need to do so yet.&lt;/p>
+&lt;p>Here is the script&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#############################################################################################&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># NAME: Agent Job Status to Excel.ps1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># DATE:22/07/2013&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># COMMENTS: Iterates through the sqlservers.txt file to populate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Excel File with colour coded status&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># WARNING - This will stop ALL Excel Processes. Read the Blog Post for more info&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># ————————————————————————&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Get List of sql servers to check&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">sqlservers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Content&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1"># from a file or a SQL query or whatever&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a .com object for Excel&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">object&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">comobject&lt;/span> &lt;span class="n">excel&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Visible&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span> &lt;span class="c1"># Set this to False when you run in production&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Workbooks&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Add&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Worksheets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Date&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">format&lt;/span> &lt;span class="n">f&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Filename&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span> &lt;span class="n">get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">date&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ddMMMyyyHHmm&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cells&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bold&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">True&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">18&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Back Up Report $date&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Last Job Run Older than 1 Day&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">43&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Last Job Run Older than 7 Days&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">53&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Successful Job&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Failed Job&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Job Status Unknown&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define some variables to control navigation&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#insert column headings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Server&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Columnwidth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Job Name&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Columnwidth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">40&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Enabled?&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Columnwidth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Outcome&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Columnwidth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">12&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Last Run Time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">font&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Columnwidth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Load SMO extension&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Reflection&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Assembly&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">LoadWithPartialName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Microsoft.SqlServer.Smo&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">Out&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Null&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Loop through each sql server from sqlservers.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">sqlserver&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">sqlservers&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Create an SMO Server object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">srv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="s2">&amp;#34;Microsoft.SqlServer.Management.Smo.Server&amp;#34;&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">sqlserver&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># For each jobs on the server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">job&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">srv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">JobServer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Jobs&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">jobName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">job&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">jobEnabled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">job&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">IsEnabled&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">jobLastRunOutcome&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">job&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LastRunOutcome&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Time&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">job&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LastRunDate&lt;/span> &lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Set Fill Colour for Job Enabled&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">jobEnabled&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s2">&amp;#34;FALSE&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">colourenabled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;2&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">colourenabled&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;48&amp;#34;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Set Fill Colour for Failed jobs&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">jobLastRunOutcome&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s2">&amp;#34;Failed&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">colour&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;3&amp;#34;&lt;/span> &lt;span class="c1"># RED&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Set Fill Colour for Uknown jobs&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Elseif&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">jobLastRunOutcome&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s2">&amp;#34;Unknown&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">colour&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;15&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="c1">#GREY &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Colour&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;4&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="c1"># Success is Green &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">sqlserver&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">jobName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">jobEnabled&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">#Set colour of cells for Disabled Jobs to Grey&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">colourEnabled&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">colourenabled&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s2">&amp;#34;48&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">5&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">6&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span> &lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;$jobLastRunOutcome&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">colour&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">#Reset Disabled Jobs Fill Colour&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">colourenabled&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s2">&amp;#34;48&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">48&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Time&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">#Set teh Fill Colour for Time Cells&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">If&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Time&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">lt&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Date&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddDays&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">43&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">If&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Time&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">lt&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Date&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddDays&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">53&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Add two Yellow Rows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rows&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">6&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rows&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Row&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Interior&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ColorIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">6&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Saveas&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;C:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s2">emp\Test$filename.xlsx&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">quit&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Stop&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Process&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Name&lt;/span> &lt;span class="n">EXCEL&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you have any questions please get in touch&lt;/p></description></item><item><title>Rationalisation of Database with Powershell and T-SQL part one</title><link>https://blog.robsewell.com/blog/rationalisation-of-database-with-powershell-and-t-sql-part-one/</link><pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/rationalisation-of-database-with-powershell-and-t-sql-part-one/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/02/usage-excel.jpg" alt="Featured image of post Rationalisation of Database with Powershell and T-SQL part one" />&lt;p>I have recently been involved in a project to rationalise databases. It is easy in a large organisation for database numbers to rapidly increase and sometimes the DBA may not be aware of or be able to control the rise if they don’t have knowledge of all of the database servers on the estate.&lt;/p>
+&lt;p>There are lots of benefits of rationalisation to the business. Reduced cpu usage = reduced heat released = lower air-con bill for the server room and less storage used = quicker backups and less tapes used or better still less requirement for that expensive new SAN. You may be able to consolidate data and provide one version of the truth for the business as well. Removing servers can release licensing costs which could then be diverted elsewhere or pay for other improvements.&lt;/p>
+&lt;p>William Durkin &lt;a class="link" href="http://williamdurkin.com/" target="_blank" rel="noopener"
+>b&lt;/a>  &lt;a class="link" href="https://twitter.com/sql_williamd" target="_blank" rel="noopener"
+>t&lt;/a> presented to the &lt;a class="link" href="http://sqlsouthwest.co.uk" target="_blank" rel="noopener"
+>SQL South West User Group&lt;/a> about this and will be doing the session at SQL Saturday in Exeter in March 2014 Please check out his session for a more detailed view&lt;/p>
+&lt;p>I needed to be able to identify databases that could possibly be deleted and realised that an easy way to achieve this would be to use a script to check for usage of the database.&lt;/p>
+&lt;p>No need to recreate the wheel so I went to Aaron Bertrands blog &lt;a class="link" href="http://sqlblog.com/blogs/aaron_bertrand/archive/2008/05/06/when-was-my-database-table-last-accessed.aspx" target="_blank" rel="noopener"
+>http://sqlblog.com/blogs/aaron_bertrand/archive/2008/05/06/when-was-my-database-table-last-accessed.aspx&lt;/a> and used his script. Instead of using an audit file I decided to use Powershell so that I could output the results to Excel and colour code them. This made it easier to check the results and also easier to show to Managers and Service Owners&lt;/p>
+&lt;pre>&lt;code>#################################################################################
+# NAME: lastdbusage.ps1
+# AUTHOR: Rob Sewell
+# https://blog.robsewell.com
+# DATE:19/10/2013
+#
+# COMMENTS: Fill Excel WorkBook with details fo last access times for each database
+#
+# NOTES : Does NOT work with SQL 2000 boxes
+$FileName = '' # Set a filename for the output
+# Get List of sql servers to check
+$sqlservers = Get-Content '' # serverlist, database query whatever
+# Set SQL Query
+$query = &amp;quot;WITH agg AS
+(
+SELECT
+max(last_user_seek) last_user_seek,
+max(last_user_scan) last_user_scan,
+max(last_user_lookup) last_user_lookup,
+max(last_user_update) last_user_update,
+sd.name dbname
+FROM
+sys.dm_db_index_usage_stats, master..sysdatabases sd
+WHERE
+sd.name not in('master','tempdb','model','msdb')
+AND
+database_id = sd.dbid group by sd.name
+)
+SELECT
+dbname,
+last_read = MAX(last_read),
+last_write = MAX(last_write)
+FROM
+(
+SELECT dbname, last_user_seek, NULL FROM agg
+UNION ALL
+SELECT dbname, last_user_scan, NULL FROM agg
+UNION ALL
+SELECT dbname, last_user_lookup, NULL FROM agg
+UNION ALL
+SELECT dbname, NULL, last_user_update FROM agg
+) AS x (dbname, last_read, last_write)
+GROUP BY
+dbname
+ORDER BY 1;
+&amp;quot;
+#Open Excel
+$xl = new-object -comobject excel.application
+$wb = $xl.Workbooks.Add()
+# Load SMO extension
+[System.Reflection.Assembly]::LoadWithPartialName(&amp;quot;Microsoft.SqlServer.Smo&amp;quot;) | Out-Null;
+# Loop through each sql server from sqlservers.txt
+foreach ($sqlserver in $sqlservers) {
+# Get the time SQL was restarted
+$svr = New-Object 'Microsoft.SQLServer.Management.Smo.Server' $SQLServer
+$db = $svr.Databases['TempDB']
+$CreateDate = $db.CreateDate
+#Run Query against SQL Server
+$Results = Invoke-Sqlcmd -ServerInstance $sqlServer -Query $query -Database master
+# Add a new sheet
+$ws = $wb.Worksheets.Add()
+$name = &amp;quot;$sqlserver&amp;quot;
+# Name the Sheet
+$ws.name = $Name
+$cells = $ws.Cells
+$xl.Visible = $true
+#define some variables to control navigation
+$row = 2
+$col = 2
+$cells.item($row, $col) = $SQLServer + ' Was Rebooted at ' + $CreateDate
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 10
+$row = 3
+$col = 2
+# Set some titles
+$cells.item($row, $col) = &amp;quot;Server&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 10
+$col++
+$cells.item($row, $col) = &amp;quot;Database&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 40
+$col++
+$cells.item($row, $col) = &amp;quot;Last Read&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 20
+$col++
+$cells.item($row, $col) = &amp;quot;Last Write&amp;quot;
+$cells.item($row, $col).font.size = 16
+$Cells.item($row, $col).Columnwidth = 20
+$col++
+foreach ($result in $results) {
+# Check if value is NULL
+$DBNull = [System.DBNull]::Value
+$LastRead = $Result.last_read
+$LastWrite = $Result.last_write
+$row++
+$col = 2
+$cells.item($Row, $col) = $sqlserver
+$col++
+$cells.item($Row, $col) = $Result.dbname
+$col++
+if ($LastRead -eq $DBNull) {
+$LastRead = &amp;quot;Not Since Last Reboot&amp;quot;
+$colour = &amp;quot;46&amp;quot;
+$cells.item($Row, $col).Interior.ColorIndex = $colour
+$cells.item($Row, $col) = $LastRead
+}
+else {
+$cells.item($Row, $col) = $LastRead
+}
+$col++
+if ($LastWrite -eq $DBNull) {
+$LastWrite = &amp;quot;Not Since Last Reboot&amp;quot;
+$colour = &amp;quot;46&amp;quot;
+$cells.item($Row, $col).Interior.ColorIndex = $colour
+$cells.item($Row, $col) = $LastWrite
+}
+else {
+$cells.item($Row, $col) = $LastWrite
+}
+}
+}
+$xl.DisplayAlerts = $false
+$wb.Saveas($FileName)
+$xl.quit()
+Stop-Process -Name *excel*
+&lt;/code>&lt;/pre>
+&lt;p>What it does is place the query in a variable. Get the contents of the SQL Server text file holding all my known SQL Servers and runs the query against each of them storing the results in a variable. It then creates an Excel Workbook and a new sheet for each server and populates the sheet including a bit of colour formatting before saving it. The results look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/02/usage-excel.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/02/usage-excel.jpg"
+loading="lazy"
+alt="usage excel"
+>&lt;/a>&lt;/p>
+&lt;p>The tricky bit was understanding how to match the NULL result from the query. This was done by assigning a variable to &lt;code>[System.DBNull]::Value&lt;/code> and using that.&lt;/p>
+&lt;p>Of course these stats are reset when SQL Server restarts so I also included the SQL server restart time using the create date property  of the TempDB. I gathered these stats for a few months before starting any rationalisation.&lt;/p>
+&lt;p>My next post will be about the next step in the process.&lt;/p></description></item><item><title>sp_BlitzIndex™ ouput to Excel with Powershell</title><link>https://blog.robsewell.com/blog/sp_blitzindex-ouput-to-excel-with-powershell/</link><pubDate>Sun, 23 Jun 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sp_blitzindex-ouput-to-excel-with-powershell/</guid><description>&lt;p>I am impressed with the output from &lt;a class="link" href="http://www.brentozar.com/blitzindex/" target="_blank" rel="noopener"
+>sp_BlitzIndex™&lt;/a> and today I tried to save it to an excel file so that I could pass it on to the developer of the service. When I opened it in Excel and imported it from the csv file it didn’t keep the T-SQL in one column due the commas which bothered me so I decided to use Powershell to output the format to Excel as follows&lt;/p>
+&lt;pre>&lt;code>#############################################################################################
+#
+# NAME: SPBlitzIndexToCSV.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:22/06/2013
+#
+# COMMENTS: This script will take the output from spBlitzIndex™ and
+# export it to csv without splitting the tsql commands
+# ————————————————————————
+$Server = Read-Host &amp;quot;Please enter Server&amp;quot;
+$Database = Read-Host &amp;quot;Enter Database Name to run spBlitzIndex against&amp;quot;
+$filePath = &amp;quot;C:\temp\BlitzIndexResults&amp;quot;
+$Date = Get-Date -format ddMMYYYY
+$FileName = &amp;quot;Blitzindex_&amp;quot; + $Database + &amp;quot;_&amp;quot; + $Date + &amp;quot;.csv&amp;quot;$Query = &amp;quot;EXEC dbo.sp_BlitzIndex @database_name='$Database';&amp;quot;
+$Blitz = Invoke-SQLCMD -server $Server -database master -query $Query$Blitz|Export-Csv $FilePath
+$FileName
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item><item><title>Powershell can read email &amp; insert excel file attachment into a SQL Database</title><link>https://blog.robsewell.com/blog/powershell-can-read-email-insert-excel-file-attachment-into-a-sql-database/</link><pubDate>Thu, 20 Jun 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-can-read-email-insert-excel-file-attachment-into-a-sql-database/</guid><description>&lt;p>So at our SQL SouthWest User Group session last week we had sessions from Jonathan &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+>@fatherjack&lt;/a> and Annette &lt;a class="link" href="https://twitter.com/Mrsfatherjack" target="_blank" rel="noopener"
+>@Mrsfatherjack&lt;/a> on SSRS and SSIS respectively. During Annettes SSIS session a question was asked about reading email attachments and then loading them into a database. No-one had an answer using SSIS but I said it could be done with Powershell . So I have written the following script.&lt;/p>
+&lt;p>What it does is open an Outlook com object, search for an email with a certain subject and save it in the temp folder and then import it into a SQL database. This needs to be done on a machine with Outlook and Excel installed. It is possible to process the email using EWS in an Exchange environment and other people have written scripts to do so.&lt;/p>
+&lt;p>It uses two functions Out-Datatable from &lt;a class="link" href="http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd" target="_blank" rel="noopener"
+>http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd&lt;/a>&lt;/p>
+&lt;p>and Write-Datatable from&lt;/p>
+&lt;p>&lt;a class="link" href="http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae" target="_blank" rel="noopener"
+>http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae&lt;/a>&lt;/p>
+&lt;p>The first takes the output from parsing the Excel File and converts it into a datatable object which can then be piped to the second which uses the BulkCopy method. Alternatively if you require it you could add each row of the excel file to an array and then use Invoke-SQLCmd to insert the data row by row.&lt;/p>
+&lt;pre>&lt;code>while($row1 -le
+$lastusedrange) {
+$Col1 = $ws.Cells.Item($row1,1).Value2
+$Col2 = $ws.Cells.Item($row1,2).Value2
+$Col3 = $ws.Cells.Item($row1,3).Value2
+$query = &amp;quot;INSERT INTO Database.Schema.Table
+(Column1
+,Column2
+,Column3 )
+VALUES
+('$Col1'
+,'$Col2'
+,'$Col3')
+GO
+&amp;quot;
+$dt = invoke-sqlcmd -query $query -ServerInstance $Server -database $database
+## For Testing Write-Host $query
+#############################################################################################
+#
+# NAME: ExcelEmailAttachmentToDatabase.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:15/06/2013
+#
+# COMMENTS: This script will read your email using outlook com object and save Excel Attachment
+# and import it into a database
+# REQUIRES: It uses two functions Out-Datatable from
+# http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd
+# and Write-Datatable from
+# http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae
+#
+# ------------------------------------------------------------------------
+# Create Outlook Object
+Add-type-assembly &amp;quot;Microsoft.Office.Interop.Outlook&amp;quot;|out-null
+$olFolders = &amp;quot;Microsoft.Office.Interop.Outlook.olDefaultFolders&amp;quot; -as [type]
+$outlook = new-object -comobject outlook.application
+$namespace = $outlook.GetNameSpace(&amp;quot;MAPI&amp;quot;)
+# Set Folder to Inbox
+$folder = $namespace.getDefaultFolder($olFolders::olFolderInBox)
+# CHeck Email For Subject and set to variable
+$Email = $folder.items | Where-Object Subject -Contains $Subject
+$Attachments = $Email.Attachments
+$filepath = $env:TEMP
+$filename = &amp;quot;TestFilename.xlsx&amp;quot;
+$Subject = &amp;quot;This is a Test&amp;quot;
+$server = 'test server'
+$Database = 'Test Database'
+$Table = 'tbl_DataloadTest'
+foreach ($Attachment in $Attachments) {
+$attachName = $Attachment.filename
+If
+($attachName.Contains(&amp;quot;xlsx&amp;quot;)) {
+$Attachment.saveasfile((Join-Path $filepath $filename))
+}
+}
+# Create an Excel Object
+$xl = New-Object -comobject Excel.Application
+&amp;amp;lt;#
+##For testing
+$xl.visible = $true
+#&amp;amp;gt;
+# Open the File
+$wb = $xl.WorkBooks.Open(&amp;quot;$filepath\$filename&amp;quot;)
+$ws = $wb.Worksheets.Item(1)
+# If your data does not start at A1 you may need
+$column1 = 1
+$row1 = 2
+$lastusedrange = $ws.UsedRange.Rows.Count
+$dt = @()
+while ($row1 -le $lastusedrange) {
+$Col1 = $ws.Cells.Item($row1, 1).Value2
+$Col2 = $ws.Cells.Item($row1, 2).Value2
+$Col3 = $ws.Cells.Item($row1, 3).Value2
+$newrow = ($Col1, $col2, $col3)
+$dt += $newrow
+# Move to next row
+$row1 = $row1 + 1
+}
+$xl.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($xl)
+$Input = $dt|Out-DataTable
+Write-DataTable -ServerInstance $server -Database $Database -TableName $Table -Data $Input
+&lt;/code>&lt;/pre>
+&lt;p>Visit your own User Group – You can find them here&lt;a class="link" href="http://www.sqlpass.org/" target="_blank" rel="noopener"
+>http://www.sqlpass.org/&lt;/a>&lt;/p>
+&lt;p>If you are in the South West UK then come and join our group. Free training and conversation with like minded people once a month and pizza too what could be better!!&lt;/p></description></item></channel></rss>

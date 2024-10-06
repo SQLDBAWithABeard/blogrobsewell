@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Laerte on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/laerte/</link><description>Recent content in Laerte on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 07 May 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/laerte/index.xml" rel="self" type="application/rss+xml"/><item><title>Powershell won’t save when running as a scheduled job</title><link>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</guid><description>&lt;h3 id="or-how-sqlbits-put-me-in-touch-with-laerte-and-solved-a-problem">Or, How SQLBits put me in touch with Laerte and solved a problem
+&lt;/h3>&lt;p>I have a scheduled Powershell job which I use to create an Excel file colour coded for backup checks. (I will blog about it another time) It works brilliantly on my desktop and saves the file to a UNC path and emails the team the location. It works brilliantly when run in Powershell on the server. When I schedule it to run though it doesn’t do so well. The job completes without errors but no file is saved.&lt;/p>
+&lt;p>If you examine the processes running at the time you can see the excel process is running  so I knew it was doing something but couldn’t work out why it was failing.&lt;/p>
+&lt;p>It was one of those jobs that gets put to the bottom of the list because the service worked ok I just needed to have it running on the server rather than a desktop for resilience, recovery and security purposes. Every now and then I would try and work out what was going on but new work and new problems would always arrive and it has been like that for 6 or maybe even 9 months.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/12-things-i-learnt-at-sqlbits-xi/" target="_blank" rel="noopener"
+>As you know&lt;/a> I attended SQLBits this weekend and I went into a session with Laerte Junior. Laerte is a SQL Server MVP and can be found at &lt;a class="link" href="https://www.simple-talk.com/author/laerte-junior/" target="_blank" rel="noopener"
+>simple-talk&lt;/a> as well as his own blog &lt;a class="link" href="http://shellyourexperience.com/" target="_blank" rel="noopener"
+>http://shellyourexperience.com/&lt;/a> or on twitter &lt;a class="link" href="https://twitter.com/LaerteSQLDBA" target="_blank" rel="noopener"
+>@LaerteSQLDBA&lt;/a> Oh and He loves Star Wars 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1_thumb.jpg?resize=168%2C223"
+loading="lazy"
+alt="Laerte_Junior[1]"
+>&lt;/a>After a fascinating session I asked him if I could show him my problem. He very graciously said yes and after looking at the code and listening to me explain the problem he suggested this very simple solution which he said had taken him a great deal of searching to find. It’s a bug with COM objects and requires the creation of folders as shown below. I cam into work today, tried it and it worked. HOORAY another thing off my list and big thanks to Laerte&lt;/p>
+&lt;pre>&lt;code>#Region Bug_Jobs_ComObjects #(32Bit, always)
+# Create Folder #
+New-Item –name C:\Windows\System32\config\systemprofile\Desktop  –itemtype directory
+# #(64Bit)
+# Create folder #
+New-Item –name C:\Windows\SysWOW64\config\systemprofile\Desktop  –itemtype directory
+#EndRegion Bug_Jobs_ComObjects
+&lt;/code>&lt;/pre>
+&lt;p>This worked for me however I had already implemented another fix for a possible gotcha so I will tell you of that one too&lt;/p>
+&lt;p>Sometimes Powershell cannot save to UNC paths because of  IE enhanced security.&lt;/p>
+&lt;p>Either log in as user and add server to intranet site zones or disable the warning in registry as follows&lt;/p>
+&lt;pre>&lt;code>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap] &amp;quot;UNCAsIntranet&amp;quot;=dword:00000000
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item></channel></rss>

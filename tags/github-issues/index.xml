@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitHub Issues on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/github-issues/</link><description>Recent content in GitHub Issues on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/github-issues/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Action Workflow Protected branch update failed</title><link>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/noentry.jpg" alt="Featured image of post GitHub Action Workflow Protected branch update failed" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/" >The last post&lt;/a> showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="protecting-the-repository">Protecting the repository
+&lt;/h1>&lt;p>I opened the repository in the browser and GitHub and was provided with a warning that said&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/protectbranch.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/protectbranch.png"
+loading="lazy"
+alt="protect your branch"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking on the protect this branch button gave the reasoning.&lt;/p>
+&lt;blockquote>
+&lt;p>Protect your most important branches
+Branch protection rules define whether collaborators can delete or force push to the branch and set requirements for any pushes to the branch, such as passing status checks or a linear commit history.&lt;/p>
+&lt;/blockquote>
+&lt;p>So I changed the settings so that a Pull Request is required and needs to be reviewed.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/branchprotected.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/branchprotected.png"
+loading="lazy"
+alt="all protected"
+>&lt;/a>&lt;/p>
+&lt;h1 id="breaks-the-workflow">Breaks the workflow
+&lt;/h1>&lt;p>I had already altered the workflow trigger for the workflow to generate the speaker-list.json so that it would run when changes to the speakers directory were pushed to the main branch by adding&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> paths:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - speakers/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then approved a PR with a change to that directory and saw that the workflow had started.&lt;/p>
+&lt;p>Then it failed :-(.&lt;/p>
+&lt;p>The error message could be seen in the codespaces with the extension &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-actions&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushdenied.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushdenied.png"
+loading="lazy"
+alt="no can do"
+>&lt;/a>&lt;/p>
+&lt;p>This is the error message&lt;/p>
+&lt;blockquote>
+&lt;p>Error: To &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+! refs/heads/main:refs/heads/main [remote rejected] (protected branch hook declined)
+Done
+Pushing to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+POST git-receive-pack (604 bytes)
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: error: At least 1 approving review is required by reviewers with write access.
+error: failed to push some refs to &amp;lsquo;&lt;a class="link" href="https://github.com/dataplat/DataSpeakers%27" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers'&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, because I have now protected my branch, I cannot automatically push changes into the main branch.&lt;/p>
+&lt;h1 id="fix-it">Fix it
+&lt;/h1>&lt;p>To fix this, I had to create a new PAT token with &lt;code>public_repo&lt;/code> scope and save it as a secret for the workflow to access and update the checkout to use this token.&lt;/p>
+&lt;h2 id="create-a-new-pat-token">Create a new PAT token
+&lt;/h2>&lt;p>The instructions to do this are found &lt;a class="link" href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" rel="noopener"
+>in the docs here&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>In the upper-right corner of any page, click your profile photo, then click Settings.&lt;/li>
+&lt;li>In the left sidebar, click Developer settings.&lt;/li>
+&lt;li>In the left sidebar, click Personal access tokens.&lt;/li>
+&lt;li>Click Generate new token.&lt;/li>
+&lt;li>Give your token a descriptive name.&lt;/li>
+&lt;li>To give your token an expiration.&lt;/li>
+&lt;li>Select the scopes, or permissions, you&amp;rsquo;d like to grant this token.
+For this scenario just choose &lt;code>public_repo&lt;/code>&lt;/li>
+&lt;li>Click Generate token.&lt;/li>
+&lt;li>Save the generated token somewhere safe like your password manager. ( You &lt;strong>do&lt;/strong> have a password manager? - Our family use 1Password)&lt;/li>
+&lt;/ul>
+&lt;h2 id="save-it-as-a-secret-in-the-repository">Save it as a secret in the repository
+&lt;/h2>&lt;p>You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository &lt;a class="link" href="https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md" target="_blank" rel="noopener"
+>by following this guide&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>navigate to the main page of the repository.&lt;/li>
+&lt;li>Under your repository name, click on the &amp;ldquo;Settings&amp;rdquo; tab.&lt;/li>
+&lt;li>In the left sidebar, click Secrets.&lt;/li>
+&lt;li>On the right bar, click on &amp;ldquo;Add a new secret&amp;rdquo;&lt;/li>
+&lt;li>Type a name for your secret in the &amp;ldquo;Name&amp;rdquo; input box. I used &lt;code>REPO_TOKEN&lt;/code>&lt;/li>
+&lt;li>Type the value for your secret.&lt;/li>
+&lt;li>Click Add secret.&lt;/li>
+&lt;/ul>
+&lt;h2 id="use-it-in-your-workflow">Use it in your workflow
+&lt;/h2>&lt;p>Now that you have saved your secret, you can use it your workflows. To get rid of the protected branch error it is used in the &lt;code>actions/checkout&lt;/code> action like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> token: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I remembered to do for both workflows!!&lt;/p>
+&lt;p>I then created a PR to test it and this time it was able to successfully push changes to the main branch&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushcompleted.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushcompleted.png"
+loading="lazy"
+alt="its pushed"
+>&lt;/a>&lt;/p>
+&lt;p>and you can see &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/80d585ff1de15db22744ad5e7295294260b8fc98" target="_blank" rel="noopener"
+>the commit here&lt;/a> or &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/7046d51de7b1d9e9b9f188879a4981a76f35c3c4" target="_blank" rel="noopener"
+>the PR&lt;/a> if you wish.&lt;/p>
+&lt;h1 id="but-thats-not-all-folks">But thats not all folks
+&lt;/h1>&lt;p>This will work correctly for a PR and it will work for the initial workflow that has been called.&lt;/p>
+&lt;p>It &lt;em>&lt;strong>will not work&lt;/strong>&lt;/em> for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions/runs/2659979920" target="_blank" rel="noopener"
+>In that scenario we get this error&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/gregbrokeit.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/gregbrokeit.png"
+loading="lazy"
+alt="Greg Broke it"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Input required and not supplied: token&lt;/p>
+&lt;/blockquote>
+&lt;p>for the &lt;code>actions/checkout@v2&lt;/code> action. This took some tracking down to resolve but finally I found the answer &lt;a class="link" href="https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard" target="_blank" rel="noopener"
+>in a forum post&lt;/a>&lt;/p>
+&lt;p>In the &lt;em>&lt;strong>calling&lt;/strong>&lt;/em> workflow add a &lt;code>secrets&lt;/code> entry and pass in the token secret.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then at the top of the &lt;em>&lt;strong>reusable workflow&lt;/strong>&lt;/em> define the secrets&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> required: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and finally all is well and Dr Greg Low &lt;a class="link" href="https://blog.greglow.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/greglow" target="_blank" rel="noopener"
+>Twitter&lt;/a> can be added ;-)&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/bench.jpg" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/Training-Day-Speakers-List" >The last post&lt;/a> showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="what-do-we-need">What do we need?
+&lt;/h1>&lt;p>The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>The web page can be found here&lt;/a>. This page is generated from a JSON file.&lt;/p>
+&lt;h1 id="a-new-repository">A new repository
+&lt;/h1>&lt;p>It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website.&lt;/p>
+&lt;h1 id="create-a-dev-container">Create a dev container
+&lt;/h1>&lt;p>It&amp;rsquo;s a brand new repository &lt;code>.devcontainer&lt;/code> directory was created and the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/main/containers/powershell/.devcontainer" target="_blank" rel="noopener"
+>Microsoft VS Code Remote / GitHub Codespaces Container Definitions repository PowerShell containers&lt;/a> added. This means that whenever I or anyone else wants to work on the repo the development experience will be the same.&lt;/p>
+&lt;h2 id="add-extensions">Add extensions
+&lt;/h2>&lt;p>There are a number of default extensions that I install for PowerShell or generic development&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.powershell" target="_blank" rel="noopener"
+>ms-vscode.powershell&lt;/a> - because I am working with PowerShell&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets" target="_blank" rel="noopener"
+>2gua.rainbow-brackets&lt;/a> - because I like to easily see which opening bracket matches which closing bracket&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow" target="_blank" rel="noopener"
+>oderwat.indent-rainbow&lt;/a> - so that I can quickly see the indentations, invaluable with YAML files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens" target="_blank" rel="noopener"
+>usernamehw.errorlens&lt;/a> - so that linting errors are displayed in the editor alongside the code&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank" rel="noopener"
+>eamodio.gitlens&lt;/a> - to make source control easier&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=TylerLeonhardt.vscode-inline-values-powershell" target="_blank" rel="noopener"
+>TylerLeonhardt.vscode-inline-values-powershell&lt;/a> - so that you can see inline values when debugging&lt;/li>
+&lt;/ul>
+&lt;p>I also added two more for this repository as we are using GitHub Actions&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions" target="_blank" rel="noopener"
+>me-dutour-mathieu.vscode-github-actions&lt;/a> - for intellisense for GitHub Action files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-action&lt;/a> - to be able to start/stop/monitor GitHub Actions from the workspace&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/githubactionsview.png"
+loading="lazy"
+alt="the view in codespaces of the GitHub Actions"
+>&lt;/p>
+&lt;h1 id="gather-the-information">Gather the Information
+&lt;/h1>&lt;p>People can update repositories using Pull Requests but this needed to be a little more guided and it was decided that it was to be done with &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms" target="_blank" rel="noopener"
+>forms via GitHub Issues&lt;/a>&lt;/p>
+&lt;h2 id="where-to-put-it">Where to put it?
+&lt;/h2>&lt;p>You can create custom GitHub Issues using YAML files in the &lt;code>.github/ISSUE_TEMPLATE&lt;/code> directory. An Add Speaker issue template file was created. The name and the description will be seen on the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new/choose" target="_blank" rel="noopener"
+>new issues page&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add Speaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: Add New Speaker information
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">body:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - type: markdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attributes:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> value: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please follow the instructions to create a new speaker entry.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> We wil display this on callfordataspeakers.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a number of &lt;code>-type&lt;/code> entries. &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema" target="_blank" rel="noopener"
+>You can find the definitions in the docs&lt;/a> or you can use the intellisense from the extensions. The types are checkboxes, dropdown, input, markdown, textarea&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/intellisense-ghactions.png"
+loading="lazy"
+alt="The intellisense showing the type options"
+>&lt;/p>
+&lt;p>I used the intellisense to build a quick simple form to gather 5 pieces of information&lt;/p>
+&lt;ul>
+&lt;li>full name&lt;/li>
+&lt;li>topics&lt;/li>
+&lt;li>regions&lt;/li>
+&lt;li>sessionize profile URL&lt;/li>
+&lt;li>languages&lt;/li>
+&lt;/ul>
+&lt;p>You can find &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/blob/main/.github/ISSUE_TEMPLATE/Add-Speaker.yml" target="_blank" rel="noopener"
+>the YAML file here&lt;/a> and &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new?assignees=&amp;amp;labels=&amp;amp;template=Add-Speaker.yml" target="_blank" rel="noopener"
+>the issue here&lt;/a>&lt;/p>
+&lt;h1 id="process-the-information">Process the information
+&lt;/h1>&lt;p>Now that we have a method of gathering the information, the next stage is to process it automagically. For this we are going to be &lt;a class="link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener"
+>using GitHub Actions&lt;/a>&lt;/p>
+&lt;h2 id="workflow">Workflow
+&lt;/h2>&lt;p>GitHub Actions is a platform that can run automated processes called workflows that are defined as YAML files and triggered by events in the repository. We create another directory called &lt;code>workflows&lt;/code> also in the &lt;code>.github&lt;/code> directory.&lt;/p>
+&lt;h2 id="triggering-the-workflow">Triggering the workflow
+&lt;/h2>&lt;p>Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.&lt;/p>
+&lt;p>You can automatically add labels, close stale issues and much more. There are a large number of events open to you as &lt;a class="link" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows" target="_blank" rel="noopener"
+>can be seen here &lt;/a>. Even looking at just issues there are a number of activities types that can be used&lt;/p>
+&lt;ul>
+&lt;li>opened&lt;/li>
+&lt;li>edited&lt;/li>
+&lt;li>deleted&lt;/li>
+&lt;li>transferred&lt;/li>
+&lt;li>pinned&lt;/li>
+&lt;li>unpinned&lt;/li>
+&lt;li>closed&lt;/li>
+&lt;li>reopened&lt;/li>
+&lt;li>assigned&lt;/li>
+&lt;li>unassigned&lt;/li>
+&lt;li>labeled&lt;/li>
+&lt;li>unlabeled&lt;/li>
+&lt;li>locked&lt;/li>
+&lt;li>unlocked&lt;/li>
+&lt;li>milestoned&lt;/li>
+&lt;li>demilestoned&lt;/li>
+&lt;/ul>
+&lt;p>(and there are separate ones for issue comments)&lt;/p>
+&lt;p>The beginning of the workflow YAML file has the name and then the trigger. This triggers the workflow when an issue is opened.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add a new speaker json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issues:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> types:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;#34;opened&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-all-the-source">Getting all the source
+&lt;/h2>&lt;p>The workflow consists of &lt;a class="link" href="https://docs.github.com/en/actions/using-jobs" target="_blank" rel="noopener"
+>one or many jobs&lt;/a> that can be run on different runners. The first job is named &lt;code>AddNewSpeaker&lt;/code> and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.&lt;/p>
+&lt;p>We &lt;strong>&lt;em>use&lt;/em>&lt;/strong> a default &lt;strong>&lt;em>action&lt;/em>&lt;/strong> to checkout and because we push changes back to the repository (more on that later) we choose a &lt;code>fetch-depth&lt;/code> of 0 to get all of the history and the &lt;code>ref&lt;/code> main as that is the branch we are working with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addNewSpeaker:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="being-polite">Being polite
+&lt;/h2>&lt;p>costs nothing so this action from Peter Evans can be used to add or update a comment&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hi @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for your Speaker submission.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Action should be running now and adding it to the webpage. It should should update here.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If it doesn&amp;#39;t - get in touch with Rob on Twitter https://twitter.com/sqldbawithbeard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="wait-a-minute-how-did-you-work-that-out">wait a minute, how did you work that out?
+&lt;/h3>&lt;p>The say thank you comment uses &lt;code>github.event.issue.number&lt;/code> and &lt;code>github.event.issue.user.login&lt;/code> to ensure that the comment goes on the issue that triggered the workflow and thanks the user that created it. To work out what is available, I used this PowerShell step to write out the GitHub context to the logs as JSON&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># You also can print the whole GitHub context to the logs to view more details.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: View the GitHub context
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: Write-Host &amp;#34;$GITHUB_CONTEXT&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GITHUB_CONTEXT: ${{ toJson(github) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="get-the-info-into-a-file">Get the info into a file
+&lt;/h2>&lt;p>Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates &lt;code>### &amp;lt;label&amp;gt;&lt;/code> and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a &lt;code>pscustomobject&lt;/code>&lt;/p>
+&lt;p>Then I could convert it to Json and save it to a file. I chose to save each speakers information in their own file in case anything else would be needed in the future and also so that if the process failed it only affected this speakers information.&lt;/p>
+&lt;p>I also add the speaker file name to a text file that I may make use of at some future point.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Get Speaker Information to file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Host &amp;#34;What do we have?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # gci -recurse = this is for troubleshooting because paths are hard
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody = &amp;#34;${{ github.event.issue.body }}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write-Host $IssueBody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody | Out-File speakers/temp.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # get the temp file contents - I do this so I don&amp;#39;t lose anything
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $file = Get-Content ./speakers/temp.txt -Raw
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # parse the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $regexResult = [regex]::Matches($file, &amp;#39;(?ms)fullname\n\n(?&amp;lt;fullname&amp;gt;.*)\n\n### topics\n\n(?&amp;lt;topics&amp;gt;.*)\n\n### regions\n\n(?&amp;lt;regions&amp;gt;.*)\n\n### Sessionize\n\n(?&amp;lt;Sessionize&amp;gt;.*)\n\n### language\n\n(?&amp;lt;language&amp;gt;.*)\n&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # create an object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerObject = [PSCustomObject]@{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name = $regexResult[0].Groups[&amp;#39;fullname&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> topics = $regexResult[0].Groups[&amp;#39;topics&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> regions = $regexResult[0].Groups[&amp;#39;regions&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sessionize = $regexResult[0].Groups[&amp;#39;Sessionize&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> language = $regexResult[0].Groups[&amp;#39;language&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #save it to a file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $filePath = &amp;#39;./speakers/{0}.json&amp;#39; -f $speakerFileName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $SpeakerObject |ConvertTo-Json | Out-FIle -FilePath $filePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName | OUt-File ./speakers/list.txt -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="because-ben-is-a-fantastic-tester">Because Ben is a fantastic tester
+&lt;/h3>&lt;p>All the best testers will do unexpected but valid actions and my wonderful friend Ben Weissman (&lt;a class="link" href="https://twitter.com/bweissman" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://bweissman.azurewebsites.net/" target="_blank" rel="noopener"
+>Blog&lt;/a>) added some characters into the full name option that made the file save fail. He added his pronouns, which is awesome but not what I expected for a full name option. This is totally my fault for not considering either using pronouns or that as a user input field that is used in code the data should be validated. I used a few replaces to ensure the file name is acceptable.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="let-the-user-know-and-commit-the-new-file">Let the user know and commit the new file
+&lt;/h2>&lt;p>Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).&lt;/p>
+&lt;p>I love the &lt;code>EndBug/add-and-commit&lt;/code> action as it enables me to make changes in a workflow and commit those changes safely back to the repository.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Speaker Json has been added https://github.com/dataplat/DataSpeakers/tree/main/speakers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Add &amp;amp; Commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: EndBug/add-and-commit@v8.0.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_name: Beardy McBeardFace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_email: mrrobsewell@outlook.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> message: &amp;#39;The Beard says hooray we have another speaker @${{ github.event.issue.user.login }} - This is an automated message&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dry">DRY
+&lt;/h2>&lt;p>Don&amp;rsquo;t repeat yourself. The idea is to create the JSON file for the web-page from each of the speakers individual json files. People will want to change what they have entered or they will make mistakes, future functionality might require the same steps. With this in mind I created a separate workflow file to create the &lt;code>speaker-list.json&lt;/code> file. This used two different triggers&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>workflow_calls&lt;/code> so that it can be called from another workflow&lt;/li>
+&lt;li>&lt;code>workflow_dispatch&lt;/code> so that it can be run manually&lt;/li>
+&lt;/ul>
+&lt;p>The other workflow cannot be triggered manually as it relies on an issue to create the required file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="only-run-if">Only run if
+&lt;/h2>&lt;p>The second workflow file uses a PowerShell action to combine the individual JSONs into a single one and commits that to the repository. It also comments on the issue but it can only do this if the workflow was triggered from the add speaker job and not manually so some conditional logic was required. There were a number of options that I could choose to decide if to run this step but I decided on using the event issue number &lt;code>if: github.event.issue.number != null&lt;/code> as if there was no issue, there was nothing to comment and this would leave this step open to be used in future coding if required.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if: github.event.issue.number != null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The speaker-list.json file has been recreated ready for the website https://github.com/dataplat/DataSpeakers/blob/main/website/speaker-list.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> https://callfordataspeakers.com/precon should be updated now
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="calling-another-workflow">Calling another workflow
+&lt;/h2>&lt;p>To call another workflow in a job you use the &lt;code>uses:&lt;/code> field and the path to the yaml file and the branch. We also added the &lt;code>needs:&lt;/code> so that this job will run after the &lt;code>addNewSpeaker&lt;/code> has completed.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="close-the-issue">Close the issue
+&lt;/h2>&lt;p>This process needed to be completely automatic and so we use Peter Evans close issue action and tag the speaker and say thankyou as well as closing the issue. We have a &lt;code>needs:&lt;/code> property so that this job will only run following the successful run of the previous two jobs.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">closeIssue:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: [addNewSpeaker,createSpeakerListJson]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Close Issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/close-issue@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> comment: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hey @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Closing this issue now that the Action has run successfully.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for adding your information to the list.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It will be active on callfordataspeakers.com shortly.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please share on social media.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Love and Hugs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Rob and Daniel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @SqlDbaWithABeard @dhmacher
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="show-me-what-it-looks-like">Show me what it looks like
+&lt;/h1>&lt;p>You can &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>take a look at the repo&lt;/a> there are a &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues?q=is%3Aissue&amp;#43;is%3Aclosed" target="_blank" rel="noopener"
+>number of issues&lt;/a> like &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/36" target="_blank" rel="noopener"
+>this one from Monica Rathbun&lt;/a> (&lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>Twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/monissue.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/monissue.png"
+loading="lazy"
+alt="Monicas Image"
+>&lt;/a>&lt;/p>
+&lt;p>you can see the workflows &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions" target="_blank" rel="noopener"
+>running here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/workflowrun.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/workflowrun.png"
+loading="lazy"
+alt="workflow run"
+>&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item></channel></rss>

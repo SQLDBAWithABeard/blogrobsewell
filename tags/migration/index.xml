@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Migration on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/migration/</link><description>Recent content in Migration on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/migration/index.xml" rel="self" type="application/rss+xml"/><item><title>The first page with GitHub Pages</title><link>https://blog.robsewell.com/blog/the-first-page-with-github-pages/</link><pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-first-page-with-github-pages/</guid><description>&lt;p>Last night I started the experiment that has been in my head for a while now, to move from SQL Dba With A Beard to RobSewell.com&lt;/p>
+&lt;p>Thank you Chrissy &lt;a class="link" href="https://blog.netnerds.net/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Twitter&lt;/a> for the push!&lt;/p>
+&lt;p>I followed the instructions from her blog post &lt;a class="link" href="https://blog.netnerds.net/2020/08/migrating-my-wordpress-sites-to-github-pages/" target="_blank" rel="noopener"
+>Migrating my WordPress sites to GitHub Pages&lt;/a> but chose to use the &lt;a class="link" href="https://github.com/mmistakes/minimal-mistakes" target="_blank" rel="noopener"
+>Minimal Mistakes theme&lt;/a>&lt;/p>
+&lt;p>I like the search at the top and the &lt;a class="link" href="https://blog.robsewell.com/404.html" target="_blank" rel="noopener"
+>404 page :-)&lt;/a>&lt;/p>
+&lt;p>Now I need to export the wordpress from SQLDbaWithABeard.com (Its currently running)&lt;/p>
+&lt;p>I will still blog on there for a while I think but export it to here also or blog on here and export to there, one or the other&lt;/p></description></item><item><title>SQL Express Migration Auto Close Setting</title><link>https://blog.robsewell.com/blog/sql-express-migration-auto-close-setting/</link><pubDate>Sat, 31 Aug 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-express-migration-auto-close-setting/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/08/image_thumb.png" alt="Featured image of post SQL Express Migration Auto Close Setting" />&lt;p>With over 700 databases to look after at MyWork automation is high on my list of priorities. I have two PowerShell scripts which run regularly checking SQL Error logs. One checks for the output from DBCC CHECKDB and one for errors. They then email the results to the DBA team.&lt;/p>
+&lt;p>This week we noticed that a new database was creating a lot of entries. It appeared to be starting up every few minutes. A bit of investigation by my colleague revealed that this database had been created on SQL Express and migrated to SQL Server.&lt;/p>
+&lt;p>SQL Express sets AUTO_CLOSE to on by default and this is what was creating the entries.&lt;/p>
+&lt;p>What does the AUTO_CLOSE setting do?&lt;/p>
+&lt;p>According to BoL &lt;a class="link" href="http://technet.microsoft.com/en-us/library/ms190249%28v=sql.105%29.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link&lt;/a>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: left">Description&lt;/th>
+&lt;th style="text-align: left">Default value&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: left">When set to ON, the database is shut down cleanly and its resources are freed after the last user exits. The database automatically reopens when a user tries to use the database again.&lt;/td>
+&lt;td style="text-align: left">True for all databases when using SQL Server 2000 Desktop Engine or SQL Server Express, and False for all other editions, regardless of operating system.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">When set to OFF, the database remains open after the last user exits.&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>That explains what was happening, the database was shutting down as the session finished and then starting back up again when the next one started. Repeatedly. Filling up the log files with entries, resetting the DMVs and using resources unnecessarily.&lt;/p>
+&lt;p>To find databases with this setting on query the master.sys.databases for the is_auto_close_on column &lt;a class="link" href="http://technet.microsoft.com/en-us/library/ms178534.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link&lt;/a> or check the properties page in SSMS&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/08/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/08/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You can change the setting there or with T-SQL&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/08/image3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/08/image3.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course I like to do it with PowerShell!!&lt;/p>
+&lt;p>To find the databases with AUTO_CLOSE setting on&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/08/image1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/08/image_thumb1.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>To change the setting with PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/08/image2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/08/image_thumb2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;pre>&lt;code>$svrs = ## list of servers Get-Content from text fiel etc
+foreach ($svr in $svrs) {
+$server = New-Object Microsoft.SQLServer.Management.Smo.Server $svrs
+foreach ($db in $server.Databases) {
+if ($db.AutoClose = $true) {
+Write-Output &amp;quot;$Server - $($DB.Name) AutoClose ON&amp;quot;
+}
+}
+}
+$Svr = 'SERVERNAME'
+$DB = 'DatabaseName'
+$server = New-Object Microsoft.SQLServer.Management.Smo.Server $svrs
+$db.AutoClose = $false
+$db.Alter()
+&lt;/code>&lt;/pre></description></item></channel></rss>

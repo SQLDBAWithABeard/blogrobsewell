@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL DBA on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-dba/</link><description>Recent content in SQL DBA on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 07 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-dba/index.xml" rel="self" type="application/rss+xml"/><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p>Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+>using Power Bi with my DBA Database&lt;/a> I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p>
+&lt;p>In this post I will show how to create the following report&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You will find the latest version of my DBADatabase creation scripts and PowerShell scripts here.&lt;/a>&lt;/p>
+&lt;p>The SQLInfo table is created using this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">CREATE&lt;/span> &lt;span class="n">TABLE&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfo&lt;/span>&lt;span class="p">](&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfoID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">IDENTITY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DateChecked&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DateAdded&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ServerName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">InstanceName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLVersionString&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLVersion&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ServicePack&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Edition&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ServerType&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Collation&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">IsHADREnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLServiceAccount&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">35&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLService&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLServiceStartMode&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">BAckupDirectory&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">256&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">BrowserAccount&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">BrowserStartMode&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">IsSQLClustered&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ClusterName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ClusterQuorumstate&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ClusterQuorumType&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">C2AuditMode&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">CostThresholdForParallelism&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">tinyint&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">MaxDegreeOfParallelism&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">tinyint&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DBMailEnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DefaultBackupCComp&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">FillFactor&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">tinyint&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">MaxMem&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">MinMem&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">RemoteDacEnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">XPCmdShellEnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">CommonCriteriaComplianceEnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DefaultFile&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">DefaultLog&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">HADREndpointPort&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ErrorLogPath&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">InstallDataDirectory&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">InstallSharedDirectory&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">IsCaseSensitive&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">IsFullTextInstalled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">LinkedServer&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="nb">max&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">LoginMode&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">MasterDBLogPath&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">MasterDBPath&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">NamedPipesEnabled&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">OptimizeAdhocWorkloads&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">AGListener&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">150&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">AGs&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">150&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PK__SQL__50A5926BC7005F29&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">PRIMARY&lt;/span> &lt;span class="n">KEY&lt;/span> &lt;span class="n">CLUSTERED&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfoID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">ASC&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;span class="n">WITH&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">PAD_INDEX&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">STATISTICS_NORECOMPUTE&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">IGNORE_DUP_KEY&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_ROW_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_PAGE_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">TEXTIMAGE_ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ALTER&lt;/span> &lt;span class="n">TABLE&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfo&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">WITH&lt;/span> &lt;span class="n">CHECK&lt;/span> &lt;span class="n">ADD&lt;/span> &lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">FK_SQLInfo_InstanceList&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">FOREIGN&lt;/span> &lt;span class="n">KEY&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">REFERENCES&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">dbo&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceList&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">([&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ALTER&lt;/span> &lt;span class="n">TABLE&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfo&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">CHECK&lt;/span> &lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">FK_SQLInfo_InstanceList&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also enable some logging into a new event log by following the steps here &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx&lt;/a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT&lt;/p>
+&lt;p>To run the script I simply need to add the values for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$CentralDBAServer = &amp;#39;&amp;#39; ## Add the address of the instance that holds the DBADatabase
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CentralDatabaseName = &amp;#39;DBADatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogFile = &amp;#34;\DBADatabaseServerUpdate_&amp;#34; + $Date + &amp;#34;.log&amp;#34; ## Set Path to Log File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get &lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>the script from here&lt;/a> or you can read on to see how it works and how to create the report and publish it to powerbi.com&lt;/p>
+&lt;p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Catch-Block
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ([string]$Additional)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage = &amp;#34; On $Connection &amp;#34; + $Additional + $_.Exception.Message + $_.Exception.InnerException.InnerException.message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Message = &amp;#34; This message came from the Automated PowerShell script updating the DBA Database with Server Information&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Msg = $Additional + $ErrorMessage + &amp;#34; &amp;#34; + $Message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message $ErrorMessage -Level Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-EventLog -LogName SQLAutoScript -Source &amp;#34;SQLAUTOSCRIPT&amp;#34; -EventId 1 -EntryType Error -Message $Msg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the function an additional parameter which will hold each custom error message which I write to both the event log and a text message to enable easy troubleshooting and include the message from the $Error variable by accessing it with $_. I won&amp;rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called $ServerNames holding the server name, instance name and port&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[InstanceName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the array and create a &lt;code>$Connection&lt;/code> variable for my SMO connection string and connect to the server&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Even though I place the creation of the SMO server object in a try block you still need to an additional check to ensure that you can connect and populate the object as the code above creates an empty SMO Server object with the name property set to the $Connection variable if you can&amp;rsquo;t connect to that server and doesn’t error as you may expect The way I have always validated an SMO Server object is to check the version property. There is no justifiable reason for choosing that property, you could choose any one but that’s the one I have always used. I use an if statement to do this ( &lt;a class="link" href="http://wp.me/p3aio8-cL" target="_blank" rel="noopener"
+>This post about Snippets will show you the best way to learn PowerShell code&lt;/a>) The reference I use for exiting a loop in the way that you want is &lt;a class="link" href="http://ss64.com/ps/break.html" target="_blank" rel="noopener"
+>this one&lt;/a> In this case we use a continue to carry on iterating the loop&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (!( $srv.version)){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Catch-Block &amp;#34; Failed to Connect to $Connection&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> continue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you wish to view all of the different properties that you can gather information on in this way you can use this code to take a look. (This is something you should get used to doing when writing new PowerShell scripts)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv | Get-Member
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>As you can see from the screenshot below on my SQL2014 server there are 184 properties. I havent chosen to gather all of them, only the ones that are of interest to me, our team or others who request information from our team such as auditors and project managers etc&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>You can choose to use any or all of these properties as long as you ensure you have the columns in your table with the correct data type and that you have the correct knowledge and logic to stop the script from erroring if/when the property is not available. Here is an example&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if ($srv.IsHadrEnabled -eq $True)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {$IsHADREnabled = $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGs = $srv.AvailabilityGroups|Select Name -ExpandProperty Name|Out-String
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Expression = @{Name = &amp;#39;ListenerPort&amp;#39; ; Expression = {$_.Name + &amp;#39;,&amp;#39; + $_.PortNumber }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGListener = $srv.AvailabilityGroups.AvailabilityGroupListeners|select $Expression|select ListenerPort -ExpandProperty ListenerPort
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IsHADREnabled = $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGs = &amp;#39;None&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AGListener = &amp;#39;None&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $BackupDirectory = $srv.BackupDirectory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I check if the property &lt;code>IsHADREnabled&lt;/code> is true and if it is I then gather the information about the Availability Group names and the listener port and if it doesn’t exist I set the values to None.&lt;/p>
+&lt;p>You will find that not all of the properties that you want are at the root of the Server SMO object. If you want you max and min memory values and you want to know if &lt;code>remote admin connections&lt;/code> or &lt;code>xp_cmdshell&lt;/code> are enabled you will need to look at the &lt;code>$Srv.Configuration&lt;/code> object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $MaxMem = $srv.Configuration.MaxServerMemory.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $MinMem = $srv.Configuration.MinServerMemory.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $RemoteDacEnabled = $srv.Configuration.RemoteDacConnectionsEnabled.ConfigValue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $XPCmdShellEnabled = $srv.Configuration.XPCmdShellEnabled.ConfigValue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can look for the property that you want by using the Get-Member cmdlet as shown above or use MSDN to find it &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.server.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>starting from here&lt;/a> or by GoogleBingDuckDuckGo ing &amp;ldquo;PowerShell SMO&amp;rdquo; and the property you wish to find.&lt;/p>
+&lt;p>The rest of the script follows exactly the same pattern &lt;a class="link" href="http://sqldbawithabeard.com/2015/08/31/populating-my-dba-database-for-power-bi-with-PowerShell-server-info/" target="_blank" rel="noopener"
+>as the previous post&lt;/a> by checking the SQL Info table for an entry for that instance and updating the table if it exists and inserting if it does not.&lt;/p>
+&lt;p>There are other uses for gathering this information than just for reporting on it. You can target different versions of SQL for different scripts. You can identify values that are outside what is expected and change them. If xp_cmdshell should not be enabled, write the TSQL to gather the connection string of all of the servers from the DBADatabase where the SQLInfo table has &lt;code>XPCMDShellenabled = 1&lt;/code> and loop through them exactly as above and change the value of &lt;code>$srv.Configuration.XPCmdShellEnabled.ConfigValue&lt;/code> to 0 and then &lt;code>$Srv.Alter()&lt;/code>&lt;/p>
+&lt;p>It is a very powerful way of dynamically targeting your estate if you are looking after many instances and with great power comes great responsibility.&lt;/p>
+&lt;p>ALWAYS TEST THESE AND ANY SCRIPTS YOU FIND OR SCRIPTS YOU WRITE BEFORE YOU RUN THEM IN YOUR PRODUCTION ENVIRONMENT&lt;/p>
+&lt;p>Yeah, I shouted and some people thought it was rude. But its important, it needs to be repeated and drilled in so that it becomes habitual. You can do great damage to your estate with only a few lines of PowerShell and a DBA Database so please be very careful and ensure that you have a suitable test subset of servers that you can use to test&lt;/p>
+&lt;p>The other thing we can do is report on the data and with Power Bi we can create self service reports and dashboards and also make use of the natural language query at powerbi.com so that when your systems team ask &amp;ldquo;What are all the servers in X data center?&amp;rdquo; you can enable them to answer it themselves or when the compliance officer asks how many SQL 2005 instances do we have and which clients do they serve you can give them a dashboard they can query themselves.&lt;/p>
+&lt;p>This is how I create the two reports you see at the top. I start by connecting to the data source, my DBA Database&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>And I use this query&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">SELECT&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ServerName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">InstanceName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Location&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Inactive&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotContactable&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfoID&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DateChecked&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DateAdded&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ServerName&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceName&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLVersionString&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLVersion&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ServicePack&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">Edition&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ServerType&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">Collation&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">IsHADREnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLServiceAccount&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLService&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLServiceStartMode&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">BAckupDirectory&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">BrowserAccount&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">BrowserStartMode&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">IsSQLClustered&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ClusterName&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ClusterQuorumstate&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ClusterQuorumType&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">C2AuditMode&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">CostThresholdForParallelism&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MaxDegreeOfParallelism&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DBMailEnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DefaultBackupCComp&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">FillFactor&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MaxMem&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MinMem&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">RemoteDacEnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">XPCmdShellEnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">CommonCriteriaComplianceEnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DefaultFile&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">DefaultLog&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">HADREndpointPort&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ErrorLogPath&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstallDataDirectory&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstallSharedDirectory&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">IsCaseSensitive&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">IsFullTextInstalled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">LinkedServer&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">LoginMode&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MasterDBLogPath&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MasterDBPath&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">NamedPipesEnabled&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">OptimizeAdhocWorkloads&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">AGListener&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span>&lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">AGs&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">FROM&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">DBADatabase&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">SQLInfo&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">SI&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">JOIN&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">DBADatabase&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">dbo&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceList&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">IL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ON&lt;/span> &lt;span class="n">IL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">InstanceID&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">SI&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">InstanceID&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So that I can easily add any and all the data to the reports if I choose or query using them in powerbi.com&lt;/p>
+&lt;p>First I created 3 measures.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> AG = DISTINCTCOUNT(Query1[AGs]) Instances = DISTINCTCOUNT(Query1[InstanceID]) Servers = DISTINCTCOUNT(Query1[ServerName])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I click on map&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/5.png?w=300"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>And drag the location column to location and the Instances measure to both the Values and Color Saturation&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I then click on edit and format the title and change the colours for the data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>Next I created I heat map for Instances by Edition. The picture shows the details&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>And a column chart for Instances by Version&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/9.png?w=300"
+loading="lazy"
+alt="9"
+>&lt;/a>&lt;/p>
+&lt;p>I also add a table showing the number of instances in each location and a slicer for environment.&lt;/p>
+&lt;p>Even though you have added one slicer, you are able to slice the data by clicking on the charts. If I click on Developer Edition I can quickly see which versions and locations they are in&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/10.png?w=300"
+loading="lazy"
+alt="10"
+>&lt;/a>&lt;/p>
+&lt;p>This works for the map and the column chart as well. This has all been created using live data as a base with all identifying information altered, Bolton is where I was born and the other locations are chosen at random, all other figures and rollups have also been altered.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/11.png?w=300"
+loading="lazy"
+alt="11"
+>&lt;/a>&lt;/p>
+&lt;p>To create the other report I create two donut charts for Instances by version and by location using steps similar to my previous post and then add some tables for location, edition and xp_cmdshell enabled as well as some cards showing total numbers of Servers, Instances and Availability Groups and a slicer for environment to create a report like this, you can use the donut charts to slice the data as well&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/12.png?w=300"
+loading="lazy"
+alt="12"
+>&lt;/a>&lt;/p>
+&lt;p>But there are so many different points of information gathered by this script that you get extra value using the natural language query on powerbi.com.&lt;/p>
+&lt;p>Click Publish and enter your powerbi.com credentials and then log into powerbi.com in a browser and you will see your report and your dataset. (Note, you can easily filter to find your dashboards, reports and data sets)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/13.png?w=173"
+loading="lazy"
+alt="13"
+>&lt;/a>&lt;/p>
+&lt;p>Click the plus sign to create a new dashboard and click the pin on any of the objects in your report to pin them to the dashboard&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/14.png?w=300"
+loading="lazy"
+alt="14"
+>&lt;/a>&lt;/p>
+&lt;p>Then you can view (and share) your dashboard&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/15.png?w=300"
+loading="lazy"
+alt="15"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have done this you can query your data using natural language. It will cope with spelling mistakes and expects the column names so you may want to think about renaming them in your report by right clicking on them after you get your data.&lt;/p>
+&lt;p>You can ask it questions and build up information on the fly and alter it as you need it. As a DBA doing this and imagining enabling others to be able to ask these questions whenever they want from a browser and as many times as they like, it was very cool!&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/16.png?w=300"
+loading="lazy"
+alt="16"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/17.png?w=300"
+loading="lazy"
+alt="17"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/18.png?w=300"
+loading="lazy"
+alt="18"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/19.png?w=300"
+loading="lazy"
+alt="19"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/20.png?w=300"
+loading="lazy"
+alt="20"
+>&lt;/a>&lt;/p>
+&lt;p>Pretty cool, I think you and any of your &amp;lsquo;requestors&amp;rsquo; would agree&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You can get all of the scripts here&lt;/a>&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>You Have To Start Somewhere</title><link>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</link><pubDate>Sun, 10 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/02/medium_33194896_thumb.jpg" alt="Featured image of post You Have To Start Somewhere" />&lt;p>![medium_33194896]({{ &amp;ldquo;/assets/uploads/2013/02/medium_33194896_thumb.jpg&amp;rdquo; | relative_url }})&lt;/p>
+&lt;p>The hardest part is looking at the blank page and beginning to type. It’s much easier to go and play with the settings of the site, to look at plugins and other cool things. The only other blog I have written was &lt;a class="link" href="http://wombatsdojogle.wordpress.com" target="_blank" rel="noopener"
+>http://wombatsdojogle.wordpress.com&lt;/a>. This was a little easer as there was always ‘something’ that needed to be written about. Whether it was training or route planning or every day on the road I had material and an obvious thing to write.&lt;/p>
+&lt;p>This is a little harder for me so I will begin as follows&lt;/p>
+&lt;p>During different careers working in secure units, working for a small family firm doing everything from delivery driving to office work and working for myself selling things via eBay and at car boot sales I have always been interested in computers. I was (still am) the fella who could fix and sort things out. Towards the end I was getting paid for it too. I helped small businesses and individuals, I set up systems, reinstalled operating systems, dealt with viruses. You know the sort of thing. When things dried up and circumstances changed meaning I could spend some time away from home I got a job at an arts university. In a small team my responsibilities ranged from password resets and printer installs to rolling out new PCs and laptops and helping to merge active directory domains. I loved it. The travel too and from work was a pain at times but the job was grand though the pay wasn’t!!&lt;/p>
+&lt;p>I joined MyWork in a service desk role. Not your typical log and flog sort of place but a 24/7 team responsible for the first answering of the phone to a significant amount of second line fixing and routine IT tasks invaluable to the running of MyWork. A couple of years later after many suggestions of jobs I should apply for and plenty of encouragement from colleagues I applied for and got the position of Oracle DBA. That didn’t work out quite as expected and two months later I was asked to move to be a SQL DBA. That was 18 months ago and I am astonished by how much I have learnt so far and still slightly daunted by the sheer amount there still is to learn.&lt;/p>
+&lt;p>The reason I was asked to move is that responsibility for the SQL estate had moved to the team and the one SQL DBA was struggling with the sheer amount of work required. He had joined only a few months earlier and found that best practice and SQL had not been applied particularly well and with more than 700 databases to support he couldn’t keep up.&lt;/p>
+&lt;p>He and I began to make changes. Permissions for developers were removed – no more sysadmins for developers on live systems. Backups were run 7 days a week and checked every day. Service accounts were set up to run the various SQL services per server. Documentation was begun. All the good things that should be done were started to be done.&lt;/p>
+&lt;p>There were arguments and outbursts. Developers took time to understand that we were doing things for the best of MyWork and not to annoy them or stop them working. We got things wrong for sure. We didn’t communicate well with colleagues in other teams at times but we had the backing of our line management.&lt;/p>
+&lt;p>Then my colleague left to go to pastures new. I had been a SQL DBA for exactly 6 months and I was on my own. Then my line manager left so I had to look after the general maintenance of the Oracle estate as well. There are also some Ingres databases critical to MyWork and they were my responsibility as well.&lt;/p>
+&lt;p>For a few months I somehow managed to keep everything going without making any major booboos. It was a struggle. I was fighting my lack of knowledge, the sheer amount of work and running much too hard on caffeine and nicotine. At the end of last year some salvation arrived. First an Oracle DBA joined then a team lead (also an Oracle DBA) and another SQL DBA. Not the many years experienced SQL DBA I had hoped for who could advise me and teach me but I sure am glad he’s here.&lt;/p>
+&lt;p>In the last few weeks I am beginning to see the benefit of this. No longer on call all the time. Not as much fire fighting. Able to plan my day instead of walking in and dealing with whoever or whatever was shouting loudest. I was finally able to go to the local SQL User Group for the first time last month.&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/&lt;/a>&lt;/p>
+&lt;p>and meet up with some fabulous people.&lt;/p>
+&lt;p>I decided to start to write a blog about my experience. I hope it will show me how far I have come, how much I have learnt and the way I have done it. It may be of use to people and hopefully it will increase my interaction with the rest of the SQL community who are without doubt the most interactive and helpful group of people mainly without egos.&lt;/p>
+&lt;p>I have an idea of my next post. It will be about resolving the challenge and time spent checking and resolving backups.&lt;/p>
+&lt;p>The idea for it started with reading a blog post by John Samson &lt;a class="link" href="http://www.johnsansom.com" target="_blank" rel="noopener"
+>http://www.johnsansom.com&lt;/a> who can be found on twitter &lt;a class="link" href="https://twitter.com/SqlBrit" target="_blank" rel="noopener"
+>@SQLBrit&lt;/a>&lt;/p>
+&lt;p>The blog post is one of the most read on his blog and is titled&lt;/p>
+&lt;h3 id="the-best-database-administrators-automate-everythinghttpwwwjohnsansomcomthe-best-database-administrators-automate-everything">&lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>The Best Database Administrators Automate Everything&lt;/a>
+&lt;/h3>&lt;p>Here is a quote from that blog entry&lt;/p>
+&lt;blockquote>
+&lt;h4 id="automate-everything">Automate Everything
+&lt;/h4>&lt;p>That’s right, I said everything. Just sit back and take the &lt;em>time&lt;/em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word &lt;em>potentially&lt;/em> from your vocabulary and evaluate how you could automate &lt;strong>e-v-e-r-y-t-h-i-n-g&lt;/strong> that you do.&lt;/p>
+&lt;p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important_Proactive Mode_ tasks/projects to be getting on with&lt;/p>
+&lt;/blockquote>
+&lt;p>I have tried my best to follow this advice. I haven’t always succeeded. Many times I just didn’t have the time to spare to write the automation even though it would save me time later. Now with more assistance in my team I am starting to resolve that&lt;/p>
+&lt;p>My interest in PowerShell, which was piqued when I wanted to organise my photos and a colleague pointed me at a script to sort my photos into year and month, encouraged me to create my favourite automation process which I will describe next time.&lt;/p>
+&lt;p>photo credit: &lt;a class="link" href="http://www.flickr.com/photos/emdot/33194896/" target="_blank" rel="noopener"
+>emdot&lt;/a> via &lt;a class="link" href="http://photopin.com" target="_blank" rel="noopener"
+>photopin&lt;/a> &lt;a class="link" href="http://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener"
+>cc&lt;/a>&lt;/p></description></item></channel></rss>

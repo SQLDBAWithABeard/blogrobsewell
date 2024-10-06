@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MEAP on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/meap/</link><description>Recent content in MEAP on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/meap/index.xml" rel="self" type="application/rss+xml"/><item><title>MEAP MEAP – #dbatoolsMoL – Live Book edition</title><link>https://blog.robsewell.com/blog/meap-meap-dbatoolsmol-live-book-edition/</link><pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/meap-meap-dbatoolsmol-live-book-edition/</guid><description>&lt;p>It’s been a busy time!&lt;/p>
+&lt;p>As well as many other things, the fantastical &lt;a class="link" href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life" target="_blank" rel="noopener"
+>BDFL&lt;/a> of &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> Chrissy Lemaire &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>@cl&lt;/a> and myself have written enough of a chunk of &lt;em>&lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>Learn dbatools in a Month of Lunches&lt;/a>&lt;/em> that our publisher &lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>Manning Publications&lt;/a> have agreed to release it as a MEAP. Not a text book, this book is written in a fun conversational style and split up into chapters that you can read in a lunch-time.&lt;/p>
+&lt;p>It is impossible for me to hear MEAP and not think of this 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://tenor.com/view/hungry-coyote-looney-tunes-gif-5063446" target="_blank" rel="noopener"
+>Roadrunner Speeding GIF&lt;/a> from &lt;a class="link" href="https://tenor.com/search/hungry-gifs" target="_blank" rel="noopener"
+>Hungry GIFs&lt;/a>&lt;/p>
+&lt;p>but I expect you are wondering what a MEAP is?&lt;/p>
+&lt;blockquote>
+&lt;p>What is MEAP?
+A book can take a year or more to write, so how do you learn that hot new technology today? The answer is MEAP, the Manning Early Access Program. In MEAP, you read a book chapter-by-chapter while it’s being written and get the final eBook as soon as it’s finished. If you pre-order the pBook, you’ll get it long before it’s available in stores.&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.manning.com/meap-program" target="_blank" rel="noopener"
+>https://www.manning.com/meap-program&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Basically, to make it easy to get and for those that like to get in early, you can order the book and get the first 4 chapters (three in reality) RIGHT NOW!! (It also means that Chrissy and I have to write the rest of book – dang still going to be busy!)&lt;/p>
+&lt;p>Simply head over to &lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>https://beard.media/bookblog&lt;/a> and use the code mlsewell and you can get access to the book too.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/08/meap.png"
+loading="lazy"
+>](&lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+>https://beard.media/bookblog&lt;/a>)&lt;/p>
+&lt;p>This will also give you access to the live book.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/livebook.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>live book&lt;/p>
+&lt;p>The live book is fantastic, you can read the whole book from within your browser. See the three icons that appear to the right of the book?&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/stuffage.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>3 little icons (no porridge)&lt;/p>
+&lt;p>The left hand one enables you to bookmark an important part so that you can come back to it easily using the bookmarks link in the top right&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/bookmark.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>bookmarks&lt;/p>
+&lt;p>The middle icon enables you to write notes for yourself, maybe ways that you can use the information or maybe comments about an awesome Italian.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/satori.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Shoes&lt;/p>
+&lt;p>The last one is the way that you can make comments and engage us , the authors in conversation, ask questions, request clarification or wonder about Dutch data manglers&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/sander.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I think its down to PII&lt;/p>
+&lt;p>If you select a piece of text, another menu opens up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/highlight.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The first icon lets you highlight the text, to make it easier to find later&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/highlightyellow.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Hover over the highlight and you can choose different colours for different things.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/image.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>or even create pretty pictures for Mathias&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/pretty.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Mathias – Why isn’t he an MVP?&lt;/p>
+&lt;p>You can choose to annotate, which is sort of like highlighting and writing a note with the next icon&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/other-users.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When you want to share a link to a particular part of the book with someone else, you can highlight part of it and click the link icon&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/linkylinky.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>It’s easy to start PowerShell as another user as long as you remember when to press SHIFT&lt;/p>
+&lt;p>Which will highlight the paragraph and open a dialogue at the bottom where you can create and copy the link.&lt;/p>
+&lt;p>By far the most important part for Chrissy and I is the last link. When you find something wrong you can mark it for our attention. Yes, even with Chrissy and I proof reading each others words, the fabulous proof reader Cláudio Silva (&lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+>t&lt;/a>) and awesome tech editor Mike Shepard (&lt;a class="link" href="https://powershellstation.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/MikeShepard70" target="_blank" rel="noopener"
+>t&lt;/a>)  as well as many community reviewers there are still, and will continue to be, issues. So when you find them, highlight them and click the right hand most link&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/09/withwith.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>with with more more than than one one&lt;/p>
+&lt;p>This will open up as shown so that you can fill in what was wrong (Please don’t report this error again Shane &lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/SOZDBA" target="_blank" rel="noopener"
+>t&lt;/a> has beaten you to it!)&lt;/p>
+&lt;p>You will have noticed on social media and elsewhere that we have left some easter eggs in the book&lt;/p>
+&lt;blockquote>
+&lt;p>Yup, we have some easter eggs in &lt;a class="link" href="https://twitter.com/hashtag/dbatoolsMol?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#dbatoolsMol&lt;/a>&lt;/p>
+&lt;p>We hope you enjoy them &lt;a class="link" href="https://t.co/iZa3u8iLPC" target="_blank" rel="noopener"
+>https://t.co/iZa3u8iLPC&lt;/a>&lt;/p>
+&lt;p>— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1167116661503266819?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>August 29, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Whenever you find them or whenever you want to talk about the book on social media, please use the hashtag #dbatoolsMoL – you never know what goodies may end up in your inbox.&lt;/p>
+&lt;p>Oh and if you have got this far and don’t know what dbatools in a Month of Lunches is, listen to the hair and read more &lt;a class="link" href="https://dbatools.io/meap/" target="_blank" rel="noopener"
+>https://dbatools.io/meap/&lt;/a>&lt;/p></description></item></channel></rss>

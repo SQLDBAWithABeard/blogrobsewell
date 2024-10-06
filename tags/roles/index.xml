@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Roles on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/roles/</link><description>Recent content in Roles on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 05 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/roles/index.xml" rel="self" type="application/rss+xml"/><item><title>Quickly Creating Test Users in SQL Server using dbatools</title><link>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-using-dbatools/</link><pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-using-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png" alt="Featured image of post Quickly Creating Test Users in SQL Server using dbatools" /></description></item><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools</title><link>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/</link><pubDate>Mon, 06 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png" alt="Featured image of post Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools" />&lt;p>One of the most visited posts on my blog is nearly two and half years old now – &lt;!-- raw HTML omitted -->Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users&lt;!-- raw HTML omitted -->. I thought it was time to update it and use the &lt;!-- raw HTML omitted -->latest sqlserver module&lt;!-- raw HTML omitted --> and the &lt;!-- raw HTML omitted -->dbatools module&lt;!-- raw HTML omitted -->.&lt;/p>
+&lt;p>You can get the latest version of the sqlserver module by installing SSMS 2016. The &lt;!-- raw HTML omitted -->PASS PowerShell Virtual Chapter&lt;!-- raw HTML omitted --> have created a short link to make this easier for you to remember: &lt;!-- raw HTML omitted -->&lt;a class="link" href="https://sqlps.io/dl" target="_blank" rel="noopener"
+>https://sqlps.io/dl&lt;/a>&lt;!-- raw HTML omitted -->
+Once you have downloaded and installed SSMS you can load the module.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Import-Module sqlserver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is one situation where you will get an error loading the sqlserver module into PowerShell. If you have the SQLPS module already imported then you will get the following error:&lt;/p>
+&lt;blockquote>
+&lt;p>Import-Module : The following error occurred while loading the extended type data file:&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/sqlserver-module-error.png"
+loading="lazy"
+alt="sqlserver-module-error"
+>&lt;/p>
+&lt;p>In that case you will need to remove the SQLPS module first.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Remove-Module sqlps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module sqlserver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The original post dealt with creating a number of test users for a database and assigning them to different roles quickly and easily.
+First let’s quickly create a list of Admin users and a list of Service Users and save them in a text file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$i = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">while ($I -lt 100) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Beard_Service_User$i&amp;#34; | Out-File &amp;#39;C:\temp\Users.txt&amp;#39; -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $i++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$i = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">while ($I -lt 10) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Beard_Service_Admin_$i&amp;#34; | Out-File &amp;#39;C:\temp\Admins.txt&amp;#39; -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $i++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now that we have those users in files we can assign them to a variable by using &lt;code>Get-Content&lt;/code>&lt;/p>
+&lt;p>&lt;code>$Admins = Get-Content 'C:\temp\Admins.txt'&lt;/code>&lt;/p>
+&lt;p>Of course we can use any source for our users&lt;/p>
+&lt;ul>
+&lt;li>a database&lt;/li>
+&lt;li>an excel file&lt;/li>
+&lt;li>Active Directory&lt;/li>
+&lt;li>or even just type them in.&lt;/li>
+&lt;/ul>
+&lt;p>We can use the &lt;code>Add-SQLLogin&lt;/code> command from the sqlserver module to add our users as SQL Logins, but at present we cannot add them as database users and assign them to a role.
+If we want to add a Windows Group or a Windows User to our SQL Server we can do so using:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Add-SqlLogin -ServerInstance $Server -LoginName $User -LoginType WindowsUser -DefaultDatabase tempdb -Enable -GrantConnectSql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice that we need to enable and grant connect SQL to the user.&lt;/p>
+&lt;p>If we want to add a SQL login the code is pretty much the same but we either have to enter the password in an authentication box or pass in a PSCredential object holding the username and password. Keeping credentials secure in PowerShell scripts is outside the scope of this post and the requirement is for none-live environments so we will pass in the same password for all users as a string to the script. You may want or be required to achieve this in a different fashion.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Pass = ConvertTo-SecureString -String $Password -AsPlainText -Force
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Pass
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Add-SqlLogin -ServerInstance $Server -LoginName $User -LoginType $LoginType -DefaultDatabase tempdb -Enable -GrantConnectSql -LoginPSCredential $Credential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We can ensure that we are not trying to add logins that already exist using&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if(!($srv.Logins.Contains($User)))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>$srv&lt;/code> is a &lt;!-- raw HTML omitted -->SQL Server Management Server Object&lt;!-- raw HTML omitted --> which you can create using a snippet. I blogged about &lt;!-- raw HTML omitted -->snippets here&lt;!-- raw HTML omitted --> and you can find my &lt;!-- raw HTML omitted -->list of snippets on GitHub here&lt;!-- raw HTML omitted -->. However, today I am going to use the &lt;!-- raw HTML omitted -->dbatools module &lt;!-- raw HTML omitted -->to create a SMO Server Object using the &lt;!-- raw HTML omitted -->Connect-DbaInstance command&lt;!-- raw HTML omitted --> and assign the server and the database to a variable:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Create a SQL Server SMO Object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = Connect-DbaInstance -SqlInstance $server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db = $srv.Databases[$Database]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once we have our Logins we need to create our database users:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$usr = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.User&amp;#39;) ($db, $User)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$usr.Login = $User
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$usr.Create()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and add them to a database role.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#Add User to the Role
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db.roles[$role].AddMember($User)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I created a little function to call in the script and then simply loop through our users and admins and call the function.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($User in $Users) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Add-UserToRole -Password $Password -User $user -Server $server -Role $Userrole -LoginType SQLLogin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach ($User in $Admins) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Add-UserToRole -Password $Password -User $user -Server $server -Role $adminrole -LoginType SQLLogin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To check that they have been added correctly I simply use the &lt;!-- raw HTML omitted -->Get-DbaRoleMember&lt;!-- raw HTML omitted -->;command from dbatools and output it to &lt;!-- raw HTML omitted -->Out-GridView&lt;!-- raw HTML omitted --> using the alias ogv as I am on the command line:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Get-DbaRoleMember -SqlInstance $server |ogv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which looks like this:&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/get-dbarole-memebr.png"
+loading="lazy"
+alt="get-dbarole-memebr"
+>&lt;/p>
+&lt;p>Once we need to clean up the logins and users we can use the &lt;!-- raw HTML omitted -->Get-SQLLogin&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->Remove-SQLLogin&lt;!-- raw HTML omitted --> commands from the sqlserver module to remove the logins and if we do that first we can then use the dbatools command &lt;!-- raw HTML omitted -->Remove-SQLOrphanuser&lt;!-- raw HTML omitted --> to remove the orphaned users 🙂 (I thought that was rather cunning!)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(Get-SqlLogin -ServerInstance $server).Where{$_.Name -like &amp;#39;*Beard_Service_*&amp;#39;}|Remove-SqlLogin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Remove-SQLOrphanUser -SqlServer $Server -databases $database
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Remove-SQLLogin will prompt for confirmation and the result of the Remove-SQLOrphanUser looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>When you are looking at doing this type of automation with PowerShell, you should remember always to make use of &lt;!-- raw HTML omitted -->Get-Command&lt;!-- raw HTML omitted -->, &lt;!-- raw HTML omitted -->Get-Help&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->Get-Member&lt;!-- raw HTML omitted -->. That will enable you to work out how to do an awful lot. I have a short video on youtube about this:&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/zC-KpI89fkg"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>and when you get stuck come and ask in the SQL Server Slack at &lt;!-- raw HTML omitted -->&lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;!-- raw HTML omitted -->. You will find a powershellhelp channel in there.
+Here is the complete code:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;span class="lnt">76
+&lt;/span>&lt;span class="lnt">77
+&lt;/span>&lt;span class="lnt">78
+&lt;/span>&lt;span class="lnt">79
+&lt;/span>&lt;span class="lnt">80
+&lt;/span>&lt;span class="lnt">81
+&lt;/span>&lt;span class="lnt">82
+&lt;/span>&lt;span class="lnt">83
+&lt;/span>&lt;span class="lnt">84
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#Requires -module sqlserver&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#Requires -module dbatools&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">### Define some variables&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">server&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Password&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Database&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;TheBeardsDatabase&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Admins&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Content&lt;/span> &lt;span class="s1">&amp;#39;C:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s1">emp\Admins.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Users&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Content&lt;/span> &lt;span class="s1">&amp;#39;C:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s1">emp\Users.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;SQLLogin&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">userrole&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">nbsp&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="s1">&amp;#39;Users&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">adminrole&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Admin&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a SQL Server SMO Object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">srv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Connect&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">DbaSqlServer&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">SqlServer&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">srv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Databases&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Database&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Add&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">UserToRole&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">param&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipeline&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipelineByPropertyName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromRemainingArguments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateNotNullOrEmpty&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipeline&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipelineByPropertyName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromRemainingArguments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateNotNullOrEmpty&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipeline&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipelineByPropertyName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromRemainingArguments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateNotNullOrEmpty&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Server&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipeline&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipelineByPropertyName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromRemainingArguments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateNotNullOrEmpty&lt;/span>&lt;span class="p">()]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Role&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">Parameter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Mandatory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipeline&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromPipelineByPropertyName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ValueFromRemainingArguments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">ValidateSet&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;SQLLogin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;WindowsGroup&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;WindowsUser&amp;#34;&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">srv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Logins&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">)))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s1">&amp;#39;SQLLogin&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Pass&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ConvertTo&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">SecureString&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">String&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">AsPlainText&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Force&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">TypeName&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Management&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Automation&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">PSCredential&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ArgumentList&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Pass&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Add&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">SqlLogin&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ServerInstance&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Server&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginName&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">DefaultDatabase&lt;/span> &lt;span class="n">tempdb&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Enable&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">GrantConnectSql&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginPSCredential&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Credential&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">elseif&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s1">&amp;#39;WindowsGroup&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">or&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">eq&lt;/span> &lt;span class="s1">&amp;#39;WindowsUser&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Add&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">SqlLogin&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ServerInstance&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Server&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginName&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">DefaultDatabase&lt;/span> &lt;span class="n">tempdb&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Enable&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">GrantConnectSql&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Contains&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">)))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Add user to database&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">usr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Microsoft.SqlServer.Management.Smo.User&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Login&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Create&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">#Add User to the Role&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">roles&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">role&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AddMember&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Add&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">UserToRole&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">user&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Server&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">server&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Role&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Userrole&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="n">SQLLogin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Admins&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Add&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">UserToRole&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Password&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">User&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">user&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Server&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">server&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Role&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">adminrole&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">LoginType&lt;/span> &lt;span class="n">SQLLogin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">DbaRoleMember&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">SqlInstance&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">server&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">ogv&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Happy Automating!&lt;/p></description></item><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p>There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+>up to date version of this post here&lt;/a> using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> and the sqlserver module&lt;/p>
+&lt;p>But if you want to continue with this way read on!!&lt;/p>
+&lt;p>Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Windows Users&lt;/a> or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+>SQL Users&lt;/a> using the last two days posts, today we shall add them to a role on a database.&lt;/p>
+&lt;p>As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+>previously&lt;/a> I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p>
+&lt;p>So with each database having the correct roles created and the users created we just need to add the user to the database and to the role. This is easily done with PowerShell.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image70.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image70.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The &lt;code>Add-UserToRole&lt;/code> function takes four parameters Server,Database,User and Role and does a series of error checks.&lt;/p>
+&lt;p>With these functions you can easily create a number of Users and add them to database roles quickly and easily and repeatedly.&lt;/p>
+&lt;p>If the test team come to you and require 10 Test Users and 3 Test Administrators adding to the test database. I create 2 notepad files&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image71.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image71.png"
+loading="lazy"
+alt="image"
+>&lt;/a>  &lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image72.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image72.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and use them with the &lt;code>Add-SQLAccountToSQLRole&lt;/code> and &lt;code>Add-UserToRole&lt;/code> functions to create the users&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image73.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image73.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Here are the results in PowerShell&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image74.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image74.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and in SSMS&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image75.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image75.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The Code is here&lt;/p>
+&lt;pre>&lt;code>############################################################# ################################
+#
+# NAME: Add-UserToRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to add user or group to a role on a database
+#
+# USAGE: Add-UserToRole fade2black Aerosmith Test db_owner
+#
+Function Add-UserToRole ([string] $server, [String] $Database , [string]$User, [string]$Role)
+{
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+#Check Database Name entered correctly
+$db = $svr.Databases[$Database]
+if($db -eq $null)
+{
+Write-Output &amp;quot; $Database is not a valid database on $Server&amp;quot;
+Write-Output &amp;quot; Databases on $Server are :&amp;quot;
+$svr.Databases|select name
+break
+}
+#Check Role exists on Database
+$Rol = $db.Roles[$Role]
+if($Rol -eq $null)
+{
+Write-Output &amp;quot; $Role is not a valid Role on $Database on $Server &amp;quot;
+Write-Output &amp;quot; Roles on $Database are:&amp;quot;
+$db.roles|select name
+break
+}
+if(!($svr.Logins.Contains($User)))
+{
+Write-Output &amp;quot;$User not a login on $server create it first&amp;quot;
+break
+}
+if (!($db.Users.Contains($User)))
+{
+# Add user to database
+$usr = New-Object ('Microsoft.SqlServer.Management. Smo.User') ($db, $User)
+$usr.Login = $User
+$usr.Create()
+#Add User to the Role
+$Rol = $db.Roles[$Role]
+$Rol.AddMember($User)
+Write-Output &amp;quot;$User was not a login on $Database on $server&amp;quot;
+Write-Output &amp;quot;$User added to $Database on $Server and $Role Role&amp;quot;
+}
+else
+{
+#Add User to the Role
+$Rol = $db.Roles[$Role]
+$Rol.AddMember($User)
+Write-Output &amp;quot;$User added to $Role Role in $Database on $Server &amp;quot;
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Creating SQL User and adding to Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</link><pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</guid><description>&lt;p>Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+>PowerShell Box of Tricks&lt;/a> series.&lt;/p>
+&lt;p>In yesterdays post &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+>Creating a Windows User and Adding to SQL Role&lt;/a> we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.&lt;/p>
+&lt;p>It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image69.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image69.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The same error checking is performed as the Windows Login function. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the role object is Null for the Roles and the Contains Method for the Logins&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image99.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image99.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The function is called as follows.&lt;/p>
+&lt;pre>&lt;code>Add-SQLAccountToSQLRole FADE2BLACK Test Password01 dbcreator
+&lt;/code>&lt;/pre>
+&lt;p>The code can be found here&lt;/p>
+&lt;pre>&lt;code>############################################################# ###########
+#
+# NAME: Add-SQLAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a sql user and add them to a server role
+#
+# USAGE: Add-SQLAccountToSQLRole FADE2BLACK Test Password01 dbcreator
+# Add-SQLAccountToSQLRole FADE2BLACK Test Password01 public
+Function Add-SQLAccountToSQLRole ([String]$Server, [String] $User, [String]$Password, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Host &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$SVRRole.AddMember($LoginName)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'SqlLogin'
+$SqlUser.PasswordExpirationEnabled = $false
+$SqlUser.Create($Password)
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$SVRRole.AddMember($LoginName)
+}
+}
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Creating a Windows User and adding to a SQL Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</link><pubDate>Fri, 20 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image67.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image67.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The function does some simple error checking. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the Role object is Null for the Roles and the Contains Method for the Logins&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image98.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image98.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>Add-WindowsAccountToSQLRole FADE2BLACK ‘FADE2BLACK\Test’ public
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>###########################################################
+#
+# NAME: Add-WindowsAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a windows user and add them to a server role
+#
+# USAGE: Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' dbcreator
+# Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' public
+Function Add-WindowsAccountToSQLRole ([String]$Server, [String] $User, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Output &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'WindowsUser'
+$SqlUser.Create()
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted --></description></item><item><title>Checking Drive Sizes with PowerShell</title><link>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</link><pubDate>Fri, 06 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image31.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image32.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image32.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and here are the results from my Azure VM. (See &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>My previous posts on how to create your own Azure VMs with PowerShell&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image33.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image33.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>#############################################################################
+#
+# NAME: Show-DriveSizes.ps1
+# AUTHOR: Rob Sewell http://sqldbawiththebeard.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for displaying drivesizes
+# USAGE: Show-DriveSizes server1
+###########################################
+Function Show-DriveSizes ([string]$Server) {
+$Date = Get-Date
+Write-Host -foregroundcolor DarkBlue -backgroundcolor yellow &amp;quot;$Server - - $Date&amp;quot;
+#interogate wmi service and return disk information
+$disks = Get-WmiObject -Class Win32_logicaldisk -Filter &amp;quot;Drivetype=3&amp;quot; -ComputerName $Server
+$diskData = $disks | Select DeviceID, VolumeName ,
+# select size in Gbs as int and label it SizeGb
+@{Name = &amp;quot;SizeGB&amp;quot;; Expression = {$_.size / 1GB -as [int]}},
+# select freespace in Gbs and label it FreeGb and two deciaml places
+@{Name = &amp;quot;FreeGB&amp;quot;; Expression = {&amp;quot;{0:N2}&amp;quot; -f ($_.Freespace / 1GB)}},
+# select freespace as percentage two deciaml places and label it PercentFree
+@{Name = &amp;quot;PercentFree&amp;quot;; Expression = {&amp;quot;{0:P2}&amp;quot; -f ($_.Freespace / $_. Size)}}
+$diskdata
+}
+&lt;/code>&lt;/pre></description></item><item><title>SQL login object permissions via PowerShell</title><link>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</link><pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-SQLServerPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Enumerating Server and Database Role permissions or object permissions
+#
+# USAGE Show-SQLServerPermissions Server1
+# ————————————————————————
+Function Show-SQLServerPermissions ($SQLServer) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$selected = &amp;quot;&amp;quot;
+$selected = Read-Host &amp;quot;Enter Selection
+1.) Role Membership or
+2.) Object Permissions&amp;quot;
+Switch ($Selected) {
+1 {
+Write-Host &amp;quot;#### Server Role Membership on $Server ############################################## `n`n&amp;quot;
+foreach ($Role in $Server.Roles) {
+if ($Role.EnumServerRoleMembers().count -ne 0) {
+Write-Host &amp;quot;############### Server Role Membership for $role on $Server #########################`n&amp;quot;
+$Role.EnumServerRoleMembers()
+}
+}
+Write-Host &amp;quot;################################################################ ######################&amp;quot;
+Write-Host &amp;quot;################################################################ ######################`n `n `n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### $Database Permissions on $Server ###############################################`n&amp;quot;
+foreach ($role in $Database.Roles) {
+if ($Role.EnumMembers().count -ne 0) {
+Write-Host &amp;quot;########### Database Role Permissions for $Database $Role on $Server ################`n&amp;quot;
+$Role.EnumMembers()
+}
+}
+}
+}
+2 {
+Write-Host &amp;quot;################## Object Permissions on $Server ################################`n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### Object Permissions on $Database on $Server #################################`n&amp;quot;
+foreach ($user in $database.Users) {
+foreach ($databasePermission in $database. EnumDatabasePermissions($user.Name)) {
+Write-Host $databasePermission.PermissionState $databasePermission.PermissionType &amp;quot;TO&amp;quot; $databasePermission.Grantee
+}
+foreach ($objectPermission in $database. EnumObjectPermissions($user.Name)) {
+Write-Host $objectPermission.PermissionState $objectPermission.PermissionType &amp;quot;ON&amp;quot; $objectPermission.ObjectName &amp;quot;TO&amp;quot; $objectPermission. Grantee
+}
+}
+}
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted --></description></item><item><title>Checking SQL Server User Role Membership with PowerShell</title><link>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</link><pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-SQLUserPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function to Display the permissions a user has across the estate
+# NOTE - Will not show permissions granted through AD Group Membership
+#
+# USAGE Show-SQLUserPermissions DBAwithaBeard
+Function Show-SQLUserPermissions ($user)
+{
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | out-null
+# Suppress Error messages - They will be displayed at the end
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+#cls
+$Query = @&amp;quot;
+SELECT
+IL.ServerName
+FROM [dbo].[InstanceList] IL
+WHERE NotContactable = 0
+AND Inactive = 0
+AND DatabaseEngine = 'Microsoft SQL Server'
+&amp;quot;@
+Try
+{
+$Results = (Invoke-Sqlcmd -ServerInstance HMDBS02 -Database DBADatabase -Query $query -ErrorAction Stop).ServerName
+}
+catch
+{
+Write-Error &amp;quot;Unable to Connect to the DBADatabase - Please Check&amp;quot;
+}
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$user&amp;quot;,&amp;quot;DOMAIN3\$user&amp;quot;, &amp;quot;DOMAIN4\$user&amp;quot; ,&amp;quot;$user&amp;quot; )
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;Logins for `n $logins displayed below&amp;quot;
+Write-Output &amp;quot;################################# `n&amp;quot;
+#loop through each server and each database and display usernames, servers and databases
+Write-Output &amp;quot; Server Logins&amp;quot;
+foreach($server in $Results)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($login in $logins)
+{
+if($srv.Logins.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $login &amp;quot;
+foreach ($Role in $Srv.Roles)
+{
+$RoleMembers = $Role. EnumServerRoleMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role on $Server&amp;quot;
+}
+}
+}
+else
+{
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;`n Database Logins&amp;quot;
+foreach($server in $servers)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($database in $srv.Databases)
+{
+foreach($login in $logins)
+{
+if($database.Users.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $database , $login &amp;quot;
+foreach($role in $Database.Roles)
+{
+$RoleMembers = $Role.EnumMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role Role on $Database on $Server&amp;quot;
+}
+}
+}
+else
+{
+continue
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Finished - If there are no logins displayed above then no logins were found!&amp;quot;
+Write-Output &amp;quot;#########################################&amp;quot;
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

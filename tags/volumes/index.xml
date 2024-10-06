@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Volumes on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/volumes/</link><description>Recent content in Volumes on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/volumes/index.xml" rel="self" type="application/rss+xml"/><item><title>Persisting databases with named volumes on Windows with docker compose</title><link>https://blog.robsewell.com/blog/persisting-databases-with-named-volumes-on-windows-with-docker-compose/</link><pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/persisting-databases-with-named-volumes-on-windows-with-docker-compose/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-27.png" alt="Featured image of post Persisting databases with named volumes on Windows with docker compose" />&lt;p>With all things containers I refer to my good friend Andrew Pruski. Known as &lt;a class="link" href="https://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>dbafromthecold on twitter&lt;/a> he blogs at &lt;a class="link" href="https://dbafromthecold.com/" target="_blank" rel="noopener"
+>https://dbafromthecold.com&lt;/a>&lt;/p>
+&lt;p>I was reading his latest blog post &lt;a class="link" href="https://dbafromthecold.com/2019/03/21/using-docker-named-volumes-to-persist-databases-in-sql-server" target="_blank" rel="noopener"
+>Using docker named volumes to persist databases in SQL Server&lt;/a> and decided to give it a try.&lt;/p>
+&lt;p>His instructions worked perfectly and I thought I would try them using a docker-compose file as I like the ease of spinning up containers with them.&lt;/p>
+&lt;p>I created a docker-compose file like this which will map my backup folder on my Windows 10 laptop to a directory on the container and two more folders to the system folders on the container in the same way as Andrew has in his blog.&lt;/p>
+&lt;pre>&lt;code>version: '3.7'
+services:
+2019-CTP23:
+image: mcr.microsoft.com/mssql/server:2019-CTP2. 3-ubuntu
+ports:
+- &amp;quot;15591:1433&amp;quot;
+- &amp;quot;5022:5022&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- C:\MSSQL\DockerFiles\datafiles:/var/opt/sqlserver
+- C:\MSSQL\DockerFiles\system:/var/opt/mssql
+&lt;/code>&lt;/pre>
+&lt;p>and then from the directory I ran&lt;/p>
+&lt;pre>&lt;code>docker-compose up -d
+&lt;/code>&lt;/pre>
+&lt;p>This will build the containers as defined in the docker-compose file. The -d runs the container in the background. This was the result.&lt;/p>
+&lt;p>UPDATE – 2019-03-27&lt;/p>
+&lt;p>I have no idea why, but today it has worked as expected using the above docker-compose file. I had tried this a couple of times, restarted docker and restarted my laptop and was consistently getting the results below – however today it has worked&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-28.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>So feel free to carry on reading, it’s a fun story and it shows how you can persist the databases in a new container but the above docker-compose has worked!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-20.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>The command completed successfully but as you can see on the left the container is red because it is not running. (I am using the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.docker-explorer" target="_blank" rel="noopener"
+>Docker Explorer extension for Visual Studio C&lt;/a>&lt;/p>
+&lt;p>I inspected the logs from the container using&lt;/p>
+&lt;pre>&lt;code> docker logs ctp23_2019-CTP23_1
+&lt;/code>&lt;/pre>
+&lt;p>which returned&lt;/p>
+&lt;blockquote>
+&lt;p>This is an evaluation version. There are [153] days left in the evaluation period.&lt;br>
+This program has encountered a fatal error and cannot continue running at Tue Mar 26 19:40:35 20&lt;br>
+19&lt;br>
+The following diagnostic information is available:&lt;br>
+&lt;code>Reason: 0x00000006 Status: 0x40000015 Message: Kernel bug check Address: 0x6b643120&lt;/code>&lt;br>
+Parameters: 0x10861f680&lt;br>
+Stacktrace: 000000006b72d63f 000000006b64317b 000000006b6305ca&lt;br>
+000000006b63ee02 000000006b72b83a 000000006b72a29d&lt;br>
+000000006b769c02 000000006b881000 000000006b894000&lt;br>
+000000006b89c000 0000000000000001&lt;br>
+Process: 7 – sqlservr&lt;br>
+Thread: 11 (application thread 0x4)&lt;br>
+Instance Id: e01b154f-7986-42c6-ae13-c7d34b8b257d&lt;br>
+Crash Id: 8cbb1c22-a8d6-4fad-bf8f-01c6aa5389b7&lt;br>
+Build stamp: 0e53295d0e1704ae5b221538dd6e2322cd46134e0cc32be49c887ca84cdb8c10&lt;br>
+Distribution: Ubuntu 16.04.6 LTS&lt;br>
+Processors: 2&lt;br>
+Total Memory: 4906205184 bytes&lt;br>
+Timestamp: Tue Mar 26 19:40:35 2019&lt;br>
+Ubuntu 16.04.6 LTS&lt;br>
+Capturing core dump and information to /var/opt/mssql/log…&lt;br>
+dmesg: read kernel buffer failed: Operation not permitted&lt;br>
+No journal files were found.&lt;br>
+No journal files were found.&lt;br>
+Attempting to capture a dump with paldumper&lt;br>
+WARNING: Capture attempt failure detected&lt;br>
+Attempting to capture a filtered dump with paldumper&lt;br>
+WARNING: Attempt to capture dump failed. Reference /var/opt/mssql/log/core.sqlservr.7.temp/log/&lt;br>
+paldumper-debug.log for details&lt;br>
+Attempting to capture a dump with gdb&lt;br>
+WARNING: Unable to capture crash dump with GDB. You may need to&lt;br>
+allow ptrace debugging, enable the CAP_SYS_PTRACE capability, or&lt;br>
+run as root.&lt;/p>
+&lt;/blockquote>
+&lt;p>which told me that …………. it hadn’t worked. So I removed the containers with&lt;/p>
+&lt;pre>&lt;code>docker-compose down
+&lt;/code>&lt;/pre>
+&lt;p>I thought I would create the volumes ahead of time like Andrew’s blog had mentioned with&lt;/p>
+&lt;pre>&lt;code>docker volume create mssqlsystem
+docker volume create mssqluser
+&lt;/code>&lt;/pre>
+&lt;p>and then use the volume names in the docker-compose file mapped to the system folders in the container, this time the result was&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-21.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>ERROR: Named volume “mssqlsystem:/var/opt/sqlserver:rw” is used in service “2019-CTP23” but no declaration was found in the volumes section.&lt;/p>
+&lt;/blockquote>
+&lt;p>So that didn&amp;rsquo;t work either 🙂&lt;/p>
+&lt;p>I decided to inspect the volume definition using&lt;/p>
+&lt;pre>&lt;code> docker volume inspect mssqlsystem
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-22.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can see the mountpoint is /var/lib/docker/volumes/mssqlsystem/_data so I decided to try a docker-compose like this&lt;/p>
+&lt;p>version: &amp;lsquo;3.7&amp;rsquo;&lt;/p>
+&lt;p>services:
+2019-CTP23:
+image: mcr.microsoft.com/mssql/server:2019-CTP2.3-ubuntu
+ports:&lt;br>
+- &amp;ldquo;15591:1433&amp;rdquo;
+- &amp;ldquo;5022:5022&amp;rdquo;
+environment:
+SA_PASSWORD: &amp;ldquo;Password0!&amp;rdquo;
+ACCEPT_EULA: &amp;ldquo;Y&amp;rdquo;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- /var/lib/docker/volumes/mssqluser/_data:/var/opt/sqlserver
+- /var/lib/docker/volumes/mssqlsystem/_data:/var/opt/mssql&lt;/p>
+&lt;p>and then ran docker-compose up without the -d flag so that I could see all of the output&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-23.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can see in the output that the system database files are being moved. That looks like it is working so I used CTRL + C to stop the container and return the terminal. I then ran docker-compose up -d and&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-24.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I created a special database for Andrew.&lt;/p>
+&lt;blockquote>
+&lt;p>This made me laugh out loud…as there&amp;rsquo;s a strong possibility that could happen &lt;a class="link" href="https://t.co/sh0pnhtPQy" target="_blank" rel="noopener"
+>https://t.co/sh0pnhtPQy&lt;/a>&lt;/p>
+&lt;p>— Andrew Pruski 🏴󠁧󠁢󠁷󠁬󠁳󠁿 (@dbafromthecold) &lt;a class="link" href="https://twitter.com/dbafromthecold/status/1109253907304206336?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 23, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-25.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I could then remove the container with&lt;/p>
+&lt;pre>&lt;code>docker-compose down
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-26.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>To make sure there is nothing up my sleeve I altered the docker-compose file to use a different name and port but kept the volume definitions the same.&lt;/p>
+&lt;pre>&lt;code>version: '3.7'
+services:
+2019-CTP23-Mk1:
+image: mcr.microsoft.com/mssql/server:2019-CTP2. 3-ubuntu
+ports:
+- &amp;quot;15592:1433&amp;quot;
+- &amp;quot;5022:5022&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- /var/lib/docker/volumes/mssqluser/_data:/var/opt/sqlserver
+- /var/lib/docker/volumes/mssqlsystem/_data:/var/opt/mssql
+&lt;/code>&lt;/pre>
+&lt;p>I ran &lt;code>docker-compose up -d&lt;/code> again and connected to the new container and lo and behold the container is still there&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-27.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>So after doing this, I have learned that to persist the databases and to use docker-compose files I had to map the volume to the mountpoint of the docker volume. Except I haven’t, I have learned that sometimes weird things happen with Docker on my laptop!!&lt;/p></description></item></channel></rss>

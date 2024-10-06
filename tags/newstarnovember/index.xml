@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NewStarNovember on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/newstarnovember/</link><description>Recent content in NewStarNovember on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 24 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/newstarnovember/index.xml" rel="self" type="application/rss+xml"/><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars1.jpg" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="in-the-beginning">In the beginning
+&lt;/h1>&lt;p>It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits Conference&lt;/a> (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don&amp;rsquo;t like it and don&amp;rsquo;t ever do it again. (Narrator - exactly the opposite happened - He loved it and does it &lt;a class="link" href="https://sessionize.com/rob-sewell/" target="_blank" rel="noopener"
+>at every opportunity&lt;/a>)&lt;/p>
+&lt;p>It was not the most brilliant presentation. I learned a lot and blogged about it too &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>as you can read here&lt;/a>. But I enjoyed it and it gave me the confidence to do it again and set me on a path to the wonderful life I have now.&lt;/p>
+&lt;h1 id="should-you-speak-at-your-user-group">Should you speak at your User Group?
+&lt;/h1>&lt;p>Yes&lt;/p>
+&lt;p>OK, you want a bit more?&lt;/p>
+&lt;p>Yes you definitely should.&lt;/p>
+&lt;p>You should try it once.&lt;/p>
+&lt;p>Your user group should be filled with some familiar faces of people who you know will support you and only want the best for you.
+It will usually be a smaller group than at an event like a Data Saturday or other local to your town/city event.
+Your user group leader will be delighted to help and to support you.
+If you don&amp;rsquo;t like it, you don&amp;rsquo;t ever have to do it again.&lt;/p>
+&lt;h1 id="what-is-the-benefit-of-speaking">What is the benefit of speaking?
+&lt;/h1>&lt;p>Why should you put yourself through all of that stress and work to put on a wonderful session? I think there are a number of benefits and most won&amp;rsquo;t come to you from doing a single session.&lt;/p>
+&lt;ul>
+&lt;li>The first one does. You will know your subject more thoroughly. By preparing a session to present, you will definitely research, you will read blogs, you will try things out, you will want to make sure that you know all there is to know. This means that you will be improving your knowledge on the subject.&lt;/li>
+&lt;li>Confidence. Speaking in public will give you more confidence.&lt;/li>
+&lt;li>It will improve your communication skills. You will have to be able to convey your message to others&lt;/li>
+&lt;li>Some people say that a job interview is like a presentation and you can improve that skill. (I am not sure but &lt;a class="link" href="https://blog.robsewell.com/blog/i-hate-interviews-tsql2sday/" target="_blank" rel="noopener"
+>I hate interviews and don&amp;rsquo;t perform well&lt;/a>)&lt;/li>
+&lt;li>It will improve your time management skills. You have to do a presentation on Monday, you need to get everything in place in time for that.&lt;/li>
+&lt;/ul>
+&lt;p>There are plenty of other reasons too.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?
+&lt;/h1>&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> call for papers are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item></channel></rss>

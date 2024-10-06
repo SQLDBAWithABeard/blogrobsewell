@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/tools/</link><description>Recent content in Tools on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 13 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>TSQL2sDay - Do I use Notebooks?</title><link>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</link><pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post TSQL2sDay - Do I use Notebooks?" />&lt;h1 id="do-i-use-notebooks">Do I use Notebooks?
+&lt;/h1>&lt;p>T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+>Twitter&lt;/a>). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Twitter&lt;/a>) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>a website with all previous posts&lt;/a>. Everyone is welcome to participate in this monthly blog post.&lt;/p>
+&lt;p>This month’s T-SQL Tuesday is hosted by Steve. Steve says:&lt;/p>
+&lt;blockquote>
+&lt;p>I want you to write about how you have used, or would like to use, a Jupyter notebook. This seemed to be exciting for many people at first, but I haven’t seen a lot of uptake from users in general. So I’m curious if you are using them.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>The original post is here.&lt;/a>&lt;br>
+&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/a>&lt;/p>
+&lt;h1 id="am-i-using-notebooks-">Am I using Notebooks ?
+&lt;/h1>&lt;p>Hehe. I LOVE notebooks. I use them all of the time and every day.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://blog.robsewell.com/categories/#jupyter-notebooks" target="_blank" rel="noopener"
+>I have written a few posts about them as well&lt;/a>.&lt;/li>
+&lt;li>I have a repository on GitHub with many notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>https://beard.media/Notebooks&lt;/a>.&lt;/li>
+&lt;li>I have given presentations about notebooks &lt;a class="link" href="https://beard.media/presentations" target="_blank" rel="noopener"
+>https://beard.media/presentations&lt;/a>&lt;/li>
+&lt;li>I have videos on my youtube channel about notebooks &lt;a class="link" href="https://beard.media/notebooksyoutube" target="_blank" rel="noopener"
+>https://beard.media/notebooksyoutube&lt;/a>&lt;/li>
+&lt;li>I have written a &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook/0.0.20201008.1" target="_blank" rel="noopener"
+>PowerShell Module&lt;/a> to create Notebooks []&lt;/li>
+&lt;/ul>
+&lt;p>I have assisted clients with using notebooks to&lt;/p>
+&lt;ul>
+&lt;li>Integrate new team members&lt;/li>
+&lt;li>Create a repository of incident response notebooks &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/" target="_blank" rel="noopener"
+>dynamically created with Azure DevOps&lt;/a>&lt;/li>
+&lt;li>Create a repository of daily tasks notebooks&lt;/li>
+&lt;li>Create a repository of common large scale changes&lt;/li>
+&lt;li>Off-load DBA requests to Service Desk with notebooks&lt;/li>
+&lt;li>Use notebooks to demonstrate changes to Product Owners and other teams&lt;/li>
+&lt;li>Use notebooks for diagnosis by customers&lt;/li>
+&lt;li>Use notebooks to investigate Azure environments and Azure Data Services&lt;/li>
+&lt;li>and more&lt;/li>
+&lt;/ul>
+&lt;p>I use notebooks to validate dbachecks PRs, to demonstrate &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbachecks" target="_blank" rel="noopener"
+>dbachecks&lt;/a> and &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbatools" target="_blank" rel="noopener"
+>dbatools&lt;/a> with docker that anyone can use.&lt;/p>
+&lt;p>I am thoroughly looking forward to seeing what other people do with notebooks. I love how the community helps us all to develop and move forward by sharing.&lt;/p>
+&lt;h1 id="all-this-and">All this and
+&lt;/h1>&lt;p>&lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nodatascientist.png"
+loading="lazy"
+alt="nodatascientist"
+>&lt;/a>&lt;br>
+Thank you - &lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>https://www.advancinganalytics.co.uk/&lt;/a>&lt;/p></description></item><item><title>Tooling for TSql2sDay</title><link>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</link><pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post Tooling for TSql2sDay" />&lt;h1 id="tooling-for-tsql2sday">Tooling for TSQL2sDay
+&lt;/h1>&lt;p>T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+>Twitter&lt;/a>). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Twitter&lt;/a>) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>a website with all previous posts&lt;/a>. Everyone is welcome to participate in this monthly blog post.&lt;/p>
+&lt;p>This month’s T-SQL Tuesday is hosted by Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+>Twitter&lt;/a> ). Mikey says:&lt;/p>
+&lt;blockquote>
+&lt;p>Without tools, most of the work would be much harder to do or could not be done at all. Write a blog post about the most helpful and effective tools you use or know of.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://www.bronowski.it/blog/2021/02/t-sql-tuesday-135-the-outstanding-tools-of-the-trade-that-make-your-job-awesome/" target="_blank" rel="noopener"
+>The original post is here.&lt;/a>&lt;/p>
+&lt;p>I miss Mikey, I worked in an office with him until the end of 2019. We used to sit next to each other which meant that I required some tools of my own!&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1113346708631629824" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/mikeyredgatewall.png"
+loading="lazy"
+alt="Twitter"
+>&lt;/a>&lt;/p>
+&lt;p>We had a lot of fun and worked hard in Yorkshire (although he never learnt to make a proper cup of tea!) and both of us learnt new sayings&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/MikeyBronowski/status/1247998435644456960" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/mikeytea.png"
+loading="lazy"
+alt="Twitter"
+>&lt;/a>&lt;/p>
+&lt;h2 id="tools">Tools
+&lt;/h2>&lt;p>Writing that gave me an idea for this blog post. Of course, I could have written about PowerShell, Azure Data Studio, dbatools, dbachecks or many of the other tools I use to deliver change and automate. You will find several good posts in this TSQL2sday series from people like &lt;a class="link" href="https://jesspomfret.com/t-sql-tuesday-135/" target="_blank" rel="noopener"
+>Jess Pomfret&lt;/a> and &lt;a class="link" href="https://jqmartin.info/2021/02/09/t-sql-tuesday-135-tools-of-the-trade/" target="_blank" rel="noopener"
+>John Martin&lt;/a> showing some of those.&lt;/p>
+&lt;p>Instead, I am going to share some of my working from home tools that I cannot do without.&lt;/p>
+&lt;h3 id="coffee">Coffee
+&lt;/h3>&lt;p>Hello, my name is Rob and I drink a lot of coffee! I like to have coffee, I drink a lot of it so we got a coffee machine to make it easier.&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2021/CoffeeMachine.jpg"
+loading="lazy"
+alt="Coffee"
+>&lt;/p>
+&lt;p>It takes beans, which we get delivered via Amazon and turns them into any sort of coffee you like with a press of a button.&lt;/p>
+&lt;h3 id="standing-desk">Standing Desk
+&lt;/h3>&lt;p>Spending a lot of time sitting down without moving much is not much good you and also really easy to do when you are working from home so I got a standing desk from &lt;a class="link" href="https://www.autonomous.ai/standing-desks/smartdesk-2-business" target="_blank" rel="noopener"
+>Autonomous&lt;/a> Which I love. I normally start my morning sitting down, stand up for the standup! Then I will alternate throughout the day between sitting and standing or using my &lt;a class="link" href="https://www.autonomous.ai/office-chairs/ergonomic-stool" target="_blank" rel="noopener"
+>wibbly wobbly Autonomous stool&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/standingdesk.jpg"
+loading="lazy"
+alt="Standingdesk"
+>&lt;/p>
+&lt;h3 id="bicycle">Bicycle
+&lt;/h3>&lt;p>With Covid I was not able to play any cricket last year. I really enjoyed playing cricket. I have played it since I was very small and having a reason to be out in the open, expending some energy and getting my competitive juices flowing was good for me. I have cycled in the past and enjoyed it. With the cricket team I cycled from John o&amp;rsquo; Groats to Lands End for charity a few years ago, so I bought a bike and now I again have a reason to go out in the fresh air and get my competitive juices going again, although I only compete against myself and compare my results on Strava with my previous times. Last year I started riding in April and rode 2897 miles. This gets me out into the beautiful south west UK countryside, expends some energy and keeps me moving, which I think is a good thing!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/bikeride.jpg"
+loading="lazy"
+alt="bikeride"
+>&lt;/p>
+&lt;h3 id="zwift">Zwift
+&lt;/h3>&lt;p>I told you a little fib, well maybe I just neglected the whole story. I &lt;em>did&lt;/em> ride 2897 last year but not all of them are outside. I found that I really enjoy cycling in the morning when I wake up but its not really safe when it is so dark or pleasant to do when the weather is rough, so I have a cycle trainer which I connect to Zwift. This enables me to ride with other people from all over the globe and explore various worlds, both real representations of London, New York and Paris and the virtual world of Watopia where you can see dolphins, whales, shipwrecks, dinosaurs or ride up and through a volcano. This can be really fun and certainly makes it easier for me to cycle more regularly. It has a number of gamifications and even allows you to ride through a tube station at midnight ! (note this was not at midnight but The Jam didnt sing about the tube station at 6-30am!!)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/tubestation.jpg"
+loading="lazy"
+alt="bikeride"
+>&lt;/p>
+&lt;h2 id="most-important-of-all-the-people">Most Important of all The People
+&lt;/h2>&lt;p>The most important tool though is the most useful.&lt;/p>
+&lt;p>The community.&lt;/p>
+&lt;p>The people who take their time to share knowledge, whether by blog posts, presentations, answering #sqlhelp on Twitter or just replying to a DM or an email. Those who organise virtual events or user groups, open source projects and community tooling like Data Saturdays and those who get paid for it as vendor evangelists or Microsoft or other companies employees.&lt;/p>
+&lt;p>The sheer range of knowledge that is readily and freely available with a simple courteous question is amazing and has certainly saved me a bunch of time and helped me out of some difficult to solve situations. Remember to be polite and appreciative of the time that they take out of their day and you will find they are willing to share their knowhow and help.&lt;/p>
+&lt;p>Thank you to all of those people&lt;/p></description></item></channel></rss>

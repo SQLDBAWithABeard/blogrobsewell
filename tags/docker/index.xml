@@ -1,0 +1,1480 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/docker/</link><description>Recent content in Docker on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes lab certificates expired</title><link>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</link><pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post Kubernetes lab certificates expired" />&lt;h1 id="it-wont-start">It won&amp;rsquo;t start!
+&lt;/h1>&lt;p>I have a 3 node kubernetes cluster running in my office that I have used for my &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Azure Arc-enabled data services&lt;/a> presentations over the last year (&lt;a class="link" href="beard.media/presentations" >Side note, my presentations are here&lt;/a>). A few days ago after a power cut I tried to connect to my cluster with &lt;a class="link" href="https://k8slens.dev/" target="_blank" rel="noopener"
+>Lens&lt;/a> and was not able to.&lt;/p>
+&lt;p>I tried to run &lt;code>kubectl get nodes&lt;/code> but got no response.&lt;/p>
+&lt;h2 id="try-on-the-master-node">Try on the master node
+&lt;/h2>&lt;p>I used my windows terminal profile that ssh&amp;rsquo;s into the master node and ran&lt;/p>
+&lt;p>&lt;code>systemctl status kubelet&lt;/code>&lt;/p>
+&lt;p>this resulted in&lt;/p>
+&lt;blockquote>
+&lt;p>rob@beardlinux:~$ systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+Drop-In: /etc/systemd/system/kubelet.service.d
+└─10-kubeadm.conf
+Active: active (running) since Thu 2022-07-07 09:29:00 BST; 8min ago
+Docs: &lt;a class="link" href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener"
+>https://kubernetes.io/docs/home/&lt;/a>
+Main PID: 1201 (kubelet)
+Tasks: 15 (limit: 38316)
+Memory: 120.3M
+CGroup: /system.slice/kubelet.service
+└─1201 /usr/bin/kubelet &amp;ndash;bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf &amp;ndash;kubeconfig=/etc/kub&amp;gt;
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.318044 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.418240 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="how-many-logs">How many logs?
+&lt;/h2>&lt;p>So beardlinux is the master node that we are running on so why can it not be found?&lt;/p>
+&lt;p>&lt;code>journalctl -u kubelet -n 50&lt;/code>&lt;/p>
+&lt;p>that will show me, i thought. It showed&lt;/p>
+&lt;blockquote>
+&lt;p>jrob@beardlinux:~$ journalctl -u kubelet -n 50
+&amp;ndash; Logs begin at Thu 2022-06-16 14:26:08 BST, end at Thu 2022-07-07 19:38:55 BST. &amp;ndash;
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.710347 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.810556 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:50 beardlinux kubelet[1201]: E0707 19:38:50.910804 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.011102 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.111501 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.211840 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.312180 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.412460 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.512751 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.612983 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.713231 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.813398 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:51 beardlinux kubelet[1201]: E0707 19:38:51.913647 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.013891 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.114153 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.214312 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.314439 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.414546 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.514875 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.615009 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.715310 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.815683 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:52 beardlinux kubelet[1201]: E0707 19:38:52.915917 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.016190 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found
+Jul 07 19:38:53 beardlinux kubelet[1201]: E0707 19:38:53.116399 1201 kubelet.go:2243] node &amp;ldquo;beardlinux&amp;rdquo; not found&lt;/p>
+&lt;/blockquote>
+&lt;p>Ah :-(&lt;/p>
+&lt;p>so after some investigation I found&lt;/p>
+&lt;blockquote>
+&lt;p>Jul 06 08:03:09 beardlinux kubelet[1021]: I0706 08:03:09.755007 1021 kubelet_node_status.go:71] Attempting to register node beardlinux
+Jul 06 08:03:09 beardlinux kubelet[1021]: E0706 08:03:09.755338 1021 kubelet_node_status.go:93] Unable to register node &amp;ldquo;beardlinux&amp;rdquo; with API server: Post &amp;ldquo;https://192.168.2.62:6443/api/v1/nodes&amp;rdquo;: dial tcp 192.168.2.62:6443: connect: connection refused&lt;/p>
+&lt;/blockquote>
+&lt;p>which lead me to an issue on GitHub where there was a &lt;a class="link" href="https://github.com/kubernetes/kubeadm/issues/1026#issuecomment-768832968" target="_blank" rel="noopener"
+>comment&lt;/a> to check for expired certificates&lt;/p>
+&lt;h2 id="do-i-have-expired-certificates">Do I have expired certificates?
+&lt;/h2>&lt;p>You can check your certificates using&lt;/p>
+&lt;p>&lt;code>kubeadm certs check-expiration&lt;/code>&lt;/p>
+&lt;p>which resulted in&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/expired-certs.png"
+loading="lazy"
+alt="expired-certs"
+>&lt;/p>
+&lt;h2 id="and-renewing-them">And renewing them
+&lt;/h2>&lt;p>They are renewed using &lt;code>kubeadm certs renew all&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# kubeadm certs renew all
+[renew] Reading configuration from the cluster&amp;hellip;
+[renew] FYI: You can look at this config file with &amp;lsquo;kubectl -n kube-system get cm kubeadm-config -o yaml&amp;rsquo;
+[renew] Error reading configuration from the Cluster. Falling back to default configuration&lt;/p>
+&lt;p>certificate embedded in the kubeconfig file for the admin to use and for kubeadm itself renewed
+certificate for serving the Kubernetes API renewed
+certificate the apiserver uses to access etcd renewed
+certificate for the API server to connect to kubelet renewed
+certificate embedded in the kubeconfig file for the controller manager to use renewed
+certificate for liveness probes to healthcheck etcd renewed
+certificate for etcd nodes to communicate with each other renewed
+certificate for serving etcd renewed
+certificate for the front proxy client renewed
+certificate embedded in the kubeconfig file for the scheduler manager to use renewed&lt;/p>
+&lt;p>Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.&lt;/p>
+&lt;/blockquote>
+&lt;p>stopped and started the kubelet&lt;/p>
+&lt;blockquote>
+&lt;p>root@beardlinux:/home/rob# systemctl stop kubelet
+root@beardlinux:/home/rob# systemctl start kubelet&lt;/p>
+&lt;/blockquote>
+&lt;p>and checked the nodes&lt;/p>
+&lt;blockquote>
+&lt;p>pwsh 7.2.5&amp;gt; kubectl get nodes
+NAME STATUS ROLES AGE VERSION
+beardlinux Ready control-plane,master 376d v1.20.2
+beardlinux2 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2
+beardlinux3 Ready &lt;!-- raw HTML omitted --> 376d v1.20.2&lt;/p>
+&lt;/blockquote>
+&lt;p>I also had to update my config with the new certificate data to make that work as well.&lt;/p></description></item><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" />&lt;h1 id="broken-link">Broken Link
+&lt;/h1>&lt;p>It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+>Twitter&lt;/a> )&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+>&lt;/p>
+&lt;p>Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+>404 page &lt;/a> which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p>
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it">Why do something manual when you can automate it
+&lt;/h2>&lt;p>This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p>
+&lt;p>So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts &lt;a class="link" href="2021-04-11-locally-viewing-github-pages-new-data-saturdays.md" >Running GitHub Pages locally&lt;/a> or &lt;a class="link" href="2021-04-15-locally-viewing-github-pages-locally-with-remote-theme.md" >Running GitHub Pages locally with a Remote Theme (this site has a remote theme)&lt;/a>. Then I could see the changes locally before pushing them to the repository.&lt;/p>
+&lt;p>But my brain didn&amp;rsquo;t work in that way. Instead it thought &amp;ldquo;Hmmm maybe I could do this in the browser in &lt;a class="link" href="https://github.com/features/codespaces" target="_blank" rel="noopener"
+>GitHub Codespaces&lt;/a> and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code&amp;rdquo;&lt;/p>
+&lt;p>The most wonderful Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@jpomfret" target="_blank" rel="noopener"
+>Twitter&lt;/a> and I delivered a &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the &lt;a class="link" href="psconf.eu" >PowerShell Conference Europe&lt;/a> about using dev containers so I had a little knowledge of how it can be done.&lt;/p>
+&lt;h1 id="how-easy-is-it-">How easy is it ?
+&lt;/h1>&lt;p>It&amp;rsquo;s super super easy. Surprisingly easy.&lt;/p>
+&lt;h2 id="open-a-codespace-for-your-repository">Open a codespace for your repository
+&lt;/h2>&lt;p>First I went to the repository for my website and opened a codespace by clicking on the green code button and creating a codespace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/create-codespace.png"
+loading="lazy"
+alt="the create codespace button"
+>&lt;/p>
+&lt;h2 id="add-the-development-container-configuration">Add the development container configuration
+&lt;/h2>&lt;p>Using &lt;code>CTRL SHIFT + P&lt;/code> to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/add-config.png"
+loading="lazy"
+alt="Add the configuration"
+>&lt;/p>
+&lt;p>and follow the prompts&lt;/p>
+&lt;ul>
+&lt;li>Show All Definitions&lt;/li>
+&lt;li>Jekyll&lt;/li>
+&lt;li>bullseye (or buster if you use Apples)&lt;/li>
+&lt;li>lts&lt;/li>
+&lt;/ul>
+&lt;h2 id="the-config-files-are-created">The config files are created
+&lt;/h2>&lt;p>This will create a &lt;code>.devcontainer&lt;/code> directory with&lt;/p>
+&lt;ul>
+&lt;li>devcontainer.json&lt;/li>
+&lt;li>Dockerfile&lt;/li>
+&lt;li>post-create.sh&lt;/li>
+&lt;/ul>
+&lt;p>Which will do all that you need. You can stop here. You will just need to run &lt;code>jekyll serve&lt;/code> to start the website.&lt;/p>
+&lt;h2 id="automatic-regeneration">Automatic regeneration
+&lt;/h2>&lt;p>To make it automatically regenerate. I added&lt;/p>
+&lt;p>&lt;code>bundle exec jekyll serve --force-polling&lt;/code>&lt;/p>
+&lt;p>to the end of the post-create.sh file. This will automatically start the website and regenerate it everytime I make a change :-)&lt;/p>
+&lt;h2 id="view-the-logs">View the logs
+&lt;/h2>&lt;p>You can watch the logs of the regeneration with View Creation Log from the command palette - Use &lt;code>CTRL SHIFT + P&lt;/code> to open it. Then you can see the log output in real-time.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/view-creation-log.png"
+loading="lazy"
+alt="look at the logs"
+>&lt;/p>
+&lt;h2 id="open-the-website-locally">Open the website &amp;ldquo;locally&amp;rdquo;
+&lt;/h2>&lt;p>To open the website from inside the devcontainers the ports are exposed via the configuration. In the browser in codepaces there is a port tab and a button to press to open the website and show the updates that you have written.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/port-forwards.png"
+loading="lazy"
+alt="the ports get forwarded"
+>&lt;/p>
+&lt;p>If you click that you get a live view of the website so that you can validate that it works.&lt;/p>
+&lt;h1 id="and-vs-code">And VS Code?
+&lt;/h1>&lt;p>This showed it being created in codespaces in the browser, you can have the same effect in VS Code by adding a &lt;code>.devcontainer&lt;/code> directory and copying the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/jekyll/.devcontainer" target="_blank" rel="noopener"
+>vs code dev containers repo&lt;/a>&lt;/p>
+&lt;p>The rest is pretty much the same except the url!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/vscode.png"
+loading="lazy"
+alt="running in vs code"
+>&lt;/p>
+&lt;h1 id="rather-have-video-">Rather Have Video ?
+&lt;/h1>&lt;p>If you prefer video then you can find one on Youtube showing the same process.&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/aFFmPlbjfCw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div></description></item><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" />&lt;h1 id="a-different-method-for-my-own-site">A different method for my own site
+&lt;/h1>&lt;p>This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>b&lt;/a> and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+>t&lt;/a> - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+>b&lt;/a> after a twitter discussion a few weeks ago.&lt;/p>
+&lt;blockquote>
+&lt;p>How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="do-you-need-to">Do you need to?
+&lt;/h2>&lt;p>My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code>CTRL + K, V&lt;/code> and you can see a live preview of your post as you type.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>However, I appreciate that at some point you will probably want to see what your site looks like locally, so I decided to look at the blog posts in the theme locally for this blog. My &lt;a class="link" href="_posts%5c2021-04-10-locally-viewing-github-pages-new-data-saturdays.md" >last post&lt;/a> showed how I do this with the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site&lt;/a> but I get an error when running this for my site because it cant find the gem sources. This is because I am using a remote theme for my blog.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/nogemsources.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nogemsources.png"
+loading="lazy"
+alt="nogemsources"
+>&lt;/a>&lt;/p>
+&lt;p>What I could do is work out how to get these in the right place, but I am lazy! Whilst researching for the Data Saturdays site, I had found another docker container, the official Jekyll one &lt;a class="link" href="https://hub.docker.com/r/jekyll/jekyll" target="_blank" rel="noopener"
+>https://hub.docker.com/r/jekyll/jekyll&lt;/a>. I wondered if I could use that.&lt;/p>
+&lt;h2 id="which-version-to-use">Which version to use?
+&lt;/h2>&lt;p>First we need to know which version of Jekyll GitHub Pages is using. You can find all of that information here &lt;a class="link" href="https://pages.github.com/versions/" target="_blank" rel="noopener"
+>https://pages.github.com/versions/&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/githubpagesversions.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/githubpagesversions.jpg"
+loading="lazy"
+alt="ghpagesversions"
+>&lt;/a>&lt;/p>
+&lt;p>So we need to use 3.9.0&lt;/p>
+&lt;p>so I ran&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.9&lt;/code>&lt;/p>
+&lt;p>but&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/noimage.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/noimage.jpg"
+loading="lazy"
+alt="noimage"
+>&lt;/a>&lt;/p>
+&lt;p>so I tried 3.8.6 and it worked for me.&lt;/p>
+&lt;p>&lt;code>docker pull jekyll/jekyll:3.8.6&lt;/code>&lt;/p>
+&lt;h1 id="set-up">Set up
+&lt;/h1>&lt;p>Let&amp;rsquo;s back up a bit and set the environment up. I am using Docker on Windows Subsystem for Linux 2 (WSL2) I installed it &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>using this guide&lt;/a>. I believe this will work using native Docker, you would just need to replace the &lt;code>$PWD&lt;/code> in the example below with a dot &lt;code>.&lt;/code>&lt;/p>
+&lt;p>Once that is installed and the image is pulled, I can then run my blog locally using&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=$PWD:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>or if not using WSL2&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=.:/srv/jekyll -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>The &lt;code>--rm&lt;/code> means that the container will be removed when it is stopped, &lt;code>--volume=&amp;quot;$PWD:/srv/jekyll&amp;quot;&lt;/code> maps the current directory locally to the &lt;code>/srv/jekyll&lt;/code> directory in the container so I need to change the directory to my local repository for my blog. &lt;code>-p 4001:4000&lt;/code> says map port 4001 on my machine to port 4000 on the container. This means that I can view the blog locally at https://localhost:4001. &lt;code>jekyll serve&lt;/code> will build the site and run it for me.&lt;/p>
+&lt;h2 id="of-course-there-is-tweaking">Of course, there is tweaking
+&lt;/h2>&lt;p>We have to make a few changes to make this work easily. When I run the site locally with this command I get the following error and the site would not build.&lt;/p>
+&lt;blockquote>
+&lt;p>Liquid Exception: No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to your github.com repository. in /_layouts/default.html&lt;br>
+ERROR: YOUR SITE COULD NOT BE BUILT:&lt;br>
+No repo name found. Specify using PAGES_REPO_NWO environment variables, &amp;lsquo;repository&amp;rsquo; in your configuration, or set up an &amp;lsquo;origin&amp;rsquo; git remote pointing to yocom repository.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/jekyllerror.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/jekyllerror.jpg"
+loading="lazy"
+alt="jekyllerror"
+>&lt;/a>&lt;/p>
+&lt;p>to fix this add the following to your &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>repository: GITHUBUSERNAME/REPONAME&lt;/code>&lt;/p>
+&lt;p>mine is&lt;/p>
+&lt;p>&lt;code>repository: SQLDBAWithABeard/robsewell&lt;/code>&lt;/p>
+&lt;p>Then when I run the container I get another warning&lt;/p>
+&lt;blockquote>
+&lt;p>GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data.&lt;/p>
+&lt;/blockquote>
+&lt;p>This does not really matter as the site still builds but another warning&lt;/p>
+&lt;blockquote>
+&lt;p>Auto-regeneration may not work on some Windows versions.
+Please see: &lt;a class="link" href="https://github.com/Microsoft/BashOnWindows/issues/216" target="_blank" rel="noopener"
+>https://github.com/Microsoft/BashOnWindows/issues/216&lt;/a>
+If it does not work, please upgrade Bash on Windows or run Jekyll with &amp;ndash;no-watch.&lt;/p>
+&lt;/blockquote>
+&lt;p>means that the site will not auto-regenerate when you make a change and save the file.&lt;/p>
+&lt;p>We fix these errors by adding&lt;/p>
+&lt;p>&lt;code>github: [metadata]&lt;/code>&lt;/p>
+&lt;p>to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>and running the container with an extra switch for the jekyll command &lt;code>--force_polling&lt;/code>&lt;/p>
+&lt;h2 id="so-now-it-works">So now it works?
+&lt;/h2>&lt;p>So with the additional data in the &lt;code>_config.yml&lt;/code> file and the new command&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>the site will build. You will still get the warning for auto-regeneration but it works. The purple arrow and the yellow box show the file that was changed and that it regenerated.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/regenerate.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/regenerate.jpg"
+loading="lazy"
+alt="regenerate"
+>&lt;/a>&lt;/p>
+&lt;p>It will only regenerate whilst running for blog post changes and not for configuration changes, such as altering the &lt;code>_config.yml&lt;/code> file. If you want to see those, you will have to stop the container and re-run it.&lt;/p>
+&lt;p>There is one last problem however. When you write your blog posts in Jekyll you name the file YYYY-MM-DD-Nameoffile.md this will give the post time of YYYY-MM-DD but the file for this blog post is named with a date in the future and by default it doesn&amp;rsquo;t show. The green box shows the file name but there is no corresponding blog post.&lt;/p>
+&lt;p>To fix this we add another entry to the &lt;code>_config.yml&lt;/code> file&lt;/p>
+&lt;p>&lt;code>future: true&lt;/code>&lt;/p>
+&lt;p>This will tell Jekyll to show the posts with a data in the future. Unless you wish to show future posts on your blog when it is live, you will have to remember to change this to&lt;/p>
+&lt;p>&lt;code>future: false&lt;/code>&lt;/p>
+&lt;p>when you push your changes to GitHub so that your blog behaves as expected but now you can see your current blog post and write away and be able to see how it will look in your theme&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/futureposts.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/futureposts.jpg"
+loading="lazy"
+alt="futureposts"
+>&lt;/a>&lt;/p>
+&lt;h1 id="lets-make-it-even-better">Let&amp;rsquo;s make it even better
+&lt;/h1>&lt;p>When you run the container, it will need to download all of the things it needs to run the site. This can take a little time.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/downloadingthings.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/downloadingthings.jpg"
+loading="lazy"
+alt="downloadingthings"
+>&lt;/a>&lt;/p>
+&lt;p>It would be better if we had our own image that had all of those already downloaded for us. Let&amp;rsquo;s create our own image. We need to run our container without the &lt;code>rm&lt;/code> option this time as we need it not to be removed when we stop it.&lt;/p>
+&lt;p>&lt;code>docker run -volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 jekyll/jekyll:3.8 jekyll serve&lt;/code>&lt;/p>
+&lt;p>Once it has finished downloading and installing all that it needs and generated the site press &lt;code>CTRL +C&lt;/code> to stop the container and run&lt;/p>
+&lt;p>&lt;code>docker ps -a&lt;/code>&lt;/p>
+&lt;p>which will show you all of containers.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/dockerps.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/dockerps.jpg"
+loading="lazy"
+alt="dockerps"
+>&lt;/a>&lt;/p>
+&lt;p>Use the first 3 characters of the container. In my example it is &lt;code>760&lt;/code>. If you have more than one, look for the one with the &lt;code>jekyll/jekyll:3.8.6&lt;/code> as the image.&lt;/p>
+&lt;p>Then we can create our own image using&lt;/p>
+&lt;p>&lt;code>docker commit 760 myblogimage&lt;/code>&lt;/p>
+&lt;p>replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;p>Once you have created the image, you can remove the stopped container with&lt;/p>
+&lt;p>&lt;code>docker rm 760&lt;/code>&lt;/p>
+&lt;p>Again, replace &lt;code>760&lt;/code> with your own container.&lt;/p>
+&lt;h2 id="quicker-run">Quicker run
+&lt;/h2>&lt;p>Now you can use your own image and the container will not need to download and install all of the things. Replace &lt;code>jekyll/jekyll:3.8&lt;/code> with &lt;code>myblogimage&lt;/code>&lt;/p>
+&lt;p>&lt;code>docker run --rm --volume=&amp;quot;$PWD:/srv/jekyll&amp;quot; -p 4001:4000 myblogimage jekyll serve --force_polling&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/muchquicker.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/muchquicker.jpg"
+loading="lazy"
+alt="muchquicker"
+>&lt;/a>&lt;/p>
+&lt;p>Happy local blog writing.&lt;/p></description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" />&lt;h1 id="data-saturdays-has-new-clothes">Data Saturdays Has New Clothes!
+&lt;/h1>&lt;p>The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+>&lt;/a>&lt;/p>
+&lt;p>Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+>https://www.dcac.com/&lt;/a> generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+>99designs.com&lt;/a>. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>blog&lt;/a> for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p>
+&lt;h1 id="now-we-have-to-update-the-web-site">Now we have to update the web-site
+&lt;/h1>&lt;p>The next challenge we face is to update the website. As the website is hosted on GitHub Pages using Jekyll, this means that we can easily update the website by updating the code and letting GitHub actions build the new site but we have no way of checking the way that it looks before we push the changes. With such a radical change required, I felt that it would be a good idea to explore how to do this locally.&lt;/p>
+&lt;h2 id="install-everything-you-need-locally">Install everything you need locally
+&lt;/h2>&lt;p>I examined the requirements to create a local development environment and this meant installing Jekyll and Ruby and a host of other things, there appeared to be a whole bundle of quirks and strange errors that may or may not need to be handled so I quickly went off that idea!!&lt;/p>
+&lt;h2 id="docker-to-the-rescue">Docker to the rescue
+&lt;/h2>&lt;p>This is a fantastic use case for using a Docker container. I can host all of the required bits inside a container, spin it up and down as I need it and I don&amp;rsquo;t have to worry about polluting my machine with software and settings or the pain of having to configure it to work.&lt;/p>
+&lt;p>Also, other people have already done a lot of the work so I dont have to.&lt;/p>
+&lt;p>I am running Docker in WSL2. I followed these &lt;a class="link" href="https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2" target="_blank" rel="noopener"
+>instructions&lt;/a> to set it up. It doesn&amp;rsquo;t take very long.&lt;/p>
+&lt;p>With thanks to Hans Kristian Flaatten &lt;a class="link" href="https://github.com/Starefossen" target="_blank" rel="noopener"
+>GitHub&lt;/a> - &lt;a class="link" href="https://twitter.com/Starefossen" target="_blank" rel="noopener"
+>Twitter&lt;/a> who has created &lt;a class="link" href="https://github.com/Starefossen/docker-github-pages" target="_blank" rel="noopener"
+>this docker image&lt;/a> it is as easy as running this from the local directory of the site repository&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v &amp;#34;$PWD&amp;#34;:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you are not using WSL but native Docker on Windows, then the command to run is slightly different&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -it --rm -v .:/usr/src/app -p &amp;#34;4000:4000&amp;#34; starefossen/github-pages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>As soon as the container has started running and built the site I can see my changes locally in my browser at &lt;code>http://localhost:4000/&lt;/code> There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com//assets/uploads/2021/localdev.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localdev.jpg"
+loading="lazy"
+alt="localdev"
+>&lt;/a>&lt;/p>
+&lt;h1 id="develop-and-test">Develop and Test
+&lt;/h1>&lt;p>Now I can make changes to the code in the website and save the file and the site will update. In the below video, you can see that I have updated the favicon so that the new logo appears.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>I shall go back to editing the site now.&lt;/p>
+&lt;h1 id="a-little-feature-if-you-are-working-on-your-event-page">A little &amp;lsquo;Feature&amp;rsquo; if you are working on your event page
+&lt;/h1>&lt;p>If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts &lt;code>http://0.0.0.0:4000/&lt;/code> like &lt;a class="link" href="http://0.0.0.0:4000/2021-04-17-datasaturday0005/" target="_blank" rel="noopener"
+>http://0.0.0.0:4000/2021-04-17-datasaturday0005/&lt;/a>. This will not work on a Windows machine so you will have to replace &lt;code>0.0.0.0&lt;/code> in the address bar with &lt;code>localhost&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/0000.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/0000.jpg"
+loading="lazy"
+alt="0000"
+>&lt;/a>&lt;/p>
+&lt;p>and then it will work&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/localhostworks.jpg"
+loading="lazy"
+alt="localhostworks"
+>&lt;/a>&lt;/p>
+&lt;h1 id="data-saturdays">Data Saturdays
+&lt;/h1>&lt;p>You can find the &lt;a class="link" href="https://datasaturdays.com" target="_blank" rel="noopener"
+>Data Saturdays web-site here&lt;/a>. There is a list of all of the upcoming and past Data Saturdays events available.&lt;/p></description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" />&lt;p>Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;h2 id="jaap-is-awesome">Jaap is awesome
+&lt;/h2>&lt;p>&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+>t&lt;/a> blog post&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a>&lt;/p>
+&lt;h2 id="joel-is-also-awesome">Joel is also awesome!
+&lt;/h2>&lt;p>When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+>t&lt;/a> module BetterCredentials which uses the Windows Credential Manager&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.powershellgallery.com/packages/BetterCredentials/4.5" target="_blank" rel="noopener"
+>https://www.powershellgallery.com/packages/BetterCredentials/4.5&lt;/a>&lt;/p>
+&lt;h2 id="microsoft-also-awesome">Microsoft? Also awesome!
+&lt;/h2>&lt;p>In February, Microsoft released the SecretManagement module for preview.&lt;/p>
+&lt;p>&lt;a class="link" href="https://devblogs.microsoft.com/powershell/secrets-management-development-release?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://devblogs.microsoft.com/powershell/secrets-management-development-release/&lt;/a>&lt;/p>
+&lt;p>Sydney &lt;a class="link" href="https://twitter.com/sydneysmithreal" target="_blank" rel="noopener"
+>t&lt;/a> gave a presentation at the European PowerShell Conference which you can watch on Youtube.&lt;/p>
+&lt;h2 id="good-bye-import-clixml">Good Bye Import-CliXML
+&lt;/h2>&lt;p>So now I say, it is time to stop using Import-Clixml for storing secrets and use the Microsoft.PowerShell.SecretsManagement module instead for storing your secrets.&lt;/p>
+&lt;h2 id="notebooks-are-as-good-as-blog-posts">Notebooks are as good as blog posts
+&lt;/h2>&lt;p>I love notebooks and to show some people who had asked about storing secrets, I have created some. So, because I am efficient lazy I have embedded them here for you to see. You can find them in my Jupyter Notebook repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;p>in the Secrets folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png?resize=630%2C349&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-and-using-the-secrets-management-module">Installing and using the Secrets Management Module
+&lt;/h2>&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="using-the-secret-management-module-in-your-scripts">Using the Secret Management Module in your scripts
+&lt;/h2>&lt;p>Here is a simple example of using the module to provide the credential for a docker container and then to dbatools to query the container&lt;/p>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>How to break a SQL 2019 container on my laptop</title><link>https://blog.robsewell.com/blog/how-to-break-a-sql-2019-container-on-my-laptop/</link><pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-break-a-sql-2019-container-on-my-laptop/</guid><description>&lt;p>Just a very quick post today. At the weekend I blogged about &lt;a class="link" href="https://sqldbawithabeard.com/2019/03/26/persisting-databases-with-named-volumes-on-windows-with-docker-compose/" target="_blank" rel="noopener"
+>creating SQL 2019 containers with named volumes enabling&lt;/a> you to persist your data and yesterday about &lt;a class="link" href="https://sqldbawithabeard.com/2019/04/02/generating-a-workload-against-adventureworks-with-PowerShell/" target="_blank" rel="noopener"
+>creating a random workload using PowerShell&lt;/a> and a big T-SQL script.&lt;/p>
+&lt;p>The interesting thing about creating workload is that you can break things :-)&lt;/p>
+&lt;p>When I created a SQL 2019 container with the data files mapped to a directory on my laptops C Drive with a docker-compose like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">version&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;3.7&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">services&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">CTP23&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">mcr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">microsoft&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">server&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">CTP2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">ubuntu&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ports&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="s2">&amp;#34;15591:1433&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="s2">&amp;#34;5022:5022&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">environment&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SA_PASSWORD&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Password0!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ACCEPT_EULA&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Y&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">volumes&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">BACKUP&lt;/span>\&lt;span class="n">KEEP&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">backups&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">DockerFiles&lt;/span>\&lt;span class="n">datafiles&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">sqlserver&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">-&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">MSSQL&lt;/span>\&lt;span class="n">DockerFiles&lt;/span>\&lt;span class="n">system&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>restore the AdventureWorks database to use the /var/opt/sqlserver directory and run a workload after a while the container stops and when you examine the logs you find&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/D26g3dPXgAAso28.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/D26g3dPXgAAso28.png?fit=630%2C214&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I had a whole load of these errors&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.73 spid58 Error: 17053, Severity: 16, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.73 spid58 FCB::MakePreviousWritesDurable: Operating system error (null) encountered.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.74 spid58 Error: 9001, Severity: 21, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:24.74 spid58 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.05 spid58 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.05 spid58 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.06 spid52 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:48:25.06 spid52 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then some of these&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="mi">019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">02&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">55&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mf">16.26&lt;/span> &lt;span class="n">spid53&lt;/span> &lt;span class="n">Error&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">17053&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Severity&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">16&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">State&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="mi">2019&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">02&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">55&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mf">16.26&lt;/span> &lt;span class="n">spid53&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">sqlserver&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">AdventureWorks2014_Data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mdf&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Operating&lt;/span> &lt;span class="n">system&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="mi">31&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">A&lt;/span> &lt;span class="n">device&lt;/span> &lt;span class="n">attached&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">system&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">functioning&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">encountered&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then it went really bad&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.35 spid53 Error: 3314, Severity: 21, State: 3.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.35 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:25). Typically, the specific failure is logged previously as an error in the operating system error log. Restore the database or file from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.37 spid53 Database AdventureWorks2014 was shutdown due to error 3314 in routine &amp;#39;XdesRMReadWrite::RollbackToLsn&amp;#39;. Restart for non-snapshot databases will be attempted after all connections to the database are aborted.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart packet created for dbid 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.41 spid53 Error during rollback. shutting down database (location: 1).
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">after that it tried to restart the database
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.44 spid53 Error: 3314, Severity: 21, State: 3.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.44 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:25). Typically, the specific failure is logged previously as an error in the operating system error log. Restore the database or file from
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.49 spid53 Error: 3314, Severity: 21, State: 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:16.49 spid53 During undoing of a logged operation in database &amp;#39;AdventureWorks2014&amp;#39; (page (0:0) if any), an error occurred at log record ID (65:6696:1). Typically, the specific failure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">is logged previously as an error in the operating system error log. Restore the database or file from a backup, or repair the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Restart packet processing for dbid 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.04 spid52 [5]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 0.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.06 spid52 Starting up database &amp;#39;AdventureWorks2014&amp;#39;.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>But that caused&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.90 spid76 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:17.90 spid76 The log for database &amp;#39;master&amp;#39; is not available. Check the operating
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Master eh? Now what will you do?&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.55 spid52 29 transactions rolled forward in database &amp;#39;AdventureWorks2014&amp;#39; (5:0). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.90 spid52 1 transactions rolled back in database &amp;#39;AdventureWorks2014&amp;#39; (5:0). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:25.90 spid52 Recovery is writing a checkpoint in database &amp;#39;AdventureWorks2014&amp;#39; (5). This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.16 spid52 Recovery completed for database AdventureWorks2014 (database ID 5) in 7 second(s) (analysis 424 ms, redo 5305 ms, undo 284 ms.) This is an informational message only. No user action is required.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.21 spid52 Parallel redo is shutdown for database &amp;#39;AdventureWorks2014&amp;#39; with worker pool size [1].
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 20:55:26.27 spid52 CHECKDB for database &amp;#39;AdventureWorks2014&amp;#39; finished without errors on 2018-03-24 00:38:39.313 (local time). This is an informational message only; no user action is required.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Interesting, then back to this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.57 spid51 Error: 17053, Severity: 16, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.57 spid51 FCB::MakePreviousWritesDurable: Operating system error (null) encountered.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.62 spid51 Error: 9001, Severity: 21, State: 1.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.62 spid51 The log for database &amp;#39;AdventureWorks2014&amp;#39; is not available. Check the operating system error log for related error messages. Resolve any errors and restart the database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2019-04-02 21:00:00.64 spid51 Error: 9001, Severity: 21, State: 16.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It did all that again before&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">This&lt;/span> &lt;span class="n">program&lt;/span> &lt;span class="n">has&lt;/span> &lt;span class="n">encountered&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">fatal&lt;/span> &lt;span class="n">error&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">cannot&lt;/span> &lt;span class="k">continue&lt;/span> &lt;span class="n">running&lt;/span> &lt;span class="n">at&lt;/span> &lt;span class="n">Tue&lt;/span> &lt;span class="n">Apr&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="mi">21&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">08&lt;/span> &lt;span class="mi">2019&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">The&lt;/span> &lt;span class="n">following&lt;/span> &lt;span class="n">diagnostic&lt;/span> &lt;span class="n">information&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">available&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Reason&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">0x00000004&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">RETAIL&lt;/span> &lt;span class="n">ASSERT&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Expression&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">false&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="ne">File&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="ne">Thread&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpp&lt;/span> &lt;span class="n">Line&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4643&lt;/span> &lt;span class="n">Description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">Timed&lt;/span> &lt;span class="n">out&lt;/span> &lt;span class="n">waiting&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">thread&lt;/span> &lt;span class="n">terminate&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">suspend&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">resume&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Stacktrace&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af30187&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af2836a&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">ae4a4d1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">ae48c55&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af6ab5e&lt;/span> &lt;span class="mi">000000006&lt;/span>&lt;span class="n">af6ac04&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">00000002809528&lt;/span>&lt;span class="n">df&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Process&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">sqlservr&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">Thread&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">129&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">application&lt;/span> &lt;span class="n">thread&lt;/span> &lt;span class="mh">0x1e8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Instance&lt;/span> &lt;span class="n">Id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">215&lt;/span>&lt;span class="n">cfcc9&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="n">f69&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">4869&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="n">a52&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="n">aa44a415a83&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Crash&lt;/span> &lt;span class="n">Id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">53e98400&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">33&lt;/span>&lt;span class="n">f1&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">4786&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">98&lt;/span>&lt;span class="n">fd&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">484&lt;/span>&lt;span class="n">f0c8d9a7e&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Build&lt;/span> &lt;span class="n">stamp&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0e53295&lt;/span>&lt;span class="n">d0e1704ae5b221538dd6e2322cd46134e0cc32be49c887ca84cdb8c10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Distribution&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Ubuntu&lt;/span> &lt;span class="mf">16.04&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">6&lt;/span> &lt;span class="n">LTS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Processors&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Total&lt;/span> &lt;span class="n">Memory&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4906205184&lt;/span> &lt;span class="n">bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Timestamp&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Tue&lt;/span> &lt;span class="n">Apr&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="mi">21&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">04&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">08&lt;/span> &lt;span class="mi">2019&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Ubuntu&lt;/span> &lt;span class="mf">16.04&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">6&lt;/span> &lt;span class="n">LTS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Capturing&lt;/span> &lt;span class="n">core&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">information&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">/&lt;/span>&lt;span class="n">usr&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bin&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;/proc/7/task/516&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">No&lt;/span> &lt;span class="n">such&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dmesg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">read&lt;/span> &lt;span class="n">kernel&lt;/span> &lt;span class="n">buffer&lt;/span> &lt;span class="n">failed&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Operation&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">permitted&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">No&lt;/span> &lt;span class="n">journal&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="n">were&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">No&lt;/span> &lt;span class="n">journal&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="n">were&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">paldumper&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Capture&lt;/span> &lt;span class="n">attempt&lt;/span> &lt;span class="n">failure&lt;/span> &lt;span class="n">detected&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">filtered&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">paldumper&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Attempt&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">failed&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="ne">Reference&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mssql&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sqlservr&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">7.&lt;/span>&lt;span class="n">temp&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">paldumper&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">debug&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">details&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Attempting&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">gdb&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WARNING&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Unable&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">capture&lt;/span> &lt;span class="n">crash&lt;/span> &lt;span class="n">dump&lt;/span> &lt;span class="n">with&lt;/span> &lt;span class="n">GDB&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">You&lt;/span> &lt;span class="n">may&lt;/span> &lt;span class="n">need&lt;/span> &lt;span class="n">to&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">allow&lt;/span> &lt;span class="n">ptrace&lt;/span> &lt;span class="n">debugging&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">enable&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">CAP_SYS_PTRACE&lt;/span> &lt;span class="n">capability&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="ow">or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">run&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">root&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>failing to capture it&amp;rsquo;s dump!! Oops :-)&lt;/p>
+&lt;p>I had to recreate the containers without using the named volumes and then I could run my workload :-)&lt;/p>
+&lt;p>Nothing particularly useful about this blog post other than an interesting look at the error log when things go wrong :-)&lt;/p></description></item><item><title>Persisting databases with named volumes on Windows with docker compose</title><link>https://blog.robsewell.com/blog/persisting-databases-with-named-volumes-on-windows-with-docker-compose/</link><pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/persisting-databases-with-named-volumes-on-windows-with-docker-compose/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-27.png" alt="Featured image of post Persisting databases with named volumes on Windows with docker compose" />&lt;p>With all things containers I refer to my good friend Andrew Pruski. Known as &lt;a class="link" href="https://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>dbafromthecold on twitter&lt;/a> he blogs at &lt;a class="link" href="https://dbafromthecold.com/" target="_blank" rel="noopener"
+>https://dbafromthecold.com&lt;/a>&lt;/p>
+&lt;p>I was reading his latest blog post &lt;a class="link" href="https://dbafromthecold.com/2019/03/21/using-docker-named-volumes-to-persist-databases-in-sql-server" target="_blank" rel="noopener"
+>Using docker named volumes to persist databases in SQL Server&lt;/a> and decided to give it a try.&lt;/p>
+&lt;p>His instructions worked perfectly and I thought I would try them using a docker-compose file as I like the ease of spinning up containers with them.&lt;/p>
+&lt;p>I created a docker-compose file like this which will map my backup folder on my Windows 10 laptop to a directory on the container and two more folders to the system folders on the container in the same way as Andrew has in his blog.&lt;/p>
+&lt;pre>&lt;code>version: '3.7'
+services:
+2019-CTP23:
+image: mcr.microsoft.com/mssql/server:2019-CTP2. 3-ubuntu
+ports:
+- &amp;quot;15591:1433&amp;quot;
+- &amp;quot;5022:5022&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- C:\MSSQL\DockerFiles\datafiles:/var/opt/sqlserver
+- C:\MSSQL\DockerFiles\system:/var/opt/mssql
+&lt;/code>&lt;/pre>
+&lt;p>and then from the directory I ran&lt;/p>
+&lt;pre>&lt;code>docker-compose up -d
+&lt;/code>&lt;/pre>
+&lt;p>This will build the containers as defined in the docker-compose file. The -d runs the container in the background. This was the result.&lt;/p>
+&lt;p>UPDATE – 2019-03-27&lt;/p>
+&lt;p>I have no idea why, but today it has worked as expected using the above docker-compose file. I had tried this a couple of times, restarted docker and restarted my laptop and was consistently getting the results below – however today it has worked&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-28.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>So feel free to carry on reading, it’s a fun story and it shows how you can persist the databases in a new container but the above docker-compose has worked!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-20.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>The command completed successfully but as you can see on the left the container is red because it is not running. (I am using the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.docker-explorer" target="_blank" rel="noopener"
+>Docker Explorer extension for Visual Studio C&lt;/a>&lt;/p>
+&lt;p>I inspected the logs from the container using&lt;/p>
+&lt;pre>&lt;code> docker logs ctp23_2019-CTP23_1
+&lt;/code>&lt;/pre>
+&lt;p>which returned&lt;/p>
+&lt;blockquote>
+&lt;p>This is an evaluation version. There are [153] days left in the evaluation period.&lt;br>
+This program has encountered a fatal error and cannot continue running at Tue Mar 26 19:40:35 20&lt;br>
+19&lt;br>
+The following diagnostic information is available:&lt;br>
+&lt;code>Reason: 0x00000006 Status: 0x40000015 Message: Kernel bug check Address: 0x6b643120&lt;/code>&lt;br>
+Parameters: 0x10861f680&lt;br>
+Stacktrace: 000000006b72d63f 000000006b64317b 000000006b6305ca&lt;br>
+000000006b63ee02 000000006b72b83a 000000006b72a29d&lt;br>
+000000006b769c02 000000006b881000 000000006b894000&lt;br>
+000000006b89c000 0000000000000001&lt;br>
+Process: 7 – sqlservr&lt;br>
+Thread: 11 (application thread 0x4)&lt;br>
+Instance Id: e01b154f-7986-42c6-ae13-c7d34b8b257d&lt;br>
+Crash Id: 8cbb1c22-a8d6-4fad-bf8f-01c6aa5389b7&lt;br>
+Build stamp: 0e53295d0e1704ae5b221538dd6e2322cd46134e0cc32be49c887ca84cdb8c10&lt;br>
+Distribution: Ubuntu 16.04.6 LTS&lt;br>
+Processors: 2&lt;br>
+Total Memory: 4906205184 bytes&lt;br>
+Timestamp: Tue Mar 26 19:40:35 2019&lt;br>
+Ubuntu 16.04.6 LTS&lt;br>
+Capturing core dump and information to /var/opt/mssql/log…&lt;br>
+dmesg: read kernel buffer failed: Operation not permitted&lt;br>
+No journal files were found.&lt;br>
+No journal files were found.&lt;br>
+Attempting to capture a dump with paldumper&lt;br>
+WARNING: Capture attempt failure detected&lt;br>
+Attempting to capture a filtered dump with paldumper&lt;br>
+WARNING: Attempt to capture dump failed. Reference /var/opt/mssql/log/core.sqlservr.7.temp/log/&lt;br>
+paldumper-debug.log for details&lt;br>
+Attempting to capture a dump with gdb&lt;br>
+WARNING: Unable to capture crash dump with GDB. You may need to&lt;br>
+allow ptrace debugging, enable the CAP_SYS_PTRACE capability, or&lt;br>
+run as root.&lt;/p>
+&lt;/blockquote>
+&lt;p>which told me that …………. it hadn’t worked. So I removed the containers with&lt;/p>
+&lt;pre>&lt;code>docker-compose down
+&lt;/code>&lt;/pre>
+&lt;p>I thought I would create the volumes ahead of time like Andrew’s blog had mentioned with&lt;/p>
+&lt;pre>&lt;code>docker volume create mssqlsystem
+docker volume create mssqluser
+&lt;/code>&lt;/pre>
+&lt;p>and then use the volume names in the docker-compose file mapped to the system folders in the container, this time the result was&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-21.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>ERROR: Named volume “mssqlsystem:/var/opt/sqlserver:rw” is used in service “2019-CTP23” but no declaration was found in the volumes section.&lt;/p>
+&lt;/blockquote>
+&lt;p>So that didn&amp;rsquo;t work either 🙂&lt;/p>
+&lt;p>I decided to inspect the volume definition using&lt;/p>
+&lt;pre>&lt;code> docker volume inspect mssqlsystem
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-22.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can see the mountpoint is /var/lib/docker/volumes/mssqlsystem/_data so I decided to try a docker-compose like this&lt;/p>
+&lt;p>version: &amp;lsquo;3.7&amp;rsquo;&lt;/p>
+&lt;p>services:
+2019-CTP23:
+image: mcr.microsoft.com/mssql/server:2019-CTP2.3-ubuntu
+ports:&lt;br>
+- &amp;ldquo;15591:1433&amp;rdquo;
+- &amp;ldquo;5022:5022&amp;rdquo;
+environment:
+SA_PASSWORD: &amp;ldquo;Password0!&amp;rdquo;
+ACCEPT_EULA: &amp;ldquo;Y&amp;rdquo;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- /var/lib/docker/volumes/mssqluser/_data:/var/opt/sqlserver
+- /var/lib/docker/volumes/mssqlsystem/_data:/var/opt/mssql&lt;/p>
+&lt;p>and then ran docker-compose up without the -d flag so that I could see all of the output&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-23.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can see in the output that the system database files are being moved. That looks like it is working so I used CTRL + C to stop the container and return the terminal. I then ran docker-compose up -d and&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-24.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I created a special database for Andrew.&lt;/p>
+&lt;blockquote>
+&lt;p>This made me laugh out loud…as there&amp;rsquo;s a strong possibility that could happen &lt;a class="link" href="https://t.co/sh0pnhtPQy" target="_blank" rel="noopener"
+>https://t.co/sh0pnhtPQy&lt;/a>&lt;/p>
+&lt;p>— Andrew Pruski 🏴󠁧󠁢󠁷󠁬󠁳󠁿 (@dbafromthecold) &lt;a class="link" href="https://twitter.com/dbafromthecold/status/1109253907304206336?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>March 23, 2019&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-25.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>I could then remove the container with&lt;/p>
+&lt;pre>&lt;code>docker-compose down
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-26.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>To make sure there is nothing up my sleeve I altered the docker-compose file to use a different name and port but kept the volume definitions the same.&lt;/p>
+&lt;pre>&lt;code>version: '3.7'
+services:
+2019-CTP23-Mk1:
+image: mcr.microsoft.com/mssql/server:2019-CTP2. 3-ubuntu
+ports:
+- &amp;quot;15592:1433&amp;quot;
+- &amp;quot;5022:5022&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+volumes:
+- C:\MSSQL\BACKUP\KEEP:/var/opt/mssql/backups
+- /var/lib/docker/volumes/mssqluser/_data:/var/opt/sqlserver
+- /var/lib/docker/volumes/mssqlsystem/_data:/var/opt/mssql
+&lt;/code>&lt;/pre>
+&lt;p>I ran &lt;code>docker-compose up -d&lt;/code> again and connected to the new container and lo and behold the container is still there&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-27.png%3e"
+loading="lazy"
+>&lt;/p>
+&lt;p>So after doing this, I have learned that to persist the databases and to use docker-compose files I had to map the volume to the mountpoint of the docker volume. Except I haven’t, I have learned that sometimes weird things happen with Docker on my laptop!!&lt;/p></description></item><item><title>Using Docker to run Integration Tests for dbachecks</title><link>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</link><pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</guid><description>&lt;p>My wonderful friend &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>André Kamman&lt;/a> wrote a fantastic blog post this week &lt;a class="link" href="https://andrekamman.com/sql-server-container-instances-via-cloudshell/" target="_blank" rel="noopener"
+>SQL Server Container Instances via Cloudshell&lt;/a> about how he uses containers in Azure to test code against different versions of SQL Server.&lt;/p>
+&lt;p>It reminded me that I do something very similar to test &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+>dbachecks&lt;/a> code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend &lt;a class="link" href="https://github.com/ClaudioESSilva" target="_blank" rel="noopener"
+>Cláudio Silva&lt;/a> who has added &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks/pull/582" target="_blank" rel="noopener"
+>agent job history checks.&lt;/a>&lt;/p>
+&lt;h2 id="github-pr-vs-code-extension">GitHub PR VS Code Extension
+&lt;/h2>&lt;p>I use the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github" target="_blank" rel="noopener"
+>GitHub Pull Requests extension for VS Code&lt;/a> to work with pull requests for &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks/pulls" target="_blank" rel="noopener"
+>dbachecks&lt;/a>. This enables me to see all of the information about the Pull Request, merge it, review it, comment on it all from VS Code&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/GitHub-Pull-Request-VsCode-Extension.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can also see which files have been changed and which changes have been made&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/viewing-a-change.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Once I am ready to test the pull request I perform a checkout using the extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/checkout-pull-request-checkout.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This will update all of the files in my local repository with all of the changes in this pull request&lt;/p>
+&lt;p>&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;p>You can see at the bottom left that the branch changes from development to the name of the PR.&lt;a class="link" href="https://blog.robsewell.com/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/" target="_blank" rel="noopener"
+>&lt;/a>&lt;/p>
+&lt;h2 id="running-the-unit-tests">Running The Unit Tests
+&lt;/h2>&lt;p>The first thing that I do is to run the Unit Tests for the module. These will test that the code is following all of the guidelines that we require and that the tests are formatted in the correct way for the Power Bi to parse. I have blogged about this &lt;a class="link" href="https://blog.robsewell.com/using-the-ast-in-pester-for-dbachecks/" target="_blank" rel="noopener"
+>here&lt;/a> and &lt;a class="link" href="https://blog.robsewell.com/using-the-powershell-ast-to-find-a-foreach-method/" target="_blank" rel="noopener"
+>here&lt;/a> and we use this Pester in our CI process in Azure DevOps which I described &lt;a class="link" href="https://blog.robsewell.com/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/" target="_blank" rel="noopener"
+>here.&lt;/a>&lt;/p>
+&lt;p>I navigate to the root of the dbachecks repository on my local machine and run&lt;/p>
+&lt;pre>&lt;code> $testresults = Invoke-Pester .\tests -ExcludeTag Integration -Show Fails -PassThru
+&lt;/code>&lt;/pre>
+&lt;p>and after about a minute&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/pester-tests.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Thank you Cláudio, the code has passed the tests 😉&lt;/p>
+&lt;h2 id="running-some-integration-tests">Running Some Integration Tests
+&lt;/h2>&lt;p>The difference between Unit tests and Integration tests in a nutshell is that the Unit tests are testing that the code is doing what is expected without any other external influences whilst the Integration tests are checking that the code is doing what is expected when running on an actual environment. In this scenario we know that the code is doing what is expected but we want to check what it does when it runs against a SQL Server and even when it runs against multiple SQL Servers of different versions.&lt;/p>
+&lt;h2 id="multiple-versions-of-sql-server">Multiple Versions of SQL Server
+&lt;/h2>&lt;p>As I have described &lt;a class="link" href="https://blog.robsewell.com/creating-sql-server-containers-for-versions-2012-2017/" target="_blank" rel="noopener"
+>before&lt;/a> my friend and former colleague Andrew Pruski &lt;a class="link" href="http://dbafromthecold.com" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="http://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>t&lt;/a> has many resources for running SQL in containers. This means that I can quickly and easily create fresh uncontaminated instances of SQL 2012, 2014, 2016 and 2017 really quickly.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/creating-contatiners.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I can create 4 instances of different versions of SQL in (a tad over) 1 minute. How about you?&lt;/p>
+&lt;p>Imagine how long it would take to run the installers for 4 versions of SQL and the pain you would have trying to uninstall them and make sure everything is ‘clean’. Even images that have been sysprep’d won’t be done in 1 minute.&lt;/p>
+&lt;h2 id="docker-compose-up-">Docker Compose Up ?
+&lt;/h2>&lt;p>So what is this magic command that has enabled me to do this? docker compose uses a YAML file to define multi-container applications. This means that with a file called docker-compose.yml like &lt;a class="link" href="https://gist.github.com/SQLDBAWithABeard/b589d499484af4ebfb7d637cb6b4efa3" target="_blank" rel="noopener"
+>this&lt;/a>&lt;/p>
+&lt;pre>&lt;code>version: '3.7'
+services:
+sql2012:
+image: dbafromthecold/sqlserver2012dev:sp4
+ports:
+- &amp;quot;15589:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2014:
+image: dbafromthecold/sqlserver2014dev:sp2
+ports:
+- &amp;quot;15588:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2016:
+image: dbafromthecold/sqlserver2016dev:sp2
+ports:
+- &amp;quot;15587:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2017:
+image: microsoft/ mssql-server-windows-developer:2017-latest
+ports:
+- &amp;quot;15586:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>and in that directory just run&lt;/p>
+&lt;pre>&lt;code>docker-compose up -d
+&lt;/code>&lt;/pre>
+&lt;p>and 4 SQL containers are available to you. You can interact with them via SSMS if you wish with localhost comma PORTNUMBER. The port numbers in the above file are 15586, 15587,15588 and 15589&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/containers.png?resize=630%2C188&amp;amp;ssl=1"
+loading="lazy"
+>](&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/01/containers.png?ssl=1" target="_blank" rel="noopener"
+>https://blog.robsewell.com/assets/uploads/2019/01/containers.png?ssl=1&lt;/a>)&lt;/p>
+&lt;p>Now it must be noted, as I &lt;a class="link" href="https://blog.robsewell.com/creating-sql-server-containers-for-versions-2012-2017/" target="_blank" rel="noopener"
+>describe here&lt;/a> that first I pulled the images to my laptop. The first time you run docker compose will take significantly longer if you haven’t pulled the images already (pulling the images will take quite a while depending on your broadband speed)&lt;/p>
+&lt;h2 id="credential">Credential
+&lt;/h2>&lt;p>The next thing is to save a credential to make it easier to automate.&lt;del>I use the method described by my PowerShell friend Jaap Brasser &lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/del>&lt;/p>
+&lt;p>EDIT (September or is it March? 2020) - Nowadays I use the Secret Management Module&lt;/p>
+&lt;p>I run this code&lt;/p>
+&lt;pre>&lt;code> $CredentialPath = 'C:\MSSQL\BACKUP\KEEP\sacred.xml'
+Get-Credential | Export-Clixml -Path $CredentialPath
+&lt;/code>&lt;/pre>
+&lt;p>and then I can create a credential object using&lt;/p>
+&lt;pre>&lt;code>$cred = Import-Clixml $CredentialPath
+&lt;/code>&lt;/pre>
+&lt;h2 id="check-the-connections">Check The Connections
+&lt;/h2>&lt;p>I ensure a clean session by removing the dbatools and dbachecks modules and then import the local version of dbachecks and set some variables&lt;/p>
+&lt;pre>&lt;code>$dbacheckslocalpath = 'GIT:\dbachecks\'
+Remove-Module dbatools, dbachecks -ErrorAction SilentlyContinue
+Import-Module $dbacheckslocalpath\dbachecks.psd1
+$cred = Import-Clixml $CredentialPath
+$containers = 'localhost,15589', 'localhost,15588', 'localhost, 15587', 'localhost,15586'
+&lt;/code>&lt;/pre>
+&lt;p>Now I can start to run my Integration tests. First reset the dbachecks configuration and set some configuration values&lt;/p>
+&lt;pre>&lt;code># run the checks against these instances
+$null = Set-DbcConfig -Name app.sqlinstance $containers
+# We are using SQL authentication
+$null = Set-DbcConfig -Name policy.connection.authscheme -Value SQL
+# sometimes its a bit slower than the default value
+$null = Set-DbcConfig -Name policy.network.latencymaxms -Value 100 # because the containers run a bit slow!
+&lt;/code>&lt;/pre>
+&lt;p>Then I will run the dbachecks connectivity checks and save the results to a variable without showing any output&lt;/p>
+&lt;pre>&lt;code>$ConnectivityTests = Invoke-DbcCheck -SqlCredential $cred -Check Connectivity -Show None -PassThru
+&lt;/code>&lt;/pre>
+&lt;p>I can then use Pester to check that dbachecks has worked as expected by testing if the failedcount property returned is 0.&lt;/p>
+&lt;pre>&lt;code>Describe &amp;quot;Testing the checks are running as expected&amp;quot; -Tag Integration {
+Context &amp;quot;Connectivity Checks&amp;quot; {
+It &amp;quot;All Tests should pass&amp;quot; {
+$ConnectivityTests.FailedCount | Should -Be 0 -Because &amp;quot;We expect all of the checks to run and pass with default settings&amp;quot;
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/check-connectivity.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="what-is-the-unit-test-for-this-pr">What is the Unit Test for this PR?
+&lt;/h2>&lt;p>Next I think about what we need to be testing for the this PR. The Unit tests will help us.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/what-are-the-unit-tests.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="choose-some-integration-tests">Choose some Integration Tests
+&lt;/h2>&lt;p>This check is checking the Agent job history settings and the unit tests are&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>It “Passes Check Correctly with Maximum History Rows disabled (-1)”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It “Fails Check Correctly with Maximum History Rows disabled (-1) but configured value is 1000”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It “Passes Check Correctly with Maximum History Rows being 10000”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It “Fails Check Correctly with Maximum History Rows being less than 10000”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It “Passes Check Correctly with Maximum History Rows per job being 100”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It “Fails Check Correctly with Maximum History Rows per job being less than 100”&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>So we will check the same things on real actual SQL Servers. First though we need to start the SQL Server Agent as it is not started by default. We can do this as follows&lt;/p>
+&lt;pre>&lt;code>docker exec -ti integration_sql2012_1 powershell start-service SQLSERVERAGENT
+docker exec -ti integration_sql2014_1 powershell start-service SQLSERVERAGENT
+docker exec -ti integration_sql2016_1 powershell start-service SQLSERVERAGENT
+docker exec -ti integration_sql2017_1 powershell start-service SQLSERVERAGENT
+&lt;/code>&lt;/pre>
+&lt;p>Unfortunately, the agent service wont start in the SQL 2014 container so I cant run agent integration tests for that container but it’s better than no integration tests.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/agent-wont-start.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="this-is-what-we-will-test">This is What We Will Test
+&lt;/h2>&lt;p>So we want to test if the check will pass with default settings. In general, dbachecks will pass for default instance, agent or database settings values by default.&lt;/p>
+&lt;p>We also want the check to fail if the configured value for dbachecks is set to default but the value has been set on the instance.&lt;/p>
+&lt;p>We want the check to pass if the configured value for the dbachecks configuration is set and the instance (agent, database) setting matches it.&lt;/p>
+&lt;h2 id="if-you-are-doing-something-more-than-once-">If You Are Doing Something More Than Once ……
+&lt;/h2>&lt;p>Let’s automate that. We are going to be repeatedly running those three tests for each setting that we are running integration tests for. I have created 3 functions for this again checking that FailedCount or Passed Count is 0 depending on the test.&lt;/p>
+&lt;pre>&lt;code>function Invoke-DefaultCheck {
+It &amp;quot;All Checks should pass with default for $Check&amp;quot; {
+$Tests = get-variable &amp;quot;$($Check)default&amp;quot; -ValueOnly
+$Tests.FailedCount | Should -Be 0 -Because &amp;quot;We expect all of the checks to run and pass with default setting (Yes we may set some values before but you get my drift)&amp;quot;
+}
+}
+function Invoke-ConfigCheck {
+It &amp;quot;All Checks should fail when config changed for $Check&amp;quot; {
+$Tests = get-variable &amp;quot;$($Check)configchanged&amp;quot; -ValueOnly
+$Tests.PassedCount | Should -Be 0 -Because &amp;quot;We expect all of the checks to run and fail when we have changed the config values&amp;quot;
+}
+}
+function Invoke-ValueCheck {
+It &amp;quot;All Checks should pass when setting changed for $Check&amp;quot; {
+$Tests = get-variable &amp;quot;$($Check) value changed&amp;quot; -ValueOnly
+$Tests.FailedCount | Should -Be 0 -Because &amp;quot;We expect all of the checks to run and pass when we have changed the settings to match the config values&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>Now I can use those functions inside a loop in my Integration Pester Test&lt;/p>
+&lt;pre>&lt;code>$TestingTheChecks = @('errorlogscount','jobhistory')
+Foreach ($Check in $TestingTheChecks) {
+Context &amp;quot;$Check Checks&amp;quot; {
+Invoke-DefaultCheck
+Invoke-ConfigCheck
+Invoke-ValueCheck
+}
+}
+&lt;/code>&lt;/pre>
+&lt;h2 id="write-some-integration-tests">Write Some Integration Tests
+&lt;/h2>&lt;p>So for this new test I have added a value to the TestingTheChecks array then I can test my checks. The default check I can check like this&lt;/p>
+&lt;pre>&lt;code># run the checks against these instances (SQL2014 agent wont start :-( ))
+$null = Set-DbcConfig -Name app.sqlinstance $containers.Where {$_ -ne 'localhost,15588'}
+# by default all tests should pass on default instance settings
+$jobhistorydefault = Invoke-DbcCheck -SqlCredential $cred -Check JobHistory -Show None -PassThru
+&lt;/code>&lt;/pre>
+&lt;p>Now I need to change the configurations so that they do not match the defaults and run the checks again&lt;/p>
+&lt;pre>&lt;code>#Change the configuration to test that the checks fail
+$null = Set-DbcConfig -Name agent.history. maximumjobhistoryrows -value 1000
+$null = Set-DbcConfig -Name agent.history.maximumhistoryrows -value 10000
+$jobhistoryconfigchanged = Invoke-DbcCheck -SqlCredential $cred -Check JobHistory -Show None -PassThru
+&lt;/code>&lt;/pre>
+&lt;p>Next we have to change the instance settings so that they match the dbachecks configuration and run the checks and test that they all pass.&lt;/p>
+&lt;p>We will (of course) use &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> for this. First we need to find the command that we need&lt;/p>
+&lt;pre>&lt;code>Find-DbaCommand jobserver
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/find-dbacommand.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then work out how to use it&lt;/p>
+&lt;pre>&lt;code>Get-Help Set-DbaAgentServer -Detailed
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/set-the-values.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>There is an example that does exactly what we want 🙂 So we can run this.&lt;/p>
+&lt;pre>&lt;code>$setDbaAgentServerSplat = @{
+MaximumJobHistoryRows = 1000
+MaximumHistoryRows = 10000
+SqlInstance = $containers.Where{$_ -ne 'localhost,15588'}
+SqlCredential = $cred
+}
+Set-DbaAgentServer @setDbaAgentServerSplat
+$jobhistoryvaluechanged = Invoke-DbcCheck -SqlCredential $cred -Check JobHistory -Show None -PassThru
+&lt;/code>&lt;/pre>
+&lt;h2 id="run-the-integration-tests">Run the Integration Tests
+&lt;/h2>&lt;p>And then we will check that all of the checks are passing and failing as expected&lt;/p>
+&lt;pre>&lt;code>Invoke-Pester .\DockerTests.ps1
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/testing-the-checks.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="integration-test-for-error-log-counts">Integration Test For Error Log Counts
+&lt;/h2>&lt;p>There is another integration test there for the error logs count. This works in the same way. Here is the code&lt;/p>
+&lt;pre>&lt;code>#region error Log Count - PR 583
+# default test
+$errorlogscountdefault = Invoke-DbcCheck -SqlCredential $cred -Check ErrorLogCount -Show None -PassThru
+# set a value and then it will fail
+$null = Set-DbcConfig -Name policy.errorlog.logcount -Value 10
+$errorlogscountconfigchanged = Invoke-DbcCheck -SqlCredential $cred -Check ErrorLogCount -Show None -PassThru
+# set the value and then it will pass
+$null = Set-DbaErrorLogConfig -SqlInstance $containers -SqlCredential $cred -LogCount 10
+$errorlogscountvaluechanged = Invoke-DbcCheck -SqlCredential $cred -Check ErrorLogCount -Show None -PassThru
+#endregion
+&lt;/code>&lt;/pre>
+&lt;h2 id="merge-the-changes">Merge the Changes
+&lt;/h2>&lt;p>So with all the tests passing I can merge the PR into the development branch and Azure DevOps will start a build. Ultimately, I would like to add the integration to the build as well following &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+>André&lt;/a>‘s blog post but for now I used the GitHub Pull Request extension to merge the pull request into development which started a &lt;a class="link" href="https://sqlcollaborative.visualstudio.com/dbachecks/_build/results?buildId=365&amp;amp;view=results" target="_blank" rel="noopener"
+>build&lt;/a> and then merged that into master which signed the code and deployed it to the PowerShell gallery as you can see &lt;a class="link" href="https://sqlcollaborative.visualstudio.com/dbachecks/_releaseProgress?_a=release-environment-logs&amp;amp;releaseId=81&amp;amp;environmentId=81" target="_blank" rel="noopener"
+>here&lt;/a> and the result is&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.powershellgallery.com/packages/dbachecks/1.1.164" target="_blank" rel="noopener"
+>https://www.powershellgallery.com/packages/dbachecks/1.1.164&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/01/powershell-gallery.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Running Windows and Linux SQL Containers together</title><link>https://blog.robsewell.com/blog/running-windows-and-linux-sql-containers-together/</link><pubDate>Mon, 24 Dec 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-windows-and-linux-sql-containers-together/</guid><description>&lt;p>Just for fun I decided to spend Christmas Eve getting Windows and Linux SQL containers running together.&lt;/p>
+&lt;h2 id="warning">WARNING
+&lt;/h2>&lt;p>This is NOT a production ready solution, in fact I would not even recommend that you try it.&lt;br>
+I definitely wouldn’t recommend it on any machine with anything useful on it that you want to use again.&lt;br>
+We will be using a re-compiled dockerd.exe created by someone else and you know the rules about downloading things from the internet don’t you? and trusting unknown unverified people?&lt;/p>
+&lt;p>Maybe you can try this in an Azure VM or somewhere else safe.&lt;/p>
+&lt;p>Anyway, with that in mind, lets go.&lt;/p>
+&lt;h2 id="linux-containers-on-windows">Linux Containers On Windows
+&lt;/h2>&lt;p>You can run Linux containers on Windows in Docker as follows. You need to be running the latest Docker for Windows.&lt;/p>
+&lt;p>Right click on the whale in the task bar and select Settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/docker-settings.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/docker-settings.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Notice that I am running Windows Containers as there is a switch to Linux containers option. If you see Switch to Windows containers then click that first.&lt;/p>
+&lt;p>Click on Daemon and then tick the experimental features tick box and press apply.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/docker-daemon-settings.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/docker-daemon-settings.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Docker will restart and you can now run Linux containers alongside windows containers.&lt;/p>
+&lt;p>So you you can pull the Ubuntu container with&lt;/p>
+&lt;pre>&lt;code>docker pull ubuntu:18.04
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/ubuntu-image-pull.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/ubuntu-image-pull.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and then you can run it with&lt;/p>
+&lt;pre>&lt;code>docker run -it --name ubuntu ubuntu:18.04
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/ubuntu-coontainer-interactively.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/ubuntu-coontainer-interactively.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>There you go one Linux container running 🙂&lt;br>
+A good resource for learning bash for SQL Server DBAs is Kellyn Pot’Vin-Gorman &lt;a class="link" href="https://dbakevlar.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/DBAKevlar" target="_blank" rel="noopener"
+>t&lt;/a> &lt;a class="link" href="https://www.red-gate.com/simple-talk/sql/sql-linux/how-to-linux-for-sql-server-dbas-part-1/" target="_blank" rel="noopener"
+>series on Simple Talk&lt;/a>&lt;/p>
+&lt;p>Type Exit to get out of the container and to remove it&lt;/p>
+&lt;pre>&lt;code>docker rm ubuntu
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/exit-remove-ubuntu.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/exit-remove-ubuntu.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;h3 id="heading">
+&lt;/h3>&lt;p>Running SQL Linux Containers On Windows&lt;/p>
+&lt;p>So can we run SQL Containers ?&lt;/p>
+&lt;p>Well, we can pull the image successfully.&lt;/p>
+&lt;pre>&lt;code>docker pull mcr.microsoft.com/mssql/server:2019-CTP2.2-ubuntu
+&lt;/code>&lt;/pre>
+&lt;p>If you try that without the experimental features enabled you will get this error.&lt;/p>
+&lt;blockquote>
+&lt;p>image operating system “linux” cannot be used on this platform&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/wrong-platform.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/wrong-platform.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>So you would think that what you can do is to use the code from Andrew ‘dbafromthecold’ Pruski’s &lt;a class="link" href="http://DBAfromthecold.com" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/DBAfromthecold" target="_blank" rel="noopener"
+>t&lt;/a> excellent &lt;a class="link" href="https://dbafromthecold.com/2017/03/15/summary-of-my-container-series/" target="_blank" rel="noopener"
+>container series&lt;/a>&lt;/p>
+&lt;pre>&lt;code>docker run -d -p 15789:1433 --env ACCEPT_EULA=Y --env SA_PASSWORD=Testing1122 --name testcontainer mcr.microsoft.com/mssql/server:2019-CTP2.2-ubuntu
+&lt;/code>&lt;/pre>
+&lt;p>When you do, the command will finish successfully but the container won’t be started (as can been seen by the red dot in the docker explorer).&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/container-wont-run.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/container-wont-run.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>If you look at the logs for the container. (I am lazy, I right click on the container and choose show logs in VS Code 🙂 ) you will see&lt;/p>
+&lt;blockquote>
+&lt;p>sqlservr: This program requires a machine with at least 2000 megabytes of memory.&lt;br>
+/opt/mssql/bin/sqlservr: This program requires a machine with at least 2000 megabytes of memory.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/needs-more-memory.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/needs-more-memory.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now, if you are running Linux containers, this is an easy fix. All you have to do is to right click on the whale in the taskbar, choose Settings, Advanced and move the slider for the Memory and click apply.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/linux-containers-memory-increase.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/linux-containers-memory-increase.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>But in Windows containers that option is not available.&lt;/p>
+&lt;p>If you go a-googling you will find that &lt;a class="link" href="https://twitter.com/wsmelton" target="_blank" rel="noopener"
+>Shawn Melton&lt;/a> created an &lt;a class="link" href="https://github.com/Microsoft/mssql-docker/issues/293" target="_blank" rel="noopener"
+>issue for thi&lt;/a>s many months ago, which gets referenced by &lt;a class="link" href="https://github.com/Microsoft/opengcs/issues/145" target="_blank" rel="noopener"
+>this issue&lt;/a> for the guest compute service, which references t&lt;a class="link" href="https://github.com/moby/moby/pull/37296" target="_blank" rel="noopener"
+>his PR&lt;/a> in moby. But as this hasn’t been merged into master yet it is not available. I got bored of waiting for this and decided to look a bit deeper today.&lt;/p>
+&lt;h3 id="get-it-working-just-for-fun">Get It Working Just For Fun
+&lt;/h3>&lt;p>So, you read the warning at the top?&lt;/p>
+&lt;p>Now let’s get it working. I take zero credit here. All of the work was done by Brian Weeteling &lt;a class="link" href="https://www.brianweet.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://github.com/brianweet" target="_blank" rel="noopener"
+>G&lt;/a> in &lt;a class="link" href="https://www.brianweet.com/2018/04/26/running-mssql-server-linux-using-lcow.html" target="_blank" rel="noopener"
+>this post&lt;/a>&lt;/p>
+&lt;p>So you can follow Brians examples and check out the source code and compile it as he says or you can &lt;a class="link" href="https://www.brianweet.com/assets/mssql-linux/dockerd.rar" target="_blank" rel="noopener"
+>download the exe&lt;/a> that he has made available (remember the warning?)&lt;/p>
+&lt;p>Stop Docker for Windows, and with the file downloaded and unzipped, open an admin PowerShell and navigate to the directory the dockerd.exe file is and run&lt;/p>
+&lt;pre>&lt;code>.\dockerd.exe
+&lt;/code>&lt;/pre>
+&lt;p>You will get an output like this and it will keep going for a while.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/running-dockerd.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/running-dockerd.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Leave this window open whilst you are using Docker like this. Once you see&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/logs.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/logs.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then open a new PowerShell window or VS Code. You will need to run it as admin. I ran&lt;/p>
+&lt;pre>&lt;code>docker ps-a
+&lt;/code>&lt;/pre>
+&lt;p>to see if it was up and available.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/docker-ps.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/docker-ps.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I also had to create a bootx64.efi file at C:\Program Files\Linux Containers which I did by copying and renaming the kernel file in that folder.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/bootx64-file.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/bootx64-file.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now I can use a docker-compose file to create 5 containers. Four will be Windows containers from &lt;a class="link" href="https://hub.docker.com/u/dbafromthecold" target="_blank" rel="noopener"
+>Andrews Docker hub repositories&lt;/a> or &lt;a class="link" href="https://hub.docker.com/r/microsoft/mssql-server/" target="_blank" rel="noopener"
+>Microsoft’s Docker Hub&lt;/a> for SQL 2012, SQL 2014, SQL 2016, and SQL 2017 and one will be the latest &lt;a class="link" href="https://hub.docker.com/r/microsoft/mssql-server" target="_blank" rel="noopener"
+>Ubuntu SQL 2019 CTP 2.2 image&lt;/a>. Note that you have to use version 2.4 of docker compose as the platform tag is not available yet in any later version, although it is coming to 3.7 soon.&lt;/p>
+&lt;pre>&lt;code>version: '2.4'
+services:
+sql2019:
+image: mcr.microsoft.com/mssql/server:2019-CTP2.2-ubuntu
+platform: linux
+ports:
+- &amp;quot;15585:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2012:
+image: dbafromthecold/sqlserver2012dev:sp4
+platform: windows
+ports:
+- &amp;quot;15589:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2014:
+image: dbafromthecold/sqlserver2014dev:sp2
+platform: windows
+ports:
+- &amp;quot;15588:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2016:
+image: dbafromthecold/sqlserver2016dev:sp2
+platform: windows
+ports:
+- &amp;quot;15587:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+sql2017:
+image: microsoft/mssql-server-windows-developer:2017-latest
+platform: windows
+ports:
+- &amp;quot;15586:1433&amp;quot;
+environment:
+SA_PASSWORD: &amp;quot;Password0!&amp;quot;
+ACCEPT_EULA: &amp;quot;Y&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Save this code as docker-compose.yml and navigate to the directory in an admin PowerShell or VS Code and run&lt;/p>
+&lt;pre>&lt;code>docker-compose up -d
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/all-the-containers.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/all-the-containers.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and now I have Windows and Linux SQL containers running together. This means that I can test some code against all versions of SQL from 2012 to 2019 easily in containers 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/containers-in-SSMS.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/containers-in-SSMS.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/all-the-containers-dbatools.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/all-the-containers-dbatools.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>So that is just a bit of fun.&lt;/p>
+&lt;p>To return to the normal Docker, simply CTRL and C the admin PowerShell you ran .\dockerd.exe in and you will see the logs showing it shutting down.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/shutdown-docker.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/shutdown-docker.png?fit=630%2C142"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You will then be able to start Docker For Windows as usual.&lt;/p>
+&lt;p>I look forward to the time, hopefully early next year when all of the relevant PR’s have been merged and this is available in Docker for Windows.&lt;/p>
+&lt;p>Happy Automating 🙂&lt;/p></description></item><item><title>Creating SQL Server Containers for versions 2012-2017</title><link>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</link><pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</guid><description>&lt;p>I am working on my &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+>dbachecks&lt;/a> presentations for &lt;a class="link" href="http://www.sqlsaturday.com/735/eventhome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Finland&lt;/a>, &lt;a class="link" href="https://sqlday.pl/" target="_blank" rel="noopener"
+>SQLDays&lt;/a>, &lt;a class="link" href="http://www.sqlsaturday.com/742/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Cork&lt;/a> and &lt;a class="link" href="https://sqlgrillen.de/" target="_blank" rel="noopener"
+>SQLGrillen&lt;/a> I want to show the two modules running against a number of SQL Versions so I have installed&lt;/p>
+&lt;ul>
+&lt;li>2 Domain Controllers&lt;/li>
+&lt;li>2 SQL 2017 instances on Windows 2016 with an Availability Group and WideWorldImporters database&lt;/li>
+&lt;li>1 Windows 2016 jump box with all the programmes I need&lt;/li>
+&lt;li>1 Windows 2016 with containers&lt;/li>
+&lt;/ul>
+&lt;p>using a VSTS build and this set of &lt;a class="link" href="https://github.com/SQLDBAWithABeard/ARMTemplates/tree/master/DeployAlwaysOn" target="_blank" rel="noopener"
+>ARM templates and scripts&lt;/a>&lt;/p>
+&lt;p>I wanted to create containers running SQL2017, SQL2016, SQL2014 and SQL2012 and restore versions of the AdventureWorks database onto each one.&lt;/p>
+&lt;h2 id="move-docker-location">Move Docker Location
+&lt;/h2>&lt;p>I redirected my docker location from my &lt;code>C:\&lt;/code> drive to my &lt;code>E:\&lt;/code> drive so I didnt run out of space. I did this by creating a &lt;code>daemon.json&lt;/code> file in &lt;code>C:\ProgramData\docker\config&lt;/code> and adding&lt;/p>
+&lt;p>&lt;code>{&amp;quot;data-root&amp;quot;: &amp;quot;E:\containers&amp;quot;}&lt;/code>&lt;/p>
+&lt;p>and restarting the docker service which created folders like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-folders.png"
+loading="lazy"
+alt="01 - folders.png"
+>&lt;/p>
+&lt;p>Then I ran&lt;/p>
+&lt;p>&lt;code>docker volume create SQLBackups&lt;/code>&lt;/p>
+&lt;p>to create a volume to hold the backups that I could mount on the containers&lt;/p>
+&lt;h2 id="adventureworks-backups">AdventureWorks Backups
+&lt;/h2>&lt;p>I downloaded &lt;a class="link" href="https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks" target="_blank" rel="noopener"
+>all the AdventureWorks backups from GitHub&lt;/a> and copied them to &lt;code>E:\containers\volumes\sqlbackups\_data&lt;/code>&lt;/p>
+&lt;p>&lt;code>Get-ChildItem $Home\Downloads\AdventureWorks* | Copy-Item -Destination E:\containers\volumes\sqlbackups\_data&lt;/code>&lt;/p>
+&lt;h2 id="getting-the-images">Getting the Images
+&lt;/h2>&lt;p>To download the &lt;a class="link" href="https://hub.docker.com/r/microsoft/mssql-server-windows-developer/" target="_blank" rel="noopener"
+>SQL 2017 image from the DockerHub&lt;/a> I ran&lt;/p>
+&lt;p>&lt;code>docker pull microsoft/mssql-server-windows-developer:latest&lt;/code>&lt;/p>
+&lt;p>and waited for it to download and extract&lt;/p>
+&lt;p>I also needed the images for other versions. My good friend Andrew Pruski &lt;a class="link" href="https://dbafromthecold.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/dbafromthecold" target="_blank" rel="noopener"
+>t&lt;/a> has versions available for us to use on &lt;a class="link" href="https://hub.docker.com/u/dbafromthecold/" target="_blank" rel="noopener"
+>his Docker Hub &lt;/a> so it is just a case of running&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker pull dbafromthecold/sqlserver2016dev:sp1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull dbafromthecold/sqlserver2014dev:sp2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker pull dbafromthecold/sqlserver2012dev:sp4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and waiting for those to download and extract (This can take a while!)&lt;/p>
+&lt;h2 id="create-the-containers">Create the containers
+&lt;/h2>&lt;p>Creating the containers is as easy as&lt;/p>
+&lt;p>&lt;code>docker run -d -p ExposedPort:InternalPort --name NAME -v VolumeName:LocalFolder -e sa\_password=THEPASSWORD -e ACCEPT\_EULA=Y IMAGENAME&lt;/code>&lt;/p>
+&lt;p>so all I needed to run to create 4 SQL containers one of each version was&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">docker run -d -p 15789:1433 --name 2017 -v sqlbackups:C:\SQLBackups -e sa\_password=PruskiIsSQLContainerMan! -e ACCEPT\_EULA=Y microsoft/mssql-server-windows-developer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d -p 15788:1433 --name 2016 -v sqlbackups:C:\SQLBackups -e sa\_password=PruskiIsSQLContainerMan! -e ACCEPT\_EULA=Y dbafromthecold/sqlserver2016dev:sp1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d -p 15787:1433 --name 2014 -v sqlbackups:C:\SQLBackups -e sa\_password=PruskiIsSQLContainerMan! -e ACCEPT\_EULA=Y dbafromthecold/sqlserver2014dev:sp2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">docker run -d -p 15786:1433 --name 2012 -v sqlbackups:C:\SQLBackups -e sa\_password=PruskiIsSQLContainerMan! -e ACCEPT\_EULA=Y dbafromthecold/sqlserver2012dev:sp4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and just a shade over 12 seconds later I have 4 SQL instances ready for me 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/02-creating-containers.png"
+loading="lazy"
+alt="02 - creating containers.png"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/03-Containers-at-the-ready.png"
+loading="lazy"
+alt="03 - Containers at the ready.png"
+>&lt;/p>
+&lt;h2 id="storing-credentials">Storing Credentials
+&lt;/h2>&lt;p>This is not something I would do in a Production environment but I save my credentials using this method that Jaap Brasser &lt;a class="link" href="http://www.jaapbrasser.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/jaap_brasser" target="_blank" rel="noopener"
+>t&lt;/a> &lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>shared here&lt;/a>&lt;/p>
+&lt;p>&lt;code>Get-Credential | Export-Clixml -Path $HOME\Documents\sa.cred&lt;/code>&lt;/p>
+&lt;p>which means that I can get the credentials in my PowerShell session (as long as it is the same user that created the file) using&lt;/p>
+&lt;p>&lt;code>$cred = Import-Clixml $HOME\Documents\sa.cred&lt;/code>&lt;/p>
+&lt;h2 id="restoring-the-databases">Restoring the databases
+&lt;/h2>&lt;p>I restored all of the AdventureWorks databases that each instance will support onto each instance, so 2017 has all of them whilst 2012 only has the 2012 versions.&lt;/p>
+&lt;p>First I needed to get the filenames of the backup files into a variable&lt;/p>
+&lt;p>&lt;code>$filenames = (Get-ChildItem '\bearddockerhost\e$\containers\volumes\sqlbackups\_data').Name&lt;/code>&lt;/p>
+&lt;p>and the container connection strings, which are the hostname and the port number&lt;/p>
+&lt;p>&lt;code>$containers = 'bearddockerhost,15789', 'bearddockerhost,15788', 'bearddockerhost,15787', 'bearddockerhost,15786'&lt;/code>&lt;/p>
+&lt;p>then I can restore the databases using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> using a switch statement on the version which I get with the NameLevel property of &lt;code>Get-DbaSqlBuildReference&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$cred = Import-Clixml $HOME\Documents\sa.cred
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$containers = &amp;#39;bearddockerhost,15789&amp;#39;, &amp;#39;bearddockerhost,15788&amp;#39;, &amp;#39;bearddockerhost,15787&amp;#39;, &amp;#39;bearddockerhost,15786&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$filenames = (Get-ChildItem &amp;#39;\bearddockerhost\e$\containers\volumes\sqlbackups\_data&amp;#39;).Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$containers.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Container = $Psitem
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $NameLevel = (Get-DbaSqlBuildReference-SqlInstance $Container-SqlCredential $cred).NameLevel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> switch ($NameLevel) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2017 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Restore-DbaDatabase-SqlInstance $Container-SqlCredential $cred-Path C:\sqlbackups\ -useDestinationDefaultDirectories -WithReplace |Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Verbose-Message &amp;#34;Restored Databases on 2017&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2016 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Files = $Filenames.Where{$PSitem -notlike &amp;#39;\*2017\*&amp;#39;}.ForEach{&amp;#39;C:\sqlbackups\&amp;#39; + $Psitem}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Restore-DbaDatabase-SqlInstance $Container-SqlCredential $cred-Path $Files-useDestinationDefaultDirectories -WithReplace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Verbose-Message &amp;#34;Restored Databases on 2016&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2014 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Files = $Filenames.Where{$PSitem -notlike &amp;#39;\*2017\*&amp;#39; -and $Psitem -notlike &amp;#39;\*2016\*&amp;#39;}.ForEach{&amp;#39;C:\sqlbackups\&amp;#39; + $Psitem}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Restore-DbaDatabase-SqlInstance $Container-SqlCredential $cred-Path $Files-useDestinationDefaultDirectories -WithReplace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Verbose-Message &amp;#34;Restored Databases on 2014&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2012 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Files = $Filenames.Where{$PSitem -like &amp;#39;\*2012\*&amp;#39;}.ForEach{&amp;#39;C:\sqlbackups\&amp;#39; + $Psitem}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Restore-DbaDatabase-SqlInstance $Container-SqlCredential $cred-Path $Files-useDestinationDefaultDirectories -WithReplace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Verbose-Message &amp;#34;Restored Databases on 2012&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Default {}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I need to create the file paths for each backup file by getting the correct backups and appending the names to &lt;code>C:\SQLBackups&lt;/code> which is where the volume is mounted inside the container&lt;/p>
+&lt;p>As Get-DbaDatabase gives the container ID as the Computer Name I have highlighted each container below&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/04-databases.png"
+loading="lazy"
+alt="04 - databases.png"
+>&lt;/p>
+&lt;p>That is how easy it is to create a number of SQL containers of differing versions for your presentations or exploring needs&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>dbatools with SQL on Docker and running SQL queries</title><link>https://blog.robsewell.com/blog/dbatools-with-sql-on-docker-and-running-sql-queries/</link><pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbatools-with-sql-on-docker-and-running-sql-queries/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>$srv.Query($Query)&lt;/p>
+&lt;p>$srv.Query($Query).column1&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;!-- raw HTML omitted --></description></item></channel></rss>
