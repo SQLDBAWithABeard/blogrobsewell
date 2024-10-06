@@ -1,7 +1,10 @@
 # Change baseurl before deploy
 baseurl = "https://blog.robsewell.com"
 languageCode = "en"
-paginate = 5
+[pagination]
+  disableAliases = false
+  pagerSize = 5
+  path = 'page'
 title = "Rob Sewell (aka SQL DBA With A Beard)"
 
 # Theme i18n support
