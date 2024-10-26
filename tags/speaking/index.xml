@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Speaking on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/speaking/</link><description>Recent content in Speaking on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/speaking/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLBits 2023 in Newport - A beards viewpoint</title><link>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</link><pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits 2023 in Newport - A beards viewpoint" />&lt;h1 id="what-is-sqlbits">What is SQLBits?
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="committee">Committee
+&lt;/h2>&lt;p>The SQLBits committee is responsible for the running of the conference, the selection of general sessions and training days, helpers, sponsors, venue, dates, child care, theme, logo, the party, the website, charity support, hotels, bars, delegate app, helpers app, sponsors app, food, drinks, entertainment, prizes, swag, t-shirts, mugs, code of conduct, badges, printing, freight, stickers, lanyards, bags,on-site therapist, pens, notepads&amp;hellip; and everything else that goes into making SQLBits the best conference it can be!!&lt;/p>
+&lt;h2 id="before-the-conference">Before the conference
+&lt;/h2>&lt;p>We have been meeting every week as a committee to plan the conference. Every committee member has also spent a lot of time in meetings, dealing with correspondence, answering questions, and then feeding this back to the whole committee. We received some feedback from one of our largest sponsors that one of the things that the liked about SQLBits was that we are all so passionate about the conference and that it really shows. We are all volunteers and we all have full time jobs, families, and other commitments but we are also determined to make SQLBits the best Microsoft Data Platform conference in the world.&lt;/p>
+&lt;h2 id="set-up">Set up
+&lt;/h2>&lt;p>We all arrived in Newport on the Sunday or the Monday before the conference to set up. Set up is a massive operation involving a significant number of people who turn the big empty room into the exhibition hall, build all of the sponsor booths, set up all of the rooms with a stage, screens, signage and projectors, ensure that there is wifi, power, and hard-wired internet access in them all. There was also a team taking all of the output from the speakers desk and ensuring that it will be available for the live streams for the online delegates. Whilst all of that is happening, we were unpacking all of the things that had been in storage (or peoples garages) getting all of the t-shirts for the helpers, for the speakers and for the committee. All of the speaker swag and delegate swag was put into a box or a bag by some of the orange shirted helpers.
+We also had a &amp;ldquo;Meet the trainer&amp;rdquo; event in the evening which allowed delegates to come and interact with the speakers. This was a great opportunity for delegates to ask questions and get to know the trainers before the training days.&lt;/p>
+&lt;p>That was all expected.&lt;/p>
+&lt;p>However, there are also things that happens behind the scenes during this time. For example, due to a storm over Northern Europe which impacted flights into and out of Schiphol, London and Bristol Airports as well as the trains running from London to Newport, there was a point on Monday afternoon where we were not sure that over half of our training day speakers for the next day would be able to make it. This lead to a couple of hours of manic phone calls and communication with the speakers as we tried our best to get them to the conference. We were very lucky that with only one exception, everyone made it to the conference. Unfortunately, despite best efforts and a lot of searching, one speaker was unable to get to the UK in time and so we had to switch their rooms to a room with virtual speakers enabled and update all of the schedules and teams involved in providing the content. These are the things that you don&amp;rsquo;t see, but that are part of the magic of ensuring that the conference runs smoothly. I hope all of the delegates and most of the speakers and sponsors have no idea of the things that were happening behind the scenes. I always describe it like a swan, it looks calm and serene on the surface, but underneath the water, there is a lot of paddling going on!&lt;/p>
+&lt;h1 id="tuesday">Tuesday
+&lt;/h1>&lt;p>For me, Tuesday was a training day. With my fantastic partner in fun and games and sharing - Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>B&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>M&lt;/a> we spent the whole day with about 75 people both in person and online and talked about how to manage large SQL estates. We had a lot of fun and I hope that everyone who attended enjoyed it as much as we did. We had a lot of questions and a lot of interaction with the delegates in both formats and it showed that the system that we had to enable virtual delegates for SQLBits really managed to work well.&lt;/p>
+&lt;h1 id="equity-and-inclusivity">Equity and Inclusivity
+&lt;/h1>&lt;p>We had a lot of positive feedback from the delegates and we are really pleased that we were able to provide this opportunity for even more people to attend the conference. We are passionate about Diversity, Equity and Inclusivity and the feedback that we have received is that allowing virtual attendees enabled more people to attend the conference and to learn from the speakers. People who would not have been able to attend because of their family commitments or because of the cost of travel and accommodation were able to attend and this is one of our goals for the conference.&lt;/p>
+&lt;p>Concentrating on Inclusion and Equity will naturally have a positive impact on our Diversity and our goal is to make SQLBits a conference that is welcoming to everyone. The DE and I teams initiatives such as childcare are beginning to bear fruit and we are seeing more and more people attending the conference with their families, as well as more people from underrepresented groups attending the conference and we are working hard to ensure that we are providing a safe and welcoming environment for everyone.&lt;/p>
+&lt;h1 id="getting-everyone-in">Getting everyone in
+&lt;/h1>&lt;p>Whilst Jess and I were doing the training day, the rest of the team were ensuring that everyone was able to get in, with a badge, registered with the session that they expected, or the one they wished to change to. Some sessions had a limited number of places and so we had to ensure that the people who were on the waiting list were able to get into the session that they wanted to attend if places became available. We had to print the badges for the people who had signed up in the days before we sent the information to the printers. We had people paying for new tickets right up until Friday!&lt;/p>
+&lt;h1 id="wednesday">Wednesday
+&lt;/h1>&lt;p>There was another &amp;ldquo;Meet the trainer&amp;rdquo; event on the Tuesday evening and another set of speakers and delegates who were arriving as well as sponsor teams and their freight. Wednesday morning did not see as much of a rush as Tuesday morning, but there was still a lot of people arriving and needing processing or having questions that needed answering. At events like SQLBits there is also a lot of communication and conversation with the venue. Ensuring that there is coffee at the times that everyone comes out of the rooms for breaks and that there is lunch at the right time. When you are thinking about lunch, you also need to think about the sponsors. On General sessions days we need to ensure that they can have lunch before all of the delegates come out of their sessions and they need to spend their time talking with them and demonstrating their products. Wednesday evening was also when the sponsors were able to setup their booths. This, of course, generates a large number of questions that need answering and boxes that need finding and then unpacking.&lt;/p>
+&lt;h1 id="evening-events">Evening events
+&lt;/h1>&lt;p>Wednesday saw the first of the large evening events. We provided a games night with food. Thursday there was a quiz night with curry and Friday was the Party. As you can imagine, there is a significant amount of organisation required behind the scenes for all of these additional events. Food, drinks, prizes, the folks providing the entertainment and the helpers. The venue, security, transport from the hotels to the venue and back again. All of this needs to be organised and then managed on the day. We had a lot of fun at these events though and find them a great way to end each day and enable delegates who want to, to be able to network with each other and with the sponsors all whilst doing something fun. The party is organised by the wonderful, sparkly Julia and her team and they do a fantastic job of making sure that everyone has a great time.&lt;/p>
+&lt;h1 id="general-sessions">General sessions
+&lt;/h1>&lt;p>General sessions then add further complexity, more delegates, more speakers, more moving parts that always have the possibility for things to require fixing. I have been a SQLBits helper and runner enough times to know that there were many things requiring attention, this year my responsibility was the agenda and updating the processes behind that when things changed and answering the myriad of questions that come up at the information desk. It is a lot of fun but also a lot of work.&lt;/p>
+&lt;h1 id="wrap-up">Wrap up
+&lt;/h1>&lt;p>This is a totally raw outpouring of my experience this year, pretty much without filter. Just so that I had it down somewhere in words.&lt;/p></description></item><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" />&lt;h1 id="what-is-sqlbits">What is SQLBits?
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="where-and-when">Where and when?
+&lt;/h2>&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p>
+&lt;h2 id="what-is-there-at-sqlbits">What is there at SQLBits?
+&lt;/h2>&lt;p>Tuesday and Wednesday are training days with all day sessions provided by subject matter experts including Microsoft Product Group members, Microsoft Valued Professionals, Microsoft Certified Trainers, and other experts. There are 30 options covering all areas of the Data Platform and none-technical sessions as well.&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/training-days" target="_blank" rel="noopener"
+>training day agenda here&lt;/a>&lt;/p>
+&lt;p>Thursday and Friday have 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>Saturday is the &lt;strong>FREE to attend&lt;/strong> day. It also has 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>There are about 250 sessions on Thursday, Friday and Saturday&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/agenda" target="_blank" rel="noopener"
+>general session agenda here&lt;/a>&lt;/p>
+&lt;h2 id="what-else-is-there-outside-of-technical-stuff">What else is there outside of technical stuff?
+&lt;/h2>&lt;p>Oh My!!&lt;/p>
+&lt;p>The biggest benefit is the people, for networking, for answering questions, building relationships with Microsoft product group or local Microsoft, meeting companies who are sponsoring, finding your new job or your new team members, learning and sharing with your peers.&lt;/p>
+&lt;p>There is also a pub quiz on Thursday evening, the Friday night costume party, the community zone.&lt;/p>
+&lt;h1 id="how-do-i-find-the-sessions">How do I find the sessions?
+&lt;/h1>&lt;p>With so many sessions, its hard to find the ones that you want or to get a good overview in the format that you want. So I built a PowerShell module to get that information for you easily in any format you like. (Editor - thats a fib, he built it so that he could write Pester to ensure that speakers were not scheduled when they were not available)&lt;/p>
+&lt;h1 id="the-sqlbitsps-module">The SQLBitsPS module
+&lt;/h1>&lt;p>You can find the SQLBitsPS PowerShell module on the &lt;a class="link" href="https://www.powershellgallery.com/packages/SQLBitsPS" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>As with all PowerShell modules from the Gallery, you can install it by running&lt;/p>
+&lt;p>&lt;code>Install-Module SQLBitsPS&lt;/code>&lt;/p>
+&lt;p>I find that a lot of people like to use the &lt;code>ShowWindow&lt;/code> parameter to have the help in another searchable window.&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule -ShowWindow&lt;/code>
+&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="use-the-help">Use the help
+&lt;/h2>&lt;p>to find out how to use any PowerShell command you should use Get-Help and this module is no different. The help for the commands is built in and can be accessed with&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule&lt;/code>&lt;/p>
+&lt;h2 id="getting-the-schedule">Getting the schedule
+&lt;/h2>&lt;p>You can just run &lt;code>Get-SQLBitsSchedule&lt;/code> and by default it will get the schedule and if you have the &lt;code>ImportExcel&lt;/code> module available it will write an Excel Workbook with each days agenda on a different sheet and colour code the service sessions like Registration, lunch and coffee breaks&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>To save you having to click to open Excel I have added a &lt;code>Show&lt;/code> parameter which will open it for you!&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-csv-instead">I would like a csv instead
+&lt;/h2>&lt;p>The &lt;code>output&lt;/code> parameter gives you a number of options for the format of the output. If you do not have the &lt;code>ImportExcel&lt;/code> module it will default to &lt;code>-output csv&lt;/code> which you can also combine with the &lt;code>Show&lt;/code> parameter&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output csv -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-html-page-instead">I would like a html page instead
+&lt;/h2>&lt;p>It&amp;rsquo;s not awesome but you can also create an HTML page. This may be useful if you wish to print the agenda yourself so that you have a hard copy.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output html -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="let-me-decide-what-format-i-want">Let me decide what format I want
+&lt;/h2>&lt;p>You can also output a &lt;code>[pscustomobject]&lt;/code> which you may use to PowerShell to your hearts content!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Format-Table&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Maybe you would like to see the sessions that are on Friday at 16:50&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Where-Object {$_.Day -eq 'Friday' -and $_.StartTime -eq '16:50'} &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They look amazing, I recommend Mladen Prajdic session. That one blew me away at Data Grillen and I may very well attend that again.&lt;/p>
+&lt;h2 id="i-cant-do-anything-fancy-just-let-me-search">I can&amp;rsquo;t do anything fancy, just let me search
+&lt;/h2>&lt;p>If all you want is to search for your favourite speaker then you can use the &lt;code>search&lt;/code> parameter which will perform a wildcard search.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Cathrine -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Monica -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You can also use it search for topics&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search 'Mental Health' -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and even to search for wisdom!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search wisdom -output object &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h1 id="i-want-to-make-it-better">I want to make it better
+&lt;/h1>&lt;p>Awesome, thank you.&lt;/p>
+&lt;p>This is all open-source and you can find it on GitHub at&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS&lt;/a>&lt;/p>
+&lt;p>There are some brief instructions here&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md&lt;/a>&lt;/p>
+&lt;h1 id="join-us">Join us
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform.&lt;/p>
+&lt;h2 id="where-and-when-1">Where and when?
+&lt;/h2>&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p></description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars1.jpg" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="in-the-beginning">In the beginning
+&lt;/h1>&lt;p>It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits Conference&lt;/a> (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don&amp;rsquo;t like it and don&amp;rsquo;t ever do it again. (Narrator - exactly the opposite happened - He loved it and does it &lt;a class="link" href="https://sessionize.com/rob-sewell/" target="_blank" rel="noopener"
+>at every opportunity&lt;/a>)&lt;/p>
+&lt;p>It was not the most brilliant presentation. I learned a lot and blogged about it too &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>as you can read here&lt;/a>. But I enjoyed it and it gave me the confidence to do it again and set me on a path to the wonderful life I have now.&lt;/p>
+&lt;h1 id="should-you-speak-at-your-user-group">Should you speak at your User Group?
+&lt;/h1>&lt;p>Yes&lt;/p>
+&lt;p>OK, you want a bit more?&lt;/p>
+&lt;p>Yes you definitely should.&lt;/p>
+&lt;p>You should try it once.&lt;/p>
+&lt;p>Your user group should be filled with some familiar faces of people who you know will support you and only want the best for you.
+It will usually be a smaller group than at an event like a Data Saturday or other local to your town/city event.
+Your user group leader will be delighted to help and to support you.
+If you don&amp;rsquo;t like it, you don&amp;rsquo;t ever have to do it again.&lt;/p>
+&lt;h1 id="what-is-the-benefit-of-speaking">What is the benefit of speaking?
+&lt;/h1>&lt;p>Why should you put yourself through all of that stress and work to put on a wonderful session? I think there are a number of benefits and most won&amp;rsquo;t come to you from doing a single session.&lt;/p>
+&lt;ul>
+&lt;li>The first one does. You will know your subject more thoroughly. By preparing a session to present, you will definitely research, you will read blogs, you will try things out, you will want to make sure that you know all there is to know. This means that you will be improving your knowledge on the subject.&lt;/li>
+&lt;li>Confidence. Speaking in public will give you more confidence.&lt;/li>
+&lt;li>It will improve your communication skills. You will have to be able to convey your message to others&lt;/li>
+&lt;li>Some people say that a job interview is like a presentation and you can improve that skill. (I am not sure but &lt;a class="link" href="https://blog.robsewell.com/blog/i-hate-interviews-tsql2sday/" target="_blank" rel="noopener"
+>I hate interviews and don&amp;rsquo;t perform well&lt;/a>)&lt;/li>
+&lt;li>It will improve your time management skills. You have to do a presentation on Monday, you need to get everything in place in time for that.&lt;/li>
+&lt;/ul>
+&lt;p>There are plenty of other reasons too.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?
+&lt;/h1>&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> call for papers are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>GitHub Action Workflow Protected branch update failed</title><link>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/noentry.jpg" alt="Featured image of post GitHub Action Workflow Protected branch update failed" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/" >The last post&lt;/a> showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="protecting-the-repository">Protecting the repository
+&lt;/h1>&lt;p>I opened the repository in the browser and GitHub and was provided with a warning that said&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/protectbranch.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/protectbranch.png"
+loading="lazy"
+alt="protect your branch"
+>&lt;/a>&lt;/p>
+&lt;p>Clicking on the protect this branch button gave the reasoning.&lt;/p>
+&lt;blockquote>
+&lt;p>Protect your most important branches
+Branch protection rules define whether collaborators can delete or force push to the branch and set requirements for any pushes to the branch, such as passing status checks or a linear commit history.&lt;/p>
+&lt;/blockquote>
+&lt;p>So I changed the settings so that a Pull Request is required and needs to be reviewed.&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/branchprotected.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/branchprotected.png"
+loading="lazy"
+alt="all protected"
+>&lt;/a>&lt;/p>
+&lt;h1 id="breaks-the-workflow">Breaks the workflow
+&lt;/h1>&lt;p>I had already altered the workflow trigger for the workflow to generate the speaker-list.json so that it would run when changes to the speakers directory were pushed to the main branch by adding&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> push:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> branches:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> paths:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - speakers/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then approved a PR with a change to that directory and saw that the workflow had started.&lt;/p>
+&lt;p>Then it failed :-(.&lt;/p>
+&lt;p>The error message could be seen in the codespaces with the extension &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-actions&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushdenied.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushdenied.png"
+loading="lazy"
+alt="no can do"
+>&lt;/a>&lt;/p>
+&lt;p>This is the error message&lt;/p>
+&lt;blockquote>
+&lt;p>Error: To &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+! refs/heads/main:refs/heads/main [remote rejected] (protected branch hook declined)
+Done
+Pushing to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers&lt;/a>
+POST git-receive-pack (604 bytes)
+remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: error: At least 1 approving review is required by reviewers with write access.
+error: failed to push some refs to &amp;lsquo;&lt;a class="link" href="https://github.com/dataplat/DataSpeakers%27" target="_blank" rel="noopener"
+>https://github.com/dataplat/DataSpeakers'&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, because I have now protected my branch, I cannot automatically push changes into the main branch.&lt;/p>
+&lt;h1 id="fix-it">Fix it
+&lt;/h1>&lt;p>To fix this, I had to create a new PAT token with &lt;code>public_repo&lt;/code> scope and save it as a secret for the workflow to access and update the checkout to use this token.&lt;/p>
+&lt;h2 id="create-a-new-pat-token">Create a new PAT token
+&lt;/h2>&lt;p>The instructions to do this are found &lt;a class="link" href="https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" rel="noopener"
+>in the docs here&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>In the upper-right corner of any page, click your profile photo, then click Settings.&lt;/li>
+&lt;li>In the left sidebar, click Developer settings.&lt;/li>
+&lt;li>In the left sidebar, click Personal access tokens.&lt;/li>
+&lt;li>Click Generate new token.&lt;/li>
+&lt;li>Give your token a descriptive name.&lt;/li>
+&lt;li>To give your token an expiration.&lt;/li>
+&lt;li>Select the scopes, or permissions, you&amp;rsquo;d like to grant this token.
+For this scenario just choose &lt;code>public_repo&lt;/code>&lt;/li>
+&lt;li>Click Generate token.&lt;/li>
+&lt;li>Save the generated token somewhere safe like your password manager. ( You &lt;strong>do&lt;/strong> have a password manager? - Our family use 1Password)&lt;/li>
+&lt;/ul>
+&lt;h2 id="save-it-as-a-secret-in-the-repository">Save it as a secret in the repository
+&lt;/h2>&lt;p>You do not ever ever ever want to store secrets in source control. When using GitHub like this you can store your secrets in the settings of the repository &lt;a class="link" href="https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md" target="_blank" rel="noopener"
+>by following this guide&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>navigate to the main page of the repository.&lt;/li>
+&lt;li>Under your repository name, click on the &amp;ldquo;Settings&amp;rdquo; tab.&lt;/li>
+&lt;li>In the left sidebar, click Secrets.&lt;/li>
+&lt;li>On the right bar, click on &amp;ldquo;Add a new secret&amp;rdquo;&lt;/li>
+&lt;li>Type a name for your secret in the &amp;ldquo;Name&amp;rdquo; input box. I used &lt;code>REPO_TOKEN&lt;/code>&lt;/li>
+&lt;li>Type the value for your secret.&lt;/li>
+&lt;li>Click Add secret.&lt;/li>
+&lt;/ul>
+&lt;h2 id="use-it-in-your-workflow">Use it in your workflow
+&lt;/h2>&lt;p>Now that you have saved your secret, you can use it your workflows. To get rid of the protected branch error it is used in the &lt;code>actions/checkout&lt;/code> action like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> token: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I remembered to do for both workflows!!&lt;/p>
+&lt;p>I then created a PR to test it and this time it was able to successfully push changes to the main branch&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/pushcompleted.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/pushcompleted.png"
+loading="lazy"
+alt="its pushed"
+>&lt;/a>&lt;/p>
+&lt;p>and you can see &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/80d585ff1de15db22744ad5e7295294260b8fc98" target="_blank" rel="noopener"
+>the commit here&lt;/a> or &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/commit/7046d51de7b1d9e9b9f188879a4981a76f35c3c4" target="_blank" rel="noopener"
+>the PR&lt;/a> if you wish.&lt;/p>
+&lt;h1 id="but-thats-not-all-folks">But thats not all folks
+&lt;/h1>&lt;p>This will work correctly for a PR and it will work for the initial workflow that has been called.&lt;/p>
+&lt;p>It &lt;em>&lt;strong>will not work&lt;/strong>&lt;/em> for the reusable workflow. When the reusable workflow is called from another workflow it is unable to pick up the token from the secrets. &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions/runs/2659979920" target="_blank" rel="noopener"
+>In that scenario we get this error&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/gregbrokeit.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/gregbrokeit.png"
+loading="lazy"
+alt="Greg Broke it"
+>&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Input required and not supplied: token&lt;/p>
+&lt;/blockquote>
+&lt;p>for the &lt;code>actions/checkout@v2&lt;/code> action. This took some tracking down to resolve but finally I found the answer &lt;a class="link" href="https://github.community/t/reusable-workflows-secrets-and-environments/203695/18?u=sqldbawithabeard" target="_blank" rel="noopener"
+>in a forum post&lt;/a>&lt;/p>
+&lt;p>In the &lt;em>&lt;strong>calling&lt;/strong>&lt;/em> workflow add a &lt;code>secrets&lt;/code> entry and pass in the token secret.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then at the top of the &lt;em>&lt;strong>reusable workflow&lt;/strong>&lt;/em> define the secrets&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> secrets:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> REPO_TOKEN:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> required: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and finally all is well and Dr Greg Low &lt;a class="link" href="https://blog.greglow.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/greglow" target="_blank" rel="noopener"
+>Twitter&lt;/a> can be added ;-)&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/bench.jpg" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/blog/community/Training-Day-Speakers-List" >The last post&lt;/a> showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p>
+&lt;h1 id="what-do-we-need">What do we need?
+&lt;/h1>&lt;p>The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>The web page can be found here&lt;/a>. This page is generated from a JSON file.&lt;/p>
+&lt;h1 id="a-new-repository">A new repository
+&lt;/h1>&lt;p>It was decided to use a GitHub repository to hold this information so that it is available publicly as well as via the website.&lt;/p>
+&lt;h1 id="create-a-dev-container">Create a dev container
+&lt;/h1>&lt;p>It&amp;rsquo;s a brand new repository &lt;code>.devcontainer&lt;/code> directory was created and the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/main/containers/powershell/.devcontainer" target="_blank" rel="noopener"
+>Microsoft VS Code Remote / GitHub Codespaces Container Definitions repository PowerShell containers&lt;/a> added. This means that whenever I or anyone else wants to work on the repo the development experience will be the same.&lt;/p>
+&lt;h2 id="add-extensions">Add extensions
+&lt;/h2>&lt;p>There are a number of default extensions that I install for PowerShell or generic development&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.powershell" target="_blank" rel="noopener"
+>ms-vscode.powershell&lt;/a> - because I am working with PowerShell&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets" target="_blank" rel="noopener"
+>2gua.rainbow-brackets&lt;/a> - because I like to easily see which opening bracket matches which closing bracket&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow" target="_blank" rel="noopener"
+>oderwat.indent-rainbow&lt;/a> - so that I can quickly see the indentations, invaluable with YAML files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens" target="_blank" rel="noopener"
+>usernamehw.errorlens&lt;/a> - so that linting errors are displayed in the editor alongside the code&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank" rel="noopener"
+>eamodio.gitlens&lt;/a> - to make source control easier&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=TylerLeonhardt.vscode-inline-values-powershell" target="_blank" rel="noopener"
+>TylerLeonhardt.vscode-inline-values-powershell&lt;/a> - so that you can see inline values when debugging&lt;/li>
+&lt;/ul>
+&lt;p>I also added two more for this repository as we are using GitHub Actions&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions" target="_blank" rel="noopener"
+>me-dutour-mathieu.vscode-github-actions&lt;/a> - for intellisense for GitHub Action files&lt;/li>
+&lt;li>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions" target="_blank" rel="noopener"
+>cschleiden.vscode-github-action&lt;/a> - to be able to start/stop/monitor GitHub Actions from the workspace&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/githubactionsview.png"
+loading="lazy"
+alt="the view in codespaces of the GitHub Actions"
+>&lt;/p>
+&lt;h1 id="gather-the-information">Gather the Information
+&lt;/h1>&lt;p>People can update repositories using Pull Requests but this needed to be a little more guided and it was decided that it was to be done with &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms" target="_blank" rel="noopener"
+>forms via GitHub Issues&lt;/a>&lt;/p>
+&lt;h2 id="where-to-put-it">Where to put it?
+&lt;/h2>&lt;p>You can create custom GitHub Issues using YAML files in the &lt;code>.github/ISSUE_TEMPLATE&lt;/code> directory. An Add Speaker issue template file was created. The name and the description will be seen on the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new/choose" target="_blank" rel="noopener"
+>new issues page&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add Speaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: Add New Speaker information
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">body:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - type: markdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attributes:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> value: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please follow the instructions to create a new speaker entry.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> We wil display this on callfordataspeakers.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a number of &lt;code>-type&lt;/code> entries. &lt;a class="link" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema" target="_blank" rel="noopener"
+>You can find the definitions in the docs&lt;/a> or you can use the intellisense from the extensions. The types are checkboxes, dropdown, input, markdown, textarea&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/intellisense-ghactions.png"
+loading="lazy"
+alt="The intellisense showing the type options"
+>&lt;/p>
+&lt;p>I used the intellisense to build a quick simple form to gather 5 pieces of information&lt;/p>
+&lt;ul>
+&lt;li>full name&lt;/li>
+&lt;li>topics&lt;/li>
+&lt;li>regions&lt;/li>
+&lt;li>sessionize profile URL&lt;/li>
+&lt;li>languages&lt;/li>
+&lt;/ul>
+&lt;p>You can find &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/blob/main/.github/ISSUE_TEMPLATE/Add-Speaker.yml" target="_blank" rel="noopener"
+>the YAML file here&lt;/a> and &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/new?assignees=&amp;amp;labels=&amp;amp;template=Add-Speaker.yml" target="_blank" rel="noopener"
+>the issue here&lt;/a>&lt;/p>
+&lt;h1 id="process-the-information">Process the information
+&lt;/h1>&lt;p>Now that we have a method of gathering the information, the next stage is to process it automagically. For this we are going to be &lt;a class="link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener"
+>using GitHub Actions&lt;/a>&lt;/p>
+&lt;h2 id="workflow">Workflow
+&lt;/h2>&lt;p>GitHub Actions is a platform that can run automated processes called workflows that are defined as YAML files and triggered by events in the repository. We create another directory called &lt;code>workflows&lt;/code> also in the &lt;code>.github&lt;/code> directory.&lt;/p>
+&lt;h2 id="triggering-the-workflow">Triggering the workflow
+&lt;/h2>&lt;p>Many people are comfortable with a DevOps process that will build, test and deploy code when a pull request is raised and approved, GitHub Actions are able to do more as they can be triggered by any events in the repository.&lt;/p>
+&lt;p>You can automatically add labels, close stale issues and much more. There are a large number of events open to you as &lt;a class="link" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows" target="_blank" rel="noopener"
+>can be seen here &lt;/a>. Even looking at just issues there are a number of activities types that can be used&lt;/p>
+&lt;ul>
+&lt;li>opened&lt;/li>
+&lt;li>edited&lt;/li>
+&lt;li>deleted&lt;/li>
+&lt;li>transferred&lt;/li>
+&lt;li>pinned&lt;/li>
+&lt;li>unpinned&lt;/li>
+&lt;li>closed&lt;/li>
+&lt;li>reopened&lt;/li>
+&lt;li>assigned&lt;/li>
+&lt;li>unassigned&lt;/li>
+&lt;li>labeled&lt;/li>
+&lt;li>unlabeled&lt;/li>
+&lt;li>locked&lt;/li>
+&lt;li>unlocked&lt;/li>
+&lt;li>milestoned&lt;/li>
+&lt;li>demilestoned&lt;/li>
+&lt;/ul>
+&lt;p>(and there are separate ones for issue comments)&lt;/p>
+&lt;p>The beginning of the workflow YAML file has the name and then the trigger. This triggers the workflow when an issue is opened.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">name: Add a new speaker json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issues:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> types:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - &amp;#34;opened&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-all-the-source">Getting all the source
+&lt;/h2>&lt;p>The workflow consists of &lt;a class="link" href="https://docs.github.com/en/actions/using-jobs" target="_blank" rel="noopener"
+>one or many jobs&lt;/a> that can be run on different runners. The first job is named &lt;code>AddNewSpeaker&lt;/code> and runs on the latest ubuntu version. Each job can have a number of steps and the first step in this scenario is to checkout the latest version of the repository.&lt;/p>
+&lt;p>We &lt;strong>&lt;em>use&lt;/em>&lt;/strong> a default &lt;strong>&lt;em>action&lt;/em>&lt;/strong> to checkout and because we push changes back to the repository (more on that later) we choose a &lt;code>fetch-depth&lt;/code> of 0 to get all of the history and the &lt;code>ref&lt;/code> main as that is the branch we are working with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jobs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> addNewSpeaker:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - uses: actions/checkout@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fetch-depth: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ref: main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="being-polite">Being polite
+&lt;/h2>&lt;p>costs nothing so this action from Peter Evans can be used to add or update a comment&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hi @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for your Speaker submission.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Action should be running now and adding it to the webpage. It should should update here.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> If it doesn&amp;#39;t - get in touch with Rob on Twitter https://twitter.com/sqldbawithbeard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="wait-a-minute-how-did-you-work-that-out">wait a minute, how did you work that out?
+&lt;/h3>&lt;p>The say thank you comment uses &lt;code>github.event.issue.number&lt;/code> and &lt;code>github.event.issue.user.login&lt;/code> to ensure that the comment goes on the issue that triggered the workflow and thanks the user that created it. To work out what is available, I used this PowerShell step to write out the GitHub context to the logs as JSON&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># You also can print the whole GitHub context to the logs to view more details.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: View the GitHub context
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: Write-Host &amp;#34;$GITHUB_CONTEXT&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> env:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GITHUB_CONTEXT: ${{ toJson(github) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="get-the-info-into-a-file">Get the info into a file
+&lt;/h2>&lt;p>Whilst developing, I first saved the issue body to a file so that I could work with it. As I moved forward I forgot and just left the code in and it works. The issue form creates &lt;code>### &amp;lt;label&amp;gt;&lt;/code> and then a blank line and then the data that was entered. This enabled me to use some regex and capture each label, grab the data and put it in a &lt;code>pscustomobject&lt;/code>&lt;/p>
+&lt;p>Then I could convert it to Json and save it to a file. I chose to save each speakers information in their own file in case anything else would be needed in the future and also so that if the process failed it only affected this speakers information.&lt;/p>
+&lt;p>I also add the speaker file name to a text file that I may make use of at some future point.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Get Speaker Information to file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> run: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Host &amp;#34;What do we have?&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # gci -recurse = this is for troubleshooting because paths are hard
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody = &amp;#34;${{ github.event.issue.body }}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write-Host $IssueBody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $IssueBody | Out-File speakers/temp.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # get the temp file contents - I do this so I don&amp;#39;t lose anything
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $file = Get-Content ./speakers/temp.txt -Raw
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # parse the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $regexResult = [regex]::Matches($file, &amp;#39;(?ms)fullname\n\n(?&amp;lt;fullname&amp;gt;.*)\n\n### topics\n\n(?&amp;lt;topics&amp;gt;.*)\n\n### regions\n\n(?&amp;lt;regions&amp;gt;.*)\n\n### Sessionize\n\n(?&amp;lt;Sessionize&amp;gt;.*)\n\n### language\n\n(?&amp;lt;language&amp;gt;.*)\n&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # create an object
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerObject = [PSCustomObject]@{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> name = $regexResult[0].Groups[&amp;#39;fullname&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> topics = $regexResult[0].Groups[&amp;#39;topics&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> regions = $regexResult[0].Groups[&amp;#39;regions&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sessionize = $regexResult[0].Groups[&amp;#39;Sessionize&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> language = $regexResult[0].Groups[&amp;#39;language&amp;#39;].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #save it to a file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $filePath = &amp;#39;./speakers/{0}.json&amp;#39; -f $speakerFileName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $SpeakerObject |ConvertTo-Json | Out-FIle -FilePath $filePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $speakerFileName | OUt-File ./speakers/list.txt -Append
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> shell: pwsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="because-ben-is-a-fantastic-tester">Because Ben is a fantastic tester
+&lt;/h3>&lt;p>All the best testers will do unexpected but valid actions and my wonderful friend Ben Weissman (&lt;a class="link" href="https://twitter.com/bweissman" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://bweissman.azurewebsites.net/" target="_blank" rel="noopener"
+>Blog&lt;/a>) added some characters into the full name option that made the file save fail. He added his pronouns, which is awesome but not what I expected for a full name option. This is totally my fault for not considering either using pronouns or that as a user input field that is used in code the data should be validated. I used a few replaces to ensure the file name is acceptable.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$speakerFileName = $SpeakerObject.name -replace &amp;#39; &amp;#39;, &amp;#39;-&amp;#39; -replace &amp;#39;&amp;#39;&amp;#39;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;/&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\\&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;:&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\*&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\?&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;&amp;#34;&amp;#39;,&amp;#39;-&amp;#39; -replace &amp;#39;\|&amp;#39;,&amp;#39;-&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="let-the-user-know-and-commit-the-new-file">Let the user know and commit the new file
+&lt;/h2>&lt;p>Next up is another comment, this time to show some progress but also add a link to the created files directory so that the speaker can see it. They can also edit this file if they wish to make any changes. (yes, maybe I should have thought of a way to do it with issues but this is an iterative process).&lt;/p>
+&lt;p>I love the &lt;code>EndBug/add-and-commit&lt;/code> action as it enables me to make changes in a workflow and commit those changes safely back to the repository.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> - name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The Speaker Json has been added https://github.com/dataplat/DataSpeakers/tree/main/speakers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Add &amp;amp; Commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: EndBug/add-and-commit@v8.0.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_name: Beardy McBeardFace
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> author_email: mrrobsewell@outlook.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> message: &amp;#39;The Beard says hooray we have another speaker @${{ github.event.issue.user.login }} - This is an automated message&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dry">DRY
+&lt;/h2>&lt;p>Don&amp;rsquo;t repeat yourself. The idea is to create the JSON file for the web-page from each of the speakers individual json files. People will want to change what they have entered or they will make mistakes, future functionality might require the same steps. With this in mind I created a separate workflow file to create the &lt;code>speaker-list.json&lt;/code> file. This used two different triggers&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>workflow_calls&lt;/code> so that it can be called from another workflow&lt;/li>
+&lt;li>&lt;code>workflow_dispatch&lt;/code> so that it can be run manually&lt;/li>
+&lt;/ul>
+&lt;p>The other workflow cannot be triggered manually as it relies on an issue to create the required file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">on:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_call:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflow_dispatch:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="only-run-if">Only run if
+&lt;/h2>&lt;p>The second workflow file uses a PowerShell action to combine the individual JSONs into a single one and commits that to the repository. It also comments on the issue but it can only do this if the workflow was triggered from the add speaker job and not manually so some conditional logic was required. There were a number of options that I could choose to decide if to run this step but I decided on using the event issue number &lt;code>if: github.event.issue.number != null&lt;/code> as if there was no issue, there was nothing to comment and this would leave this step open to be used in future coding if required.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- name: Add another comment to the issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/create-or-update-comment@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if: github.event.issue.number != null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> The speaker-list.json file has been recreated ready for the website https://github.com/dataplat/DataSpeakers/blob/main/website/speaker-list.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> https://callfordataspeakers.com/precon should be updated now
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="calling-another-workflow">Calling another workflow
+&lt;/h2>&lt;p>To call another workflow in a job you use the &lt;code>uses:&lt;/code> field and the path to the yaml file and the branch. We also added the &lt;code>needs:&lt;/code> so that this job will run after the &lt;code>addNewSpeaker&lt;/code> has completed.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">createSpeakerListJson:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: addNewSpeaker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: dataplat/DataSpeakers/.github/workflows/wesbiteFile.yml@main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="close-the-issue">Close the issue
+&lt;/h2>&lt;p>This process needed to be completely automatic and so we use Peter Evans close issue action and tag the speaker and say thankyou as well as closing the issue. We have a &lt;code>needs:&lt;/code> property so that this job will only run following the successful run of the previous two jobs.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">closeIssue:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> needs: [addNewSpeaker,createSpeakerListJson]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> runs-on: ubuntu-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - name: Close Issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> uses: peter-evans/close-issue@v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> with:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> issue-number: ${{ github.event.issue.number }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> comment: |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hey @${{ github.event.issue.user.login }},
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Closing this issue now that the Action has run successfully.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Thank you so much for adding your information to the list.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It will be active on callfordataspeakers.com shortly.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Please share on social media.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Love and Hugs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Rob and Daniel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @SqlDbaWithABeard @dhmacher
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="show-me-what-it-looks-like">Show me what it looks like
+&lt;/h1>&lt;p>You can &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>take a look at the repo&lt;/a> there are a &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues?q=is%3Aissue&amp;#43;is%3Aclosed" target="_blank" rel="noopener"
+>number of issues&lt;/a> like &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues/36" target="_blank" rel="noopener"
+>this one from Monica Rathbun&lt;/a> (&lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+>Twitter&lt;/a> - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/monissue.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/monissue.png"
+loading="lazy"
+alt="Monicas Image"
+>&lt;/a>&lt;/p>
+&lt;p>you can see the workflows &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/actions" target="_blank" rel="noopener"
+>running here&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="assets/uploads/2022/07/workflowrun.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/workflowrun.png"
+loading="lazy"
+alt="workflow run"
+>&lt;/a>&lt;/p>
+&lt;p>Happy Automating!&lt;/p></description></item><item><title>Training Day Speakers List</title><link>https://blog.robsewell.com/blog/training-day-speakers-list/</link><pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/training-day-speakers-list/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/magnify.jpg" alt="Featured image of post Training Day Speakers List" />&lt;p>How do data platform events find Training Day/Pre-Con speakers?&lt;/p>
+&lt;p>&lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>So we built a thing for speakers to add themselves and for events to find them&lt;/a>&lt;/p>
+&lt;p>I think event organisers know who the &lt;em>big names&lt;/em> are and the topics that they can deliver for full day training sessions or pre-cons as they are also known. Finding other speakers and finding speakers who can deliver on different topics is a little more difficult.&lt;/p>
+&lt;h1 id="hey-new-speakers">Hey New Speakers
+&lt;/h1>&lt;p>With all the &lt;em>*waves hand at world for the last 2 years&lt;/em> going on, there are a number of new speakers who have taken advantage of virtual events like &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a>, &lt;a class="link" href="https://datagrillen.com/dativerse/" target="_blank" rel="noopener"
+>DatiVerse&lt;/a> and other events that have helped to promote and support new speakers. This is truly awesome and I love seeing the pool of speakers growing and all the new voices enriching our learning.&lt;/p>
+&lt;p>There are undoubtedly speakers who have content and can provide full day seesions that events and attendees will gladly have if only the organisers knew about the content and/or the speakers knew about the events.&lt;/p>
+&lt;h1 id="events-want-your-content">Events want your content
+&lt;/h1>&lt;p>This came up on social media and after a quick conversation with Daniel Hutmacher (&lt;a class="link" href="https://twitter.com/dhmacher" target="_blank" rel="noopener"
+>Twitter&lt;/a> &lt;a class="link" href="https://sqlsunday.com/" target="_blank" rel="noopener"
+>Blog&lt;/a>) we decided to create a resource page that can be found on &lt;a class="link" href="https://callfordataspeakers.com" target="_blank" rel="noopener"
+>Call For Data Speakers&lt;/a>.&lt;/p>
+&lt;p>Call For Data Speakers enables speakers to sign up to receive an email when a new event is announced. It also enables events to sign up, so that speakers can be notified when there is a call for speakers. So this seemed to be the obvious place to hold a list of speakers that event organisers can contact and show the topics that they can present full day or training day sessions on.&lt;/p>
+&lt;h1 id="yes-even-you-please-join">YES even you. Please join.
+&lt;/h1>&lt;p>I have created some automation that will make adding (and removing) yourself from this list easy to do. You can just go straight to &lt;a class="link" href="https://github.com/dataplat/DataSpeakers" target="_blank" rel="noopener"
+>the repo&lt;/a> and follow the instructions if you dont want to read any more here.&lt;/p>
+&lt;p>I see this as a resource for everybody, famouse or not, new or old. I absolutely want &lt;strong>you to add yourself&lt;/strong>, if you have content that can be used to provide a full day of training. Please don&amp;rsquo;t let imposter syndrome get in the way. Right now, all you are doing is listing your idea for people to see. Hopefully soon event organisers will get in touch and say hey I see you present on &amp;hellip; please would you submit to our event for a training day.&lt;/p>
+&lt;p>Event organisers - You &lt;strong>do need to reach out to speakers&lt;/strong>. By adding some effort into finding speakers your event will be more rounded and of interest and benefit to a wider numebr of attendees and sponsors. I am talking about pre-con speakers here bu the same applies to general sessions.&lt;/p>
+&lt;h1 id="how-do-i-do-it">How do I do it?
+&lt;/h1>&lt;p>This process is all automated and driven by GitHub Issues.&lt;/p>
+&lt;h2 id="to-add-yourself-as-a-speaker">To add yourself as a speaker
+&lt;/h2>&lt;p>Open the &lt;a class="link" href="https://github.com/dataplat/DataSpeakers/issues" target="_blank" rel="noopener"
+>Issues Page&lt;/a> and click new issue.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/newissue.png"
+loading="lazy"
+alt="open a new issue"
+>&lt;/p>
+&lt;p>Click the get started button next to Add Speaker.&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/emptyissue.png"
+loading="lazy"
+alt="empty issue"
+>&lt;/p>
+&lt;p>Fill in the details, the title can be anything that you like -&lt;/p>
+&lt;ul>
+&lt;li>Your full name&lt;/li>
+&lt;li>topics you can provide training days or pre-cons for (dbatools, Index Tuning, DevOps for example) Add as many as you like.
+&lt;strong>Just topics&lt;/strong> not session titles or descriptions, those will be in your sessionize profile then this resource does not need updating so frequently. It is after all just a &amp;ldquo;Here I am, come find me&amp;rdquo; resource.&lt;/li>
+&lt;li>regions that you would be willing to present training days or pre-cons in (these match the regions on callfordataspeakers.com)&lt;/li>
+&lt;li>Your sessionize profile URl which will show the event organisers the precise sessions that you have and also your contact details/methods&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/filledinsessions.png"
+loading="lazy"
+alt="new speaker info"
+>&lt;/p>
+&lt;p>Thats it, then press Submit new issue and the automation will do its thing&lt;/p>
+&lt;h1 id="what-does-it-look-like">What does it look like?
+&lt;/h1>&lt;p>A GitHub Action will run and &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+>the web-page&lt;/a> will be updated.&lt;/p>
+&lt;p>You can then search for topics, regions, click on any topic to see all the speakers that are happy to present on that topic.&lt;/p>
+&lt;p>Click on a speaker and you will be directed to their Sessionize profile page.&lt;/p>
+&lt;p>Here is a quick look at the demo page after I had some test data in there!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/callfordataprecons.png"
+loading="lazy"
+alt="PreConSpeakers"
+>&lt;/p>
+&lt;h1 id="what-else-can-i-do">What else can I do?
+&lt;/h1>&lt;p>Please promote this resource. It will have no benefit if speakers do not add themselves and event organisers do not know about it.&lt;/p>
+&lt;p>I would be really happy if you can keep this in mind if you are organising a data platform event, let any speakers know that this exists so that they can add themselves, share it on social media.&lt;/p>
+&lt;p>Many Thanks.&lt;/p></description></item><item><title>Presentation Nerves</title><link>https://blog.robsewell.com/blog/presentation-nerves/</link><pubDate>Tue, 08 Aug 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/presentation-nerves/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Speaking? You? Go on. #tsql2sday #84</title><link>https://blog.robsewell.com/blog/speaking-you-go-on.-tsql2sday-84/</link><pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/speaking-you-go-on.-tsql2sday-84/</guid><description>&lt;p>This is a blog post for &lt;a class="link" href="https://sqlbek.wordpress.com/2016/10/25/t-sql-tuesday-84-growing-new-speakers/" target="_blank" rel="noopener"
+>this month&amp;rsquo;s T-SQL Tuesday post&lt;/a>, hosted by Andy Yun (&lt;a class="link" href="https://sqlbek.wordpress.com/author/sqlbek/" target="_blank" rel="noopener"
+>b&lt;/a>|&lt;a class="link" href="https://twitter.com/SQLBek" target="_blank" rel="noopener"
+>t&lt;/a>). &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>T-SQL Tuesday&lt;/a> is a monthly blog event started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>b&lt;/a>|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+>t&lt;/a>). The T-SQL Tuesday topic this month was about advice for new speakers. Thanks Andy for hosting. I have created a channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a> for presenting which everyone can make use of to ask and to answer questions&lt;/p>
+&lt;h2 id="i-think-you-should-share-what-you-know-with-others">I think you should share what you know with others.
+&lt;/h2>&lt;p>You will be amazing.&lt;/p>
+&lt;p>I will give you some great advice I learnt from a &lt;a class="link" href="https://www.brentozar.com/archive/2012/08/become-presenter-change-your-life/" target="_blank" rel="noopener"
+>blog post&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>Start speaking&lt;/li>
+&lt;li>Keep going&lt;/li>
+&lt;li>Listen to feedback&lt;/li>
+&lt;li>That’s it.&lt;/li>
+&lt;/ol>
+&lt;p>Kendra has said it all, you don&amp;rsquo;t need to read any further ;-)&lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p>However..&lt;/p>
+&lt;h2 id="not-all-plain-sailing">Not all plain sailing
+&lt;/h2>&lt;p>I love giving sessions but I never knew or thought that I would. My journey to speaking started at my SQL user group in Exeter and two fabulous people &lt;a class="link" href="https://twitter.com/FatherJack" target="_blank" rel="noopener"
+>Jonathan&lt;/a> and &lt;a class="link" href="https://twitter.com/Mrs_FatherJack" target="_blank" rel="noopener"
+>Annette Allen&lt;/a> who encouraged me to share some PowerShell with the group. I was terrified, didn&amp;rsquo;t think I was worthy, my HDMI output wasn&amp;rsquo;t strong enough to power the projector, I had to transfer my slides and demo to Jonathans laptop. It was a fraught and frustrating experience.&lt;/p>
+&lt;p>My second presentation was done on &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>Stuart Moores&lt;/a> MacBook Pro using Office Online for presentations and Azure for demos. Again a change right at the last minute and using a machine I didn&amp;rsquo;t know (and a different keyboard set-up).&lt;/p>
+&lt;p>Stuff will go wrong. Murphy&amp;rsquo;s Law will always show his head somewhere and no matter how often you test and re-test your demos, sometimes an odd thing will make them stop working&lt;/p>
+&lt;p>There will be problems and issues, you can mitigate some of them by following the 6 P&amp;rsquo;s&lt;/p>
+&lt;blockquote>
+&lt;p>Proper Preparation Prevents Pretty Poor Performance.&lt;/p>
+&lt;/blockquote>
+&lt;p>You can read some great blog posts in this T-SQL Tuesday Series and also &lt;a class="link" href="https://voiceofthedba.wordpress.com/2016/10/13/why-i-practice-presentations/" target="_blank" rel="noopener"
+>this one from Steve Jones&lt;/a> or &lt;a class="link" href="https://www.brentozar.com/archive/tag/presenting/" target="_blank" rel="noopener"
+>any of these&lt;/a> But also accept that these things happen and you must be prepared to shine on through the darkness if the power runs out or use pen and paper or even plastic cups like &lt;a class="link" href="https://twitter.com%5csqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> :-)&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="you-never-know-you-might-enjoy-it">You never know you might enjoy it
+&lt;/h2>&lt;p>I found I enjoyed it and wanted to do more and since then I have presented sessions in a wide variety of places. It was very strange to have been sat watching and listening to all of these fantastic presenters thinking I could never do that and then find out that actually it is something that I enjoy doing and find fun. You can do that too.&lt;/p>
+&lt;p>Equally, it&amp;rsquo;s ok to not enjoy it, think its not worth the stress and hassle and support the community in a different way but at least give it a go&lt;/p>
+&lt;h2 id="you-will-be-nervous">You will be nervous
+&lt;/h2>&lt;p>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2016/11/quote-joan-jett-you-want-to-have-butterflies-in-your-185899.png?w=1972"
+loading="lazy"
+alt="quote-joan-jett-you-want-to-have-butterflies-in-your-185899"
+>&lt;/p>
+&lt;p>I shared a train across Germany with someone who had attended the PSMonday conference in Munich and they were astonished when I said that I get very nervous before speaking. It&amp;rsquo;s ok to be nervous, the trick is to make use of that nervous energy and turn it into something positive.&lt;/p>
+&lt;p>I get very nervous before presentations. My hands shake, I sweat, I either babble or loose my voice. I fret and fidget and check everything a thousandillion times. I find it is better for me if I am sat in the room during the previous presentation as that generally helps me to feel more relaxed as I can listen to their talk and also out of respect for the presenter and the organisation it forces me to sit quietly.&lt;/p>
+&lt;p>You will find your own way to deal with this, maybe listening to music on headphones or just sitting quietly somewhere. Don&amp;rsquo;t worry if it is not immediately obvious, try some different things, talk with others and believe me, it will be ok.&lt;/p>
+&lt;p>Don&amp;rsquo;t try to numb it with alcohol&lt;/p>
+&lt;p>Once I get up and its &amp;lsquo;my&amp;rsquo; turn I take a few deep breaths and suddenly presenter turns on and I forget all about being nervous.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/173101-everything-you-want-is-on-the-other-side-of-fear.jpg"
+loading="lazy"
+alt="173101-everything-you-want-is-on-the-other-side-of-fear"
+>&lt;/p>
+&lt;h2 id="something-to-talk-about">Something to talk about
+&lt;/h2>&lt;p>I have nothing to talk about.&lt;/p>
+&lt;p>Or everyone else knows more than I do.&lt;/p>
+&lt;p>Or X Y and Z talk about this much better than I do.&lt;/p>
+&lt;p>I&amp;rsquo;m scared&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/splappy" target="_blank" rel="noopener"
+>Richard Munn&lt;/a> and I gave an impromptu session at SQL Relay in Cardiff where we talked about and hopefully encouraged people to start speaking and these statements came up.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/wp_20161004_13_59_32_pro.jpg"
+loading="lazy"
+alt="wp_20161004_13_59_32_pro"
+>&lt;/p>
+&lt;p>Heres (a little of) what we said&lt;/p>
+&lt;p>No-one knows everything. Many people know a hell of a lot but not everything. You know a lot more than you realise and you also know things that no-one else does.&lt;/p>
+&lt;p>If you are stuck for things to talk about think about the you of 6 months or a year ago and something that you have learnt in that time and write the session that you wish you could have seen then. There will be other people at a similar stage who will appreciate it.&lt;/p>
+&lt;p>Don&amp;rsquo;t be scared, they are only people.&lt;/p>
+&lt;h2 id="practice">Practice
+&lt;/h2>&lt;p>My dog is the one person who has been present at my presentations the most. He has listened (sometimes intently) to me practicing.&lt;/p>
+&lt;p>You need to practice speaking out loud.&lt;/p>
+&lt;p>You need to understand the timings&lt;/p>
+&lt;p>You need to be comfortable with hearing yourself speaking out aloud&lt;/p>
+&lt;p>You need to practice speaking out loud&lt;/p>
+&lt;p>A double reminder because I think it is important. You should practice and practice and practice with an eye on your timings and if you have a good friend who is technical or a small group at work for a lunchtime maybe then ask them if they will listen and give feedback.&lt;/p>
+&lt;h2 id="wanna-chat">Wanna chat?
+&lt;/h2>&lt;p>I am very passionate about community involvement and lucky enough to be involved in two fantastic communities - the SQL community and the PowerShell community and have made some great friends along the way. I was amazed and proud when very soon after my second presentation someone told me that I had inspired them to start to present.&lt;/p>
+&lt;p>Since then I have gone out of my way to encourage other people to speak and to blog and am really enjoying watching them blossom. If you want to have a chat via email or via &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>slack&lt;/a> about speaking or blogging or getting involved in the community please feel free to contact me and I promise you I will get back to you. Better still go to the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Community Slack&lt;/a> and ask questions in #presentingorspeaking&lt;/p>
+&lt;h2 id="go-find-out-more">Go find out more
+&lt;/h2>&lt;p>We are good at sharing and learning technical content but we can share and learn about so much more, about all aspects of our life. Go and read all of the other posts in this T-SQL Tuesday for starters :-) and develop&lt;/p></description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p>I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+>PSConfAsia&lt;/a> conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+>Ravi Chaganti&lt;/a> spoke about DSC&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+>&lt;/p>
+&lt;p>and then Desmond Lee lead a Q and A session. In the end we decided that all the answers were&lt;/p>
+&lt;blockquote>
+&lt;p>It Depends and Test in your Environment&lt;/p>
+&lt;/blockquote>
+&lt;p>That evening, I even managed to jump on the PASS PowerShell Virtual Chapter session by Scott Sutherland Hacking SQL Servers on Scale using PowerShell the recording of which is here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/npoORzfP7rw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>A session organised and managed online in three different time zones by Aaron Chrissy and myself :-).&lt;/p>
+&lt;p>On Thursday the conference proper started with a pre-con day at the Amazon Web Services office. Yes, you read that right. This conference really highlighted the cross-platform direction and adoption of open-source that Microsoft is taking.  &lt;a class="link" href="http://twitter.com/@JasonYoder_MCT" target="_blank" rel="noopener"
+>Jason Yoder&lt;/a> spent all day teaching a group &amp;ldquo;PowerShell for Beginners&amp;rdquo; in one room&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_09_24_43_pro.jpg"
+loading="lazy"
+alt="WP_20161020_09_24_43_Pro.jpg"
+>&lt;/p>
+&lt;p>while The Amazon Web Services Team showed DevOps on AWS with PowerShell in the morning and &lt;a class="link" href="https://twitter.com/juneb_get_help" target="_blank" rel="noopener"
+>June Blender&lt;/a> gave a SAPIEN Toolmaking Seminar.fter this we went back to the Microsoft Offices for another User Group where Jason Yoder gave a (nother) session with &lt;a class="link" href="https://twitter.com/jaap_brasser" target="_blank" rel="noopener"
+>Jaap Brasser&lt;/a> on PowerShell Tips and Tricks (&lt;a class="link" href="https://onedrive.live.com/?authkey=%21AJyNBdDeTNtAS18&amp;amp;id=4B0EFD9B34E1210E%2124928&amp;amp;cid=4B0EFD9B34E1210E" target="_blank" rel="noopener"
+>Demo&lt;/a>)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_19_26_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_19_26_24_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Friday started with The PowerShell Team represented by &lt;a class="link" href="https://twitter.com/khansenhansen" target="_blank" rel="noopener"
+>Kenneth Hansen&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/angelcalvos" target="_blank" rel="noopener"
+>Angel Calvo&lt;/a> talking about PowerShell Past, Present and Future. It was really good that there was such great access to the product team at the conference and I saw lots of interaction around the conference as well, in addition to the sessions they provided.&lt;/p>
+&lt;p>Next up for me was another session from the PowerShell Team, this time &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> taking us on a Journey Through the Ages of PowerShell Security&lt;/p>
+&lt;blockquote>
+&lt;p>Execution Policy is not a security feature&lt;/p>
+&lt;/blockquote>
+&lt;p>That took us to lunch, we were treated to excellent lunches at this conference&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_12_07_14_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_12_07_14_Pro (2).jpg"
+>&lt;/p>
+&lt;p>After lunch I sat in the PowerShell Teams Ask Us Anything session although I was mainly preparing for my own session PowerShell Profile Prepares Perfect Production Purlieu which followed. There were excellent sessions on JEA, Nano Server, Chef and DSC, Containers, ETS and securing PowerShell against malware whilst I attended &lt;a class="link" href="http://flynnbundy.com" target="_blank" rel="noopener"
+>Flynn Bundy&amp;rsquo;s&lt;/a> session about Windows Containers and Building GUIs with XAML with &lt;a class="link" href="https://twitter.com/david_das_neves" target="_blank" rel="noopener"
+>David Das Neves&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161021_15_58_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20161021_15_58_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>That evening, organisers, speakers and attendees all went to the Penny Black pub on Marina Bay and enjoyed some food, refreshments and networking&lt;/p>
+&lt;p>Saturday started slowly after the rain (another impressive &amp;lsquo;feature&amp;rsquo; of Singapore)  but the first session was a brilliant one with &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> talking Pragmatic PowerShell and answering questions. I am glad Jason used &lt;a class="link" href="https://github.com/Code52/carnac" target="_blank" rel="noopener"
+>Carnac&lt;/a> to show what he was typing so that people could (just about :-) ) keep up. I then attended the excellent session about contribution with Microsoft.&lt;/p>
+&lt;p>The rest of the day had amazing sessions on Azure Automation, IoT, AWS Cloud Formation, Centralised Repository Server, Chef, Puppet, Professional Help, Nano Server, Docker, DSC, Release Pipeline and of course some bearded fella talking about Installing SQL Scripts and creating Pester Tests for them and combining PowerShell, SQL, SSRS, PowerBi and Cortana :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cjason-yoders-photo.jpg"
+loading="lazy"
+alt="Jason Yoder&amp;rsquo;s photo.jpg"
+>&lt;/p>
+&lt;p>My takeaways from the conference were that Microsoft is very open to all members of the open source community, DevOps is a very important topic and also the following points from the PowerShell team&lt;/p>
+&lt;blockquote>
+&lt;p>PowerShell Team want YOU to contribute. Interact with them File bugs Feature Requests Documentation Tests Code&lt;/p>
+&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>Fixing is better than complaining :-) &lt;a class="link" href="https://twitter.com/@HemanMahawar" target="_blank" rel="noopener"
+>@HemanMahawar&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a> You can help fix the documentation. Use the contribute button on the doc&lt;/p>
+&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>If you are thinking of starting or run a PowerShell usergroup Microsoft would like help. Tag 1 of the team such as &lt;a class="link" href="https://twitter.com/@ANGELCALVOS" target="_blank" rel="noopener"
+>@ANGELCALVOS&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>Special thanks and congratulations must go to Matt, Milton, Sebastian and Ben for their excellent organisation and for creating an awesome event. I am looking forward to seeing how they can better it next year and also hoping that seeing all the fabulous speakers and sessions will inspire some attendees from this years event to share their own knowledge and experience at local user groups and even next years conference.&lt;/p></description></item><item><title>Making Start-Demo work with multi-line commands without a backtick</title><link>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</link><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" alt="Featured image of post Making Start-Demo work with multi-line commands without a backtick" />&lt;p>I love to speak about PowerShell. I really enjoy giving presentations and when I saw Start-Demo being used at the PowerShell Conference in Hanover I started to make use of it in my presentations.&lt;/p>
+&lt;p>&lt;code>Start-Demo&lt;/code> was written in 2007 by a fella who knows PowerShell pretty well 🙂  &lt;a class="link" href="https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/" target="_blank" rel="noopener"
+>https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/&lt;/a>&lt;/p>
+&lt;p>It was then updated in 2012 by Max Trinidad &lt;a class="link" href="http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/" target="_blank" rel="noopener"
+>http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/&lt;/a>&lt;/p>
+&lt;p>This enabled support for multi-line code using backticks at the end of each line. This works well but I dislike having to use the backticks in foreach loops, it confuses people who think that they need to be included and to my mind looks a bit messy&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo.png"
+loading="lazy"
+alt="start-demo"
+>&lt;/a>&lt;/p>
+&lt;p>This didn’t bother me enough to look at the code but I did mention it to my friend Luke &lt;a class="link" href="https:%5C%5Ctwitter.com%5Clduddridge" target="_blank" rel="noopener"
+>t&lt;/a> | &lt;a class="link" href="https://github.com/ChocolateMonkey" target="_blank" rel="noopener"
+>g&lt;/a> who decided to use it as a challenge for his Friday lunch-time codeathon and updated the function so that it works without needing a backtick&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png"
+loading="lazy"
+alt="start-demo2"
+>&lt;/a>&lt;/p>
+&lt;p>It also works with nested loops&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo3.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo3.png"
+loading="lazy"
+alt="start-demo3"
+>&lt;/a>&lt;/p>
+&lt;p>just a little improvement but one I think that works well and looks good&lt;/p>
+&lt;p>You can find it at&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Start-Demo.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/Start-Demo.ps1&lt;/a>&lt;/p>
+&lt;p>and a little demo showing what it can and cant do&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/start-demotest.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/start-demotest.ps1&lt;/a>&lt;/p>
+&lt;p>Load the &lt;code>Start-Demo.ps1&lt;/code> file and then run&lt;/p>
+&lt;p>&lt;code>Start-Demo PATHTO\start-demotest.ps1&lt;/code>&lt;/p>
+&lt;p>Enjoy!&lt;/p></description></item><item><title>Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month</title><link>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</link><pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</guid><description>&lt;p>Just a quick post to say that I will be speaking at the PowerShell Virtual Chapter meeting this Thursday at 4pm GMT 12pm EDT and also at the Cardiff SQL User Group on Tuesday 31st March&lt;/p>
+&lt;p>I will be giving my Making PowerShell Useful for your Team presentation&lt;/p>
+&lt;p>You have heard about PowerShell and may be spent a little bit of time exploring some of the ways in which it will benefit you at work. You want to be able to perform tasks more specific to your organisation and need to share them with your team. I will show you how you can achieve this by demonstrating&lt;/p>
+&lt;ul>
+&lt;li>An easy way to learn the syntax&lt;/li>
+&lt;li>How to explore SQL Server with PowerShell&lt;/li>
+&lt;li>How to turn your one off scripts into shareable functions&lt;/li>
+&lt;li>How to ensure that your team can easily and quickly make use of and contribute to PowerShell solutions&lt;/li>
+&lt;li>Where else to go for help&lt;/li>
+&lt;/ul>
+&lt;p>You can find out more about the Virtual Chapter here&lt;/p>
+&lt;p>&lt;a class="link" href="http://PowerShell.sqlpass.org/%c2%a0" title="http://PowerShell.sqlpass.org/ "
+target="_blank" rel="noopener"
+>http://PowerShell.sqlpass.org/&lt;/a> &lt;/p>
+&lt;p>and the Cardiff meeting here&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/%c2%a0" title="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/ "
+target="_blank" rel="noopener"
+>http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/&lt;/a> &lt;/p>
+&lt;p>The Cardiff meeting has been named The Battle Of The Beards as it features Tobiasz Koprowski: talking about Windows Azure SQL Database - Tips and Tricks for beginners and Terry McCann with SSRS Inception. I will be giving the same presentation as at the Virtual Chapter&lt;/p>
+&lt;p>I hope to see you at one or both sessions&lt;/p></description></item></channel></rss>

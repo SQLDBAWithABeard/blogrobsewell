@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwsh on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/pwsh/</link><description>Recent content in Pwsh on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/pwsh/index.xml" rel="self" type="application/rss+xml"/><item><title>How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error</title><link>https://blog.robsewell.com/blog/how-to-import-dbatools-from-a-zip-file-from-the-github-release-into-azure-automation-modules-without-an-error/</link><pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-import-dbatools-from-a-zip-file-from-the-github-release-into-azure-automation-modules-without-an-error/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/dbatools.jpg" alt="Featured image of post How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error" />&lt;p>There are a number of methods to import PowerShell modules into Azure automation &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/automation/shared-resources/modules?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>as described in the documentation here&lt;/a>&lt;/p>
+&lt;p>You may however miss an important piece of information hidden in that documentation if you are uploading a module from a GitHub release instead of via the &lt;a class="link" href="https://www.powershellgallery.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a>. The name that you refer to the module must match the module name and module folder name in the zip file.&lt;/p>
+&lt;h1 id="method-one---from-gallery">Method one - from Gallery
+&lt;/h1>&lt;p>This is my preferred method for importing modules into Azure Automation accounts, the only bothersome part is remembering to do it twice, once for 5.1 and once for 7.1 as I am sure that if I forget that will be the one module that I will need!&lt;/p>
+&lt;h2 id="find-the-module">Find the module
+&lt;/h2>&lt;p>Go to the Module page for the automation account and then Add module and browse the gallery and search for &lt;a class="link" href="dbatools.io" >dbatools&lt;/a> (other modules are available!) and install it&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181550108-e6096986-3392-4585-a57a-5c515c2890bf.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>It will take a few moments to install but you will see it in the list with a green tick once it has imported.&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181548887-0ec695e4-41b9-45b3-8ab3-a004968c2323.png"
+loading="lazy"
+alt="image"
+>#&lt;/p>
+&lt;p>Then it is available in all of my PowerShell 7.1 runbooks in my automation account - Here I have just run &lt;code>Get-DbaToolsConfig&lt;/code> in a test runbook to prove that the module has imported&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181550937-7e89c7b3-31e8-4af1-b965-c82f2f63562f.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;h1 id="method-two---using-the-zip-file-from-a-github-release">Method two - using the zip file from a GitHub Release
+&lt;/h1>&lt;p>Sometimes you may wish to not use the PowerShell Gallery to import the modules, maybe you have a custom module that you are not ready to upload to the gallery or maybe the module is just internally developed and not available on the &lt;a class="link" href="https://www.powershellgallery.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a>. In this scenario, you can still import hte module so that it can be used by your runbooks.&lt;/p>
+&lt;p>To demonstrate, I will remove the dbatools module from the Automation Account&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181553061-9be2da4d-344d-4027-aa7f-902445cee12b.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>and download the latest release from GitHub directly&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/dataplat/dbatools/releases/tag/v1.1.118" target="_blank" rel="noopener"
+>https://github.com/dataplat/dbatools/releases/tag/v1.1.118&lt;/a>&lt;/p>
+&lt;p>If you are unable to use the PowerShell Gallery to get the latest dbatools release, I would always use the official signed release.&lt;/p>
+&lt;p>You can then upload the zip from the same Modules page using the Browse for file but here is the &lt;em>important bit&lt;/em> You must update the name of the module. By default Azure will set the name to match the name of the zip file as that is what is expected and indeed mentioned in the &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/automation/shared-resources/modules#author-modules?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Microsoft documentation here &lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181561112-6aecd5e3-efaa-4b2a-84d7-f7e521035d04.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>and once it is imported successfully and I have a green tick&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181564377-df8c707e-24ec-43eb-8d57-702fcb39400b.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>I can run the test - Again I just ran &lt;code>Get-DbaToolsConfig&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181569077-2b2e59e2-4bf1-46b6-851f-2e624cf9c43c.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>This method will work with both PowerShell 5.1 and PowerShell 7.1, you will just have to upload the zip (and remember to rename the module entry) twice.&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181571123-8acb8ff5-7b36-4b62-91f7-34b3df36a1d8.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181571518-909ecc6f-9270-45d2-a7b5-0de4406c88c4.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;h1 id="when-it-goes-wrong">When it goes wrong
+&lt;/h1>&lt;p>If you do not rename the module correctly but leave it as the name of file &lt;code>dbatools-signed&lt;/code> in this example&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181571939-b881b4bc-4449-4569-b71a-66142436158a.png"
+loading="lazy"
+alt="image"
+>
+.&lt;/p>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/6729780/181572041-2fe18929-cc14-40ae-b654-62653206903f.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>Error importing the module dbatools-signed. Import failed with the following error:
+Orchestrator.Shared.AsyncModuleImport.ModuleImportException: Cannot import the module of name dbatools-signed, as the module structure was invalid. at
+Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.ExecuteInternal(CodeActivityContext context, Byte[] moduleContent, String moduleName, ModuleLanguage moduleLanguage) at
+Orchestrator.Activities.GetModuleMetadataAfterValidationActivity.Execute(CodeActivityContext context) at
+System.Activities.CodeActivity.InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager) at System.Activities.Runtime.ActivityExecutor.ExecuteActivityWorkItem.ExecuteBody(ActivityExecutor executor, BookmarkManager bookmarkManager, Location resultLocation)&lt;/p>
+&lt;/blockquote>
+&lt;p>If you get that, just re-upload the zip file and use the correct name in the form.&lt;/p>
+&lt;p>Happy Automating&lt;/p></description></item><item><title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</title><link>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</link><pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png" alt="Featured image of post New .NET Notebooks are here – PowerShell 7 notebooks are here." />&lt;p>Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and &lt;a class="link" href="https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>added SQL&lt;/a> kernel where &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//" target="_blank" rel="noopener"
+>with a little bit of faffing you could run PowerShell&lt;/a> and then a &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+>Python kernel that enabled PowerShell&lt;/a>. It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.&lt;/p>
+&lt;blockquote>
+&lt;p>.NET Notebooks Preview 2 is here! Preview 2 includes 🎉&lt;a class="link" href="https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@PowerShell_Team&lt;/a>, &lt;a class="link" href="https://twitter.com/nteractio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@nteractio&lt;/a>, and a new tool. Check out our blog to learn more. Congratulations to &lt;a class="link" href="https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@jonsequitur&lt;/a> &lt;a class="link" href="https://twitter.com/colombod?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@colombod&lt;/a> and our entire team&lt;a class="link" href="https://t.co/WqNWQWR3Bo" target="_blank" rel="noopener"
+>https://t.co/WqNWQWR3Bo&lt;/a>&lt;a class="link" href="https://twitter.com/dotnet?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@dotnet&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/jupyter?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#jupyter&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/PowerShell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#PowerShell&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/interactiveprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#interactiveprogramming&lt;/a>.&lt;/p>
+&lt;p>— Maria Naggaga (@LadyNaggaga) &lt;a class="link" href="https://twitter.com/LadyNaggaga/status/1225464258823163906?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="powershell-7-notebooks-">PowerShell 7 Notebooks 🙂
+&lt;/h2>&lt;p>A notebook experience for PowerShell 7 that sounds amazing. This will enable a true cross-platform PowerShell Notebook experience which is lacking from the Python version as it uses Windows PowerShell on Windows and PowerShell Core on other OS’s&lt;/p>
+&lt;p>The first thing I asked was – Will this come to Azure Data Studio. I got an immediate response from Sydney Smith PowerShell Program Manager saying it is on the roadmap&lt;/p>
+&lt;blockquote>
+&lt;p>Moving this kernel into ADS is on our roadmap! Right now our kernel uses hosted pwsh 7 but we would love to know if you have scenarios that don&amp;rsquo;t work with 7&lt;/p>
+&lt;p>— Sydney Smith (@sydneysmithreal) &lt;a class="link" href="https://twitter.com/sydneysmithreal/status/1225488719567818752?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="install-dependencies">Install dependencies
+&lt;/h2>&lt;p>To be able to run the notebook, you need to install some dependencies. First install the .NET CORE SDK which you can download from &lt;a class="link" href="https://dotnet.microsoft.com/download?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://dotnet.microsoft.com/download&lt;/a> This needs admin permissions to install.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image.png?resize=620%2C418&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You also need a Python installation – You can use Anaconda, which you can download from here &lt;a class="link" href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener"
+>https://www.anaconda.com/distribution/&lt;/a> This does not need admin to install&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-1.png?resize=531%2C232&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-2.png?fit=630%2C490&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="add-anaconda-to-windows-terminal">Add Anaconda to Windows Terminal
+&lt;/h2>&lt;p>I have added the Anaconda prompt to Windows Terminal so that I have one entry point for all my CLIs. Open the settings file and add the code below. (It will also give you an icon and background.&lt;/p>
+&lt;pre>&lt;code> {
+// Make changes here to the Anaconda.exe profile
+&amp;quot;guid&amp;quot;: &amp;quot;{0caa0dad-35be-5f56-a7ff-afceeeaa6101}&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Anaconda&amp;quot;,
+&amp;quot;commandline&amp;quot;: &amp;quot;cmd.exe /K C:\\Users\\mrrob\\Anaconda3\\Scripts\\activate.bat&amp;quot;,
+&amp;quot;hidden&amp;quot;: false,
+&amp;quot;backgroundImage&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;icon&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;backgroundImageAlignment&amp;quot;: &amp;quot;topRight&amp;quot;,
+&amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniform&amp;quot;,
+&amp;quot;backgroundImageOpacity&amp;quot;: 0.1
+}
+&lt;/code>&lt;/pre>
+&lt;p>and it appears in the drop down&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-3.png?resize=509%2C409&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>With Anaconda installed, check that that the kernel is available on your path. If like me you have Azure Data Studio installed, you will have additional kernels but the important one line here is&lt;/p>
+&lt;p>&lt;code>python3 C:\Users\USERNAME\Anaconda3\share\jupyter\kernels\python3&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-4.png?resize=630%2C210&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>In Windows Terminal move to a PowerShell 7 prompt and install the dotnet interactive tool&lt;/p>
+&lt;pre>&lt;code>dotnet tool install --global Microsoft.dotnet-interactive
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-5.png?resize=630%2C259&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can install the .NET kernel in your Anaconda prompt using this command&lt;/p>
+&lt;pre>&lt;code>dotnet interactive jupyter install
+&lt;/code>&lt;/pre>
+&lt;h2 id="sometimes-new-things-have-errors">Sometimes new things have errors
+&lt;/h2>&lt;p>I had an error when I tried this first time&lt;/p>
+&lt;blockquote>
+&lt;p>Could not execute because the specified command or file was not found.&lt;br>
+Possible reasons for this include:&lt;br>
+* You misspelled a built-in dotnet command.&lt;br>
+* You intended to execute a .NET Core program, but dotnet-interactive does not exist.&lt;br>
+* You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.&lt;/p>
+&lt;/blockquote>
+&lt;p>This is easily fixed by adding &lt;code>%USERPROFILE%\.dotnet\tools&lt;/code> to my path with &lt;code>set PATH=%PATH%;%USERPROFILE%\.dotnet\tools&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-6.png?fit=630%2C369&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Running &lt;code>jupyter kernelspec list&lt;/code> shows that the .NET kernel is installed for C Sharp, F Sharp and .NET PowerShell&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-7.png?resize=630%2C197&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="lets-open-a-notebook">Lets open a Notebook
+&lt;/h2>&lt;p>Now you want to play with it!&lt;br>
+You can run the lab environment using `jupyter lab`&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-8.png?fit=630%2C194&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>This opens a browser&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-9.png?fit=630%2C272&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can open existing Azure Data Studio PowerShell notebooks (but not SQL ones)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-10.png?fit=630%2C492&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="sometimes-new-things-have-errors-part-2">Sometimes new things have errors Part 2
+&lt;/h2>&lt;p>Unfortunately, I get errors when trying to import Pester which means I can not use my dbachecks notebooks in this blog post. &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>I have raised an issue on the repo here&lt;/a>.&lt;/p>
+&lt;h2 id="create-a-new-notebook">Create a New Notebook
+&lt;/h2>&lt;p>But it is easy to create a new Notebook&lt;/p>
+&lt;p>In the launcher page click the .NET PowerShell button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-12.png?resize=567%2C171&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Which will open a new Notebook in the directory that you launched the lab from. You can then add Code or Markdown as I have &lt;a class="link" href="https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>described before here&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-11.png?resize=316%2C195&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can add code, markdown and images to create your notebook.&lt;/p>
+&lt;p>Once you have finished using the notebook lab, you can shut it down in the Anaconda prompt with &lt;code>CTRL + C&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-15.png?fit=630%2C103&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Here is a video of running a notebook which anyone can use to create a couple of Docker containers running SQL 2019 and query them with dbatools. You can find the notebook further down this post.&lt;/p>
+&lt;h2 id="sharing-notebooks">Sharing Notebooks
+&lt;/h2>&lt;p>You can create notebooks to run common tasks. Even better, from the lab you can convert the notebook including the results to a variety of formats to share with other none-technical people. I used this functionality this week to export Azure Data Studio Notebooks to HTML and PDF for a Project manager 🙂&lt;/p>
+&lt;p>You can find the Export Notebook command in the File menu&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png?resize=610%2C542&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Exporting to HTML did not export the images but it does include the results&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-14.png?fit=630%2C476&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can share notebooks via GitHub – Either in a gist like this&lt;/p>
+&lt;p>or by providing a straight link to the notebook in GitHub &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb&lt;/a>&lt;/p>
+&lt;p>You can also use Binder &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a>&lt;/p>
+&lt;p>This uses Docker to create an interactive Notebook. Create a GitHub repo like &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks&lt;/a> (or just clone it) Copy your notebooks into the notebooks folder and push the changes to GitHub and then go to &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a> and add your URL to the repository.&lt;/p>
+&lt;p>You can see what it looks like by clicking the button below which Binder creates for you&lt;/p>
+&lt;p>&lt;a class="link" href="https://mybinder.org/v2/gh/SQLDBAWithABeard/Notebooks/master" target="_blank" rel="noopener"
+>&lt;img src="https://mybinder.org/badge_logo.svg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Unfortunately the kernel only supports Python for the moment but you can see the possibilities 🙂&lt;/p></description></item><item><title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</title><link>https://blog.robsewell.com/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</link><pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-125.png" alt="Featured image of post Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools" />&lt;p>In my posts about using Azure Devops to build Azure resources with Terraform, &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>I built a Linux SQL VM.&lt;/a> I used the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+>Terraform in this GitHub&lt;/a> repository and created this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-mobaxterm">Connecting with MobaXterm
+&lt;/h2>&lt;p>I had set the Network security rules to accept connections only from my static IP using variables in the Build Pipeline. I use &lt;a class="link" href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener"
+>MobaXterm&lt;/a> as my SSH client. Its a free download. I click on sessions&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-120.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose a SSH session and fill in the remote host address from the portal&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-121.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>fill in the password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-122.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="configuring-sql">Configuring SQL
+&lt;/h2>&lt;p>The next task is to configure the SQL installation. Following the instructions on the &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sql/provision-sql-server-linux-virtual-machine?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Microsoft docs site&lt;/a> I run&lt;/p>
+&lt;pre>&lt;code>sudo systemctl stop mssql-server
+sudo /opt/mssql/bin/mssql-conf set-sa-password
+&lt;/code>&lt;/pre>
+&lt;p>enter the sa password and&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-123.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now to start SQL&lt;/p>
+&lt;pre>&lt;code>sudo systemctl start mssql-server
+&lt;/code>&lt;/pre>
+&lt;h2 id="installing-pwsh">Installing pwsh
+&lt;/h2>&lt;p>Installing PowerShell Core (pwsh) is easy with snap&lt;/p>
+&lt;p>sudo snap install powershell &amp;ndash;classic&lt;/p>
+&lt;p>A couple of minutes of downloads and install&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-124.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and pwsh is ready for use&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-125.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-dbatools">Installing dbatools
+&lt;/h2>&lt;p>To install &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> from the &lt;a class="link" href="https://www.powershellgallery.com/packages/dbatools" target="_blank" rel="noopener"
+>Powershell Gallery&lt;/a> simply run&lt;/p>
+&lt;p>Install-Module dbatools -Scope CurrentUser&lt;/p>
+&lt;p>This will prompt you to allow installing from an untrusted repository&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-126.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and dbatools is ready to go&lt;/p>
+&lt;pre>&lt;code>#Set a credential
+$cred = Get-Credential
+# Show the databases on the local instance
+Get-DbaDatabase -SqlInstance localhost -SqlCredential $cred
+&lt;/code>&lt;/pre>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-127.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="connecting-with-azure-data-studio">Connecting with Azure Data Studio
+&lt;/h2>&lt;p>I can also connect with Azure Data Studio&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-128.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and connect&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-129.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Just a quick little post explaining what I did 🙂&lt;/p>
+&lt;p>Happy Linuxing!&lt;/p></description></item></channel></rss>

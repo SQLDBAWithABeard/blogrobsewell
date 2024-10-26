@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL Alerts on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-alerts/</link><description>Recent content in SQL Alerts on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 18 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-alerts/index.xml" rel="self" type="application/rss+xml"/><item><title>Changing Delay Between Responses for SQL Alerts with Powershell</title><link>https://blog.robsewell.com/blog/changing-delay-between-responses-for-sql-alerts-with-powershell/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/changing-delay-between-responses-for-sql-alerts-with-powershell/</guid><description>&lt;p>So you have read that you should have alerts for severity levels 16 to 24 and 823,824 and 825 on &lt;a class="link" href="http://www.sqlskills.com/blogs/glenn/the-accidental-dba-day-17-of-30-configuring-alerts-for-high-severity-problems/" target="_blank" rel="noopener"
+>SQLSkills.com&lt;/a> or maybe you have used &lt;a class="link" href="http://www.brentozar.com/blitz/" target="_blank" rel="noopener"
+>sp_blitz&lt;/a> and received the &lt;a class="link" href="http://www.brentozar.com/blitz/configure-sql-server-alerts/" target="_blank" rel="noopener"
+>Blitz Result: No SQL Server Agent Alerts Configured&lt;/a> and like a good and conscientious DBA you have set them up.&lt;/p>
+&lt;p>Hopefully you also have &lt;a class="link" href="https://www.simple-talk.com/blogs/author/13359-jonathan-allen/" target="_blank" rel="noopener"
+>Jonathan Allens blog&lt;/a> on your feed and if you look at his historical posts and seen this one where &lt;a class="link" href="https://www.simple-talk.com/blogs/2011/06/27/alerts-are-good-arent-they/" target="_blank" rel="noopener"
+>lack of a delay in response broke the Exchange Server!&lt;/a>&lt;/p>
+&lt;p>However sometimes the oft used delay between responses of 1 minute is too much. Alerts should be actionable after all and maybe you sync your email every 15 minutes and don’t need to see 15 alerts for the same error or you decide that certain level of errors require a lesser response and therefore you only need to know about them every hour or three. Or possibly you want to enforce a certain delay for all servers and want to set up a system to check regularly and enforce your rule&lt;/p>
+&lt;p>Whatever the reason, changing the delay between response for every alert on every server with SSMS could be time consuming and (of course) I will use Powershell to do the job.&lt;/p>
+&lt;p>To find the alerts I follow the process I use when finding any new property in powershell&lt;/p>
+&lt;pre>&lt;code>$server = 'SERVERNAME'
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+&lt;/code>&lt;/pre>
+&lt;p>I know that the Alerts will be found under the JobServer Property&lt;/p>
+&lt;pre>&lt;code>$srv.JobServer.Alerts|Get-Member
+&lt;/code>&lt;/pre>
+&lt;p>Shows me&lt;/p>
+&lt;blockquote>
+&lt;p>DelayBetweenResponses   Property   int DelayBetweenResponses {get;set;}&lt;/p>
+&lt;/blockquote>
+&lt;p>And&lt;/p>
+&lt;blockquote>
+&lt;p> Alter                   Method     void Alter(), void IAlterable.Alter()&lt;/p>
+&lt;/blockquote>
+&lt;p>So I use both of those as follows&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts){
+$Alert.DelayBetweenResponses = 600 # This is in seconds
+$Alert.Alter()
+}
+&lt;/code>&lt;/pre>
+&lt;p>And place it in a foreach loop for the servers I want to change. If I only want to change certain alerts I can do so by filtering on Name&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts|Where-Object {$_.Name -eq 'NameOfAlert'})
+&lt;/code>&lt;/pre>
+&lt;p>Or by category&lt;/p>
+&lt;pre>&lt;code>Foreach($Alert in $srv.JobServer.Alerts|Where-Object {$_.CategoryName -eq 'Category Name'})
+&lt;/code>&lt;/pre>
+&lt;p>When you have 5 minutes go and look at the results of&lt;/p>
+&lt;pre>&lt;code>$srv.JobServer|Get-Member
+&lt;/code>&lt;/pre>
+&lt;p>And explore and let me know what you find&lt;/p></description></item></channel></rss>

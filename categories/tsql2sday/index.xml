@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TSql2sDay on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/tsql2sday/</link><description>Recent content in TSql2sDay on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 13 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/tsql2sday/index.xml" rel="self" type="application/rss+xml"/><item><title>TSQL2sDay - Do I use Notebooks?</title><link>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</link><pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post TSQL2sDay - Do I use Notebooks?" />&lt;h1 id="do-i-use-notebooks">Do I use Notebooks?
+&lt;/h1>&lt;p>T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+>Twitter&lt;/a>). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Twitter&lt;/a>) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>a website with all previous posts&lt;/a>. Everyone is welcome to participate in this monthly blog post.&lt;/p>
+&lt;p>This month’s T-SQL Tuesday is hosted by Steve. Steve says:&lt;/p>
+&lt;blockquote>
+&lt;p>I want you to write about how you have used, or would like to use, a Jupyter notebook. This seemed to be exciting for many people at first, but I haven’t seen a lot of uptake from users in general. So I’m curious if you are using them.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>The original post is here.&lt;/a>&lt;br>
+&lt;a class="link" href="https://www.sqlservercentral.com/blogs/tsql2sday-137-invite-using-notebooks-every-day" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/a>&lt;/p>
+&lt;h1 id="am-i-using-notebooks-">Am I using Notebooks ?
+&lt;/h1>&lt;p>Hehe. I LOVE notebooks. I use them all of the time and every day.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://blog.robsewell.com/categories/#jupyter-notebooks" target="_blank" rel="noopener"
+>I have written a few posts about them as well&lt;/a>.&lt;/li>
+&lt;li>I have a repository on GitHub with many notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>https://beard.media/Notebooks&lt;/a>.&lt;/li>
+&lt;li>I have given presentations about notebooks &lt;a class="link" href="https://beard.media/presentations" target="_blank" rel="noopener"
+>https://beard.media/presentations&lt;/a>&lt;/li>
+&lt;li>I have videos on my youtube channel about notebooks &lt;a class="link" href="https://beard.media/notebooksyoutube" target="_blank" rel="noopener"
+>https://beard.media/notebooksyoutube&lt;/a>&lt;/li>
+&lt;li>I have written a &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook/0.0.20201008.1" target="_blank" rel="noopener"
+>PowerShell Module&lt;/a> to create Notebooks []&lt;/li>
+&lt;/ul>
+&lt;p>I have assisted clients with using notebooks to&lt;/p>
+&lt;ul>
+&lt;li>Integrate new team members&lt;/li>
+&lt;li>Create a repository of incident response notebooks &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/" target="_blank" rel="noopener"
+>dynamically created with Azure DevOps&lt;/a>&lt;/li>
+&lt;li>Create a repository of daily tasks notebooks&lt;/li>
+&lt;li>Create a repository of common large scale changes&lt;/li>
+&lt;li>Off-load DBA requests to Service Desk with notebooks&lt;/li>
+&lt;li>Use notebooks to demonstrate changes to Product Owners and other teams&lt;/li>
+&lt;li>Use notebooks for diagnosis by customers&lt;/li>
+&lt;li>Use notebooks to investigate Azure environments and Azure Data Services&lt;/li>
+&lt;li>and more&lt;/li>
+&lt;/ul>
+&lt;p>I use notebooks to validate dbachecks PRs, to demonstrate &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbachecks" target="_blank" rel="noopener"
+>dbachecks&lt;/a> and &lt;a class="link" href="https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbatools" target="_blank" rel="noopener"
+>dbatools&lt;/a> with docker that anyone can use.&lt;/p>
+&lt;p>I am thoroughly looking forward to seeing what other people do with notebooks. I love how the community helps us all to develop and move forward by sharing.&lt;/p>
+&lt;h1 id="all-this-and">All this and
+&lt;/h1>&lt;p>&lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/nodatascientist.png"
+loading="lazy"
+alt="nodatascientist"
+>&lt;/a>&lt;br>
+Thank you - &lt;a class="link" href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener"
+>https://www.advancinganalytics.co.uk/&lt;/a>&lt;/p></description></item><item><title>Tooling for TSql2sDay</title><link>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</link><pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post Tooling for TSql2sDay" />&lt;h1 id="tooling-for-tsql2sday">Tooling for TSQL2sDay
+&lt;/h1>&lt;p>T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+>Twitter&lt;/a>). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+>Twitter&lt;/a>) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>a website with all previous posts&lt;/a>. Everyone is welcome to participate in this monthly blog post.&lt;/p>
+&lt;p>This month’s T-SQL Tuesday is hosted by Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+>Twitter&lt;/a> ). Mikey says:&lt;/p>
+&lt;blockquote>
+&lt;p>Without tools, most of the work would be much harder to do or could not be done at all. Write a blog post about the most helpful and effective tools you use or know of.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://www.bronowski.it/blog/2021/02/t-sql-tuesday-135-the-outstanding-tools-of-the-trade-that-make-your-job-awesome/" target="_blank" rel="noopener"
+>The original post is here.&lt;/a>&lt;/p>
+&lt;p>I miss Mikey, I worked in an office with him until the end of 2019. We used to sit next to each other which meant that I required some tools of my own!&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/1113346708631629824" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/mikeyredgatewall.png"
+loading="lazy"
+alt="Twitter"
+>&lt;/a>&lt;/p>
+&lt;p>We had a lot of fun and worked hard in Yorkshire (although he never learnt to make a proper cup of tea!) and both of us learnt new sayings&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/MikeyBronowski/status/1247998435644456960" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/mikeytea.png"
+loading="lazy"
+alt="Twitter"
+>&lt;/a>&lt;/p>
+&lt;h2 id="tools">Tools
+&lt;/h2>&lt;p>Writing that gave me an idea for this blog post. Of course, I could have written about PowerShell, Azure Data Studio, dbatools, dbachecks or many of the other tools I use to deliver change and automate. You will find several good posts in this TSQL2sday series from people like &lt;a class="link" href="https://jesspomfret.com/t-sql-tuesday-135/" target="_blank" rel="noopener"
+>Jess Pomfret&lt;/a> and &lt;a class="link" href="https://jqmartin.info/2021/02/09/t-sql-tuesday-135-tools-of-the-trade/" target="_blank" rel="noopener"
+>John Martin&lt;/a> showing some of those.&lt;/p>
+&lt;p>Instead, I am going to share some of my working from home tools that I cannot do without.&lt;/p>
+&lt;h3 id="coffee">Coffee
+&lt;/h3>&lt;p>Hello, my name is Rob and I drink a lot of coffee! I like to have coffee, I drink a lot of it so we got a coffee machine to make it easier.&lt;/p>
+&lt;p>[&lt;img src="https://blog.robsewell.com/assets/uploads/2021/CoffeeMachine.jpg"
+loading="lazy"
+alt="Coffee"
+>&lt;/p>
+&lt;p>It takes beans, which we get delivered via Amazon and turns them into any sort of coffee you like with a press of a button.&lt;/p>
+&lt;h3 id="standing-desk">Standing Desk
+&lt;/h3>&lt;p>Spending a lot of time sitting down without moving much is not much good you and also really easy to do when you are working from home so I got a standing desk from &lt;a class="link" href="https://www.autonomous.ai/standing-desks/smartdesk-2-business" target="_blank" rel="noopener"
+>Autonomous&lt;/a> Which I love. I normally start my morning sitting down, stand up for the standup! Then I will alternate throughout the day between sitting and standing or using my &lt;a class="link" href="https://www.autonomous.ai/office-chairs/ergonomic-stool" target="_blank" rel="noopener"
+>wibbly wobbly Autonomous stool&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/standingdesk.jpg"
+loading="lazy"
+alt="Standingdesk"
+>&lt;/p>
+&lt;h3 id="bicycle">Bicycle
+&lt;/h3>&lt;p>With Covid I was not able to play any cricket last year. I really enjoyed playing cricket. I have played it since I was very small and having a reason to be out in the open, expending some energy and getting my competitive juices flowing was good for me. I have cycled in the past and enjoyed it. With the cricket team I cycled from John o&amp;rsquo; Groats to Lands End for charity a few years ago, so I bought a bike and now I again have a reason to go out in the fresh air and get my competitive juices going again, although I only compete against myself and compare my results on Strava with my previous times. Last year I started riding in April and rode 2897 miles. This gets me out into the beautiful south west UK countryside, expends some energy and keeps me moving, which I think is a good thing!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/bikeride.jpg"
+loading="lazy"
+alt="bikeride"
+>&lt;/p>
+&lt;h3 id="zwift">Zwift
+&lt;/h3>&lt;p>I told you a little fib, well maybe I just neglected the whole story. I &lt;em>did&lt;/em> ride 2897 last year but not all of them are outside. I found that I really enjoy cycling in the morning when I wake up but its not really safe when it is so dark or pleasant to do when the weather is rough, so I have a cycle trainer which I connect to Zwift. This enables me to ride with other people from all over the globe and explore various worlds, both real representations of London, New York and Paris and the virtual world of Watopia where you can see dolphins, whales, shipwrecks, dinosaurs or ride up and through a volcano. This can be really fun and certainly makes it easier for me to cycle more regularly. It has a number of gamifications and even allows you to ride through a tube station at midnight ! (note this was not at midnight but The Jam didnt sing about the tube station at 6-30am!!)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/tubestation.jpg"
+loading="lazy"
+alt="bikeride"
+>&lt;/p>
+&lt;h2 id="most-important-of-all-the-people">Most Important of all The People
+&lt;/h2>&lt;p>The most important tool though is the most useful.&lt;/p>
+&lt;p>The community.&lt;/p>
+&lt;p>The people who take their time to share knowledge, whether by blog posts, presentations, answering #sqlhelp on Twitter or just replying to a DM or an email. Those who organise virtual events or user groups, open source projects and community tooling like Data Saturdays and those who get paid for it as vendor evangelists or Microsoft or other companies employees.&lt;/p>
+&lt;p>The sheer range of knowledge that is readily and freely available with a simple courteous question is amazing and has certainly saved me a bunch of time and helped me out of some difficult to solve situations. Remember to be polite and appreciative of the time that they take out of their day and you will find they are willing to share their knowhow and help.&lt;/p>
+&lt;p>Thank you to all of those people&lt;/p></description></item><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" />&lt;h1 id="automation">Automation
+&lt;/h1>&lt;!-- raw HTML omitted -->
+&lt;p>This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted -->blog&lt;!-- raw HTML omitted --> and &lt;!-- raw HTML omitted -->twitter&lt;!-- raw HTML omitted -->.&lt;/p>
+&lt;p>Thank you Elizabeth&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+>&lt;/p>
+&lt;p>Elizabeth asks&lt;/p>
+&lt;blockquote>
+&lt;p>My invitation to you is I want to know what you have automated to make your life easier?&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="from-the-past">From the Past
+&lt;/h2>&lt;p>I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>You have to start somewhere&lt;/a> In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>The Best Database Administrators Automate Everything&lt;/a> which I am pleased to see is still available nearly a decade later&lt;/p>
+&lt;p>Here is a quote from his blog entry&lt;/p>
+&lt;blockquote>
+&lt;h2 id="automate-everything">Automate Everything
+&lt;/h2>&lt;p>That’s right, I said everything. Just sit back and take the &lt;em>time&lt;/em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word &lt;em>potentially&lt;/em> from your vocabulary and evaluate how you could automate &lt;strong>e-v-e-r-y-t-h-i-n-g&lt;/strong> that you do.&lt;/p>
+&lt;p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important &lt;em>Proactive Mode&lt;/em> tasks/projects to be getting on with&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="i-love-automation">I love Automation
+&lt;/h2>&lt;p>I have tried my best at all times to follow this advice in the last decade and pretty much I am happy that I have managed it.&lt;/p>
+&lt;ul>
+&lt;li>I use PowerShell (a lot!) to automate all sorts of routine tasks including migrating this blog&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://blog.robsewell.com/tags/#jupyter-notebooks" target="_blank" rel="noopener"
+>Jupyter Notebooks&lt;/a> to enable myself and others to automate Run Books, Training, Documentation, Demonstrations, Incident Response. You can find my notebooks &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/li>
+&lt;li>I use Azure DevOps to automate infrastructure creation and changes with terraform and delivery of changes to code as well as unit testing.&lt;/li>
+&lt;li>I use GitHub actions to create this blog, publish the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+>ADSNotebook&lt;/a> module&lt;/li>
+&lt;li>I use &lt;a class="link" href="https://chocolatey.org/" target="_blank" rel="noopener"
+>Chocolatey&lt;/a> to install and update software&lt;/li>
+&lt;li>I have used Desired State Configuration to ensure that infrastructure is as it is expected to be&lt;/li>
+&lt;/ul>
+&lt;p>At every point I am looking for a means to automate the thing that I am doing because it is almost guaranteed that there will be a time in the future after you have done a thing that there will be a need to do it again or to do it slightly differently.&lt;/p>
+&lt;h2 id="whats-the-last-thing-that-you-automated">Whats the last thing that you automated?
+&lt;/h2>&lt;p>Following my blog post about &lt;a class="link" href="https://blog.robsewell.com/blog/notifying-a-teams-channel-of-a-sql-agent-job-result/" target="_blank" rel="noopener"
+>Notifying a Teams Channel about a SQL Agent Job result&lt;/a> I was asked if this could be tweaked to reduce the time spent getting information about SSIS Execution failures.&lt;/p>
+&lt;h3 id="finding-ssis-failures">Finding SSIS failures
+&lt;/h3>&lt;p>When you run an SSIS package in an Agent Job and it fails, the Agent Job History shows something along these lines&lt;/p>
+&lt;blockquote>
+&lt;p>The job failed. The Job was invoked by User MyDomain\MyUserName. The last step to run was step 1 (scheduling ssis package).
+Executed as user: NT Service\SQLSERVERAGENT. Microsoft (R) SQL Server Execute Package Utility Version 11.0.5058.0 for 64-bit Copyright (C) Microsoft Corporation. All rights reserved. Started: 4:17:12 PM Package execution on IS Server failed. &lt;strong>Execution ID: 123456789&lt;/strong>, Execution Status:4. To view the details for the execution, right-click on the Integration Services Catalog, and open the [All Executions] report Started: 4:17:12 PM Finished: 4:17:12 PM Elapsed: 4.493 seconds. The package execution failed. The step failed.&lt;/p>
+&lt;/blockquote>
+&lt;p>The next step is to open SSMS, go to the SSISDb and click through to the SSIS reports and then scroll through to find the package and then the message. This is not particularly efficient and the SSIS reports are not known for their speedy executions!&lt;/p>
+&lt;p>This meant that the team member responsible for checking in the morning, could see which instance and which job had failed from the Teams message but then had to manually follow the above steps to find an error message that they could take action on.&lt;/p>
+&lt;h3 id="automate-it">Automate it
+&lt;/h3>&lt;p>In the SSISDB database there is an &lt;code>event_messages&lt;/code> view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)&lt;/p>
+&lt;p>In the code below, I&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>check if the failure comes from an SSIS instance
+if($Inst -in ($SSISInstances)){&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Execution ID from the Error message
+&lt;code>$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a query for the SSISDB&lt;/p>
+&lt;p>&lt;code>$SSISQuery = @&amp;quot;&lt;/code>
+&lt;code>SELECT * FROM catalog.event_messages em&lt;/code>
+&lt;code>WHERE em.operation_id = $ExecutionId&lt;/code>
+&lt;code>AND (em.event_name = 'OnError')&lt;/code>
+&lt;code>ORDER BY em.event_message_id;&lt;/code>
+&lt;code>&amp;quot;@&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the Error Message and the Execution Path to variables
+&lt;code>$errMessage = $SSISQueryResults.Message&lt;/code>
+&lt;code>$ExecutionPath = $SSISQueryResults.execution_path&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get the Error Message for none SSIS failures
+&lt;code>}else{&lt;/code>
+&lt;code>$errMessage = $j.group[-1].Message&lt;/code>
+&lt;code>$ExecutionPath = 'the job'&lt;/code>
+&lt;code>}&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Teams message&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>You will see that I used &lt;code>SELECT *&lt;/code> because someone will always ask for some extra information in the future!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/images/happyrob.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>The full script is below, Happy Automating!&lt;/p>
+&lt;pre>&lt;code>$webhookurl = &amp;quot;https://outlook.office.com/webhook/ the rest of it here&amp;quot;
+$SSISInstances = # to identify SSIS instances
+$ProdInstances = # ALL instances for checking
+$startdate = (Get-Date).AddHours(-1)
+$AllFailedJobs = foreach ($Instance in $ProdInstances) {
+Write-Host &amp;quot;Connecting to $instance&amp;quot;
+try{
+$smo = Connect-DbaInstance $Instance -ErrorAction Stop
+Write-Host &amp;quot;Connected successfully to $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed to connect to $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+Write-Host &amp;quot;Getting Agent Jobs on $instance&amp;quot;
+try {
+$AgentJobs = Get-DbaAgentJobHistory -SqlInstance $smo -EnableException -StartDate $startdate
+Write-Host &amp;quot;Successfully got Agent Jobs on $instance&amp;quot;
+}
+catch {
+Write-Host &amp;quot;Failed to get agent jobs on $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+$jobs = $agentJobs # | Where-Object { $Psitem.Job -match '^Beard-\d\d\d\d\d' -or $Psitem.Job -like 'BeardJob*' } # if you need to filter
+$FailedJobs = $jobs | Where-Object { $Psitem.Status -ne 'Succeeded' }
+$FailedJobs | Group-Object Job
+try{
+$smo.ConnectionContext.Disconnect()
+Write-Host &amp;quot;Disconnecting $instance&amp;quot;
+}
+catch{
+Write-Host &amp;quot;Failed disconnect from $Instance&amp;quot;
+$errorMessage = $_ | Out-String
+Write-Host $errorMessage
+Continue
+}
+}
+Write-Host &amp;quot;We have $($AllFailedJobs.Count) Failed Jobs&amp;quot;
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+foreach ($j in $AllFailedJobs) {
+$Inst = $j.group[-1].SqlInstance
+$jName = $j.name
+$sname = $j.group[-1].StepName
+$edate = $j.group[-1].EndDate
+if($Inst -in ($SSISInstances)){
+$BaseerrMessage = $j.group[-1].Message
+$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value
+$SSISQuery = @&amp;quot;
+SELECT * FROM catalog.event_messages em
+WHERE em.operation_id = $ExecutionId
+AND (em.event_name = 'OnError')
+ORDER BY em.event_message_id;
+&amp;quot;@
+$SSISQueryResults = Invoke-DbaQuery -SqlInstance $Inst -Database SSISDB -Query $SSISQuery
+$errMessage = $SSISQueryResults.Message
+$ExecutionPath = $SSISQueryResults.execution_path
+}else{
+$errMessage = $j.group[-1].Message
+$ExecutionPath = 'the job'
+}
+$Text = @&amp;quot;
+# **$Inst**
+## **$JName**
+- The Job step that failed is - **$sname**
+- It failed at - **$edate**
+- It failed in $ExecutionPath with the message
+- $errMessage
+&amp;quot;@
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There was a Job Failure&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;Job Failures &amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last 1 hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/sobrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = $text
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+if(-not $AllFailedJobs){
+$JSONBody = [PSCustomObject][Ordered]@{
+&amp;quot;@type&amp;quot; = &amp;quot;MessageCard&amp;quot;
+&amp;quot;@context&amp;quot; = &amp;quot;http://schema.org/extensions&amp;quot;
+&amp;quot;summary&amp;quot; = &amp;quot;There were no job failures in the last hour at $ (Get-Date)&amp;quot;
+&amp;quot;themeColor&amp;quot; = '0078D7'
+&amp;quot;sections&amp;quot; = @(
+@{
+&amp;quot;activityTitle&amp;quot; = &amp;quot;There were no job failures at $ (Get-Date)&amp;quot;
+&amp;quot;activitySubtitle&amp;quot; = &amp;quot;in the Last hour&amp;quot;
+&amp;quot;activityImage&amp;quot; = &amp;quot;https://blog.robsewell.com/assets/images/happyrob.jpg&amp;quot;
+&amp;quot;text&amp;quot; = &amp;quot;All is well&amp;quot;
+&amp;quot;markdown&amp;quot; = $true
+}
+)
+}
+$TeamMessageBody = ConvertTo-Json $JSONBody -Depth 100
+$parameters = @{
+&amp;quot;URI&amp;quot; = $webhookurl
+&amp;quot;Method&amp;quot; = 'POST'
+&amp;quot;Body&amp;quot; = $TeamMessageBody
+&amp;quot;ContentType&amp;quot; = 'application/json'
+}
+Invoke-RestMethod @parameters
+}
+&lt;/code>&lt;/pre></description></item><item><title>#TSQL2sDay – NomNomNomNomNom</title><link>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</link><pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg" alt="Featured image of post #TSQL2sDay – NomNomNomNomNom" />&lt;p>&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>The topic for this months&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+> T-SQL Tuesday #112&lt;/a> hosted by Shane O’Neill (&lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> / &lt;a class="link" href="https://twitter.com/sozdba" target="_blank" rel="noopener"
+>Twitter&lt;/a>) is about “dipping into your cookie jar”. This reference means “when times get tough how do you dip into your reserves to keep going”. Shane asks the following:&lt;/p>
+&lt;blockquote>
+&lt;p>That is what I want from the contributors of this T-SQL Tuesday, those memories that they can think back on for sustenance. Like the humble cookie, I want a humble brag.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="mmmm-cookies">Mmmm Cookies
+&lt;/h2>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/photos/DM-KD1_fZrg?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>Pille-Riin Priske&lt;/a> on &lt;a class="link" href="https://unsplash.com/search/photos/cookie?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;p>I’m not good at bragging, &lt;a class="link" href="https://en.wikipedia.org/wiki/Impostor_syndrome" target="_blank" rel="noopener"
+>I’m generally convinced that all of you are better than me&lt;/a>. Yes, I am aware that it is irrational. This has made writing this post really hard. Sure, I get immense pleasure and satisfaction from solving a problem, that’s a form of instant fulfillment. Certainly, I enjoy teaching people and passing over my knowledge for them to use.
+I am not going to write about technical things that I have done because they don’t give me sustenance in that way.&lt;/p>
+&lt;p>So what does give me sustenance when times are hard?&lt;/p>
+&lt;p>People.&lt;/p>
+&lt;p>The things I am most proud of are the things other people do where I have played a small part. These are the things I look back at and help to energise me. Things like&lt;/p>
+&lt;ul>
+&lt;li>A couple of people who I suggested started writing blogs and then speaking who are now seen as experts in their niche.&lt;/li>
+&lt;li>The people I mentored as new speakers who are now speaking all over the continent.&lt;/li>
+&lt;/ul>
+&lt;p>The most recent story was a DBA who sat in a full day pre-con at a SQL Saturday, took loads of notes and waited at the end to ask questions. We were looking at some code and she was telling me it wasn’t very good and apologising for it. It was good, it performed the required actions over a large estate and I told her so. I asked about her job and with a big sigh, she told a story of being stuck in a rut, dealing with a lot of legacy systems, not enjoying it and not being able to move on. We had a long talk.&lt;/p>
+&lt;p>Cut to this years SQL Bits and she came running up to me all energised. She has a new job, doing something “Cool in the cloud”, she said the things she had learned had helped her to land this role.&lt;/p>
+&lt;p>In all of these cases, it is the person involved who has done all of the hard work but it is these things that keep me going. The thank yous and the smiles I see on those peoples faces as they do the thing that they love and enjoy their success and progression 🙂&lt;/p>
+&lt;h2 id="cake-">Cake !!!!!
+&lt;/h2>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/prince-abid-653931-unsplash.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/photos/pEvPkPmuHzo?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>Prince Abid&lt;/a> on &lt;a class="link" href="https://unsplash.com/search/photos/cake?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;p>Hey, thats cake and not cookies Rob.&lt;/p>
+&lt;p>I know. The biggest thing that keeps me going when times are tough though is the security I am able to provide. Nearly 20 years ago my life was very different. Without a job, I’d had to give up a career, struggling dealing with my wife’s serious illnesses, suddenly responsible for the entire household without the means to provide, I was in a very bleak place and saw no way out.&lt;/p>
+&lt;p>So to have found a career that is my hobby, to be able to work and also to have fun, to have a social world that provides me with friends and entertainment in many countries and the opportunity to experience different cultures and still be able to live comfortably. Thats a blessing and what keeps me going.&lt;/p>
+&lt;p>Also being able to pay my dad back for turning up with sacks of potatoes by taking him to football matches and comedy shows 🙂&lt;/p>
+&lt;p>Acknowledge what you have got, tell your loved ones that you love them, enjoy life and use your cookies when you need them but don’t forget the cake 🙂&lt;/p></description></item><item><title>#TSQL2sday #94 Lets get all Posh!</title><link>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</guid><description>&lt;p>Write-Output &amp;ldquo;What are you going to automate today?&amp;rdquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>Welcome to T-SQL Tuesday for September 2017!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+>
+&lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>T-SQL Tuesday&lt;/a> is a chance for you to join in the SQL Server community and write a blog post on a suggested topic. It makes for a great way to find a bunch of blog posts showing the same subject from many different viewpoints. Please join in and write a blog post, maybe it&amp;rsquo;s your first ever, maybe you haven&amp;rsquo;t blogged for a while but even if you blog every day come and join the party and share your knowledge.&lt;/p>
+&lt;p>To participate:&lt;/p>
+&lt;ol>
+&lt;li>Write a post on the topic below&lt;/li>
+&lt;li>Schedule the post to go live on Tuesday, September 12th (between zero am and midnight, UTC)&lt;/li>
+&lt;li>Include the &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2010/06/01/t-sql-tuesday-007-and-t-sql-tuesday-has-a-logo.aspx" target="_blank" rel="noopener"
+>TSQL Tuesday logo&lt;/a> in the top of your post&lt;/li>
+&lt;li>Link the post back to this one (it’s easier if you comment on this post and link it)&lt;/li>
+&lt;li>Optional: Tweet a link to your post using the &lt;a class="link" href="https://twitter.com/hashtag/TSQL2sday?src=hash" target="_blank" rel="noopener"
+>#tsql2sday hash tag on Twitter&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Extra credit: if you’d like to host your own TSQL Tuesday in the future, &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2017/01/03/t-sql-tuesday-rules-of-engagement.aspx" target="_blank" rel="noopener"
+>read the full rules for info on how to sign up&lt;/a>. Just like I did but don&amp;rsquo;t forget its your month!!&lt;/p>
+&lt;h2 id="this-months-topic-lets-get-all-posh---what-are-you-going-to-automate-today">This month’s topic: Let&amp;rsquo;s get all Posh - What are you going to automate today?
+&lt;/h2>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/PowerShell.png"
+loading="lazy"
+alt="PowerShell"
+>
+It is no surprise to those that know me that I will choose PowerShell as the topic for this month. I am passionate about PowerShell because it has enabled me to have the career I have today and to visit numerous countries all around the world, meet people and talk about PowerShell. By my reckoning &lt;a class="link" href="http://tsqltuesday.com/?s=PowerShell" target="_blank" rel="noopener"
+>searching the TSQL Tuesday website&lt;/a> it has been over 3 years since we had a topic specific to PowerShell. So I would like you to blog about PowerShell and SQL Server (or other interesting data platform products)&lt;/p>
+&lt;p>If you don&amp;rsquo;t know or use PowerShell GREAT! That&amp;rsquo;s awesome.&lt;/p>
+&lt;p>Please spend an hour or so with it and tell us how you got on and what and how you learned. Just like &lt;a class="link" href="https://www.brentozar.com/archive/2017/07/live-blogging-erik-vs-PowerShell/" target="_blank" rel="noopener"
+>Erik and Brent did&lt;/a>. You could install one of the community modules like &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a>, &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> , &lt;a class="link" href="https://www.PowerShellgallery.com/packages/SQLDiagAPI" target="_blank" rel="noopener"
+>SQLDiagAPI&lt;/a>  or the Microsoft ones &lt;a class="link" href="https://www.PowerShellgallery.com/packages/Sqlserver" target="_blank" rel="noopener"
+>sqlserver&lt;/a> or &lt;a class="link" href="https://github.com/Microsoft/ReportingServicesTools" target="_blank" rel="noopener"
+>SSRS&lt;/a> and try them out and tell us what you learned.&lt;/p>
+&lt;p>If you want help whilst doing this please make use of the #PowerShellhelp channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a>&lt;/p>
+&lt;p>This will be of so much benefit to all people who don&amp;rsquo;t use PowerShell and want to start to learn about it.&lt;/p>
+&lt;p>If you do use PowerShell and SQL then either tell the tale of the best thing you have automated or a beginners post to show people how to start using PowerShell. I have heard many stories and am looking forward to tales of&lt;/p>
+&lt;ul>
+&lt;li>testing backups&lt;/li>
+&lt;li>doing migrations&lt;/li>
+&lt;li>resetting log shipping&lt;/li>
+&lt;li>creating things in the cloud and on premises&lt;/li>
+&lt;li>SQL on Linux with PowerShell on Linux&lt;/li>
+&lt;li>using Pester for testing&lt;/li>
+&lt;li>automating manual tasks&lt;/li>
+&lt;li>automating incident knowledge gathering&lt;/li>
+&lt;li>continuous integration and delivery&lt;/li>
+&lt;/ul>
+&lt;p>and many more. I will read all of them and do a write up of them later next week.&lt;/p>
+&lt;p>Invoke-Coffee&lt;/p>
+&lt;p>Start-BlogWriting -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Get-BlogProofRead&lt;/p>
+&lt;p>Post-Blog -Date ‘September 12th 2017’ -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Write-Tweet -Hashtag ‘TSQL2sday’ -Message &amp;lsquo;This is my cool blogpost&amp;rsquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/keep-calm-and-PowerShell.jpg"
+loading="lazy"
+alt="keep calm and PowerShell.jpg"
+>&lt;/p></description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p>&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>Jen McCown&lt;/a> and is about Enterprise Strategy.&lt;/p>
+&lt;p>Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+>TSQL Tuesdays over 5 years ago&lt;/a> and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+>you search for them&lt;/a>&lt;/p>
+&lt;p>Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>This post by John Sansom&lt;/a> could have been written for this months party and I recommend that you read it.&lt;/p>
+&lt;p>So here are a few points that I think you should consider if you look after SQL in an Enterprise environment.&lt;/p>
+&lt;ul>
+&lt;li>Enterprise Strategy will undoubtedly garner a whole host of excellent posts and Jen will provide a round up post which will I am certain will be an excellent resource. &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/the-tsql2sday-70-roundup/" target="_blank" rel="noopener"
+>Take a look here&lt;/a>&lt;/li>
+&lt;li>Know where your instances are and have a single place that you can reference them from. Some people recommend a &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/bb895144.aspx?f=255&amp;amp;MSPPError=-2147217396" target="_blank" rel="noopener"
+>Central Management Server&lt;/a> but I find this too restrictive for my needs. I use an InstanceList table in my DBA Database with the following columns [ServerName], [InstanceName] , [Port] , [AG] , [Inactive] , [Environment] and [Location]. This enables me to target instances not just by name but by environment (Dev, Test, Pre-Prod, Live etc), by location or by joining the InstanceList table with another table I can target by the application or any number of other factors. I also capture information about the servers at windows and SQL level to this database so I can target the SQL 2012 servers specifically if need be or any other metric. This is very powerful and enables far greater flexibility than the CMS in my opinion.&lt;/li>
+&lt;li>Use PowerShell (no surprise I would mention this!) PowerShell is a brilliant tool for automation and I use it all of the time&lt;/li>
+&lt;li>Get used to using this piece of PowerShell code&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName],[InstanceName],[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0 AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice the query variable above, this is where the power lies as it enables you to gather all the instances that you need for your task as described in the bullet post above. Once you get used to doing this you can do things like this identify all the instances with Remote DAC disabled using a query against the DBA Database and then enable it on all servers by adding this code to the loop above&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$srv.RemoteDacEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.alter()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Very quick very simple and very very powerful. You can also use this to run TSQL scripts against the instances you target but there are some &lt;a class="link" href="https://www.bing.com/search?q=issues%20with%20invoke-sqlcmd&amp;amp;form=EDGEAR&amp;amp;qs=PF&amp;amp;cvid=bafe07c6afd54a6cb0ce7a1583300a79&amp;amp;pq=issues%20with%20invoke-sqlcmd&amp;amp;elv=AF!A!XC!KoOyC2FxnVd!deIwlgRcylR4EqUAG2rfVDNS" target="_blank" rel="noopener"
+>added complications with Invoke-SQLCmd&lt;/a> that you need to be aware of&lt;/p>
+&lt;ul>
+&lt;li>BE CAREFUL. Test and understand and test before you run any script on a live system especially using a script like this which enables you to target ALL of your servers. You must definitely check that your $ServerNames array contains only the instances you need before you make any changes. You need to be ultra-cautious when it is possible to do great damage&lt;/li>
+&lt;li>Write scripts that are robust and handle errors gracefully. I use Jason Wasser @wasserja Write-Log function to write to a text file and wrap my commands in a try catch block.&lt;/li>
+&lt;li>Include comments in your scripts to assist either the future you or the folks in your position in 5 years time. I would also add one of my bug bears - Use the description block in Agent Jobs. The first place any DBA is going to go to when that job fails is to open the properties of the job. Please fill in that block so that anyone troubleshooting knows some information about what the job does or at the very least a link to some documentation about it&lt;/li>
+&lt;li>Finally in my list, don&amp;rsquo;t overdo the alerts. Alerting is vital for any DBA it is a brilliant way to ensure that you quickly know about any issues affecting your estate but &lt;a class="link" href="http://thomaslarock.com/2012/02/the-minimalist-guide-to-database-administration/" target="_blank" rel="noopener"
+>all alerts should be actionable&lt;/a> and in some cases you can automate the action that you can take but the message here is don&amp;rsquo;t send messages to the DBA team email for every single tiny thing or they will get swamped and ignore the vital one. This holds for whichever alerting or monitoring system that you use&lt;/li>
+&lt;/ul>
+&lt;p>This is but a small sub-section of things that you need to consider when responsible for a large SQL estate but if you need help and advice or just moral support and you don’t already interact with the SQL community then make today the day you start. Maybe &lt;a class="link" href="http://thomaslarock.com/sql-family/" target="_blank" rel="noopener"
+>this post by Thomas La Rock&lt;/a> is a good place to start or &lt;a class="link" href="http://www.sqlpass.org/PASSChapters.aspx" target="_blank" rel="noopener"
+>your nearest User Group/Chapter&lt;/a> or the &lt;a class="link" href="https://twitter.com/hashtag/sqlfamily" target="_blank" rel="noopener"
+>#sqlfamily hashtag&lt;/a> or give me a shout and I will gladly help.&lt;/p></description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>#tsql2sday #60 – Something New Learned – Problem Step Recorder</title><link>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</link><pubDate>Tue, 11 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</guid><description>&lt;h3 id="what-is-t-sql-tuesday">What is T-SQL Tuesday?
+&lt;/h3>&lt;p>&lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/" target="_blank" rel="noopener"
+>&lt;img src="https://chrisyatessql.files.wordpress.com/2012/10/sql-tuesday1.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>T-SQL Tuesday is a monthly blog party hosted by a different blogger each month. This blog party was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>blog&lt;/a>|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+>twitter&lt;/a>). You can take part by posting your own participating post that fits the topic of the month and follows the requirements Additionally, if you are interested in hosting a future T-SQL Tuesday, contact Adam Machanic on his blog.&lt;/p>
+&lt;p>This month’s blog party is hosted by Chris Yates &lt;a class="link" href="http://chrisyatessql.wordpress.com/" target="_blank" rel="noopener"
+>blog&lt;/a> |&lt;a class="link" href="https://twitter.com/@Yatessql" target="_blank" rel="noopener"
+>twitter&lt;/a> who asked people to share something newly learned.&lt;/p>
+&lt;p>I love being a part of the SQL community. It gives me the opportunity to learn as much as I want to about anything I can think of within the data field. In the last couple of months I have presented at &lt;a class="link" href="http://sqlne.sqlpass.org/" target="_blank" rel="noopener"
+>Newcastle User Group&lt;/a> and learnt about migrating SQL using Powershell with &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>Stuart Moore&lt;/a>. At our user group in Exeter &lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/&lt;/a> we had &lt;a class="link" href="https://twitter.com/Steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> talking about version control for databases and lightning talks from &lt;a class="link" href="https://twitter.com/pavol" target="_blank" rel="noopener"
+>Pavol Rovensky&lt;/a> on Mocking in C# ,&lt;a class="link" href="http://twitter.com/SQLServerMonkey" target="_blank" rel="noopener"
+>John Martin&lt;/a> on Azure fault domains and availability sets using a pen and a whiteboard!, &lt;a class="link" href="https://twitter.com/mrs_fatherjack" target="_blank" rel="noopener"
+>Annette Allen&lt;/a> on Database Unit Testing,&lt;a class="link" href="https://twitter.com/sqlshark" target="_blank" rel="noopener"
+>Terry McCann&lt;/a>  on SQL Certifications. We also had &lt;a class="link" href="http://www.simple-talk.com/community/blogs/jonathanallen/" target="_blank" rel="noopener"
+>Jonathan Allen&lt;/a> talking about some free tools and resources to help manage both large and small SQL environments.  I went to SQL Relay in Southampton and saw &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>Stuart Moore&lt;/a> (again!) &lt;a class="link" href="https://twitter.com/SQLScott" target="_blank" rel="noopener"
+>Scott Klein&lt;/a> &lt;a class="link" href="https://twitter.com/_AlexYates_" target="_blank" rel="noopener"
+>Alex Yates&lt;/a> &lt;a class="link" href="https://twitter.com/thesqlpimp" target="_blank" rel="noopener"
+>James Skipworth&lt;/a> and I joined the PASS DBA fundamentals virtual chapter webinar for Changing Your Habits to Improve the Performance of Your T-SQL by &lt;a class="link" href="https://twitter.com/SQLMickey" target="_blank" rel="noopener"
+>Mickey Stuewe&lt;/a> and that’s only the ‘in-person’ learning that I did. I also read a lot of blog posts!&lt;/p>
+&lt;p>But instead of repeating what I learnt from others within the community I thought I would write a blog post that I have been meaning to write for a few weeks about a solution pre-built into Windows that appears to not be well known. Problem Step Recorder.&lt;/p>
+&lt;h3 id="what-is-psr">What is PSR?
+&lt;/h3>&lt;p>I found out about a little known tool included in Windows Operating System a couple of months ago which enables you to record what you are doing by taking screenshots of every mouse click. The tool is Step Recorder also known as PSR. It is included by default in Windows 7 , Windows 8 and 8.1 and Windows Server 2008 and above.&lt;/p>
+&lt;h3 id="what-does-it-do">What does it do?
+&lt;/h3>&lt;p>Simply put, it records “This is what I did” There are many situations when this can be useful&lt;/p>
+&lt;ul>
+&lt;li>You can use this during installations to help create documentation. “This is what I did” when I installed X and now you can follow those steps and I know I haven’t missed anything.&lt;/li>
+&lt;li>You can use it when communicating with 3rd parties or other support teams. “This is what I did” when I got this error and here are all of the steps so that you can re-create the issue and I know that I haven’t missed anything&lt;/li>
+&lt;li>You can use this when resolving high priority incidents. “This is what I did” when System X broke, it includes all of the times of my actions.
+I still keep my notepad by my keyboard out of habit but I have a record of the exact steps that I took to try to resolve the issue which will be very useful for reporting on the incident in the near future and also placing into a Knowledge Base for others to use if it happens again and I know I haven’t missed anything&lt;/li>
+&lt;li>For assisting family members. Like many, I am “The IT guy” and PSR enables me to provide clear instructions with pictures showing exactly where I clicked to those family members who are having trouble with “The internet being broken”&lt;/li>
+&lt;/ul>
+&lt;p>It does this by automatically taking a screen shot after every mouse click or program event with a timestamp and a description of what happened. It does not record keystrokes though so if you need to record what you have typed there is some manual steps required&lt;/p>
+&lt;h3 id="so-how-do-you-access-psr">So how do you access PSR?
+&lt;/h3>&lt;p>Simple. Type “psr” into the run box, cmd or PowerShell and it will open&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled-picture.png"
+loading="lazy"
+alt="Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>Once you click on Start Record it will start recording your clicks and taking screenshots. However I always open the settings by clicking on the drop down to the left of the help icon first and change the number of recent screen captures to store to the maximum value of 100.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/1untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/1untitled-picture.png"
+loading="lazy"
+alt="1Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>If you do not you will get no warning but PSR will only save the last 25 screenshots it takes and your results will look like the below. It will still record your actions but not keep the screenshots.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B1%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 16: (09/11/2014 13:47:45) User left click on “Chris Yates (@YatesSQL) | Twitter (tab item)”&lt;/p>
+&lt;p>No screenshots were saved for this step.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B2%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B3%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 17: (09/11/2014 13:47:47) User left click on “The SQL Professor | ‘Leadership Through Service’ (text)”&lt;/p>
+&lt;p>No screenshots were saved for this step.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B4%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B5%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 18: (09/11/2014 13:47:47) User left click on “T-SQL Tuesday #60 – Something New Learned | The SQL Professor (text)” in “T-SQL Tuesday #60 – Something New Learned | The SQL Professor – Google Chrome”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled.png"
+loading="lazy"
+alt="untitled"
+>&lt;/a>&lt;/p>
+&lt;p>You can also set the name and location of the saved file in the settings but if you leave it blank it will prompt for a location and name once you click Stop Record&lt;/p>
+&lt;h3 id="how-do-i-add-keyboard-input">How do I add keyboard input?
+&lt;/h3>&lt;p>PSR allows you add keyboard input manually. You may need this if you need to include the text you have entered into prompts or address bars or if you wish to add further comment. You can do this by clicking add comment, drawing a box around the relevant part of the screen for the text input and inputting the text into the box&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/2untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/2untitled-picture.png"
+loading="lazy"
+alt="2Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>In the results this looks like&lt;/p>
+&lt;p>Step 1: (09/11/2014 12:56:22) User Comment: “&lt;a class="link" href="http://www.microsoft.com/en-gb/download/details.aspx?id=42573" target="_blank" rel="noopener"
+>http://www.microsoft.com/en-gb/download/details.aspx?id=42573&lt;/a>”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png"
+loading="lazy"
+alt="untitled1"
+>&lt;/a>&lt;/p>
+&lt;h3 id="what-do-the-results-look-like">What do the results look like?
+&lt;/h3>&lt;p>Once you have finished the actions that you want to record (or when you think you are close to 100 screenshots) click stop record and the following screen will be displayed&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/3untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/3untitled-picture.png"
+loading="lazy"
+alt="3Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>This allows you to review what PSR has recorded. You can then save it to a location of your desire. It is saved as a zip file which has a single .mht file in it. You can open the file without unzipping the archive and it will open in Internet Explorer. As you can see from the shots below you can run PSR on your client and it will still record actions in your RDP sessions although it does not record as much detail. The first two are on my SCOM server in my lab and the second two are on the laptop using the SCOM console&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B1%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 11: (09/11/2014 13:02:13) User left click on “Input Capture Window (pane)” in “SCOM on ROB-LAPTOP – Virtual Machine Connection”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled2.png"
+loading="lazy"
+alt="untitled2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B2%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B3%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 12: (09/11/2014 13:02:16) User left click on “Input Capture Window (pane)” in “SCOM on ROB-LAPTOP – Virtual Machine Connection”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled3.png"
+loading="lazy"
+alt="untitled3"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B4%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B5%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 13: (09/11/2014 13:06:25) User right click on “Management Packs (tree item)” in “Agent Managed – THEBEARDMANAGEMENTGROUP – Operations Manager”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled4.png"
+loading="lazy"
+alt="untitled4"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B6%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B7%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 14: (09/11/2014 13:06:27) User left click on “Import Management Packs… (menu item)”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled5.png"
+loading="lazy"
+alt="untitled5"
+>&lt;/a>&lt;/p>
+&lt;p>You can then use the zip file as you wish. Maybe you email it to your third party support team (once you have edited any confidential data) or you can attach it to your incident in your IT Service Management solution or attach it to a report. If you wish to create documentation you can open the .mht file in Word, edit it as you see fit and save it appropriately.&lt;/p>
+&lt;p>So that is one of the many things that I have learnt recently and I am looking forward to seeing what others have learnt especially as many will have just been to the SQL PASS Summit. You will be able to find the other posts in this blog party &lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/#comments" target="_blank" rel="noopener"
+>in the comments on Chris’s page&lt;/a>&lt;/p></description></item></channel></rss>

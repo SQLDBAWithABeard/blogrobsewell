@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Snippets on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/snippets/</link><description>Recent content in Snippets on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/snippets/index.xml" rel="self" type="application/rss+xml"/><item><title>Max Length of a column in a DataTable in PowerShell</title><link>https://blog.robsewell.com/blog/max-length-of-a-column-in-a-datatable-in-powershell/</link><pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/max-length-of-a-column-in-a-datatable-in-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>&amp;ldquo;@
+}
+New-IseSnippet @snippet
+}&lt;!-- raw HTML omitted -->&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>VS Code PowerShell Snippets</title><link>https://blog.robsewell.com/blog/vs-code-powershell-snippets/</link><pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/vs-code-powershell-snippets/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>PowerShell Snippets A Great Learning Tool</title><link>https://blog.robsewell.com/blog/powershell-snippets-a-great-learning-tool/</link><pubDate>Tue, 09 Sep 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-snippets-a-great-learning-tool/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image9.png" alt="Featured image of post PowerShell Snippets A Great Learning Tool" />&lt;p>When I talk to people about Powershell they often ask how can they easily learn the syntax. Here’s a good tip&lt;/p>
+&lt;p>Open PowerShell ISE and press CTRL + J&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/09/image9.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image_thumb9.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You will find a number of snippets that will enable you to write your scripts easily.  Johnathan Medd PowerShell MVP has written a good post about snippets on the &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2014/01/25/using-powershell-ise-snippets-to-remember-tricky-syntax.aspx" target="_blank" rel="noopener"
+>Hey, Scripting Guy! blog&lt;/a> so I will not repeat that but suggest that you go and read that post. It will show you how quickly and easily you will be able to write more complex Powershell scripts as you do not have to learn the syntax but can use the snippets to insert all the code samples you require.&lt;/p>
+&lt;p>Not only are there default snippets for you to use but you can create your own snippets. However there isn’t a snippet for creating a new snippet so here is the code to do that&lt;/p>
+&lt;pre>&lt;code>$snippet1 = @{
+Title = 'New-Snippet'
+Description = 'Create a New Snippet'
+Text = @&amp;quot;
+`$snippet = @{
+Title = `'Put Title Here`'
+Description = `'Description Here`'
+Text = @`&amp;quot;
+Code in Here
+`&amp;quot;@
+}
+New-IseSnippet @snippet
+&amp;quot;@
+}
+New-IseSnippet @snippet1 –Force
+&lt;/code>&lt;/pre>
+&lt;p>I frequently use the SQL Server SMO Object in my code so I created this snippet&lt;/p>
+&lt;pre>&lt;code> $snippet = @{
+Title = 'SMO-Server'
+Description = 'Creates a SQL Server SMO Object'
+Text = @&amp;quot;
+`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `$Server
+&amp;quot;@
+}
+New-IseSnippet @snippet
+&lt;/code>&lt;/pre>
+&lt;p>I also use Data Tables a lot so I created a snippet for that too&lt;/p>
+&lt;pre>&lt;code> $snippet = @{
+Title = 'New-DataTable'
+Description = 'Creates a Data Table Object'
+Text = @&amp;quot;
+# Create Table Object
+`$table = New-Object system.Data.DataTable `$TableName
+# Create Columns
+`$col1 = New-Object system.Data.DataColumn NAME1,([string])
+`$col2 = New-Object system.Data.DataColumn NAME2,([decimal])
+#Add the Columns to the table
+`$table.columns.add(`$col1)
+`$table.columns.add(`$col2)
+# Create a new Row
+`$row = `$table.NewRow()
+# Add values to new row
+`$row.Name1 = 'VALUE'
+`$row.NAME2 = 'VALUE'
+#Add new row to table
+`$table.Rows.Add($row)
+&amp;quot;@
+}
+New-IseSnippet @snippet
+&lt;/code>&lt;/pre>
+&lt;p>Denniver Reining has created a &lt;a class="link" href="http://bytecookie.wordpress.com/snippet-manager/" target="_blank" rel="noopener"
+>Snippet Manager&lt;/a> which you can use to further expand your snippets usage and it is free as well.&lt;/p>
+&lt;p>If you have further examples of useful snippets please feel free to post them in the comments below&lt;/p>
+&lt;p>Edit 16/12/2014&lt;/p>
+&lt;p>I am proud that this article was nominated for the Tribal Awards. Please go and vote for your winners in all the categories&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlservercentral.com/articles/Awards/119953/" target="_blank" rel="noopener"
+>http://www.sqlservercentral.com/articles/Awards/119953/&lt;/a>&lt;/p>
+&lt;p>Personally in the article category I will be voting for&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/gail-shaws-sql-server-howlers/" target="_blank" rel="noopener"
+>Gail Shaw’s SQL Server Howlers&lt;/a>&lt;/p></description></item></channel></rss>

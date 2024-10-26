@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Configuration on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/configuration/</link><description>Recent content in Configuration on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 05 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Enable CLR with Powershell</title><link>https://blog.robsewell.com/blog/enable-clr-with-powershell/</link><pubDate>Mon, 05 May 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enable-clr-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi2.png" alt="Featured image of post Enable CLR with Powershell" />&lt;p>I had an email last night from someone who attended my PowerShell Box of Tricks session at &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>He was getting an error whilst trying to set CLR Enabled during an automatic install and asked if I had any ideas. The error he had was related to Invoke-SQLcmd and the method he was calling the PowerShell script&lt;/p>
+&lt;p>I was unable to replicate his problem on my servers so I looked at other methods that may assist as well as following up with him to try and understand what was causing his issue. In doing so I worked out the following method to change the CLR Enabled setting by SMO and thought it worth a blog post to share&lt;/p>
+&lt;p>One way around his issue is to define and then call &lt;a class="link" href="http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894" target="_blank" rel="noopener"
+>Invoke-SQLCmd2 by Chad Miller&lt;/a> within his script. So his script would look in part as follows&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>However, I prefer to use SMO so I examined the Server SMO as follows notice the “.” for local server&lt;/p>
+&lt;pre>&lt;code>$srv = New-Object Microsoft.SQLServer.Management.SMO.Server .
+$srv |gm
+&lt;/code>&lt;/pre>
+&lt;p>And noticed the Configuration property&lt;/p>
+&lt;pre>&lt;code> $srv.Configuration |Get-Member
+&lt;/code>&lt;/pre>
+&lt;p>Enabled me to see the IsCLREnabled Property and using Get-Member I could see that the config value was settable&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>With this information I could write a simple script to alter the settings.&lt;/p>
+&lt;p>Prior to running the script&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>We then run the following script&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi4.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Line 1 creates a Server SMO object there is a “.” to denote local server at the end of the line although you can use the server name as well&lt;/p>
+&lt;p>Line 4 sets the configvalue for the IsCLREnabled property&lt;/p>
+&lt;p>And Line 5 Alters the Config object, essentially running the reconfigure&lt;/p>
+&lt;p>After running the script&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Hopefully this short post shows how easy it is to set SQL Server configuration values with Powershell using SMO&lt;/p>
+&lt;p>Any questions or comments please feel free to ask&lt;/p></description></item></channel></rss>

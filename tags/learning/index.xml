@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learning on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/learning/</link><description>Recent content in Learning on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 16 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p>Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p>
+&lt;p>I have an InstanceList table which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">CREATE&lt;/span> &lt;span class="n">TABLE&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">dbo&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceList&lt;/span>&lt;span class="p">](&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">IDENTITY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">ServerName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Port&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">AG&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Inactive&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">bit&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span> &lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">DF_InstanceList_Inactive&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">DEFAULT&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="ne">Environment&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">25&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Location&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PK_InstanceList_ID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">PRIMARY&lt;/span> &lt;span class="n">KEY&lt;/span> &lt;span class="n">CLUSTERED&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">InstanceID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">ASC&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;span class="n">WITH&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">PAD_INDEX&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">STATISTICS_NORECOMPUTE&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">IGNORE_DUP_KEY&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_ROW_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_PAGE_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p>
+&lt;p>I have 4 scripts&lt;/p>
+&lt;ul>
+&lt;li>ServerInfo which gathers Windows OS information such as Version and edition of the operating system, number of processors,amount of RAM, IP address, domain name etc&lt;/li>
+&lt;li>SQLInfo which gathers information about the instance such as SQL version, edition, collation, max and min memory, MAXDOP , service accounts and start modes, default file locations etc&lt;/li>
+&lt;li>Database information such as size, data usage, index usage, last backup dates, owner and many more&lt;/li>
+&lt;li>Agent Job which gathers the outcome of the jobs that have run, their names, category into two tables one for a server rollup and one for details about each job&lt;/li>
+&lt;/ul>
+&lt;p>Recently I have received a lot of requests for information from various sources, auditors asking about encryption and backup policies, Project managers asking about database and sql versions, compliance asking about numbers of Windows 2003 servers or SQL 2005 servers, system teams asking which serves in a particular location can be turned off at which time dependant on which system they are supporting for a power down&lt;/p>
+&lt;p>Before we had the DBA database holding all of the information about the instances we would have struggled to be able to compile this information and when I saw Power Bi was released to GA I thought that it would be a good place to start to learn about it. By using data that I understood and answering questions that I knew the format of the answer I could be more confident about experimenting - ie. if I know I have 100 servers then any result for servers that exceeds that is incorrect&lt;/p>
+&lt;p>I have never been a BI guy, I claim no expertise in the correct methods of manipulating the data. There may very well be better methods of achieving these results and if there please feel free to comment below so that I can improve my knowledge and keep on learning&lt;/p>
+&lt;p>All data shown in the examples below has been generated from real-life data but all identifiable data has been altered or removed. I have no servers in Bolton, it is where I am from originally!!&lt;/p>
+&lt;p>I downloaded Power BI Desktop from powerbi.com and ran the installer and the first screen you see is this one&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I then clicked on Get Data&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/2.png?w=276"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>And then SQL Server and filled in the details for my DBA Database and clicked connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>I used my current Windows credentials&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It then asked me which tables I wanted to load so I said all of them :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/5.png?w=195"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>Once I had loaded the data I looked at the queries and renamed some of the columns to make more sense to me. I also created some calculated columns by clicking New Column&lt;/p>
+&lt;p>I created a relative date column using this code from Chris Webb &lt;a class="link" href="http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/" target="_blank" rel="noopener"
+>http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Relative Date Offset=INT([Date] – TODAY()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Relative Date=IF([Relative Date Offset]=0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">, &amp;#34;Today &amp;#34; &amp;amp; IF([Relative Date Offset]&amp;gt;0, &amp;#34;+&amp;#34;, &amp;#34;&amp;#34;) &amp;amp; [Relative Date Offset])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This will enable me to show data for the last day&lt;/p>
+&lt;p>I also did the same for days of the week&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">DayOfWeek = CONCATENATE(WEEKDAY(&amp;#39;Info AgentJobDetail&amp;#39;[LastRunTime],2),FORMAT(&amp;#39;InfoAgentJobDetail&amp;#39;[LastRunTime],&amp;#34; -dddd&amp;#34;))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Because I struggled to show the information about the Operating system I also created two columns for OS name and OS edition by adding columns as shown below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Version = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;Server 2012 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Edition = SWITCH(&amp;#39;Info ServerOSInfo&amp;#39;[OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I started to play with the data.&lt;/p>
+&lt;p>This is probably not how a professional would phrase it but I would say that if you don&amp;rsquo;t know how to use a new application be brave and give it a try.&lt;/p>
+&lt;p>&lt;strong>OBVIOUSLY&lt;/strong> you are a &lt;strong>PROFESSIONAL DBA&lt;/strong> and will not do anything that would endanger production, use a backup of your database and work locally if you need to.&lt;/p>
+&lt;p>The first thing I wanted to know was how many servers I had by operating system, how many by SQL version and the location of them so that I could answer the questions I had been asked. I had already written a query to get the correct information to give to the requestors so I knew the correct answers which was also an advantage. I did this like this&lt;/p>
+&lt;p>I expanded the Info ServerOSInfo query and dragged the ServerName field to the report which created a table of names&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I then changed the ServerName values to Count&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>I then dragged the calculated column Operating System Version to the table&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>If I click on the table and then donut chart in the visualisations it changes to&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/9.png?w=300"
+loading="lazy"
+alt="9"
+>&lt;/a>&lt;/p>
+&lt;p>So you can quickly see how you want the data displayed&lt;/p>
+&lt;p>I then decided to look at the number of SQL 2005 instances that I had and as I had relationships between SQLInfo and Instancelist and Clients I could build a more dynamic report.&lt;/p>
+&lt;p>I created a donut chart with SQLVersion as the legend and InstanceID as the values and a table of SQLVersion, ServerName and Instance Name. I also created a card that was count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png?w=300"
+loading="lazy"
+alt="10"
+>&lt;/a>&lt;/p>
+&lt;p>Now it starts getting really useful. If I want to know how many SQL 2005 instances I have I simply click on SQL2005 in the donut chart and the rest of the report changes&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png?w=300"
+loading="lazy"
+alt="11"
+>&lt;/a>&lt;/p>
+&lt;p>This is very cool and I hope you can see how useful this could be and how brilliant it would be to enable relevant people within the organisation the ability to look at that report and answer their own questions.&lt;/p>
+&lt;p>Lets take it to the next step. I have a location column in the InstanceList table which comprises of town names. If I choose a map and drag that column to the Location field and set Values and Color Saturation to the Count of InstanceID&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/12.png?w=166"
+loading="lazy"
+alt="12"
+>&lt;/a>&lt;/p>
+&lt;p>and create two tables one of client with a count of instanceid and one location with a count of instance id I can do this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png?w=300"
+loading="lazy"
+alt="13"
+>&lt;/a>&lt;/p>
+&lt;p>Look at how it dynamically changes as you click on the data labels - This is very cool and makes me smile every time!! I altered the colour saturation colours to make it easier to see. Now if I am asked about SQL 2005 servers I can quickly click on SQL 2005 and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png?w=300"
+loading="lazy"
+alt="14"
+>&lt;/a>&lt;/p>
+&lt;p>I can see that there are 32 instances, most are in Southampton, and which clients they support&lt;/p>
+&lt;p>If I click a location rather than SQL version the report alters like so&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/15.png?w=300"
+loading="lazy"
+alt="15"
+>&lt;/a>&lt;/p>
+&lt;p>So you can simply pass the report file to your colleagues to enable them to use it or you can publish it to Powerbi.com. &lt;a class="link" href="https://support.powerbi.com/knowledgebase/articles/685479-power-bi-pro-content-what-is-it?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>I am not going to go into any detail about the costs or licensing etc&lt;/a> I will just say it is as easy as clicking publish. If you wish to have the information automatically refreshed there are some &lt;a class="link" href="http://biinsight.com/power-bi-personal-gateway-five-things-you-must-know/" target="_blank" rel="noopener"
+>more steps that you would need to go through which are detailed here which enable you to connect your on-premise database to Powerbi using the data management gateway&lt;/a>, alternatively you can simply refresh the data in the report and then publish it and replace the existing report.&lt;/p>
+&lt;p>Once the report is in powerbi.com you can enable Q and A on the data. This is some kind of supernatural mystical magical query language which enables you to query your data with natural language and will alter the results as you type and even cope with (deliberate for screenshot) spelling mistakes :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/16.png?w=300"
+loading="lazy"
+alt="16"
+>&lt;/a>&lt;/p>
+&lt;p>I also created a report for my Agent Jobs to enable me to quickly and easily see which Jobs have failed in the last day&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png?w=300"
+loading="lazy"
+alt="17"
+>&lt;/a>&lt;/p>
+&lt;p>I did this by filtering the report by Relative Date Offset greater than -1 (today) and &lt;code>isenabled = True&lt;/code> and &lt;code>Outcome = Failed&lt;/code>&lt;/p>
+&lt;p>There are many many more ways I can see this being useful and I hope I have given you some ideas and encouraged you to try for yourself and find out more&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p>This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+>described here&lt;/a> to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a> so was surprised to see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I read the announcement and also the details on MSDN &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx&lt;/a> which show that this requires the SQL Server IaaS Agent. This is a default option on new virtual machines.&lt;/p>
+&lt;p>There are some other considerations too. It is only supported for SQL Server 2014 and Windows Server 2012 and 2012R2 at present and you can set a retention period to a maximum of 30 days but it is automated. You do not have to decide upon the backup strategy Azure will decide the frequency and type of backups dependent upon the workload of the database and some other factors such as&lt;/p>
+&lt;p>A full backup is taken ○ when an instance is added to use Managed backup ○ When transaction log growth is 1Gb or more ○ At least once a week ○ If the log chain is broken ○ When a database is created&lt;/p>
+&lt;p>A transaction log backup is taken - If no log backup is found - Transaction log space used is 5Mb or larger - At least once every two hours - Any time the transaction log backup is lagging behind a full database backup. The goal is to keep the log chain ahead of full backup.&lt;/p>
+&lt;p>From &lt;a class="link" href="https://msdn.microsoft.com/en-gb/library/dn449496%28v=sql.120%29.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-gb/library/dn449496(v=sql.120).aspx&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>There are some restrictions - Only database backups are supported - System databases are not supported so you need to back those up yourself - You can only back up to Azure storage - Maximum backup size is 1Tb as this is the maximum size for a blob in Azure storage - Simple recovery is not supported - Maximum retention is 30 days - if you are required to keep your backups for longer than 30 days for regulatory or other reasons you could simply use Azure Automation to copy the files to another storage account in Azure)&lt;/p>
+&lt;/blockquote>
+&lt;p>How to set it up.&lt;/p>
+&lt;p>If you are using the GUI then you will find SQL Automated Backup in the optional config blade of the set up. You can follow the steps &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here to set it up&lt;/a>. If (like me) you want to use PowerShell then use the following code after you have created your Virtual Machine&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$storageaccount = &amp;#34;&amp;lt;storageaccountname&amp;gt;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storageaccountkey = (Get-AzureStorageKey -StorageAccountName $storageaccount).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -StorageAccountKey $storageaccountkey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$encryptionpassword = (Get-Credential -message &amp;#39;Backup Encryption Password&amp;#39; -User &amp;#39;IGNOREUSER&amp;#39;).password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$autobackupconfig = New-AzureVMSqlServerAutoBackupConfig -StorageContext $storagecontext -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-AzureVM -ServiceName &amp;lt;vmservicename&amp;gt; -Name &amp;lt;vmname&amp;gt; | Set-AzureVMSqlServerExtension -AutoBackupSettings $autobackupconfig | Update-AzureVM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once you have run the code, Azure will take care of the rest. Add a couple of databases to your instance and look in the storage account and you will see this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>And in the automaticbackup container you will find the Certificates and master key backups&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It will also create a credential&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/5.png"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>You can use the same credential to back up your system databases. If like me you use &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>Ola Hallengrens excellent Maintenance Solution&lt;/a> then simply change your systems backup job as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [msdb]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXEC msdb.dbo.sp_update_jobstep @job_name = &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;, @step_id=1 ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @command=N&amp;#39;sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q &amp;#34;EXECUTE [dbo].[DatabaseBackup] @Databases = &amp;#39;&amp;#39;SYSTEM_DATABASES&amp;#39;&amp;#39;, &amp;#34;https://myaccount.blob.core.windows.net/mycontainer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> , @Credential = &amp;#39;&amp;#39;AutoBackup_Credential&amp;#39;&amp;#39;, @BackupType = &amp;#39;&amp;#39;FULL&amp;#39;&amp;#39;, @Verify = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @CleanupTime = NULL, @CheckSum = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @LogToTable = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;&amp;#34; -b&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you need to restore your database then you can use the GUI and when you choose restore you will see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>Enter your storage account and the key which you can get from the Azure portal. You will notice that the credential has already been selected, click connect and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>There are all of your backups ready to restore to any point in time that you choose. By clicking script the T-SQL is generated which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [master]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BACKUP LOG [Test] TO URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_LogBackup_2015-07-16_06-21-26.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOFORMAT, NOINIT, NAME = N&amp;#39;Test_LogBackup_2015-07-16_06-21-26&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOSKIP, NOREWIND, NOUNLOAD, NORECOVERY , STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE DATABASE [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714201240+00.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714202740+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714224241+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715005741+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715031242+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715052742+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715074243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715095743+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715121243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150716060004+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is an important note. Remember this when you have just set it up so that you don’t think that you have done it wrong (which is what I did!)&lt;/p>
+&lt;p>When you enable Automated Patching for the first time, Azure configures the SQL Server IaaS Agent in the background. During this time, the portal will not show that Automated Patching is configured. Wait several minutes for the agent to be installed, configured. After that the portal will reflect the new settings.&lt;/p>
+&lt;p>From &amp;lt;&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx&lt;/a>&amp;gt;&lt;/p>
+&lt;p>And also look out for this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>The password I had chosen was not complex enough but the PowerShell script had succeeded and not given me the warning&lt;/p>
+&lt;p>To set up SQL Automated Patching you follow a similar steps. The setting is again on the OS Config blade and click enable and then you can choose the frequency and duration of the patching.&lt;/p>
+&lt;p>It is important to remember to choose your maintenance window correctly. If you have set up your SQL VMs correctly you will have them in an availability set and be using either mirroring or Availability Groups and have the VMs set up in the same availability set to ensure availability during the underlying host patching but I had it confirmed by Principal Software Engineering Manager Sethu Srinivasan &lt;a class="link" href="http://twitter.com/sethusrinivasan" target="_blank" rel="noopener"
+>t&lt;/a> via Microsoft PFE Arvind Shyamsundar &lt;a class="link" href="http://blogs.msdn.com/b/arvindsh/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/arvisam" target="_blank" rel="noopener"
+>t&lt;/a> that the SQL Automated Patching is not HA aware so you will need to ensure that you set the maintenance windows on each VM to ensure that they do not overlap&lt;/p></description></item><item><title>#tsql2sday #60 – Something New Learned – Problem Step Recorder</title><link>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</link><pubDate>Tue, 11 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</guid><description>&lt;h3 id="what-is-t-sql-tuesday">What is T-SQL Tuesday?
+&lt;/h3>&lt;p>&lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/" target="_blank" rel="noopener"
+>&lt;img src="https://chrisyatessql.files.wordpress.com/2012/10/sql-tuesday1.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>T-SQL Tuesday is a monthly blog party hosted by a different blogger each month. This blog party was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>blog&lt;/a>|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+>twitter&lt;/a>). You can take part by posting your own participating post that fits the topic of the month and follows the requirements Additionally, if you are interested in hosting a future T-SQL Tuesday, contact Adam Machanic on his blog.&lt;/p>
+&lt;p>This month’s blog party is hosted by Chris Yates &lt;a class="link" href="http://chrisyatessql.wordpress.com/" target="_blank" rel="noopener"
+>blog&lt;/a> |&lt;a class="link" href="https://twitter.com/@Yatessql" target="_blank" rel="noopener"
+>twitter&lt;/a> who asked people to share something newly learned.&lt;/p>
+&lt;p>I love being a part of the SQL community. It gives me the opportunity to learn as much as I want to about anything I can think of within the data field. In the last couple of months I have presented at &lt;a class="link" href="http://sqlne.sqlpass.org/" target="_blank" rel="noopener"
+>Newcastle User Group&lt;/a> and learnt about migrating SQL using Powershell with &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>Stuart Moore&lt;/a>. At our user group in Exeter &lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/&lt;/a> we had &lt;a class="link" href="https://twitter.com/Steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> talking about version control for databases and lightning talks from &lt;a class="link" href="https://twitter.com/pavol" target="_blank" rel="noopener"
+>Pavol Rovensky&lt;/a> on Mocking in C# ,&lt;a class="link" href="http://twitter.com/SQLServerMonkey" target="_blank" rel="noopener"
+>John Martin&lt;/a> on Azure fault domains and availability sets using a pen and a whiteboard!, &lt;a class="link" href="https://twitter.com/mrs_fatherjack" target="_blank" rel="noopener"
+>Annette Allen&lt;/a> on Database Unit Testing,&lt;a class="link" href="https://twitter.com/sqlshark" target="_blank" rel="noopener"
+>Terry McCann&lt;/a>  on SQL Certifications. We also had &lt;a class="link" href="http://www.simple-talk.com/community/blogs/jonathanallen/" target="_blank" rel="noopener"
+>Jonathan Allen&lt;/a> talking about some free tools and resources to help manage both large and small SQL environments.  I went to SQL Relay in Southampton and saw &lt;a class="link" href="https://twitter.com/napalmgram" target="_blank" rel="noopener"
+>Stuart Moore&lt;/a> (again!) &lt;a class="link" href="https://twitter.com/SQLScott" target="_blank" rel="noopener"
+>Scott Klein&lt;/a> &lt;a class="link" href="https://twitter.com/_AlexYates_" target="_blank" rel="noopener"
+>Alex Yates&lt;/a> &lt;a class="link" href="https://twitter.com/thesqlpimp" target="_blank" rel="noopener"
+>James Skipworth&lt;/a> and I joined the PASS DBA fundamentals virtual chapter webinar for Changing Your Habits to Improve the Performance of Your T-SQL by &lt;a class="link" href="https://twitter.com/SQLMickey" target="_blank" rel="noopener"
+>Mickey Stuewe&lt;/a> and that’s only the ‘in-person’ learning that I did. I also read a lot of blog posts!&lt;/p>
+&lt;p>But instead of repeating what I learnt from others within the community I thought I would write a blog post that I have been meaning to write for a few weeks about a solution pre-built into Windows that appears to not be well known. Problem Step Recorder.&lt;/p>
+&lt;h3 id="what-is-psr">What is PSR?
+&lt;/h3>&lt;p>I found out about a little known tool included in Windows Operating System a couple of months ago which enables you to record what you are doing by taking screenshots of every mouse click. The tool is Step Recorder also known as PSR. It is included by default in Windows 7 , Windows 8 and 8.1 and Windows Server 2008 and above.&lt;/p>
+&lt;h3 id="what-does-it-do">What does it do?
+&lt;/h3>&lt;p>Simply put, it records “This is what I did” There are many situations when this can be useful&lt;/p>
+&lt;ul>
+&lt;li>You can use this during installations to help create documentation. “This is what I did” when I installed X and now you can follow those steps and I know I haven’t missed anything.&lt;/li>
+&lt;li>You can use it when communicating with 3rd parties or other support teams. “This is what I did” when I got this error and here are all of the steps so that you can re-create the issue and I know that I haven’t missed anything&lt;/li>
+&lt;li>You can use this when resolving high priority incidents. “This is what I did” when System X broke, it includes all of the times of my actions.
+I still keep my notepad by my keyboard out of habit but I have a record of the exact steps that I took to try to resolve the issue which will be very useful for reporting on the incident in the near future and also placing into a Knowledge Base for others to use if it happens again and I know I haven’t missed anything&lt;/li>
+&lt;li>For assisting family members. Like many, I am “The IT guy” and PSR enables me to provide clear instructions with pictures showing exactly where I clicked to those family members who are having trouble with “The internet being broken”&lt;/li>
+&lt;/ul>
+&lt;p>It does this by automatically taking a screen shot after every mouse click or program event with a timestamp and a description of what happened. It does not record keystrokes though so if you need to record what you have typed there is some manual steps required&lt;/p>
+&lt;h3 id="so-how-do-you-access-psr">So how do you access PSR?
+&lt;/h3>&lt;p>Simple. Type “psr” into the run box, cmd or PowerShell and it will open&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled-picture.png"
+loading="lazy"
+alt="Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>Once you click on Start Record it will start recording your clicks and taking screenshots. However I always open the settings by clicking on the drop down to the left of the help icon first and change the number of recent screen captures to store to the maximum value of 100.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/1untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/1untitled-picture.png"
+loading="lazy"
+alt="1Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>If you do not you will get no warning but PSR will only save the last 25 screenshots it takes and your results will look like the below. It will still record your actions but not keep the screenshots.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B1%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 16: (09/11/2014 13:47:45) User left click on “Chris Yates (@YatesSQL) | Twitter (tab item)”&lt;/p>
+&lt;p>No screenshots were saved for this step.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B2%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B3%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 17: (09/11/2014 13:47:47) User left click on “The SQL Professor | ‘Leadership Through Service’ (text)”&lt;/p>
+&lt;p>No screenshots were saved for this step.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B4%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1348%5B5%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 18: (09/11/2014 13:47:47) User left click on “T-SQL Tuesday #60 – Something New Learned | The SQL Professor (text)” in “T-SQL Tuesday #60 – Something New Learned | The SQL Professor – Google Chrome”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled.png"
+loading="lazy"
+alt="untitled"
+>&lt;/a>&lt;/p>
+&lt;p>You can also set the name and location of the saved file in the settings but if you leave it blank it will prompt for a location and name once you click Stop Record&lt;/p>
+&lt;h3 id="how-do-i-add-keyboard-input">How do I add keyboard input?
+&lt;/h3>&lt;p>PSR allows you add keyboard input manually. You may need this if you need to include the text you have entered into prompts or address bars or if you wish to add further comment. You can do this by clicking add comment, drawing a box around the relevant part of the screen for the text input and inputting the text into the box&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/2untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/2untitled-picture.png"
+loading="lazy"
+alt="2Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>In the results this looks like&lt;/p>
+&lt;p>Step 1: (09/11/2014 12:56:22) User Comment: “&lt;a class="link" href="http://www.microsoft.com/en-gb/download/details.aspx?id=42573" target="_blank" rel="noopener"
+>http://www.microsoft.com/en-gb/download/details.aspx?id=42573&lt;/a>”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png"
+loading="lazy"
+alt="untitled1"
+>&lt;/a>&lt;/p>
+&lt;h3 id="what-do-the-results-look-like">What do the results look like?
+&lt;/h3>&lt;p>Once you have finished the actions that you want to record (or when you think you are close to 100 screenshots) click stop record and the following screen will be displayed&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/3untitled-picture.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/3untitled-picture.png"
+loading="lazy"
+alt="3Untitled picture"
+>&lt;/a>&lt;/p>
+&lt;p>This allows you to review what PSR has recorded. You can then save it to a location of your desire. It is saved as a zip file which has a single .mht file in it. You can open the file without unzipping the archive and it will open in Internet Explorer. As you can see from the shots below you can run PSR on your client and it will still record actions in your RDP sessions although it does not record as much detail. The first two are on my SCOM server in my lab and the second two are on the laptop using the SCOM console&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B1%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 11: (09/11/2014 13:02:13) User left click on “Input Capture Window (pane)” in “SCOM on ROB-LAPTOP – Virtual Machine Connection”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled2.png"
+loading="lazy"
+alt="untitled2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B2%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B3%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 12: (09/11/2014 13:02:16) User left click on “Input Capture Window (pane)” in “SCOM on ROB-LAPTOP – Virtual Machine Connection”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled3.png"
+loading="lazy"
+alt="untitled3"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B4%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B5%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 13: (09/11/2014 13:06:25) User right click on “Management Packs (tree item)” in “Agent Managed – THEBEARDMANAGEMENTGROUP – Operations Manager”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled4.png"
+loading="lazy"
+alt="untitled4"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B6%5D.mht" target="_blank" rel="noopener"
+>Previous&lt;/a> &lt;a class="link" href="https://blog.robsewell.com/tsql2sday-60-something-new-learned-problem-step-recorder/%24Recording_20141109_1338%5B7%5D.mht" target="_blank" rel="noopener"
+>Next&lt;/a>&lt;/p>
+&lt;p>Step 14: (09/11/2014 13:06:27) User left click on “Import Management Packs… (menu item)”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/untitled5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/untitled5.png"
+loading="lazy"
+alt="untitled5"
+>&lt;/a>&lt;/p>
+&lt;p>You can then use the zip file as you wish. Maybe you email it to your third party support team (once you have edited any confidential data) or you can attach it to your incident in your IT Service Management solution or attach it to a report. If you wish to create documentation you can open the .mht file in Word, edit it as you see fit and save it appropriately.&lt;/p>
+&lt;p>So that is one of the many things that I have learnt recently and I am looking forward to seeing what others have learnt especially as many will have just been to the SQL PASS Summit. You will be able to find the other posts in this blog party &lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/#comments" target="_blank" rel="noopener"
+>in the comments on Chris’s page&lt;/a>&lt;/p></description></item><item><title>Generating T-SQL Randomly with Powershell</title><link>https://blog.robsewell.com/blog/generating-t-sql-randomly-with-powershell/</link><pubDate>Wed, 05 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/generating-t-sql-randomly-with-powershell/</guid><description>&lt;p>I have a lab on my laptop running various servers so that I can problem solve and learn and recently I wanted to add several months of data into a database. I had created a stored procedure to take some parameters perform some logic and insert the data.&lt;/p>
+&lt;p>To execute the stored procedure in T-SQL I simply run this&lt;/p>
+&lt;pre>&lt;code>EXECUTE [dbo].[usp_Insert_DriveSpace] 'Server1','C','2014-11-05','100','25'
+&lt;/code>&lt;/pre>
+&lt;p>which uses the server name, drive letter, date, capacity and free space to add the data&lt;/p>
+&lt;p>In my wisdom I decided to create some data that was more ‘real-life’ I was interested in storing drive space data and will be learning how to write reports on it. To do this I had pre-populated some tables in the database with 10 Server Names each with 5 drives so I needed 10*5*90 or 4500 statements&lt;/p>
+&lt;p>I wanted to populate this with about 3 months of data as if it had been gathered every day. I read &lt;a class="link" href="http://smehrozalam.wordpress.com/2009/06/09/t-sql-using-common-table-expressions-cte-to-generate-sequences/" target="_blank" rel="noopener"
+>this post&lt;/a> about using CTEs to create sequences and I am sure it can be done this way but I don’t have the T-SQL skills to do so. If someone can (or has) done that please let me know as I am trying to improve my T-SQL skills and would be interested in how to approach and solve this problem with T-SQL&lt;/p>
+&lt;p>I solved it with Powershell in this way.&lt;/p>
+&lt;p>Created an array of Servers and an array of Drives to enable me to iterate though each.&lt;/p>
+&lt;pre>&lt;code>$Servers = 'Server1','Server2','Server3','Server4','Server5','Server6','Server7','Server8','Server9','Server10'
+$Drives = 'C','D','E','F','G'
+&lt;/code>&lt;/pre>
+&lt;p>Set the drive capacity for each drive. To make my life slightly easier I standardised my ‘servers’&lt;/p>
+&lt;pre>&lt;code>$CDriveCapacity = 100
+$DDriveCapacity = 50
+$EDriveCapacity = 200
+$FDriveCapacity = 200
+$GDriveCapacity = 500
+&lt;/code>&lt;/pre>
+&lt;p>I needed to create a date. You can use &lt;code>Get-Date&lt;/code> to get todays date and to get dates or times in the future or the past you can use the &lt;code>AddDays()&lt;/code> function. You can also add ticks, milliseconds, seconds, minutes, hours, months or years&lt;/p>
+&lt;pre>&lt;code>(Get-Date).AddDays(1)
+&lt;/code>&lt;/pre>
+&lt;p>I then needed to format the date. This is slightly confusing. If you just use &lt;code>Get-Date&lt;/code> to get the current date (time) then you can use the &lt;code>format&lt;/code> or &lt;code>uformat&lt;/code> switch to format the output&lt;/p>
+&lt;pre>&lt;code>Get-Date -Format yyyyMMdd
+Get-Date -UFormat %Y%m%d
+&lt;/code>&lt;/pre>
+&lt;p>However this does not work once you have used the AddDays() method. You have to use the ToString() method&lt;/p>
+&lt;pre>&lt;code>$Date = (Get-Date).AddDays(-7).ToString('yyyy-MM-dd')
+&lt;/code>&lt;/pre>
+&lt;p>To replicate gathering data each day I decided to use a while loop. I set $x to –95 and pressed CTRL and J to bring up Snippets and typed w and picked the while loop. You can find out more about snippets in &lt;a class="link" href="https://blog.robsewell.com/powershell-snippets-a-great-learning-tool/" target="_blank" rel="noopener"
+>my previous post&lt;/a> I started at –95 so that all the identity keys incremented in a real-life manner oldest to newest.&lt;/p>
+&lt;pre>&lt;code>$x = -98
+while ($x -le 0)
+{
+$Date = (get-date).AddDays($x).ToString('yyyy-MM-dd')
+foreach($Server in $Servers)
+{
+foreach ($Drive in $Drives)
+{
+&lt;/code>&lt;/pre>
+&lt;p>I could then use the while loop to generate data for each day and loop through each server and each drive and generate the T-SQL but I wanted more!&lt;/p>
+&lt;p>I wanted to generate some random numbers for the free space available for each drive. I used the &lt;a class="link" href="http://technet.microsoft.com/en-us/library/hh849905.aspx" target="_blank" rel="noopener"
+>Get-Random cmdlet&lt;/a> If you are going to use it make sure you read &lt;a class="link" href="http://www.vtesseract.com/post/15440295910/a-get-random-gotcha-powershell-how-i-was-robbed" target="_blank" rel="noopener"
+>this post&lt;/a> to make sure that you don’t get caught by the gotcha. I decided to set the free space for my OS,Data and Log Files to somewhere between 70 and 3 Gb free as in this imaginary scenario these drives are carefully monitored and the data and log file sizes under the control of a careful DBA but still able to go below thresholds.&lt;/p>
+&lt;pre>&lt;code>if($Drive -eq 'C')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+&lt;/code>&lt;/pre>
+&lt;p>I set the TempDB drive to have either 4,7 or 11 Gb free so that i can try to colour code my reports depending on values and if one field only has three values it makes it simpler to verify.&lt;/p>
+&lt;p>I set the Backup Drive to somewhere between 50 and 0 so that I will hit 0 sometimes!!&lt;/p>
+&lt;p>Here is the full script. It generated 4500 T-SQL statements in just under 16 seconds&lt;/p>
+&lt;pre>&lt;code>$Servers = 'Server1','Server2','Server3','Server4','Server5','Server6','Server7','Server8','Server9','Server10'
+$Drives = 'C','D','E','F','G'
+$CDriveCapacity = 100
+$DDriveCapacity = 50
+$EDriveCapacity = 200
+$FDriveCapacity = 200
+$GDriveCapacity = 500
+$x = -98
+while ($x -le 0)
+{
+$Date = (get-date).AddDays($x).ToString('yyyy-MM-dd')
+foreach($Server in $Servers)
+{
+foreach ($Drive in $Drives)
+{
+if($Drive -eq 'C')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$CDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'D')
+{
+$Free = Get-Random -InputObject 4,7,11
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$DDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'E')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$EDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'F')
+{
+$Free = Get-Random -Maximum 70 -Minimum 3
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$FDriveCapacity','$Free'&amp;amp;quot;
+}
+elseif($Drive -eq 'G')
+{
+$Free = Get-Random -Maximum 50 -Minimum 0
+Write-Host &amp;amp;quot;EXECUTE \[dbo\].\[usp\_Insert\_DriveSpace\] '$Server','$Drive','$Date','$GDriveCapacity','$Free'&amp;amp;quot;
+}
+}
+}
+$X++
+}
+&lt;/code>&lt;/pre>
+&lt;p>Once it had run I simply copied the output into SSMS and was on my way&lt;/p></description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p> &lt;/p>
+&lt;p>Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a> and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+>#SQLSatExeter&lt;/a> on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p>
+&lt;p>In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p>
+&lt;h4 id="sql-saturday-pre-cons-are-exceptional-value">SQL SATURDAY PRE-CONS ARE EXCEPTIONAL VALUE
+&lt;/h4>&lt;p>It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry &lt;a class="link" href="https://twitter.com/@mrdenny" target="_blank" rel="noopener"
+>@mrdenny&lt;/a>. The conversation went along the lines of&lt;/p>
+&lt;p>“I want to go to this training session being delivered by this guy. &lt;a class="link" href="https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link to MVP page&lt;/a>. It’s £150 and is in Exeter so no other costs required”&lt;/p>
+&lt;p>My boss – “OK”&lt;/p>
+&lt;p>Of course there was a little more fun and games to be had with the payment but it was easy for me to get training sorted and £150 is not going to break the training budget.&lt;/p>
+&lt;p>Looking back through my notes from the session today I realise quite how much I have taken from it into my role at work. I can’t really comment which and what though that wouldn’t be good security!!&lt;/p>
+&lt;p>I remember an enjoyable day with plenty of technical learning, a lot of questions and answers and plenty of laughs as well. But more than that was the opportunity to mix with other professionals and talk with them. During the breaks and at lunch there were plenty of opportunities to chew the fat, learn how others do things, make new friends and put faces to twitter handles. (NOTE : I do look pretty much like my &lt;a class="link" href="https://pbs.twimg.com/profile_images/75950380/n675059923_1450.jpg" target="_blank" rel="noopener"
+>twitter profile picture&lt;/a> so if you see me at SQL Community events I expect you to come up and say hi, that&amp;rsquo;s part of the benefit of attending these events, having a good natter)&lt;/p>
+&lt;p>Take a look at the end of this post for details of 2014 Pre-Cons&lt;/p>
+&lt;h4 id="sql-saturday--cant-get-cheaper-than-free">SQL SATURDAY – CAN’T GET CHEAPER THAN FREE
+&lt;/h4>&lt;p>SQL Saturdays are FREE&lt;/p>
+&lt;p>SQL Saturdays offer sessions from internationally renowned and local SQL speakers on subjects relevant to you and your job, your future career, your development plan or just to challenge yourself by learning about something outside of your comfort zone. For Nothing. Add in the networking opportunities, the prizes from the sponsors, (if you were at Exeter this year the beer and the pasty) and if you added it up its a sizeable investment in yourself, your career and your development (did I mention a free beer and pasty?)&lt;/p>
+&lt;p>NOT BAD FOR FREE!!&lt;/p>
+&lt;p>To enable that, SQL Saturday organisers have to go out and talk sponsors into putting their hands into their pockets. They will only do that if it is worthwhile to them. You can make it easier for the organisers by going and spending time with the sponsors during the breaks, chatting with them and giving them your details. Also, if you choose to use one of their products please tell the sponsors you spoke to them at a SQL Saturday. They are (usually) data professionals who will record that and use that to make future decisions which will we hope include sponsoring SQL Saturdays.&lt;/p>
+&lt;p>This year on the Saturday I went to the following sessions&lt;/p>
+&lt;p>A temporary fix for a short term problem by Ian Meade Advanced SQL Server 2012 HA and DR Architectures by Christian Bolton Busting common T-SQL myths by Dave Morrison Power View and the Cube by Régis Baccaro Natural Born Killers, performance issues to avoid by Richard Douglas Tracking server performance without slowing it down by Jonathan Allen which I also Room Monitored Increasing Business and IT collaboration by Chris Testa-O&amp;rsquo;Neill&lt;/p>
+&lt;p>It was a really good day. I learnt so much from all those knowledgeable and talented people. It really kicked me on in my development at work. I was able to take from each of those sessions and use that knowledge to do my job better and I made new friends and new contacts. Just going back to my notes today has reminded me of something that I need to look into for work.
+Some of the conversations I have had at events this year have been fascinating - learning how other people do the same thing you do in a completely different but equally valid way,  problem-solving with a different set and type of minds than the ones at MyWork, laughing at the same things and moaning about similar frustrations. All have been both entertaining and rewarding and I think are worth mentioning as things I enjoyed about going to SQL Community events this year and play a part in the reason I shall continue to go to them (Just hope my boss doesn&amp;rsquo;t read this and think he won’t have to pay as I will go anyway!)&lt;/p>
+&lt;p>It’s busy and hectic, the sessions come along thick and fast and there are lots of people around to talk to. I wish I had made use of the SQL Saturday mobile phone app and I definitely recommend researching ahead of time and planning your day out.&lt;/p>
+&lt;p>This years sessions have not been decided yet but I have seen some of the submissions and there are some fabulous sessions there. You could also submit a session yourself. Choosing the sessions will be tough, but we want to offer the opportunity to speak to as many people as possible both new and experienced speakers.&lt;/p>
+&lt;p>You can submit your sessions at this link &lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/callforspeakers.aspx&lt;/a>&lt;/p>
+&lt;h4 id="round-up-sql-saturday-exeter-why-wouldnt-you-come">ROUND-UP SQL SATURDAY EXETER WHY WOULDN’T YOU COME
+&lt;/h4>&lt;p>For a newbie, as I was last time, SQL Saturday Exeter was a revelation.&lt;/p>
+&lt;p>An opportunity to learn without spending thousands of my own or MyWorks money to sit in a lecture room and listen to a trainer.&lt;/p>
+&lt;p>A chance to develop my understanding in a friendly environment amongst my peers where I could ask questions.&lt;/p>
+&lt;p>A place to meet new people and build relationships who have helped me with situations at work throughout the year. I reckon I&amp;rsquo;m in credit already&lt;/p>
+&lt;p>This year I have attended SQL Bits and SQL Saturday Cambridge and this month I shall be at SQL Relay in Cardiff and in Bristol. That all started with SQL Saturday 194 in Exeter 2013&lt;/p>
+&lt;h4 id="what-about-next-years-sql-saturday-exeter">WHAT ABOUT NEXT YEARS SQL SATURDAY EXETER?
+&lt;/h4>&lt;p>Next years SQL Saturday in Exeter, SQL Saturday #269, will be held at the same place - &lt;a class="link" href="http://www.jurysinns.com/hotels/exeter" target="_blank" rel="noopener"
+>Jury’s Inn Hotel Exeter&lt;/a> on March 21/22nd 2014.&lt;/p>
+&lt;p>We had such amazing submissions for our pre-cons that we have had to find more rooms to be able to fit them all in.. You can see for yourself the quality of the sessions and speakers for SQL Saturday Exeter 2014 at the following link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>What do you think? I want to split myself into 8 and go to every one!&lt;/p>
+&lt;h4 id="what-should-you-do-now">WHAT SHOULD YOU DO NOW?
+&lt;/h4>&lt;p>I suggest that you should book Saturday 22nd March 2014 out in your calendar right this minute. Done that? Good.&lt;/p>
+&lt;p>Now go to this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/&lt;/a>&lt;/p>
+&lt;p>and register for FREE to attend and let us know &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a>&lt;/p>
+&lt;p>Next make yourself a coffee (Other beverages are available) and head to the pre-con page&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>This bit is up to you, the choice is hard. I can’t tell you which one of our eight fabulous sessions you want to go to. It’s not for me to say which amazing speaker you want to spend a day with for a bargain price but if you need further info please get in touch and we will try and help. Unfortunately our human cloning experiment is not stable enough to allow you to go to more than one!&lt;/p>
+&lt;p>Then, let me know you have done so and come and say hi when you are here.&lt;/p></description></item><item><title>12 Things I learnt at SQLBits XI</title><link>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</guid><description>&lt;ul>
+&lt;li>
+&lt;h3 id="the-quality-of-the-speakers-and-sessions-is-exceptional">The quality of the speakers and sessions is exceptional
+&lt;/h3>&lt;p>&lt;a class="link" href="http://sqlbits.com/information/Agenda.aspx" target="_blank" rel="noopener"
+>http://sqlbits.com/information/Agenda.aspx&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="the-helpers-are-awesome">The Helpers are awesome
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001_thumb.jpg?resize=313%2C502"
+loading="lazy"
+alt="clip_image001"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="often-sessions-fill-up-very-quickly--get-there-early">Often Sessions fill up very quickly – Get there early
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="http://t.co/y2S9IDnama" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image002.jpg?resize=372%2C211"
+loading="lazy"
+alt="clip_image002"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="the-guidebook-app-is-pretty-good-but-with-a-map-it-would-be-better">The GuideBook app is pretty good but with a map it would be better
+&lt;/h3>&lt;p>&lt;a class="link" href="http://guidebook.com/" target="_blank" rel="noopener"
+>http://guidebook.com/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="you-can-learn-as-much-outside-of-the-sessions-as-you-can-in-them">You can learn as much outside of the sessions as you can in them
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/lh6.googleusercontent.com/-3d8PCx0AlFA/UYfqxH0fHhI/AAAAAAAAd-E/k_EnX5cpOZY/w960-h641-no/DSC_5670.JPG?resize=622%2C415&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="there-are-amazing-prizes">There are amazing prizes
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/photo.php?fbid=599765410034832&amp;amp;set=pb.330145840330125.-2207520000.1367904819.&amp;amp;type=3&amp;amp;theater" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-snc6/602577_599765410034832_674054200_n.jpg?resize=616%2C392&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>A LEGO R2D2 !!!&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="bring-your-sense-of-humour">Bring your sense of humour
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="http://sphotos-a.ak.fbcdn.net/hphotos-ak-prn1/945206_599117553432951_1586348603_n.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sphotos-a.ak.fbcdn.net/hphotos-ak-prn1/945206_599117553432951_1586348603_n.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://sphotos-b.ak.fbcdn.net/hphotos-ak-ash3/603597_599117663432940_27947956_n.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sphotos-b.ak.fbcdn.net/hphotos-ak-ash3/603597_599117663432940_27947956_n.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="the-sql-community-contains-the-most-gracious-and-generous-willing-to-help-people">The SQL community contains the most gracious and generous, willing to help people
+&lt;/h3>&lt;/li>
+&lt;li>
+&lt;h3 id="you-can-connect-with-your-user-group-and-get-a-mini-sql-bits-every-month">You can connect with your user group and get a mini SQL Bits every month
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>Find your User Group Here &lt;a class="link" href="http://sqlsouthwest.co.uk/national_ug.htm" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/national_ug.htm&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="if-there-is-no-user-group-in-your-area-people-will-help-you-to-start-one">If there is no user group in your area people will help you to start one
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>RT @&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>fatherjack&lt;/a> Interesting chat about a potential new user group in the uk. Anyone around Newcastle area looking for some free training?&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="every-session-is-videoed-and-will-be-available-online-for-free">Every session is videoed and will be available online. For free.
+&lt;/h3>&lt;/li>
+&lt;li>
+&lt;h3 id="you-will-learn-and-have-fun">You will learn and have fun
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>Too awesome for words! “@&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>justjonlevett&lt;/a>: Lego Server! @&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>fusionio&lt;/a> &lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>&lt;a class="link" href="http://t.co/bhxPaTIq4K" target="_blank" rel="noopener"
+>pic.twitter.com/bhxPaTIq4K&lt;/a>”&lt;/p>
+&lt;h3 id="more-blogs-about-sql-bits-xi-and-photos">More blogs about SQL Bits XI and Photos
+&lt;/h3>&lt;p>SQL Bits Facebook &lt;a class="link" href="https://www.facebook.com/SQLBits" target="_blank" rel="noopener"
+>https://www.facebook.com/SQLBits&lt;/a>&lt;/p>
+&lt;p>Roger Van Unen Gallery &lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+>https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577&lt;/a>&lt;/p>
+&lt;p>JR’s Gallery &lt;a class="link" href="https://skydrive.live.com/?cid=7b73b60f4c7d77c9&amp;amp;id=7B73B60F4C7D77C9%212222" target="_blank" rel="noopener"
+>https://skydrive.live.com/?cid=7b73b60f4c7d77c9&amp;amp;id=7B73B60F4C7D77C9%212222&lt;/a>&lt;/p>
+&lt;p>Steve Jones Blog &lt;a class="link" href="http://voiceofthedba.wordpress.com/2013/05/06/fun-at-sql-bits/" target="_blank" rel="noopener"
+>http://voiceofthedba.wordpress.com/2013/05/06/fun-at-sql-bits/&lt;/a>&lt;/p>
+&lt;p>Chris Webbs Blog &lt;a class="link" href="http://cwebbbi.wordpress.com/2013/05/05/sqlbits-xi-summary/" target="_blank" rel="noopener"
+>http://cwebbbi.wordpress.com/2013/05/05/sqlbits-xi-summary/&lt;/a>&lt;/p>
+&lt;p>Find more from the Facebook Page or &lt;a class="link" href="https://twitter.com/search?q=%23sqlbits&amp;amp;src=typd" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>&lt;/p>
+&lt;p>Finally a BIG Thank you to all these people &lt;a class="link" href="http://sqlbits.com/about/WhosWho.aspx" target="_blank" rel="noopener"
+>http://sqlbits.com/about/WhosWho.aspx&lt;/a>&lt;/p>
+&lt;p>and the fantastic helpers without whom SQL Bits would never happen&lt;/p>
+&lt;p>Till Next year&lt;/p></description></item></channel></rss>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Slovenia on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/slovenia/</link><description>Recent content in Slovenia on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/slovenia/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying a Windows Data Science Virtual Machine to Azure with PowerShell easily</title><link>https://blog.robsewell.com/blog/deploying-a-windows-data-science-virtual-machine-to-azure-with-powershell-easily/</link><pubDate>Sun, 18 Dec 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/deploying-a-windows-data-science-virtual-machine-to-azure-with-powershell-easily/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/rdp-file.png" alt="Featured image of post Deploying a Windows Data Science Virtual Machine to Azure with PowerShell easily" />&lt;p>This weekend (10 December 2016), I went to Slovenia for a &lt;a class="link" href="http://www.sqlsaturday.com/567/eventhome.aspx" target="_blank" rel="noopener"
+>SQL Saturday&lt;/a>. As always, it was an amazing event well organised by &lt;a class="link" href="https://twitter.com/MladenPrajdic" target="_blank" rel="noopener"
+>Mladen Prajdic&lt;/a>, &lt;a class="link" href="http://sqlblog.com/blogs/dejan_sarka/default.aspx" target="_blank" rel="noopener"
+>Dejan Sarka&lt;/a>, and &lt;a class="link" href="https://twitter.com/MatijaLah" target="_blank" rel="noopener"
+>Matija Lah&lt;/a> in a fabulous setting amongst fabulous scenery. I highly recommend it and, also, &lt;a class="link" href="https://en.wikipedia.org/wiki/Ljubljana" target="_blank" rel="noopener"
+>Ljubljana&lt;/a>  is a wonderful place to be in December with all the lights and markets.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/wp_20161209_19_21_06_pro.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/wp_20161209_19_21_06_pro.jpg"
+loading="lazy"
+alt="WP_20161209_19_21_06_Pro.jpg"
+>&lt;/a>&lt;/p>
+&lt;p>Whilst I was there I was asked by someone if you could deploy data science virtual machines in Azure with PowerShell. I said I was sure that it could be done and agreed I would write a blog post, so here it is.&lt;/p>
+&lt;p>According to the &lt;a class="link" href="https://azure.microsoft.com/en-gb/marketplace/partners/microsoft-ads/standard-data-science-vm/" target="_blank" rel="noopener"
+>Azure documentation&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>The Data Science Virtual Machine running on a Windows Server 2012 contains popular tools for data exploration, modeling and development activities. The main tools include Microsoft R Server Developer Edition (An enterprise ready scalable R framework) , Anaconda Python distribution, Jupyter notebooks for Python and R, Visual Studio Community Edition with Python, R and node.js tools, Power BI desktop, SQL Server 2016 Developer edition including support In-Database analytics using Microsoft R Server. It also includes open source deep learning tools like Microsoft Cognitive Toolkit (CNTK 2.0) and mxnet; ML algorithms like xgboost, Vowpal Wabbit. The Azure SDK and libraries on the VM allows you to build your applications using various services in the cloud that are part of the Cortana Analytics Suite which includes Azure Machine Learning, Azure data factory, Stream Analytics and SQL Datawarehouse, Hadoop, Data Lake, Spark and more.&lt;/p>
+&lt;/blockquote>
+&lt;p>I have created a function to wrap around the process to make it easier for none PowerShell  people to do this. There are a series of steps to follow below and you should be able to create a machine in about 10 minutes once you have completed the pre-requisites.&lt;/p>
+&lt;h2 id="enable-programmatically-deployment">Enable Programmatically Deployment
+&lt;/h2>&lt;p>First, an annoyance. To be able to deploy Data Science virtual machines in Azure programmatically  you first have to login to the portal and click some buttons.&lt;/p>
+&lt;p>In the &lt;a class="link" href="https://portal.aure.com" target="_blank" rel="noopener"
+>Portal&lt;/a> click new and then marketplace and then search for data science. Choose the Windows Data Science Machine and under the blue Create button you will see a link which says “Want to deploy programmatically? Get started” Clicking this will lead to the following blade.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/set-up-programmatically1.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/set-up-programmatically1.png"
+loading="lazy"
+alt="set-up-programmatically"
+>&lt;/a>&lt;/p>
+&lt;p>Click Enable and then save and you then move to PowerShell 🙂&lt;/p>
+&lt;h2 id="azure-powershell-cmdlets">Azure PowerShell Cmdlets
+&lt;/h2>&lt;p>Follow the instructions &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/azureps-cmdlets-docs/" target="_blank" rel="noopener"
+>here&lt;/a> to install the Azure PowerShell modules. In the examples you see here I am using Windows 10 and PowerShell version 5.1.14393.479 and I installed the Azure modules using the Install-Module method&lt;/p>
+&lt;h2 id="get-the-script">Get the script
+&lt;/h2>&lt;p>To install a data science VM, we’ll use the &lt;code>New-WindowsDataScienceVM.ps1&lt;/code> script. In this script, I’m using version 1.2, but any version of this script published in PowerShell Gallery is fine.&lt;/p>
+&lt;p>To install the &lt;code>New-WindowsDataScienceVM&lt;/code> script from the PowerShell gallery, type:&lt;/p>
+&lt;p>&lt;code>Install-Script New-WindowsDataScienceVM&lt;/code>&lt;/p>
+&lt;p>For  more information about using the PowerShellGet cmdlets to install scripts and modules from PowerShell Gallery, &lt;a class="link" href="https://msdn.microsoft.com/powershell/gallery/readme" target="_blank" rel="noopener"
+>read this page&lt;/a>. The PowerShellGet modules is included in PowerShell 5.0 and later on Windows 10, but you can install PowerShellGet for PowerShell 3.0 and 4.0. If you cannot connect to the gallery or prefer not to install the module, you can also find the &lt;a class="link" href="https://raw.githubusercontent.com/SQLDBAWithABeard/DataScienceVM/master/New-WindowsDataScienceVM.ps1" target="_blank" rel="noopener"
+>script on GitHub&lt;/a>.&lt;/p>
+&lt;h2 id="login-to-azure">Login to Azure
+&lt;/h2>&lt;p>You can login to Azure using the command&lt;/p>
+&lt;p>&lt;code>Login-AzureRMAccount&lt;/code>&lt;/p>
+&lt;p>which will pop-up a prompt for you to log into Azure&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/login.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/login.png"
+loading="lazy"
+alt="login"
+>&lt;/a>&lt;/p>
+&lt;h2 id="enable-simple-mode">Enable Simple Mode
+&lt;/h2>&lt;p>The &lt;code>New-WindowsDataScienceVM&lt;/code> function comes with a &lt;strong>Simple&lt;/strong> switch parameter.&lt;/p>
+&lt;p>If you use &lt;strong>-Simple&lt;/strong>, the function prompts you only for the admin username and password for the virtual machine. It creates a randomly-named, standard_DS1_v2-sized machine in the ukwest data centre with standard, locally redundant storage in a randomly named Resource Group. All of the required objects have random names, too. If that is not what you want, there is more information at the end of this post. I am considering offering a pop-up to choose location in Simple Mode. Let me know here if that would be something you would like&lt;/p>
+&lt;p>To create a simple data science VM, run:&lt;/p>
+&lt;p>&lt;code>New-WindowsDataScienceVM -Simple&lt;/code>&lt;/p>
+&lt;h2 id="enter-local-admin-password">Enter Local Admin Password
+&lt;/h2>&lt;p>When you run the function, it prompts for a local admin username and password to log into the virtual machine. The password must have 3 of the following 1 Upper case, 1 lower case, I special character and 1 number. Don’t lose it, you will need it.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/local-admin.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/local-admin.png"
+loading="lazy"
+alt="Local Admin.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>Grab a cuppa, creating your VM and its resources will take 5 – 10 minutes. (In my testing it reliably took between 7 and 8 minutes)  The screen will look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/deploying.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/deploying.png"
+loading="lazy"
+alt="deploying.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>When the script has finished running you will have deployed a set of resources like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/portal.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/portal.png"
+loading="lazy"
+alt="portal"
+>&lt;/a>&lt;/p>
+&lt;h2 id="login-to-the-virtual-machine">Login to the Virtual Machine
+&lt;/h2>&lt;p>Copy and paste the correct code from the output at the end of the script to launch the RDP session and save the RDP file to your documents folder for later use.&lt;/p>
+&lt;p>Or you can find the Virtual machine name in the portal or by running&lt;/p>
+&lt;p>&lt;code>Get-AzureRmVM -ResourceGroupName &amp;lt;ResourceGroup&amp;gt; | Where-Object {$_.Name -like 'DSVM*'}&lt;/code>&lt;/p>
+&lt;p>You can then use the code below to download a RDP file and log into the virtual machine using this code&lt;/p>
+&lt;p>&lt;code>Get-AzureRmRemoteDesktopFile -ResourceGroupName &amp;lt;ResourceGroup&amp;gt; -Name &amp;lt;VMName&amp;gt;  -LocalPath C:\WIP\DataScienceVM.rdp -Launch&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/rdp-file.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/rdp-file.png"
+loading="lazy"
+alt="rdp file.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>You will need to login with the local admin account you set up previously, which means that you will need to click on more choices and then the &lt;code>machinename\Username&lt;/code>. In this case the machine name is &lt;code>DSVMZIAgd&lt;/code>&lt;/p>
+&lt;p>You can copy the correct Virtual Machine name and Username from the output at the end of the script.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/login-screen.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/login-screen.png"
+loading="lazy"
+alt="login screen.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>If you have forgotten your password, you can reset it in the Portal.&lt;/p>
+&lt;h2 id="enjoy-the-data-science-virtual-machine">Enjoy the Data Science Virtual Machine
+&lt;/h2>&lt;p>You are then logged in and can carry on. Once the Azure PowerShell modules and script are installed you would be able to have a machine up and running within 10 minutes.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/vm-desktop.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/vm-desktop.png"
+loading="lazy"
+alt="vm-desktop"
+>&lt;/a>&lt;/p>
+&lt;h2 id="cleaning-up">Cleaning Up
+&lt;/h2>&lt;p>To remove the resource group and ALL resources in the resource group, including the data science VM, run:&lt;/p>
+&lt;p>&lt;code>Remove-AzureRmResourceGroup -Name &amp;lt;ResourceGroup&amp;gt;  -Force&lt;/code>&lt;/p>
+&lt;p>This will remove ALL resources in that resource group, so be careful if you have deployed anything else.&lt;/p>
+&lt;h2 id="customising-the-deployment">Customising the Deployment
+&lt;/h2>&lt;p>If you want to use different settings for the deployment or want to script the creation of a number of machines, you can run&lt;/p>
+&lt;p>&lt;code>Get-Help New-WindowsDataScienceVM -Full&lt;/code>&lt;/p>
+&lt;p>and see all the options and further examples. Any questions please feel free to comment&lt;/p></description></item></channel></rss>
