@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Permissions on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/permissions/</link><description>Recent content in Permissions on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/permissions/index.xml" rel="self" type="application/rss+xml"/><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Export SQL User Permissions to T-SQL script using PowerShell and dbatools</title><link>https://blog.robsewell.com/blog/export-sql-user-permissions-to-t-sql-script-using-powershell-and-dbatools/</link><pubDate>Mon, 10 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/export-sql-user-permissions-to-t-sql-script-using-powershell-and-dbatools/</guid><description>&lt;p>NOTE - Updated November 2022 for this site and the correct command name.&lt;/p>
+&lt;p>There are times when DBA’s are required to export database user permissions to a file. This may be for a number of reasons. Maybe for DR purposes, for auditing, for transfer to another database or instance. Sometimes we need to create a new user with the same permissions as another user or perhaps nearly the same permissions. I was having a conversation with my good friend and &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+>MVP Cláudio Silva&lt;/a> and we were talking about how &lt;a class="link" href="https://docs.dbatools.io/Export-DbaUser" target="_blank" rel="noopener"
+>Export-DbaUser&lt;/a> from &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> could help in these situations and he suggested that I blogged about it so here it is.&lt;/p>
+&lt;p>The &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> (for those that don’t know) is a PowerShell module written by amazing folks in the community designed to make administrating your SQL Server significantly easier using PowerShell. The instructions for installing it are &lt;a class="link" href="https://dbatools.io/getting-started/" target="_blank" rel="noopener"
+>available here&lt;/a> It comprises of 182 separate commands at present&lt;/p>
+&lt;p>Cláudio wrote &lt;a class="link" href="https://docs.dbatools.io/Export-DbaUser" target="_blank" rel="noopener"
+>Export-DbaUser&lt;/a> to solve a problem. You should always start with Get-Help whenever you are starting to use a new PowerShell command&lt;/p>
+&lt;p>&lt;code>Get-Help Export-DbaUser -ShowWindow&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-get-help.png"
+loading="lazy"
+alt="01 - get help.PNG"
+>&lt;/p>
+&lt;p>The command exports users creation and its permissions to a T-SQL file or host. Export includes user, create and add to role(s), database level permissions, object level permissions and also the Create Role statements for any roles, although the script does not create IF NOT EXISTS statements which would be an improvement. It also excludes the system databases so if you are scripting users who need access to those databases then that needs to be considered. Cláudio is aware of these and is looking at improving the code to remove those limitations.&lt;/p>
+&lt;p>It takes the following parameters&lt;/p>
+&lt;ul>
+&lt;li>SqlInstance&lt;br>
+The SQL Server instance name. SQL Server 2000 and above supported.&lt;/li>
+&lt;li>User&lt;br>
+Export only the specified database user(s). If not specified will export all users from the database(s)&lt;/li>
+&lt;li>DestinationVersion&lt;br>
+Which SQL version the script should be generated using. If not specified will use the current database compatibility level&lt;/li>
+&lt;li>FilePath&lt;br>
+The filepath to write to export the T-SQL.&lt;/li>
+&lt;li>SqlCredential&lt;br>
+Allows you to login to servers using alternative credentials&lt;/li>
+&lt;li>NoClobber&lt;br>
+Do not overwrite the file&lt;/li>
+&lt;li>Append&lt;br>
+Append to the file&lt;/li>
+&lt;li>Databases&lt;br>
+Not in the help but a dynamic parameter allowing you to specify one or many databases&lt;/li>
+&lt;/ul>
+&lt;p>Lets take a look at it in action&lt;/p>
+&lt;p>&lt;code>Export-DbaUser -SqlInstance SQL2016N2 -FilePath C:\temp\SQL2016N2-Users.sql&lt;/code>
+&lt;code>Notepad C:\temp\SQL2016N2-Users.sql&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/02-export-user-server.png"
+loading="lazy"
+alt="02 - Export user server.PNG"
+>&lt;/p>
+&lt;p>Lets take a look at a single database&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Export-DbaUser -SqlInstance SQL2016N2 -FilePath C:\temp\SQL2016N2-Fadetoblack.sql -Databases Fadetoblack
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">notepad C:\temp\SQL2016N2-Fadetoblack.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/03-single-database.png"
+loading="lazy"
+alt="03 single database.PNG"
+>&lt;/p>
+&lt;p>This is so cool and so easy. It is possible to do this in T-SQL. I found this script on &lt;a class="link" href="http://www.sqlservercentral.com/scripts/Security/71562/" target="_blank" rel="noopener"
+>SQLServerCentral&lt;/a> for example which is 262 lines and would then require some mouse action to save to a file&lt;/p>
+&lt;p>We can look at a single user as well. Lets see what Lars Ulrich can see on the FadeToBlack database&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/04-export-lars.png"
+loading="lazy"
+alt="04 - export lars.PNG"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [FadetoBlack]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CREATE USER [UlrichLars] FOR LOGIN [UlrichLars] WITH DEFAULT_SCHEMA=[dbo]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GRANT CONNECT TO [UlrichLars]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DENY INSERT ON [dbo].[Finances] TO [UlrichLars]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DENY SELECT ON [dbo].[RealFinances] TO [UlrichLars]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GRANT SELECT ON [dbo].[Finances] TO [UlrichLars]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So he can select data from the Finances table but cannot insert and cannot read the RealFinances data. Now lets suppose a new manager comes in and he wants to be able to look at the data in this database. As the manager though he wants to be able to read the RealFinances table  and insert into the Finances table. He requests that we add those permissions to the database. We can create the T-SQL for Lars user and then do a find and replace for &lt;code>UlrichLars&lt;/code> with &lt;code>TheManager&lt;/code> , &lt;code>DENY INSERT ON [dbo].[Finances]&lt;/code> with &lt;code>GRANT INSERT ON [dbo].[Finances]&lt;/code> and &lt;code>DENY SELECT ON [dbo].[RealFinances]&lt;/code> with &lt;code>GRANT SELECT ON [dbo].[RealFinances]&lt;/code> and save to a new file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$LarsPermsFile = &amp;#39;C:\temp\SQL2016N2-Lars-Fadetoblack.sql&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ManagerPermsFile = &amp;#39;C:\temp\SQL2016N2-Manager-Fadetoblack.sql&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Export-DbaUser -SqlInstance SQL2016N2 -FilePath $LarsPermsFile -User UlrichLars -Databases Fadetoblack
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ManagerPerms = Get-Content $LarsPermsFile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## replace permissions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ManagerPerms = $ManagerPerms.Replace(&amp;#39;DENY INSERT ON [dbo].[Finances]&amp;#39;,&amp;#39;GRANT INSERT ON [dbo].[Finances]&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ManagerPerms = $ManagerPerms.Replace(&amp;#39;DENY SELECT ON [dbo].[RealFinances]&amp;#39;,&amp;#39;GRANT SELECT ON [dbo].[RealFinances]&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ManagerPerms = $ManagerPerms.Replace(&amp;#39;UlrichLars&amp;#39;,&amp;#39;TheManager&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-Content -path $ManagerPermsFile -Value $ManagerPerms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I will open this in Visual Studio Code Insiders using&lt;/p>
+&lt;p>&lt;code>code-insiders $LarsPermsFile , $ManagerPermsFile&lt;/code>&lt;/p>
+&lt;p>if you are not using the insiders preview remove the “-insiders”&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/05-code-insiders.png"
+loading="lazy"
+alt="05 - code insiders.PNG"
+>&lt;/p>
+&lt;p>You can right click on the Lars file and click select for compare and then right click on the Managers file and select compare with Lars File and get a nice colour coded diff&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/06-compare.gif"
+loading="lazy"
+alt="06 - compare.gif"
+>&lt;/p>
+&lt;p>Perfect, we can run that code and complete the request. When we impersonate Lars we get&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/07-lars.png"
+loading="lazy"
+alt="07 - lars.PNG"
+>&lt;/p>
+&lt;p>but when we run as the manager we get&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/08-the-manager.png"
+loading="lazy"
+alt="08 - the manager.PNG"
+>&lt;/p>
+&lt;p>Excellent! All is well.&lt;/p>
+&lt;p>It turns out that there is another Fadetoblack database on a SQL2000 instance which for reasons lost in time never had its data imported into the newer database. It is still used for reporting purposes. The manager needs to have the same permissions as on the SQL2016N2 instance. Obviously the T-SQL we have just created will not work as that syntax did not exist for SQL 2000 but Cláudio has thought of that too. We can use the DestinationVersion parameter to create the SQL2000 (2005,2008/20008R2,2012,2014,2016) code&lt;/p>
+&lt;p>We just run&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Export-DbaUser -SqlInstance SQL2016N2 -Databases FadetoBlack -User TheManager  -FilePath C:\temp\S
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">QL2016N2-Manager-2000.sql  -DestinationVersion SQLServer2000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Notepad C:\temp\SQL2016N2-Manager-2000.sql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and our SQL2000 compatible code is created&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/09-manager-2000.png"
+loading="lazy"
+alt="09- manager 2000.PNG"
+>&lt;/p>
+&lt;p>Simply awesome. Thank you Cláudio&lt;/p>
+&lt;p>Happy Automating&lt;/p>
+&lt;p>NOTE – The major 1.0 release of dbatools due in the summer 2017 may have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using&lt;/p>
+&lt;p>&lt;code>Get-Module dbatools&lt;/code>&lt;/p>
+&lt;p>and update it using an Administrator PowerShell session with&lt;/p>
+&lt;p>&lt;code>Update-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You may find that you get no output from Update-Module as you have the latest version. If you have not installed the module from the PowerShell Gallery using&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>Then you can use&lt;/p>
+&lt;p>&lt;code>Update-dbatools&lt;/code>&lt;/p></description></item><item><title>Testing SQL Server Access to a share with PowerShell using dbatools</title><link>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</link><pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Installing and upgrading default scripts automation - part one - Introduction</title><link>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</link><pubDate>Mon, 08 Jun 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</guid><description>&lt;p>First I must say thank you to all of the wonderful people who have put time and effort into providing free tools and scripts to enable not only myself but all SQL DBAs to ease their work. For this series I especially thank&lt;/p>
+&lt;ul>
+&lt;li>Brent Ozar - &lt;a class="link" href="http://www.brentozar.com/" target="_blank" rel="noopener"
+>w&lt;/a>|&lt;a class="link" href="https://twitter.com/BrentO" target="_blank" rel="noopener"
+>t&lt;/a>&lt;/li>
+&lt;li>Ola Hallengren - &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>w&lt;/a>&lt;/li>
+&lt;li>Adam Mechanic - &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>b&lt;/a>|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+>t&lt;/a>&lt;/li>
+&lt;li>Jared Zagelbaum - &lt;a class="link" href="https://jaredzagelbaum.wordpress.com/" target="_blank" rel="noopener"
+>b&lt;/a>|&lt;a class="link" href="https://twitter.com/JaredZagelbaum" target="_blank" rel="noopener"
+>t&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>The aim of this series is to share the methodology and the scripts that I have used to resolve this issue.&lt;/p>
+&lt;p>How can I automate the deployment and update of backup, integrity ,index maintenance and troubleshooting scripts as well as other default required scripts to all of the instances under my control and easily target any instances by OS version, SQL version, Environment, System or any other configuration of my choosing&lt;/p>
+&lt;p>This is Part 1 - Introduction I will link to the further posts here as I write them&lt;/p>
+&lt;p>So the scenario that lead to this series is a varied estate of SQL servers and instances where I wanted an automated method of deploying the scripts and being able to target different servers. It needed to be easy to maintain, easy to use and easy to alter. I wanted to be able to update all of the scripts easily when required. I also wanted to automate the install of new instances and ensure that I could ensure that all required scripts were installed and documented.&lt;/p>
+&lt;p>The method of doing this that I chose is just that - Its the way that I chose, whether it will work for you and your estate I don&amp;rsquo;t know but I hope you will find it of benefit. Of course you must test it first. Ensure that you understand what is happening, what it is doing and that that is what you want it to do. If you implement this methodology of installing scripts you will easily be able to start by targeting your Development Server and then gradually rolling it out to any other environments&amp;rsquo; whilst always making sure that you test, monitor and validate prior to moving to the next.&lt;/p>
+&lt;p>I decided that I needed to have a DBA Database to start with. The role of the DBA Database is to be the single source of truth for the instances that are under my control, a source for the location of the scripts that I need to deploy and a place to hold the information that I gather from the servers. It is from this database that I will be able to target the instances as required and set the flags to update the scripts as and when I need to&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/06/agentjob1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/06/agentjob1.png?w=300"
+loading="lazy"
+alt="agentjob"
+>&lt;/a>&lt;/p>
+&lt;p>On that instance I also chose to put the SQL Agent Job that will deploy all of the scripts. This is an important point. The account that you use to run that job whether it is the Agent Service Account or a proxy account will need to have privileges on every instance that you target. It will need to be able to run every script that you wish to target your servers. The privileges it requires are defined by the scripts that you want to run. How that is set up is unique to your environment and your system. I will only say that all errors are logged to the log files and will enable you to resolve these issues. You should always use the principle of least privilege required to get the job done. Domain and Sys Admin are not really the best answer here :-)&lt;/p>
+&lt;p>I also created 2 further Agent Jobs to gather Windows and SQL Information from the servers. These jobs target all the instances and servers in the DBA Database and gather information centrally about Windows and SQL configurations making it easy to provide that information to any other teams that require it. I am always looking for methods to reduce the workload on DBAs and enabling people (using the correct permissions) to gather the information that they require by self-service is very beneficial&lt;/p>
+&lt;p>Documentation and logging about the scripts are provided by the log files stored as text files to troubleshoot the script and also documented in the Change log table in a DBA database on each instance which I blogged about &lt;a class="link" href="http://sqldbawithabeard.com/2014/12/08/making-a-change-log-easier-with-PowerShell/" target="_blank" rel="noopener"
+>previously here&lt;/a>&lt;/p>
+&lt;p>The last thing was the script which needed to be modular and easy to add to and amend.&lt;/p>
+&lt;p>Throughout this series of blog posts I will share and expand on the methods I used to do this. If you have any questions at any point please feel free to ask either by commenting on the post or by contacting me using the methods on my About Me page&lt;/p></description></item><item><title>Listing the SQL Server SysAdmins With PowerShell</title><link>https://blog.robsewell.com/blog/listing-the-sql-server-sysadmins-with-powershell/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/listing-the-sql-server-sysadmins-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg" alt="Featured image of post Listing the SQL Server SysAdmins With PowerShell" />&lt;p>A very short blog today just to pass on this little script.&lt;/p>
+&lt;p>I was required to list all of the SysAdmins across a large estate. Obviously I turned to PowerShell 🙂&lt;/p>
+&lt;p>I iterated through my server list collection and then created a server SMO object and used the EnumServerRoleMembers method to display all of the sysadmin members&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg"
+loading="lazy"
+alt="2014-04-12_152433"
+>&lt;/a>&lt;/p>
+&lt;p>This will work on SQL2000 – SQL2012. You can see how you can easily change the rolename in the script to enumerate other server roles.&lt;/p>
+&lt;p>Another way you could do it is to use the query&lt;/p>
+&lt;pre>&lt;code>SELECT c.name AS Sysadmin_Server_Role_Members
+FROM sys.server_principals a
+INNER JOIN sys.server_role_members b
+ON a.principal_id = b.role_principal_id AND a.type = 'R' AND a.name ='sysadmin'
+INNER JOIN sys.server_principals c
+ON b.member_principal_id = c.principal_id
+&lt;/code>&lt;/pre>
+&lt;p>and pass that with &lt;code>Invoke-SQLCMD&lt;/code> through to every server (if you had to use Powershell 🙂 ). That query won’t work with SQL 2000 though&lt;/p></description></item><item><title>Checking Drive Sizes with PowerShell</title><link>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</link><pubDate>Fri, 06 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image31.png"
+loading="lazy"
+alt="image"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image32.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image32.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and here are the results from my Azure VM. (See &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>My previous posts on how to create your own Azure VMs with PowerShell&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image33.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image33.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>#############################################################################
+#
+# NAME: Show-DriveSizes.ps1
+# AUTHOR: Rob Sewell http://sqldbawiththebeard.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for displaying drivesizes
+# USAGE: Show-DriveSizes server1
+###########################################
+Function Show-DriveSizes ([string]$Server) {
+$Date = Get-Date
+Write-Host -foregroundcolor DarkBlue -backgroundcolor yellow &amp;quot;$Server - - $Date&amp;quot;
+#interogate wmi service and return disk information
+$disks = Get-WmiObject -Class Win32_logicaldisk -Filter &amp;quot;Drivetype=3&amp;quot; -ComputerName $Server
+$diskData = $disks | Select DeviceID, VolumeName ,
+# select size in Gbs as int and label it SizeGb
+@{Name = &amp;quot;SizeGB&amp;quot;; Expression = {$_.size / 1GB -as [int]}},
+# select freespace in Gbs and label it FreeGb and two deciaml places
+@{Name = &amp;quot;FreeGB&amp;quot;; Expression = {&amp;quot;{0:N2}&amp;quot; -f ($_.Freespace / 1GB)}},
+# select freespace as percentage two deciaml places and label it PercentFree
+@{Name = &amp;quot;PercentFree&amp;quot;; Expression = {&amp;quot;{0:P2}&amp;quot; -f ($_.Freespace / $_. Size)}}
+$diskdata
+}
+&lt;/code>&lt;/pre></description></item><item><title>SQL login object permissions via PowerShell</title><link>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</link><pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-SQLServerPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Enumerating Server and Database Role permissions or object permissions
+#
+# USAGE Show-SQLServerPermissions Server1
+# ————————————————————————
+Function Show-SQLServerPermissions ($SQLServer) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$selected = &amp;quot;&amp;quot;
+$selected = Read-Host &amp;quot;Enter Selection
+1.) Role Membership or
+2.) Object Permissions&amp;quot;
+Switch ($Selected) {
+1 {
+Write-Host &amp;quot;#### Server Role Membership on $Server ############################################## `n`n&amp;quot;
+foreach ($Role in $Server.Roles) {
+if ($Role.EnumServerRoleMembers().count -ne 0) {
+Write-Host &amp;quot;############### Server Role Membership for $role on $Server #########################`n&amp;quot;
+$Role.EnumServerRoleMembers()
+}
+}
+Write-Host &amp;quot;################################################################ ######################&amp;quot;
+Write-Host &amp;quot;################################################################ ######################`n `n `n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### $Database Permissions on $Server ###############################################`n&amp;quot;
+foreach ($role in $Database.Roles) {
+if ($Role.EnumMembers().count -ne 0) {
+Write-Host &amp;quot;########### Database Role Permissions for $Database $Role on $Server ################`n&amp;quot;
+$Role.EnumMembers()
+}
+}
+}
+}
+2 {
+Write-Host &amp;quot;################## Object Permissions on $Server ################################`n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### Object Permissions on $Database on $Server #################################`n&amp;quot;
+foreach ($user in $database.Users) {
+foreach ($databasePermission in $database. EnumDatabasePermissions($user.Name)) {
+Write-Host $databasePermission.PermissionState $databasePermission.PermissionType &amp;quot;TO&amp;quot; $databasePermission.Grantee
+}
+foreach ($objectPermission in $database. EnumObjectPermissions($user.Name)) {
+Write-Host $objectPermission.PermissionState $objectPermission.PermissionType &amp;quot;ON&amp;quot; $objectPermission.ObjectName &amp;quot;TO&amp;quot; $objectPermission. Grantee
+}
+}
+}
+}
+}
+}
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted --></description></item><item><title>Checking SQL Server User Role Membership with PowerShell</title><link>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</link><pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-SQLUserPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function to Display the permissions a user has across the estate
+# NOTE - Will not show permissions granted through AD Group Membership
+#
+# USAGE Show-SQLUserPermissions DBAwithaBeard
+Function Show-SQLUserPermissions ($user)
+{
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | out-null
+# Suppress Error messages - They will be displayed at the end
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+#cls
+$Query = @&amp;quot;
+SELECT
+IL.ServerName
+FROM [dbo].[InstanceList] IL
+WHERE NotContactable = 0
+AND Inactive = 0
+AND DatabaseEngine = 'Microsoft SQL Server'
+&amp;quot;@
+Try
+{
+$Results = (Invoke-Sqlcmd -ServerInstance HMDBS02 -Database DBADatabase -Query $query -ErrorAction Stop).ServerName
+}
+catch
+{
+Write-Error &amp;quot;Unable to Connect to the DBADatabase - Please Check&amp;quot;
+}
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$user&amp;quot;,&amp;quot;DOMAIN3\$user&amp;quot;, &amp;quot;DOMAIN4\$user&amp;quot; ,&amp;quot;$user&amp;quot; )
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;Logins for `n $logins displayed below&amp;quot;
+Write-Output &amp;quot;################################# `n&amp;quot;
+#loop through each server and each database and display usernames, servers and databases
+Write-Output &amp;quot; Server Logins&amp;quot;
+foreach($server in $Results)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($login in $logins)
+{
+if($srv.Logins.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $login &amp;quot;
+foreach ($Role in $Srv.Roles)
+{
+$RoleMembers = $Role. EnumServerRoleMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role on $Server&amp;quot;
+}
+}
+}
+else
+{
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;`n Database Logins&amp;quot;
+foreach($server in $servers)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($database in $srv.Databases)
+{
+foreach($login in $logins)
+{
+if($database.Users.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $database , $login &amp;quot;
+foreach($role in $Database.Roles)
+{
+$RoleMembers = $Role.EnumMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role Role on $Database on $Server&amp;quot;
+}
+}
+}
+else
+{
+continue
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Finished - If there are no logins displayed above then no logins were found!&amp;quot;
+Write-Output &amp;quot;#########################################&amp;quot;
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows-Azure on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/windows-azure/</link><description>Recent content in Windows-Azure on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/windows-azure/index.xml" rel="self" type="application/rss+xml"/><item><title>Uploading a Source Folder to Azure File Storage</title><link>https://blog.robsewell.com/blog/uploading-a-source-folder-to-azure-file-storage/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/uploading-a-source-folder-to-azure-file-storage/</guid><description>&lt;p>Azure File Storage enables you to present an Azure Storage Account to your IaaS VMs as a share using SMB. You can fid out further details here&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/%c2%a0" title="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/ "
+target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/&lt;/a> &lt;/p>
+&lt;p>Once you have created your Azure File Storage Account and connected your Azure Virtual Machines to it, you may need to upload data from your premises into the storage to enable it to be accessed by the Virtual Machines&lt;/p>
+&lt;p>To accomplish this I wrote a function and called it Upload-ToAzureFileStorage&lt;/p>
+&lt;p>I started by creating a source folder and files to test&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New2&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New3&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New4&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New5&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">b&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">c&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">d&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">1&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">2&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">3&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">4&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">Directory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New2&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New3&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New4&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New5&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">1&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">2&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">3&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Item&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">4&lt;/span>\\&lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ItemType&lt;/span> &lt;span class="ne">File&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we needed to connect to the subscription, get the storage account access key and create a context to store them&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#Select Azure Subscription
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Get the Storage Account Key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$StorageAccountKey = (Get-AzureStorageKey -StorageAccountName $StorageAccountName).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># create a context for account and key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ctx=New-AzureStorageContext $StorageAccountName $StorageAccountKey
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806403.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Get-AzureStorageShare  cmdlet&lt;/a> shows the shares available for the context so we can check if the share exists&lt;/p>
+&lt;p>&lt;code>$S = Get-AzureStorageShare -Context $ctx -ErrorAction SilentlyContinue|Where-Object {$\_.Name -eq $AzureShare}&lt;/code>&lt;/p>
+&lt;p>and if it doesnt exist create it using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806378.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageShare&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$s = New-AzureStorageShare $AzureShare -Context $ctx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>For the sake only of doing it a different way we can check for existence of the directory in Azure File Storage that we are going to upload the files to like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$d = Get-AzureStorageFile -Share $s -ErrorAction SilentlyContinue|select Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($d.Name -notcontains $AzureDirectory)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and if it doesnt exist create it using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806385.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageDirectory&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$d = New-AzureStorageDirectory -Share $s -Path $AzureDirectory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Now that we have the directory created in the storage account we need to create any subfolders. First get the folders&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">\# get all the folders in the source directory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Folders = Get-ChildItem -Path $Source -Directory -Recurse
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We can then iterate through them using a foreach loop. If we do this and select the FullName property the results will be&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New2&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New3&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New4&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New5&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">b&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">c&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">d&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">1&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">2&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">3&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">:&lt;/span>\\&lt;span class="n">temp&lt;/span>\\&lt;span class="n">TestUpload&lt;/span>\\&lt;span class="n">New1&lt;/span>\\&lt;span class="n">list&lt;/span>\\&lt;span class="n">a&lt;/span>\\&lt;span class="mi">4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>but to create new folders we need to remove the &lt;code>&amp;quot;C:\\temp\\TestUpload&amp;quot;&lt;/code> and replace it with the Directory name in Azure. I chose to do this as follows using the substring method and the length of the source folder path.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach($Folder in $Folders)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $f = ($Folder.FullName).Substring(($source.Length))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Path = $AzureDirectory + $f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and tested that the results came out as I wanted&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">AppName\\New1 AppName\\New2 AppName\\New3 AppName\\New4 AppName\\New5 AppName\\New1\\list AppName\\New1\\list\\a AppName\\New1\\list\\b AppName\\New1\\list\\c AppName\\New1\\list\\d AppName\\New1\\list\\a\\1 AppName\\New1\\list\\a\\2 AppName\\New1\\list\\a\\3 AppName\\New1\\list\\a\\4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I could then create the new folders in azure using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806385.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>New-AzureStorageDirectory&lt;/a> again&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">New-AzureStorageDirectory -Share $s -Path $Path -ErrorAction SilentlyContinue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I followed the same process with the files&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$files = Get-ChildItem -Path $Source -Recurse -File&amp;lt;/pre&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;pre&amp;gt;foreach($File in $Files)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $f = ($file.FullName).Substring(($Source.Length))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Path = $AzureDirectory + $f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then created the files using &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn806404.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Set-AzureStorageFileContent&lt;/a> this has a -Force and a -Confirm switch and I added those into my function by using a [switch] Parameter&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#upload the files to the storage&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Confirm&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Set&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">AzureStorageFileContent&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Share&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Source&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Confirm&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Set&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">AzureStorageFileContent&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Share&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Source&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FullName&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">Path&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Force&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can download the function from the Script Center&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe&lt;/a>&lt;/p>
+&lt;p>As also, any comments or queries are welcome and obviously the internet lies so please understand and test all code you find before using it in production&lt;/p></description></item></channel></rss>

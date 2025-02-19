@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Files on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/files/</link><description>Recent content in Files on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/files/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting SQL Server File Sizes and Space Used with dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-server-file-sizes-and-space-used-with-dbatools/</link><pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-server-file-sizes-and-space-used-with-dbatools/</guid><description>&lt;p>I read a great blog post about answering the question &lt;a class="link" href="https://sqlbuffet.wordpress.com/2017/03/08/how-big-is-the-database-how-to-answer-that-annoying-question/" target="_blank" rel="noopener"
+>how big is the database using T-SQL on SQL Buffet&lt;/a> and wondered how much I could do with the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>&lt;/p>
+&lt;p>The dbatools module (for those that don’t know) is a PowerShell module written by amazing folks in the community designed to make administrating your SQL Server significantly easier using PowerShell. The instructions for installing it are &lt;a class="link" href="https://dbatools.io/getting-started/" target="_blank" rel="noopener"
+>available here&lt;/a> It comprises of 182 separate commands at present (11 March 2017 Version 0.8.938)&lt;/p>
+&lt;p>I know that there is a &lt;a class="link" href="https://dbatools.io/functions/get-dbadatabasefreespace/" target="_blank" rel="noopener"
+>Get-DBADatabaseFreeSpace Command&lt;/a> written by Mike Fal &lt;a class="link" href="http://mikefal.net" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/mike_fal" target="_blank" rel="noopener"
+>t&lt;/a> and using &lt;a class="link" href="http://www.sqlskills.com/blogs/glenn/category/dmv-queries/" target="_blank" rel="noopener"
+>Glenn Berry’s diagnostic queries&lt;/a>)&lt;/p>
+&lt;p>First thing as always is to look at the help&lt;/p>
+&lt;p>&lt;code> Get-Help Get-DbaDatabaseFreespace -ShowWindow&lt;/code>&lt;/p>
+&lt;p>which will show you the help for the command and some examples&lt;/p>
+&lt;p>Lets look at the details for a single instance&lt;/p>
+&lt;p>&lt;code> Get-DbaDatabaseFreespace -sqlserver $server&lt;/code>&lt;/p>
+&lt;p>This is what it looks like&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/02-singel-server.gif?resize=630%2C220&amp;amp;ssl=1"
+loading="lazy"
+alt="02 - singel server.gif"
+>&lt;/p>
+&lt;p>and yes it really is that fast, I have not speeded this up. 232 ms to get those details for an instance with 19 databases&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/03-measure-command.png?resize=630%2C310&amp;amp;ssl=1"
+loading="lazy"
+alt="03 - Measure Command.PNG"
+>&lt;/p>
+&lt;p>What information do you get ? Lets look at the information for a single database, you get an object for each file&lt;/p>
+&lt;p>Server               : SQL2014SER12R2
+Database             : DBA-Admin
+FileName             : DBA-Admin_System
+FileGroup            : PRIMARY
+PhysicalName         : F:\DBA-Admin_System.MDF
+FileType             : ROWS
+UsedSpaceMB          : 3
+FreeSpaceMB          : 253
+FileSizeMB           : 256
+PercentUsed          : 1
+AutoGrowth           : 0
+AutoGrowType         : MB
+SpaceUntilMaxSizeMB  : 16777213
+AutoGrowthPossibleMB : 0
+UnusableSpaceMB      : 16777213&lt;/p>
+&lt;p>Server               : SQL2014SER12R2
+Database             : DBA-Admin
+FileName             : DBA-Admin_Log
+FileGroup            :
+PhysicalName         : G:\DBA-Admin_Log.LDF
+FileType             : LOG
+UsedSpaceMB          : 32
+FreeSpaceMB          : 224
+FileSizeMB           : 256
+PercentUsed          : 12
+AutoGrowth           : 256
+AutoGrowType         : MB
+SpaceUntilMaxSizeMB  : 2528
+AutoGrowthPossibleMB : 2304
+UnusableSpaceMB      : 0&lt;/p>
+&lt;p>Server               : SQL2014SER12R2
+Database             : DBA-Admin
+FileName             : DBA-Admin_User
+FileGroup            : UserFG
+PhysicalName         : F:\DBA-Admin_User.NDF
+FileType             : ROWS
+UsedSpaceMB          : 1
+FreeSpaceMB          : 255
+FileSizeMB           : 256
+PercentUsed          : 0
+AutoGrowth           : 256
+AutoGrowType         : MB
+SpaceUntilMaxSizeMB  : 5119
+AutoGrowthPossibleMB : 4864
+UnusableSpaceMB      : 0&lt;/p>
+&lt;p>There is a lot of useful information returned for each file. Its better if you use &lt;code>Out-GridView&lt;/code> as then you can order by columns and filter in the top bar.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/04-single-server-ogv.gif?resize=630%2C317&amp;amp;ssl=1"
+loading="lazy"
+alt="04 - single server ogv.gif"
+>&lt;/p>
+&lt;p>As always, PowerShell uses the permissions of the account running the sessions to connect to the SQL Server unless you provide a separate credential for SQL Authentication. If you need to connect with a different windows account you will need to hold Shift down and right click on the PowerShell icon and click run as a different user.&lt;/p>
+&lt;p>Lets get the information for a single database. The command has dynamic parameters which populate the database names to save you time and keystrokes&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/05-dynamic-parameters.gif?resize=630%2C300&amp;amp;ssl=1"
+loading="lazy"
+alt="05 dynamic parameters.gif"
+>&lt;/p>
+&lt;p>But you may want to gather information about more than one server. lets take a list of servers and place them into a variable. You can add your servers to this variable in a number of ways, maybe by querying your CMDB or using your registered servers or central management server&lt;/p>
+&lt;p>&lt;code>$SQLServers = 'SQL2005Ser2003','SQL2012Ser08AG3','SQL2012Ser08AG1','SQL2012Ser08AG2','SQL2014Ser12R2','SQL2016N1','SQL2016N2','SQL2016N3','SQLVnextN1','SQLvNextN2'&lt;/code>&lt;/p>
+&lt;p>and then&lt;/p>
+&lt;p>&lt;code>Get-DbaDatabaseFreespace -SqlInstance $SQLServers | Out-GridView&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/06-many-servers-ogv.png?resize=630%2C340&amp;amp;ssl=1"
+loading="lazy"
+alt="06 - Many servers ogv.PNG"
+>&lt;/p>
+&lt;p>As you can see, you get a warning quite correctly, that the information for the asynchronous secondary node of the availability group databases is not available and I did not have all of my servers running so there are a couple of could not connect warnings as well. You can still filter very quickly. dbatools is tested from SQL2000 to SQL vNext as you can see below (although I don’t have a SQL2000 instance)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/07-filter-ogv.png?resize=630%2C417&amp;amp;ssl=1"
+loading="lazy"
+alt="07 - filter ogv"
+>&lt;/p>
+&lt;p>Not only on Windows, this command will work against SQL running on Linux as well&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/08-linux.png?resize=630%2C289&amp;amp;ssl=1"
+loading="lazy"
+alt="08 - linux.PNG"
+>&lt;/p>
+&lt;p>So if we want to know the total size of the files on disk for  the database we need to look at the FileSizeMB property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$server = &amp;#39;SQL2014Ser12R2&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$dbName = &amp;#39;AdventureWorksDW2014&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-DbaDatabaseFreespace -SqlServer $server -database $dbName |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Select Database,FileName,FileSizeMB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Of course that’s an easy calculation here&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/08a-filesize.png?resize=630%2C190&amp;amp;ssl=1"
+loading="lazy"
+alt="08a - filesize.PNG"
+>&lt;/p>
+&lt;p>but if we have numerous files then it may be tougher. we can use the Measure-Object command to sum the properties. We need to do a bit of preparation here and set a couple of calculated properties to make it more readable&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$server = &amp;#39;SQL2014Ser12R2&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$dbName = &amp;#39;AdventureWorksDW2014&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$database = @{Name = &amp;#39;Database&amp;#39;; Expression = {$dbname}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$FileSize = @{Name = &amp;#39;FileSize&amp;#39;; Expression = {$_.Sum}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-DbaDatabaseFreespace -SqlServer $server -database $dbName |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Select Database,FileSizeMB |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Measure-Object FileSizeMB -Sum |
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Select $database ,Property, $filesize
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/09-filessize.png?resize=630%2C225&amp;amp;ssl=1"
+loading="lazy"
+alt="09 - filessize"
+>&lt;/p>
+&lt;p>Maybe we want to look at all of the databases on an instance. Again, we have to do a little more work here&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$server = &amp;#39;SQL2014Ser12R2&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = Connect-DbaSqlServer $server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeonDisk = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases |ForEach-Object {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$dbName = $_.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$database = @{Name = &amp;#39;Database&amp;#39;; Expression = {$dbname}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$FileSize = @{Name = &amp;#39;FileSize&amp;#39;; Expression = {$_.Sum}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeOnDisk += Get-DbaDatabaseFreespace -SqlServer $server -database $dbName | Select Database,FileSizeMB |  Measure-Object FileSizeMb -Sum | Select $database ,Property, $Filesize
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeOnDisk
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/10-size-on-disk.png?resize=630%2C438&amp;amp;ssl=1"
+loading="lazy"
+alt="10 - size on disk"
+>&lt;/p>
+&lt;p>If we wanted the databases ordered by the size of their files we could do this&lt;/p>
+&lt;p>&lt;code>$SizeOnDisk |Sort-Object Filesize -Descending&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/11-size-sorted.png?resize=630%2C345&amp;amp;ssl=1"
+loading="lazy"
+alt="11 - size sorted.PNG"
+>&lt;/p>
+&lt;p>As it is PowerShell we have an object and we can use it any way we like. Maybe we want that information in a text file or a csv or an excel file or in an email, PowerShell can do that&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ## In a text file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeonDisk | Out-file C:\\temp\\Sizeondisk.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Invoke-Item C:\\temp\\Sizeondisk.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\## In a CSV
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeonDisk | Export-Csv C:\\temp\\Sizeondisk.csv -NoTypeInformation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">notepad C:\\temp\\Sizeondisk.csv
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\## Email
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Send-MailMessage -SmtpServer $smtp -From DBATeam@TheBeard.local -To JuniorDBA-Smurf@TheBeard.Local `
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-Subject &amp;#34;Smurf this needs looking At&amp;#34; -Body $SizeonDisk
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\## Email as Attachment
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Send-MailMessage -SmtpServer $smtp -From DBATeam@TheBeard.local -To JuniorDBA-Smurf@TheBeard.Local `
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-Subject &amp;#34;Smurf this needs looking At&amp;#34; -Body &amp;#34;Smurf&amp;#34; -Attachments C:\\temp\\Sizeondisk.csv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I had a little play with &lt;a class="link" href="https://github.com/proxb/PoshCharts/tree/Dev" target="_blank" rel="noopener"
+>Boe Prox PoshCharts&lt;/a> (you have to use the dev branch) to see if I could get some nice charts and unfortunately the bar charts did not come out so well but luckily the donut and pie charts did. (I’m a DBA I love donuts!)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$SizeonDisk| Out-PieChart -XField Database -YField FileSize -Title &amp;#34;UsedSpaceMB per Database on $Server&amp;#34; -IncludeLegend -Enable3D
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeonDisk| Out-DoughnutChart -XField Database -YField FileSize -Title &amp;#34;UsedSpaceMB per Database on $Server&amp;#34; -IncludeLegend -Enable3D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/12-donuts.png?resize=630%2C280&amp;amp;ssl=1"
+loading="lazy"
+alt="12 - donuts.PNG"
+>&lt;/p>
+&lt;p>So the point is, whatever you or your process requires you can pretty much bet that PowerShell can enable it for you to automate.&lt;/p>
+&lt;p>You can make use of all of the properties exposed by the command. If you want to only see the files with less than 20% space free&lt;/p>
+&lt;p>&lt;code> Get-DbaDatabaseFreespace -SqlServer $server | Where-Object {$_.PercentUsed -gt 80}&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/13-percent-used.png?resize=630%2C208&amp;amp;ssl=1"
+loading="lazy"
+alt="13 - percent used.PNG"
+>&lt;/p>
+&lt;p>you can also use the command to check for file growth settings as well&lt;/p>
+&lt;p>&lt;code> Get-DbaDatabaseFreespace -SqlServer $server | Where-Object {$_.AutoGrowType  -ne 'Mb'}&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/14-autogrowth.png?resize=630%2C196&amp;amp;ssl=1"
+loading="lazy"
+alt="14 - autogrowth.PNG"
+>&lt;/p>
+&lt;p>Or maybe you want to know the FileSize, Used and Free Space per database&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $server = &amp;#39;SQL2014Ser12R2&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv = Connect-DbaSqlServer $server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeonDisk = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.Databases |ForEach-Object {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$dbName = $_.Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$database = @{Name = &amp;#39;Database&amp;#39;; Expression = {$dbname}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$MB = @{Name = &amp;#39;Mbs&amp;#39;; Expression = {$_.Sum}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeOnDisk += Get-DbaDatabaseFreespace -SqlServer $server -database $dbName | Select Database,FileSizeMB, UsedSpaceMB, FreeSpaceMb |  Measure-Object FileSizeMb , UsedSpaceMB, FreeSpaceMb -Sum  | Select $database ,Property, $Mb
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$SizeOnDisk
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/03/15-totals.png?resize=630%2C504&amp;amp;ssl=1"
+loading="lazy"
+alt="15 totals.PNG"
+>&lt;/p>
+&lt;p>Hopefully that has given you a quick insight into another one of the fabulous dbatools commands. Any questions, comment below or head over to the SQL Server Community Slack via &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Happy Automating&lt;/p>
+&lt;p>NOTE – The major 1.0 release of dbatools due in the summer 2017 may have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using&lt;/p>
+&lt;p>&lt;code> Get-Module dbatools&lt;/code>&lt;/p>
+&lt;p>and update it using an Administrator PowerShell session with&lt;/p>
+&lt;p>&lt;code> Update-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You may find that you get no output from Update-Module as you have the latest version. If you have not installed the module from the PowerShell Gallery using&lt;/p>
+&lt;p>&lt;code> Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>Then you can use&lt;/p>
+&lt;p> &lt;code>Update-dbatools&lt;/code>&lt;/p></description></item><item><title>Finding Text In All Files In A Folder With PowerShell</title><link>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</link><pubDate>Wed, 25 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</guid><description>&lt;p>Whilst writing my &lt;a class="link" href="https://blog.robsewell.com/?p=434" target="_blank" rel="noopener"
+>PowerShell Box of Tricks GUI&lt;/a> I realised that I had hard-coded the path to the sqlservers.txt file in several functions and I wanted one place where I could set this. At the top of the GUI script I added a variable and in the ReadMe explained this needed to be set but I needed to change it in all of the functions where it was referenced.&lt;/p>
+&lt;p>&lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2011/08/04/use-an-easy-powershell-command-to-search-files-for-information.aspx" target="_blank" rel="noopener"
+>The Hey Scripting Guy Blog came to the rescue&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image97.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image97.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Only four entries so i did them manually but &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2008/01/17/how-can-i-use-windows-powershell-to-replace-characters-in-a-text-file.aspx" target="_blank" rel="noopener"
+>You can also use PowerShell to replace the entries.&lt;/a>&lt;/p></description></item></channel></rss>

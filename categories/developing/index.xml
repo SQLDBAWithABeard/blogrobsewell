@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Developing on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/developing/</link><description>Recent content in Developing on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/developing/index.xml" rel="self" type="application/rss+xml"/><item><title>Running SQL Queries with Visual Studio Code</title><link>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</guid><description>&lt;p>Reading this blog post by &lt;a class="link" href="http://www.sqlshack.com/introduction-visual-studio-code-dbas/" target="_blank" rel="noopener"
+>Shawn Melton Introduction of Visual Studio Code for DBAs&lt;/a> reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code&lt;/p>
+&lt;p>To download Code go to this link &lt;a class="link" href="https://code.visualstudio.com/download" target="_blank" rel="noopener"
+>https://code.visualstudio.com/download&lt;/a> and choose your operating system. Code works on Windows, Linux and Mac&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/00-code-download.png"
+loading="lazy"
+alt="00-code-download"
+>&lt;/p>
+&lt;p>Once you have downloaded and installed hit CTRL SHIFT and P which will open up the command palette&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/01-ctrlshiftp.png"
+loading="lazy"
+alt="01-ctrlshiftp"
+>&lt;/p>
+&lt;p>Once you start typing the results will filter so type ext and then select Extensions : Install Extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/02-extensions.png"
+loading="lazy"
+alt="02-extensions"
+>&lt;/p>
+&lt;p>Which will open the Extensions tab ( You could have achieved the same end result just by clicking this icon)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/03-install-extensions.png"
+loading="lazy"
+alt="03-install-extensions"
+>&lt;/p>
+&lt;p>But then you would not have learned about the command palette 🙂&lt;/p>
+&lt;p>So, with the extensions tab open, search for mssql and then click install&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/04-search-mssql.png"
+loading="lazy"
+alt="04-search-mssql"
+>&lt;/p>
+&lt;p>Once it has installed the button will change to Reload so click it&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/05-reload.png"
+loading="lazy"
+alt="05-reload"
+>&lt;/p>
+&lt;p>And you will be prompted to Reload the window&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/06-reload-prompt.png"
+loading="lazy"
+alt="06-reload-prompt"
+>&lt;/p>
+&lt;p>Accept the prompt and then open a new file (CTRL N) and then change the language for the file.&lt;/p>
+&lt;p>You can do this by clicking CTRL K and then M (Not CTRL K CTRL M) or click the language button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/07-choose-langauga.png"
+loading="lazy"
+alt="07-choose-langauga"
+>&lt;/p>
+&lt;p>And then choose SQL&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/08-choose-sql.png"
+loading="lazy"
+alt="08-choose-sql"
+>&lt;/p>
+&lt;p>This will start a download so make sure you are connected (and allowed to connect to the internet)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/09-start-download.png"
+loading="lazy"
+alt="09-start-download"
+>&lt;/p>
+&lt;p>Once it has finished it will show this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/10-finished-downloading.png"
+loading="lazy"
+alt="10-finished-downloading"
+>&lt;/p>
+&lt;p>And offer you the chance to read the release notes&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/11-release-notes.png"
+loading="lazy"
+alt="11-release-notes"
+>&lt;/p>
+&lt;p>Which you can get for any extension anytime by finding the extension in the extensions tab and clicking on it. This has links to tutorials as well as information about the release&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/12-release-notes.png"
+loading="lazy"
+alt="12-release-notes"
+>&lt;/p>
+&lt;p>The mssql extension enables Intellisence for T-SQL when you open a .sql file or when you change the language to SQL as shown above for a new file&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/13-intellisense.png"
+loading="lazy"
+alt="13-intellisense"
+>&lt;/p>
+&lt;p>Write your T-SQL Query and press CTRL SHIFT and E or Right Click and choose Execute Query. This will ask you to choose a Connection Profile (and display any existing profiles)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/14-execute.png"
+loading="lazy"
+alt="14-execute"
+>&lt;/p>
+&lt;p>Choose Create Connection Profile and answer the prompts&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/15-enter-servername.png"
+loading="lazy"
+alt="15-enter-servername"
+>&lt;/p>
+&lt;p>The query will then run&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/16-query-runs.png"
+loading="lazy"
+alt="16-query-runs"
+>&lt;/p>
+&lt;p>You can then output the results to csv or json if you wish&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/17-results.png"
+loading="lazy"
+alt="17-results"
+>&lt;/p>
+&lt;p>You can find a video showing this whole process with some typos and an error here&lt;/p>
+&lt;p>&lt;a class="link" href="https://youtu.be/_qTNKohFzPE" target="_blank" rel="noopener"
+>Using SQL with VS Code&lt;/a>&lt;/p></description></item></channel></rss>

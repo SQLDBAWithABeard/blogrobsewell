@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Psconfasia on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/psconfasia/</link><description>Recent content in Psconfasia on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 24 Oct 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/psconfasia/index.xml" rel="self" type="application/rss+xml"/><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p>I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+>PSConfAsia&lt;/a> conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+>Ravi Chaganti&lt;/a> spoke about DSC&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+>&lt;/p>
+&lt;p>and then Desmond Lee lead a Q and A session. In the end we decided that all the answers were&lt;/p>
+&lt;blockquote>
+&lt;p>It Depends and Test in your Environment&lt;/p>&lt;/blockquote>
+&lt;p>That evening, I even managed to jump on the PASS PowerShell Virtual Chapter session by Scott Sutherland Hacking SQL Servers on Scale using PowerShell the recording of which is here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/npoORzfP7rw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>A session organised and managed online in three different time zones by Aaron Chrissy and myself :-).&lt;/p>
+&lt;p>On Thursday the conference proper started with a pre-con day at the Amazon Web Services office. Yes, you read that right. This conference really highlighted the cross-platform direction and adoption of open-source that Microsoft is taking.  &lt;a class="link" href="http://twitter.com/@JasonYoder_MCT" target="_blank" rel="noopener"
+>Jason Yoder&lt;/a> spent all day teaching a group &amp;ldquo;PowerShell for Beginners&amp;rdquo; in one room&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_09_24_43_pro.jpg"
+loading="lazy"
+alt="WP_20161020_09_24_43_Pro.jpg"
+>&lt;/p>
+&lt;p>while The Amazon Web Services Team showed DevOps on AWS with PowerShell in the morning and &lt;a class="link" href="https://twitter.com/juneb_get_help" target="_blank" rel="noopener"
+>June Blender&lt;/a> gave a SAPIEN Toolmaking Seminar.fter this we went back to the Microsoft Offices for another User Group where Jason Yoder gave a (nother) session with &lt;a class="link" href="https://twitter.com/jaap_brasser" target="_blank" rel="noopener"
+>Jaap Brasser&lt;/a> on PowerShell Tips and Tricks (&lt;a class="link" href="https://onedrive.live.com/?authkey=%21AJyNBdDeTNtAS18&amp;amp;id=4B0EFD9B34E1210E%2124928&amp;amp;cid=4B0EFD9B34E1210E" target="_blank" rel="noopener"
+>Demo&lt;/a>)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_19_26_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_19_26_24_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Friday started with The PowerShell Team represented by &lt;a class="link" href="https://twitter.com/khansenhansen" target="_blank" rel="noopener"
+>Kenneth Hansen&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/angelcalvos" target="_blank" rel="noopener"
+>Angel Calvo&lt;/a> talking about PowerShell Past, Present and Future. It was really good that there was such great access to the product team at the conference and I saw lots of interaction around the conference as well, in addition to the sessions they provided.&lt;/p>
+&lt;p>Next up for me was another session from the PowerShell Team, this time &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> taking us on a Journey Through the Ages of PowerShell Security&lt;/p>
+&lt;blockquote>
+&lt;p>Execution Policy is not a security feature&lt;/p>&lt;/blockquote>
+&lt;p>That took us to lunch, we were treated to excellent lunches at this conference&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_12_07_14_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_12_07_14_Pro (2).jpg"
+>&lt;/p>
+&lt;p>After lunch I sat in the PowerShell Teams Ask Us Anything session although I was mainly preparing for my own session PowerShell Profile Prepares Perfect Production Purlieu which followed. There were excellent sessions on JEA, Nano Server, Chef and DSC, Containers, ETS and securing PowerShell against malware whilst I attended &lt;a class="link" href="http://flynnbundy.com" target="_blank" rel="noopener"
+>Flynn Bundy&amp;rsquo;s&lt;/a> session about Windows Containers and Building GUIs with XAML with &lt;a class="link" href="https://twitter.com/david_das_neves" target="_blank" rel="noopener"
+>David Das Neves&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161021_15_58_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20161021_15_58_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>That evening, organisers, speakers and attendees all went to the Penny Black pub on Marina Bay and enjoyed some food, refreshments and networking&lt;/p>
+&lt;p>Saturday started slowly after the rain (another impressive &amp;lsquo;feature&amp;rsquo; of Singapore)  but the first session was a brilliant one with &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> talking Pragmatic PowerShell and answering questions. I am glad Jason used &lt;a class="link" href="https://github.com/Code52/carnac" target="_blank" rel="noopener"
+>Carnac&lt;/a> to show what he was typing so that people could (just about :-) ) keep up. I then attended the excellent session about contribution with Microsoft.&lt;/p>
+&lt;p>The rest of the day had amazing sessions on Azure Automation, IoT, AWS Cloud Formation, Centralised Repository Server, Chef, Puppet, Professional Help, Nano Server, Docker, DSC, Release Pipeline and of course some bearded fella talking about Installing SQL Scripts and creating Pester Tests for them and combining PowerShell, SQL, SSRS, PowerBi and Cortana :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cjason-yoders-photo.jpg"
+loading="lazy"
+alt="Jason Yoder’s photo.jpg"
+>&lt;/p>
+&lt;p>My takeaways from the conference were that Microsoft is very open to all members of the open source community, DevOps is a very important topic and also the following points from the PowerShell team&lt;/p>
+&lt;blockquote>
+&lt;p>PowerShell Team want YOU to contribute. Interact with them File bugs Feature Requests Documentation Tests Code&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>Fixing is better than complaining :-) &lt;a class="link" href="https://twitter.com/@HemanMahawar" target="_blank" rel="noopener"
+>@HemanMahawar&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a> You can help fix the documentation. Use the contribute button on the doc&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>If you are thinking of starting or run a PowerShell usergroup Microsoft would like help. Tag 1 of the team such as &lt;a class="link" href="https://twitter.com/@ANGELCALVOS" target="_blank" rel="noopener"
+>@ANGELCALVOS&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Special thanks and congratulations must go to Matt, Milton, Sebastian and Ben for their excellent organisation and for creating an awesome event. I am looking forward to seeing how they can better it next year and also hoping that seeing all the fabulous speakers and sessions will inspire some attendees from this years event to share their own knowledge and experience at local user groups and even next years conference.&lt;/p></description></item></channel></rss>

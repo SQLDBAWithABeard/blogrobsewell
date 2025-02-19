@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dbatools - GitHub on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dbatools---github/</link><description>Recent content in Dbatools - GitHub on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 13 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dbatools---github/index.xml" rel="self" type="application/rss+xml"/><item><title>Why VS Code Increases my Productivity</title><link>https://blog.robsewell.com/blog/why-vs-code-increases-my-productivity/</link><pubDate>Thu, 13 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-vs-code-increases-my-productivity/</guid><description>&lt;p>Last week I was showing a co-worker some PowerShell code and he asked what the editor was that I was using. &lt;a class="link" href="https://code.visualstudio.com/" target="_blank" rel="noopener"
+>Visual Studio Code&lt;/a> I said. Why do you use that? What does it do? This is what I showed him&lt;/p>
+&lt;h3 id="runs-on-any-operating-system">Runs on any Operating System
+&lt;/h3>&lt;p>Code (as I shall refer to it) is free lightweight open source editor which runs on all the main operating systems. So you have the same experience in Linux as on Windows. So there is less to learn&lt;/p>
+&lt;h3 id="extensions">Extensions
+&lt;/h3>&lt;p>You can add new languages, themes, debuggers and tools from the extensions gallery to reduce the number of programmes you have open and the need to switch between programmesYou can add extensions using CTRL + SHIFT  + X and searching in the bar &lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-extensions.png?resize=630%2C335&amp;amp;ssl=1"
+loading="lazy"
+alt="01 - Extensions"
+> or by going to the &lt;a class="link" href="https://marketplace.visualstudio.com/VSCode" target="_blank" rel="noopener"
+>Extensions gallery&lt;/a> searching for the extensions and copying the installation command &lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/02-extensions-gallery.png" target="_blank" rel="noopener"
+>02 - extensions gallery.PNG&lt;/a>&lt;/p>
+&lt;h3 id="debugging">Debugging
+&lt;/h3>&lt;p>There is a rich de-bugging experience built in&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/03-debugging.png?resize=630%2C410&amp;amp;ssl=1"
+loading="lazy"
+alt="03 - debugging.PNG"
+> You can learn about debugging from the &lt;a class="link" href="https://code.visualstudio.com/docs/editor/debugging" target="_blank" rel="noopener"
+>official docs&lt;/a> and Keith Hill wrote a blog post on Hey Scripting Guys about &lt;a class="link" href="https://blogs.technet.microsoft.com/heyscriptingguy/2017/02/06/debugging-powershell-script-in-visual-studio-code-part-1/" target="_blank" rel="noopener"
+>debugging PowerShell&lt;/a>&lt;/p>
+&lt;h3 id="intellisense">Intellisense
+&lt;/h3>&lt;p>An absolute must to make life simpler. Code has intellisense for PowerShell and T-SQL which I use the most but also for many more languages . Read more &lt;a class="link" href="https://code.visualstudio.com/docs/editor/intellisense" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;h3 id="git-integration">Git integration
+&lt;/h3>&lt;p>I love the Git integration, makes it so easy to work with GitHub for me. I can see diffs, commit, undo commits nice and simply. Just open the root folder of the repository and its there
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/04-git.png?resize=630%2C336&amp;amp;ssl=1"
+loading="lazy"
+alt="04 - git"
+> This page will &lt;a class="link" href="https://code.visualstudio.com/docs/editor/versioncontrol" target="_blank" rel="noopener"
+>give you a good start&lt;/a> on using git with Code&lt;/p>
+&lt;h3 id="no-distractions">No distractions
+&lt;/h3>&lt;p>With full screen mode (F11) or Zen mode (CTRL +K, Z) I can concentrate on coding and not worry about distractions&lt;/p>
+&lt;h3 id="stay-in-one-programme-and-do-it-all">Stay in one programme and do it all
+&lt;/h3>&lt;p>I have a Markdown document, a PowerShell script and a T-SQL script all in one Git repository and I can work on all of them and version control in one place. The screencast below also shows some of the new capabilities available in the &lt;a class="link" href="https://code.visualstudio.com/insiders" target="_blank" rel="noopener"
+>insiders version&lt;/a> I managed to leave the screen recording dialogue open as well, apologies and the mistake was deliberate!&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/DMoTXQh9hwc"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>I used the &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank" rel="noopener"
+>GitLens&lt;/a> and &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=sensourceinc.vscode-sql-beautify" target="_blank" rel="noopener"
+>SQL beautify&lt;/a> extensions as well as the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> in that demo That’s why I am using Code more and more these days, hope it helps Happy Automating!&lt;/p></description></item><item><title>Testing SQL Server Access to a share with PowerShell using dbatools</title><link>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</link><pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</guid><description>&lt;!-- raw HTML omitted --></description></item></channel></rss>

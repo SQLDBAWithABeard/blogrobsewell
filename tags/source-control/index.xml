@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Source Control on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/source-control/</link><description>Recent content in Source Control on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/source-control/index.xml" rel="self" type="application/rss+xml"/><item><title>Adding a Folder of Scripts to GitHub with Azure Data Studio</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</link><pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</guid><description>&lt;p>In my last post I showed how to &lt;a class="link" href="https://blog.robsewell.com/10501/" target="_blank" rel="noopener"
+>add a folder of scripts to GitHub&lt;/a> using Visual Studio Code.&lt;/p>
+&lt;p>You can do it with Azure Data Studio as well. It’s exactly the same steps!&lt;/p>
+&lt;p>The blog post could end here but read on for some screen shots 😉&lt;/p>
+&lt;p>Follow the previous post for details of setting up a new GitHub account&lt;/p>
+&lt;p>Create a repository in GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-27.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Open the folder in Azure Data Studio with CTRL K CTRL O (Or File –&amp;gt; Open Folder)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-28.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Click on the Source Control icon or CTRL + SHIFT + G and then Initialize Repository&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-29.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Choose the folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-30.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Write a commit message&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-31.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Say yes to the prompt. Press CTRL + ‘ to open the terminal&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-32.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Navigate to the scripts folder. (I have a PSDrive set up to my Git folder)&lt;/p>
+&lt;pre>&lt;code>Set-Location GIT:\\ADS-Scripts\
+&lt;/code>&lt;/pre>
+&lt;p>and copy the code from the GitHub page after “…or push an existing repository from the command line”&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-33.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and run it&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-34.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and there are your scripts in GitHub&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-35.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Make some changes to a script and it will go muddy brown&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-36.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>and then write a commit message. If you click on the file name in the source control tab then you can see the changes that have been made, that are not currently tracked&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-37.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Commit the change with CTRL + ENTER and then click the roundy-roundy icon (seriously anyone know its name ?) click yes on the prompt and your changes are in GitHub as well 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-38.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Realistically, you can use the previous post to do this with Azure Data Studio as it is built on top of Visual Studio Code but I thought it was worth showing the steps in Azure Data Studio.&lt;/p>
+&lt;p>Happy Source Controlling&lt;/p></description></item><item><title>Adding a Folder of Scripts to GitHub</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</link><pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</guid><description>&lt;p>Yesterday there was a tweet from Allen White.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/SQLRunr/status/1113862196201758720" target="_blank" rel="noopener"
+>https://twitter.com/SQLRunr/status/1113862196201758720&lt;/a>&lt;/p>
+&lt;p>Allen wanted to add his scripts folder to source control but didn&amp;rsquo;t have a how to do it handy. So I thought I would write one. Hopefully this will enable someone new to GitHub and to source control get a folder of scripts under source control&lt;/p>
+&lt;h2 id="github-account">GitHub account
+&lt;/h2>&lt;p>If you do not have a GitHub account go to &lt;a class="link" href="https://github.com" target="_blank" rel="noopener"
+>https://github.com&lt;/a> and create a new account&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>There is a funky are you a human challenge&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-1.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then you can choose your subscription&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-2.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then answer some questions (Note - you probably want to choose different answers to the what are you interested in question! I&amp;rsquo;d suggest something technical)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-3.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You need to do the email verification&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-4.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-4.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Next is a very important step - Please do not skip this. You should set up 2 factor authentication. Yes even if &amp;ldquo;It&amp;rsquo;s just for me there is nothing special here&amp;rdquo;&lt;/p>
+&lt;p>Click your user icon top right and then settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-5.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Then click set up two factor authentication&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-6.png" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/image-6.png?fit=630%2C365&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and either set up with an app or via SMS (I suggest the app is better)&lt;/p>
+&lt;p>OK - Now you have your GitHub account set up. It should have taken you less time than reading this far.&lt;/p>
+&lt;h2 id="add-a-scripts-folder-to-github">Add a Scripts Folder to GitHub
+&lt;/h2>&lt;p>OK, Now to add a folder of scripts to a repository. Here is my folder of scripts. They can be any type of files. I would recommend copy the folder to a specific Git folder.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-7.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-7.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Open VS Code - If you don&amp;rsquo;t have VS Code, download it from
+&lt;a class="link" href="https://code.visualstudio.com/" target="_blank" rel="noopener"
+>https://code.visualstudio.com/&lt;/a> From the welcome window choose open folder&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-8.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-8.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and open your scripts folder&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-9.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-9.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>In VS Code click the Source Control button&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-10.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-10.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and up at the top you will see a little icon - initialise repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-11.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-11.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Click that and choose your folder&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-12.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-12.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Which will then show all of the changes to the repository (adding all the new files)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-13.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-13.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Now we need to add a commit message for our changes. I generally try to write commit messages that are the reason why the change has been made as the what has been changed is made easy to see in VS Code (as well as other source control GUI tools)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-14.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-14.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Click the tick or press CTRL + ENTER and this box will pop up&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-15.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-15.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>I never click Always, I click yes, so that I can check if I am committing the correct files. Now we have created a local repository for our scripts folder. Our next step is to publish it to GitHub&lt;/p>
+&lt;h2 id="create-a-new-repository-in-github">Create a New Repository in GitHub
+&lt;/h2>&lt;p>In GitHub we need to create a remote repository. Click on the New Button. Give your repository a name and decide if you want it to be Public (available for anyone to search and find) or Private (only available to people you explicitly provide access to).&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-18.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-18.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This will give you a page that looks like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-19.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/image-19.png?fit=630%2C499&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Copy the code after …or push an existing repository from the command line&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># make sure prompt is at right place
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-Location C:\Git\MyScriptsFolder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Then paste the code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git remote add origin https://github.com/SQLDBAWithABeard-Test/TheBeardsFunkyScriptFolder.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push -u origin master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and paste it into PowerShell in VS Code. Make sure that your prompt is at the root of your scripts folder.&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-20.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/image-20.png?fit=630%2C340&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Fill in your username and password and your 2FA&lt;/p>
+&lt;p>Then you will see a page like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-21.png" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/image-21.png?fit=630%2C180&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>and if you refresh your GitHub page you will see&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-22.png" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2019/04/image-22.png?fit=630%2C504&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Congratulations, your code is source controlled :-)&lt;/p>
+&lt;h2 id="making-changes">Making Changes
+&lt;/h2>&lt;p>Now you can make a change to a file&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-23.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-23.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Commit your change&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-24.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-24.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Hit the roundy-roundy icon (anyone know its proper name ?)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-25.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-25.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Press OK and your commit will be pushed to GitHub :-)&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2019/04/image-26.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-26.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Yay - Source Control all the things&lt;/p></description></item></channel></rss>

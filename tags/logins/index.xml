@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Logins on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/logins/</link><description>Recent content in Logins on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 16 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/logins/index.xml" rel="self" type="application/rss+xml"/><item><title>Write Your first Pester Test Today</title><link>https://blog.robsewell.com/blog/write-your-first-pester-test-today/</link><pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/write-your-first-pester-test-today/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>Checking for SQL Server logins with PowerShell</title><link>https://blog.robsewell.com/blog/checking-for-sql-server-logins-with-powershell/</link><pubDate>Sat, 31 Aug 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-for-sql-server-logins-with-powershell/</guid><description>&lt;p>As some of you may know, I love PowerShell!&lt;/p>
+&lt;p>I use it all the time in my daily job as a SQL DBA and at home whilst learning as well.&lt;/p>
+&lt;p>Not only do I use PowerShell for automating tasks such as Daily Backup Checks, Drive Space Checks, Service Running Checks, File Space Checks, Failed Agent Job Checks, SQL Error Log Checks, DBCC Checks and more but also for those questions which come up daily and interfere with concentrating on a complex or time consuming task.&lt;/p>
+&lt;p>I have developed a series of functions over time which save me time and effort whilst still enabling me to provide a good service to my customers. I keep them all in a functions folder and call them whenever I need them. I also have a very simple GUI which I have set up for my colleagues to enable them to easily answer simple questions quickly and easily which I will blog about later. I call it my &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+>PowerShell Box of Tricks&lt;/a>&lt;/p>
+&lt;p>I am going to write a short post about each one over the next few weeks as I write my presentation on the same subject which I will be presenting to SQL User Groups.&lt;/p>
+&lt;p>Todays question which I often get asked is Which database does this account have access to?&lt;/p>
+&lt;p>This question can come from Support Desks when they are investigating a users issue, Developers when they are testing an application as well as audit activities. It is usually followed by what permissions do they have which is covered by my next blog post.&lt;/p>
+&lt;p>I start by getting the list of servers from my text file and creating an array of logins for each domain as I work in a multi domain environment&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image10.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb10.png?resize=538%2C98"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Then loop through each server and if the login exists write it out to the window.&lt;/p>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image19.png" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb19.png?resize=567%2C173"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>I then repeat this but loop through each database as well&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image20.png" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb20.png?resize=572%2C155"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>A little bit of formatting is added and then a quick easy report that can easily be copied to an email as required.&lt;/p>
+&lt;p>To call it simply load the function&lt;/p>
+&lt;p>&lt;a class="link" href="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image22.png" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb22.png?resize=357%2C23"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and get the results&lt;/p>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image21.png" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb21.png?resize=624%2C226"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>The code is below&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.Synopsis
+A workflow to display users server and database logins across a SQL estate
+.DESCRIPTION
+Display a list of server login and database user and login for SQL servers listed
+in sqlservers.txt file from a range of domains
+AUTHOR: Rob Sewell https://blog.robsewell.com
+LAST UPDATE: DATE:07/01/2015
+.EXAMPLE
+Show-SQLUserLogins DBAwithaBeard
+Shows the SQL Server logins and database users matching DOMAIN1\DBAWithaBeard,DOMAIN2\DBAWithaBeard, DBAWithaBeard
+#&amp;gt;
+Workflow Show-UserLogins
+{
+param ([string]$usr)
+$servers = Get-Content '\sql\Powershell Scripts\sqlservers.txt'
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$usr&amp;quot;,&amp;quot;DOMAIN2\$usr&amp;quot;, &amp;quot;DOMAIN3\$usr&amp;quot; ,&amp;quot;$usr&amp;quot; )
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;SQL Servers, Databases and Logins for `n$logins displayed below &amp;quot;
+Write-Output &amp;quot;################################# `n&amp;quot;
+#loop through each server and each database and display usernames, servers and databases
+Write-Output &amp;quot; Server Logins`n&amp;quot;
+foreach -parallel ($server in $servers)
+{
+inlinescript
+{
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | out-null
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $Using:server
+if(!$srv.Version)
+{
+Write-Output &amp;quot;$Using:server is not contactable - Please Check Manually&amp;quot;
+}
+else
+{
+foreach ($login in $Using:logins)
+{
+if($srv.Logins.Contains($login))
+{
+Write-Output &amp;quot; $Using:server -- $login &amp;quot;
+}
+else
+{
+continue
+}
+}
+}
+}
+}
+Write-Output &amp;quot;`n###########################&amp;quot;
+Write-Output &amp;quot;`n Database Logins`n&amp;quot;
+foreach -parallel ($server in $servers)
+{
+inlinescript
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $Using:server
+if(!$srv.Version)
+{
+Write-Output &amp;quot;$Using:server is not contactable - Please Check Manually&amp;quot;
+}
+else
+{
+foreach($database in $srv.Databases|Where-Object{$_.IsAccessible -eq $True})
+{
+foreach($login in $Using:logins)
+{
+if($database.Users.Contains($login))
+{
+Write-Output &amp;quot; $Using:server -- $database -- $login &amp;quot;
+}
+else
+{
+}
+}
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Finished - If there are no logins displayed above then no logins were found!&amp;quot;
+Write-Output &amp;quot;#########################################&amp;quot;
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

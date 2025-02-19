@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Always-Encrypted on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/always-encrypted/</link><description>Recent content in Always-Encrypted on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 30 Jun 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/always-encrypted/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p>
+&lt;blockquote>
+&lt;p>This means that if you have a PowerShell script doing &lt;em>Import-Module SQLPS&lt;/em>, it will need to be changed to be &lt;em>Import-Module SqlServer&lt;/em> in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to &lt;em>“%Program Files\WindowsPowerShell\Modules\SqlServer&lt;/em>” and hence no update to $env:PSModulePath is required.&lt;/p>&lt;/blockquote>
+&lt;p>So SQLPS will still continue to work but will not be updated and will not contain the new CMDlets or the future new CMDlets.&lt;/p>
+&lt;h2 id="so-what-new-things-do-we-have">So what new things do we have?
+&lt;/h2>&lt;blockquote>
+&lt;p>This month we introduce CMDLETs for the following areas:&lt;/p>
+&lt;ul>
+&lt;li>Always Encrypted&lt;/li>
+&lt;li>SQL Agent&lt;/li>
+&lt;li>SQL Error Logs&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>Chrissy LeMaire has written about the &lt;a class="link" href="https://blog.netnerds.net/2016/06/the-sql-server-PowerShell-module-formerly-known-as-sqlps/" target="_blank" rel="noopener"
+>new SQL Agent cmdlets&lt;/a>&lt;/p>
+&lt;p>Aaron Nelson has written about the &lt;a class="link" href="http://sqlvariant.com/2016/06/webinar-on-25-new-PowerShell-cmdlets-for-sql-server-and-more/" target="_blank" rel="noopener"
+>new Get-SqlErrorLog cmdlet&lt;/a>&lt;/p>
+&lt;p>Laerte Junior has written about &lt;a class="link" href="https://www.simple-talk.com/blogs/2016/06/30/invoke-sqlcmd-just-got-better/" target="_blank" rel="noopener"
+>Invoke-SQLCmd&lt;/a>&lt;/p>
+&lt;p>All four of us will be presenting a webinar on the new CMDlets via the &lt;a class="link" href="http://PowerShell.sqlpass.org/" target="_blank" rel="noopener"
+>PowerShell Virtual Chapter&lt;/a> Wed, Jul 06 2016 12:00 Eastern Daylight Time If you cant make it a recording will be made available on YouTube on the VC Channel &lt;a class="link" href="https://sqlps.io/video" target="_blank" rel="noopener"
+>https://sqlps.io/video&lt;/a>&lt;/p>
+&lt;h2 id="always-encrypted-cmdlets">Always Encrypted CMDlets
+&lt;/h2>&lt;p>That leaves the Always Encrypted CMDLets and there are 17 of those!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p> &lt;/p>
+&lt;p>That seems to cover setting up Always Encrypted with PowerShell , removing it and getting information about it. When the new SSMS update is dropped you will be able to start using all of this new functionality.&lt;/p>
+&lt;p>Just remember Import-Module sqlserver&lt;/p>
+&lt;h2 id="call-to-action">CALL TO ACTION
+&lt;/h2>&lt;p>Microsoft are engaging with the community to improve the tools we all use in our day to day work. There is are two Trello boards set up for &lt;strong>YOU&lt;/strong> to use to contribute&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/vote" target="_blank" rel="noopener"
+>https://sqlps.io/vote&lt;/a>  for SQLPS  sqlserver PowerShell module&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/ssms" target="_blank" rel="noopener"
+>https://sqlps.io/ssms&lt;/a> for SSMS&lt;/p>
+&lt;p>Go and join them and upvote &lt;strong>YOUR&lt;/strong> preferred choice of the next lot of CMDlets&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/trellocount.png"
+loading="lazy"
+alt="trellocount"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>We have also set up a SQL Community Slack for anyone in the community to discuss all things related to SQL including the Trello board items and already it seems a good place for people to get help with 150+ members in a few days. You can get an invite here &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Come and join us&lt;/p></description></item></channel></rss>

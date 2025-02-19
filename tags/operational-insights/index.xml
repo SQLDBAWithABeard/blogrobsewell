@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Operational Insights on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/operational-insights/</link><description>Recent content in Operational Insights on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 24 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/operational-insights/index.xml" rel="self" type="application/rss+xml"/><item><title>A look at the SQL Assessment Intelligence Pack in Operational Insights</title><link>https://blog.robsewell.com/blog/a-look-at-the-sql-assessment-intelligence-pack-in-operational-insights/</link><pubDate>Mon, 24 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/a-look-at-the-sql-assessment-intelligence-pack-in-operational-insights/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg" alt="Featured image of post A look at the SQL Assessment Intelligence Pack in Operational Insights" />&lt;p>Operational Insights is a service that has been added in preview to Azure. It enables you to collect, combine, correlate and visualize all your machine data in one place. It can collect data from all of your machines either via SCOM or by using an agent. Once the data is collected Operational Insights has a number of Intelligence Packs which have pre-configured rules and algorithms to provide analysis in various areas including for SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-gb/services/operational-insights/" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-gb/services/operational-insights/&lt;/a>&lt;/p>
+&lt;p>I thought I would take a look. I have an installation of SCOM in my lab on my laptop and I read the instructions to see how to connect it to Operational Insights. (You don’t have to have a SCOM installation to use Operational insights you can make use of an agent as well just follow the steps from the page below)&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-us/trial/operational-insights-get-started/" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-us/trial/operational-insights-get-started/&lt;/a>&lt;/p>
+&lt;p>It really is very simple&lt;/p>
+&lt;p>If you have an Azure subscription already you can sign into the portal and join the preview program by clicking&lt;/p>
+&lt;p>New –&amp;gt; App Services –&amp;gt; Operational Insights&lt;/p>
+&lt;p>and create a new Operational Insights Workspace.&lt;/p>
+&lt;p>Once you have done that, if you have an installation of SCOM 2012 you need to be running Service Pack 1 and download and install the System Center Operational Insights Connector for Operations Manager and import the MPB files into SCOM.&lt;/p>
+&lt;p>If you have SCOM 2012R2 the connector is already installed and to connect your SCOM to Operational Insights is very very easy as you can see on&lt;/p>
+&lt;p>&lt;a class="link" href="http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&amp;amp;step3=SCOMcustomer" target="_blank" rel="noopener"
+>http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&amp;amp;step3=SCOMcustomer&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>In the Operations Manager Console, click Administration.&lt;/li>
+&lt;li>Under Administration, select System Center Advisor, and then click Advisor Connection.&lt;/li>
+&lt;li>Click Register to Advisor Service.&lt;/li>
+&lt;li>Sign in with your Microsoft or Organizational account.&lt;/li>
+&lt;li>Choose an existing Operational Insights workspace from the drop down menu&lt;/li>
+&lt;li>Confirm your changes.&lt;/li>
+&lt;li>In the System Center Advisor Overview page, Under Actions, click Add a Computer/Group.&lt;/li>
+&lt;li>Under Options, select Windows Server or All Instance Groups, and then search and add servers that you want data&lt;/li>
+&lt;/ol>
+&lt;p>That is it. No really, that is it. I was amazed how quickly I was able to get this done in my lab and it would not take very long in a large implementation of SCOM either as you will have your groups of computers defined which will make it easy to decide which groups to use. You could use a separate workspace for each type of server or split up the information per service. It really is very customisable.&lt;/p>
+&lt;p>Once you have done that, go and add some of the Intelligence Packs. Each intelligence pack will change the amount  and type of data that is collected. At November 23rd there are&lt;/p>
+&lt;ul>
+&lt;li>Alert Management – for your SCOM Alerts&lt;/li>
+&lt;li>Change Tracking – Tracking Configuration Changes&lt;/li>
+&lt;li>Log Management – for event log collection and interrogation&lt;/li>
+&lt;li>System Update Assessment – Missing Security Updates&lt;/li>
+&lt;li>Malware Assessment – Status of Anti-Malware and Anti-Virus scans&lt;/li>
+&lt;li>Capacity Planning – Identify Capacity and Utilisation bottlenecks&lt;/li>
+&lt;li>SQL Assessment – The risk and health of SQL Server Environment&lt;/li>
+&lt;/ul>
+&lt;p>There are also two ‘coming soon’ Intelligence packs&lt;/p>
+&lt;ul>
+&lt;li>AD Assessment – Risk and health of Active Directory&lt;/li>
+&lt;li>Security – Explore security related data and help identify security breaches&lt;/li>
+&lt;/ul>
+&lt;p>You then (if you are like me) have a period of frustration whilst you wait for all of the data to be uploaded and aggregated but once it is you sign into the Operational Insights Portal&lt;/p>
+&lt;p>&lt;a class="link" href="https://preview.opinsights.azure.com" target="_blank" rel="noopener"
+>https://preview.opinsights.azure.com&lt;/a> and it will look like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg"
+loading="lazy"
+alt="opsman1"
+>&lt;/a>&lt;/p>
+&lt;p>There is a lot of information there. As it is on my laptop and the lab is not running all of the time and is not connected to the internet most of the time I am not surprised that there are some red parts to my assessment!!&lt;/p>
+&lt;p>Obviously I was interested in the SQL Assessment and I explored it a bit further&lt;/p>
+&lt;p>Clicking on the SQL Assessment tile takes you to a screen which shows the SQL Assessment broken down into 6 Focus areas&lt;/p>
+&lt;p>Security and Compliance, Availability and Business Continuity, Performance and Scalability, Upgrade, Migration and  Deployment, Operations and Monitoring and Change and Configuration Management. MSDN &lt;a class="link" href="http://msdn.microsoft.com/en-us/library/azure/dn873967.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/en-us/library/azure/dn873967.aspx&lt;/a> gives some more information about each one&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Security and Compliance&lt;/strong> – Safeguard the reputation of your organization by defending yourself from security threats and breaches, enforcing corporate policies, and meeting - technical, legal and regulatory compliance requirements.&lt;/li>
+&lt;li>&lt;strong>Availability and Business Continuity&lt;/strong> – Keep your services available and your business profitable by ensuring the resiliency of your infrastructure and by having the right - level of business protection in the event of a disaster.&lt;/li>
+&lt;li>&lt;strong>Performance and Scalability&lt;/strong> – Help your organization to grow and innovate by ensuring that your IT environment can meet current performance requirements and can respond - quickly to changing business needs.&lt;/li>
+&lt;li>&lt;strong>Upgrade, Migration and Deployment&lt;/strong> – Position your IT department to be the key driver of change and innovation, by taking full advantage of new enabling technologies to - unlock more business value for organizational units, workforce and customers.&lt;/li>
+&lt;li>&lt;strong>Operations and Monitoring&lt;/strong> – Lower your IT maintenance budget by streamlining your IT operations and implementing a comprehensive preventative maintenance program to - maximize business performance.&lt;/li>
+&lt;li>&lt;strong>Change and Configuration Management&lt;/strong> – Protect the day-to-day operations of your organization and ensure that changes won’t negatively affect the business by establishing change control procedures and by tracking and auditing system configurations.&lt;/li>
+&lt;/ul>
+&lt;p>You will be able to see some dials showing you how well you are doing in each area for the servers whose data has been collected.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman2.jpg"
+loading="lazy"
+alt="opsman2"
+>&lt;/a>&lt;/p>
+&lt;p>Each area will have the High Priority Recommendations shown below the dial and you can click on them to see more information about those recommendations&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman3.jpg"
+loading="lazy"
+alt="opsman3"
+>&lt;/a>&lt;/p>
+&lt;p>You can also click the dial or the see all link to enter the search area where you can customise how you wish to see the data that has been collected, this looks a bit confusing at first&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/11/opsman4.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/opsman4.jpg"
+loading="lazy"
+alt="opsman4"
+>&lt;/a>&lt;/p>
+&lt;p>The top bar contains the search , the timescale and some buttons to save the search, view the saved searches and view the search history, all of which will be shown in the right hand column below&lt;/p>
+&lt;p>The left column contains a bar graph for the search and all of the filters. The middle column contains the results of the search and can be viewed in list or tabular format and exported to CSV using the button below. A little bit of experimentation will give you a better understanding of how the filtering works and how you can make use of that for your environment&lt;/p>
+&lt;p>By looking at the search for the Operations and Monitoring Focus Area shown above&lt;/p>
+&lt;blockquote>
+&lt;p>Type:SQLAssessmentRecommendation IsRollup=true RecommendationPeriod=2014-11 FocusArea=”Operations and Monitoring” RecommendationResult=Failed | sort RecommendationWeight desc&lt;/p>&lt;/blockquote>
+&lt;p>I saw that &lt;code>RecommendationResult=Failed&lt;/code> and changed it to &lt;code>RecommendationResult=Passed&lt;/code>. This enabled me to see all of the Recommendations that had been passed in the Focus Area and clicking the export button downloaded a csv file. I deleted &lt;code>RecommendationResult=Passed&lt;/code> from the search and that gave me all of the recommendations that made up that Focus Area&lt;/p>
+&lt;ul>
+&lt;li>Operations and Monitoring Focus Area&lt;/li>
+&lt;li>Recommendation&lt;/li>
+&lt;li>Enable Remote Desktop on servers.&lt;/li>
+&lt;li>Enable Remote Desktop on virtual machines.&lt;/li>
+&lt;li>Ensure computers are able to download updates.&lt;/li>
+&lt;li>Configure event logs to overwrite or archive old events automatically.&lt;/li>
+&lt;li>Review event log configuration to ensure event data is retained automatically. This relates to System Logs&lt;/li>
+&lt;li>Review event log configuration to ensure event data is retained automatically. This relates to Application Logs&lt;/li>
+&lt;/ul>
+&lt;p>I decided then to do the same for each of the Focus Areas for the SQL Assessment Intelligence Pack&lt;/p>
+&lt;p>Security and Compliance Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Change passwords that are the same as the login name.&lt;/li>
+&lt;li>Remove logins with blank passwords.&lt;/li>
+&lt;li>LAN Manager Hash for Passwords Stored&lt;/li>
+&lt;li>Investigate why unsigned kernel modules were loaded.&lt;/li>
+&lt;li>Apply security best practices to contained databases.&lt;/li>
+&lt;li>Enable User Account control on all computers.&lt;/li>
+&lt;li>Consider disabling the xp_cmdshell extended stored procedure.&lt;/li>
+&lt;li>Implement Windows authentication on Microsoft Azure-hosted SQL Server deployments.&lt;/li>
+&lt;li>Avoid using the Local System account to run the SQL Server service.&lt;/li>
+&lt;li>Avoid adding users to the db_owner database role.&lt;/li>
+&lt;li>Ensure only essential users are added to the SQL Server sysadmin server role.&lt;/li>
+&lt;li>Disable SQL Server guest user in all user databases.&lt;/li>
+&lt;li>Avoid running SQL Server Agent jobs using highly-privileged accounts.&lt;/li>
+&lt;li>Configure the SQL Server Agent service to use a recommended account.&lt;/li>
+&lt;li>Apply Windows password policies to SQL Server logins.&lt;/li>
+&lt;li>Investigate failures to validate the integrity of protected files.&lt;/li>
+&lt;li>Investigate failures to validate kernel modules.&lt;/li>
+&lt;/ul>
+&lt;p>Availability and Business Continuity Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Schedule full database backups at least weekly.&lt;/li>
+&lt;li>Optimize your backup strategy with Microsoft Azure Blob Storage.&lt;/li>
+&lt;li>Avoid using the Simple database recovery model.&lt;/li>
+&lt;li>Ensure all installations of Windows are activated.&lt;/li>
+&lt;li>Investigate logical disk errors.&lt;/li>
+&lt;li>Reduce the maximum Kerberos access token size.&lt;/li>
+&lt;li>Investigate connection failures due to SSPI context errors.&lt;/li>
+&lt;li>Set the PAGE_VERIFY database option to CHECKSUM.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate a write error on a disk.&lt;/li>
+&lt;li>Check the network access to Active Directory domain controllers.&lt;/li>
+&lt;li>Review DNS configuration on non-DNS servers.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate memory dumps.&lt;/li>
+&lt;li>Increase free space on system drives.&lt;/li>
+&lt;li>Investigate why the computer shut down unexpectedly.&lt;/li>
+&lt;li>Enable dynamic DNS registration for domain-joined servers.&lt;/li>
+&lt;/ul>
+&lt;p>Performance and Scalability Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Increase the number of tempdb database files.&lt;/li>
+&lt;li>Configure the tempdb database to reduce page allocation contention.&lt;/li>
+&lt;li>Ensure all tempdb database files have identical initial sizes and growth increments.&lt;/li>
+&lt;li>Set autogrowth increments for database files and log files to fixed values rather than percentage values.&lt;/li>
+&lt;li>Set autogrowth increments for transaction log files to less than 1GB.&lt;/li>
+&lt;li>Modify auto-grow settings to use a fixed size growth increment of less than 1GB and consider enabling Instant File Initialization.&lt;/li>
+&lt;li>Change your Affinity Mask and Affinity I/O MASK settings to prevent conflicts.&lt;/li>
+&lt;li>Resolve issues caused by excessive virtual log files.&lt;/li>
+&lt;li>Modify the database file layout for databases larger than 1TB.&lt;/li>
+&lt;li>Set the AUTO_CLOSE option to OFF for frequently accessed databases.&lt;/li>
+&lt;li>Review memory requirements on servers with less than 4GB of physical memory installed.&lt;/li>
+&lt;li>Configure system SiteName properties to be dynamic.&lt;/li>
+&lt;li>Align the Max Degree of Parallelism option to the number of logical processors.&lt;/li>
+&lt;li>Align the Max Degree of Parallelism option to the number of logical processors.&lt;/li>
+&lt;li>Consider disabling the AUTO_SHRINK database option.&lt;/li>
+&lt;li>Review memory requirements on computers with high paging file use.&lt;/li>
+&lt;li>Ensure SQL Server does not consume memory required by other applications and system components.&lt;/li>
+&lt;li>Consider changing your power saving settings to optimize performance.&lt;/li>
+&lt;li>Increase the initial size of the tempdb database.&lt;/li>
+&lt;li>Review the configuration of Maximum Transfer Unit (MTU) size.&lt;/li>
+&lt;li>Review your paging file settings.&lt;/li>
+&lt;li>Review and optimize memory cache configuration.&lt;/li>
+&lt;li>Review the configuration of Maximum Transfer Unit (MTU) size.&lt;/li>
+&lt;li>Review the system processor scheduling mode.&lt;/li>
+&lt;li>Review network provider ordering settings.&lt;/li>
+&lt;li>Remove invalid entries from the PATH environment variable.&lt;/li>
+&lt;li>Remove network entries from the PATH environment variable.&lt;/li>
+&lt;li>Investigate processes that use a large number of threads.&lt;/li>
+&lt;li>Avoid hosting user database files on the same disk volume as tempdb database files.&lt;/li>
+&lt;li>Review processes with large working set sizes.&lt;/li>
+&lt;li>Reduce the length of the PATH environment variable.&lt;/li>
+&lt;li>Reduce the number of entries in the PATH environment variable.&lt;/li>
+&lt;li>Ensure SQL Server does not consume memory required by other applications and system components.&lt;/li>
+&lt;li>Enable the backup compression default configuration option.&lt;/li>
+&lt;li>Ensure the DNS Client service is running and is set to start automatically.&lt;/li>
+&lt;li>Consider compressing database tables and indexes.&lt;/li>
+&lt;/ul>
+&lt;p>Upgrade, Migration and Deployment Focus Area&lt;br>
+Recommendation&lt;/p>
+&lt;ul>
+&lt;li>Ensure all devices run supported operating system versions.&lt;/li>
+&lt;li>Ensure that the guest user is enabled in the msdb database.&lt;/li>
+&lt;li>Avoid using the Affinity64 Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Affinity Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Affinity I/O Mask configuration setting in new development work.&lt;/li>
+&lt;li>Avoid using the Allow Updates configuration option in SQL Server.&lt;/li>
+&lt;li>Avoid using the Allow Updates configuration option in SQL Server.&lt;/li>
+&lt;li>Avoid using the Affinity64 I/O Mask configuration setting in new development work.&lt;/li>
+&lt;li>Configure SQL Server to accept incoming connections.&lt;/li>
+&lt;li>Configure SQL Server instances and firewalls to allow communication over TCP/IP.&lt;/li>
+&lt;/ul>
+&lt;p>As I have no data for Change and Configuration Management I was not able to see the recommendations in my Operation Insights Workspace.&lt;/p>
+&lt;p>Edit: Daniele Muscetta has said in the comments that this is a bug which is being tracked&lt;/p>
+&lt;p>As you can see from the type and description of the recommendations above these are all areas that a DBA will be concerned about and the benefit of having all of this information gathered, pre-sorted, prioritised and presented to you in this manner will enable you to work towards a better SQL environment and track your progress. You can read more about the SQL Assessment Intelligence Pack here&lt;/p>
+&lt;p>&lt;a class="link" href="http://msdn.microsoft.com/en-us/library/azure/dn873958.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/en-us/library/azure/dn873958.aspx&lt;/a>&lt;/p>
+&lt;p>As well as the pre-determined queries that are built into the Intelligence pack you can search your data in any way that you require enabling you to present information about the health and risk of your SQL Environment to your team or your management with ease. The “with ease” bit is dependent on you understanding the language and structure of the search queries.&lt;/p>
+&lt;p>You will need to put this page into your bookmarks&lt;/p>
+&lt;p>&lt;a class="link" href="http://msdn.microsoft.com/library/azure/dn873997.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://msdn.microsoft.com/library/azure/dn873997.aspx&lt;/a>&lt;/p>
+&lt;p>As it contains the syntax and definitions to search your data&lt;/p>
+&lt;p>A very useful page for a starter like me is&lt;/p>
+&lt;p>&lt;a class="link" href="http://blogs.msdn.com/b/dmuscett/archive/2014/10/19/advisor-searches-collection.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.msdn.com/b/dmuscett/archive/2014/10/19/advisor-searches-collection.aspx&lt;/a>&lt;/p>
+&lt;p>by Daniele Muscetta which has a list of useful Operational Insights search queries such as&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>SQL Recommendation by Computer&lt;/strong>&lt;/p>
+&lt;p>Type=SQLAssessmentRecommendation IsRollup=false RecommendationResult=Failed | measure count() by Computer&lt;/p>&lt;/blockquote>
+&lt;p>If you click the star to the right of the search box you will find the saved searches. For the SQL Assessment Intelligence Pack there are&lt;/p>
+&lt;p>Did the agent pass the prerequisite check (if not, SQL Assessment data won’t be complete)&lt;/p>
+&lt;p>Focus Areas&lt;/p>
+&lt;ul>
+&lt;li>How many SQL Recommendation are affecting a Computer a SQL Instance or a - Database?&lt;/li>
+&lt;li>How many times did each unique SQL Recommendation trigger?&lt;/li>
+&lt;li>SQL Assesments passed by Server&lt;/li>
+&lt;li>SQL Recommendation by Computer&lt;/li>
+&lt;li>SQL Recommendation by Database&lt;/li>
+&lt;li>SQL Recommendation by Instance&lt;/li>
+&lt;/ul>
+&lt;p>You can use these and you can save your own searches which show the data in a way that is valuable to you.&lt;/p>
+&lt;p>Overall I am impressed with this tool and can see how it can be beneficial for a DBA as well as for System Administrators. I was amazed how easy it was to set up and how quickly I was able to start manipulating the data once it had been uploaded.&lt;/p></description></item></channel></rss>

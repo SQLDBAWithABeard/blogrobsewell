@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dbareports on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dbareports/</link><description>Recent content in Dbareports on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dbareports/index.xml" rel="self" type="application/rss+xml"/><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>#TSQL2sday #94 Lets get all Posh!</title><link>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</guid><description>&lt;p>Write-Output &amp;ldquo;What are you going to automate today?&amp;rdquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>Welcome to T-SQL Tuesday for September 2017!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+>
+&lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>T-SQL Tuesday&lt;/a> is a chance for you to join in the SQL Server community and write a blog post on a suggested topic. It makes for a great way to find a bunch of blog posts showing the same subject from many different viewpoints. Please join in and write a blog post, maybe it&amp;rsquo;s your first ever, maybe you haven&amp;rsquo;t blogged for a while but even if you blog every day come and join the party and share your knowledge.&lt;/p>
+&lt;p>To participate:&lt;/p>
+&lt;ol>
+&lt;li>Write a post on the topic below&lt;/li>
+&lt;li>Schedule the post to go live on Tuesday, September 12th (between zero am and midnight, UTC)&lt;/li>
+&lt;li>Include the &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2010/06/01/t-sql-tuesday-007-and-t-sql-tuesday-has-a-logo.aspx" target="_blank" rel="noopener"
+>TSQL Tuesday logo&lt;/a> in the top of your post&lt;/li>
+&lt;li>Link the post back to this one (it’s easier if you comment on this post and link it)&lt;/li>
+&lt;li>Optional: Tweet a link to your post using the &lt;a class="link" href="https://twitter.com/hashtag/TSQL2sday?src=hash" target="_blank" rel="noopener"
+>#tsql2sday hash tag on Twitter&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Extra credit: if you’d like to host your own TSQL Tuesday in the future, &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2017/01/03/t-sql-tuesday-rules-of-engagement.aspx" target="_blank" rel="noopener"
+>read the full rules for info on how to sign up&lt;/a>. Just like I did but don&amp;rsquo;t forget its your month!!&lt;/p>
+&lt;h2 id="this-months-topic-lets-get-all-posh---what-are-you-going-to-automate-today">This month’s topic: Let&amp;rsquo;s get all Posh - What are you going to automate today?
+&lt;/h2>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/PowerShell.png"
+loading="lazy"
+alt="PowerShell"
+>
+It is no surprise to those that know me that I will choose PowerShell as the topic for this month. I am passionate about PowerShell because it has enabled me to have the career I have today and to visit numerous countries all around the world, meet people and talk about PowerShell. By my reckoning &lt;a class="link" href="http://tsqltuesday.com/?s=PowerShell" target="_blank" rel="noopener"
+>searching the TSQL Tuesday website&lt;/a> it has been over 3 years since we had a topic specific to PowerShell. So I would like you to blog about PowerShell and SQL Server (or other interesting data platform products)&lt;/p>
+&lt;p>If you don&amp;rsquo;t know or use PowerShell GREAT! That&amp;rsquo;s awesome.&lt;/p>
+&lt;p>Please spend an hour or so with it and tell us how you got on and what and how you learned. Just like &lt;a class="link" href="https://www.brentozar.com/archive/2017/07/live-blogging-erik-vs-PowerShell/" target="_blank" rel="noopener"
+>Erik and Brent did&lt;/a>. You could install one of the community modules like &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a>, &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> , &lt;a class="link" href="https://www.PowerShellgallery.com/packages/SQLDiagAPI" target="_blank" rel="noopener"
+>SQLDiagAPI&lt;/a>  or the Microsoft ones &lt;a class="link" href="https://www.PowerShellgallery.com/packages/Sqlserver" target="_blank" rel="noopener"
+>sqlserver&lt;/a> or &lt;a class="link" href="https://github.com/Microsoft/ReportingServicesTools" target="_blank" rel="noopener"
+>SSRS&lt;/a> and try them out and tell us what you learned.&lt;/p>
+&lt;p>If you want help whilst doing this please make use of the #PowerShellhelp channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a>&lt;/p>
+&lt;p>This will be of so much benefit to all people who don&amp;rsquo;t use PowerShell and want to start to learn about it.&lt;/p>
+&lt;p>If you do use PowerShell and SQL then either tell the tale of the best thing you have automated or a beginners post to show people how to start using PowerShell. I have heard many stories and am looking forward to tales of&lt;/p>
+&lt;ul>
+&lt;li>testing backups&lt;/li>
+&lt;li>doing migrations&lt;/li>
+&lt;li>resetting log shipping&lt;/li>
+&lt;li>creating things in the cloud and on premises&lt;/li>
+&lt;li>SQL on Linux with PowerShell on Linux&lt;/li>
+&lt;li>using Pester for testing&lt;/li>
+&lt;li>automating manual tasks&lt;/li>
+&lt;li>automating incident knowledge gathering&lt;/li>
+&lt;li>continuous integration and delivery&lt;/li>
+&lt;/ul>
+&lt;p>and many more. I will read all of them and do a write up of them later next week.&lt;/p>
+&lt;p>Invoke-Coffee&lt;/p>
+&lt;p>Start-BlogWriting -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Get-BlogProofRead&lt;/p>
+&lt;p>Post-Blog -Date ‘September 12th 2017’ -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Write-Tweet -Hashtag ‘TSQL2sday’ -Message &amp;lsquo;This is my cool blogpost&amp;rsquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/keep-calm-and-PowerShell.jpg"
+loading="lazy"
+alt="keep calm and PowerShell.jpg"
+>&lt;/p></description></item><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p>Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+>I wrote about using Power Bi to display my checkins&lt;/a>. I only started this in June and this is where I have been :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/swarm.png"
+loading="lazy"
+alt="swarm"
+>&lt;/p>
+&lt;p>I learnt about &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> and ended the year incorporating it into &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>. I also started using &lt;a class="link" href="https://github.com/SQLDBAWithABeard" target="_blank" rel="noopener"
+>GitHub&lt;/a> It is quite surprising to me how much time I now spend using both. I also had to start learning &lt;a class="link" href="https://msdn.microsoft.com/en-us/PowerShell/dsc/overview" target="_blank" rel="noopener"
+>DSC&lt;/a> for the client I was working with because as &amp;rsquo;the PowerShell guy&amp;rsquo; I was the one who could the easiest. I learnt things and &lt;a class="link" href="http://sqldbawithabeard.com/2016/01/31/PowerShell-pester-the-script-failed-due-to-call-depth-overflow/" target="_blank" rel="noopener"
+>then forgot them causing me to find this Pester post via google later in the year!!&lt;/a> (That&amp;rsquo;s a big reason for blogging by the way)&lt;/p>
+&lt;p>Early in the year we organised with &lt;a class="link" href="http://www.sqlsaturday.com/496/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section" target="_blank" rel="noopener"
+>https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>The Beard says&lt;/p>
+&lt;blockquote>
+&lt;p>When you go to an event -  Say thank you to the organisers and volunteers&lt;/p>&lt;/blockquote>
+&lt;p>and a TERRIBLE thing happened - I broke my DBA Team mug&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/WP_20160223_07_51_03_Pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Luckily the fine folk at &lt;a class="link" href="http://www.red-gate.com/" target="_blank" rel="noopener"
+>redgate&lt;/a> sorted me out with a replacement from deep in the stores somewhere and gave it to me at SQL Saturday Exeter :-) Thank you.&lt;/p>
+&lt;p>I spoke at the PowerShell Conference Europe and met and made some great friends which lead to me speaking at the PowerShell Monday in Munich and the Dutch PowerShell Usergroup. SQL Saturday Dublin was a blast, its a wonderful city, Manchester had a whole PowerShell Track :-) and Cambridge was memorable for the appalling journey as well as the chance to share a stage with &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy&lt;/a>. PowerShell Conference Asia in the sovereign city-state of Singapore was such a good event and place. Lastly of course was Slovenia with its fantastic Christmas lights and awesome event organisation. I visited some user groups too. Southampton run by my good friends &lt;a class="link" href="https://twitter.com/sqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> and &lt;a class="link" href="https://twitter.com/steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> Congratulations to John on his first MVP award yesterday, Cardiff for the Return of the Battle of the Beards with Terry McCann and Tobiasz Koprowski where the projector threw its toys out of the pram and Birmingham in the school hall which was slightly chilly (theres a joke there for some people)&lt;/p>
+&lt;p>Amazing things happened&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>And that&amp;rsquo;s the biggest and bestest thing about this year. Some amazing new friends and spending time with all my other friends. I started writing out a list but was terrified I would have missed someone out, so to all my friends&lt;/p>
+&lt;p>THANK YOU for a brilliant 2016 and 2017 shall be just as good :-)&lt;/p>
+&lt;p>Here are a few of my pics from the year with a lot of my friends&lt;/p>
+&lt;p>[gallery type=&amp;ldquo;circle&amp;rdquo; columns=&amp;ldquo;9&amp;rdquo; ids=&amp;ldquo;3082,3083,3084,3085,3086,3087,3088,3089,3090,3091,3092,3093,3094,3095,3096,3097,3098,3099,3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3133,3134,3077,3075,3074,3073,3067,3068,3069,3070,3071,3072,3066,3065,3064,3063,3062,3061,3055,3056,3057,3058,3059,3060,3054,3053,3052,3051,3050,3049,2943,2950,2897,2923,3046,2924,2927,3047,2933,3048&amp;rdquo;]&lt;/p></description></item><item><title>Enabling Cortana for dbareports PowerBi</title><link>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</link><pubDate>Sun, 13 Nov 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png" alt="Featured image of post Enabling Cortana for dbareports PowerBi" />&lt;p>Last week at the Birmingham user group I gave a presentation about PowerShell and SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg"
+loading="lazy"
+alt="saved-image-from-tweetium-8"
+>&lt;/a>&lt;/p>
+&lt;p>It was a very packed session as I crammed in the &lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/" target="_blank" rel="noopener"
+>new sqlserver module&lt;/a>, &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> 🙂 On reflection I think this is a bit too much for a one hour session but at the end of the session I demo’d live Cortana using the dbareports dataset and returning a Cortana PowerBi page.&lt;/p>
+&lt;p>As always it took a couple of goes to get it right but when it goes correctly it is fantastic. I call it a salary increasing opportunity! Someone afterwards asked me how it was done so I thought that was worth a blog post&lt;/p>
+&lt;p>There is a video below but the steps are quite straightforward.&lt;/p>
+&lt;h2 id="add-cortana-specific-pages">Add Cortana Specific Pages
+&lt;/h2>&lt;p>Whilst you can just enable Cortana to access your dataset, as shown later in this post, which enables Cortana to search available datasets and return an appropriate visualisation it is better to provide specific pages for Cortana to use and display. You can do this in PowerBi Desktop&lt;/p>
+&lt;p>Start by adding a new page in your report by clicking on the plus button&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/add-page.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/add-page.png"
+loading="lazy"
+alt="add page.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>and then change the size of the report page by clicking on the paintbrush icon in the visualisation page.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/page-size.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/page-size.png"
+loading="lazy"
+alt="page-size"
+>&lt;/a>&lt;/p>
+&lt;p>This creates a page that is optimised for Cortana to display and also will be the first place that Cortana will look to answer the question&lt;/p>
+&lt;blockquote>
+&lt;p>Power BI first looks for answers in &lt;a class="link" href="https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-desktop-entity-cards/" target="_blank" rel="noopener"
+>Answer Pages&lt;/a> and then searches your datasets and reports for other answers and displays them in the form of visualizations. The highest-scoring results display first as &lt;em>best matches&lt;/em>, followed by links to other possible answers and applications. Best matches come from Power BI Answer Pages or Power BI reports.&lt;/p>&lt;/blockquote>
+&lt;p>Rename the page so that it contains the words or phrase you expect to be in the question such as “Servers By Version” You will help Cortana and PowerBi to get your results better if you use some of the column names in your dataset&lt;/p>
+&lt;p>Then it is just another report page and you can add visualisations just like any other page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-page.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-page.png"
+loading="lazy"
+alt="cortana page.PNG"
+>&lt;/a>&lt;/p>
+&lt;h2 id="make-cortana-work-for-you-and-your-users">Make Cortana work for you and your users
+&lt;/h2>&lt;p>If your users are likely to use a number of different words in their questions you can assist Cortana to find the right answer by adding alternate names. So maybe if your page is sales by store you might add shop, building, results, amount, orders. This is also useful when Cortana doesn’t understand the correct words as you will notice in the screenshot below I have added “service” for “servers” and “buy” for “by” to help get the right answer. You can add these alternate words by clicking the paintbrush under visualisations and then Page Information&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-additional.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-additional.png"
+loading="lazy"
+alt="cortana-additional"
+>&lt;/a>&lt;/p>
+&lt;h2 id="publish-your-pbix-file-to-powerbicom">Publish your PBIX file to PowerBi.com
+&lt;/h2>&lt;p>To publish your PowerBi report to &lt;a class="link" href="https://powerbi.com" target="_blank" rel="noopener"
+>PowerBi.com&lt;/a> either via the Publish button in &lt;a class="link" href="http://go.microsoft.com/fwlink/?LinkID=521662" target="_blank" rel="noopener"
+>PowerBi desktop&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/publish.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/publish.png"
+loading="lazy"
+alt="publish"
+>&lt;/a>&lt;/p>
+&lt;p>or by using the &lt;a class="link" href="https://github.com/DevScope/powerbi-powershell-modules" target="_blank" rel="noopener"
+>PowerBiPS module&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> Install-Module -Name PowerBIPS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Grab the token, will require a sign in
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $authToken = Get-PBIAuthToken –Verbose
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Import-PBIFile –authToken $authToken –filePath “Path to PBIX file” –verbose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="enable-cortana">Enable Cortana
+&lt;/h2>&lt;p>In your browser log into &lt;a class="link" href="https://powerbi.com" target="_blank" rel="noopener"
+>https://powerbi.com&lt;/a> and then click on the cog and then settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/powerbicom.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/powerbicom.png"
+loading="lazy"
+alt="powerbicom.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>then click on Datasets&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/settings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/settings.png"
+loading="lazy"
+alt="settings"
+>&lt;/a>&lt;/p>
+&lt;p>Then choose the dataset – in this case dbareports SQL Information sample and click the tick box to Allow Cortana to access the this dataset and then click apply&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/dataset-settings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/dataset-settings.png"
+loading="lazy"
+alt="dataset settings.PNG"
+>&lt;/a>&lt;/p>
+&lt;h2 id="use-cortana-against-your-powerbi-data">Use Cortana against your PowerBi data
+&lt;/h2>&lt;p>You can type into the Cortana search box and it will offer the opportunity for you to choose your PowerBi data&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search.png"
+loading="lazy"
+alt="cortana-search"
+>&lt;/a>&lt;/p>
+&lt;p>but it is so much better when you let it find the answer 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-11.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-11.png"
+loading="lazy"
+alt="cortana-search-1"
+>&lt;/a>&lt;/p>
+&lt;p>and if you want to go to the PowerBi report there is a handy link at the bottom of the Cortana page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png"
+loading="lazy"
+alt="cortana-search-2"
+>&lt;/a>&lt;/p>
+&lt;p>I absolutely love this, I was so pleased when I got it to work and the response when I show people is always one of wonder for both techies and none-techies alike&lt;/p>
+&lt;h2 id="the-conditions-for-cortana-to-work">The conditions for Cortana to work
+&lt;/h2>&lt;p>You will need to have added your work or school Microsoft ID to the computer or phone that you want to use Cortana on and that account must be able to access the dataset either because it is the dataset owner or because a dashboard using that dataset has been shared with that account.&lt;/p>
+&lt;p>&lt;strong>&lt;a class="link" href="https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-enable/" target="_blank" rel="noopener"
+>From this page on PowerBi.com&lt;/a>&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>When a new dataset or custom Cortana Answer Page is added to Power BI and enabled for Cortana it can take up to 30 minutes for results to begin appearing in Cortana. Logging in and out of Windows 10, or otherwise restarting the Cortana process in Windows 10, will allow new content to appear immediately.&lt;/p>&lt;/blockquote>
+&lt;h2 id="its-not-perfect">It’s not perfect!
+&lt;/h2>&lt;p>When you start using Cortana to query your data you will find that at times it is very frustrating. My wife was in fits of giggles listening to me trying to record the video below as Cortana refused to understand that I was saying “servers” and repeatedly searched Bing for “service” Whilst you can negate the effect by using the alternate names for the Q and A settings it is still a bit hit and miss at times.&lt;/p>
+&lt;h2 id="it-is-amazing">It is amazing
+&lt;/h2>&lt;p>There is something about giving people the ability to just talk to their device in a meeting and for example with dbareports ask&lt;/p>
+&lt;blockquote>
+&lt;p>Which clients are in Bolton&lt;/p>&lt;/blockquote>
+&lt;p>or&lt;/p>
+&lt;blockquote>
+&lt;p>When was the last backup for client The Eagles&lt;/p>&lt;/blockquote>
+&lt;p>and get the information they require and a link to the report in PowerBi.com. I am certain that the suits will be absolutely delighted at being able to show off in that way which is why I call it a salary increasing opportunity 🙂&lt;/p>
+&lt;h2 id="we-would-love-you-to-come-and-join-us-at-the-sql-community-collaborative">We would love YOU to come and join us at the SQL Community Collaborative
+&lt;/h2>&lt;p>Help us make &lt;code>dbatools&lt;/code>, &lt;code>dbareports&lt;/code> and &lt;code>Invoke-SQLCmd2&lt;/code> even better. You can join in by forking the repos in GitHub and writing your code and then performing a PR but we would much rather that you came and discussed new requests in our Trello boards, raised issues in GitHub and generally discussed the modules in the SQL Server Community Slack &lt;code>#dbatools&lt;/code> &lt;code>#dbareports&lt;/code>. We are also looking for assistance with our wiki pages, Pester tests and appveyor integration for our builds and any comments people want to make&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/sqlcollaborative/" target="_blank" rel="noopener"
+>SQL Server Collaborative GitHub Organisation holding the modules.&lt;/a> Go here to raise issues, fork the repositories or download the code&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/trello" target="_blank" rel="noopener"
+>dbatools Trello for discussion about new cmdlets&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a> where you can find #dbatools and #dbareports as well as over 1100 people discussing all aspects of the Data Platform, events, jobs, presenting&lt;/p>
+&lt;p>COME AND JOIN US&lt;/p></description></item><item><title>The SQL Server Community Collaborative GitHub Organisation is born</title><link>https://blog.robsewell.com/blog/the-sql-server-community-collaborative-github-organisation-is-born/</link><pubDate>Wed, 14 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-sql-server-community-collaborative-github-organisation-is-born/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg" alt="Featured image of post The SQL Server Community Collaborative GitHub Organisation is born" />&lt;p>My wonderful friend &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy LeMaire&lt;/a> and I are the creators of two GitHub repositories for SQL Server and PowerShell called &lt;a class="link" href="https://dbatools.io/" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>&lt;/p>
+&lt;p>If you are working with SQL Server I highly recommend that you take a look at the vast number of commands available to you at &lt;a class="link" href="https://dbatools.io/" target="_blank" rel="noopener"
+>dbatools&lt;/a> which will help you complete tasks within SQL Server especially for Instance migrations and also a growing number of best practice implementations&lt;/p>
+&lt;p>Both of these modules are not just the work of one person any more. We have over 20 people who have collaborated on the modules THANK YOU ALL and more that have provided guidance and comments via the Slack Channels in the SQL Server Community Slack &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a> and via the Trello boards &lt;a class="link" href="https://dbatools.io/trello" target="_blank" rel="noopener"
+>https://dbatools.io/trello&lt;/a> and &lt;a class="link" href="https://dbareports/trello" target="_blank" rel="noopener"
+>https://dbareports/trello&lt;/a>&lt;/p>
+&lt;p>At SQL Saturday Cambridge this weekend I was proud to join Chrissy in her presentation as we talked about both modules. Heres a fabulous picture of us with Buck Woody&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg"
+loading="lazy"
+alt="wp_20160910_10_14_58_pro"
+>&lt;/a>&lt;/p>
+&lt;p>We had discussed previously that it didn’t feel quite right that these community tools were under our own personal accounts and it also caused some administration issues with allowing access. So with that in mind after a naming discussion in the slack channel we created an organisation to hold them both&lt;/p>
+&lt;h2 id="sql-server-community-collaborative"> SQL Server Community Collaborative
+&lt;/h2>&lt;p>is born at &lt;a class="link" href="https://github.com/sqlcollaborative" target="_blank" rel="noopener"
+>https://github.com/sqlcollaborative&lt;/a>&lt;/p>
+&lt;p>Nothing much changes except the name. we have even found that all the old links work and GitHub desktop updated. We will continue to make great commands with all of our fantastic collaborators. Discussions will happen in Slack and organisation in Trello and we will continue to grow and learn and teach and share and create together.&lt;/p>
+&lt;p>We would love you to come and join us&lt;/p></description></item><item><title>Converting SQL Agent Job Duration to TimeSpan using PowerShell</title><link>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</link><pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/timespan.png" alt="Featured image of post Converting SQL Agent Job Duration to TimeSpan using PowerShell" />&lt;p>When you look in msdb for the SQL Agent Job duration you will find that it is an int.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png"
+loading="lazy"
+alt="sysjobshistoiry"
+>&lt;/a>&lt;/p>
+&lt;p>This is also the same when you look at &lt;code>Get-SQLAgentJobHistory &lt;/code>from the sqlserver module. (You can get this by &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/mt238290.aspx" target="_blank" rel="noopener"
+>downloading the latest SSMS release from here&lt;/a>)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png"
+loading="lazy"
+alt="agentjobhistoryproperties"
+>&lt;/a>&lt;/p>
+&lt;p>This means that when you look at the various duration of the Agent Jobs you get something like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/duration1.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/duration1.png"
+loading="lazy"
+alt="duration.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>The first job took 15 hours 41 minutes  53 seconds, the second 1 minute 25 seconds, the third 21 seconds. This makes it quite tricky to calculate the duration in a suitable datatype. In T-SQL people use scripts like the following from &lt;a class="link" href="https://www.mssqltips.com/sqlservertip/2850/querying-sql-server-agent-job-history-data/" target="_blank" rel="noopener"
+>MSSQLTips.com&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">((run_duration/10000*3600 + (run_duration/100)%100*60 + run_duration%100 + 31 ) / 60)  as &amp;#39;RunDurationMinutes&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I needed more information than the number of minutes so I have this which will convert the Run Duration to a timespan&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$FormattedDuration = @{Name = &amp;#39;FormattedDuration&amp;#39; ; Expression = {[timespan]$_.RunDuration.ToString().PadLeft(6,&amp;#39;0&amp;#39;).insert(4,&amp;#39;:&amp;#39;).insert(2,&amp;#39;:&amp;#39;)}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/formatted.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/formatted.png"
+loading="lazy"
+alt="formatted.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>So how did I get to there?&lt;/p>
+&lt;p>First I tried to just convert it. In PowerShell you can define a datatype in square brackets and PowerShell will try to convert it&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/timespan.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/timespan.png"
+loading="lazy"
+alt="timespan"
+>&lt;/a>&lt;/p>
+&lt;p>It did its best but it converted it to ticks! So we need to convince PowerShell that this is a proper timespan. First we need to convert the run duration to a standard length, you can use the PadLeft method of a string to do this which will ensure that a string has a length and precede the current string with a value you choose until the string is that length.&lt;/p>
+&lt;p>Lets have a length of 6 and preceding zeros PadLeft(6,’0′)&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/padlefterror.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/padlefterror.png"
+loading="lazy"
+alt="padlefterror"
+>&lt;/a>&lt;/p>
+&lt;p>But this works only if it is a string!! Remember red text is useful, it will often contain the information you need to resolve your error. Luckily there is a method to turn an int to a string. I am using the foreach method to demonstrate&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/padleft-with-string.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/padleft-with-string.png"
+loading="lazy"
+alt="padleft-with-string"
+>&lt;/a>&lt;/p>
+&lt;p>Now every string is 6 characters long starting with zeros. So all that is left is to format this with colons to separate the hours and minutes and the minutes and seconds. We can do this with the insert method. You can find out the methods using Get-Member or its alias gm&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/methods.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/methods.png"
+loading="lazy"
+alt="methods.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>So the insert method takes an int for the startindex and a string value to enter&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/insert.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/insert.png"
+loading="lazy"
+alt="insert"
+>&lt;/a>&lt;/p>
+&lt;p>There we go now we have some proper formatted timespans however they are still strings. We can then convert them using [timespan] Now we can format the results within the select by using an expression as shown below&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/select.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/select.png"
+loading="lazy"
+alt="select"
+>&lt;/a>&lt;/p>
+&lt;p>and as you can see it is a timespan now&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/timespan-property.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/timespan-property.png"
+loading="lazy"
+alt="timespan property.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>On a slight side note. I needed the durations for Agent Jobs with a certain name within the last 6 days.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/getting-agent-jobs1.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/getting-agent-jobs1.png"
+loading="lazy"
+alt="getting-agent-jobs"
+>&lt;/a>&lt;/p>
+&lt;p>I did this by passing an array of servers (which I got from my &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> database) to &lt;code>Get-SQLAgentJobHistory&lt;/code>. I then used the Where method to filter for JobName and the Job Outcome step of the history. I compared the RunDate property  to &lt;code>Get-Date&lt;/code> (today) adding -6 days using the &lt;code>AddDays&lt;/code> method 🙂&lt;/p>
+&lt;p>Hopefully this will be of use to people and also I have it recorded for the next time I need to do it 🙂&lt;/p></description></item></channel></rss>
