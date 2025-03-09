@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Workspace on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/workspace/</link><description>Recent content in Workspace on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/workspace/index.xml" rel="self" type="application/rss+xml"/><item><title>My current VS Code Extensions and using a workspace file</title><link>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" />&lt;p>I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p>
+&lt;h2 id="listing-extensions">Listing Extensions
+&lt;/h2>&lt;p>From the command line you can list your extensions using&lt;/p>
+&lt;pre>&lt;code>code --list-extensions
+code-insiders --list-extensions
+&lt;/code>&lt;/pre>
+&lt;p>My list looks like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-31.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-extensions">Installing Extensions
+&lt;/h2>&lt;p>You can install extensions by opening the Extensions view in Visual Studio Code and searching for the extension. The list I have below has the precise names for each extension which you can use to search&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-24.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can also install extensions from the command-line with&lt;/p>
+&lt;pre>&lt;code>code --install-extension &amp;lt;extensionid&amp;gt;
+code-insiders --install-extension &amp;lt;extensionid&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;h2 id="my-extensions">My Extensions
+&lt;/h2>&lt;p>I am going to list these in alphabetical order by display name for ease (my ease that is!)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-1.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Because Chrissy LeMaire and I are writing &lt;a class="link" href="https://beard.media/book" target="_blank" rel="noopener"
+>dbatools in a Month of Lunches&lt;/a> using AsciiDoc, it makes sense to have an extension enabling previewing and syntax, you can find it &lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=stayfool.vscode-asciidoc" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-2.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure I use the Azure Account Extension – ms-vscode.azure-account&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-3.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I use Azure CLI so I make use of the functionality of the Azure CLI Tools extension ms-vscode.azurecli&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-4.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For interacting with Azure Repos I use the ms-vsts.team extension&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-5.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>When creating ARM templates, this extension is very useful msazurermtools.azurerm-vscode-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-6.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have a few theme extensions, this one is for fun in demos 😉 beardedbear.beardedtheme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-7.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The blackboard theme is my default one gerane.theme-blackboard&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-8.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Chasing closing brackets is much easier with the Bracket Pair Colorizer, I use the beta version coenraads.bracket-pair-colorizer-2&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-10.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I am rubbish at spelling and typing so I use this to help point out the issues! streetsidesoftware.code-spell-checker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-11.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Using the Docker extension adds another view to Visual Studio Code to ease working with containers ms-azuretools.vscode-docker&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-12.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>As an open-source project maintainer it is good to be able to work with GitHub pull requests without leaving Visual Studio Code github.vscode-pull-request-github_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-13.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>GitLens is absolutely invaluable when working with source control. It has so many features. This is an absolute must eamodio.gitlens&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-14.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Working with Kubernetes? This extension adds another view for interacting with your cluster ms-kubernetes-tools.vscode-kubernetes-tools&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-15.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Visual Studio Live Share enables you to collaborate in real-time in Visual Studio Code with your colleagues or friends. I blogged about this &lt;a class="link" href="https://blog.robsewell.com/visual-studio-code-live-sharing-set-up/" target="_blank" rel="noopener"
+>here&lt;/a> ms-vsliveshare.vsliveshare&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-16.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I love writing markdown and this linter assists me to ensure that my markdown is correct davidanson.vscode-markdownlint&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-17.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>The Material Icon Theme ensures that there are pretty icons in my editor! pkief.material-icon-theme&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-18.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have both the PowerShell extension ms-vscode.powershell and the PowerShell preview extension ms-vscode.powershell-preview installed but only one can be enabled at a time&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-19.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>This suite of extensions enables easy remote development so that you can develop your PowerShell scripts, for example, inside a ubuntu container running PowerShell 7 or inside Windows Subsystem for LInux ms-vscode-remote.vscode-remote-extensionpack_Preview_&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-20.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Writing for cross-platform means looking out for line endings and this extension will display them and any whitespace in your editor medo64.render-crlf&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-21.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>An absolutely essential extension which enables me to backup all of my Visual Studio Code settings, shortcuts, extensions into a GitHub gist and keep all of my machines feeling the same. shan.code-settings-sync&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-22.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For working with SQL Server within Visual Studio Code and having a view for my instances as well as a linter and intellisense I use ms-mssql.mssql&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-23.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Yaml files and spaces! I no longer get so confused with this extension to help me 🙂 redhat.vscode-yaml&lt;/p>
+&lt;h2 id="workspaces">Workspaces
+&lt;/h2>&lt;p>Now that is a lot of extensions and I dont need all of them everytime. I use workspaces to help with this. I will create a workspace file for the project I am working on.&lt;/p>
+&lt;p>I open or create the folders I will be working on and then click File and Save Workspace As and save the file in the root of the folder.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-25.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now, the next time I want to open the workspace, I can open the workspace file or if I open the folder Visual Studio Code will helpfully prompt me&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Now I can have all of my settings retained for that workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-27.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>For this folder, I am ensuring that the PowerShell extension uses the PSScriptAnalyzer Settings file that I have created so that it will show if the code is compatible with the versions of PowerShell I have chosen. I can define settings for a workspace in the settings file, which you can open using CTRL and ,&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-28.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>But I can also enable or disable extensions for a workspace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-29.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>So everytime I open this workspace I am only loading the extensions I want&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-30.png"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>

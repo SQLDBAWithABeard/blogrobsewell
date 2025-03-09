@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>User Group on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/user-group/</link><description>Recent content in User Group on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/user-group/index.xml" rel="self" type="application/rss+xml"/><item><title>Microsoft Values The Community</title><link>https://blog.robsewell.com/blog/microsoft-values-the-community/</link><pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoft-values-the-community/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/MSCommunity.png" alt="Featured image of post Microsoft Values The Community" />&lt;h1 id="what-happens-next">What Happens Next?
+&lt;/h1>&lt;p>When PASS announced that operations would cease, a common question was &amp;ldquo;OK, so what happens now? To SQL Saturdays?, to the summit?, to the local user groups?&amp;rdquo; The answers to some of those questions will lie in other conversations but for right now, let&amp;rsquo;s talk about Local User Groups.&lt;/p>
+&lt;h1 id="user-groups">User Groups
+&lt;/h1>&lt;p>User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from.&lt;/p>
+&lt;p>Attending my local user group for the first time really helped me to improve. &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>At the time I was really struggling in my job with no idea how to get support from people who &lt;strong>know&lt;/strong> what should be done.&lt;/a> I joined the group, I made many friends and I learnt a lot. My OneNote is full of notes I have taken during User Group sessions. I became involved in running the user group and the associated SQL Saturday and then became aware of the wider community.&lt;/p>
+&lt;p>We are always very proud of the number of speakers who started their speaking career at our user group and have gone to great things. I too, &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>started my speaking career at our user group&lt;/a>.&lt;/p>
+&lt;p>Our little user group in Exeter in the UK (or in Teams these days!) and user groups in general have a big place in my heart and I am a strong supporter of them. (If you would like a speaker, please always feel free to get in touch with me.) so I too, wondered&lt;/p>
+&lt;blockquote>
+&lt;p>What is going to happen to the user groups now?&lt;/p>&lt;/blockquote>
+&lt;h1 id="microsoft-values-the-community">Microsoft Values The Community
+&lt;/h1>&lt;p>Microsoft have announced the support that they will be giving to user groups. You can watch Buck Woody &lt;a class="link" href="https://twitter.com/BuckWoodyMSFT" target="_blank" rel="noopener"
+>t&lt;/a> explain everything that the Microsoft Data Platform is doing to empower the community on Youtube&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/obFlSwpIihc"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>(While you are there, I suggest subscribing to the channel, it&amp;rsquo;s really awesome)&lt;/p>
+&lt;p>Microsoft always has and always will support the technical professionals who use their products and they recognise that at the grass roots, the local user groups are the core of the community.&lt;/p>
+&lt;h1 id="so-microsoft-are-taking-over-the-user-groups">So Microsoft are taking over the User Groups?
+&lt;/h1>&lt;p>NO.&lt;/p>
+&lt;p>Microsoft&amp;rsquo;s philosophy is that local user groups should be Community-owned but they can be Microsoft-empowered. They have created a series of assets, resources, and benefits for user group leaders to run their groups. I am astonished at the scale of what has been achieved in a short amount of time. There are a lot of benefits that will make it easier for user groups to have a stable presence and all the tools that they need to enable their user group .&lt;/p>
+&lt;h1 id="what-is-being-offered-">What is being offered ?
+&lt;/h1>&lt;p>If you want to skip right to the sign up please fill out the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>The Azure Data Community will provide&lt;/p>
+&lt;ul>
+&lt;li>The Community Landing Page &lt;a class="link" href="aka.ms/datacommunity?WT.mc_id=DP-MVP-5002693" >aka.ms/datacommunity&lt;/a> which is central gateway for useful Azure Data Community resources from blog posts and videos to the user groups.&lt;/li>
+&lt;li>Meetup Pro fees, fully paid for by Microsoft saving user groups leaders from paying out of their own pocket or finding sponsorship.&lt;/li>
+&lt;li>A centralised way to find groups and events in the Data Community &lt;a class="link" href="https://www.meetup.com/pro/azuredatatechgroups/" target="_blank" rel="noopener"
+>https://www.meetup.com/pro/azuredatatechgroups/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datacommunity.png"
+loading="lazy"
+alt="Community"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Full Microsoft Teams subscriptions with all the bells &amp;amp; whistles for qualified Community Groups using a customisable template for the user group to define as they wish. This will be fantastic for running virtual events, sharing slides and demo code as well as keping in touch wiht your fellow user group members&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Community Leader Collaboration (via Teams &amp;amp; Meetup) enabling all the user groups leaders to be able to communicate, collaborate and share resources.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="do-i-have-to-use-this-">Do I have to use this ?
+&lt;/h1>&lt;p>NO.&lt;/p>
+&lt;p>You are in charge, if you already run your user group and don&amp;rsquo;t need these resources, let the team know and they will get you listed on the community gateway site.&lt;/p>
+&lt;h1 id="what-are-the-requirements">What are the requirements?
+&lt;/h1>&lt;p>Throughout the duration of the Group’s participation in the Program, the Group will:&lt;/p>
+&lt;ol>
+&lt;li>Have a group leader and a designated co-leader who have each accepted these T&amp;amp;Cs.&lt;/li>
+&lt;li>Not charge other members a fee to attend Group meetings, except in cases in which the venue and/or hosting costs (e.g., food and beverages) are passed through to members.&lt;/li>
+&lt;li>Maintain a published code of conduct that is easily accessible from the Group’s home page. See guidance &lt;a class="link" href="https://aka.ms/atg/guidance?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/guidance&lt;/a>.&lt;/li>
+&lt;li>Maintain a regular meeting cadence including having meetings at least six times per year that relate to or cover Azure Data products &amp;amp; services or relate to Diversity, Equity &amp;amp; Inclusion (DE&amp;amp;I) or Professional Development targeted to data professionals.&lt;/li>
+&lt;li>Comply with Program’s Code of Conduct located at &lt;a class="link" href="https://aka.ms/atg/code_of_conduct?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/code_of_conduct&lt;/a>.&lt;/li>
+&lt;li>Adhere to Microsoft’s Trademark and Brand guidelines, when using any Microsoft trademarks or referring to Microsoft’s software, products or services (see &lt;a class="link" href="https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx&lt;/a>.&lt;/li>
+&lt;/ol>
+&lt;h1 id="which-technologies-do-these-benefits-apply-to">Which technologies do these benefits apply to?
+&lt;/h1>&lt;ul>
+&lt;li>SQL Server (on Windows, Linux, and in Containers, on-premises and in Microsoft Azure)&lt;/li>
+&lt;li>Azure Data Lake&lt;/li>
+&lt;li>Azure Cosmos DB&lt;/li>
+&lt;li>Azure HDInsight, Hadoop and Spark on Azure&lt;/li>
+&lt;li>Azure Search&lt;/li>
+&lt;li>Data Warehousing (Azure SQL Data Warehouse, Fast Track and APS)&lt;/li>
+&lt;li>Azure Stream Analytics&lt;/li>
+&lt;li>Cortana Intelligence Suite&lt;/li>
+&lt;li>Information Management (ADF, SSIS, and Data Sync)&lt;/li>
+&lt;li>SQL Server Reporting Services and Analysis Services&lt;/li>
+&lt;li>SQL Server Machine Learning Services&lt;/li>
+&lt;li>Azure Database for MySQL&lt;/li>
+&lt;li>Azure Database for PostgreSQL&lt;/li>
+&lt;li>Azure SQL (Database, Pools, Serverless, Hyperscale, Managed Instance, Virtual Machines)&lt;/li>
+&lt;li>Azure SQL Edge&lt;/li>
+&lt;li>Big Data Clusters&lt;/li>
+&lt;li>Azure Databricks&lt;/li>
+&lt;li>Azure Arc Enabled Data Services&lt;/li>
+&lt;li>Azure Synapse Analytics&lt;/li>
+&lt;li>Azure Data Catalog&lt;/li>
+&lt;/ul>
+&lt;p>Sign up vis the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>Thank you to all of those people involved in making this happen.&lt;/p></description></item><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p>Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+>I wrote about using Power Bi to display my checkins&lt;/a>. I only started this in June and this is where I have been :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/swarm.png"
+loading="lazy"
+alt="swarm"
+>&lt;/p>
+&lt;p>I learnt about &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> and ended the year incorporating it into &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>. I also started using &lt;a class="link" href="https://github.com/SQLDBAWithABeard" target="_blank" rel="noopener"
+>GitHub&lt;/a> It is quite surprising to me how much time I now spend using both. I also had to start learning &lt;a class="link" href="https://msdn.microsoft.com/en-us/PowerShell/dsc/overview" target="_blank" rel="noopener"
+>DSC&lt;/a> for the client I was working with because as &amp;rsquo;the PowerShell guy&amp;rsquo; I was the one who could the easiest. I learnt things and &lt;a class="link" href="http://sqldbawithabeard.com/2016/01/31/PowerShell-pester-the-script-failed-due-to-call-depth-overflow/" target="_blank" rel="noopener"
+>then forgot them causing me to find this Pester post via google later in the year!!&lt;/a> (That&amp;rsquo;s a big reason for blogging by the way)&lt;/p>
+&lt;p>Early in the year we organised with &lt;a class="link" href="http://www.sqlsaturday.com/496/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section" target="_blank" rel="noopener"
+>https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>The Beard says&lt;/p>
+&lt;blockquote>
+&lt;p>When you go to an event -  Say thank you to the organisers and volunteers&lt;/p>&lt;/blockquote>
+&lt;p>and a TERRIBLE thing happened - I broke my DBA Team mug&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/WP_20160223_07_51_03_Pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Luckily the fine folk at &lt;a class="link" href="http://www.red-gate.com/" target="_blank" rel="noopener"
+>redgate&lt;/a> sorted me out with a replacement from deep in the stores somewhere and gave it to me at SQL Saturday Exeter :-) Thank you.&lt;/p>
+&lt;p>I spoke at the PowerShell Conference Europe and met and made some great friends which lead to me speaking at the PowerShell Monday in Munich and the Dutch PowerShell Usergroup. SQL Saturday Dublin was a blast, its a wonderful city, Manchester had a whole PowerShell Track :-) and Cambridge was memorable for the appalling journey as well as the chance to share a stage with &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy&lt;/a>. PowerShell Conference Asia in the sovereign city-state of Singapore was such a good event and place. Lastly of course was Slovenia with its fantastic Christmas lights and awesome event organisation. I visited some user groups too. Southampton run by my good friends &lt;a class="link" href="https://twitter.com/sqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> and &lt;a class="link" href="https://twitter.com/steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> Congratulations to John on his first MVP award yesterday, Cardiff for the Return of the Battle of the Beards with Terry McCann and Tobiasz Koprowski where the projector threw its toys out of the pram and Birmingham in the school hall which was slightly chilly (theres a joke there for some people)&lt;/p>
+&lt;p>Amazing things happened&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>And that&amp;rsquo;s the biggest and bestest thing about this year. Some amazing new friends and spending time with all my other friends. I started writing out a list but was terrified I would have missed someone out, so to all my friends&lt;/p>
+&lt;p>THANK YOU for a brilliant 2016 and 2017 shall be just as good :-)&lt;/p>
+&lt;p>Here are a few of my pics from the year with a lot of my friends&lt;/p>
+&lt;p>[gallery type=&amp;ldquo;circle&amp;rdquo; columns=&amp;ldquo;9&amp;rdquo; ids=&amp;ldquo;3082,3083,3084,3085,3086,3087,3088,3089,3090,3091,3092,3093,3094,3095,3096,3097,3098,3099,3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3133,3134,3077,3075,3074,3073,3067,3068,3069,3070,3071,3072,3066,3065,3064,3063,3062,3061,3055,3056,3057,3058,3059,3060,3054,3053,3052,3051,3050,3049,2943,2950,2897,2923,3046,2924,2927,3047,2933,3048&amp;rdquo;]&lt;/p></description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p>&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>Jen McCown&lt;/a> and is about Enterprise Strategy.&lt;/p>
+&lt;p>Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+>TSQL Tuesdays over 5 years ago&lt;/a> and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+>you search for them&lt;/a>&lt;/p>
+&lt;p>Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>This post by John Sansom&lt;/a> could have been written for this months party and I recommend that you read it.&lt;/p>
+&lt;p>So here are a few points that I think you should consider if you look after SQL in an Enterprise environment.&lt;/p>
+&lt;ul>
+&lt;li>Enterprise Strategy will undoubtedly garner a whole host of excellent posts and Jen will provide a round up post which will I am certain will be an excellent resource. &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/the-tsql2sday-70-roundup/" target="_blank" rel="noopener"
+>Take a look here&lt;/a>&lt;/li>
+&lt;li>Know where your instances are and have a single place that you can reference them from. Some people recommend a &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/bb895144.aspx?f=255&amp;amp;MSPPError=-2147217396" target="_blank" rel="noopener"
+>Central Management Server&lt;/a> but I find this too restrictive for my needs. I use an InstanceList table in my DBA Database with the following columns [ServerName], [InstanceName] , [Port] , [AG] , [Inactive] , [Environment] and [Location]. This enables me to target instances not just by name but by environment (Dev, Test, Pre-Prod, Live etc), by location or by joining the InstanceList table with another table I can target by the application or any number of other factors. I also capture information about the servers at windows and SQL level to this database so I can target the SQL 2012 servers specifically if need be or any other metric. This is very powerful and enables far greater flexibility than the CMS in my opinion.&lt;/li>
+&lt;li>Use PowerShell (no surprise I would mention this!) PowerShell is a brilliant tool for automation and I use it all of the time&lt;/li>
+&lt;li>Get used to using this piece of PowerShell code&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SELECT [ServerName],[InstanceName],[Port]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FROM [DBADatabase].[dbo].[InstanceList]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Where Inactive = 0 AND NotContactable = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $AlltheServers= Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerNames = $AlltheServers| Select ServerName,InstanceName,Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> foreach ($ServerName in $ServerNames)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ## $ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $InstanceName = $ServerName|Select InstanceName -ExpandProperty InstanceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Port = $ServerName| Select Port -ExpandProperty Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Connection = $ServerName + &amp;#39;\&amp;#39; + $InstanceName + &amp;#39;,&amp;#39; + $Port
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $srv = New-Object (&amp;#39;Microsoft.SqlServer.Management.Smo.Server&amp;#39;) $Connection
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Notice the query variable above, this is where the power lies as it enables you to gather all the instances that you need for your task as described in the bullet post above. Once you get used to doing this you can do things like this identify all the instances with Remote DAC disabled using a query against the DBA Database and then enable it on all servers by adding this code to the loop above&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$srv.RemoteDacEnabled = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$srv.alter()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Very quick very simple and very very powerful. You can also use this to run TSQL scripts against the instances you target but there are some &lt;a class="link" href="https://www.bing.com/search?q=issues%20with%20invoke-sqlcmd&amp;amp;form=EDGEAR&amp;amp;qs=PF&amp;amp;cvid=bafe07c6afd54a6cb0ce7a1583300a79&amp;amp;pq=issues%20with%20invoke-sqlcmd&amp;amp;elv=AF!A!XC!KoOyC2FxnVd!deIwlgRcylR4EqUAG2rfVDNS" target="_blank" rel="noopener"
+>added complications with Invoke-SQLCmd&lt;/a> that you need to be aware of&lt;/p>
+&lt;ul>
+&lt;li>BE CAREFUL. Test and understand and test before you run any script on a live system especially using a script like this which enables you to target ALL of your servers. You must definitely check that your $ServerNames array contains only the instances you need before you make any changes. You need to be ultra-cautious when it is possible to do great damage&lt;/li>
+&lt;li>Write scripts that are robust and handle errors gracefully. I use Jason Wasser @wasserja Write-Log function to write to a text file and wrap my commands in a try catch block.&lt;/li>
+&lt;li>Include comments in your scripts to assist either the future you or the folks in your position in 5 years time. I would also add one of my bug bears - Use the description block in Agent Jobs. The first place any DBA is going to go to when that job fails is to open the properties of the job. Please fill in that block so that anyone troubleshooting knows some information about what the job does or at the very least a link to some documentation about it&lt;/li>
+&lt;li>Finally in my list, don&amp;rsquo;t overdo the alerts. Alerting is vital for any DBA it is a brilliant way to ensure that you quickly know about any issues affecting your estate but &lt;a class="link" href="http://thomaslarock.com/2012/02/the-minimalist-guide-to-database-administration/" target="_blank" rel="noopener"
+>all alerts should be actionable&lt;/a> and in some cases you can automate the action that you can take but the message here is don&amp;rsquo;t send messages to the DBA team email for every single tiny thing or they will get swamped and ignore the vital one. This holds for whichever alerting or monitoring system that you use&lt;/li>
+&lt;/ul>
+&lt;p>This is but a small sub-section of things that you need to consider when responsible for a large SQL estate but if you need help and advice or just moral support and you don’t already interact with the SQL community then make today the day you start. Maybe &lt;a class="link" href="http://thomaslarock.com/sql-family/" target="_blank" rel="noopener"
+>this post by Thomas La Rock&lt;/a> is a good place to start or &lt;a class="link" href="http://www.sqlpass.org/PASSChapters.aspx" target="_blank" rel="noopener"
+>your nearest User Group/Chapter&lt;/a> or the &lt;a class="link" href="https://twitter.com/hashtag/sqlfamily" target="_blank" rel="noopener"
+>#sqlfamily hashtag&lt;/a> or give me a shout and I will gladly help.&lt;/p></description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p>Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>using Power Bi with my DBA Database&lt;/a> I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+>Installing and upgrading default scripts automation - part one - Introduction&lt;/a> which is a series I will continue later.&lt;/p>
+&lt;p>In this post I will show how to create the following report&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/18.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/18.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You will find the latest version of my DBADatabase creation scripts here&lt;/a>.&lt;/p>
+&lt;p>I create the following tables&lt;/p>
+&lt;ul>
+&lt;li>dbo.ClientDatabaseLookup&lt;/li>
+&lt;li>dbo.Clients&lt;/li>
+&lt;li>dbo.InstanceList&lt;/li>
+&lt;li>dbo.InstanceScriptLookup&lt;/li>
+&lt;li>dbo.ScriptList&lt;/li>
+&lt;li>Info.AgentJobDetail&lt;/li>
+&lt;li>Info.AgentJobServer&lt;/li>
+&lt;li>Info.Databases&lt;/li>
+&lt;li>Info.Scriptinstall&lt;/li>
+&lt;li>Info.ServerOSInfo&lt;/li>
+&lt;li>Info.SQLInfo&lt;/li>
+&lt;/ul>
+&lt;p>By adding Server name, Instance Name , Port, Environment, NotContactable, and Location into the InstanceList table I can gather all of the information that I need and also easily add more information to other tables as I need to.&lt;/p>
+&lt;p>The not contactable column is so that I am able to add instances that I am not able to contact due to permission or environment issues. I can still gather information about them manually and add it to the table. I use the same script and change it to generate the SQL query rather than run it, save the query and then run the query manually to insert the data. This is why I have the DateAdded and Date Checked column so that I know how recent the data is. I don’t go as far as recording the change however as that will be added to a DBA-Admin database on every instance which stores every change to the instance.&lt;/p>
+&lt;p>The ServerOSInfo table is created like so&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span> &lt;span class="ne">Object&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Table&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ServerOSInfo&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="ne">Script&lt;/span> &lt;span class="n">Date&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">26&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">08&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">2015&lt;/span> &lt;span class="mi">19&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">38&lt;/span> \&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>\&lt;span class="o">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">SET&lt;/span> &lt;span class="n">ANSI_NULLS&lt;/span> &lt;span class="n">ON&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">SET&lt;/span> &lt;span class="n">QUOTED_IDENTIFIER&lt;/span> &lt;span class="n">ON&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CREATE&lt;/span> &lt;span class="n">TABLE&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">Info&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ServerOSInfo&lt;/span>&lt;span class="p">](&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">ServerOSInfoID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">IDENTITY&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">DateAdded&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">DateChecked&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">ServerName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">DNSHostName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">Domain&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">30&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">OperatingSystem&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">NoProcessors&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">tinyint&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">IPAddress&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">nvarchar&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="mi">15&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">RAM&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="ne">int&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CONSTRAINT&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PK__ServerOS__50A5926BC7005F29&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">PRIMARY&lt;/span> &lt;span class="n">KEY&lt;/span> &lt;span class="n">CLUSTERED&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">ServerOSInfoID&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="n">ASC&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;span class="n">WITH&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">PAD_INDEX&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">STATISTICS_NORECOMPUTE&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">IGNORE_DUP_KEY&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OFF&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_ROW_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ALLOW_PAGE_LOCKS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ON&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="n">ON&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">PRIMARY&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">GO&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to a text file but I also  enable some logging into a new event log by following the steps here &lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>http://blogs.technet.com/b/heyscriptingguy/archive/2013/02/01/use-PowerShell-to-create-and-to-use-a-new-event-log.aspx&lt;/a> to create a log named SQLAutoScript with a source SQLAUTOSCRIPT&lt;/p>
+&lt;p>To run the script I simply need to add the values for&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$CentralDBAServer = &amp;#39;&amp;#39; ## Add the address of the instance that holds the DBADatabase
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$CentralDatabaseName= &amp;#39;DBADatabase&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$LogFile = &amp;#34;\DBADatabaseServerUpdate_&amp;#34; + $Date + &amp;#34;.log&amp;#34; ## Set Path to Log File
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get the &lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>script from here&lt;/a> or you can read on to see how it works and how to create the report&lt;/p>
+&lt;p>I create a function called Catch-Block to save keystrokes and put my commands inside a try catch to make the scripts as robust as possible.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function Catch-Block{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">param ([string]$Additional)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ErrorMessage = &amp;#34; On $Connection &amp;#34; + $Additional + $_.Exception.Message + $_.Exception.InnerException.InnerException.message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Message = &amp;#34; This message came from the Automated PowerShell script updating the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DBA Database with Server Information&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Msg = $Additional + $ErrorMessage + &amp;#34; &amp;#34; + $Message
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message $ErrorMessage -Level Error
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-EventLog -LogName SQLAutoScript -Source &amp;#34;SQLAUTOSCRIPT&amp;#34; -EventId 1 -EntryType Error -Message $Msg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the function an additional parameter which will hold each custom error message which I write to both the event log and a text message to enable easy troubleshooting and include the message from the &lt;code>$Error&lt;/code> variable by accessing it with &lt;code>$_&lt;/code>. I won&amp;rsquo;t include the try catch in the examples below. I gather all of the server names from the InstanceList table and set the results to an array variable called &lt;code>$Servers&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$AlltheServers = Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query &amp;#34;SELECT DISTINCT [ServerName] FROM [DBADatabase].[dbo].[InstanceList] WHERE Inactive = 0 OR NotContactable = 1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Servers = $AlltheServers| Select ServerName -ExpandProperty ServerName
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then loop through the array and gather the information with three WMI queries.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;Gathering Info for $Server &amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">foreach($Server in $Servers)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;Gathering Info for $Servers&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DNSHostName = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Domain = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$OperatingSystem = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$IP = &amp;#39;NOT GATHERED&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">try{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Info = get-wmiobject win32_computersystem -ComputerName $Server -ErrorAction Stop|select DNSHostName,Domain,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@{Name=&amp;#34;RAM&amp;#34;;Expression={&amp;#34;{0:n0}&amp;#34; -f($_.TotalPhysicalMemory/1gb)}},NumberOfLogicalProcessors
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I give the variables some default values in case they are not picked up and set the error action for the command to Stop to exit the try and the first query gathers the DNSHostName, Domain Name, the amount of RAM in GB and the number of logical processors, the second gathers the Operating System version but the third was the most interesting to do. There are many methods of gathering the IP Address using PowerShell and I tried a few of them before finding one that would work with all of the server versions that I had in my estate but the one that worked remotely the best for me and this is a good point to say that this works in my lab and in my shop but may not necessarily work in yours, so understand, check and test this and any other script that you find on the internet before you let them anywhere near your production environment.&lt;/p>
+&lt;p>Unfortunately the one that worked everywhere remotely errored with the local server so I added a check to see if the server name in the variable matches the global environment variable of Computer Name&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$OS = gwmi Win32_OperatingSystem -ComputerName $Server| select @{name=&amp;#39;Name&amp;#39;;Expression={($_.caption)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if($Server -eq $env:COMPUTERNAME)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{$IP = (Get-WmiObject -ComputerName $Server -class win32_NetworkAdapterConfiguration -Filter &amp;#39;ipenabled = &amp;#34;true&amp;#34;&amp;#39; -ErrorAction Stop).ipaddress[0] }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else {$IP = [System.Net.Dns]::GetHostAddresses($Server).IPAddressToString }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Log -Path $LogFile -Message &amp;#34;WMI Info gathered for $Server &amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once I have all of the information I check if the server already exists in the ServerOs table and choose to either insert or update.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $Exists = Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query &amp;#34;SELECT [ServerName] FROM [DBADatabase].[Info].[ServerOSInfo] WHERE ServerName = &amp;#39;$Server&amp;#39;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($Exists)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UPDATE [Info].[ServerOSInfo]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SET [DateChecked] = GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[ServerName] = &amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DNSHostName] = &amp;#39;$DNSHostName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Domain] = &amp;#39;$Domain&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[OperatingSystem] = &amp;#39;$OperatingSystem&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[NoProcessors] = &amp;#39;$NOProcessors&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[IPAddress] = &amp;#39;$IP&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[RAM] = &amp;#39;$RAM&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> WHERE ServerName = &amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Query = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> INSERT INTO [Info].[ServerOSInfo]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ([DateChecked]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DateAdded
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[ServerName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[DNSHostName]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[Domain]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[OperatingSystem]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[NoProcessors]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[IPAddress]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,[RAM])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VALUES
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ( GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,GetDate()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$Server&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$DNSHostName&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$Domain&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$OperatingSystem&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$NoProcessors&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$IP&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ,&amp;#39;$RAM&amp;#39;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query $Query
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ```
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">And that’s it. Now if you wish to gather different data about your servers then you can examine the data available to you by
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>get-wmiobject Win32_OperatingSystem -ComputerName $Server | Get-Member
+get-wmiobject win32_computersystem -ComputerName $Server | Get-Member&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">If you find something that you want to gather you can then add the property to the script and gather that information as well, make sure that you add the column to the table and to both the insert and update statements in the PowerShell Script
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">**Creating the report in Power Bi**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">All data shown in the examples below has been generated from real-life data but all identifiable data has been altered or removed. I was born in Bolton and [SQL SouthWest](http://sqlsouthwest.co.uk/) is based in Exeter :-)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Open Power Bi Desktop and click get data. Add the connection details for your DBA Database server and database and add the query
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;pre>&lt;code>SELECT SOI.[ServerOSInfoID]
+,SOI.[DateChecked]
+,SOI.[ServerName]
+,SOI.[DNSHostName]
+,SOI.[Domain]
+,SOI.[OperatingSystem]
+,SOI.[NoProcessors]
+,SOI.[IPAddress]
+,SOI.[RAM]
+,IL.ServerName
+,IL.InstanceName
+,IL.Location
+,IL.Environment
+,IL.Inactive
+,IL.NotContactable
+FROM [DBADatabase].[Info].[ServerOSInfo] as SOI
+JOIN [dbo].[InstanceList] as IL
+ON IL.ServerName = SOI.[ServerName]
+```
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/21.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/21.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>Create a new column for the Operating Edition by clicking data on the left and using this code as described &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>in my previous post&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Operating System Edition = SWITCH([OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;DataCenter&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Standard&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Enterprise&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And one for OS Version using this code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OS Version = SWITCH([OperatingSystem], &amp;#34;Microsoft Windows Server 2012 Datacenter&amp;#34;, &amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 Standard&amp;#34;,&amp;#34;Server 2012&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2012 R2 Datacenter&amp;#34;, &amp;#34;Server 2012 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Standard&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows Server 2008 R2 Enterprise&amp;#34;, &amp;#34;Server 2008 R2&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Standard&amp;#34;, &amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft® Windows Server® 2008 Enterprise&amp;#34;,&amp;#34;Server 2008&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Standard Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft(R) Windows(R) Server 2003, Enterprise Edition&amp;#34;, &amp;#34;Server 2003&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Microsoft Windows 2000 Server&amp;#34;, &amp;#34;Server 2000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;Unknown&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I also created a new measure to count the distinct number of servers and instances as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Servers = DISTINCTCOUNT(Query1[Servers Name])
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Instances = COUNT(Query1[Instance])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then in the report area I start by creating a new text box and adding a title to the report and setting the page level filter to InActive is false so that all decommissioned servers are not included&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/31.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/31.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>I then create a donut chart for the number of servers by Operating System by clicking the donut chart in the visualisations and then dragging the OS version to the Details and the Servers Name to the Values&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/41.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/41.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>I then click the format button and added a proper title and the background colour&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/51.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/51.png?w=90"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>Then create the server numbers by location in the same way by clicking donut chart and adding location and count of server names and adding the formatting in the same way as the previous donut&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/61.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/61.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>I created a number of charts to hold single values for Domain, Instance, Server, RAM, Processors and the number of Not Contactable to provide a quick easy view of those figures, especially when you filter the report by clicking on a value within the donut chart. I find that managers really like this feature. They are all created in the same way by clicking the card in the visualisation and choosing the value&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/71.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/71.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>I also add a table for the number of servers by operating system and the number of servers by location by dragging those values to a table visualisation. I find that slicers are very useful ways of enabling information to be displayed as required, use the live visualisation to do this, I add the environment column to slice so that I can easily see values for the live environment or the development environment&lt;/p>
+&lt;p>I create a separate page in the report to display all of the server data as this can be useful for other teams such as the systems (server admin) team. I give them a lot of different slicers : - Domain, Location, Environment, OS Version, Edition and NotContactable with a table holding all of the relevant values to enable them to quickly see details&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/08/81.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/08/81.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://1drv.ms/1N4fqxt" target="_blank" rel="noopener"
+>You can get all of the scripts here&lt;/a>&lt;/p>
+&lt;p>I have written further posts about this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+>&lt;strong>Using Power Bi with my DBA Database&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Server Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – SQL Info&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/" target="_blank" rel="noopener"
+>&lt;strong>Populating My DBA Database for Power Bi with PowerShell – Databases&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/" target="_blank" rel="noopener"
+>&lt;strong>Power Bi, PowerShell and SQL Agent Jobs&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month</title><link>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</link><pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</guid><description>&lt;p>Just a quick post to say that I will be speaking at the PowerShell Virtual Chapter meeting this Thursday at 4pm GMT 12pm EDT and also at the Cardiff SQL User Group on Tuesday 31st March&lt;/p>
+&lt;p>I will be giving my Making PowerShell Useful for your Team presentation&lt;/p>
+&lt;p>You have heard about PowerShell and may be spent a little bit of time exploring some of the ways in which it will benefit you at work. You want to be able to perform tasks more specific to your organisation and need to share them with your team. I will show you how you can achieve this by demonstrating&lt;/p>
+&lt;ul>
+&lt;li>An easy way to learn the syntax&lt;/li>
+&lt;li>How to explore SQL Server with PowerShell&lt;/li>
+&lt;li>How to turn your one off scripts into shareable functions&lt;/li>
+&lt;li>How to ensure that your team can easily and quickly make use of and contribute to PowerShell solutions&lt;/li>
+&lt;li>Where else to go for help&lt;/li>
+&lt;/ul>
+&lt;p>You can find out more about the Virtual Chapter here&lt;/p>
+&lt;p>&lt;a class="link" href="http://PowerShell.sqlpass.org/%c2%a0" title="http://PowerShell.sqlpass.org/ "
+target="_blank" rel="noopener"
+>http://PowerShell.sqlpass.org/&lt;/a> &lt;/p>
+&lt;p>and the Cardiff meeting here&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/%c2%a0" title="http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/ "
+target="_blank" rel="noopener"
+>http://www.meetup.com/Cardiff-SQL-Server-User-Group/events/219492623/&lt;/a> &lt;/p>
+&lt;p>The Cardiff meeting has been named The Battle Of The Beards as it features Tobiasz Koprowski: talking about Windows Azure SQL Database - Tips and Tricks for beginners and Terry McCann with SSRS Inception. I will be giving the same presentation as at the Virtual Chapter&lt;/p>
+&lt;p>I hope to see you at one or both sessions&lt;/p></description></item></channel></rss>

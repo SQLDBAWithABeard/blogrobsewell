@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerShell-Vc on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/powershell-vc/</link><description>Recent content in PowerShell-Vc on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 02 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/powershell-vc/index.xml" rel="self" type="application/rss+xml"/><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p>Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+>I wrote about using Power Bi to display my checkins&lt;/a>. I only started this in June and this is where I have been :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/swarm.png"
+loading="lazy"
+alt="swarm"
+>&lt;/p>
+&lt;p>I learnt about &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> and ended the year incorporating it into &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>. I also started using &lt;a class="link" href="https://github.com/SQLDBAWithABeard" target="_blank" rel="noopener"
+>GitHub&lt;/a> It is quite surprising to me how much time I now spend using both. I also had to start learning &lt;a class="link" href="https://msdn.microsoft.com/en-us/PowerShell/dsc/overview" target="_blank" rel="noopener"
+>DSC&lt;/a> for the client I was working with because as &amp;rsquo;the PowerShell guy&amp;rsquo; I was the one who could the easiest. I learnt things and &lt;a class="link" href="http://sqldbawithabeard.com/2016/01/31/PowerShell-pester-the-script-failed-due-to-call-depth-overflow/" target="_blank" rel="noopener"
+>then forgot them causing me to find this Pester post via google later in the year!!&lt;/a> (That&amp;rsquo;s a big reason for blogging by the way)&lt;/p>
+&lt;p>Early in the year we organised with &lt;a class="link" href="http://www.sqlsaturday.com/496/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section" target="_blank" rel="noopener"
+>https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>The Beard says&lt;/p>
+&lt;blockquote>
+&lt;p>When you go to an event -  Say thank you to the organisers and volunteers&lt;/p>&lt;/blockquote>
+&lt;p>and a TERRIBLE thing happened - I broke my DBA Team mug&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/WP_20160223_07_51_03_Pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Luckily the fine folk at &lt;a class="link" href="http://www.red-gate.com/" target="_blank" rel="noopener"
+>redgate&lt;/a> sorted me out with a replacement from deep in the stores somewhere and gave it to me at SQL Saturday Exeter :-) Thank you.&lt;/p>
+&lt;p>I spoke at the PowerShell Conference Europe and met and made some great friends which lead to me speaking at the PowerShell Monday in Munich and the Dutch PowerShell Usergroup. SQL Saturday Dublin was a blast, its a wonderful city, Manchester had a whole PowerShell Track :-) and Cambridge was memorable for the appalling journey as well as the chance to share a stage with &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy&lt;/a>. PowerShell Conference Asia in the sovereign city-state of Singapore was such a good event and place. Lastly of course was Slovenia with its fantastic Christmas lights and awesome event organisation. I visited some user groups too. Southampton run by my good friends &lt;a class="link" href="https://twitter.com/sqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> and &lt;a class="link" href="https://twitter.com/steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> Congratulations to John on his first MVP award yesterday, Cardiff for the Return of the Battle of the Beards with Terry McCann and Tobiasz Koprowski where the projector threw its toys out of the pram and Birmingham in the school hall which was slightly chilly (theres a joke there for some people)&lt;/p>
+&lt;p>Amazing things happened&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>And that&amp;rsquo;s the biggest and bestest thing about this year. Some amazing new friends and spending time with all my other friends. I started writing out a list but was terrified I would have missed someone out, so to all my friends&lt;/p>
+&lt;p>THANK YOU for a brilliant 2016 and 2017 shall be just as good :-)&lt;/p>
+&lt;p>Here are a few of my pics from the year with a lot of my friends&lt;/p>
+&lt;p>[gallery type=&amp;ldquo;circle&amp;rdquo; columns=&amp;ldquo;9&amp;rdquo; ids=&amp;ldquo;3082,3083,3084,3085,3086,3087,3088,3089,3090,3091,3092,3093,3094,3095,3096,3097,3098,3099,3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3133,3134,3077,3075,3074,3073,3067,3068,3069,3070,3071,3072,3066,3065,3064,3063,3062,3061,3055,3056,3057,3058,3059,3060,3054,3053,3052,3051,3050,3049,2943,2950,2897,2923,3046,2924,2927,3047,2933,3048&amp;rdquo;]&lt;/p></description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p>I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+>PSConfAsia&lt;/a> conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+>Ravi Chaganti&lt;/a> spoke about DSC&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+>&lt;/p>
+&lt;p>and then Desmond Lee lead a Q and A session. In the end we decided that all the answers were&lt;/p>
+&lt;blockquote>
+&lt;p>It Depends and Test in your Environment&lt;/p>&lt;/blockquote>
+&lt;p>That evening, I even managed to jump on the PASS PowerShell Virtual Chapter session by Scott Sutherland Hacking SQL Servers on Scale using PowerShell the recording of which is here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/npoORzfP7rw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>A session organised and managed online in three different time zones by Aaron Chrissy and myself :-).&lt;/p>
+&lt;p>On Thursday the conference proper started with a pre-con day at the Amazon Web Services office. Yes, you read that right. This conference really highlighted the cross-platform direction and adoption of open-source that Microsoft is taking.  &lt;a class="link" href="http://twitter.com/@JasonYoder_MCT" target="_blank" rel="noopener"
+>Jason Yoder&lt;/a> spent all day teaching a group &amp;ldquo;PowerShell for Beginners&amp;rdquo; in one room&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_09_24_43_pro.jpg"
+loading="lazy"
+alt="WP_20161020_09_24_43_Pro.jpg"
+>&lt;/p>
+&lt;p>while The Amazon Web Services Team showed DevOps on AWS with PowerShell in the morning and &lt;a class="link" href="https://twitter.com/juneb_get_help" target="_blank" rel="noopener"
+>June Blender&lt;/a> gave a SAPIEN Toolmaking Seminar.fter this we went back to the Microsoft Offices for another User Group where Jason Yoder gave a (nother) session with &lt;a class="link" href="https://twitter.com/jaap_brasser" target="_blank" rel="noopener"
+>Jaap Brasser&lt;/a> on PowerShell Tips and Tricks (&lt;a class="link" href="https://onedrive.live.com/?authkey=%21AJyNBdDeTNtAS18&amp;amp;id=4B0EFD9B34E1210E%2124928&amp;amp;cid=4B0EFD9B34E1210E" target="_blank" rel="noopener"
+>Demo&lt;/a>)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_19_26_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_19_26_24_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Friday started with The PowerShell Team represented by &lt;a class="link" href="https://twitter.com/khansenhansen" target="_blank" rel="noopener"
+>Kenneth Hansen&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/angelcalvos" target="_blank" rel="noopener"
+>Angel Calvo&lt;/a> talking about PowerShell Past, Present and Future. It was really good that there was such great access to the product team at the conference and I saw lots of interaction around the conference as well, in addition to the sessions they provided.&lt;/p>
+&lt;p>Next up for me was another session from the PowerShell Team, this time &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> taking us on a Journey Through the Ages of PowerShell Security&lt;/p>
+&lt;blockquote>
+&lt;p>Execution Policy is not a security feature&lt;/p>&lt;/blockquote>
+&lt;p>That took us to lunch, we were treated to excellent lunches at this conference&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_12_07_14_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_12_07_14_Pro (2).jpg"
+>&lt;/p>
+&lt;p>After lunch I sat in the PowerShell Teams Ask Us Anything session although I was mainly preparing for my own session PowerShell Profile Prepares Perfect Production Purlieu which followed. There were excellent sessions on JEA, Nano Server, Chef and DSC, Containers, ETS and securing PowerShell against malware whilst I attended &lt;a class="link" href="http://flynnbundy.com" target="_blank" rel="noopener"
+>Flynn Bundy&amp;rsquo;s&lt;/a> session about Windows Containers and Building GUIs with XAML with &lt;a class="link" href="https://twitter.com/david_das_neves" target="_blank" rel="noopener"
+>David Das Neves&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161021_15_58_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20161021_15_58_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>That evening, organisers, speakers and attendees all went to the Penny Black pub on Marina Bay and enjoyed some food, refreshments and networking&lt;/p>
+&lt;p>Saturday started slowly after the rain (another impressive &amp;lsquo;feature&amp;rsquo; of Singapore)  but the first session was a brilliant one with &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> talking Pragmatic PowerShell and answering questions. I am glad Jason used &lt;a class="link" href="https://github.com/Code52/carnac" target="_blank" rel="noopener"
+>Carnac&lt;/a> to show what he was typing so that people could (just about :-) ) keep up. I then attended the excellent session about contribution with Microsoft.&lt;/p>
+&lt;p>The rest of the day had amazing sessions on Azure Automation, IoT, AWS Cloud Formation, Centralised Repository Server, Chef, Puppet, Professional Help, Nano Server, Docker, DSC, Release Pipeline and of course some bearded fella talking about Installing SQL Scripts and creating Pester Tests for them and combining PowerShell, SQL, SSRS, PowerBi and Cortana :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cjason-yoders-photo.jpg"
+loading="lazy"
+alt="Jason Yoder’s photo.jpg"
+>&lt;/p>
+&lt;p>My takeaways from the conference were that Microsoft is very open to all members of the open source community, DevOps is a very important topic and also the following points from the PowerShell team&lt;/p>
+&lt;blockquote>
+&lt;p>PowerShell Team want YOU to contribute. Interact with them File bugs Feature Requests Documentation Tests Code&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>Fixing is better than complaining :-) &lt;a class="link" href="https://twitter.com/@HemanMahawar" target="_blank" rel="noopener"
+>@HemanMahawar&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a> You can help fix the documentation. Use the contribute button on the doc&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>If you are thinking of starting or run a PowerShell usergroup Microsoft would like help. Tag 1 of the team such as &lt;a class="link" href="https://twitter.com/@ANGELCALVOS" target="_blank" rel="noopener"
+>@ANGELCALVOS&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Special thanks and congratulations must go to Matt, Milton, Sebastian and Ben for their excellent organisation and for creating an awesome event. I am looking forward to seeing how they can better it next year and also hoping that seeing all the fabulous speakers and sessions will inspire some attendees from this years event to share their own knowledge and experience at local user groups and even next years conference.&lt;/p></description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p>
+&lt;blockquote>
+&lt;p>This means that if you have a PowerShell script doing &lt;em>Import-Module SQLPS&lt;/em>, it will need to be changed to be &lt;em>Import-Module SqlServer&lt;/em> in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to &lt;em>“%Program Files\WindowsPowerShell\Modules\SqlServer&lt;/em>” and hence no update to $env:PSModulePath is required.&lt;/p>&lt;/blockquote>
+&lt;p>So SQLPS will still continue to work but will not be updated and will not contain the new CMDlets or the future new CMDlets.&lt;/p>
+&lt;h2 id="so-what-new-things-do-we-have">So what new things do we have?
+&lt;/h2>&lt;blockquote>
+&lt;p>This month we introduce CMDLETs for the following areas:&lt;/p>
+&lt;ul>
+&lt;li>Always Encrypted&lt;/li>
+&lt;li>SQL Agent&lt;/li>
+&lt;li>SQL Error Logs&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>Chrissy LeMaire has written about the &lt;a class="link" href="https://blog.netnerds.net/2016/06/the-sql-server-PowerShell-module-formerly-known-as-sqlps/" target="_blank" rel="noopener"
+>new SQL Agent cmdlets&lt;/a>&lt;/p>
+&lt;p>Aaron Nelson has written about the &lt;a class="link" href="http://sqlvariant.com/2016/06/webinar-on-25-new-PowerShell-cmdlets-for-sql-server-and-more/" target="_blank" rel="noopener"
+>new Get-SqlErrorLog cmdlet&lt;/a>&lt;/p>
+&lt;p>Laerte Junior has written about &lt;a class="link" href="https://www.simple-talk.com/blogs/2016/06/30/invoke-sqlcmd-just-got-better/" target="_blank" rel="noopener"
+>Invoke-SQLCmd&lt;/a>&lt;/p>
+&lt;p>All four of us will be presenting a webinar on the new CMDlets via the &lt;a class="link" href="http://PowerShell.sqlpass.org/" target="_blank" rel="noopener"
+>PowerShell Virtual Chapter&lt;/a> Wed, Jul 06 2016 12:00 Eastern Daylight Time If you cant make it a recording will be made available on YouTube on the VC Channel &lt;a class="link" href="https://sqlps.io/video" target="_blank" rel="noopener"
+>https://sqlps.io/video&lt;/a>&lt;/p>
+&lt;h2 id="always-encrypted-cmdlets">Always Encrypted CMDlets
+&lt;/h2>&lt;p>That leaves the Always Encrypted CMDLets and there are 17 of those!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p> &lt;/p>
+&lt;p>That seems to cover setting up Always Encrypted with PowerShell , removing it and getting information about it. When the new SSMS update is dropped you will be able to start using all of this new functionality.&lt;/p>
+&lt;p>Just remember Import-Module sqlserver&lt;/p>
+&lt;h2 id="call-to-action">CALL TO ACTION
+&lt;/h2>&lt;p>Microsoft are engaging with the community to improve the tools we all use in our day to day work. There is are two Trello boards set up for &lt;strong>YOU&lt;/strong> to use to contribute&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/vote" target="_blank" rel="noopener"
+>https://sqlps.io/vote&lt;/a>  for SQLPS  sqlserver PowerShell module&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/ssms" target="_blank" rel="noopener"
+>https://sqlps.io/ssms&lt;/a> for SSMS&lt;/p>
+&lt;p>Go and join them and upvote &lt;strong>YOUR&lt;/strong> preferred choice of the next lot of CMDlets&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/trellocount.png"
+loading="lazy"
+alt="trellocount"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>We have also set up a SQL Community Slack for anyone in the community to discuss all things related to SQL including the Trello board items and already it seems a good place for people to get help with 150+ members in a few days. You can get an invite here &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Come and join us&lt;/p></description></item></channel></rss>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Flow on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/flow/</link><description>Recent content in Flow on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Feb 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/flow/index.xml" rel="self" type="application/rss+xml"/><item><title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services &amp; PowerBi</title><link>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</link><pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</guid><description>&lt;p>Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+>http://www.psconf.eu/&lt;/a>&lt;/p>
+&lt;p>I ended up creating an interactive PowerBi report to which my good friend and Data Platform MVP Paul Andrew &lt;a class="link" href="https://mrpaulandrew.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+>t&lt;/a> added a bit of magic and I published it. The magnificent Tobias Weltner &lt;a class="link" href="http://www.powertheshell.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/TobiasPSP" target="_blank" rel="noopener"
+>t&lt;/a> who organises PSConfEU pointed the domain name &lt;a class="link" href="http://powershell.cool" target="_blank" rel="noopener"
+>http://powershell.cool&lt;/a> at the link. It looks like this.&lt;/p>
+&lt;p>During the monthly &lt;a class="link" href="https://twitter.com/hashtag/PSTweetChat?src=hash" target="_blank" rel="noopener"
+>#PSTweetChat&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Reminder that we do this chat the first Friday of every month from 1-2PM Eastern which I think is 6:00PM UTC &lt;a class="link" href="https://twitter.com/hashtag/pstweetchat?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#pstweetchat&lt;/a>&lt;/p>
+&lt;p>— Jeffery Hicks (@JeffHicks) &lt;a class="link" href="https://twitter.com/JeffHicks/status/959495635182477324?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 2, 2018&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>I mentioned that I need to blog about how I created it and Jeff replied&lt;/p>
+&lt;blockquote>
+&lt;p>Yes, please. I&amp;rsquo;d love to setup something similiar for the PowerShell+DevOps Summit. &lt;a class="link" href="https://twitter.com/hashtag/pstweetchat?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#pstweetchat&lt;/a>&lt;/p>
+&lt;p>— Jeffery Hicks (@JeffHicks) &lt;a class="link" href="https://twitter.com/JeffHicks/status/959494450547511298?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 2, 2018&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>so here it is! Looking forward to seeing the comparison between the &lt;a class="link" href="https://powershell.org/summit/" target="_blank" rel="noopener"
+>PowerShell and Devops Summi&lt;/a>t and the &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+>PowerShell Conference Europe&lt;/a> 🙂&lt;/p>
+&lt;p>This is an overview of how it works&lt;/p>
+&lt;ul>
+&lt;li>A &lt;a class="link" href="https://flow.microsoft.com/" target="_blank" rel="noopener"
+>Microsoft Flow&lt;/a> looks for tweets with the &lt;a class="link" href="https://twitter.com/search?q=%23PSConfEU&amp;amp;src=typd" target="_blank" rel="noopener"
+>#PSConfEU&lt;/a> hashtag and then gets the information about the tweet&lt;/li>
+&lt;li>&lt;a class="link" href="https://azure.microsoft.com/en-gb/services/cognitive-services/text-analytics/" target="_blank" rel="noopener"
+>Microsoft Cognitive Services Text Analysis API&lt;/a> analyses the sentiment of the tweet and provides a score between 0 (negative) and 1 (positive)&lt;/li>
+&lt;li>Details about the tweet and the sentiment are saved in &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/sql-database/" target="_blank" rel="noopener"
+>Azure SQL database&lt;/a>&lt;/li>
+&lt;li>A &lt;a class="link" href="http://PowerBi.com" target="_blank" rel="noopener"
+>PowerBi&lt;/a> report uses that data and provides the report&lt;/li>
+&lt;/ul>
+&lt;p>You will find all of the resources and the scripts to do all of the below in &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>the GitHub repo.&lt;/a> So clone it and navigate to the filepath&lt;/p>
+&lt;h2 id="create-database">Create Database
+&lt;/h2>&lt;p>First lets create a database. Connect to your Azure subscription&lt;/p>
+&lt;pre>&lt;code>## Log in to your Azure subscription using the Add-AzureRmAccount command and follow the on-screen directions.
+Add-AzureRmAccount
+## Select the subscription
+Set-AzureRmContext -SubscriptionId YourSubscriptionIDHere
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/01-subscription.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/01-subscription.png"
+loading="lazy"
+alt="01 - subscription.png"
+>&lt;/a>&lt;/p>
+&lt;p>Then set some variables&lt;/p>
+&lt;pre>&lt;code># The data center and resource name for your resources
+$resourcegroupname = &amp;quot;twitterresource&amp;quot;
+$location = &amp;quot;WestEurope&amp;quot;
+# The logical server name: Use a random value or replace with your own value (do not capitalize)
+$servername = &amp;quot;server-$(Get-Random)&amp;quot;
+# Set an admin login and password for your database
+# The login information for the server You need to set these and uncomment them - Dont use these values
+# $adminlogin = &amp;quot;ServerAdmin&amp;quot;
+# $password = &amp;quot;ChangeYourAdminPassword1&amp;quot;
+# The ip address range that you want to allow to access your server - change as appropriate
+# $startip = &amp;quot;0.0.0.0&amp;quot;
+# $endip = &amp;quot;0.0.0.0&amp;quot;
+# To just add your own IP Address
+$startip = $endip = (Invoke-WebRequest 'http:// myexternalip.com/raw').Content -replace &amp;quot;`n&amp;quot;
+# The database name
+$databasename = &amp;quot;tweets&amp;quot;
+$AzureSQLServer = &amp;quot;$servername.database. windows.net,1433&amp;quot;
+$Table = &amp;quot;table.sql&amp;quot;
+$Proc = &amp;quot;InsertTweets.sql&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>They should all make sense, take note that you need to set and uncomment the login and password and choose which IPs to allow through the firewall&lt;/p>
+&lt;p>Create a Resource Group&lt;/p>
+&lt;pre>&lt;code>## Create a resource group
+New-AzureRmResourceGroup -Name $resourcegroupname -Location $location
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/02-resource-group.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/02-resource-group.png"
+loading="lazy"
+alt="02 - resource group.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a SQL Server&lt;/p>
+&lt;pre>&lt;code>## Create a Server
+$newAzureRmSqlServerSplat = @{
+SqlAdministratorCredentials = $SqlAdministratorCredentials
+ResourceGroupName = $resourcegroupname
+ServerName = $servername
+Location = $location
+}
+New-AzureRmSqlServer @newAzureRmSqlServerSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/03-create-server.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/03-create-server.png"
+loading="lazy"
+alt="03 - create server.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a firewall rule, I just use my own IP and add the allow azure IPs&lt;/p>
+&lt;pre>&lt;code>$newAzureRmSqlServerFirewallRuleSplat = @{
+EndIpAddress = $endip
+StartIpAddress = $startip
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+FirewallRuleName = &amp;quot;AllowSome&amp;quot;
+}
+New-AzureRmSqlServerFirewallRule @newAzureRmSqlServerFirewallRuleSplat
+# Allow Azure IPS
+$newAzureRmSqlServerFirewallRuleSplat = @{
+AllowAllAzureIPs = $true
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+}
+New-AzureRmSqlServerFirewallRule @newAzureRmSqlServerFirewallRuleSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/03a-firewall-rule.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/03a-firewall-rule.png"
+loading="lazy"
+alt="03a - firewall rule.png"
+>&lt;/a>&lt;/p>
+&lt;p>Create a database&lt;/p>
+&lt;pre>&lt;code># Create a database
+$newAzureRmSqlDatabaseSplat = @{
+ServerName = $servername
+ResourceGroupName = $resourcegroupname
+Edition = 'Basic'
+DatabaseName = $databasename
+}
+New-AzureRmSqlDatabase @newAzureRmSqlDatabaseSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/04-create-database.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/04-create-database.png"
+loading="lazy"
+alt="04 - create database.png"
+>&lt;/a>&lt;/p>
+&lt;p>I have used the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a> to run the scripts to create the database. You can get it using&lt;/p>
+&lt;pre>&lt;code>Install-Module dbatools # -Scope CurrentUser # if not admin process
+Run the scripts
+# Create a credential
+$newObjectSplat = @{
+ArgumentList = $adminlogin, $ (ConvertTo-SecureString -String $password -AsPlainText -Force)
+TypeName = 'System.Management.Automation. PSCredential'
+}
+$SqlAdministratorCredentials = New-Object @newObjectSplat
+## Using dbatools module
+$invokeDbaSqlCmdSplat = @{
+SqlCredential = $SqlAdministratorCredentials
+Database = $databasename
+File = $Table,$Proc
+SqlInstance = $AzureSQLServer
+}
+Invoke-DbaSqlCmd @invokeDbaSqlCmdSplat
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/05-Create-Table-Sproc.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/05-Create-Table-Sproc.png"
+loading="lazy"
+alt="05 - Create Table Sproc.png"
+>&lt;/a>&lt;/p>
+&lt;p>This will have created the following in Azure, you can see it in the portal&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/07-portal.png"
+loading="lazy"
+alt="07 - portal.png"
+>&lt;/p>
+&lt;p>You can connect to the database in SSMS and you will see&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/06-show-table.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/06-show-table.png"
+loading="lazy"
+alt="06 - show table.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-cognitive-services">Create Cognitive Services
+&lt;/h2>&lt;p>Now you can create the Text Analysis Cognitive Services API&lt;/p>
+&lt;p>First login (if you need to) and set some variables&lt;/p>
+&lt;pre>&lt;code>## This creates cognitive services for analysing the tweets
+## Log in to your Azure subscription using the Add-AzureRmAccount command and follow the on-screen directions.
+Add-AzureRmAccount
+## Select the subscription
+Set-AzureRmContext -SubscriptionId YOUR SUBSCRIPTION ID HERE
+#region variables
+# The data center and resource name for your resources
+$resourcegroupname = &amp;quot;twitterresource&amp;quot;
+$location = &amp;quot;WestEurope&amp;quot;
+$APIName = 'TweetAnalysis'
+#endregion
+Then create the API and get the key
+#Create the cognitive services
+$newAzureRmCognitiveServicesAccountSplat = @{
+ResourceGroupName = $resourcegroupname
+Location = $location
+SkuName = 'F0'
+Name = $APIName
+Type = 'TextAnalytics'
+}
+New-AzureRmCognitiveServicesAccount @newAzureRmCognitiveServicesAccountSplat
+# Get the Key
+$getAzureRmCognitiveServicesAccountKeySplat = @ {
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+Get-AzureRmCognitiveServicesAccountKey @getAzureRmCognitiveServicesAccountKeySplat
+&lt;/code>&lt;/pre>
+&lt;p>You will need to accept the prompt&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/08-cognitive-service.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/08-cognitive-service.png"
+loading="lazy"
+alt="08 -cognitive service"
+>&lt;/a>&lt;/p>
+&lt;p>Copy the Endpoint URL as you will need it.Then save one of  the keys for the next step!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/09-cognitiveservice-key.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/09-cognitiveservice-key.png"
+loading="lazy"
+alt="09 cognitiveservice key"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-the-flow">Create the Flow
+&lt;/h2>&lt;p>I have exported the Flow to a zip file and also the json for a PowerApp (no details about that in this post). Both are available in the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub repo&lt;/a>. I have submitted a template but it is not available yet.&lt;/p>
+&lt;p>Navigate to &lt;a class="link" href="https://flow.microsoft.com/" target="_blank" rel="noopener"
+>https://flow.microsoft.com/&lt;/a> and sign in&lt;/p>
+&lt;h2 id="creating-connections">Creating Connections
+&lt;/h2>&lt;p>You will need to set up your connections. Click New Connection and search for Text&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/16-import-step-3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/16-import-step-3.png"
+loading="lazy"
+alt="16 - import step 3.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Add and fill in the Account Key and the Site URL from the steps above&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/17-import-step-5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/17-import-step-5.png"
+loading="lazy"
+alt="17 import step 5.png"
+>&lt;/a>&lt;/p>
+&lt;p>click new connection and search for SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png"
+loading="lazy"
+alt="18 - import step 6.png"
+>&lt;/a>&lt;/p>
+&lt;p>Enter the SQL Server Name (value of &lt;code>$AzureSQLServer&lt;/code>) , Database Name , User Name and Password from the steps above&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png"
+loading="lazy"
+alt="19 - import step 7.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click new Connection and search for Twitter and create a connection (the authorisation pop-up may be hidden behind other windows!)&lt;/p>
+&lt;h2 id="import-the-flow">Import the Flow
+&lt;/h2>&lt;p>If you have a premium account you can import the flow, click Import&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/11-import-flow.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/11-import-flow.png"
+loading="lazy"
+alt="11 - import flow.png"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png"
+loading="lazy"
+alt="12 - choose import.png"
+>&lt;/a>&lt;/p>
+&lt;p>and choose the import.zip from the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub Repo&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png"
+loading="lazy"
+alt="13 import step 1.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click on Create as new and choose a name&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/14-import-step-2.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/14-import-step-2.png"
+loading="lazy"
+alt="14 - import step 2.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click select during import next to Sentiment and choose the Sentiment connection&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/15-impot-step-3.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/15-impot-step-3.png"
+loading="lazy"
+alt="15 impot step 3.png"
+>&lt;/a>&lt;/p>
+&lt;p>Select during import for the SQL Server Connection and choose the SQL Server Connection and do the same for the Twitter Connection&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/20-import-stpe-8.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/20-import-stpe-8.png"
+loading="lazy"
+alt="20 - import stpe 8.png"
+>&lt;/a>&lt;/p>
+&lt;p>Then click import&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/21-imported.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/21-imported.png"
+loading="lazy"
+alt="21 - imported.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="create-the-flow-without-import">Create the flow without import
+&lt;/h2>&lt;p>If you do not have a premium account you can still create the flow using these steps. I have created a template but it is not available at the moment. Create the connections as above and then click Create from blank.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/22-importblank.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/22-importblank.png"
+loading="lazy"
+alt="22 - importblank.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the trigger When a New Tweet is posted and add a search term. You may need to choose the connection to twitter by clicking the three dots&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/23-importblank-1.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/23-importblank-1.png"
+loading="lazy"
+alt="23 - importblank 1.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Add an action&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/24-add-action.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/24-add-action.png"
+loading="lazy"
+alt="24 - add action.png"
+>&lt;/a>&lt;/p>
+&lt;p>search for detect and choose the Text Analytics Detect Sentiment&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/25-choose-sentuiment.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/25-choose-sentuiment.png"
+loading="lazy"
+alt="25 - choose sentuiment.png"
+>&lt;/a>&lt;/p>
+&lt;p>Enter the name for the connection, the account key and the URL from the creation of the API above. If you forgot to copy them&lt;/p>
+&lt;pre>&lt;code>#region Forgot the details
+# Copy the URL if you forget to save it
+$getAzureRmCognitiveServicesAccountSplat = @{
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+(Get-AzureRmCognitiveServicesAccount @getAzureRmCognitiveServicesAccountSplat). Endpoint | Clip
+# Copy the Key if you forgot
+$getAzureRmCognitiveServicesAccountKeySplat = @ {
+Name = $APIName
+ResourceGroupName = $resourcegroupname
+}
+(Get-AzureRmCognitiveServicesAccountKey @getAzureRmCognitiveServicesAccountKeySplat). Key1 | Clip
+#endregion
+&lt;/code>&lt;/pre>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/26-enter-details.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/26-enter-details.png"
+loading="lazy"
+alt="26 - enter details.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click in the text box and choose Tweet Text&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/27-choose-tweet-text.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/27-choose-tweet-text.png"
+loading="lazy"
+alt="27 - choose tweet text.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click New Step and add an action. Search for SQL Server and choose SQL Server – Execute Stored Procedure&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/28-choose-sql-server-execute-stored-procedure.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/28-choose-sql-server-execute-stored-procedure.png"
+loading="lazy"
+alt="28 - choose sql server execute stored procedure.png"
+>&lt;/a>&lt;/p>
+&lt;p>Choose the stored procedure [dbo].[InsertTweet]&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/29-choose-stored-procedure.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/29-choose-stored-procedure.png"
+loading="lazy"
+alt="29 - choose stored procedure.png"
+>&lt;/a>&lt;/p>
+&lt;p>Fill in as follows&lt;/p>
+&lt;ul>
+&lt;li>__PowerAppsID__         0&lt;/li>
+&lt;li>Date                                 Created At&lt;/li>
+&lt;li>Sentiment                      Score&lt;/li>
+&lt;li>Tweet                              Tweet Text&lt;/li>
+&lt;li>UserLocation                 Location&lt;/li>
+&lt;li>UserName                      Tweeted By&lt;/li>
+&lt;/ul>
+&lt;p>as shown below&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/30-stored-procedure-info.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/30-stored-procedure-info.png?resize=630%2C368&amp;amp;ssl=1"
+loading="lazy"
+alt="30 stored procedure info.png"
+>&lt;/a>&lt;/p>
+&lt;p>Give the flow a name at the top and click save flow&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/31-flow-created.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/31-flow-created.png"
+loading="lazy"
+alt="31 flow created.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="connect-powerbi">Connect PowerBi
+&lt;/h2>&lt;p>Open the PSConfEU Twitter Analysis Direct.pbix from the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/PowerShellCool" target="_blank" rel="noopener"
+>GitHub repo&lt;/a> in PowerBi Desktop. Click the arrow next to Edit Queries and then change data source settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png"
+loading="lazy"
+alt="32 change data source.png"
+>&lt;/a>&lt;/p>
+&lt;p>Click Change source and enter the server (value of &lt;code>$AzureSQLServer&lt;/code>) and the database name. It will alert you to apply changes&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png"
+loading="lazy"
+alt="33 apply changes.png"
+>&lt;/a>&lt;/p>
+&lt;p>It will then pop-up with a prompt for the credentials. Choose Database and enter your credentials and click connect&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/34-creds.png?ssl=1" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/34-creds.png?resize=630%2C370&amp;amp;ssl=1"
+loading="lazy"
+alt="34 - creds.png"
+>&lt;/a>&lt;/p>
+&lt;p>and your PowerBi will be populated from the Azure SQL Database 🙂 This will fail if there are no records in the table because your flow hasn’t run yet. If it does just wait until you see some tweets and then click apply changes again.&lt;/p>
+&lt;p>You will probably want to alter the pictures and links etc and then yo can publish the report&lt;/p>
+&lt;p>Happy Twitter Analysis&lt;/p>
+&lt;p>Dont forget to keep an eye on your flow runs to make sure they have succeeded.&lt;/p></description></item></channel></rss>

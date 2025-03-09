@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Datarow on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/datarow/</link><description>Recent content in Datarow on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 18 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/datarow/index.xml" rel="self" type="application/rss+xml"/><item><title>Converting a Datarow to a JSON object with PowerShell</title><link>https://blog.robsewell.com/blog/converting-a-datarow-to-a-json-object-with-powershell/</link><pubDate>Mon, 18 Dec 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/converting-a-datarow-to-a-json-object-with-powershell/</guid><description>&lt;p>This is just a quick post. As is frequent with these they are as much for me to refer to in the future and also because the very act of writing it down will aid me in remembering. I encourage you to do the same. Share what you learn because it will help you as well as helping others.&lt;/p>
+&lt;p>Anyway, I was writing some Pester tests for a module that I was writing when I needed some sample data. I have &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>written before about using Json for this purpose&lt;/a> This function required some data from a database so I wrote the query to get the data and used &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> to run the query against the database using &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase" target="_blank" rel="noopener"
+>Get-DbaDatabase&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">DbaDatabase&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">SqlInstance&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Instance&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Database&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Database&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">variable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Simple enough. I wanted to be able to Mock &lt;code>$variable.&lt;/code> I wrapped the code above in a function, let’s call it &lt;code>Run-Query&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">Run&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">Query&lt;/span> &lt;span class="p">{(&lt;/span>&lt;span class="n">Param&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">DbaDatabase&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">SqlInstance&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Instance&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Database&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Database&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">variable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Which meant that I could easily separate it for mocking in my test. I ran the code and investigated the $variable variable to ensure it had what I wanted for my test and then decided to convert it into JSON using &lt;a class="link" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/convertto-json?view=powershell-5.1?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>ConvertTo-Json&lt;/a>&lt;/p>
+&lt;p>Lets show what happens with an example using WideWorldImporters and a query I found on &lt;a class="link" href="https://littlekendra.com/2016/09/13/deadlock-code-for-the-wideworldimporters-sample-database/" target="_blank" rel="noopener"
+>Kendra Littles blogpost about deadlocks&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">query&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">SELECT&lt;/span> &lt;span class="n">Top&lt;/span> &lt;span class="mi">10&lt;/span> &lt;span class="n">CityName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">StateProvinceName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LatestRecordedPopulation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CountryName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">FROM&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cities&lt;/span> &lt;span class="n">AS&lt;/span> &lt;span class="n">city&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">JOIN&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StateProvinces&lt;/span> &lt;span class="n">AS&lt;/span> &lt;span class="n">sp&lt;/span> &lt;span class="n">on&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">city&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StateProvinceID&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">sp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StateProvinceID&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">JOIN&lt;/span> &lt;span class="n">Application&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Countries&lt;/span> &lt;span class="n">AS&lt;/span> &lt;span class="n">ctry&lt;/span> &lt;span class="n">on&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CountryID&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ctry&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CountryID&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">WHERE&lt;/span> &lt;span class="n">sp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StateProvinceName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">N&lt;/span>&lt;span class="s1">&amp;#39;Virginia&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ORDER&lt;/span> &lt;span class="n">BY&lt;/span> &lt;span class="n">CityName&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;@&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Get&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">DbaDatabase&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">SqlInstance&lt;/span> &lt;span class="n">rob&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">xps&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Database&lt;/span> &lt;span class="n">WideWorldImporters&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">variable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">db&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Query&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If I investigate the &lt;code>$variable&lt;/code> variable I get&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/12/data-results.png"
+loading="lazy"
+alt="data results"
+>&lt;/p>
+&lt;p>The results were just what I wanted so I thought I will just convert them to JSON and save them in a file and bingo I have some test data in a mock to ensure my code is doing what I expect. However, when I run&lt;/p>
+&lt;p>&lt;code>$variable | ConvertTo-Json&lt;/code>&lt;/p>
+&lt;p>I get&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/12/json-error.png"
+loading="lazy"
+alt="json error.png"
+>&lt;/p>
+&lt;p>and thats just for one row!&lt;/p>
+&lt;p>The way to resolve this is to only select the data that we need. The easiest way to do this is to exclude the properties that we don’t need&lt;/p>
+&lt;p>&lt;code>$variable | Select-Object * -ExcludeProperty ItemArray, Table, RowError, RowState, HasErrors | ConvertTo-Json&lt;/code>&lt;/p>
+&lt;p>which gave me what I needed and a good use case for -ExcludeProperty&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/12/json-fixed.png"
+loading="lazy"
+alt="json fixed.png"
+>&lt;/p></description></item></channel></rss>

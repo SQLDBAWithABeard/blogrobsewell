@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Poshhelp on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/poshhelp/</link><description>Recent content in Poshhelp on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/poshhelp/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Twitter to get #PowerShell help</title><link>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</link><pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</guid><description>&lt;p>A quick post today just to add some weight to something that Mike Fal &lt;a class="link" href="http://www.mikefal.net/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/Mike_Fal" target="_blank" rel="noopener"
+>t&lt;/a> has kicked off. The &lt;a class="link" href="https://twitter.com/hashtag/sqlhelp" target="_blank" rel="noopener"
+>#SQLHelp hashtag&lt;/a> is well known and well used with in the SQL world. It is a fantastic resource and one that I recommend to all SQL folk I meet who are not aware of it. &lt;a class="link" href="https://www.brentozar.com/archive/2009/12/i-need-sqlhelp/" target="_blank" rel="noopener"
+>Heres how it started&lt;/a>&lt;/p>
+&lt;p>Mike has suggested that there should be a similar resource for PowerShell questions &lt;a class="link" href="https://twitter.com/search?q=%23PoShHelp" target="_blank" rel="noopener"
+>#PoSHHelp&lt;/a>. We want to create a useful and positive place for people to go with their PowerShell queries and some good folks like Mike,  &lt;a class="link" href="http://t.co/NfvkfJXMjp" target="_blank" rel="noopener"
+>Shawn Melton&lt;/a>(&lt;a class="link" href="https://twitter.com/wsmelton" target="_blank" rel="noopener"
+>@wsmelton&lt;/a>), &lt;a class="link" href="http://t.co/K8jsx6WHcc" target="_blank" rel="noopener"
+>Adam Bertram&lt;/a>(&lt;a class="link" href="https://twitter.com/adbertram" target="_blank" rel="noopener"
+>@adbertram&lt;/a>), &lt;a class="link" href="http://t.co/U5LLtwWDPI" target="_blank" rel="noopener"
+>Derik Hammer&lt;/a>(&lt;a class="link" href="https://twitter.com/SQLHammer" target="_blank" rel="noopener"
+>@SQLHammer&lt;/a>), &lt;a class="link" href="http://learn-PowerShell.net/" target="_blank" rel="noopener"
+>Boe Prox&lt;/a>(&lt;a class="link" href="https://twitter.com/proxb" target="_blank" rel="noopener"
+>@proxb&lt;/a>), myself  and others will be looking for your PowerShell problems and try to assist you over Twitter with the same care and grace as Sqlhelp.&lt;/p>
+&lt;p>As with Sqlhelp we would like there to be a few rules that we all can follow to ensure that this remains a brilliant resource. Mike has suggested the following&lt;/p>
+&lt;ol>
+&lt;li>Questions should fit into 140 characters.&lt;/li>
+&lt;li>If they don’t, put your question and information on another site (like &lt;a class="link" href="http://serverfault.com/" target="_blank" rel="noopener"
+>ServerFault.com&lt;/a>) and link to it.&lt;/li>
+&lt;li>DO NOT SPAM THE HASH TAG. This is important, because in order to make it useful it needs to be kept clean. Don’t use it to advertise your blog posts or articles, but only for Q&amp;amp;A.&lt;/li>
+&lt;li>Don’t be a dick, a.k.a. &lt;a class="link" href="http://knowyourmeme.com/memes/wheatons-law" target="_blank" rel="noopener"
+>Wheaton’s Law&lt;/a>. It’s all too easy to let the anonymity of the internet get the better of us. Be polite and respectful to those using and accidentally mis-using the hash tag.&lt;/li>
+&lt;/ol>
+&lt;p>I notice that &lt;a class="link" href="http://sqlvariant.com/2010/07/please-join-us-for-poshhelp/" target="_blank" rel="noopener"
+>Aaron Nelson had already suggested this a few years ago&lt;/a> but it seems like it has fallen by the wayside. I would like to see this grow for all PowerShell folk so I ask you all to do two things.&lt;/p>
+&lt;p>Firstly, please add #PoSHHelp to your Tweetdeck column list or pin it to Tweetium (like I have) If you see a question you can help with then jump in and give your answer and help the community.&lt;/p>
+&lt;p>Secondly, let people know, if you see or hear a question about PowerShell then advise them to make use of the hashtag. If you blog about PowerShell then write a quick blog post like this one and let your readers know.&lt;/p>
+&lt;p>Pass on the word&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/nRhfnZ0.png"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>

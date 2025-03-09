@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL Community on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-community/</link><description>Recent content in SQL Community on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 02 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-community/index.xml" rel="self" type="application/rss+xml"/><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p>Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+>I wrote about using Power Bi to display my checkins&lt;/a>. I only started this in June and this is where I have been :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/01/swarm.png"
+loading="lazy"
+alt="swarm"
+>&lt;/p>
+&lt;p>I learnt about &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+>Pester&lt;/a> and ended the year incorporating it into &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a>. I also started using &lt;a class="link" href="https://github.com/SQLDBAWithABeard" target="_blank" rel="noopener"
+>GitHub&lt;/a> It is quite surprising to me how much time I now spend using both. I also had to start learning &lt;a class="link" href="https://msdn.microsoft.com/en-us/PowerShell/dsc/overview" target="_blank" rel="noopener"
+>DSC&lt;/a> for the client I was working with because as &amp;rsquo;the PowerShell guy&amp;rsquo; I was the one who could the easiest. I learnt things and &lt;a class="link" href="http://sqldbawithabeard.com/2016/01/31/PowerShell-pester-the-script-failed-due-to-call-depth-overflow/" target="_blank" rel="noopener"
+>then forgot them causing me to find this Pester post via google later in the year!!&lt;/a> (That&amp;rsquo;s a big reason for blogging by the way)&lt;/p>
+&lt;p>Early in the year we organised with &lt;a class="link" href="http://www.sqlsaturday.com/496/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section" target="_blank" rel="noopener"
+>https://www.facebook.com/mark.pryce.maher/videos/10153333580360863/?pnref=story.unseen-section&lt;/a>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>The Beard says&lt;/p>
+&lt;blockquote>
+&lt;p>When you go to an event -  Say thank you to the organisers and volunteers&lt;/p>&lt;/blockquote>
+&lt;p>and a TERRIBLE thing happened - I broke my DBA Team mug&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/WP_20160223_07_51_03_Pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>Luckily the fine folk at &lt;a class="link" href="http://www.red-gate.com/" target="_blank" rel="noopener"
+>redgate&lt;/a> sorted me out with a replacement from deep in the stores somewhere and gave it to me at SQL Saturday Exeter :-) Thank you.&lt;/p>
+&lt;p>I spoke at the PowerShell Conference Europe and met and made some great friends which lead to me speaking at the PowerShell Monday in Munich and the Dutch PowerShell Usergroup. SQL Saturday Dublin was a blast, its a wonderful city, Manchester had a whole PowerShell Track :-) and Cambridge was memorable for the appalling journey as well as the chance to share a stage with &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>Chrissy&lt;/a>. PowerShell Conference Asia in the sovereign city-state of Singapore was such a good event and place. Lastly of course was Slovenia with its fantastic Christmas lights and awesome event organisation. I visited some user groups too. Southampton run by my good friends &lt;a class="link" href="https://twitter.com/sqldiplomat" target="_blank" rel="noopener"
+>John Martin&lt;/a> and &lt;a class="link" href="https://twitter.com/steph_middleton" target="_blank" rel="noopener"
+>Steph Middleton&lt;/a> Congratulations to John on his first MVP award yesterday, Cardiff for the Return of the Battle of the Beards with Terry McCann and Tobiasz Koprowski where the projector threw its toys out of the pram and Birmingham in the school hall which was slightly chilly (theres a joke there for some people)&lt;/p>
+&lt;p>Amazing things happened&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;p>And that&amp;rsquo;s the biggest and bestest thing about this year. Some amazing new friends and spending time with all my other friends. I started writing out a list but was terrified I would have missed someone out, so to all my friends&lt;/p>
+&lt;p>THANK YOU for a brilliant 2016 and 2017 shall be just as good :-)&lt;/p>
+&lt;p>Here are a few of my pics from the year with a lot of my friends&lt;/p>
+&lt;p>[gallery type=&amp;ldquo;circle&amp;rdquo; columns=&amp;ldquo;9&amp;rdquo; ids=&amp;ldquo;3082,3083,3084,3085,3086,3087,3088,3089,3090,3091,3092,3093,3094,3095,3096,3097,3098,3099,3100,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3133,3134,3077,3075,3074,3073,3067,3068,3069,3070,3071,3072,3066,3065,3064,3063,3062,3061,3055,3056,3057,3058,3059,3060,3054,3053,3052,3051,3050,3049,2943,2950,2897,2923,3046,2924,2927,3047,2933,3048&amp;rdquo;]&lt;/p></description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p>
+&lt;blockquote>
+&lt;p>This means that if you have a PowerShell script doing &lt;em>Import-Module SQLPS&lt;/em>, it will need to be changed to be &lt;em>Import-Module SqlServer&lt;/em> in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to &lt;em>“%Program Files\WindowsPowerShell\Modules\SqlServer&lt;/em>” and hence no update to $env:PSModulePath is required.&lt;/p>&lt;/blockquote>
+&lt;p>So SQLPS will still continue to work but will not be updated and will not contain the new CMDlets or the future new CMDlets.&lt;/p>
+&lt;h2 id="so-what-new-things-do-we-have">So what new things do we have?
+&lt;/h2>&lt;blockquote>
+&lt;p>This month we introduce CMDLETs for the following areas:&lt;/p>
+&lt;ul>
+&lt;li>Always Encrypted&lt;/li>
+&lt;li>SQL Agent&lt;/li>
+&lt;li>SQL Error Logs&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>Chrissy LeMaire has written about the &lt;a class="link" href="https://blog.netnerds.net/2016/06/the-sql-server-PowerShell-module-formerly-known-as-sqlps/" target="_blank" rel="noopener"
+>new SQL Agent cmdlets&lt;/a>&lt;/p>
+&lt;p>Aaron Nelson has written about the &lt;a class="link" href="http://sqlvariant.com/2016/06/webinar-on-25-new-PowerShell-cmdlets-for-sql-server-and-more/" target="_blank" rel="noopener"
+>new Get-SqlErrorLog cmdlet&lt;/a>&lt;/p>
+&lt;p>Laerte Junior has written about &lt;a class="link" href="https://www.simple-talk.com/blogs/2016/06/30/invoke-sqlcmd-just-got-better/" target="_blank" rel="noopener"
+>Invoke-SQLCmd&lt;/a>&lt;/p>
+&lt;p>All four of us will be presenting a webinar on the new CMDlets via the &lt;a class="link" href="http://PowerShell.sqlpass.org/" target="_blank" rel="noopener"
+>PowerShell Virtual Chapter&lt;/a> Wed, Jul 06 2016 12:00 Eastern Daylight Time If you cant make it a recording will be made available on YouTube on the VC Channel &lt;a class="link" href="https://sqlps.io/video" target="_blank" rel="noopener"
+>https://sqlps.io/video&lt;/a>&lt;/p>
+&lt;h2 id="always-encrypted-cmdlets">Always Encrypted CMDlets
+&lt;/h2>&lt;p>That leaves the Always Encrypted CMDLets and there are 17 of those!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p> &lt;/p>
+&lt;p>That seems to cover setting up Always Encrypted with PowerShell , removing it and getting information about it. When the new SSMS update is dropped you will be able to start using all of this new functionality.&lt;/p>
+&lt;p>Just remember Import-Module sqlserver&lt;/p>
+&lt;h2 id="call-to-action">CALL TO ACTION
+&lt;/h2>&lt;p>Microsoft are engaging with the community to improve the tools we all use in our day to day work. There is are two Trello boards set up for &lt;strong>YOU&lt;/strong> to use to contribute&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/vote" target="_blank" rel="noopener"
+>https://sqlps.io/vote&lt;/a>  for SQLPS  sqlserver PowerShell module&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqlps.io/ssms" target="_blank" rel="noopener"
+>https://sqlps.io/ssms&lt;/a> for SSMS&lt;/p>
+&lt;p>Go and join them and upvote &lt;strong>YOUR&lt;/strong> preferred choice of the next lot of CMDlets&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/images/trellocount.png"
+loading="lazy"
+alt="trellocount"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>We have also set up a SQL Community Slack for anyone in the community to discuss all things related to SQL including the Trello board items and already it seems a good place for people to get help with 150+ members in a few days. You can get an invite here &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>https://sqlps.io/slack&lt;/a>&lt;/p>
+&lt;p>Come and join us&lt;/p></description></item><item><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</link><pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</guid><description>&lt;p>Following on from my &lt;a class="link" href="http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/" title="Parsing XML Child Nodes and Converting to DateTime with PowerShell"
+target="_blank" rel="noopener"
+>previous pos&lt;/a>t about parsing XML where I used the information from &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+>Steve Jones blog post&lt;/a> to get information from the &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+>SQL Saturday web site&lt;/a> I thought that this information and script may be useful for others performing the same task.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.&lt;/p>
+&lt;p>We are looking at using &lt;a class="link" href="https://guidebook.com/" target="_blank" rel="noopener"
+>the Guidebook app&lt;/a> to provide an app for our attendees with all the session details for &lt;a class="link" href="https://www.sqlsaturday.com/372" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>&lt;/p>
+&lt;p>The Guidebook admin website requires the data for the sessions in a certain format. You can choose CSV or XLS.&lt;/p>
+&lt;p>In the admin portal you can download the template&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg?w=300"
+loading="lazy"
+alt="down"
+>&lt;/a>&lt;/p>
+&lt;p>which gives an Excel file like this&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg?w=300"
+loading="lazy"
+alt="-excel"
+>&lt;/a>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>So now all we need to do is to fill it with data.&lt;/p>
+&lt;p>I have an Excel Object Snippet which I use to create new Excel Objects when using PowerShell to manipulate Excel. Here it is for you. Once you have run the code you will be able to press CTRL + J and be able to choose the New Excel Object Snippet any time.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$snippet = @{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Title = &amp;#34;New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Description = &amp;#34;Creates a New Excel Object&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Text = @&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create a .com object for Excel
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl = new-object -comobject excel.application
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.Visible = \`$true # Set this to False when you run in production
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb = \`$xl.Workbooks.Add() # Add a workbook
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$ws = \`$wb.Worksheets.Item(1) # Add a worksheet
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells=\`$ws.Cells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Do Some Stuff
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">perhaps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col)=&amp;#34;Server&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$cells.item(\`$row,\`$col).font.size=16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$Cells.item(\`$row,\`$col).Columnwidth = 10
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$col++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$wb.Saveas(&amp;#34;C:\temp\Test\`$filename.xlsx&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">\`$xl.quit()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#34;@
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">New-IseSnippet @snippet
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I needed to change this to open the existing file by using&lt;/p>
+&lt;p>&lt;code>$wb = $xl.Workbooks.Open($GuideBookPath)&lt;/code>&lt;/p>
+&lt;p>In the more help tab of the Excel workbook it says&lt;/p>
+&lt;blockquote>
+&lt;!-- raw HTML omitted -->&lt;/blockquote>
+&lt;p>So we need to do some manipulation of the data we gather. As before I selected the information from the XML as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Speaker = @{Name=&amp;#34;Speaker&amp;#34;; Expression = {$_.speakers.speaker.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = @{Name=&amp;#34;Room&amp;#34;; Expression = {$_.location.name}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$startTime = @{Name=&amp;#34;StartTime&amp;#34;; Expression = {[datetime]($_.StartTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Endtime = @{Name =&amp;#34;EndTime&amp;#34;; Expression = {[datetime]($_.EndTime)}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Talks = $Sessions.event|Where-Object {$_.title -ne &amp;#39;Coffee Break&amp;#39; -and $_.title -ne &amp;#39;Room Change&amp;#39; -and $_.title -ne &amp;#39;Lunch Break&amp;#39; -and $_.title -ne &amp;#39;Raffle and Cream Tea&amp;#39;}| select $Speaker,$Room,$Starttime,$Endtime,Title,Description |Sort-Object StartTime
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I then looped through the $Talks array and wrote each line to Excel like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">foreach ($Talk in $Talks)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Date = $Talk.StartTime.ToString(&amp;#39;MM/dd/yyyy&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Start = $talk.StartTime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$End = $Talk.Endtime.ToString(&amp;#39;hh:mm tt&amp;#39;) ## to put the info in the right format
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Title = $Talk.Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Description = $Talk.Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Room = $Talk.Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col = 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Title
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Date
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $End
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Room
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$col ++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$cells.item($row,$col) = $Description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$row++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I know that I converted the String to DateTime and then back to a String again but that was the easiest (quickest) way to obtain the correct format for the Excel file&lt;/p>
+&lt;p>Then to finish save the file and quit Excel&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$wb.Save()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$xl.quit()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then you upload the file in the Guidebook admin area &lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/import.jpg?w=300"
+loading="lazy"
+alt="import"
+>&lt;/a>&lt;/p>
+&lt;p>wait for the email confirmation and all your sessions are available in the guidebook&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/03/sched.jpg?w=300"
+loading="lazy"
+alt="sched"
+>&lt;/a>&lt;/p>
+&lt;p>I hope that is useful to others. The full script is below&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">## From http://www.sqlservercentral.com/blogs/steve_jones/2015/01/26/downloading-sql-saturday-data/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">372&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">baseURL&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">http&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">www&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sqlsaturday&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">eventxml&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">aspx&lt;/span>&lt;span class="err">?&lt;/span>&lt;span class="n">sat&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">DestinationFile&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">E&lt;/span>&lt;span class="p">:&lt;/span>\&lt;span class="n">SQLSatData&lt;/span>\&lt;span class="n">SQLSat&lt;/span>&lt;span class="err">”&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">xml&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">GuideBookPath&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;C:&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s1">emp\Guidebook_Schedule_Template.xls&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">sourceURL&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">baseURL&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">New&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Xml&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">XmlDocument&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">sourceURL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">DestinationFile&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Sessions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">doc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">GuidebookXML&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">events&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Speaker&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Speaker&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">speakers&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">speaker&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Room&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">location&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">startTime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;StartTime&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="p">)}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Endtime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="err">@&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">Name&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;EndTime&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">Expression&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{[&lt;/span>&lt;span class="n">datetime&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">EndTime&lt;/span>&lt;span class="p">)}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Talks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Sessions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">event&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="n">Where&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Coffee Break&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Room Change&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Lunch Break&amp;#39;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="ow">and&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">ne&lt;/span> &lt;span class="s1">&amp;#39;Raffle and Cream Tea&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">|&lt;/span> &lt;span class="n">select&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Speaker&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Starttime&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Endtime&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">Title&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">|&lt;/span>&lt;span class="n">Sort&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="ne">Object&lt;/span> &lt;span class="n">StartTime&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a .com object for Excel&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">object&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">comobject&lt;/span> &lt;span class="n">excel&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Visible&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="bp">true&lt;/span> &lt;span class="c1"># Set this to False when you run in production&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Workbooks&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">GuideBookPath&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">ws&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Worksheets&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">=$&lt;/span>&lt;span class="n">ws&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Cells&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="c1"># To clear that entry&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span> &lt;span class="c1"># To clear that entry&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">foreach&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talks&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Date&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MM/dd/yyyy&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">StartTime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hh:mm tt&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">End&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Endtime&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;hh:mm tt&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">## to put the info in the right format&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Title&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Talk&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Room&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Date&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Start&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">End&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="ne">Room&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span> &lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">cells&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">col&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">$&lt;/span>&lt;span class="n">Description&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">row&lt;/span>&lt;span class="o">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">wb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Save&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">$&lt;/span>&lt;span class="n">xl&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">quit&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p> &lt;/p>
+&lt;p>Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a> and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+>#SQLSatExeter&lt;/a> on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p>
+&lt;p>In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p>
+&lt;h4 id="sql-saturday-pre-cons-are-exceptional-value">SQL SATURDAY PRE-CONS ARE EXCEPTIONAL VALUE
+&lt;/h4>&lt;p>It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry &lt;a class="link" href="https://twitter.com/@mrdenny" target="_blank" rel="noopener"
+>@mrdenny&lt;/a>. The conversation went along the lines of&lt;/p>
+&lt;p>“I want to go to this training session being delivered by this guy. &lt;a class="link" href="https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link to MVP page&lt;/a>. It’s £150 and is in Exeter so no other costs required”&lt;/p>
+&lt;p>My boss – “OK”&lt;/p>
+&lt;p>Of course there was a little more fun and games to be had with the payment but it was easy for me to get training sorted and £150 is not going to break the training budget.&lt;/p>
+&lt;p>Looking back through my notes from the session today I realise quite how much I have taken from it into my role at work. I can’t really comment which and what though that wouldn’t be good security!!&lt;/p>
+&lt;p>I remember an enjoyable day with plenty of technical learning, a lot of questions and answers and plenty of laughs as well. But more than that was the opportunity to mix with other professionals and talk with them. During the breaks and at lunch there were plenty of opportunities to chew the fat, learn how others do things, make new friends and put faces to twitter handles. (NOTE : I do look pretty much like my &lt;a class="link" href="https://pbs.twimg.com/profile_images/75950380/n675059923_1450.jpg" target="_blank" rel="noopener"
+>twitter profile picture&lt;/a> so if you see me at SQL Community events I expect you to come up and say hi, that&amp;rsquo;s part of the benefit of attending these events, having a good natter)&lt;/p>
+&lt;p>Take a look at the end of this post for details of 2014 Pre-Cons&lt;/p>
+&lt;h4 id="sql-saturday--cant-get-cheaper-than-free">SQL SATURDAY – CAN’T GET CHEAPER THAN FREE
+&lt;/h4>&lt;p>SQL Saturdays are FREE&lt;/p>
+&lt;p>SQL Saturdays offer sessions from internationally renowned and local SQL speakers on subjects relevant to you and your job, your future career, your development plan or just to challenge yourself by learning about something outside of your comfort zone. For Nothing. Add in the networking opportunities, the prizes from the sponsors, (if you were at Exeter this year the beer and the pasty) and if you added it up its a sizeable investment in yourself, your career and your development (did I mention a free beer and pasty?)&lt;/p>
+&lt;p>NOT BAD FOR FREE!!&lt;/p>
+&lt;p>To enable that, SQL Saturday organisers have to go out and talk sponsors into putting their hands into their pockets. They will only do that if it is worthwhile to them. You can make it easier for the organisers by going and spending time with the sponsors during the breaks, chatting with them and giving them your details. Also, if you choose to use one of their products please tell the sponsors you spoke to them at a SQL Saturday. They are (usually) data professionals who will record that and use that to make future decisions which will we hope include sponsoring SQL Saturdays.&lt;/p>
+&lt;p>This year on the Saturday I went to the following sessions&lt;/p>
+&lt;p>A temporary fix for a short term problem by Ian Meade Advanced SQL Server 2012 HA and DR Architectures by Christian Bolton Busting common T-SQL myths by Dave Morrison Power View and the Cube by Régis Baccaro Natural Born Killers, performance issues to avoid by Richard Douglas Tracking server performance without slowing it down by Jonathan Allen which I also Room Monitored Increasing Business and IT collaboration by Chris Testa-O&amp;rsquo;Neill&lt;/p>
+&lt;p>It was a really good day. I learnt so much from all those knowledgeable and talented people. It really kicked me on in my development at work. I was able to take from each of those sessions and use that knowledge to do my job better and I made new friends and new contacts. Just going back to my notes today has reminded me of something that I need to look into for work.
+Some of the conversations I have had at events this year have been fascinating - learning how other people do the same thing you do in a completely different but equally valid way,  problem-solving with a different set and type of minds than the ones at MyWork, laughing at the same things and moaning about similar frustrations. All have been both entertaining and rewarding and I think are worth mentioning as things I enjoyed about going to SQL Community events this year and play a part in the reason I shall continue to go to them (Just hope my boss doesn&amp;rsquo;t read this and think he won’t have to pay as I will go anyway!)&lt;/p>
+&lt;p>It’s busy and hectic, the sessions come along thick and fast and there are lots of people around to talk to. I wish I had made use of the SQL Saturday mobile phone app and I definitely recommend researching ahead of time and planning your day out.&lt;/p>
+&lt;p>This years sessions have not been decided yet but I have seen some of the submissions and there are some fabulous sessions there. You could also submit a session yourself. Choosing the sessions will be tough, but we want to offer the opportunity to speak to as many people as possible both new and experienced speakers.&lt;/p>
+&lt;p>You can submit your sessions at this link &lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/callforspeakers.aspx&lt;/a>&lt;/p>
+&lt;h4 id="round-up-sql-saturday-exeter-why-wouldnt-you-come">ROUND-UP SQL SATURDAY EXETER WHY WOULDN’T YOU COME
+&lt;/h4>&lt;p>For a newbie, as I was last time, SQL Saturday Exeter was a revelation.&lt;/p>
+&lt;p>An opportunity to learn without spending thousands of my own or MyWorks money to sit in a lecture room and listen to a trainer.&lt;/p>
+&lt;p>A chance to develop my understanding in a friendly environment amongst my peers where I could ask questions.&lt;/p>
+&lt;p>A place to meet new people and build relationships who have helped me with situations at work throughout the year. I reckon I&amp;rsquo;m in credit already&lt;/p>
+&lt;p>This year I have attended SQL Bits and SQL Saturday Cambridge and this month I shall be at SQL Relay in Cardiff and in Bristol. That all started with SQL Saturday 194 in Exeter 2013&lt;/p>
+&lt;h4 id="what-about-next-years-sql-saturday-exeter">WHAT ABOUT NEXT YEARS SQL SATURDAY EXETER?
+&lt;/h4>&lt;p>Next years SQL Saturday in Exeter, SQL Saturday #269, will be held at the same place - &lt;a class="link" href="http://www.jurysinns.com/hotels/exeter" target="_blank" rel="noopener"
+>Jury’s Inn Hotel Exeter&lt;/a> on March 21/22nd 2014.&lt;/p>
+&lt;p>We had such amazing submissions for our pre-cons that we have had to find more rooms to be able to fit them all in.. You can see for yourself the quality of the sessions and speakers for SQL Saturday Exeter 2014 at the following link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>What do you think? I want to split myself into 8 and go to every one!&lt;/p>
+&lt;h4 id="what-should-you-do-now">WHAT SHOULD YOU DO NOW?
+&lt;/h4>&lt;p>I suggest that you should book Saturday 22nd March 2014 out in your calendar right this minute. Done that? Good.&lt;/p>
+&lt;p>Now go to this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/&lt;/a>&lt;/p>
+&lt;p>and register for FREE to attend and let us know &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a>&lt;/p>
+&lt;p>Next make yourself a coffee (Other beverages are available) and head to the pre-con page&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>This bit is up to you, the choice is hard. I can’t tell you which one of our eight fabulous sessions you want to go to. It’s not for me to say which amazing speaker you want to spend a day with for a bargain price but if you need further info please get in touch and we will try and help. Unfortunately our human cloning experiment is not stable enough to allow you to go to more than one!&lt;/p>
+&lt;p>Then, let me know you have done so and come and say hi when you are here.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cortana on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/cortana/</link><description>Recent content in Cortana on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 13 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/cortana/index.xml" rel="self" type="application/rss+xml"/><item><title>Enabling Cortana for dbareports PowerBi</title><link>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</link><pubDate>Sun, 13 Nov 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png" alt="Featured image of post Enabling Cortana for dbareports PowerBi" />&lt;p>Last week at the Birmingham user group I gave a presentation about PowerShell and SQL Server&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg"
+loading="lazy"
+alt="saved-image-from-tweetium-8"
+>&lt;/a>&lt;/p>
+&lt;p>It was a very packed session as I crammed in the &lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/" target="_blank" rel="noopener"
+>new sqlserver module&lt;/a>, &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> 🙂 On reflection I think this is a bit too much for a one hour session but at the end of the session I demo’d live Cortana using the dbareports dataset and returning a Cortana PowerBi page.&lt;/p>
+&lt;p>As always it took a couple of goes to get it right but when it goes correctly it is fantastic. I call it a salary increasing opportunity! Someone afterwards asked me how it was done so I thought that was worth a blog post&lt;/p>
+&lt;p>There is a video below but the steps are quite straightforward.&lt;/p>
+&lt;h2 id="add-cortana-specific-pages">Add Cortana Specific Pages
+&lt;/h2>&lt;p>Whilst you can just enable Cortana to access your dataset, as shown later in this post, which enables Cortana to search available datasets and return an appropriate visualisation it is better to provide specific pages for Cortana to use and display. You can do this in PowerBi Desktop&lt;/p>
+&lt;p>Start by adding a new page in your report by clicking on the plus button&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/add-page.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/add-page.png"
+loading="lazy"
+alt="add page.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>and then change the size of the report page by clicking on the paintbrush icon in the visualisation page.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/page-size.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/page-size.png"
+loading="lazy"
+alt="page-size"
+>&lt;/a>&lt;/p>
+&lt;p>This creates a page that is optimised for Cortana to display and also will be the first place that Cortana will look to answer the question&lt;/p>
+&lt;blockquote>
+&lt;p>Power BI first looks for answers in &lt;a class="link" href="https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-desktop-entity-cards/" target="_blank" rel="noopener"
+>Answer Pages&lt;/a> and then searches your datasets and reports for other answers and displays them in the form of visualizations. The highest-scoring results display first as &lt;em>best matches&lt;/em>, followed by links to other possible answers and applications. Best matches come from Power BI Answer Pages or Power BI reports.&lt;/p>&lt;/blockquote>
+&lt;p>Rename the page so that it contains the words or phrase you expect to be in the question such as “Servers By Version” You will help Cortana and PowerBi to get your results better if you use some of the column names in your dataset&lt;/p>
+&lt;p>Then it is just another report page and you can add visualisations just like any other page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-page.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-page.png"
+loading="lazy"
+alt="cortana page.PNG"
+>&lt;/a>&lt;/p>
+&lt;h2 id="make-cortana-work-for-you-and-your-users">Make Cortana work for you and your users
+&lt;/h2>&lt;p>If your users are likely to use a number of different words in their questions you can assist Cortana to find the right answer by adding alternate names. So maybe if your page is sales by store you might add shop, building, results, amount, orders. This is also useful when Cortana doesn’t understand the correct words as you will notice in the screenshot below I have added “service” for “servers” and “buy” for “by” to help get the right answer. You can add these alternate words by clicking the paintbrush under visualisations and then Page Information&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-additional.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-additional.png"
+loading="lazy"
+alt="cortana-additional"
+>&lt;/a>&lt;/p>
+&lt;h2 id="publish-your-pbix-file-to-powerbicom">Publish your PBIX file to PowerBi.com
+&lt;/h2>&lt;p>To publish your PowerBi report to &lt;a class="link" href="https://powerbi.com" target="_blank" rel="noopener"
+>PowerBi.com&lt;/a> either via the Publish button in &lt;a class="link" href="http://go.microsoft.com/fwlink/?LinkID=521662" target="_blank" rel="noopener"
+>PowerBi desktop&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/publish.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/publish.png"
+loading="lazy"
+alt="publish"
+>&lt;/a>&lt;/p>
+&lt;p>or by using the &lt;a class="link" href="https://github.com/DevScope/powerbi-powershell-modules" target="_blank" rel="noopener"
+>PowerBiPS module&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> Install-Module -Name PowerBIPS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #Grab the token, will require a sign in
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $authToken = Get-PBIAuthToken –Verbose
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Import-PBIFile –authToken $authToken –filePath “Path to PBIX file” –verbose
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="enable-cortana">Enable Cortana
+&lt;/h2>&lt;p>In your browser log into &lt;a class="link" href="https://powerbi.com" target="_blank" rel="noopener"
+>https://powerbi.com&lt;/a> and then click on the cog and then settings&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/powerbicom.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/powerbicom.png"
+loading="lazy"
+alt="powerbicom.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>then click on Datasets&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/settings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/settings.png"
+loading="lazy"
+alt="settings"
+>&lt;/a>&lt;/p>
+&lt;p>Then choose the dataset – in this case dbareports SQL Information sample and click the tick box to Allow Cortana to access the this dataset and then click apply&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/dataset-settings.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/dataset-settings.png"
+loading="lazy"
+alt="dataset settings.PNG"
+>&lt;/a>&lt;/p>
+&lt;h2 id="use-cortana-against-your-powerbi-data">Use Cortana against your PowerBi data
+&lt;/h2>&lt;p>You can type into the Cortana search box and it will offer the opportunity for you to choose your PowerBi data&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search.png"
+loading="lazy"
+alt="cortana-search"
+>&lt;/a>&lt;/p>
+&lt;p>but it is so much better when you let it find the answer 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-11.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-11.png"
+loading="lazy"
+alt="cortana-search-1"
+>&lt;/a>&lt;/p>
+&lt;p>and if you want to go to the PowerBi report there is a handy link at the bottom of the Cortana page&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png"
+loading="lazy"
+alt="cortana-search-2"
+>&lt;/a>&lt;/p>
+&lt;p>I absolutely love this, I was so pleased when I got it to work and the response when I show people is always one of wonder for both techies and none-techies alike&lt;/p>
+&lt;h2 id="the-conditions-for-cortana-to-work">The conditions for Cortana to work
+&lt;/h2>&lt;p>You will need to have added your work or school Microsoft ID to the computer or phone that you want to use Cortana on and that account must be able to access the dataset either because it is the dataset owner or because a dashboard using that dataset has been shared with that account.&lt;/p>
+&lt;p>&lt;strong>&lt;a class="link" href="https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-enable/" target="_blank" rel="noopener"
+>From this page on PowerBi.com&lt;/a>&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>When a new dataset or custom Cortana Answer Page is added to Power BI and enabled for Cortana it can take up to 30 minutes for results to begin appearing in Cortana. Logging in and out of Windows 10, or otherwise restarting the Cortana process in Windows 10, will allow new content to appear immediately.&lt;/p>&lt;/blockquote>
+&lt;h2 id="its-not-perfect">It’s not perfect!
+&lt;/h2>&lt;p>When you start using Cortana to query your data you will find that at times it is very frustrating. My wife was in fits of giggles listening to me trying to record the video below as Cortana refused to understand that I was saying “servers” and repeatedly searched Bing for “service” Whilst you can negate the effect by using the alternate names for the Q and A settings it is still a bit hit and miss at times.&lt;/p>
+&lt;h2 id="it-is-amazing">It is amazing
+&lt;/h2>&lt;p>There is something about giving people the ability to just talk to their device in a meeting and for example with dbareports ask&lt;/p>
+&lt;blockquote>
+&lt;p>Which clients are in Bolton&lt;/p>&lt;/blockquote>
+&lt;p>or&lt;/p>
+&lt;blockquote>
+&lt;p>When was the last backup for client The Eagles&lt;/p>&lt;/blockquote>
+&lt;p>and get the information they require and a link to the report in PowerBi.com. I am certain that the suits will be absolutely delighted at being able to show off in that way which is why I call it a salary increasing opportunity 🙂&lt;/p>
+&lt;h2 id="we-would-love-you-to-come-and-join-us-at-the-sql-community-collaborative">We would love YOU to come and join us at the SQL Community Collaborative
+&lt;/h2>&lt;p>Help us make &lt;code>dbatools&lt;/code>, &lt;code>dbareports&lt;/code> and &lt;code>Invoke-SQLCmd2&lt;/code> even better. You can join in by forking the repos in GitHub and writing your code and then performing a PR but we would much rather that you came and discussed new requests in our Trello boards, raised issues in GitHub and generally discussed the modules in the SQL Server Community Slack &lt;code>#dbatools&lt;/code> &lt;code>#dbareports&lt;/code>. We are also looking for assistance with our wiki pages, Pester tests and appveyor integration for our builds and any comments people want to make&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/sqlcollaborative/" target="_blank" rel="noopener"
+>SQL Server Collaborative GitHub Organisation holding the modules.&lt;/a> Go here to raise issues, fork the repositories or download the code&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/trello" target="_blank" rel="noopener"
+>dbatools Trello for discussion about new cmdlets&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://dbatools.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a> where you can find #dbatools and #dbareports as well as over 1100 people discussing all aspects of the Data Platform, events, jobs, presenting&lt;/p>
+&lt;p>COME AND JOIN US&lt;/p></description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p>I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+>PSConfAsia&lt;/a> conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+>&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+>Ravi Chaganti&lt;/a> spoke about DSC&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+>&lt;/p>
+&lt;p>and then Desmond Lee lead a Q and A session. In the end we decided that all the answers were&lt;/p>
+&lt;blockquote>
+&lt;p>It Depends and Test in your Environment&lt;/p>&lt;/blockquote>
+&lt;p>That evening, I even managed to jump on the PASS PowerShell Virtual Chapter session by Scott Sutherland Hacking SQL Servers on Scale using PowerShell the recording of which is here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/npoORzfP7rw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>A session organised and managed online in three different time zones by Aaron Chrissy and myself :-).&lt;/p>
+&lt;p>On Thursday the conference proper started with a pre-con day at the Amazon Web Services office. Yes, you read that right. This conference really highlighted the cross-platform direction and adoption of open-source that Microsoft is taking.  &lt;a class="link" href="http://twitter.com/@JasonYoder_MCT" target="_blank" rel="noopener"
+>Jason Yoder&lt;/a> spent all day teaching a group &amp;ldquo;PowerShell for Beginners&amp;rdquo; in one room&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_09_24_43_pro.jpg"
+loading="lazy"
+alt="WP_20161020_09_24_43_Pro.jpg"
+>&lt;/p>
+&lt;p>while The Amazon Web Services Team showed DevOps on AWS with PowerShell in the morning and &lt;a class="link" href="https://twitter.com/juneb_get_help" target="_blank" rel="noopener"
+>June Blender&lt;/a> gave a SAPIEN Toolmaking Seminar.fter this we went back to the Microsoft Offices for another User Group where Jason Yoder gave a (nother) session with &lt;a class="link" href="https://twitter.com/jaap_brasser" target="_blank" rel="noopener"
+>Jaap Brasser&lt;/a> on PowerShell Tips and Tricks (&lt;a class="link" href="https://onedrive.live.com/?authkey=%21AJyNBdDeTNtAS18&amp;amp;id=4B0EFD9B34E1210E%2124928&amp;amp;cid=4B0EFD9B34E1210E" target="_blank" rel="noopener"
+>Demo&lt;/a>)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_19_26_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_19_26_24_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Friday started with The PowerShell Team represented by &lt;a class="link" href="https://twitter.com/khansenhansen" target="_blank" rel="noopener"
+>Kenneth Hansen&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/angelcalvos" target="_blank" rel="noopener"
+>Angel Calvo&lt;/a> talking about PowerShell Past, Present and Future. It was really good that there was such great access to the product team at the conference and I saw lots of interaction around the conference as well, in addition to the sessions they provided.&lt;/p>
+&lt;p>Next up for me was another session from the PowerShell Team, this time &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> taking us on a Journey Through the Ages of PowerShell Security&lt;/p>
+&lt;blockquote>
+&lt;p>Execution Policy is not a security feature&lt;/p>&lt;/blockquote>
+&lt;p>That took us to lunch, we were treated to excellent lunches at this conference&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161020_12_07_14_pro-2.jpg"
+loading="lazy"
+alt="WP_20161020_12_07_14_Pro (2).jpg"
+>&lt;/p>
+&lt;p>After lunch I sat in the PowerShell Teams Ask Us Anything session although I was mainly preparing for my own session PowerShell Profile Prepares Perfect Production Purlieu which followed. There were excellent sessions on JEA, Nano Server, Chef and DSC, Containers, ETS and securing PowerShell against malware whilst I attended &lt;a class="link" href="http://flynnbundy.com" target="_blank" rel="noopener"
+>Flynn Bundy&amp;rsquo;s&lt;/a> session about Windows Containers and Building GUIs with XAML with &lt;a class="link" href="https://twitter.com/david_das_neves" target="_blank" rel="noopener"
+>David Das Neves&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161021_15_58_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20161021_15_58_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>That evening, organisers, speakers and attendees all went to the Penny Black pub on Marina Bay and enjoyed some food, refreshments and networking&lt;/p>
+&lt;p>Saturday started slowly after the rain (another impressive &amp;lsquo;feature&amp;rsquo; of Singapore)  but the first session was a brilliant one with &lt;a class="link" href="https://twitter.com/hemanmahawar" target="_blank" rel="noopener"
+>Hemant Mahawar&lt;/a> &amp;amp; &lt;a class="link" href="https://twitter.com/lzybkr" target="_blank" rel="noopener"
+>Jason Shirk&lt;/a> talking Pragmatic PowerShell and answering questions. I am glad Jason used &lt;a class="link" href="https://github.com/Code52/carnac" target="_blank" rel="noopener"
+>Carnac&lt;/a> to show what he was typing so that people could (just about :-) ) keep up. I then attended the excellent session about contribution with Microsoft.&lt;/p>
+&lt;p>The rest of the day had amazing sessions on Azure Automation, IoT, AWS Cloud Formation, Centralised Repository Server, Chef, Puppet, Professional Help, Nano Server, Docker, DSC, Release Pipeline and of course some bearded fella talking about Installing SQL Scripts and creating Pester Tests for them and combining PowerShell, SQL, SSRS, PowerBi and Cortana :-)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cjason-yoders-photo.jpg"
+loading="lazy"
+alt="Jason Yoder’s photo.jpg"
+>&lt;/p>
+&lt;p>My takeaways from the conference were that Microsoft is very open to all members of the open source community, DevOps is a very important topic and also the following points from the PowerShell team&lt;/p>
+&lt;blockquote>
+&lt;p>PowerShell Team want YOU to contribute. Interact with them File bugs Feature Requests Documentation Tests Code&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>Fixing is better than complaining :-) &lt;a class="link" href="https://twitter.com/@HemanMahawar" target="_blank" rel="noopener"
+>@HemanMahawar&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a> You can help fix the documentation. Use the contribute button on the doc&lt;/p>&lt;/blockquote>
+&lt;p>and&lt;/p>
+&lt;blockquote>
+&lt;p>If you are thinking of starting or run a PowerShell usergroup Microsoft would like help. Tag 1 of the team such as &lt;a class="link" href="https://twitter.com/@ANGELCALVOS" target="_blank" rel="noopener"
+>@ANGELCALVOS&lt;/a> &lt;a class="link" href="https://twitter.com/search?q=%23psconfasia" target="_blank" rel="noopener"
+>#psconfasia&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Special thanks and congratulations must go to Matt, Milton, Sebastian and Ben for their excellent organisation and for creating an awesome event. I am looking forward to seeing how they can better it next year and also hoping that seeing all the fabulous speakers and sessions will inspire some attendees from this years event to share their own knowledge and experience at local user groups and even next years conference.&lt;/p></description></item></channel></rss>

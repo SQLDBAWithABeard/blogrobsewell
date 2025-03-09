@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQLBits on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/sqlbits/</link><description>Recent content in SQLBits on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/sqlbits/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLBits 2023 in Newport - A beards viewpoint</title><link>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</link><pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits 2023 in Newport - A beards viewpoint" />&lt;h1 id="what-is-sqlbits">What is SQLBits?
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="committee">Committee
+&lt;/h2>&lt;p>The SQLBits committee is responsible for the running of the conference, the selection of general sessions and training days, helpers, sponsors, venue, dates, child care, theme, logo, the party, the website, charity support, hotels, bars, delegate app, helpers app, sponsors app, food, drinks, entertainment, prizes, swag, t-shirts, mugs, code of conduct, badges, printing, freight, stickers, lanyards, bags,on-site therapist, pens, notepads&amp;hellip; and everything else that goes into making SQLBits the best conference it can be!!&lt;/p>
+&lt;h2 id="before-the-conference">Before the conference
+&lt;/h2>&lt;p>We have been meeting every week as a committee to plan the conference. Every committee member has also spent a lot of time in meetings, dealing with correspondence, answering questions, and then feeding this back to the whole committee. We received some feedback from one of our largest sponsors that one of the things that the liked about SQLBits was that we are all so passionate about the conference and that it really shows. We are all volunteers and we all have full time jobs, families, and other commitments but we are also determined to make SQLBits the best Microsoft Data Platform conference in the world.&lt;/p>
+&lt;h2 id="set-up">Set up
+&lt;/h2>&lt;p>We all arrived in Newport on the Sunday or the Monday before the conference to set up. Set up is a massive operation involving a significant number of people who turn the big empty room into the exhibition hall, build all of the sponsor booths, set up all of the rooms with a stage, screens, signage and projectors, ensure that there is wifi, power, and hard-wired internet access in them all. There was also a team taking all of the output from the speakers desk and ensuring that it will be available for the live streams for the online delegates. Whilst all of that is happening, we were unpacking all of the things that had been in storage (or peoples garages) getting all of the t-shirts for the helpers, for the speakers and for the committee. All of the speaker swag and delegate swag was put into a box or a bag by some of the orange shirted helpers.
+We also had a &amp;ldquo;Meet the trainer&amp;rdquo; event in the evening which allowed delegates to come and interact with the speakers. This was a great opportunity for delegates to ask questions and get to know the trainers before the training days.&lt;/p>
+&lt;p>That was all expected.&lt;/p>
+&lt;p>However, there are also things that happens behind the scenes during this time. For example, due to a storm over Northern Europe which impacted flights into and out of Schiphol, London and Bristol Airports as well as the trains running from London to Newport, there was a point on Monday afternoon where we were not sure that over half of our training day speakers for the next day would be able to make it. This lead to a couple of hours of manic phone calls and communication with the speakers as we tried our best to get them to the conference. We were very lucky that with only one exception, everyone made it to the conference. Unfortunately, despite best efforts and a lot of searching, one speaker was unable to get to the UK in time and so we had to switch their rooms to a room with virtual speakers enabled and update all of the schedules and teams involved in providing the content. These are the things that you don&amp;rsquo;t see, but that are part of the magic of ensuring that the conference runs smoothly. I hope all of the delegates and most of the speakers and sponsors have no idea of the things that were happening behind the scenes. I always describe it like a swan, it looks calm and serene on the surface, but underneath the water, there is a lot of paddling going on!&lt;/p>
+&lt;h1 id="tuesday">Tuesday
+&lt;/h1>&lt;p>For me, Tuesday was a training day. With my fantastic partner in fun and games and sharing - Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>B&lt;/a> &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+>M&lt;/a> we spent the whole day with about 75 people both in person and online and talked about how to manage large SQL estates. We had a lot of fun and I hope that everyone who attended enjoyed it as much as we did. We had a lot of questions and a lot of interaction with the delegates in both formats and it showed that the system that we had to enable virtual delegates for SQLBits really managed to work well.&lt;/p>
+&lt;h1 id="equity-and-inclusivity">Equity and Inclusivity
+&lt;/h1>&lt;p>We had a lot of positive feedback from the delegates and we are really pleased that we were able to provide this opportunity for even more people to attend the conference. We are passionate about Diversity, Equity and Inclusivity and the feedback that we have received is that allowing virtual attendees enabled more people to attend the conference and to learn from the speakers. People who would not have been able to attend because of their family commitments or because of the cost of travel and accommodation were able to attend and this is one of our goals for the conference.&lt;/p>
+&lt;p>Concentrating on Inclusion and Equity will naturally have a positive impact on our Diversity and our goal is to make SQLBits a conference that is welcoming to everyone. The DE and I teams initiatives such as childcare are beginning to bear fruit and we are seeing more and more people attending the conference with their families, as well as more people from underrepresented groups attending the conference and we are working hard to ensure that we are providing a safe and welcoming environment for everyone.&lt;/p>
+&lt;h1 id="getting-everyone-in">Getting everyone in
+&lt;/h1>&lt;p>Whilst Jess and I were doing the training day, the rest of the team were ensuring that everyone was able to get in, with a badge, registered with the session that they expected, or the one they wished to change to. Some sessions had a limited number of places and so we had to ensure that the people who were on the waiting list were able to get into the session that they wanted to attend if places became available. We had to print the badges for the people who had signed up in the days before we sent the information to the printers. We had people paying for new tickets right up until Friday!&lt;/p>
+&lt;h1 id="wednesday">Wednesday
+&lt;/h1>&lt;p>There was another &amp;ldquo;Meet the trainer&amp;rdquo; event on the Tuesday evening and another set of speakers and delegates who were arriving as well as sponsor teams and their freight. Wednesday morning did not see as much of a rush as Tuesday morning, but there was still a lot of people arriving and needing processing or having questions that needed answering. At events like SQLBits there is also a lot of communication and conversation with the venue. Ensuring that there is coffee at the times that everyone comes out of the rooms for breaks and that there is lunch at the right time. When you are thinking about lunch, you also need to think about the sponsors. On General sessions days we need to ensure that they can have lunch before all of the delegates come out of their sessions and they need to spend their time talking with them and demonstrating their products. Wednesday evening was also when the sponsors were able to setup their booths. This, of course, generates a large number of questions that need answering and boxes that need finding and then unpacking.&lt;/p>
+&lt;h1 id="evening-events">Evening events
+&lt;/h1>&lt;p>Wednesday saw the first of the large evening events. We provided a games night with food. Thursday there was a quiz night with curry and Friday was the Party. As you can imagine, there is a significant amount of organisation required behind the scenes for all of these additional events. Food, drinks, prizes, the folks providing the entertainment and the helpers. The venue, security, transport from the hotels to the venue and back again. All of this needs to be organised and then managed on the day. We had a lot of fun at these events though and find them a great way to end each day and enable delegates who want to, to be able to network with each other and with the sponsors all whilst doing something fun. The party is organised by the wonderful, sparkly Julia and her team and they do a fantastic job of making sure that everyone has a great time.&lt;/p>
+&lt;h1 id="general-sessions">General sessions
+&lt;/h1>&lt;p>General sessions then add further complexity, more delegates, more speakers, more moving parts that always have the possibility for things to require fixing. I have been a SQLBits helper and runner enough times to know that there were many things requiring attention, this year my responsibility was the agenda and updating the processes behind that when things changed and answering the myriad of questions that come up at the information desk. It is a lot of fun but also a lot of work.&lt;/p>
+&lt;h1 id="wrap-up">Wrap up
+&lt;/h1>&lt;p>This is a totally raw outpouring of my experience this year, pretty much without filter. Just so that I had it down somewhere in words.&lt;/p></description></item><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" />&lt;h1 id="what-is-sqlbits">What is SQLBits?
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+>written about SQLBits&lt;/a>, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p>
+&lt;h2 id="where-and-when">Where and when?
+&lt;/h2>&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p>
+&lt;h2 id="what-is-there-at-sqlbits">What is there at SQLBits?
+&lt;/h2>&lt;p>Tuesday and Wednesday are training days with all day sessions provided by subject matter experts including Microsoft Product Group members, Microsoft Valued Professionals, Microsoft Certified Trainers, and other experts. There are 30 options covering all areas of the Data Platform and none-technical sessions as well.&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/training-days" target="_blank" rel="noopener"
+>training day agenda here&lt;/a>&lt;/p>
+&lt;p>Thursday and Friday have 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>Saturday is the &lt;strong>FREE to attend&lt;/strong> day. It also has 50 minute, 20 minute and 5 minute sessions with a wide range of topics and levels.&lt;/p>
+&lt;p>There are about 250 sessions on Thursday, Friday and Saturday&lt;/p>
+&lt;p>You can see the &lt;a class="link" href="https://events.sqlbits.com/2023/agenda" target="_blank" rel="noopener"
+>general session agenda here&lt;/a>&lt;/p>
+&lt;h2 id="what-else-is-there-outside-of-technical-stuff">What else is there outside of technical stuff?
+&lt;/h2>&lt;p>Oh My!!&lt;/p>
+&lt;p>The biggest benefit is the people, for networking, for answering questions, building relationships with Microsoft product group or local Microsoft, meeting companies who are sponsoring, finding your new job or your new team members, learning and sharing with your peers.&lt;/p>
+&lt;p>There is also a pub quiz on Thursday evening, the Friday night costume party, the community zone.&lt;/p>
+&lt;h1 id="how-do-i-find-the-sessions">How do I find the sessions?
+&lt;/h1>&lt;p>With so many sessions, its hard to find the ones that you want or to get a good overview in the format that you want. So I built a PowerShell module to get that information for you easily in any format you like. (Editor - thats a fib, he built it so that he could write Pester to ensure that speakers were not scheduled when they were not available)&lt;/p>
+&lt;h1 id="the-sqlbitsps-module">The SQLBitsPS module
+&lt;/h1>&lt;p>You can find the SQLBitsPS PowerShell module on the &lt;a class="link" href="https://www.powershellgallery.com/packages/SQLBitsPS" target="_blank" rel="noopener"
+>PowerShell Gallery&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211528862-5226d25a-5642-44a3-9c14-f88bfa334aa2.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>As with all PowerShell modules from the Gallery, you can install it by running&lt;/p>
+&lt;p>&lt;code>Install-Module SQLBitsPS&lt;/code>&lt;/p>
+&lt;p>I find that a lot of people like to use the &lt;code>ShowWindow&lt;/code> parameter to have the help in another searchable window.&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule -ShowWindow&lt;/code>
+&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530034-596f0fc9-ec1d-43fc-bd7a-ff1cf01c7c15.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="use-the-help">Use the help
+&lt;/h2>&lt;p>to find out how to use any PowerShell command you should use Get-Help and this module is no different. The help for the commands is built in and can be accessed with&lt;/p>
+&lt;p>&lt;code>Get-Help Get-SQLBitsSchedule&lt;/code>&lt;/p>
+&lt;h2 id="getting-the-schedule">Getting the schedule
+&lt;/h2>&lt;p>You can just run &lt;code>Get-SQLBitsSchedule&lt;/code> and by default it will get the schedule and if you have the &lt;code>ImportExcel&lt;/code> module available it will write an Excel Workbook with each days agenda on a different sheet and colour code the service sessions like Registration, lunch and coffee breaks&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211530884-1d2b2752-a729-499d-8334-1e4404199002.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>To save you having to click to open Excel I have added a &lt;code>Show&lt;/code> parameter which will open it for you!&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211531837-2396cfd5-b843-4fd8-8a90-d1e1a06e654f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-csv-instead">I would like a csv instead
+&lt;/h2>&lt;p>The &lt;code>output&lt;/code> parameter gives you a number of options for the format of the output. If you do not have the &lt;code>ImportExcel&lt;/code> module it will default to &lt;code>-output csv&lt;/code> which you can also combine with the &lt;code>Show&lt;/code> parameter&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output csv -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211532406-bc928085-ab6f-4d8c-b42e-edc53ce027ca.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-would-like-a-html-page-instead">I would like a html page instead
+&lt;/h2>&lt;p>It&amp;rsquo;s not awesome but you can also create an HTML page. This may be useful if you wish to print the agenda yourself so that you have a hard copy.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output html -show&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533198-9bd8c53f-71b1-4426-bc1f-d7a8e874a86a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h2 id="let-me-decide-what-format-i-want">Let me decide what format I want
+&lt;/h2>&lt;p>You can also output a &lt;code>[pscustomobject]&lt;/code> which you may use to PowerShell to your hearts content!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Format-Table&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211533959-ee9f2fb5-e4be-45f2-9142-581833ee214f.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Maybe you would like to see the sessions that are on Friday at 16:50&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -output object |Where-Object {$_.Day -eq 'Friday' -and $_.StartTime -eq '16:50'} &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211534901-f75cfc82-71bc-456e-bb2c-306dd753cf9b.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They look amazing, I recommend Mladen Prajdic session. That one blew me away at Data Grillen and I may very well attend that again.&lt;/p>
+&lt;h2 id="i-cant-do-anything-fancy-just-let-me-search">I can&amp;rsquo;t do anything fancy, just let me search
+&lt;/h2>&lt;p>If all you want is to search for your favourite speaker then you can use the &lt;code>search&lt;/code> parameter which will perform a wildcard search.&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Cathrine -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536336-0202aec6-56f1-4f72-aa5b-4cc15de8f848.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search Monica -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211535867-93496665-3423-4809-a1b3-561d56315594.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You can also use it search for topics&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search 'Mental Health' -output object&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211536684-5b9a56e3-a487-40f4-aad7-f3656654c21a.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>and even to search for wisdom!!&lt;/p>
+&lt;p>&lt;code>Get-SQLBitsSchedule -search wisdom -output object &lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png" target="_blank" rel="noopener"
+>&lt;img src="https://user-images.githubusercontent.com/6729780/211537382-2a0ae647-cdc1-4ccc-82ba-87efe7fb857e.png"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;h1 id="i-want-to-make-it-better">I want to make it better
+&lt;/h1>&lt;p>Awesome, thank you.&lt;/p>
+&lt;p>This is all open-source and you can find it on GitHub at&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS&lt;/a>&lt;/p>
+&lt;p>There are some brief instructions here&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/SQLBitsPS/blob/main/DevelopingREADME.md&lt;/a>&lt;/p>
+&lt;h1 id="join-us">Join us
+&lt;/h1>&lt;p>&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform.&lt;/p>
+&lt;h2 id="where-and-when-1">Where and when?
+&lt;/h2>&lt;p>This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p>
+&lt;p>&lt;a class="link" href="https://events.sqlbits.com/2023/begin" target="_blank" rel="noopener"
+>You can register to attend here&lt;/a>&lt;/p></description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars1.jpg" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="in-the-beginning">In the beginning
+&lt;/h1>&lt;p>It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits Conference&lt;/a> (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+>here&lt;/a>&lt;/p>
+&lt;p>At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don&amp;rsquo;t like it and don&amp;rsquo;t ever do it again. (Narrator - exactly the opposite happened - He loved it and does it &lt;a class="link" href="https://sessionize.com/rob-sewell/" target="_blank" rel="noopener"
+>at every opportunity&lt;/a>)&lt;/p>
+&lt;p>It was not the most brilliant presentation. I learned a lot and blogged about it too &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>as you can read here&lt;/a>. But I enjoyed it and it gave me the confidence to do it again and set me on a path to the wonderful life I have now.&lt;/p>
+&lt;h1 id="should-you-speak-at-your-user-group">Should you speak at your User Group?
+&lt;/h1>&lt;p>Yes&lt;/p>
+&lt;p>OK, you want a bit more?&lt;/p>
+&lt;p>Yes you definitely should.&lt;/p>
+&lt;p>You should try it once.&lt;/p>
+&lt;p>Your user group should be filled with some familiar faces of people who you know will support you and only want the best for you.
+It will usually be a smaller group than at an event like a Data Saturday or other local to your town/city event.
+Your user group leader will be delighted to help and to support you.
+If you don&amp;rsquo;t like it, you don&amp;rsquo;t ever have to do it again.&lt;/p>
+&lt;h1 id="what-is-the-benefit-of-speaking">What is the benefit of speaking?
+&lt;/h1>&lt;p>Why should you put yourself through all of that stress and work to put on a wonderful session? I think there are a number of benefits and most won&amp;rsquo;t come to you from doing a single session.&lt;/p>
+&lt;ul>
+&lt;li>The first one does. You will know your subject more thoroughly. By preparing a session to present, you will definitely research, you will read blogs, you will try things out, you will want to make sure that you know all there is to know. This means that you will be improving your knowledge on the subject.&lt;/li>
+&lt;li>Confidence. Speaking in public will give you more confidence.&lt;/li>
+&lt;li>It will improve your communication skills. You will have to be able to convey your message to others&lt;/li>
+&lt;li>Some people say that a job interview is like a presentation and you can improve that skill. (I am not sure but &lt;a class="link" href="https://blog.robsewell.com/blog/i-hate-interviews-tsql2sday/" target="_blank" rel="noopener"
+>I hate interviews and don&amp;rsquo;t perform well&lt;/a>)&lt;/li>
+&lt;li>It will improve your time management skills. You have to do a presentation on Monday, you need to get everything in place in time for that.&lt;/li>
+&lt;/ul>
+&lt;p>There are plenty of other reasons too.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?
+&lt;/h1>&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> call for papers are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p>In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+>how to write your first Pester test&lt;/a> to validate something. Here’s a recap&lt;/p>
+&lt;ul>
+&lt;li>Decide the information you wish to test&lt;/li>
+&lt;li>Understand how to get it with PowerShell&lt;/li>
+&lt;li>Understand what makes it pass and what makes it fail&lt;/li>
+&lt;li>Write a Pester Test&lt;/li>
+&lt;/ul>
+&lt;p>You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p>
+&lt;h2 id="getting-the-latest-version-of-the-module">Getting the Latest Version of the Module
+&lt;/h2>&lt;p>Steve Jones wrote about getting the latest version of Pester and the correct way to do it. You can &lt;a class="link" href="https://voiceofthedba.com/2017/11/27/installing-pester/" target="_blank" rel="noopener"
+>find the important information here&lt;/a>&lt;/p>
+&lt;h2 id="test-cases">Test Cases
+&lt;/h2>&lt;p>The first way is to use the Test Case parameter of the It command (the test) which I have written about when &lt;a class="link" href="https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/" target="_blank" rel="noopener"
+>using TDD for Pester here&lt;/a>&lt;/p>
+&lt;p>Lets write a test first to check if we can successfully connect to a SQL Instance. Running&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand connection&lt;/code>&lt;/p>
+&lt;p>shows us that the &lt;a class="link" href="https://dbatools.io/functions/test-dbaconnection/" target="_blank" rel="noopener"
+>&lt;code>Test-DbaConnection&lt;/code>&lt;/a> command is the one that we want from the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools module&lt;/a>. We should always run Get-Help to understand how to use any PowerShell command. This shows us that the results will look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/01-gethelp-test-dbaconnection.png"
+loading="lazy"
+alt="01 - gethelp test-dbaconnection"
+>&lt;/p>
+&lt;p>So there is a ConnectSuccess result which returns True or false. Our test can look like this for a single instance&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to ROB-XPS&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    It &amp;#34;Connects successfully to ROB-XPS&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">        (Test-DbaConnection-SqlInstance ROB-XPS).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>which gives us some test results that look like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/successful-test.png"
+loading="lazy"
+alt="successful test.png"
+>&lt;/p>
+&lt;p>which is fine for one instance but we want to check many.&lt;/p>
+&lt;p>We need to gather the instances into a $Instances variable. In my examples I have hard coded a list of SQL Instances but you can, and probably should, use a more dynamic method, maybe the results of a query to a configuration database. Then we can fill our TestCases variable which can be done like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we can write our test like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Create an empty array
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$TestCases = @()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Fill the Testcases with the values and a Name of Instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances.ForEach{$TestCases += @{Instance = $_}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing connection to SQL Instances&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Put the TestCases &amp;#39;Name&amp;#39; in &amp;lt;&amp;gt; and add the TestCases parameter
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Connects successfully to &amp;lt;Instance&amp;gt;&amp;#34; -TestCases $TestCases {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Add a Parameter to the test with the same name as the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Param($Instance)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Write the test using the TestCases Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Test-DbaConnection -SqlInstance $Instance).ConnectSuccess | Should Be $True
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Within the title of the test we refer to the instance inside &amp;lt;&amp;gt; and add the parameter TestCases with a value of the $TestCases variable. We also need to add a Param() to the test with the same name and then use that variable in the test.&lt;/p>
+&lt;p>This looks like this&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/Testcases-test.png"
+loading="lazy"
+alt="Testcases test.png"
+>&lt;/p>
+&lt;h2 id="pester-is-powershell">Pester is PowerShell
+&lt;/h2>&lt;p>The problem with  Test Cases is that we can only easily loop through one collection, but as Pester is just PowerShell we can simply use ForEach if we wanted to loop through multiple ones, like instances and then databases.&lt;/p>
+&lt;p>I like to use the ForEach method as it is slightly quicker than other methods. It will only work with PowerShell version 4 and above. Below that version you need to pipe the collection to For-EachObject.&lt;/p>
+&lt;p>Lets write a test to see if our databases have trustworthy set on. We can do this using the Trustworthy property returned from &lt;a class="link" href="https://dbatools.io/functions/Get-DbaDatabase/" target="_blank" rel="noopener"
+>&lt;code>Get-DbaDatabase&lt;/code>&lt;/a>&lt;/p>
+&lt;p>We loop through our Instances using the ForEach method and create a Context for each Instance to make the test results easier to read. We then place the call to &lt;code>Get-DbaDatabase &lt;/code>inside braces and loop through those and check the Trustworthy property&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Get a list of SQL Servers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Use whichever method suits your situation
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Maybe from a configuration database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># I&amp;#39;m just using a hard-coded list for example
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Instances = &amp;#39;ROB-XPS&amp;#39;,&amp;#39;ROB-XPS\DAVE&amp;#39;,&amp;#39;ROB-XPS\BOLTON&amp;#39;,&amp;#39;ROB-XPS\SQL2016&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Describe &amp;#39;Testing user databases&amp;#39; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the instances
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $Instances.ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Create a Context for each Instance.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Context &amp;#34;Testing User Databases on $($_)&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Loop through the User databases on the instance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (Get-DbaDatabase -SqlInstance $_ -ExcludeAllSystemDb).ForEach{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Refer to the database name and Instance name inside a $()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> It &amp;#34;Database $($_.Name) on Instance $($_.Parent.Name) should not have TRUSTWORTHY ON&amp;#34; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $_.Trustworthy | Should Be $false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and it looks like this&lt;/p>
+&lt;h2 id="testdatabasetrustworthypng">&lt;img src="https://blog.robsewell.com/assets/uploads/2017/11/testdatabasetrustworthy.png"
+loading="lazy"
+alt="testdatabasetrustworthy.png"
+>
+&lt;/h2>&lt;p>So there you have two different ways to loop through collections in your Pester tests. Hopefully this can help you to write some good tests to validate your environment.&lt;/p>
+&lt;p>Happy Pestering&lt;/p>
+&lt;h2 id="spend-a-whole-day-with-chrissy--i-at-sqlbits">Spend a Whole Day With Chrissy &amp;amp; I at SQLBits
+&lt;/h2>&lt;p>If you would like to spend a whole day with Chrissy LeMaire and I at &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQLBits&lt;/a> in London in February – we have a pre-con on the Thursday&lt;/p>
+&lt;p>You can find out more about the pre-con &lt;a class="link" href="http://sqlps.io/bitsprecon" target="_blank" rel="noopener"
+>sqlps.io/bitsprecon&lt;/a>&lt;/p>
+&lt;p>and you can register at &lt;a class="link" href="http://sqlps.io/bitsreg" target="_blank" rel="noopener"
+>sqlps.io/bitsreg&lt;/a>&lt;/p></description></item><item><title>Why Volunteer at SQLBits ?</title><link>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</link><pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</guid><description>&lt;p>WARNING – Contains Orange and light-hearted photos 😉&lt;/p>
+&lt;p>I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?&lt;/p>
+&lt;h2 id="many-months-of-work">Many months of work
+&lt;/h2>&lt;p>First though, you need to know that the SQLBits conference is organised and run by volunteers. All of the committee spend many, many long hours, out of their own free time, for many months before and after the event to ensure that the attendees, sponsors, speakers and volunteers experience is trouble free. I think that they do an amazing and fantastic job and repeatedly pull off the best, most enjoyable conference that I have been to.&lt;/p>
+&lt;p>&lt;strong>Thank you&lt;/strong> Simon, Chris, Darren, Allan, Alex, Jonathan, Annette&lt;/p>
+&lt;p>Thank you also to their families as well, who undoubtedly miss out on time with them whilst they are organising everything to do with the event, from finding venues, organising dates, speakers, marketing, website, sponsors, printing, audio visual, THE PARTY!! and all the other big and small things that it takes to make an event of that size occur.&lt;/p>
+&lt;h2 id="orange-shirted-wonderful-folk">Orange Shirted Wonderful Folk
+&lt;/h2>&lt;p>There is another group of volunteers that you will have seen at SQLBits. For the last couple of years we have been the ones in the orange shirts.&lt;/p>
+&lt;p>Here is the Class of 2017&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_17_27_05_pro.jpg"
+loading="lazy"
+alt="WP_20170406_17_27_05_Pro.jpg"
+>&lt;/p>
+&lt;p>I think this is a brilliant colour as it makes us easy to spot (although a couple of attendees who also had orange tops on did get stopped and asked for directions 🙂 )&lt;/p>
+&lt;h2 id="what-do-they-do">What do they do?
+&lt;/h2>&lt;p>These folk come in early and get everything set up. Sometimes we have to explain that the event isn’t ready for you yet&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_07_31_20_pro.jpg"
+loading="lazy"
+alt="WP_20170406_07_31_20_Pro.jpg"
+>We sort out the registration desk and greet every attendee, speaker and sponsor and assist them.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_11_25_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_11_25_Pro.jpg"
+>&lt;/p>
+&lt;p>We help the speakers get set up&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_08_15_38_pro.jpg"
+loading="lazy"
+alt="WP_20170405_08_15_38_Pro.jpg"
+>&lt;/p>
+&lt;p>and ensure they have everything they need.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/aaron-bertrand.jpg"
+loading="lazy"
+alt="aaron bertrand.jpg"
+>&lt;/p>
+&lt;p>Aaron Bertrand (above) and John Martin from SentryOne said that it is the best experience for a speaker that they have had anywhere.&lt;/p>
+&lt;p>We direct and assist the attendees to be in the right place, sometimes with some flair!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_21_13_03_pro.jpg"
+loading="lazy"
+alt="WP_20170404_21_13_03_Pro.jpg"
+>&lt;/p>
+&lt;p>We ensure that any issues are resolved quickly and with as little distraction as possible. The room is too hot, too cold, too noisy or too quiet. The projector isn’t working or the speakers microphone has a buzz, there is too much light or too little. The water coolers are empty. The rubbish needs picking up. All these and many other minor complications are communicated and passed to the correct people to get resolved.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_17_51_33_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_17_51_33_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Sometimes we have to resolve our own issues. We had folks who were called by their work and had to stop helping and go back to their day jobs for a few hours. We all understand what it is like for people working in technology and adapt and manage accordingly. In almost every photo I took, there is someone in an orange shirt to be seen.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_43_41_pro.jpg"
+loading="lazy"
+alt="WP_20170406_10_43_41_Pro.jpg"
+>&lt;/p>
+&lt;p>We answer numerous questions from the 1500 or so attendees (and the odd sheep) who came this year.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rchard.jpg"
+loading="lazy"
+alt="rchard.jpg"
+>&lt;/p>
+&lt;p>From timings and locations to taxi numbers or restaurants. Unfortunately I did &lt;a class="link" href="https://blog.robsewell.com/a-day-in-the-life-of-a-sqlbits-volunteer/" target="_blank" rel="noopener"
+>not beat last years&lt;/a> “Best question I have been asked at SQLBits” which was&lt;/p>
+&lt;blockquote>
+&lt;p>Excuse me, I have a Dalek in the van . What would you like me to do with it?&lt;/p>&lt;/blockquote>
+&lt;p>I was even asked questions on the way back to the hotel gone midnight on Saturday!!&lt;/p>
+&lt;p>We stay afterwards and help to get ready for the next day, putting out the new signs for the domes and the required paperwork.&lt;/p>
+&lt;h2 id="so-why-do-we-do-it">So why do we do it?
+&lt;/h2>&lt;p>I asked the guys and gals this question and in their own words, this is why they do it&lt;/p>
+&lt;blockquote>
+&lt;p>Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days are 11 hours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.&lt;/p>
+&lt;p>You do get to attend sessions but you might not always get your first choice. This can be both a good and bad thing. Very often I have filled in on sessions that I normally wouldn’t attend as they are outside my direct area of work, only to find them the most interesting as I get to see how the other half lives.&lt;/p>
+&lt;p>So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is a 150 miles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.&lt;/p>
+&lt;p>All because of the of the experience that is being a volunteer.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/sqldub" target="_blank" rel="noopener"
+>Conan Farrell&lt;/a>&lt;/p>
+&lt;p>![WP_20170406_10_33_15_Pro (2).jpg](&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg" target="_blank" rel="noopener"
+>https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_33_15_pro-2.jpg&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I owe a lot to the SQL Community. It was at SQLBits a few years ago that someone convinced me to start speaking. That encouragement and acceptance from the #SQLFamily put into motion a series of events that lead to me &lt;a class="link" href="http://workingwithdevs.com/im-leaving-redgate/" target="_blank" rel="noopener"
+>quitting the best job of my life&lt;/a> last year in favour of &lt;a class="link" href="http://workingwithdevs.com/introducing-dlm-consultants-mission/" target="_blank" rel="noopener"
+>an adventure to set up my own company&lt;/a>. It’s been a wonderful journey and if it had not been for SQLBits (and SQL Relay, and SQL Saturdays, and others) I wouldn’t have taken it.&lt;/p>
+&lt;p>I have a debt to pay. And it’s wonderful to be able to contribute towards giving other people the same opportunities that the community has given me.&lt;/p>
+&lt;p>Also, for similar reasons, I recently joined the committee for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>. While I’ve been a sponsor and a speaker a lot before, I am fairly inexperienced at organising events. Helping out with the awesome SQLBits team has been a great learning curve. I hope to take what I have learned and apply it to my role for &lt;a class="link" href="https://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a>.&lt;/p>
+&lt;p>Finally, frankly, there are so many great people in the SQL Community it is just wonderful to be able to work with them during the day. (And share some beers with them in the evening!)&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/_AlexYates_" target="_blank" rel="noopener"
+>Alex Yates&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/alex2.jpg"
+loading="lazy"
+alt="alex2"
+>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer at SQLBits and in the wider Data Platform community for various reasons. The community is the glue in our industry and being part of that glue is both a privilege and an honour. Without volunteers these awesome events couldn’t function and we couldn’t share knowledge as freely. There also would not be the same opportunities to network with such great people and experts in the same field. I am proud to be part of the SQL Family and facilitate the learning that being a volunteer offers to professionals just like me. Stronger together.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+>Paul Andrew&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_16_03_17_pro-2.jpg"
+loading="lazy"
+alt="WP_20170404_16_03_17_Pro (2).jpg"
+>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>When I volunteered, I felt I’d like to give back to the SQL Community a bit of the much I’ve received from them. I wanted to become more engaged.
+I didn’t even dream it would be like this, the terrific team I found here was so great that I can barely wait for the next one.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/moliveira_xpto" target="_blank" rel="noopener"
+>Miguel Oliveira&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Volunteering gives you the experience of the effort &amp;amp; reward of running an event.. You build an appreciation of generating success, creating networks of colleagues and friends, being quick to react, and helps you walk away with the feeling of “I contributed to this”. Everyone should volunteer, even if its just once.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/benrebooted?lang=en" target="_blank" rel="noopener"
+>Ben Watt&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_09_31_24_pro-2.jpg"
+loading="lazy"
+alt="WP_20170405_09_31_24_Pro (2).jpg"
+>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>This year was my 10th sqlbits (remembering we skipped unlucky 13) and 7th I’ve been on the helping team for. I started helping when I learned my original conference companions were moving on to different technologies. Something I’ve never understood.&lt;/p>
+&lt;p>Historically I’ve worked in multiple companies as a lone dba, something I’ve found many at SQLBits can relate to. Through user groups and SQLBits I’ve met lots of others in the same boat over the years. It can be a frustrating job defending servers, implementing best practice and writing sql when all your application team want to do is add columns and ship the next release!&lt;/p>
+&lt;p>Yes, there are good networking opportunities and the parties are great but at the core is great quality training. I’ve had a great time playing a small part in helping deliver the experience over the years. Occasionally I have to shout about feedback forms or seating arrangements but on the whole folk are fine with it.  If I’m honest they are long days. A typical day involves a start and end meeting in addition to sessions you are monitoring. Add to that hotel commutes, catching up with the friends you made last year, meals, drinks etc and its 1am. Oh, and tomorrow’s meeting is 7.30 eek….&lt;/p>
+&lt;p>It’s been a great journey watching the progression of events. Each one adds to the last, they run a lot slicker now. The sponsors are first class and always embrace the theme with their stalls and giveaways. I do wish more folk would enter the prize draws and stop me winning though, it’s getting embarrassing now 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/r5d4" target="_blank" rel="noopener"
+>Richard Doering&lt;/a> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/rich2.jpg"
+loading="lazy"
+alt="rich2"
+>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>The best Data Platform conference in Europe! I couldn’t miss the opportunity to be much more than just an attendee.&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/DataHubert" target="_blank" rel="noopener"
+>Hubert Kobierzewski&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I volunteer for sqlbits, to get experience from a multi day event that has a lot of attendees. Lots of take aways to make local community events run smoother for the delegates.
+Thats my main reason&lt;/p>
+&lt;p>&lt;a class="link" href="https://twitter.com/vestergaardj" target="_blank" rel="noopener"
+>Jens Vestergard&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>There is no way I could not use this next photo celebrate this years Most Valuable Helper.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_45_12_pro-2.jpg"
+loading="lazy"
+alt="WP_20170407_20_45_12_Pro (2).jpg"
+>&lt;/p>
+&lt;p>Thank you &lt;a class="link" href="https://twitter.com/wheeliedba" target="_blank" rel="noopener"
+>Shaun Atkinson&lt;/a> you were amazing and thank you for looking after my former intern James as a first time volunteer&lt;/p>
+&lt;h2 id="how-can-i-do-it-next-year">How can I do it next year?
+&lt;/h2>&lt;p>We always welcome new people to our team. If you would like to volunteer your time to help at the next SQLBits please send an email to &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with a subject of I would like to volunteer or something similar. Nearer the time of next years SQLBits (No I don’t know when or where it is, I will know when you do) the awesome, amazing, fantastic, brilliant, organising amazeballs also known as &lt;a class="link" href="https://twitter.com/mrs_fatherjack" target="_blank" rel="noopener"
+>Annette&lt;/a> will get in touch with you with further details&lt;/p>
+&lt;p>You can expect to have a lot of fun, make new friends and help make the best data platform conference the best data platform conference&lt;/p>
+&lt;p>Oh and sometimes theres free pizza 🙂&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170404_18_31_58_pro.jpg"
+loading="lazy"
+alt="WP_20170404_18_31_58_Pro"
+>&lt;/p>
+&lt;h2 id="another-thank-you">Another Thank You
+&lt;/h2>&lt;p>Some lovely people, (I am really sorry but I didn’t get everyones name) brought sweets, biscuits, cakes and other goodies for the crew. Thank you, they were very much appreciated.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170408_08_03_34_pro.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="pictures-because-smiles-">Pictures because smiles 🙂
+&lt;/h2>&lt;p>Not all of the volunteers wanted to give feedback publically but I had some cracking photos so I thought I would share them as well. Enjoy&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_22_41_36_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_51_50_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_12_55_59_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_21_05_52_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_43_45_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170407_20_37_17_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170405_16_52_49_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_09_57_06_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_12_48_46_pro.jpg"
+loading="lazy"
+>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_16_05_06_pro.jpg"
+loading="lazy"
+>&lt;/p></description></item><item><title>A Day In The Life of a SQLBits Volunteer</title><link>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</link><pubDate>Tue, 10 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" alt="Featured image of post A Day In The Life of a SQLBits Volunteer" />&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So SQLBits has finished for another year. About 1500 people registered for the largest SQL Conference in Europe held over 4 days in Liverpool last week. 2 days of full day sessions and 2 days of shorter sessions, a pub quiz, a party (literally) out of this world.&lt;/p>
+&lt;p>It is organised and run by volunteers&lt;/p>
+&lt;p>Yes, you’re right.&lt;/p>
+&lt;p>Wow.&lt;/p>
+&lt;p>Of course we must pay special thanks to Simon, Darren, Chris, Jonathan, Annette, Allan and Alex without forgetting all that JRJ has done. They ensured that the venue, sessions, speakers, sponsors, audio visual and not forgetting the amazing party by &lt;!-- raw HTML omitted -->Sneaky Experience (Thank you Julia),&lt;!-- raw HTML omitted --> all occurred at the right time in the right place with the right people and the work and effort they have put in cannot be over-estimated but this post isn’t about those generous, inspiring, amazing folk
+Several people asked me what a volunteer does and how they can become one and hopefully this post will answer both of those questions. More than 40 people volunteered to help at SQL Bits&lt;/p>
+&lt;p>Some volunteers arrived on Tuesday to help with the set up. Making sure that we knew where everything was and helping to lift and carry all of the things that needed moving.
+&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_07_13_44_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>We wanted to begin the process of packing the swag bags so that all the attendees on Wednesday could have them as they arrived but unfortunately we were let down by a delivery firm and that was not possible. That job was completed by some very dedicated helpers during all of Wednesday and finished off by all helpers after Wednesdays sessions had finished. Many, many thanks and respect particularly to Bob and Conan for their dedication to the bag-packing cause, although I did hear “If I ever see another bag again ……..”&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/bean-bags.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>All of the registration desks with badges, lanyards and booklets were set up ready for the next day, the covers were put on the tables, the bean bags put out. (They were needed later!!)&lt;/p>
+&lt;p>We started every morning with a helpers briefing at 7am&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_07_40_18_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>where we ensured that everyone knew what was happening that day. Most helpers took some part in registration whether it was being at the desks handing out badges, assisting speakers and sponsors on arrival with questions and some the other jobs that needed doing such as putting the table cloths on the tables in the domes and getting out the bags.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_10_31_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0284.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>During every session there were two room monitors. Their responsibility was to ensure that everything went smoothly during the day and during each of the sessions on Friday and Saturday. They assisted the speaker with drinks, timings and the other foibles that technology can throw, they would have known what to do if there were issues with the domes.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dome-monitoring.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They also made sure that everyone was in the correct session and answered lots of questions. The bit that hopefully most attendees missed was that in the case of any issues they called in one of the 5 or 6 super helpers who were patrolling the arena, who could go and get the AV guys or the venue staff to iron out the wrinkles, making sure that the water coolers got re-filled etc
+They took all of your feedback forms and took them to the main desk. There were always people at the front desk helping, although Alex, Annette and Terri spent almost all of their time there.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_15_32_59_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>Of course it doesn’t stop there. During the breaks and particularly at lunchtime the helpers were available and indeed noticeable. They assisted with the queues at lunchtime and for the key-note&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_37_35_pro.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>answered questions and they helped attendees with session choices. There were always people and questions that they were willing to answer or to find someone who could.
+Once the sessions had finished, the helpers didn’t. They manned and womanned the registration desks in the evening. Returned all of the feedback forms and helped with sorting out the venue ready for the next day. There was also a de-brief for any lessons learned.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160504_17_54_40_pro-21.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>They even gave out the free drinks tokens at the entrance to the party!&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0376-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>So why do they do it? They are all part of this amazing community dedicated to providing great events for people to learn. Many of them are volunteers at other events and/or user group leaders and attendees and want to give something back to the community.) . They were able to choose the full day and hour sessions that they attended so were still able to learn from the amazing speakers at the brilliant sessions available. Everyone was able to choose which days they helped it doesn’t have to be for every day you are at the conference. They are a wonderful group of people and I have made some fantastic friendships by volunteering and get great hugs 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/wp_20160506_09_15_33_pro-2.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p>
+&lt;p>You also get asked the most brilliant questions like “Excuse me, I have a Dalek in my van, what would you like me to do with it?”
+If that sounds like something you would like to do, you just need to email &lt;a class="link" href="mailto:helpers@sqlbits.com" >helpers@sqlbits.com&lt;/a> with ‘I would like to be a helper next year at SQLBits’ in the subject. You can also offer to help at your local user group or at other events, speak to your user group leaders for more details on that
+If it’s not for you, that’s cool but please, for me, the next time you see them at an event just say thank you. It really means a lot and they thoroughly deserve every word of thanks that we give them.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/thankyou.jpg"
+loading="lazy"
+alt="image"
+>&lt;/a>&lt;/p></description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;!-- raw HTML omitted --></description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p> &lt;/p>
+&lt;p>Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a> and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+>#SQLSatExeter&lt;/a> on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p>
+&lt;p>In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p>
+&lt;h4 id="sql-saturday-pre-cons-are-exceptional-value">SQL SATURDAY PRE-CONS ARE EXCEPTIONAL VALUE
+&lt;/h4>&lt;p>It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry &lt;a class="link" href="https://twitter.com/@mrdenny" target="_blank" rel="noopener"
+>@mrdenny&lt;/a>. The conversation went along the lines of&lt;/p>
+&lt;p>“I want to go to this training session being delivered by this guy. &lt;a class="link" href="https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link to MVP page&lt;/a>. It’s £150 and is in Exeter so no other costs required”&lt;/p>
+&lt;p>My boss – “OK”&lt;/p>
+&lt;p>Of course there was a little more fun and games to be had with the payment but it was easy for me to get training sorted and £150 is not going to break the training budget.&lt;/p>
+&lt;p>Looking back through my notes from the session today I realise quite how much I have taken from it into my role at work. I can’t really comment which and what though that wouldn’t be good security!!&lt;/p>
+&lt;p>I remember an enjoyable day with plenty of technical learning, a lot of questions and answers and plenty of laughs as well. But more than that was the opportunity to mix with other professionals and talk with them. During the breaks and at lunch there were plenty of opportunities to chew the fat, learn how others do things, make new friends and put faces to twitter handles. (NOTE : I do look pretty much like my &lt;a class="link" href="https://pbs.twimg.com/profile_images/75950380/n675059923_1450.jpg" target="_blank" rel="noopener"
+>twitter profile picture&lt;/a> so if you see me at SQL Community events I expect you to come up and say hi, that&amp;rsquo;s part of the benefit of attending these events, having a good natter)&lt;/p>
+&lt;p>Take a look at the end of this post for details of 2014 Pre-Cons&lt;/p>
+&lt;h4 id="sql-saturday--cant-get-cheaper-than-free">SQL SATURDAY – CAN’T GET CHEAPER THAN FREE
+&lt;/h4>&lt;p>SQL Saturdays are FREE&lt;/p>
+&lt;p>SQL Saturdays offer sessions from internationally renowned and local SQL speakers on subjects relevant to you and your job, your future career, your development plan or just to challenge yourself by learning about something outside of your comfort zone. For Nothing. Add in the networking opportunities, the prizes from the sponsors, (if you were at Exeter this year the beer and the pasty) and if you added it up its a sizeable investment in yourself, your career and your development (did I mention a free beer and pasty?)&lt;/p>
+&lt;p>NOT BAD FOR FREE!!&lt;/p>
+&lt;p>To enable that, SQL Saturday organisers have to go out and talk sponsors into putting their hands into their pockets. They will only do that if it is worthwhile to them. You can make it easier for the organisers by going and spending time with the sponsors during the breaks, chatting with them and giving them your details. Also, if you choose to use one of their products please tell the sponsors you spoke to them at a SQL Saturday. They are (usually) data professionals who will record that and use that to make future decisions which will we hope include sponsoring SQL Saturdays.&lt;/p>
+&lt;p>This year on the Saturday I went to the following sessions&lt;/p>
+&lt;p>A temporary fix for a short term problem by Ian Meade Advanced SQL Server 2012 HA and DR Architectures by Christian Bolton Busting common T-SQL myths by Dave Morrison Power View and the Cube by Régis Baccaro Natural Born Killers, performance issues to avoid by Richard Douglas Tracking server performance without slowing it down by Jonathan Allen which I also Room Monitored Increasing Business and IT collaboration by Chris Testa-O&amp;rsquo;Neill&lt;/p>
+&lt;p>It was a really good day. I learnt so much from all those knowledgeable and talented people. It really kicked me on in my development at work. I was able to take from each of those sessions and use that knowledge to do my job better and I made new friends and new contacts. Just going back to my notes today has reminded me of something that I need to look into for work.
+Some of the conversations I have had at events this year have been fascinating - learning how other people do the same thing you do in a completely different but equally valid way,  problem-solving with a different set and type of minds than the ones at MyWork, laughing at the same things and moaning about similar frustrations. All have been both entertaining and rewarding and I think are worth mentioning as things I enjoyed about going to SQL Community events this year and play a part in the reason I shall continue to go to them (Just hope my boss doesn&amp;rsquo;t read this and think he won’t have to pay as I will go anyway!)&lt;/p>
+&lt;p>It’s busy and hectic, the sessions come along thick and fast and there are lots of people around to talk to. I wish I had made use of the SQL Saturday mobile phone app and I definitely recommend researching ahead of time and planning your day out.&lt;/p>
+&lt;p>This years sessions have not been decided yet but I have seen some of the submissions and there are some fabulous sessions there. You could also submit a session yourself. Choosing the sessions will be tough, but we want to offer the opportunity to speak to as many people as possible both new and experienced speakers.&lt;/p>
+&lt;p>You can submit your sessions at this link &lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/callforspeakers.aspx&lt;/a>&lt;/p>
+&lt;h4 id="round-up-sql-saturday-exeter-why-wouldnt-you-come">ROUND-UP SQL SATURDAY EXETER WHY WOULDN’T YOU COME
+&lt;/h4>&lt;p>For a newbie, as I was last time, SQL Saturday Exeter was a revelation.&lt;/p>
+&lt;p>An opportunity to learn without spending thousands of my own or MyWorks money to sit in a lecture room and listen to a trainer.&lt;/p>
+&lt;p>A chance to develop my understanding in a friendly environment amongst my peers where I could ask questions.&lt;/p>
+&lt;p>A place to meet new people and build relationships who have helped me with situations at work throughout the year. I reckon I&amp;rsquo;m in credit already&lt;/p>
+&lt;p>This year I have attended SQL Bits and SQL Saturday Cambridge and this month I shall be at SQL Relay in Cardiff and in Bristol. That all started with SQL Saturday 194 in Exeter 2013&lt;/p>
+&lt;h4 id="what-about-next-years-sql-saturday-exeter">WHAT ABOUT NEXT YEARS SQL SATURDAY EXETER?
+&lt;/h4>&lt;p>Next years SQL Saturday in Exeter, SQL Saturday #269, will be held at the same place - &lt;a class="link" href="http://www.jurysinns.com/hotels/exeter" target="_blank" rel="noopener"
+>Jury’s Inn Hotel Exeter&lt;/a> on March 21/22nd 2014.&lt;/p>
+&lt;p>We had such amazing submissions for our pre-cons that we have had to find more rooms to be able to fit them all in.. You can see for yourself the quality of the sessions and speakers for SQL Saturday Exeter 2014 at the following link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>What do you think? I want to split myself into 8 and go to every one!&lt;/p>
+&lt;h4 id="what-should-you-do-now">WHAT SHOULD YOU DO NOW?
+&lt;/h4>&lt;p>I suggest that you should book Saturday 22nd March 2014 out in your calendar right this minute. Done that? Good.&lt;/p>
+&lt;p>Now go to this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/&lt;/a>&lt;/p>
+&lt;p>and register for FREE to attend and let us know &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a>&lt;/p>
+&lt;p>Next make yourself a coffee (Other beverages are available) and head to the pre-con page&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>This bit is up to you, the choice is hard. I can’t tell you which one of our eight fabulous sessions you want to go to. It’s not for me to say which amazing speaker you want to spend a day with for a bargain price but if you need further info please get in touch and we will try and help. Unfortunately our human cloning experiment is not stable enough to allow you to go to more than one!&lt;/p>
+&lt;p>Then, let me know you have done so and come and say hi when you are here.&lt;/p></description></item><item><title>12 Things I learnt at SQLBits XI</title><link>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</guid><description>&lt;ul>
+&lt;li>
+&lt;h3 id="the-quality-of-the-speakers-and-sessions-is-exceptional">The quality of the speakers and sessions is exceptional
+&lt;/h3>&lt;p>&lt;a class="link" href="http://sqlbits.com/information/Agenda.aspx" target="_blank" rel="noopener"
+>http://sqlbits.com/information/Agenda.aspx&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="the-helpers-are-awesome">The Helpers are awesome
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001_thumb.jpg?resize=313%2C502"
+loading="lazy"
+alt="clip_image001"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="often-sessions-fill-up-very-quickly--get-there-early">Often Sessions fill up very quickly – Get there early
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="http://t.co/y2S9IDnama" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image002.jpg?resize=372%2C211"
+loading="lazy"
+alt="clip_image002"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="the-guidebook-app-is-pretty-good-but-with-a-map-it-would-be-better">The GuideBook app is pretty good but with a map it would be better
+&lt;/h3>&lt;p>&lt;a class="link" href="http://guidebook.com/" target="_blank" rel="noopener"
+>http://guidebook.com/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="you-can-learn-as-much-outside-of-the-sessions-as-you-can-in-them">You can learn as much outside of the sessions as you can in them
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+>&lt;img src="https://i2.wp.com/lh6.googleusercontent.com/-3d8PCx0AlFA/UYfqxH0fHhI/AAAAAAAAd-E/k_EnX5cpOZY/w960-h641-no/DSC_5670.JPG?resize=622%2C415&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="there-are-amazing-prizes">There are amazing prizes
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://www.facebook.com/photo.php?fbid=599765410034832&amp;amp;set=pb.330145840330125.-2207520000.1367904819.&amp;amp;type=3&amp;amp;theater" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-snc6/602577_599765410034832_674054200_n.jpg?resize=616%2C392&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>A LEGO R2D2 !!!&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="bring-your-sense-of-humour">Bring your sense of humour
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="http://sphotos-a.ak.fbcdn.net/hphotos-ak-prn1/945206_599117553432951_1586348603_n.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sphotos-a.ak.fbcdn.net/hphotos-ak-prn1/945206_599117553432951_1586348603_n.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://sphotos-b.ak.fbcdn.net/hphotos-ak-ash3/603597_599117663432940_27947956_n.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://sphotos-b.ak.fbcdn.net/hphotos-ak-ash3/603597_599117663432940_27947956_n.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="the-sql-community-contains-the-most-gracious-and-generous-willing-to-help-people">The SQL community contains the most gracious and generous, willing to help people
+&lt;/h3>&lt;/li>
+&lt;li>
+&lt;h3 id="you-can-connect-with-your-user-group-and-get-a-mini-sql-bits-every-month">You can connect with your user group and get a mini SQL Bits every month
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>Find your User Group Here &lt;a class="link" href="http://sqlsouthwest.co.uk/national_ug.htm" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/national_ug.htm&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="if-there-is-no-user-group-in-your-area-people-will-help-you-to-start-one">If there is no user group in your area people will help you to start one
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>RT @&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>fatherjack&lt;/a> Interesting chat about a potential new user group in the uk. Anyone around Newcastle area looking for some free training?&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;h3 id="every-session-is-videoed-and-will-be-available-online-for-free">Every session is videoed and will be available online. For free.
+&lt;/h3>&lt;/li>
+&lt;li>
+&lt;h3 id="you-will-learn-and-have-fun">You will learn and have fun
+&lt;/h3>&lt;/li>
+&lt;/ul>
+&lt;p>Too awesome for words! “@&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>justjonlevett&lt;/a>: Lego Server! @&lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>fusionio&lt;/a> &lt;a class="link" href="https://hootsuite.com/dashboard#" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>&lt;a class="link" href="http://t.co/bhxPaTIq4K" target="_blank" rel="noopener"
+>pic.twitter.com/bhxPaTIq4K&lt;/a>”&lt;/p>
+&lt;h3 id="more-blogs-about-sql-bits-xi-and-photos">More blogs about SQL Bits XI and Photos
+&lt;/h3>&lt;p>SQL Bits Facebook &lt;a class="link" href="https://www.facebook.com/SQLBits" target="_blank" rel="noopener"
+>https://www.facebook.com/SQLBits&lt;/a>&lt;/p>
+&lt;p>Roger Van Unen Gallery &lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+>https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577&lt;/a>&lt;/p>
+&lt;p>JR’s Gallery &lt;a class="link" href="https://skydrive.live.com/?cid=7b73b60f4c7d77c9&amp;amp;id=7B73B60F4C7D77C9%212222" target="_blank" rel="noopener"
+>https://skydrive.live.com/?cid=7b73b60f4c7d77c9&amp;amp;id=7B73B60F4C7D77C9%212222&lt;/a>&lt;/p>
+&lt;p>Steve Jones Blog &lt;a class="link" href="http://voiceofthedba.wordpress.com/2013/05/06/fun-at-sql-bits/" target="_blank" rel="noopener"
+>http://voiceofthedba.wordpress.com/2013/05/06/fun-at-sql-bits/&lt;/a>&lt;/p>
+&lt;p>Chris Webbs Blog &lt;a class="link" href="http://cwebbbi.wordpress.com/2013/05/05/sqlbits-xi-summary/" target="_blank" rel="noopener"
+>http://cwebbbi.wordpress.com/2013/05/05/sqlbits-xi-summary/&lt;/a>&lt;/p>
+&lt;p>Find more from the Facebook Page or &lt;a class="link" href="https://twitter.com/search?q=%23sqlbits&amp;amp;src=typd" target="_blank" rel="noopener"
+>#sqlbits&lt;/a>&lt;/p>
+&lt;p>Finally a BIG Thank you to all these people &lt;a class="link" href="http://sqlbits.com/about/WhosWho.aspx" target="_blank" rel="noopener"
+>http://sqlbits.com/about/WhosWho.aspx&lt;/a>&lt;/p>
+&lt;p>and the fantastic helpers without whom SQL Bits would never happen&lt;/p>
+&lt;p>Till Next year&lt;/p></description></item><item><title>Powershell won’t save when running as a scheduled job</title><link>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</guid><description>&lt;h3 id="or-how-sqlbits-put-me-in-touch-with-laerte-and-solved-a-problem">Or, How SQLBits put me in touch with Laerte and solved a problem
+&lt;/h3>&lt;p>I have a scheduled Powershell job which I use to create an Excel file colour coded for backup checks. (I will blog about it another time) It works brilliantly on my desktop and saves the file to a UNC path and emails the team the location. It works brilliantly when run in Powershell on the server. When I schedule it to run though it doesn’t do so well. The job completes without errors but no file is saved.&lt;/p>
+&lt;p>If you examine the processes running at the time you can see the excel process is running  so I knew it was doing something but couldn’t work out why it was failing.&lt;/p>
+&lt;p>It was one of those jobs that gets put to the bottom of the list because the service worked ok I just needed to have it running on the server rather than a desktop for resilience, recovery and security purposes. Every now and then I would try and work out what was going on but new work and new problems would always arrive and it has been like that for 6 or maybe even 9 months.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/12-things-i-learnt-at-sqlbits-xi/" target="_blank" rel="noopener"
+>As you know&lt;/a> I attended SQLBits this weekend and I went into a session with Laerte Junior. Laerte is a SQL Server MVP and can be found at &lt;a class="link" href="https://www.simple-talk.com/author/laerte-junior/" target="_blank" rel="noopener"
+>simple-talk&lt;/a> as well as his own blog &lt;a class="link" href="http://shellyourexperience.com/" target="_blank" rel="noopener"
+>http://shellyourexperience.com/&lt;/a> or on twitter &lt;a class="link" href="https://twitter.com/LaerteSQLDBA" target="_blank" rel="noopener"
+>@LaerteSQLDBA&lt;/a> Oh and He loves Star Wars 🙂&lt;/p>
+&lt;p>&lt;a class="link" href="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1.jpg" target="_blank" rel="noopener"
+>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/laerte_junior1_thumb.jpg?resize=168%2C223"
+loading="lazy"
+alt="Laerte_Junior[1]"
+>&lt;/a>After a fascinating session I asked him if I could show him my problem. He very graciously said yes and after looking at the code and listening to me explain the problem he suggested this very simple solution which he said had taken him a great deal of searching to find. It’s a bug with COM objects and requires the creation of folders as shown below. I cam into work today, tried it and it worked. HOORAY another thing off my list and big thanks to Laerte&lt;/p>
+&lt;pre>&lt;code>#Region Bug_Jobs_ComObjects #(32Bit, always)
+# Create Folder #
+New-Item –name C:\Windows\System32\config\systemprofile\Desktop  –itemtype directory
+# #(64Bit)
+# Create folder #
+New-Item –name C:\Windows\SysWOW64\config\systemprofile\Desktop  –itemtype directory
+#EndRegion Bug_Jobs_ComObjects
+&lt;/code>&lt;/pre>
+&lt;p>This worked for me however I had already implemented another fix for a possible gotcha so I will tell you of that one too&lt;/p>
+&lt;p>Sometimes Powershell cannot save to UNC paths because of  IE enhanced security.&lt;/p>
+&lt;p>Either log in as user and add server to intranet site zones or disable the warning in registry as follows&lt;/p>
+&lt;pre>&lt;code>[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap] &amp;quot;UNCAsIntranet&amp;quot;=dword:00000000
+&lt;/code>&lt;/pre>
+&lt;p>Please don’t ever trust anything you read on the internet and certainly don’t implement it on production servers without first both understanding what it will do and testing it thoroughly. This solution worked for me in my environment I hope it is of use to you in yours but I know nothing about your environment and you know little about mine&lt;/p></description></item></channel></rss>
