@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sqldiagapi on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sqldiagapi/</link><description>Recent content in Sqldiagapi on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 05 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sqldiagapi/index.xml" rel="self" type="application/rss+xml"/><item><title>#TSQL2sday #94 Lets get all Posh!</title><link>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</guid><description>&lt;p>Write-Output &amp;ldquo;What are you going to automate today?&amp;rdquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>Welcome to T-SQL Tuesday for September 2017!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+>
+&lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+>T-SQL Tuesday&lt;/a> is a chance for you to join in the SQL Server community and write a blog post on a suggested topic. It makes for a great way to find a bunch of blog posts showing the same subject from many different viewpoints. Please join in and write a blog post, maybe it&amp;rsquo;s your first ever, maybe you haven&amp;rsquo;t blogged for a while but even if you blog every day come and join the party and share your knowledge.&lt;/p>
+&lt;p>To participate:&lt;/p>
+&lt;ol>
+&lt;li>Write a post on the topic below&lt;/li>
+&lt;li>Schedule the post to go live on Tuesday, September 12th (between zero am and midnight, UTC)&lt;/li>
+&lt;li>Include the &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2010/06/01/t-sql-tuesday-007-and-t-sql-tuesday-has-a-logo.aspx" target="_blank" rel="noopener"
+>TSQL Tuesday logo&lt;/a> in the top of your post&lt;/li>
+&lt;li>Link the post back to this one (it’s easier if you comment on this post and link it)&lt;/li>
+&lt;li>Optional: Tweet a link to your post using the &lt;a class="link" href="https://twitter.com/hashtag/TSQL2sday?src=hash" target="_blank" rel="noopener"
+>#tsql2sday hash tag on Twitter&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Extra credit: if you’d like to host your own TSQL Tuesday in the future, &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2017/01/03/t-sql-tuesday-rules-of-engagement.aspx" target="_blank" rel="noopener"
+>read the full rules for info on how to sign up&lt;/a>. Just like I did but don&amp;rsquo;t forget its your month!!&lt;/p>
+&lt;h2 id="this-months-topic-lets-get-all-posh---what-are-you-going-to-automate-today">This month’s topic: Let&amp;rsquo;s get all Posh - What are you going to automate today?
+&lt;/h2>&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/PowerShell.png"
+loading="lazy"
+alt="PowerShell"
+>
+It is no surprise to those that know me that I will choose PowerShell as the topic for this month. I am passionate about PowerShell because it has enabled me to have the career I have today and to visit numerous countries all around the world, meet people and talk about PowerShell. By my reckoning &lt;a class="link" href="http://tsqltuesday.com/?s=PowerShell" target="_blank" rel="noopener"
+>searching the TSQL Tuesday website&lt;/a> it has been over 3 years since we had a topic specific to PowerShell. So I would like you to blog about PowerShell and SQL Server (or other interesting data platform products)&lt;/p>
+&lt;p>If you don&amp;rsquo;t know or use PowerShell GREAT! That&amp;rsquo;s awesome.&lt;/p>
+&lt;p>Please spend an hour or so with it and tell us how you got on and what and how you learned. Just like &lt;a class="link" href="https://www.brentozar.com/archive/2017/07/live-blogging-erik-vs-PowerShell/" target="_blank" rel="noopener"
+>Erik and Brent did&lt;/a>. You could install one of the community modules like &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a>, &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+>dbareports&lt;/a> , &lt;a class="link" href="https://www.PowerShellgallery.com/packages/SQLDiagAPI" target="_blank" rel="noopener"
+>SQLDiagAPI&lt;/a>  or the Microsoft ones &lt;a class="link" href="https://www.PowerShellgallery.com/packages/Sqlserver" target="_blank" rel="noopener"
+>sqlserver&lt;/a> or &lt;a class="link" href="https://github.com/Microsoft/ReportingServicesTools" target="_blank" rel="noopener"
+>SSRS&lt;/a> and try them out and tell us what you learned.&lt;/p>
+&lt;p>If you want help whilst doing this please make use of the #PowerShellhelp channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a>&lt;/p>
+&lt;p>This will be of so much benefit to all people who don&amp;rsquo;t use PowerShell and want to start to learn about it.&lt;/p>
+&lt;p>If you do use PowerShell and SQL then either tell the tale of the best thing you have automated or a beginners post to show people how to start using PowerShell. I have heard many stories and am looking forward to tales of&lt;/p>
+&lt;ul>
+&lt;li>testing backups&lt;/li>
+&lt;li>doing migrations&lt;/li>
+&lt;li>resetting log shipping&lt;/li>
+&lt;li>creating things in the cloud and on premises&lt;/li>
+&lt;li>SQL on Linux with PowerShell on Linux&lt;/li>
+&lt;li>using Pester for testing&lt;/li>
+&lt;li>automating manual tasks&lt;/li>
+&lt;li>automating incident knowledge gathering&lt;/li>
+&lt;li>continuous integration and delivery&lt;/li>
+&lt;/ul>
+&lt;p>and many more. I will read all of them and do a write up of them later next week.&lt;/p>
+&lt;p>Invoke-Coffee&lt;/p>
+&lt;p>Start-BlogWriting -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Get-BlogProofRead&lt;/p>
+&lt;p>Post-Blog -Date ‘September 12th 2017’ -Title &amp;lsquo;Cool PowerShell Post&amp;rsquo;&lt;/p>
+&lt;p>Write-Tweet -Hashtag ‘TSQL2sday’ -Message &amp;lsquo;This is my cool blogpost&amp;rsquo;&lt;/p>
+&lt;p> &lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/09/keep-calm-and-PowerShell.jpg"
+loading="lazy"
+alt="keep calm and PowerShell.jpg"
+>&lt;/p></description></item><item><title>Writing Dynamic and Random Tests Cases for Pester</title><link>https://blog.robsewell.com/blog/writing-dynamic-and-random-tests-cases-for-pester/</link><pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/writing-dynamic-and-random-tests-cases-for-pester/</guid><description>&lt;!-- raw HTML omitted --></description></item></channel></rss>

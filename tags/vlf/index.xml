@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VLF on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/vlf/</link><description>Recent content in VLF on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/vlf/index.xml" rel="self" type="application/rss+xml"/><item><title>Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell</title><link>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</link><pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/number-of-vlfs-and-autogrowth-settings-colour-coded-to-excel-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png" alt="Featured image of post Number of VLFs and Autogrowth Settings Colour Coded to Excel with PowerShell" />&lt;p>So you have read up on VLFs&lt;/p>
+&lt;p>No doubt you will have read &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/transaction-log-vlfs-too-many-or-too-few/" target="_blank" rel="noopener"
+>this post by Kimberly Tripp&lt;/a> and this &lt;a class="link" href="http://www.sqlskills.com/blogs/kimberly/8-steps-to-better-transaction-log-throughput/" target="_blank" rel="noopener"
+>one&lt;/a> and maybe &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/sql-server-transaction-log-fragmentation-a-primer/" target="_blank" rel="noopener"
+>this one too&lt;/a> and you want to identify the databases in your environment which have a large number of VLFs and also the initial size and the autogrowth settings of the log files.&lt;/p>
+&lt;p>There are several posts about this and doing this with PowerShell &lt;a class="link" href="https://www.simple-talk.com/sql/database-administration/monitoring-sql-server-virtual-log-file-fragmentation/" target="_blank" rel="noopener"
+>like this one&lt;/a> or &lt;a class="link" href="http://www.youdidwhatwithtsql.com/audit-vlfs-on-your-sql-server/1358/" target="_blank" rel="noopener"
+>this one&lt;/a>. As is my wont I chose to output to Excel and colour code the cells depending on the number of VLFs or the type of Autogrowth.&lt;/p>
+&lt;p>There is not a pure SMO way of identifying the number of VLFs in a log file that I am aware of and it is simple to use DBCC LOGINFO to get that info.&lt;/p>
+&lt;p>I also wanted to input the autogrowth settings, size, space used, the logical name and the file path. I started by getting all of my servers into a $Servers Array as follows&lt;/p>
+&lt;pre>&lt;code>$Servers = Get-Content 'PATHTO\sqlservers.txt'
+&lt;/code>&lt;/pre>
+&lt;p>Whilst presenting at the Newcastle User Group, Chris Taylor &lt;a class="link" href="http://chrisjarrintaylor.co.uk/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sqlgeordie" target="_blank" rel="noopener"
+>t&lt;/a> asked a good question. He asked if that was the only way to do this or if you could use your DBA database.&lt;/p>
+&lt;p>It is much better to make use of the system you already use to record your databases. It will also make it much easier for you to be able to run scripts against more specific groups of databases without needing to keep multiple text files up to date. You can accomplish this as follows&lt;/p>
+&lt;pre>&lt;code>$Query = 'SELECT Name FROM dbo.databases WHERE CONDITION meets your needs'
+$Servers = Invoke-Sqlcmd -ServerInstance MANAGEMENTSERVER -Database DBADATABASE -Query $query
+&lt;/code>&lt;/pre>
+&lt;p>I then create a foreach loop and a server SMO object (Did you read my &lt;a class="link" href="https://blog.robsewell.com/powershell-snippets-a-great-learning-tool" target="_blank" rel="noopener"
+>blog post&lt;/a> about snippets? the code for a SMO Server snippet is there) returned the number of rows for DBCC LOGINFO and the information I wanted.&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>It’s not very pretty or particularly user friendly so I decided to put it into Excel&lt;/p>
+&lt;p>I did this by using my Excel Snippet&lt;/p>
+&lt;pre>&lt;code> $snippet = @{
+Title = 'Excel Object';
+Description = 'Creates a Excel Workbook and Sheet';
+Text = @'
+# Create a .com object for Excel
+`$xl = new-object -comobject excel.application
+`$xl.Visible = `$true # Set this to False when you run in production
+`$wb = `$xl.Workbooks.Add() # Add a workbook
+`$ws = `$wb.Worksheets.Item(1) # Add a worksheet
+`$cells=`$ws.Cells
+#Do Some Stuff - perhaps -
+`$cells.item(`$row,`$col)=`'Server`'
+`$cells.item(`$row,`$col).font.size=16
+`$Cells.item(`$row,`$col).Columnwidth = 10
+`$col++
+`$wb.Saveas(`'C:\temp\Test`$filename.xlsx`')
+`$xl.quit()
+Stop-Process -Name EXCEL
+'@
+}
+New-IseSnippet @snippet
+&lt;/code>&lt;/pre>
+&lt;p>and placed the relevant bits into the foreach loop&lt;/p>
+&lt;pre>&lt;code>foreach ($Server in $Servers)
+{
+$srv = New-Object Microsoft.SqlServer.Management.Smo.Server $Server
+foreach ($db in $srv.Databases|Where-Object {$_.isAccessible -eq $True})
+{
+$VLF = $DB.ExecuteWithResults('DBCC LOGINFO').Tables[0].Rows.Count
+$logFile = $db.LogFiles | Select Growth,GrowthType,Size, UsedSpace,Name,FileName
+$Name = $DB.name
+$cells.item($row,$col)=$Server
+$col++
+$cells.item($row,$col)=$Name
+$col++
+$cells.item($row,$col)=$VLF
+$col++
+$col++
+$Type = $logFile.GrowthType.ToString()
+$cells.item($row,$col)=$Type
+$col++
+$cells.item($row,$col)=($logFile.Size)
+$col++
+$cells.item($row,$col)=($logFile.UsedSpace)
+$col++
+$cells.item($row,$col)=$logFile.Name
+$col++
+$cells.item($row,$col)=$logFile.FileName
+&lt;/code>&lt;/pre>
+&lt;p>I had to use the &lt;code>ToString()&lt;/code> method on the Type property to get Excel to display the text. I wanted to set the colour for the VLF cells to yellow or red dependant on their value and the colour of the growth type cell to red if the value was Percent. This was achieved like this&lt;/p>
+&lt;pre>&lt;code>if($VLF -gt $TooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 6 # Yellow
+}
+if($VLF -gt $WayTooMany)
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 # Red
+}
+if($Type -eq 'Percent')
+{
+$cells.item($row,$col).Interior.ColorIndex = 3 #Red
+}
+&lt;/code>&lt;/pre>
+&lt;p>I also found &lt;a class="link" href="http://theolddogscriptingblog.wordpress.com/2010/06/01/powershell-excel-cookbook-ver-2/" target="_blank" rel="noopener"
+>this excellent post&lt;/a> by which has many many snippets of code to work with excel sheets.&lt;/p>
+&lt;p>I used&lt;/p>
+&lt;pre>&lt;code>$cells.item($row,$col).HorizontalAlignment = 3 #center
+$cells.item($row,$col).HorizontalAlignment = 4 #right
+$ws.UsedRange.EntireColumn.AutoFit()
+&lt;/code>&lt;/pre>
+&lt;p>although I had to move the Title so that it was after the above line so that it looked ok.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/wp-content/uploads/2014/10/image.png" target="_blank" rel="noopener"
+>&lt;br>
+&lt;img src="https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png"
+loading="lazy"
+alt="image"
+>&lt;br>
+&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://gallery.technet.microsoft.com/scriptcenter/Number-of-VLFs-and-7ee0182a" target="_blank" rel="noopener"
+>You can find the script here.&lt;/a> As always test it somewhere safe first, understand what it is doing and any questions get in touch.&lt;/p></description></item></channel></rss>

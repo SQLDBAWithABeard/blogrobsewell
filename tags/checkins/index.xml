@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Checkins on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/checkins/</link><description>Recent content in Checkins on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 29 Oct 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/checkins/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerBi and API – Visualising my Checkins</title><link>https://blog.robsewell.com/blog/powerbi-and-api-visualising-my-checkins/</link><pubDate>Sat, 29 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powerbi-and-api-visualising-my-checkins/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi6.png%29%5D%28/assets/uploads/2016/10/powerbi6.png" alt="Featured image of post PowerBi and API – Visualising my Checkins" />&lt;p>For my own amusement and also to show my wife where I have been I use the &lt;a class="link" href="https://www.swarmapp.com/" target="_blank" rel="noopener"
+>Swarm&lt;/a> check-in app on my phone and check-in to places. Also for my own amusement I used PowerBi to visualise the data via the API and allow me to filter it in various ways.&lt;/p>
+&lt;p>Whilst at the &lt;a class="link" href="https://blog.robsewell.com/psconfasia-2016/" >PowerShell Conference in Asia&lt;/a> I was showing the mobile app to a group over some food and saying how easy it was and &lt;a class="link" href="http://twitter.com/@juneb_get_help" target="_blank" rel="noopener"
+>June Blender&lt;/a>, the mother of PowerShell help, said that I ought to blog about it. So I have 🙂&lt;/p>
+&lt;p>Follow these steps and you can create this report.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi8.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi8.png"
+loading="lazy"
+alt="powerbi8.PNG"
+>&lt;/a> and add your own access token to it should you wish. Details at the end of the post&lt;/p>
+&lt;p>I am using the swarm API but the principle is the same for any other API that provides you with data. For example, I used the same principles to create the &lt;a class="link" href="http://powershell.sqlpass.org/Reporting.aspx" target="_blank" rel="noopener"
+>embedded reports&lt;/a> on the PASS PowerShell Virtual Chapter page showing the status of the cards suggesting improvements to the sqlserver module for the product team to work on. Hopefully, this post will give you some ideas to work on and show you that it is quite easy to get excellent data visualisation from APIs&lt;/p>
+&lt;p>First up we need to get the data. I took a look at the &lt;a class="link" href="https://developer.foursquare.com/" target="_blank" rel="noopener"
+>Swarm developers page&lt;/a> ( The Trello is &lt;a class="link" href="https://developers.trello.com/advanced-reference" target="_blank" rel="noopener"
+>here by the way&lt;/a>) I had to register for an app, which gave me a client id and a secret. I then followed the &lt;a class="link" href="https://developer.foursquare.com/overview/auth.html" target="_blank" rel="noopener"
+>steps here to get my user token&lt;/a> I was only interested in my own check ins so I used the steps under Token flow Client applications to get my access token which I used in an URL like this.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://api.foursquare.com/v2/users/self/checkins?limit=5000&amp;amp;oauth_token=ACCESS_TOKEN&amp;amp;v=YYYYMMDD" target="_blank" rel="noopener"
+>https://api.foursquare.com/v2/users/self/checkins?limit=5000&amp;amp;oauth_token=ACCESS_TOKEN&amp;amp;v=YYYYMMDD&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>I added the limit 5000 as the default number of checkins returned was too small for my needs and the date was that days date.&lt;/p>
+&lt;p>You can do this in Powershell using code I got from the magnificent &lt;a class="link" href="https://foxdeploy.com/2015/11/02/using-powershell-and-oauth/" target="_blank" rel="noopener"
+>Stephen Owen’s blog post&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">## Enter the details
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Clientid =&amp;#39;&amp;#39;  ## Enter ClientId from foursquare
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$redirect = &amp;#39;&amp;#39; ## enter redirect url from client app in foursquare
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##Create the URL:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$URL = &amp;#34;https://foursquare.com/oauth2/authenticate?client_id=$Clientid&amp;amp;response_type=token&amp;amp;redirect_uri=$redirect&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## function from https://foxdeploy.com/2015/11/02/using-powershell-and-oauth/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Function Show-OAuthWindow {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Add-Type -AssemblyName System.Windows.Forms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$form = New-Object -TypeName System.Windows.Forms.Form -Property @{Width=440;Height=640}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$web  = New-Object -TypeName System.Windows.Forms.WebBrowser -Property @{Width=420;Height=600;Url=($url -f ($Scope -join &amp;#34;%20&amp;#34;)) }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$DocComp  = {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$Global:uri = $web.Url.AbsoluteUri
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($Global:Uri -match &amp;#34;error=[^&amp;amp;]*|code=[^&amp;amp;]*&amp;#34;) {$form.Close() }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$web.ScriptErrorsSuppressed = $true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$web.Add_DocumentCompleted($DocComp)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$form.Controls.Add($web)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$form.Add_Shown({$form.Activate()})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$form.ShowDialog() | Out-Null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#endregion
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#login to get an access code then close the redirect window
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Show-OAuthWindow -URL $URl
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## grab the token
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$regex = &amp;#39;(?&amp;lt;=access_token=)(.*)&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$authCode  = ($uri | Select-string -pattern $regex).Matches[0].Value
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$global:AuthToken = $authCode
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-output &amp;#34;Received a token, $AuthToken&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Write-Output &amp;#34;So the URL for your PowerBi Data is :-&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PowerBiUrl = &amp;#34;https://api.foursquare.com/v2/users/self/checkins?limit=5000&amp;amp;oauth_token=$AuthToken&amp;amp;v=20160829&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$PowerBiUrl | Clip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>I checked the URL in a browser and confirmed that it returned a json object. Keep that URL safe you will need it in a minute. That code above has placed it in your clipboard. If you want to jump straight to the report using the download stop here and go to the end&lt;/p>
+&lt;p>So now lets move to Power BI. Go to &lt;a class="link" href="http://powerbi.com" target="_blank" rel="noopener"
+>powerbi.com&lt;/a> and download the PowerBi Desktop. Its free. You will need to create an account using a school or work email address if you wish to put your reports in powerbi.com&lt;/p>
+&lt;p>Once you have downloaded and installed PowerBi Desktop you will be faced with a window like this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi.png"
+loading="lazy"
+alt="powerbi"
+>&lt;/a>&lt;/p>
+&lt;p>Start by clicking Get Data&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi2.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi2.png"
+loading="lazy"
+alt="powerbi2"
+>&lt;/a>&lt;/p>
+&lt;p>Then choose Web and paste the URL from above into the filename and press ok which will give you this&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi3.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi3.png"
+loading="lazy"
+alt="powerbi3"
+>&lt;/a>&lt;/p>
+&lt;p>Now we need to put the data into a format that is of more use to us&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/power1.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/power1.gif"
+loading="lazy"
+alt="power1"
+>&lt;/a>&lt;/p>
+&lt;p>I clicked on the record link for response, then converted to table, then the little icon at the top of the column to expand the value.items column and then the value.items column again. It doesn’t look much yet but we are a step closer.&lt;/p>
+&lt;p>Next I looked in the table for the venue column, expanded that and the location column and the formatted address column.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/power2.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/power2.gif"
+loading="lazy"
+alt="power2"
+>&lt;/a>&lt;/p>
+&lt;p>You can also expand the categories so that you can look at those too by expanding Value.items.venue.categories and Value.items.venue.categories1&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi4.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi4.gif"
+loading="lazy"
+alt="powerbi4.gif"
+>&lt;/a>&lt;/p>
+&lt;p>Now you will see that we have some duplicates in the data so we need to remove those. I did that by deleting the first 3 columns and then clicking remove duplicates under Delete Rows&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/power3b.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/power3b.gif"
+loading="lazy"
+alt="power3b.gif"
+>&lt;/a>&lt;/p>
+&lt;p>Then click close and apply. Then click on the data button as we need to rename and remove some more columns so that our data makes a little sense. I renamed the columns like this&lt;/p>
+&lt;ul>
+&lt;li>Value.items.createdAt –&amp;gt; CreatedAt&lt;/li>
+&lt;li>Value.items.shout –&amp;gt; Comment&lt;/li>
+&lt;li>Value.items.venue.name –&amp;gt; VenueName&lt;/li>
+&lt;li>Value.items.venue.location.address –&amp;gt; VenueAddress&lt;/li>
+&lt;li>Value.items.timeZoneOffset –&amp;gt; TimeZoneOffset&lt;/li>
+&lt;li>Value.items.venue.location.lat –&amp;gt; VenueLat&lt;/li>
+&lt;li>Value.items.venue.location.lng –&amp;gt; VenueLong&lt;/li>
+&lt;li>Value.items.venue.location.postalCode –&amp;gt; VenuePostalCode&lt;/li>
+&lt;li>Value.items.venue.location.cc –&amp;gt; CountryCode&lt;/li>
+&lt;li>Value.items.venue.location.city –&amp;gt; City&lt;/li>
+&lt;li>Value.items.venue.location.state –&amp;gt; State&lt;/li>
+&lt;li>Value.items.venue.location.country –&amp;gt; Country&lt;/li>
+&lt;li>Value.items.venue.location.formattedAddress –&amp;gt; VenueAddress&lt;/li>
+&lt;li>Value.items.venue.url –&amp;gt; VenueURL&lt;/li>
+&lt;li>Value.items.venue.categories.name –&amp;gt; Catogory&lt;/li>
+&lt;li>Value.items.venue.categories.pluralName –&amp;gt; Categories&lt;/li>
+&lt;/ul>
+&lt;p>and remove all of the other columns. You can also do this in the Edit Queries window, I am just showing you that there are multiple ways to do the same thing&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi5.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi5.gif"
+loading="lazy"
+alt="powerbi5.gif"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have done that you should have a window that looks like this. Notice I renamed the query to checkins as well&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi4.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi4.png"
+loading="lazy"
+alt="powerbi4.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>Now we need to create a calculated column for the time and a measure for the count of checkins. This is done using this code&lt;/p>
+&lt;p>&lt;code>Time = VAR UnixDays = [createdAt]/(60*60*24)
+RETURN (DATEVALUE(&amp;quot;1/1/1970&amp;quot;)+UnixDays)&lt;/code>&lt;/p>
+&lt;p>&lt;code>CountCheckins = COUNT(checkins[Time])&lt;/code>&lt;/p>
+&lt;p>and we can move onto the report side of things. Frist we are going to download a custom visual. Go to the &lt;a class="link" href="https://app.powerbi.com/visuals/" target="_blank" rel="noopener"
+>PowerBi Custom Visuals Page&lt;/a> and download the Timeline visual&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi5.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi5.png"
+loading="lazy"
+alt="powerbi5.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>and then import it into your PowerBi report. I have embedded a YouTube video below showing the steps I took to turn this into the PowerBi report. Its pretty easy, you will be able to click on the visuals and then click on the data columns and alter them until you have the report that you want.&lt;/p>
+&lt;p>Once you have done this, you can upload it to PowerBi if you wish by clicking on the Publish button in PowerBi desktop and signing into PowerBi.com with your work email address.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi6.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi6.png"
+loading="lazy"
+alt="powerbi6.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>and your report is available for you on PowerBi.com 🙂 By clicking on the pins on a visualisation you can add them to a dashboard.&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi8.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi8.gif"
+loading="lazy"
+alt="powerbi8.gif"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have a dashboard you can then use the natural language query to ask questions of your data. Here are some examples&lt;/p>
+&lt;p>How many checkins are in GB&lt;br>
+How many checkins are in airports&lt;br>
+How many checkins by month&lt;br>
+How many checkins by month in GB&lt;br>
+Which airports&lt;br>
+Show me hotel venuename and time&lt;br>
+How many hotels by country&lt;br>
+Show me hotel venuename and checkins count&lt;br>
+metro stations venuename and count checkins as a map&lt;br>
+Show me count checkins in Amsterdam by category as a donut&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi7.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi7.png"
+loading="lazy"
+alt="powerbi7.PNG"
+>&lt;/a>&lt;/p>
+&lt;p>If you want to use the blank report, &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/PowerBi%20and%20Api%20Blog%20Demo.pbix" target="_blank" rel="noopener"
+>download it from here&lt;/a> open it in PowerBi Desktop, click Edit Queries and Source and add your own URL and click Apply and then Refresh&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/10/powerbi9.gif" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/10/powerbi9.gif"
+loading="lazy"
+alt="powerbi9.gif"
+>&lt;/a>&lt;/p>
+&lt;p>Hopefully, this has given you some ideas of ways that you can create some reports from many of the data sources available to you via API&lt;/p></description></item></channel></rss>

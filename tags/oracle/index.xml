@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/oracle/</link><description>Recent content in Oracle on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Feb 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/oracle/index.xml" rel="self" type="application/rss+xml"/><item><title>Those Pesky ‘s</title><link>https://blog.robsewell.com/blog/those-pesky-s/</link><pubDate>Mon, 11 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/those-pesky-s/</guid><description>&lt;h3 id="changing-domain-names-in-a-column">Changing Domain Names in a Column
+&lt;/h3>&lt;p>A quick little post for today. Not particularly SQL related but the points at the end are relevant.&lt;/p>
+&lt;p>I had a task when moving a service to a new development area to change the domain name within columns in several tables from “DOMAIN1\USER” to “DOMAIN2\USER”&lt;/p>
+&lt;p>In SQL I was able to do this quite easily as follows&lt;/p>
+&lt;pre>&lt;code>USE [DATABASENAME]
+GO
+-- Declare variables
+DECLARE @Live nvarchar(10)
+DECLARE @Dev nvarchar(10)
+-- Set the variable to the Domains
+Set @Live = 'Live Domain'
+Set @Dev = 'Dev Domain'
+--Update tables
+UPDATE [TABLENAME]
+SET [User] = REPLACE([User], @Live, @Dev)
+GO
+UPDATE [TABLENAME]
+SET [Group] = REPLACE([Group], @Live, @Dev)
+GO
+&lt;/code>&lt;/pre>
+&lt;p>I also had to do the same for some Oracle databases too and this is where the fun started!&lt;/p>
+&lt;p>I needed to create the update scripts for documentation for the Oracle databases.&lt;/p>
+&lt;p>I wanted to create&lt;/p>
+&lt;pre>&lt;code>update schema.tablename set userid = replace ('DOMAIN1\USER', 'DOMAIN1', 'DOMAIN2') WHERE USERID = 'DOMAIN1\USER';
+&lt;/code>&lt;/pre>
+&lt;p>for each userid in the table.I had trouble with the script I found in our DBA area as it kept failing with&lt;/p>
+&lt;p>ORA-00911: invalid character&lt;/p>
+&lt;p>at the \&lt;/p>
+&lt;p>as it wouldn’t add the ‘ ‘ around DOMAIN1\USER&lt;/p>
+&lt;p>Not being an Oracle DBA but wanting to solve the issue once and for all I tried a whole host of solutions trying to find the escape character. i asked the Oracle DBAs but they were unable to help Checking the IT Pros handbook (also known as Google!) made me more confused but in the end I solved it.&lt;/p>
+&lt;pre>&lt;code>select 'update schema.table set userid = replace (''' || userid || ''', ''DOMAIN1'', ''DOMAIN2'') WHERE USERID = ''' || USERID || ''';' FROM schema.tablename;
+&lt;/code>&lt;/pre>
+&lt;p>A whole host of ‘s in there!!&lt;/p>
+&lt;p>I put this in my blog as it is relevant to my situation and an experience I have had that I couldn’t easily solve. Maybe it will help another person searching for the same thing.&lt;/p>
+&lt;p>It raises some interesting points&lt;/p>
+&lt;p>The script provided ( I use that term loosely, it had the right name and was in the right place to use for this process) had obviously not been run as it didn’t work or someone had manually added the ‘s. I wasn’t go to do that for the number of users required.&lt;/p>
+&lt;p>If it no good, if it doesn’t do what i expected or is still in development then mark it as so, so that everyone knows. In the name of the script, in the comments in the script or by keeping live tested scripts in one place. Which ever method you choose is fine as long as it is appropriate to your environment and everyone knows about it&lt;/p>
+&lt;p>I probably say a dozen times a day to my new colleague&lt;/p>
+&lt;p>“In case you/I get run over by a bus”&lt;/p>
+&lt;p>It is all very well being the one who knows everything but it is pointless if you aren’t there SPOF’s (Single Points of Failure) apply to people as well as hardware.&lt;/p>
+&lt;p>Enable your service to be supported by preparing proper documentation.&lt;/p>
+&lt;p>This doesn’t have to be reams of paperwork. It can sometimes be as simple as placing things in a recognised place or a single comment in the script.&lt;/p>
+&lt;p>I hold my hands up. I am guilty of this too. I have been so busy I haven’t done this as much as I should have over the last few months of last year. I have tried but not done as well as I should have. In my defence, I have spent plenty of time recently rectifying this, which is why this situation was so memorable.&lt;/p>
+&lt;p>Some links I have read in the past related to this by  people who know more than me.&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.brentozar.com/archive/2013/01/documentation-it-doesnt-suck/" target="_blank" rel="noopener"
+>Documentation It Doesn’t Suck – Brent Ozar&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.johnsansom.com/your-lack-of-documentation-is-costing-you-more-than-you-think/" target="_blank" rel="noopener"
+>Your Lack Of Documentation is Costing you More than you Think – John Samson&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.bradmcgehee.com/2012/06/do-you-document-your-sql-server-instances/" target="_blank" rel="noopener"
+>Do You Document Your SQL Server Instances? – Brad McGhee&lt;/a>&lt;/p></description></item><item><title>You Have To Start Somewhere</title><link>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</link><pubDate>Sun, 10 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/02/medium_33194896_thumb.jpg" alt="Featured image of post You Have To Start Somewhere" />&lt;p>![medium_33194896]({{ &amp;ldquo;/assets/uploads/2013/02/medium_33194896_thumb.jpg&amp;rdquo; | relative_url }})&lt;/p>
+&lt;p>The hardest part is looking at the blank page and beginning to type. It’s much easier to go and play with the settings of the site, to look at plugins and other cool things. The only other blog I have written was &lt;a class="link" href="http://wombatsdojogle.wordpress.com" target="_blank" rel="noopener"
+>http://wombatsdojogle.wordpress.com&lt;/a>. This was a little easer as there was always ‘something’ that needed to be written about. Whether it was training or route planning or every day on the road I had material and an obvious thing to write.&lt;/p>
+&lt;p>This is a little harder for me so I will begin as follows&lt;/p>
+&lt;p>During different careers working in secure units, working for a small family firm doing everything from delivery driving to office work and working for myself selling things via eBay and at car boot sales I have always been interested in computers. I was (still am) the fella who could fix and sort things out. Towards the end I was getting paid for it too. I helped small businesses and individuals, I set up systems, reinstalled operating systems, dealt with viruses. You know the sort of thing. When things dried up and circumstances changed meaning I could spend some time away from home I got a job at an arts university. In a small team my responsibilities ranged from password resets and printer installs to rolling out new PCs and laptops and helping to merge active directory domains. I loved it. The travel too and from work was a pain at times but the job was grand though the pay wasn’t!!&lt;/p>
+&lt;p>I joined MyWork in a service desk role. Not your typical log and flog sort of place but a 24/7 team responsible for the first answering of the phone to a significant amount of second line fixing and routine IT tasks invaluable to the running of MyWork. A couple of years later after many suggestions of jobs I should apply for and plenty of encouragement from colleagues I applied for and got the position of Oracle DBA. That didn’t work out quite as expected and two months later I was asked to move to be a SQL DBA. That was 18 months ago and I am astonished by how much I have learnt so far and still slightly daunted by the sheer amount there still is to learn.&lt;/p>
+&lt;p>The reason I was asked to move is that responsibility for the SQL estate had moved to the team and the one SQL DBA was struggling with the sheer amount of work required. He had joined only a few months earlier and found that best practice and SQL had not been applied particularly well and with more than 700 databases to support he couldn’t keep up.&lt;/p>
+&lt;p>He and I began to make changes. Permissions for developers were removed – no more sysadmins for developers on live systems. Backups were run 7 days a week and checked every day. Service accounts were set up to run the various SQL services per server. Documentation was begun. All the good things that should be done were started to be done.&lt;/p>
+&lt;p>There were arguments and outbursts. Developers took time to understand that we were doing things for the best of MyWork and not to annoy them or stop them working. We got things wrong for sure. We didn’t communicate well with colleagues in other teams at times but we had the backing of our line management.&lt;/p>
+&lt;p>Then my colleague left to go to pastures new. I had been a SQL DBA for exactly 6 months and I was on my own. Then my line manager left so I had to look after the general maintenance of the Oracle estate as well. There are also some Ingres databases critical to MyWork and they were my responsibility as well.&lt;/p>
+&lt;p>For a few months I somehow managed to keep everything going without making any major booboos. It was a struggle. I was fighting my lack of knowledge, the sheer amount of work and running much too hard on caffeine and nicotine. At the end of last year some salvation arrived. First an Oracle DBA joined then a team lead (also an Oracle DBA) and another SQL DBA. Not the many years experienced SQL DBA I had hoped for who could advise me and teach me but I sure am glad he’s here.&lt;/p>
+&lt;p>In the last few weeks I am beginning to see the benefit of this. No longer on call all the time. Not as much fire fighting. Able to plan my day instead of walking in and dealing with whoever or whatever was shouting loudest. I was finally able to go to the local SQL User Group for the first time last month.&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/&lt;/a>&lt;/p>
+&lt;p>and meet up with some fabulous people.&lt;/p>
+&lt;p>I decided to start to write a blog about my experience. I hope it will show me how far I have come, how much I have learnt and the way I have done it. It may be of use to people and hopefully it will increase my interaction with the rest of the SQL community who are without doubt the most interactive and helpful group of people mainly without egos.&lt;/p>
+&lt;p>I have an idea of my next post. It will be about resolving the challenge and time spent checking and resolving backups.&lt;/p>
+&lt;p>The idea for it started with reading a blog post by John Samson &lt;a class="link" href="http://www.johnsansom.com" target="_blank" rel="noopener"
+>http://www.johnsansom.com&lt;/a> who can be found on twitter &lt;a class="link" href="https://twitter.com/SqlBrit" target="_blank" rel="noopener"
+>@SQLBrit&lt;/a>&lt;/p>
+&lt;p>The blog post is one of the most read on his blog and is titled&lt;/p>
+&lt;h3 id="the-best-database-administrators-automate-everything">&lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>The Best Database Administrators Automate Everything&lt;/a>
+&lt;/h3>&lt;p>Here is a quote from that blog entry&lt;/p>
+&lt;blockquote>
+&lt;h4 id="automate-everything">Automate Everything
+&lt;/h4>&lt;p>That’s right, I said everything. Just sit back and take the &lt;em>time&lt;/em> to consider this point for a moment. Let it wander around your mind whilst you consider the processes and tasks that you could look to potentially automate. Now eliminate the word &lt;em>potentially&lt;/em> from your vocabulary and evaluate how you could automate &lt;strong>e-v-e-r-y-t-h-i-n-g&lt;/strong> that you do.&lt;/p>
+&lt;p>Even if you believe that there is only a remote possibility that you will need to repeat a given task, just go ahead and automate it anyway! Chances are that when the need to repeat the process comes around again, you will either be under pressure to get it done, or even better have more important_Proactive Mode_ tasks/projects to be getting on with&lt;/p>&lt;/blockquote>
+&lt;p>I have tried my best to follow this advice. I haven’t always succeeded. Many times I just didn’t have the time to spare to write the automation even though it would save me time later. Now with more assistance in my team I am starting to resolve that&lt;/p>
+&lt;p>My interest in PowerShell, which was piqued when I wanted to organise my photos and a colleague pointed me at a script to sort my photos into year and month, encouraged me to create my favourite automation process which I will describe next time.&lt;/p>
+&lt;p>photo credit: &lt;a class="link" href="http://www.flickr.com/photos/emdot/33194896/" target="_blank" rel="noopener"
+>emdot&lt;/a> via &lt;a class="link" href="http://photopin.com" target="_blank" rel="noopener"
+>photopin&lt;/a> &lt;a class="link" href="http://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener"
+>cc&lt;/a>&lt;/p></description></item></channel></rss>

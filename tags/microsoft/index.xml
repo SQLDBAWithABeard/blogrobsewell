@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Microsoft on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/microsoft/</link><description>Recent content in Microsoft on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/microsoft/index.xml" rel="self" type="application/rss+xml"/><item><title>Microsoft Values The Community</title><link>https://blog.robsewell.com/blog/microsoft-values-the-community/</link><pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoft-values-the-community/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/MSCommunity.png" alt="Featured image of post Microsoft Values The Community" />&lt;h1 id="what-happens-next">What Happens Next?
+&lt;/h1>&lt;p>When PASS announced that operations would cease, a common question was &amp;ldquo;OK, so what happens now? To SQL Saturdays?, to the summit?, to the local user groups?&amp;rdquo; The answers to some of those questions will lie in other conversations but for right now, let&amp;rsquo;s talk about Local User Groups.&lt;/p>
+&lt;h1 id="user-groups">User Groups
+&lt;/h1>&lt;p>User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from.&lt;/p>
+&lt;p>Attending my local user group for the first time really helped me to improve. &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+>At the time I was really struggling in my job with no idea how to get support from people who &lt;strong>know&lt;/strong> what should be done.&lt;/a> I joined the group, I made many friends and I learnt a lot. My OneNote is full of notes I have taken during User Group sessions. I became involved in running the user group and the associated SQL Saturday and then became aware of the wider community.&lt;/p>
+&lt;p>We are always very proud of the number of speakers who started their speaking career at our user group and have gone to great things. I too, &lt;a class="link" href="https://blog.robsewell.com/blog/lessons-learnt-from-my-first-talk-at-sql-southwest/" target="_blank" rel="noopener"
+>started my speaking career at our user group&lt;/a>.&lt;/p>
+&lt;p>Our little user group in Exeter in the UK (or in Teams these days!) and user groups in general have a big place in my heart and I am a strong supporter of them. (If you would like a speaker, please always feel free to get in touch with me.) so I too, wondered&lt;/p>
+&lt;blockquote>
+&lt;p>What is going to happen to the user groups now?&lt;/p>&lt;/blockquote>
+&lt;h1 id="microsoft-values-the-community">Microsoft Values The Community
+&lt;/h1>&lt;p>Microsoft have announced the support that they will be giving to user groups. You can watch Buck Woody &lt;a class="link" href="https://twitter.com/BuckWoodyMSFT" target="_blank" rel="noopener"
+>t&lt;/a> explain everything that the Microsoft Data Platform is doing to empower the community on Youtube&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/obFlSwpIihc"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>(While you are there, I suggest subscribing to the channel, it&amp;rsquo;s really awesome)&lt;/p>
+&lt;p>Microsoft always has and always will support the technical professionals who use their products and they recognise that at the grass roots, the local user groups are the core of the community.&lt;/p>
+&lt;h1 id="so-microsoft-are-taking-over-the-user-groups">So Microsoft are taking over the User Groups?
+&lt;/h1>&lt;p>NO.&lt;/p>
+&lt;p>Microsoft&amp;rsquo;s philosophy is that local user groups should be Community-owned but they can be Microsoft-empowered. They have created a series of assets, resources, and benefits for user group leaders to run their groups. I am astonished at the scale of what has been achieved in a short amount of time. There are a lot of benefits that will make it easier for user groups to have a stable presence and all the tools that they need to enable their user group .&lt;/p>
+&lt;h1 id="what-is-being-offered-">What is being offered ?
+&lt;/h1>&lt;p>If you want to skip right to the sign up please fill out the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>The Azure Data Community will provide&lt;/p>
+&lt;ul>
+&lt;li>The Community Landing Page &lt;a class="link" href="aka.ms/datacommunity?WT.mc_id=DP-MVP-5002693" >aka.ms/datacommunity&lt;/a> which is central gateway for useful Azure Data Community resources from blog posts and videos to the user groups.&lt;/li>
+&lt;li>Meetup Pro fees, fully paid for by Microsoft saving user groups leaders from paying out of their own pocket or finding sponsorship.&lt;/li>
+&lt;li>A centralised way to find groups and events in the Data Community &lt;a class="link" href="https://www.meetup.com/pro/azuredatatechgroups/" target="_blank" rel="noopener"
+>https://www.meetup.com/pro/azuredatatechgroups/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datacommunity.png"
+loading="lazy"
+alt="Community"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Full Microsoft Teams subscriptions with all the bells &amp;amp; whistles for qualified Community Groups using a customisable template for the user group to define as they wish. This will be fantastic for running virtual events, sharing slides and demo code as well as keping in touch wiht your fellow user group members&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Community Leader Collaboration (via Teams &amp;amp; Meetup) enabling all the user groups leaders to be able to communicate, collaborate and share resources.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="do-i-have-to-use-this-">Do I have to use this ?
+&lt;/h1>&lt;p>NO.&lt;/p>
+&lt;p>You are in charge, if you already run your user group and don&amp;rsquo;t need these resources, let the team know and they will get you listed on the community gateway site.&lt;/p>
+&lt;h1 id="what-are-the-requirements">What are the requirements?
+&lt;/h1>&lt;p>Throughout the duration of the Group’s participation in the Program, the Group will:&lt;/p>
+&lt;ol>
+&lt;li>Have a group leader and a designated co-leader who have each accepted these T&amp;amp;Cs.&lt;/li>
+&lt;li>Not charge other members a fee to attend Group meetings, except in cases in which the venue and/or hosting costs (e.g., food and beverages) are passed through to members.&lt;/li>
+&lt;li>Maintain a published code of conduct that is easily accessible from the Group’s home page. See guidance &lt;a class="link" href="https://aka.ms/atg/guidance?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/guidance&lt;/a>.&lt;/li>
+&lt;li>Maintain a regular meeting cadence including having meetings at least six times per year that relate to or cover Azure Data products &amp;amp; services or relate to Diversity, Equity &amp;amp; Inclusion (DE&amp;amp;I) or Professional Development targeted to data professionals.&lt;/li>
+&lt;li>Comply with Program’s Code of Conduct located at &lt;a class="link" href="https://aka.ms/atg/code_of_conduct?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://aka.ms/atg/code_of_conduct&lt;/a>.&lt;/li>
+&lt;li>Adhere to Microsoft’s Trademark and Brand guidelines, when using any Microsoft trademarks or referring to Microsoft’s software, products or services (see &lt;a class="link" href="https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx&lt;/a>.&lt;/li>
+&lt;/ol>
+&lt;h1 id="which-technologies-do-these-benefits-apply-to">Which technologies do these benefits apply to?
+&lt;/h1>&lt;ul>
+&lt;li>SQL Server (on Windows, Linux, and in Containers, on-premises and in Microsoft Azure)&lt;/li>
+&lt;li>Azure Data Lake&lt;/li>
+&lt;li>Azure Cosmos DB&lt;/li>
+&lt;li>Azure HDInsight, Hadoop and Spark on Azure&lt;/li>
+&lt;li>Azure Search&lt;/li>
+&lt;li>Data Warehousing (Azure SQL Data Warehouse, Fast Track and APS)&lt;/li>
+&lt;li>Azure Stream Analytics&lt;/li>
+&lt;li>Cortana Intelligence Suite&lt;/li>
+&lt;li>Information Management (ADF, SSIS, and Data Sync)&lt;/li>
+&lt;li>SQL Server Reporting Services and Analysis Services&lt;/li>
+&lt;li>SQL Server Machine Learning Services&lt;/li>
+&lt;li>Azure Database for MySQL&lt;/li>
+&lt;li>Azure Database for PostgreSQL&lt;/li>
+&lt;li>Azure SQL (Database, Pools, Serverless, Hyperscale, Managed Instance, Virtual Machines)&lt;/li>
+&lt;li>Azure SQL Edge&lt;/li>
+&lt;li>Big Data Clusters&lt;/li>
+&lt;li>Azure Databricks&lt;/li>
+&lt;li>Azure Arc Enabled Data Services&lt;/li>
+&lt;li>Azure Synapse Analytics&lt;/li>
+&lt;li>Azure Data Catalog&lt;/li>
+&lt;/ul>
+&lt;p>Sign up vis the form linked &lt;a class="link" href="https://cloudblogs.microsoft.com/sqlserver/2020/12/22/resources-for-the-sql-server-and-azure-data-community?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>on this page&lt;/a>&lt;/p>
+&lt;p>Thank you to all of those people involved in making this happen.&lt;/p></description></item><item><title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</title><link>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</link><pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png" alt="Featured image of post Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user" />&lt;p>Following on from &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+>my last post about the Secret Management module&lt;/a>. I was asked another question.&lt;/p>
+&lt;blockquote>
+&lt;p>Can I use this to run applications as my admin account?&lt;/p>
+&lt;p>A user with a beard&lt;/p>&lt;/blockquote>
+&lt;p>It is good practice to not log into your work station with an account with admin privileges. In many shops, you will need to open applications that can do administration tasks with another set of account credentials.&lt;/p>
+&lt;p>Unfortunately, people being people, they will often store their admin account credentials in a less than ideal manner (OneNote, Notepad ++ etc) to make it easier for them, so that when they right click and run as a different user, they can copy and paste the password.&lt;/p>
+&lt;h2 id="use-the-secret-management-module">Use the Secret Management module
+&lt;/h2>&lt;p>Again, I decided to use a notebook to show this as it is a fantastic way to share code and results and because it means that anyone can try it out.&lt;/p>
+&lt;p>The notebook may not render on a mobile device.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Using the notebook, I can quickly store my admin password safely and open and run the applications using the credential&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" />&lt;p>Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;h2 id="jaap-is-awesome">Jaap is awesome
+&lt;/h2>&lt;p>&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+>&lt;/p>
+&lt;p>I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+>t&lt;/a> blog post&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+>https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a>&lt;/p>
+&lt;h2 id="joel-is-also-awesome">Joel is also awesome!
+&lt;/h2>&lt;p>When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+>t&lt;/a> module BetterCredentials which uses the Windows Credential Manager&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.powershellgallery.com/packages/BetterCredentials/4.5" target="_blank" rel="noopener"
+>https://www.powershellgallery.com/packages/BetterCredentials/4.5&lt;/a>&lt;/p>
+&lt;h2 id="microsoft-also-awesome">Microsoft? Also awesome!
+&lt;/h2>&lt;p>In February, Microsoft released the SecretManagement module for preview.&lt;/p>
+&lt;p>&lt;a class="link" href="https://devblogs.microsoft.com/powershell/secrets-management-development-release?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://devblogs.microsoft.com/powershell/secrets-management-development-release/&lt;/a>&lt;/p>
+&lt;p>Sydney &lt;a class="link" href="https://twitter.com/sydneysmithreal" target="_blank" rel="noopener"
+>t&lt;/a> gave a presentation at the European PowerShell Conference which you can watch on Youtube.&lt;/p>
+&lt;h2 id="good-bye-import-clixml">Good Bye Import-CliXML
+&lt;/h2>&lt;p>So now I say, it is time to stop using Import-Clixml for storing secrets and use the Microsoft.PowerShell.SecretsManagement module instead for storing your secrets.&lt;/p>
+&lt;h2 id="notebooks-are-as-good-as-blog-posts">Notebooks are as good as blog posts
+&lt;/h2>&lt;p>I love notebooks and to show some people who had asked about storing secrets, I have created some. So, because I am efficient lazy I have embedded them here for you to see. You can find them in my Jupyter Notebook repository&lt;/p>
+&lt;p>&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+>https://beard.media/dotnetnotebooks&lt;/a>&lt;/p>
+&lt;p>in the Secrets folder&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png?resize=630%2C349&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="installing-and-using-the-secrets-management-module">Installing and using the Secrets Management Module
+&lt;/h2>&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="using-the-secret-management-module-in-your-scripts">Using the Secret Management Module in your scripts
+&lt;/h2>&lt;p>Here is a simple example of using the module to provide the credential for a docker container and then to dbatools to query the container&lt;/p>
+&lt;p>These notebooks may not display on a mobile device unfortunately&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>Surprised and Honoured and Proud</title><link>https://blog.robsewell.com/blog/surprised-and-honoured-and-proud/</link><pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/surprised-and-honoured-and-proud/</guid><description>&lt;p>I have always been extremely proud to be a Cloud and Datacenter Management MVP, and lucky enough to be involved with both the PowerShell community as well as the Data Platform community.&lt;/p>
+&lt;p>Today, July 1st is the date that many MVPs receive their renewal email to let them know that they have been awarded for another year. There is a lot of F5’ing and frequent checking of emails and “Have you heard yet?” DMs going around.&lt;/p>
+&lt;p>When I received the news, I was using Azure DevOps to run PowerShell and Terraform to build an Azure SQL Elastic Pool (yes, I will write a blog post about it!). I love technology and within my work, like many people, I work across many different disciplines. Azure, Azure DevOps, SQL Server and Microsoft Data Platform products are the main focus of my time.&lt;/p>
+&lt;p>I didn’t notice the significance of the information.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image.png?resize=589%2C213&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>I was pleased as punch to be renewed again, proud that what I do is recognised by Microsoft, honoured to spend another year as an MVP. Then my friends pointed out the big news that I had missed.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/pixpoetry-JD1RqKlqAi0-unsplash.jpg?fit=630%2C423&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@blackpoetry?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>pixpoetry&lt;/a> on &lt;a class="link" href="https://unsplash.com/s/photos/surprise?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;p>There are two award categories.&lt;/p>
+&lt;p>I have been awarded for both Cloud and Datacenter Management and Data Platform.&lt;/p>
+&lt;p>I am beyond words.&lt;/p>
+&lt;p>Proud, Surprised and Honoured.&lt;/p>
+&lt;p>Thank you to all of the people who help and support me. You help more than you will ever know.&lt;/p>
+&lt;p>I am going to go and prop my jaw shut!&lt;/p></description></item></channel></rss>

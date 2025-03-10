@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Change Log on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/change-log/</link><description>Recent content in Change Log on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/change-log/index.xml" rel="self" type="application/rss+xml"/><item><title>Making a Change Log Easier With PowerShell</title><link>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</link><pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</guid><description>&lt;p>Having a Change Log is a good thing. A quick and simple place to find out what has changed on a server and when. This can be invaluable when troubleshooting, matching a change to a symptom especially when assessed alongside your performance counter collection. Here is a simple way to make use of a change log and automate it&lt;/p>
+&lt;p>Create a simple table&lt;/p>
+&lt;pre>&lt;code>USE [MDW]
+GO
+CREATE TABLE [dbo].[ChangeLog](
+[ChangeID] [int] IDENTITY(1,1) PRIMARY KEY ,
+[Date] [datetime] NOT NULL,
+[Server] [varchar](50) NOT NULL,
+[UserName] [nvarchar](50) NOT NULL,
+[Change] [nvarchar](max) NOT NULL,
+)
+GO
+&lt;/code>&lt;/pre>
+&lt;p>You can keep this on a central server or create a database on each server, whichever fits your needs best. You can add other columns if you want your information in a different format&lt;/p>
+&lt;p>Once you have your table you can create a couple of Powershell functions to easily and quickly add to and retrieve data from the table. I make use of &lt;a class="link" href="https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1" target="_blank" rel="noopener"
+>Invoke-SQLCMD2&lt;/a> in these functions&lt;/p>
+&lt;p>This can then be included in any automation tasks that you use to update your environments whether you are using automated deployment methods for releases or using SCCM to patch your environments making it easy to update and also easy to automate by making it part of your usual deployment process.&lt;/p>
+&lt;p>To add a new change&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.Synopsis
+A function to add a ChangeLog information
+.DESCRIPTION
+Load function for adding a change to the changelog table in the MDW database on MDWSERVER.
+Use Get-ChangeLog $Server to see details
+Inputs the username of the account running powershell into the database as the user
+REQUIRES Invoke-SQLCMD2
+https://blog.robsewell.com
+.EXAMPLE
+Add-ChangeLog SERVERNAME &amp;quot;Altered AutoGrowth Settings for TempDB to None&amp;quot;
+Adds ServerName UserName and Altered AutoGrowth Settings for TempDB to None to the change log table
+#&amp;gt;
+Function Add-ChangeLog
+{
+[CmdletBinding()]
+Param(
+[Parameter(Mandatory=$True)]
+[string]$Server,
+[Parameter(Mandatory=$True)]
+[string]$Change
+)
+$UserName = $env:USERDOMAIN + '\' + $env:USERNAME
+$Query = &amp;quot;INSERT INTO [dbo].[ChangeLog]
+([Date]
+,[Server]
+,[UserName]
+,[Change])
+VALUES
+(GetDate()
+,'$Server'
+,'$UserName'
+,'$Change')
+&amp;quot;
+Invoke-Sqlcmd2 -ServerInstance MDWSERVER -Database &amp;quot;MDW&amp;quot; -Query $Query -Verbose
+}
+&lt;/code>&lt;/pre>
+&lt;p>You can then run&lt;/p>
+&lt;pre>&lt;code>Add-ChangeLog SERVERNAME &amp;quot;Added New Database SuperAppData&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>to add the change to the change log&lt;/p>
+&lt;p>To retrieve the data you can use&lt;/p>
+&lt;pre>&lt;code>&amp;lt;#
+.Synopsis
+A function to get ChangeLog information
+.DESCRIPTION
+Load function for finding ChangeLog information. Information is selected from the MDW Database on SERVERNAME
+REQUIRES Invooke-SQLCMD2
+https://blog.robsewell.com
+.EXAMPLE
+Get-ChangeLog SERVERNAME
+#&amp;gt;
+Function Get-ChangeLog
+{
+[CmdletBinding()]
+[OutputType([int])]
+Param
+(
+# Server Name Required
+[Parameter(Mandatory=$true,]
+$Server
+)
+$a = @{Expression={$_.Date};Label=&amp;quot;Date&amp;quot;;width=15}, `
+@{Expression={$_.Server};Label=&amp;quot;Server&amp;quot;;width=10},
+@{Expression={$_.UserName};Label=&amp;quot;UserName&amp;quot;;width=20}, `
+@{Expression={$_.Change};Label=&amp;quot;Change&amp;quot;;width=18}
+Invoke-Sqlcmd2 -ServerInstance MDWSERVER -Database &amp;quot;MDW&amp;quot; -Query &amp;quot;SELECT * FROM dbo.ChangeLog WHERE Server = '$Server';&amp;quot; -Verbose|Format-table $a -Auto -Wrap
+}
+&lt;/code>&lt;/pre>
+&lt;p>and use&lt;/p>
+&lt;pre>&lt;code>Get-ChangeLog SERVERNAME
+&lt;/code>&lt;/pre>
+&lt;p>To find out what changed when. Happy Automating&lt;/p></description></item></channel></rss>

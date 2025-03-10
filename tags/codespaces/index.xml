@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codespaces on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/codespaces/</link><description>Recent content in Codespaces on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/codespaces/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" />&lt;h1 id="broken-link">Broken Link
+&lt;/h1>&lt;p>It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+>Twitter&lt;/a> )&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+>&lt;/p>
+&lt;p>Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+>404 page &lt;/a> which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p>
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it">Why do something manual when you can automate it
+&lt;/h2>&lt;p>This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p>
+&lt;p>So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts &lt;a class="link" href="2021-04-11-locally-viewing-github-pages-new-data-saturdays.md" >Running GitHub Pages locally&lt;/a> or &lt;a class="link" href="2021-04-15-locally-viewing-github-pages-locally-with-remote-theme.md" >Running GitHub Pages locally with a Remote Theme (this site has a remote theme)&lt;/a>. Then I could see the changes locally before pushing them to the repository.&lt;/p>
+&lt;p>But my brain didn&amp;rsquo;t work in that way. Instead it thought &amp;ldquo;Hmmm maybe I could do this in the browser in &lt;a class="link" href="https://github.com/features/codespaces" target="_blank" rel="noopener"
+>GitHub Codespaces&lt;/a> and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code&amp;rdquo;&lt;/p>
+&lt;p>The most wonderful Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+>Blog&lt;/a> &lt;a class="link" href="https://twitter.com/@jpomfret" target="_blank" rel="noopener"
+>Twitter&lt;/a> and I delivered a &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the &lt;a class="link" href="psconf.eu" >PowerShell Conference Europe&lt;/a> about using dev containers so I had a little knowledge of how it can be done.&lt;/p>
+&lt;h1 id="how-easy-is-it-">How easy is it ?
+&lt;/h1>&lt;p>It&amp;rsquo;s super super easy. Surprisingly easy.&lt;/p>
+&lt;h2 id="open-a-codespace-for-your-repository">Open a codespace for your repository
+&lt;/h2>&lt;p>First I went to the repository for my website and opened a codespace by clicking on the green code button and creating a codespace&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/create-codespace.png"
+loading="lazy"
+alt="the create codespace button"
+>&lt;/p>
+&lt;h2 id="add-the-development-container-configuration">Add the development container configuration
+&lt;/h2>&lt;p>Using &lt;code>CTRL SHIFT + P&lt;/code> to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/add-config.png"
+loading="lazy"
+alt="Add the configuration"
+>&lt;/p>
+&lt;p>and follow the prompts&lt;/p>
+&lt;ul>
+&lt;li>Show All Definitions&lt;/li>
+&lt;li>Jekyll&lt;/li>
+&lt;li>bullseye (or buster if you use Apples)&lt;/li>
+&lt;li>lts&lt;/li>
+&lt;/ul>
+&lt;h2 id="the-config-files-are-created">The config files are created
+&lt;/h2>&lt;p>This will create a &lt;code>.devcontainer&lt;/code> directory with&lt;/p>
+&lt;ul>
+&lt;li>devcontainer.json&lt;/li>
+&lt;li>Dockerfile&lt;/li>
+&lt;li>post-create.sh&lt;/li>
+&lt;/ul>
+&lt;p>Which will do all that you need. You can stop here. You will just need to run &lt;code>jekyll serve&lt;/code> to start the website.&lt;/p>
+&lt;h2 id="automatic-regeneration">Automatic regeneration
+&lt;/h2>&lt;p>To make it automatically regenerate. I added&lt;/p>
+&lt;p>&lt;code>bundle exec jekyll serve --force-polling&lt;/code>&lt;/p>
+&lt;p>to the end of the post-create.sh file. This will automatically start the website and regenerate it everytime I make a change :-)&lt;/p>
+&lt;h2 id="view-the-logs">View the logs
+&lt;/h2>&lt;p>You can watch the logs of the regeneration with View Creation Log from the command palette - Use &lt;code>CTRL SHIFT + P&lt;/code> to open it. Then you can see the log output in real-time.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/view-creation-log.png"
+loading="lazy"
+alt="look at the logs"
+>&lt;/p>
+&lt;h2 id="open-the-website-locally">Open the website &amp;ldquo;locally&amp;rdquo;
+&lt;/h2>&lt;p>To open the website from inside the devcontainers the ports are exposed via the configuration. In the browser in codepaces there is a port tab and a button to press to open the website and show the updates that you have written.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/port-forwards.png"
+loading="lazy"
+alt="the ports get forwarded"
+>&lt;/p>
+&lt;p>If you click that you get a live view of the website so that you can validate that it works.&lt;/p>
+&lt;h1 id="and-vs-code">And VS Code?
+&lt;/h1>&lt;p>This showed it being created in codespaces in the browser, you can have the same effect in VS Code by adding a &lt;code>.devcontainer&lt;/code> directory and copying the files from the &lt;a class="link" href="https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/jekyll/.devcontainer" target="_blank" rel="noopener"
+>vs code dev containers repo&lt;/a>&lt;/p>
+&lt;p>The rest is pretty much the same except the url!&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/vscode.png"
+loading="lazy"
+alt="running in vs code"
+>&lt;/p>
+&lt;h1 id="rather-have-video-">Rather Have Video ?
+&lt;/h1>&lt;p>If you prefer video then you can find one on Youtube showing the same process.&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/aFFmPlbjfCw"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div></description></item></channel></rss>
