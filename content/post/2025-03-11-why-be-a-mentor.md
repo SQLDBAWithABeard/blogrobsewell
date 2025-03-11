@@ -10,7 +10,7 @@ tags:
  - Community
  - Mentor
  - Mentoring
-
+image: assets/uploads/2025/mentor.png
 ---
 
 [![](https://debthedba.wordpress.com/wp-content/uploads/2016/06/tsql2sday-150x150.png)](https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/)
