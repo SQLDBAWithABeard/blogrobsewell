@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Development on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/development/</link><description>Recent content in Development on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 09 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/development/index.xml" rel="self" type="application/rss+xml"/><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;p>&lt;img src="https://i0.wp.com/blog.waynesheffield.com/wayne/wp-content/uploads/2012/04/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+>blog&lt;/a>|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+>twitter&lt;/a>) and is now starting its 6th year, is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme. This month it is hosted by Wayne Sheffield &lt;a class="link" href="http://blog.waynesheffield.com/wayne/archive/2014/12/t-sql-tuesday-61-giving-back/" target="_blank" rel="noopener"
+>blog&lt;/a>|&lt;a class="link" href="http://www.twitter.com/#/DBAWayne" target="_blank" rel="noopener"
+>twitter&lt;/a> and in the spirit of the holiday season it is about giving. This is my post on giving back, in the little ways as well as the bigger ones, how you can give back and why it not only benefits others but also yourself&lt;/p>
+&lt;h3 id="whats-the-sql-family">What’s the SQL Family?
+&lt;/h3>&lt;p>The SQL Family (or SQL community call it what you will) is a fabulous place to be. Full of many wonderful, talented, passionate and generous people. Every method of interaction that you wish for can be found if you look. Ever wanted to know how others do it? or Does this happen in other shops? or I wish I had access to someone who knows about ‘insert new shiny thing here’?&lt;/p>
+&lt;p>I guess that that is how I joined. I had no peers in my shop. I had no one to turn to to ask questions or get advice. I had no support and I turned to the internet. Now we all know that the internet lies. It is full of accidental and deliberate mistruths, of part information and downright bad advice. You have to be careful where you go and who you trust. I gradually found myself going back to the same resources and from those I found out about PASS and user groups&lt;/p>
+&lt;p>I am in the UK. I found the list of UK SQL User Groups&lt;/p>
+&lt;p>You can find more &lt;a class="link" href="http://www.sqlpass.org/passchapters.aspx" target="_blank" rel="noopener"
+>here&lt;/a> both local and virtual&lt;/p>
+&lt;h3 id="user-groups">User Groups
+&lt;/h3>&lt;p>I found a &lt;a class="link" href="http://sqlsouthwest.co.uk" target="_blank" rel="noopener"
+>user group near me&lt;/a> and went along to a meeting not knowing what to expect. I found a group of people like me willing to give up their time to learn and share knowledge. A wide range of people from DBAs, Developers, BI Professionals and SysAdmins. Working for International multi regional companies looking after many hundreds of SQL Servers to single sysadmins looking after the whole kit and caboodle and everything in between. A wealth and breadth of knowledge to tap into. You will learn so much not only from the sessions but also the conversation with all these other talented people&lt;/p>
+&lt;p>Come along.&lt;/p>
+&lt;p>Simply coming along will bring benefit. Other people will be interested in what you have to say even if you are in week 0 of your first ever job. Your view will still be valued. Everyone can learn from everybody and NO-ONE knows it all.&lt;/p>
+&lt;p>There will come a point where you will pass on a piece of knowledge or an idea or a way of working and someone will say thank you I didn’t know that. You just gave back. It may even be someone you look up to, someone whose knowledge and experience far outweighs yours whose word you hang on to. That feels good.&lt;/p>
+&lt;p>You may ask the questions that others thought but didnt ask and boy are they glad you asked the question. You just gave back. It’s something I do often. I ask questions and sometimes I ask questions I know the answer to so that they will be of benefit to the group.&lt;/p>
+&lt;p>What will you get? More than you can ever put in. Free training, often free pizza, knowledge, advice,guidance, contacts, support, a network of people in your field, notice of job openings, swag, fun, friends, more social events and more and more&lt;/p>
+&lt;p>The user groups are run by volunteers in their own time out of the goodness of their hearts. They will always need your help. Turn up 5 minutes earlier and help set out the chairs or put out the handouts or assist with the tech. You just gave back. Afterwards before going to the pub clear the tables, help carry the boxes, put the pizza evidence in the bin. You just gave back&lt;/p>
+&lt;h3 id="sql-saturdays-and-other-community-events">SQL Saturdays and other community events
+&lt;/h3>&lt;p>SQL Saturdays are held all over the world most every Saturday You can find more about them here &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+>https://www.sqlsaturday.com/&lt;/a> There are also other larger events such as &lt;a class="link" href="http://sqlbits.com" target="_blank" rel="noopener"
+>SQL Bits&lt;/a> and &lt;a class="link" href="http://sqlrelay.co.uk" target="_blank" rel="noopener"
+>SQL Relay&lt;/a> here in the UK. Everything I wrote about User groups counts here just in a slightly larger scale. You will be able to attend several sessions across many different areas for free on a Saturday&lt;/p>
+&lt;p>These events are also run by volunteers and they will also need your help. If you can spare some time to help on a registration desk you just gave back. A room monitor to ensure the speaker and delegates have everything they need, the room is tidy and the session runs to time. You just gave back. Putting things out and tidying them away again. You just gave back.&lt;/p>
+&lt;p>You can become a volunteer by asking the people organising the events if they would like your help. These events will all have twitter feeds and emails and facebook pages and many methods of getting in touch. Contact them and offer your help if you can. You just gave back.&lt;/p>
+&lt;p>If you fancy taking the next step then you can get involved in organising the events. This is hard work, great fun, a good thing to add to your CV and you just gave back. There are so many areas to get involved organising an event. Premises and technology, speakers and printers, volunteers and sponsors all need co-ordination. Websites,twitter feeds, feedback forms, posters, marketing materials all need designing and producing. There are so many ways in which you will be able to provide value to the event and you just gave back&lt;/p>
+&lt;p>Oh and whilst I am at it, when you attend an event&lt;/p>
+&lt;p>Say Thank You to the volunteers. You just gave back.&lt;/p>
+&lt;h3 id="speaking-and-blogging">Speaking and Blogging
+&lt;/h3>&lt;p>All the events named above need speakers. The bigger events like the SQL Saturdays and the large events like SQL Bits will generally have more established speakers but every user group will need speakers and they will be more likely to accept new speakers and will be very supportive if you say that you are a new speaker. Every speaker had to make their first presentation at some point and they all know how it feels and can provide guidance and advice. You will feel that you don’t have anything to speak about that others will want to hear about. You do. Your experience and your knowledge or how you solved something or created something will be of interest to people. Of course, you need to check with the user group leaders and members if your idea for a presentation is suitable. Like anything you do that is new, researching it and taking advice from people with more experience is always useful. Maybe you can start with a lightning talk. Give it a go. You just gave back.&lt;/p>
+&lt;p>What do you get back from Speaking and Blogging?&lt;/p>
+&lt;p>I’ll tell you a secret. The vast majority of my posts ( This is an exception) are written for the benefit of one person. Me.&lt;/p>
+&lt;p>I write posts to record my learning for myself. To document my knowledge. I use my posts to help me to do my job. I know that I wrote the method of doing something somewhere and this is part of my store of knowledge. I write posts to answer peoples questions so that I have a place to point them to. Occasionally people will email me asking a question and if it requires a detailed response I will write a post and email them to tell them that this is the answer. I often point my work colleagues at my blog when they ask me questions about Azure or Powershell. You could also see your blog as an extension of your CV and use it when job hunting and develop it in that way&lt;/p>
+&lt;p>I also write posts to expand my knowledge and this is the same for speaking. When I am writing a blog post or a presentation I will read and watch videos and ensure I know more about it. The process of creating that content will improve my own knowledge and work practices and you will find that, as you write your blog posts you will have a deeper knowledge also. When you give your presentations you will learn as you answer questions or find the answer to the question afterwards (It’s ok to do that) that you are improving yourself and your knowledge.You will also be giving back.&lt;/p>
+&lt;p>Putting your information online will enable people to find it. Sure you can worry about SEO and getting to the top of search pages but you know that &lt;a class="link" href="https://blog.robsewell.com/powershell-wont-save-when-running-as-a-scheduled-job/" target="_blank" rel="noopener"
+>sometimes the answer is on the ninth page&lt;/a>. What you write will be of benefit to others and by taking the time to post you will be giving back to the community&lt;/p>
+&lt;p>You can do one, many or all of those and you will be giving back. I hope you do&lt;/p>
+&lt;p>I will be giving back. You will find me at &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+>SQL Bits&lt;/a> where I shall be room monitoring and volunteering.&lt;/p>
+&lt;p>You will find me at SQL Saturday Exeter. I am again one of the fabulous SQL South West team&lt;/p>
+&lt;p>&lt;img src="https://tsqlninja.files.wordpress.com/2014/03/wp_20140321_003_thumb.jpg"
+loading="lazy"
+>&lt;/p>
+&lt;p>who are again organising a SQL Saturday in Exeter in the UK on April 24th/25th 2015 You can find out more here &lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-372/%C2%A0" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-372/&lt;/a>&lt;/p>
+&lt;p>You still have time, if you are quick, to submit a session to speak or present a pre-con at Exeter. Submissions close on 15th December and &lt;a class="link" href="http://sqlsouthwest.co.uk/2014/10/29/sql-saturday-exeter-2015-looking-for-training-day-submissions/" target="_blank" rel="noopener"
+>we would love to have yours&lt;/a>&lt;/p>
+&lt;p>I shall carry on blogging and hopefully present at some user groups again this year. If you see me any where, come up and say hi to me. You just gave back&lt;/p></description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p> &lt;/p>
+&lt;p>Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+>SQL Saturday Exeter&lt;/a>. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a> and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+>#SQLSatExeter&lt;/a> on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p>
+&lt;p>In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p>
+&lt;h4 id="sql-saturday-pre-cons-are-exceptional-value">SQL SATURDAY PRE-CONS ARE EXCEPTIONAL VALUE
+&lt;/h4>&lt;p>It was relatively easy to persuade my bosses to pay for my pre-con. For £150 I was able to spend a whole day in a room with about a dozen people being trained in SQL Server Security by Denny Cherry &lt;a class="link" href="https://twitter.com/@mrdenny" target="_blank" rel="noopener"
+>@mrdenny&lt;/a>. The conversation went along the lines of&lt;/p>
+&lt;p>“I want to go to this training session being delivered by this guy. &lt;a class="link" href="https://mvp.microsoft.com/en-us/mvp/Denny%20Cherry-4021851?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>Link to MVP page&lt;/a>. It’s £150 and is in Exeter so no other costs required”&lt;/p>
+&lt;p>My boss – “OK”&lt;/p>
+&lt;p>Of course there was a little more fun and games to be had with the payment but it was easy for me to get training sorted and £150 is not going to break the training budget.&lt;/p>
+&lt;p>Looking back through my notes from the session today I realise quite how much I have taken from it into my role at work. I can’t really comment which and what though that wouldn’t be good security!!&lt;/p>
+&lt;p>I remember an enjoyable day with plenty of technical learning, a lot of questions and answers and plenty of laughs as well. But more than that was the opportunity to mix with other professionals and talk with them. During the breaks and at lunch there were plenty of opportunities to chew the fat, learn how others do things, make new friends and put faces to twitter handles. (NOTE : I do look pretty much like my &lt;a class="link" href="https://pbs.twimg.com/profile_images/75950380/n675059923_1450.jpg" target="_blank" rel="noopener"
+>twitter profile picture&lt;/a> so if you see me at SQL Community events I expect you to come up and say hi, that&amp;rsquo;s part of the benefit of attending these events, having a good natter)&lt;/p>
+&lt;p>Take a look at the end of this post for details of 2014 Pre-Cons&lt;/p>
+&lt;h4 id="sql-saturday--cant-get-cheaper-than-free">SQL SATURDAY – CAN’T GET CHEAPER THAN FREE
+&lt;/h4>&lt;p>SQL Saturdays are FREE&lt;/p>
+&lt;p>SQL Saturdays offer sessions from internationally renowned and local SQL speakers on subjects relevant to you and your job, your future career, your development plan or just to challenge yourself by learning about something outside of your comfort zone. For Nothing. Add in the networking opportunities, the prizes from the sponsors, (if you were at Exeter this year the beer and the pasty) and if you added it up its a sizeable investment in yourself, your career and your development (did I mention a free beer and pasty?)&lt;/p>
+&lt;p>NOT BAD FOR FREE!!&lt;/p>
+&lt;p>To enable that, SQL Saturday organisers have to go out and talk sponsors into putting their hands into their pockets. They will only do that if it is worthwhile to them. You can make it easier for the organisers by going and spending time with the sponsors during the breaks, chatting with them and giving them your details. Also, if you choose to use one of their products please tell the sponsors you spoke to them at a SQL Saturday. They are (usually) data professionals who will record that and use that to make future decisions which will we hope include sponsoring SQL Saturdays.&lt;/p>
+&lt;p>This year on the Saturday I went to the following sessions&lt;/p>
+&lt;p>A temporary fix for a short term problem by Ian Meade Advanced SQL Server 2012 HA and DR Architectures by Christian Bolton Busting common T-SQL myths by Dave Morrison Power View and the Cube by Régis Baccaro Natural Born Killers, performance issues to avoid by Richard Douglas Tracking server performance without slowing it down by Jonathan Allen which I also Room Monitored Increasing Business and IT collaboration by Chris Testa-O&amp;rsquo;Neill&lt;/p>
+&lt;p>It was a really good day. I learnt so much from all those knowledgeable and talented people. It really kicked me on in my development at work. I was able to take from each of those sessions and use that knowledge to do my job better and I made new friends and new contacts. Just going back to my notes today has reminded me of something that I need to look into for work.
+Some of the conversations I have had at events this year have been fascinating - learning how other people do the same thing you do in a completely different but equally valid way,  problem-solving with a different set and type of minds than the ones at MyWork, laughing at the same things and moaning about similar frustrations. All have been both entertaining and rewarding and I think are worth mentioning as things I enjoyed about going to SQL Community events this year and play a part in the reason I shall continue to go to them (Just hope my boss doesn&amp;rsquo;t read this and think he won’t have to pay as I will go anyway!)&lt;/p>
+&lt;p>It’s busy and hectic, the sessions come along thick and fast and there are lots of people around to talk to. I wish I had made use of the SQL Saturday mobile phone app and I definitely recommend researching ahead of time and planning your day out.&lt;/p>
+&lt;p>This years sessions have not been decided yet but I have seen some of the submissions and there are some fabulous sessions there. You could also submit a session yourself. Choosing the sessions will be tough, but we want to offer the opportunity to speak to as many people as possible both new and experienced speakers.&lt;/p>
+&lt;p>You can submit your sessions at this link &lt;a class="link" href="http://www.sqlsaturday.com/269/callforspeakers.aspx" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/callforspeakers.aspx&lt;/a>&lt;/p>
+&lt;h4 id="round-up-sql-saturday-exeter-why-wouldnt-you-come">ROUND-UP SQL SATURDAY EXETER WHY WOULDN’T YOU COME
+&lt;/h4>&lt;p>For a newbie, as I was last time, SQL Saturday Exeter was a revelation.&lt;/p>
+&lt;p>An opportunity to learn without spending thousands of my own or MyWorks money to sit in a lecture room and listen to a trainer.&lt;/p>
+&lt;p>A chance to develop my understanding in a friendly environment amongst my peers where I could ask questions.&lt;/p>
+&lt;p>A place to meet new people and build relationships who have helped me with situations at work throughout the year. I reckon I&amp;rsquo;m in credit already&lt;/p>
+&lt;p>This year I have attended SQL Bits and SQL Saturday Cambridge and this month I shall be at SQL Relay in Cardiff and in Bristol. That all started with SQL Saturday 194 in Exeter 2013&lt;/p>
+&lt;h4 id="what-about-next-years-sql-saturday-exeter">WHAT ABOUT NEXT YEARS SQL SATURDAY EXETER?
+&lt;/h4>&lt;p>Next years SQL Saturday in Exeter, SQL Saturday #269, will be held at the same place - &lt;a class="link" href="http://www.jurysinns.com/hotels/exeter" target="_blank" rel="noopener"
+>Jury’s Inn Hotel Exeter&lt;/a> on March 21/22nd 2014.&lt;/p>
+&lt;p>We had such amazing submissions for our pre-cons that we have had to find more rooms to be able to fit them all in.. You can see for yourself the quality of the sessions and speakers for SQL Saturday Exeter 2014 at the following link&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>What do you think? I want to split myself into 8 and go to every one!&lt;/p>
+&lt;h4 id="what-should-you-do-now">WHAT SHOULD YOU DO NOW?
+&lt;/h4>&lt;p>I suggest that you should book Saturday 22nd March 2014 out in your calendar right this minute. Done that? Good.&lt;/p>
+&lt;p>Now go to this link&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.sqlsaturday.com/269/" target="_blank" rel="noopener"
+>http://www.sqlsaturday.com/269/&lt;/a>&lt;/p>
+&lt;p>and register for FREE to attend and let us know &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+>@SQLSatExeter&lt;/a>&lt;/p>
+&lt;p>Next make yourself a coffee (Other beverages are available) and head to the pre-con page&lt;/p>
+&lt;p>&lt;a class="link" href="http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/" target="_blank" rel="noopener"
+>http://sqlsouthwest.co.uk/sql-saturday-269-precon-training-day-details/&lt;/a>&lt;/p>
+&lt;p>This bit is up to you, the choice is hard. I can’t tell you which one of our eight fabulous sessions you want to go to. It’s not for me to say which amazing speaker you want to spend a day with for a bargain price but if you need further info please get in touch and we will try and help. Unfortunately our human cloning experiment is not stable enough to allow you to go to more than one!&lt;/p>
+&lt;p>Then, let me know you have done so and come and say hi when you are here.&lt;/p></description></item><item><title>Those Pesky ‘s</title><link>https://blog.robsewell.com/blog/those-pesky-s/</link><pubDate>Mon, 11 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/those-pesky-s/</guid><description>&lt;h3 id="changing-domain-names-in-a-column">Changing Domain Names in a Column
+&lt;/h3>&lt;p>A quick little post for today. Not particularly SQL related but the points at the end are relevant.&lt;/p>
+&lt;p>I had a task when moving a service to a new development area to change the domain name within columns in several tables from “DOMAIN1\USER” to “DOMAIN2\USER”&lt;/p>
+&lt;p>In SQL I was able to do this quite easily as follows&lt;/p>
+&lt;pre>&lt;code>USE [DATABASENAME]
+GO
+-- Declare variables
+DECLARE @Live nvarchar(10)
+DECLARE @Dev nvarchar(10)
+-- Set the variable to the Domains
+Set @Live = 'Live Domain'
+Set @Dev = 'Dev Domain'
+--Update tables
+UPDATE [TABLENAME]
+SET [User] = REPLACE([User], @Live, @Dev)
+GO
+UPDATE [TABLENAME]
+SET [Group] = REPLACE([Group], @Live, @Dev)
+GO
+&lt;/code>&lt;/pre>
+&lt;p>I also had to do the same for some Oracle databases too and this is where the fun started!&lt;/p>
+&lt;p>I needed to create the update scripts for documentation for the Oracle databases.&lt;/p>
+&lt;p>I wanted to create&lt;/p>
+&lt;pre>&lt;code>update schema.tablename set userid = replace ('DOMAIN1\USER', 'DOMAIN1', 'DOMAIN2') WHERE USERID = 'DOMAIN1\USER';
+&lt;/code>&lt;/pre>
+&lt;p>for each userid in the table.I had trouble with the script I found in our DBA area as it kept failing with&lt;/p>
+&lt;p>ORA-00911: invalid character&lt;/p>
+&lt;p>at the \&lt;/p>
+&lt;p>as it wouldn’t add the ‘ ‘ around DOMAIN1\USER&lt;/p>
+&lt;p>Not being an Oracle DBA but wanting to solve the issue once and for all I tried a whole host of solutions trying to find the escape character. i asked the Oracle DBAs but they were unable to help Checking the IT Pros handbook (also known as Google!) made me more confused but in the end I solved it.&lt;/p>
+&lt;pre>&lt;code>select 'update schema.table set userid = replace (''' || userid || ''', ''DOMAIN1'', ''DOMAIN2'') WHERE USERID = ''' || USERID || ''';' FROM schema.tablename;
+&lt;/code>&lt;/pre>
+&lt;p>A whole host of ‘s in there!!&lt;/p>
+&lt;p>I put this in my blog as it is relevant to my situation and an experience I have had that I couldn’t easily solve. Maybe it will help another person searching for the same thing.&lt;/p>
+&lt;p>It raises some interesting points&lt;/p>
+&lt;p>The script provided ( I use that term loosely, it had the right name and was in the right place to use for this process) had obviously not been run as it didn’t work or someone had manually added the ‘s. I wasn’t go to do that for the number of users required.&lt;/p>
+&lt;p>If it no good, if it doesn’t do what i expected or is still in development then mark it as so, so that everyone knows. In the name of the script, in the comments in the script or by keeping live tested scripts in one place. Which ever method you choose is fine as long as it is appropriate to your environment and everyone knows about it&lt;/p>
+&lt;p>I probably say a dozen times a day to my new colleague&lt;/p>
+&lt;p>“In case you/I get run over by a bus”&lt;/p>
+&lt;p>It is all very well being the one who knows everything but it is pointless if you aren’t there SPOF’s (Single Points of Failure) apply to people as well as hardware.&lt;/p>
+&lt;p>Enable your service to be supported by preparing proper documentation.&lt;/p>
+&lt;p>This doesn’t have to be reams of paperwork. It can sometimes be as simple as placing things in a recognised place or a single comment in the script.&lt;/p>
+&lt;p>I hold my hands up. I am guilty of this too. I have been so busy I haven’t done this as much as I should have over the last few months of last year. I have tried but not done as well as I should have. In my defence, I have spent plenty of time recently rectifying this, which is why this situation was so memorable.&lt;/p>
+&lt;p>Some links I have read in the past related to this by  people who know more than me.&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.brentozar.com/archive/2013/01/documentation-it-doesnt-suck/" target="_blank" rel="noopener"
+>Documentation It Doesn’t Suck – Brent Ozar&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.johnsansom.com/your-lack-of-documentation-is-costing-you-more-than-you-think/" target="_blank" rel="noopener"
+>Your Lack Of Documentation is Costing you More than you Think – John Samson&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="http://www.bradmcgehee.com/2012/06/do-you-document-your-sql-server-instances/" target="_blank" rel="noopener"
+>Do You Document Your SQL Server Instances? – Brad McGhee&lt;/a>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Transaction Log on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/transaction-log/</link><description>Recent content in Transaction Log on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 24 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/transaction-log/index.xml" rel="self" type="application/rss+xml"/><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p>This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+>described here&lt;/a> to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a> so was surprised to see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+>&lt;/a>&lt;/p>
+&lt;p>I read the announcement and also the details on MSDN &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn906091.aspx&lt;/a> which show that this requires the SQL Server IaaS Agent. This is a default option on new virtual machines.&lt;/p>
+&lt;p>There are some other considerations too. It is only supported for SQL Server 2014 and Windows Server 2012 and 2012R2 at present and you can set a retention period to a maximum of 30 days but it is automated. You do not have to decide upon the backup strategy Azure will decide the frequency and type of backups dependent upon the workload of the database and some other factors such as&lt;/p>
+&lt;p>A full backup is taken ○ when an instance is added to use Managed backup ○ When transaction log growth is 1Gb or more ○ At least once a week ○ If the log chain is broken ○ When a database is created&lt;/p>
+&lt;p>A transaction log backup is taken - If no log backup is found - Transaction log space used is 5Mb or larger - At least once every two hours - Any time the transaction log backup is lagging behind a full database backup. The goal is to keep the log chain ahead of full backup.&lt;/p>
+&lt;p>From &lt;a class="link" href="https://msdn.microsoft.com/en-gb/library/dn449496%28v=sql.120%29.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-gb/library/dn449496(v=sql.120).aspx&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>There are some restrictions - Only database backups are supported - System databases are not supported so you need to back those up yourself - You can only back up to Azure storage - Maximum backup size is 1Tb as this is the maximum size for a blob in Azure storage - Simple recovery is not supported - Maximum retention is 30 days - if you are required to keep your backups for longer than 30 days for regulatory or other reasons you could simply use Azure Automation to copy the files to another storage account in Azure)&lt;/p>&lt;/blockquote>
+&lt;p>How to set it up.&lt;/p>
+&lt;p>If you are using the GUI then you will find SQL Automated Backup in the optional config blade of the set up. You can follow the steps &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>here to set it up&lt;/a>. If (like me) you want to use PowerShell then use the following code after you have created your Virtual Machine&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$storageaccount = &amp;#34;&amp;lt;storageaccountname&amp;gt;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storageaccountkey = (Get-AzureStorageKey -StorageAccountName $storageaccount).Primary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -StorageAccountKey $storageaccountkey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$encryptionpassword = (Get-Credential -message &amp;#39;Backup Encryption Password&amp;#39; -User &amp;#39;IGNOREUSER&amp;#39;).password
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$autobackupconfig = New-AzureVMSqlServerAutoBackupConfig -StorageContext $storagecontext -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Get-AzureVM -ServiceName &amp;lt;vmservicename&amp;gt; -Name &amp;lt;vmname&amp;gt; | Set-AzureVMSqlServerExtension -AutoBackupSettings $autobackupconfig | Update-AzureVM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once you have run the code, Azure will take care of the rest. Add a couple of databases to your instance and look in the storage account and you will see this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png?w=300"
+loading="lazy"
+alt="2"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/3.png?w=300"
+loading="lazy"
+alt="3"
+>&lt;/a>&lt;/p>
+&lt;p>And in the automaticbackup container you will find the Certificates and master key backups&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/4.png?w=300"
+loading="lazy"
+alt="4"
+>&lt;/a>&lt;/p>
+&lt;p>It will also create a credential&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/5.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/5.png"
+loading="lazy"
+alt="5"
+>&lt;/a>&lt;/p>
+&lt;p>You can use the same credential to back up your system databases. If like me you use &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+>Ola Hallengrens excellent Maintenance Solution&lt;/a> then simply change your systems backup job as follows&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [msdb]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXEC msdb.dbo.sp_update_jobstep @job_name = &amp;#39;DatabaseBackup - SYSTEM_DATABASES - FULL&amp;#39;, @step_id=1 ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> @command=N&amp;#39;sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q &amp;#34;EXECUTE [dbo].[DatabaseBackup] @Databases = &amp;#39;&amp;#39;SYSTEM_DATABASES&amp;#39;&amp;#39;, &amp;#34;https://myaccount.blob.core.windows.net/mycontainer&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> , @Credential = &amp;#39;&amp;#39;AutoBackup_Credential&amp;#39;&amp;#39;, @BackupType = &amp;#39;&amp;#39;FULL&amp;#39;&amp;#39;, @Verify = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @CleanupTime = NULL, @CheckSum = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;, @LogToTable = &amp;#39;&amp;#39;Y&amp;#39;&amp;#39;&amp;#34; -b&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you need to restore your database then you can use the GUI and when you choose restore you will see this screen&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png?w=300"
+loading="lazy"
+alt="6"
+>&lt;/a>&lt;/p>
+&lt;p>Enter your storage account and the key which you can get from the Azure portal. You will notice that the credential has already been selected, click connect and&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png?w=300"
+loading="lazy"
+alt="7"
+>&lt;/a>&lt;/p>
+&lt;p>There are all of your backups ready to restore to any point in time that you choose. By clicking script the T-SQL is generated which looks like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">USE [master]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BACKUP LOG [Test] TO URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_LogBackup_2015-07-16_06-21-26.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; ,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOFORMAT, NOINIT, NAME = N&amp;#39;Test_LogBackup_2015-07-16_06-21-26&amp;#39;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NOSKIP, NOREWIND, NOUNLOAD, NORECOVERY , STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE DATABASE [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714201240+00.bak&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714202740+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150714224241+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715005741+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715031242+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715052742+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715074243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715095743+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150715121243+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RESTORE LOG [Test] FROM URL = N&amp;#39;https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150716060004+00.log&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WITH CREDENTIAL = N&amp;#39;AutoBackup_Credential&amp;#39; , FILE = 1, NOUNLOAD, STATS = 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is an important note. Remember this when you have just set it up so that you don’t think that you have done it wrong (which is what I did!)&lt;/p>
+&lt;p>When you enable Automated Patching for the first time, Azure configures the SQL Server IaaS Agent in the background. During this time, the portal will not show that Automated Patching is configured. Wait several minutes for the agent to be installed, configured. After that the portal will reflect the new settings.&lt;/p>
+&lt;p>From &amp;lt;&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx" target="_blank" rel="noopener"
+>https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx&lt;/a>&amp;gt;&lt;/p>
+&lt;p>And also look out for this&lt;/p>
+&lt;p>&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png" target="_blank" rel="noopener"
+>&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/8.png?w=300"
+loading="lazy"
+alt="8"
+>&lt;/a>&lt;/p>
+&lt;p>The password I had chosen was not complex enough but the PowerShell script had succeeded and not given me the warning&lt;/p>
+&lt;p>To set up SQL Automated Patching you follow a similar steps. The setting is again on the OS Config blade and click enable and then you can choose the frequency and duration of the patching.&lt;/p>
+&lt;p>It is important to remember to choose your maintenance window correctly. If you have set up your SQL VMs correctly you will have them in an availability set and be using either mirroring or Availability Groups and have the VMs set up in the same availability set to ensure availability during the underlying host patching but I had it confirmed by Principal Software Engineering Manager Sethu Srinivasan &lt;a class="link" href="http://twitter.com/sethusrinivasan" target="_blank" rel="noopener"
+>t&lt;/a> via Microsoft PFE Arvind Shyamsundar &lt;a class="link" href="http://blogs.msdn.com/b/arvindsh/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/arvisam" target="_blank" rel="noopener"
+>t&lt;/a> that the SQL Automated Patching is not HA aware so you will need to ensure that you set the maintenance windows on each VM to ensure that they do not overlap&lt;/p></description></item></channel></rss>

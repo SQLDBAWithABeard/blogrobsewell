@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mentoring on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/mentoring/</link><description>Recent content in Mentoring on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 11 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/mentoring/index.xml" rel="self" type="application/rss+xml"/><item><title>Why Be a Mentor?</title><link>https://blog.robsewell.com/blog/why-be-a-mentor/</link><pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-be-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2025/mentor.png" alt="Featured image of post Why Be a Mentor?" />&lt;p>&lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+>&lt;img src="https://debthedba.wordpress.com/wp-content/uploads/2016/06/tsql2sday-150x150.png"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="https://github.com/amachanic" target="_blank" rel="noopener"
+>github&lt;/a> is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme.&lt;/p>
+&lt;p>This month it is hosted by &lt;a class="link" href="https://debthedba.wordpress.com/" target="_blank" rel="noopener"
+>Deborah&lt;/a> on the &lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+>theme of mentoring and sponsorship&lt;/a>. Thank you Deborah for hosting.&lt;/p>
+&lt;h1 id="mentoring">Mentoring
+&lt;/h1>&lt;p>I am lucky to have mentored some fantastic people in the community and been able to watch them grow and develop. Chris W, Eivind, Chris J, Justin, Olivier, Umar, Mikey, Thomas, Craig and Paul are some of the official mentees that I have had and even better some of them have gone on to mentor others so I have grand-mentees like Grace and others.&lt;/p>
+&lt;p>It makes me proud to know that I have been able to provide a tiny bit of help to them and that they have gone on to do great things and that that influence is continuing to spread onto others as well.&lt;/p>
+&lt;h1 id="whats-in-it-for-me">Whats in it for me?
+&lt;/h1>&lt;p>I have learned so much from my mentees. They have taught me about new technologies, new ways of working, new ways of thinking. They have challenged me to think about things in a different way. They have made me a better person, a better DBA, a better developer, a better speaker, a better writer. They have made me a better mentor. Every person is different and needs new and different things from a mentor. I have learned to adapt and change my style to suit the person I am mentoring.&lt;/p>
+&lt;p>They have made me a better person and I thank each and every one for that. Without doubt, one of the greatest benefits of sharing, blogging, speaking is the knowledge that you build to enable you to do so. You learn so much because you are the one doing the teaching and the sharing and as such you know that you need to research and understand the topic in order to be able to explain it to others. You also learn from the questions that you are asked.&lt;/p>
+&lt;p>Mentoring is exactly the same. You learn more about being a mentor because you are mentoring, you learn more about explaining situations, you learn more about listening, you learn more about understanding. You have to develop new ways of explaining scenarios and concepts as you work alongside new people with different experiences and different ways of thinking.&lt;/p>
+&lt;p>This can only be of benefit to yourself. You can and will take this knowledge on from the mentoring relationship and use it in your day to day work and life. You will be a better team member, a better leader, a better manager because of the things that you will learn.&lt;/p>
+&lt;h1 id="what-can-you-do">What can you do?
+&lt;/h1>&lt;p>If you are not already mentoring someone, then I would encourage you to do so. You will learn so much from the experience. One way that you can do so is via New Stars of Data. This is a fantastic program that pairs mentors with mentees. You can find out more about it &lt;a class="link" href="https://newstarsofdata.com/" target="_blank" rel="noopener"
+>here&lt;/a> You can also join the New Stars Track at the &lt;a class="link" href="https://passdatasummit.com" target="_blank" rel="noopener"
+>PASS Data Community Summit&lt;/a> will run for the third time this year and is designed for speakers who have presented before but never at a big international event. Data Scotland and Dataminds Connect are also great events that support new speakers and mentors.&lt;/p>
+&lt;p>Or go to your local user group and offer to mentor someone. Or ask someone to mentor you.&lt;/p>
+&lt;h1 id="you-can-even-be-a-mentor-without-realising-it">You can even be a mentor without realising it
+&lt;/h1>&lt;p>Just be kind, be helpful, provide support to people. Online and in-person. You never know who you are influencing and who you are helping. You never know who you are mentoring.&lt;/p></description></item><item><title>#NewStarNovember - Being a mentor</title><link>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</link><pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars.jpg" alt="Featured image of post #NewStarNovember - Being a mentor" />&lt;p>Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+>for the suggestion to blog&lt;/a>. Check out #NewStarNovember for more blog posts.&lt;/p>
+&lt;h1 id="who-was-your-mentor">Who was your mentor?
+&lt;/h1>&lt;p>I have never had an official mentor but I am so very very grateful to all of the people who have helped, supported and inspired me throughout my career.&lt;/p>
+&lt;p>I feel so privileged to be able to reach out to so many wonderful people and ask questions and receive advice.&lt;/p>
+&lt;h2 id="so-rob-why-do-you-mentor-others">So Rob, Why do you mentor others?
+&lt;/h2>&lt;p>I have always been willing to share everything that I know and have been doing so in various formats for many years now. I have officially mentored many people for presentations, through events such as New Stars of Data, Data (née SQL) Grillen, Data Minds, Data Scotland, as well as unofficially because they have asked me.&lt;/p>
+&lt;p>Why do I do this? because I enjoy it, because I believe that anyone can give a good presentation and because the more voices we have giving presentations the better that it is for us all.&lt;/p>
+&lt;h2 id="whats-the-best-thing-about-mentoring">What&amp;rsquo;s the best thing about mentoring?
+&lt;/h2>&lt;p>So many things are fantastic about mentoring.&lt;/p>
+&lt;p>You learn so many things. Getting the opinions of different people or watching how others perform similar tasks to you almost always leads to you learning something new. Whether it is the subject they are talking about, or just the way that they use PowerPoint or VS Code, or even the way they have Windows set up there is always something to learn.&lt;/p>
+&lt;p>I also get such a warm fuzzy feeling from seeing people blossom as they gain confidence and realise that they can do a fantastic presentation and that it is a mainly a case of learning and practicing new skills.&lt;/p>
+&lt;p>I am super proud of the people that I have mentored who have continued to present and have since presented at international conferences.&lt;/p>
+&lt;p>I am also equally proud of those who have decided that it was not for them right now and are currently taking a break from presenting.&lt;/p>
+&lt;p>I am delighted to see people who deserve it, become MVPs, or get promoted or change jobs. I hope that maybe I had a little impact, although I tell everyone I mentor, they are doing all of the hard work I am just listening and commenting.&lt;/p>
+&lt;h2 id="doesnt-it-take-a-lot-of-time">Doesn&amp;rsquo;t it take a lot of time?
+&lt;/h2>&lt;p>There is, of course, a time element to being a mentor but I am always happy to give up a few hours each month to help and I am also careful that I don&amp;rsquo;t take on too much and over burden myself.&lt;/p>
+&lt;p>For me, being a mentor means giving guidance and setting goals and with a bit of careful planning you can be efficient about it.&lt;/p>
+&lt;h2 id="what-else-have-you-learnt">What else have you learnt?
+&lt;/h2>&lt;p>I have learnt that everyone is different and that, as a mentor, some of your tactics and procedures will not work for every person. As an example, I have learnt that some people like to have a script that they can use to memorise or to have as an aide whilst others are much happier just with key words.&lt;/p>
+&lt;p>I have learnt that time zones make it harder. If it is Sunday evening for me, it is Sunday morning on the west coast of the US. This can make it harder to find times that fit well for both parties.&lt;/p>
+&lt;h1 id="what-should-i-do">What should I do?
+&lt;/h1>&lt;p>If someone asks or suggests that you do a presentation or become a mentor then I say that you should give it a try. They believe in you and so do I. &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> CFP are open and available for mentors as well as new speakers.&lt;/p>
+&lt;p>If this blog post makes you think &amp;ldquo;I would like to give this a go&amp;rdquo; at presenting or mentoring, then you can reach out to your local user group. You are a member of your local user group I hope? If not, you can find yours in the &lt;a class="link" href="https://www.meetup.com/en-AU/pro/azuredatatechgroups" target="_blank" rel="noopener"
+>Azure Data Community&lt;/a>.&lt;/p>
+&lt;p>Don&amp;rsquo;t want to speak in person the first time? You can sign up for &lt;a class="link" href="https://www.newstarsofdata.com/" target="_blank" rel="noopener"
+>New Stars Of Data&lt;/a> and you will be presenting virtually on the 2023-05-12. They are also taking mentors for the speakers for this event.&lt;/p>
+&lt;p>GOOD LUCK&lt;/p>
+&lt;p>I believe in you&lt;/p>
+&lt;p>You can do it.&lt;/p></description></item></channel></rss>

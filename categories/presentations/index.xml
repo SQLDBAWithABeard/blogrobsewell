@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Presentations on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/presentations/</link><description>Recent content in Presentations on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 29 Aug 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/presentations/index.xml" rel="self" type="application/rss+xml"/><item><title>Making Start-Demo work with multi-line commands without a backtick</title><link>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</link><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" alt="Featured image of post Making Start-Demo work with multi-line commands without a backtick" />&lt;p>I love to speak about PowerShell. I really enjoy giving presentations and when I saw Start-Demo being used at the PowerShell Conference in Hanover I started to make use of it in my presentations.&lt;/p>
+&lt;p>&lt;code>Start-Demo&lt;/code> was written in 2007 by a fella who knows PowerShell pretty well 🙂  &lt;a class="link" href="https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/" target="_blank" rel="noopener"
+>https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/&lt;/a>&lt;/p>
+&lt;p>It was then updated in 2012 by Max Trinidad &lt;a class="link" href="http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/" target="_blank" rel="noopener"
+>http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/&lt;/a>&lt;/p>
+&lt;p>This enabled support for multi-line code using backticks at the end of each line. This works well but I dislike having to use the backticks in foreach loops, it confuses people who think that they need to be included and to my mind looks a bit messy&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo.png"
+loading="lazy"
+alt="start-demo"
+>&lt;/a>&lt;/p>
+&lt;p>This didn’t bother me enough to look at the code but I did mention it to my friend Luke &lt;a class="link" href="https:%5C%5Ctwitter.com%5Clduddridge" target="_blank" rel="noopener"
+>t&lt;/a> | &lt;a class="link" href="https://github.com/ChocolateMonkey" target="_blank" rel="noopener"
+>g&lt;/a> who decided to use it as a challenge for his Friday lunch-time codeathon and updated the function so that it works without needing a backtick&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png"
+loading="lazy"
+alt="start-demo2"
+>&lt;/a>&lt;/p>
+&lt;p>It also works with nested loops&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/08/start-demo3.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo3.png"
+loading="lazy"
+alt="start-demo3"
+>&lt;/a>&lt;/p>
+&lt;p>just a little improvement but one I think that works well and looks good&lt;/p>
+&lt;p>You can find it at&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Start-Demo.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/Start-Demo.ps1&lt;/a>&lt;/p>
+&lt;p>and a little demo showing what it can and cant do&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/start-demotest.ps1" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Presentations/blob/master/start-demotest.ps1&lt;/a>&lt;/p>
+&lt;p>Load the &lt;code>Start-Demo.ps1&lt;/code> file and then run&lt;/p>
+&lt;p>&lt;code>Start-Demo PATHTO\start-demotest.ps1&lt;/code>&lt;/p>
+&lt;p>Enjoy!&lt;/p></description></item></channel></rss>

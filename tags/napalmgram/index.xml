@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Napalmgram on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/napalmgram/</link><description>Recent content in Napalmgram on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Jul 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/napalmgram/index.xml" rel="self" type="application/rss+xml"/><item><title>Remove-SQLDatabaseSafely My First Contribution to DBATools</title><link>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</link><pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</guid><description>&lt;p>What is DBA Tools?&lt;/p>
+&lt;blockquote>
+&lt;p>A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.&lt;/p>&lt;/blockquote>
+&lt;p>You can read more about &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>here&lt;/a> and it is &lt;a class="link" href="https://github.com/ctrlbold/dbatools" target="_blank" rel="noopener"
+>freely available for download on GitHub&lt;/a> I thoroughly recommend that [you watch this quick video]&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/PciYdDEBiDM"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>to see just how easy it is to migrate an entire SQL instance in one command Longer session here&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/kQYUrSlb0wg"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>Installing it is as easy as&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>which will get you over 80 commands . Visit &lt;a class="link" href="https://dbatools.io/functions/" target="_blank" rel="noopener"
+>https://dbatools.io/functions/&lt;/a> to find out more information about them&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/07/cmdlets.png" >&lt;img src="https://blog.robsewell.com/assets/uploads/2016/07/cmdlets.png"
+loading="lazy"
+alt="cmdlets"
+>&lt;/a>&lt;/p>
+&lt;p>The journey to &lt;code>Remove-SQLDatabaseSafely&lt;/code> started with William Durkin &lt;a class="link" href="http://williamdurkin.com/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/sql_williamd" target="_blank" rel="noopener"
+>t&lt;/a> who presented to the &lt;a class="link" href="http://sqlsouthwest.co.uk/" target="_blank" rel="noopener"
+>SQL South West User Group&lt;/a>  (&lt;a class="link" href="http://www.sqlsaturday.com/269/Sessions/Details.aspx?sid=28201" target="_blank" rel="noopener"
+>You can get his slides here)&lt;/a>&lt;/p>
+&lt;p>Following that session  I wrote a Powershell Script to gather information about the last used date for databases &lt;a class="link" href="https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-one/" >which I blogged about here&lt;/a> and then a T-SQL script to take a final backup and create a SQL Agent Job to restore from that back up &lt;a class="link" href="https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-two-2/" >which I blogged about here&lt;/a> The team have used this solution (updated to load the DBA Database and a report instead of using Excel) ever since and it proved invaluable when a read-only database was dropped and could quickly and easily be restored with no fuss.&lt;/p>
+&lt;p>I was chatting with Chrissy LeMaire who founded DBATools &lt;a class="link" href="https://blog.netnerds.net/" target="_blank" rel="noopener"
+>b&lt;/a> | &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+>t&lt;/a> about this process and when she asked for contributions in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>SQL Server Community Slack&lt;/a> I offered my help and she suggested I write this command. I have learnt so much. I thoroughly enjoyed and highly recommend working on projects collaboratively to improve your skills. It is amazing to work with such incredible professional PowerShell people.&lt;/p>
+&lt;p>I went back to the basics and thought about what was required and watched one of my favourite videos again. &lt;a class="link" href="https://sqlps.io/backuprant" target="_blank" rel="noopener"
+>Grant Fritcheys Backup Rant&lt;/a>&lt;/p>
+&lt;p>I decided that the process should be as follows&lt;/p>
+&lt;ol>
+&lt;li>Performs a DBCC CHECKDB&lt;/li>
+&lt;li>Database is backed up WITH CHECKSUM&lt;/li>
+&lt;li>Database is restored with VERIFY ONLY on the source&lt;/li>
+&lt;li>An Agent Job is created to easily restore from that backup&lt;/li>
+&lt;li>The database is dropped&lt;/li>
+&lt;li>The Agent Job restores the database&lt;/li>
+&lt;li>performs a DBCC CHECKDB and drops the database for a final time&lt;/li>
+&lt;/ol>
+&lt;p>This (hopefully) passes all of Grants checks. This is how I created the command&lt;/p>
+&lt;p>I check that the SQL Agent is running otherwise we wont be able to run the job. I use a while loop with a timeout like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$agentservice = Get-Service -ComputerName $ipaddr -Name $serviceName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($agentservice.Status -ne &amp;#39;Running&amp;#39;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $agentservice.Start()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $timeout = new-timespan -seconds 60
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $sw = [diagnostics.stopwatch]::StartNew()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $agentstatus = (Get-Service -ComputerName $ipaddr -Name $serviceName).Status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while ($dbStatus -ne &amp;#39;Running&amp;#39; -and $sw.elapsed -lt $timeout) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $dbStatus = (Get-Service -ComputerName $ipaddr -Name $serviceName).Status
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are a lot more checks and logic than I will describe here to make sure that the process is as robust as possible. For example, the script can exit after errors are found using DBCC CHECKDB or continue and label the database backup file and restore job appropriately. Unless the force option is used it will exit if the job name already exists. We have tried to think of everything but if something has been missed or you have suggestions let us know (details at end of post)&lt;/p>
+&lt;p>The only thing I didn’t add was a LARGE RED POP UP SAYING ARE YOU SURE YOU WANT TO DROP THIS DATABASE but I considered it!!&lt;/p>
+&lt;h2 id="performs-a-dbcc-checkdb">Performs a DBCC CHECKDB
+&lt;/h2>&lt;p>Running DBCC CHECKDB with Powershell is as easy as this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$sourceserver = New-Object Microsoft.SQLServer.Management.Smo.Server &amp;#34;ServerName&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$db = $sourceserver.databases[$dbname]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$null = $db.CheckTables(&amp;#39;None&amp;#39;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.database.checktables.aspx" target="_blank" rel="noopener"
+>you can read more on MSDN&lt;/a>&lt;/p>
+&lt;h2 id="database-is-backed-up-with-checksum">Database is backed up WITH CHECKSUM
+&lt;/h2>&lt;p>Stuart Moore is my go to for doing &lt;a class="link" href="http://stuart-moore.com/category/31-days-of-sql-server-backup-and-restore-with-powershell/" target="_blank" rel="noopener"
+>backups and restores with SMO&lt;/a>&lt;/p>
+&lt;p>I ensured that the backup was performed with checksum like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$backup = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Backup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Action = [Microsoft.SqlServer.Management.SMO.BackupActionType]::Database
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.BackupSetDescription = &amp;#34;Final Full Backup of $dbname Prior to Dropping&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Database = $dbname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$backup.Checksum = $True
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="database-is-restored-with-verify-only-on-the-source">Database is restored with VERIFY ONLY on the source
+&lt;/h2>&lt;p>I used SMO all the way through this command and performed the restore verify only like this&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$restoreverify = New-Object &amp;#39;Microsoft.SqlServer.Management.Smo.Restore&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$restoreverify.Database = $dbname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$restoreverify.Devices.AddDevice($filename, $devicetype)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$result = $restoreverify.SqlVerify($sourceserver)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="an-agent-job-is-created-to-easily-restore-from-that-backup">An Agent Job is created to easily restore from that backup
+&lt;/h2>&lt;p>First I created a category for the Agent Job&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Function New-SqlAgentJobCategory {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> param ([string]$categoryname,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> [object]$jobServer)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (!$jobServer.JobCategories[$categoryname]) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if ($Pscmdlet.ShouldProcess($sourceserver, &amp;#34;Creating Agent Job Category $categoryname&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;#34;Creating Agent Job Category $categoryname&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category = New-Object Microsoft.SqlServer.Management.Smo.Agent.JobCategory
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Parent = $jobServer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Name = $categoryname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $category.Create()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;#34;Created Agent Job Category $categoryname&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> catch {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Exception $_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> throw &amp;#34;FAILED : To Create Agent Job Category $categoryname - Aborting&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then generated the TSQL for the restore step by using the &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.restore.script.aspx" target="_blank" rel="noopener"
+>script method on the Restore SMO object&lt;/a>&lt;/p>
+&lt;p>This is how to create an Agent Job&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$job = New-Object Microsoft.SqlServer.Management.Smo.Agent.Job $jobServer, $jobname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.Name = $jobname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.OwnerLoginName = $jobowner
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$job.Description = &amp;#34;This job will restore the $dbname database using the final backup located at $filename&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and then to add a job step to run the restore command&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$jobStep = new-object Microsoft.SqlServer.Management.Smo.Agent.JobStep $job, $jobStepName $jobStep.SubSystem = &amp;#39;TransactSql&amp;#39; # &amp;#39;PowerShell&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.DatabaseName = &amp;#39;master&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.Command = $jobStepCommmand
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.OnSuccessAction = &amp;#39;QuitWithSuccess&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$jobStep.OnFailAction = &amp;#39;QuitWithFailure&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ($Pscmdlet.ShouldProcess($destination, &amp;#34;Creating Agent JobStep on $destination&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $null = $jobStep.Create()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.ApplyToTargetServer($destination)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.StartStepID = $jobStartStepid
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Alter()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="the-database-is-dropped">The database is dropped
+&lt;/h2>&lt;p>We try 3 different methods to drop the database&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$server.KillDatabase($dbname)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$server.databases[$dbname].Drop()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$null = $server.ConnectionContext.ExecuteNonQuery(&amp;#34;DROP DATABASE &amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="the-agent-job-restores-the-database">The Agent Job restores the database
+&lt;/h2>&lt;p>To run the Agent Job I call the start method of the Job SMO Object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> $job = $destserver.JobServer.Jobs[$jobname]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Start()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $status = $job.CurrentRunStatus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while ($status -ne &amp;#39;Idle&amp;#39;) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Write-Output &amp;amp;quot; Restore Job for $dbname on $destination is $status&amp;amp;quot;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $job.Refresh()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $status = $job.CurrentRunStatus
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Start-Sleep -Seconds 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then we drop the database for the final time with the confidence that we have a safe backup and an easy one click method to restore it from that backup (as long as the backup is in the same location)&lt;/p>
+&lt;p>There are further details on the &lt;a class="link" href="https://dbatools.io/functions/remove-sqldatabasesafely/" target="_blank" rel="noopener"
+>functions page on dbatools&lt;/a>&lt;/p>
+&lt;p>Some videos of it in action are on YouTube &lt;a class="link" href="http://dbatools.io/video" target="_blank" rel="noopener"
+>http://dbatools.io/video&lt;/a>&lt;/p>
+&lt;p>You can take a look at &lt;a class="link" href="https://github.com/ctrlbold/dbatools/blob/fbd2f19b4442a8065f3cb133d385fde9b2cddea0/functions/Remove-SqlDatabaseSafely.ps1" target="_blank" rel="noopener"
+>the code on GitHub here&lt;/a>&lt;/p>
+&lt;p>You can install it with&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You can provide feedback via the &lt;a class="link" href="https://dbatools.io/trello" target="_blank" rel="noopener"
+>Trello Board&lt;/a> or discuss it in the #dbatools channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+>Sqlserver Community Slack&lt;/a>&lt;/p>
+&lt;p>You too can also become a contributor &lt;a class="link" href="https://dbatools.io/join-us/" target="_blank" rel="noopener"
+>https://dbatools.io/join-us/&lt;/a> Come and write a command to make it easy for DBAs to (this bit is up to your imagination).&lt;/p></description></item><item><title>SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram</title><link>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</link><pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</guid><description>&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125056.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>$server | Get-Member
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>$Server.JobServer|gm
+&lt;/code>&lt;/pre>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>$Server.JobServer.Operators | gm
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125717.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_130052.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_174005.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_173953.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174056.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174112.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_113931.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_114601.jpg"
+loading="lazy"
+alt="alt"
+>&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code>############################################################################# ################
+#
+# NAME: Show-SQLServerOperators.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:03/09/2013
+#
+# COMMENTS: Load function for Enumerating Operators and Notifications
+# ————————————————————————
+Function Show-SQLServerOperators ($SQLServer) {
+Write-Output &amp;quot;############### $SQLServer ##########################&amp;quot;
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+foreach ($Operator in $server.JobServer.Operators) {
+$Operator = New-Object (&amp;quot;$SMO.Agent.Operator&amp;quot;) ($server.JobServer, $Operator)
+$OpName = $Operator.Name
+Write-Output &amp;quot;Operator $OpName&amp;quot;
+Write-Output &amp;quot;`n###### Job Notifications ######&amp;quot;
+$Operator.EnumJobNotifications()| Select JobName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+Write-Output &amp;quot;`n###### Alert Notifications #######&amp;quot;
+$Operator.EnumNotifications() | Select AlertName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+}
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

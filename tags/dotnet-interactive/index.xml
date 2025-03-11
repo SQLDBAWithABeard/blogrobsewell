@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dotnet Interactive on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dotnet-interactive/</link><description>Recent content in Dotnet Interactive on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dotnet-interactive/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET PowerShell Notebooks – Using Pester</title><link>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/.net-powershell-notebooks-using-pester/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post .NET PowerShell Notebooks – Using Pester" />&lt;p>&lt;a class="link" href="http://localhost:4001/blog/jupyter%20notebooks/azure%20data%20studio/powershell/pwsh/dbatools/dbachecks/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+>My last post&lt;/a> had a lot of information about the new .NET PowerShell notebooks including installation instructions.&lt;/p>
+&lt;p>.NET Notebooks are Jupyter Notebooks that use .NET core to enable C#, F# and PowerShell kernels.&lt;/p>
+&lt;h2 id="use-cases">Use Cases
+&lt;/h2>&lt;p>One of the main benefits that I see for Jupyter Notebooks for Ops folk is that the results of the query are saved with the notebook. This makes them fantastic for Incident resolution.&lt;/p>
+&lt;p>If you have an incident at 3am and you know that you will need that information in the wash up meeting the next day instead of copying and pasting results into a OneNote document or a text file, you can simply run the queries in a notebook and save it.&lt;/p>
+&lt;p>In the meeting, you can simply open the notebook and the results will be available for everyone to see.&lt;/p>
+&lt;p>Even better, if you have a template notebook for those scenarios and you can then compare them to previous occurrences.&lt;/p>
+&lt;h2 id="using-pester">Using Pester
+&lt;/h2>&lt;p>Using Pester to validate that an environment is as you expect it is a good resource for incident resolution, potentially enabling you to quickly establish an area to concentrate on for the issue. However, if you try to run Pester in a .NET Notebook you will receive an error&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;pre>&lt;code> | ^ The term 'Get-CimInstance' is not recognized as the name of a
+| cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included,
+| verify that the path is correct and try again.
+&lt;/code>&lt;/pre>
+&lt;p>Import-Module: The module to process &amp;lsquo;Pester.psm1&amp;rsquo;, listed in field &amp;lsquo;ModuleToProcess/RootModule&amp;rsquo; of module manifest &amp;lsquo;C:\Users\mrrob\Documents\PowerShell\Modules\Pester\4.9.0\Pester.psd1&amp;rsquo; was not processed because no valid module was found in any module directory. &lt;!-- raw HTML omitted -->
+Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>in the issue that I raised&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>Yes, it was the CimCmdlets module from the system32 module path that got imported (via the &lt;code>WinCompat&lt;/code> feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …&lt;br>
+The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue &lt;a class="link" href="https://github.com/PowerShell/PowerShell/issues/11783" target="_blank" rel="noopener"
+>PowerShell/PowerShell#11783&lt;/a> to track this work.&lt;/p>&lt;/blockquote>
+&lt;p>&lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/DotNet%20Notebook/01-PesterWontRun.ipynb" target="_blank" rel="noopener"
+>You can see all of this including all the results in this notebook that I have created and shared on GitHub and also below as a gist to embed in this blog post&lt;/a>&lt;/p>
+&lt;h2 id="sharing-code-and-results-">Sharing Code AND Results 🙂
+&lt;/h2>&lt;p>Notebooks – A brilliant way of sharing what you did and the results that you got enabling others to follow along. You can do this with this Notebook. Download it and open it in your Jupyter Lab and you will be able to run it and see all of the errors and the fix on your machine.&lt;/p>
+&lt;!-- raw HTML omitted --></description></item><item><title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</title><link>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</link><pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/new-.net-notebooks-are-here-powershell-7-notebooks-are-here./</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png" alt="Featured image of post New .NET Notebooks are here – PowerShell 7 notebooks are here." />&lt;p>Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and &lt;a class="link" href="https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>added SQL&lt;/a> kernel where &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//" target="_blank" rel="noopener"
+>with a little bit of faffing you could run PowerShell&lt;/a> and then a &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+>Python kernel that enabled PowerShell&lt;/a>. It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.&lt;/p>
+&lt;blockquote>
+&lt;p>.NET Notebooks Preview 2 is here! Preview 2 includes 🎉&lt;a class="link" href="https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@PowerShell_Team&lt;/a>, &lt;a class="link" href="https://twitter.com/nteractio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@nteractio&lt;/a>, and a new tool. Check out our blog to learn more. Congratulations to &lt;a class="link" href="https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@jonsequitur&lt;/a> &lt;a class="link" href="https://twitter.com/colombod?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@colombod&lt;/a> and our entire team&lt;a class="link" href="https://t.co/WqNWQWR3Bo" target="_blank" rel="noopener"
+>https://t.co/WqNWQWR3Bo&lt;/a>&lt;a class="link" href="https://twitter.com/dotnet?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>@dotnet&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/jupyter?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#jupyter&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/PowerShell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#PowerShell&lt;/a> &lt;a class="link" href="https://twitter.com/hashtag/interactiveprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>#interactiveprogramming&lt;/a>.&lt;/p>
+&lt;p>— Maria Naggaga (@LadyNaggaga) &lt;a class="link" href="https://twitter.com/LadyNaggaga/status/1225464258823163906?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h2 id="powershell-7-notebooks-">PowerShell 7 Notebooks 🙂
+&lt;/h2>&lt;p>A notebook experience for PowerShell 7 that sounds amazing. This will enable a true cross-platform PowerShell Notebook experience which is lacking from the Python version as it uses Windows PowerShell on Windows and PowerShell Core on other OS’s&lt;/p>
+&lt;p>The first thing I asked was – Will this come to Azure Data Studio. I got an immediate response from Sydney Smith PowerShell Program Manager saying it is on the roadmap&lt;/p>
+&lt;blockquote>
+&lt;p>Moving this kernel into ADS is on our roadmap! Right now our kernel uses hosted pwsh 7 but we would love to know if you have scenarios that don&amp;rsquo;t work with 7&lt;/p>
+&lt;p>— Sydney Smith (@sydneysmithreal) &lt;a class="link" href="https://twitter.com/sydneysmithreal/status/1225488719567818752?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+>February 6, 2020&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h2 id="install-dependencies">Install dependencies
+&lt;/h2>&lt;p>To be able to run the notebook, you need to install some dependencies. First install the .NET CORE SDK which you can download from &lt;a class="link" href="https://dotnet.microsoft.com/download?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+>https://dotnet.microsoft.com/download&lt;/a> This needs admin permissions to install.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image.png?resize=620%2C418&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You also need a Python installation – You can use Anaconda, which you can download from here &lt;a class="link" href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener"
+>https://www.anaconda.com/distribution/&lt;/a> This does not need admin to install&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-1.png?resize=531%2C232&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-2.png?fit=630%2C490&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="add-anaconda-to-windows-terminal">Add Anaconda to Windows Terminal
+&lt;/h2>&lt;p>I have added the Anaconda prompt to Windows Terminal so that I have one entry point for all my CLIs. Open the settings file and add the code below. (It will also give you an icon and background.&lt;/p>
+&lt;pre>&lt;code> {
+// Make changes here to the Anaconda.exe profile
+&amp;quot;guid&amp;quot;: &amp;quot;{0caa0dad-35be-5f56-a7ff-afceeeaa6101}&amp;quot;,
+&amp;quot;name&amp;quot;: &amp;quot;Anaconda&amp;quot;,
+&amp;quot;commandline&amp;quot;: &amp;quot;cmd.exe /K C:\\Users\\mrrob\\Anaconda3\\Scripts\\activate.bat&amp;quot;,
+&amp;quot;hidden&amp;quot;: false,
+&amp;quot;backgroundImage&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;icon&amp;quot;: &amp;quot;C:\\Users\\mrrob\\Anaconda3\\Menu\\anaconda-navigator.ico&amp;quot;,
+&amp;quot;backgroundImageAlignment&amp;quot;: &amp;quot;topRight&amp;quot;,
+&amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniform&amp;quot;,
+&amp;quot;backgroundImageOpacity&amp;quot;: 0.1
+}
+&lt;/code>&lt;/pre>
+&lt;p>and it appears in the drop down&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-3.png?resize=509%2C409&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>With Anaconda installed, check that that the kernel is available on your path. If like me you have Azure Data Studio installed, you will have additional kernels but the important one line here is&lt;/p>
+&lt;p>&lt;code>python3 C:\Users\USERNAME\Anaconda3\share\jupyter\kernels\python3&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-4.png?resize=630%2C210&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>In Windows Terminal move to a PowerShell 7 prompt and install the dotnet interactive tool&lt;/p>
+&lt;pre>&lt;code>dotnet tool install --global Microsoft.dotnet-interactive
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-5.png?resize=630%2C259&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can install the .NET kernel in your Anaconda prompt using this command&lt;/p>
+&lt;pre>&lt;code>dotnet interactive jupyter install
+&lt;/code>&lt;/pre>
+&lt;h2 id="sometimes-new-things-have-errors">Sometimes new things have errors
+&lt;/h2>&lt;p>I had an error when I tried this first time&lt;/p>
+&lt;blockquote>
+&lt;p>Could not execute because the specified command or file was not found.&lt;br>
+Possible reasons for this include:&lt;br>
+* You misspelled a built-in dotnet command.&lt;br>
+* You intended to execute a .NET Core program, but dotnet-interactive does not exist.&lt;br>
+* You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.&lt;/p>&lt;/blockquote>
+&lt;p>This is easily fixed by adding &lt;code>%USERPROFILE%\.dotnet\tools&lt;/code> to my path with &lt;code>set PATH=%PATH%;%USERPROFILE%\.dotnet\tools&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-6.png?fit=630%2C369&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Running &lt;code>jupyter kernelspec list&lt;/code> shows that the .NET kernel is installed for C Sharp, F Sharp and .NET PowerShell&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-7.png?resize=630%2C197&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="lets-open-a-notebook">Lets open a Notebook
+&lt;/h2>&lt;p>Now you want to play with it!&lt;br>
+You can run the lab environment using `jupyter lab`&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-8.png?fit=630%2C194&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>This opens a browser&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-9.png?fit=630%2C272&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can open existing Azure Data Studio PowerShell notebooks (but not SQL ones)&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-10.png?fit=630%2C492&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="sometimes-new-things-have-errors-part-2">Sometimes new things have errors Part 2
+&lt;/h2>&lt;p>Unfortunately, I get errors when trying to import Pester which means I can not use my dbachecks notebooks in this blog post. &lt;a class="link" href="https://github.com/dotnet/interactive/issues/136" target="_blank" rel="noopener"
+>I have raised an issue on the repo here&lt;/a>.&lt;/p>
+&lt;h2 id="create-a-new-notebook">Create a New Notebook
+&lt;/h2>&lt;p>But it is easy to create a new Notebook&lt;/p>
+&lt;p>In the launcher page click the .NET PowerShell button&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-12.png?resize=567%2C171&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Which will open a new Notebook in the directory that you launched the lab from. You can then add Code or Markdown as I have &lt;a class="link" href="https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+>described before here&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-11.png?resize=316%2C195&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Then you can add code, markdown and images to create your notebook.&lt;/p>
+&lt;p>Once you have finished using the notebook lab, you can shut it down in the Anaconda prompt with &lt;code>CTRL + C&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-15.png?fit=630%2C103&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Here is a video of running a notebook which anyone can use to create a couple of Docker containers running SQL 2019 and query them with dbatools. You can find the notebook further down this post.&lt;/p>
+&lt;h2 id="sharing-notebooks">Sharing Notebooks
+&lt;/h2>&lt;p>You can create notebooks to run common tasks. Even better, from the lab you can convert the notebook including the results to a variety of formats to share with other none-technical people. I used this functionality this week to export Azure Data Studio Notebooks to HTML and PDF for a Project manager 🙂&lt;/p>
+&lt;p>You can find the Export Notebook command in the File menu&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png?resize=610%2C542&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>Exporting to HTML did not export the images but it does include the results&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-14.png?fit=630%2C476&amp;amp;ssl=1"
+loading="lazy"
+>&lt;/p>
+&lt;p>You can share notebooks via GitHub – Either in a gist like this&lt;/p>
+&lt;p>or by providing a straight link to the notebook in GitHub &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks/blob/master/notebooks/Exploring%20dbatools.ipynb&lt;/a>&lt;/p>
+&lt;p>You can also use Binder &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a>&lt;/p>
+&lt;p>This uses Docker to create an interactive Notebook. Create a GitHub repo like &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Notebooks" target="_blank" rel="noopener"
+>https://github.com/SQLDBAWithABeard/Notebooks&lt;/a> (or just clone it) Copy your notebooks into the notebooks folder and push the changes to GitHub and then go to &lt;a class="link" href="https://mybinder.org/" target="_blank" rel="noopener"
+>https://mybinder.org/&lt;/a> and add your URL to the repository.&lt;/p>
+&lt;p>You can see what it looks like by clicking the button below which Binder creates for you&lt;/p>
+&lt;p>&lt;a class="link" href="https://mybinder.org/v2/gh/SQLDBAWithABeard/Notebooks/master" target="_blank" rel="noopener"
+>&lt;img src="https://mybinder.org/badge_logo.svg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>Unfortunately the kernel only supports Python for the moment but you can see the possibilities 🙂&lt;/p></description></item></channel></rss>
