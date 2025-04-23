@@ -3,13 +3,13 @@ title: "Odd Error with Contained Database Users - look out for your 3rd party ve
 date: "2025-04-23"
 categories:
   - Blog
-  - Community
-tags:
   - SQL Server
+tags:
   - Contained Databases
   - Error
   - Permissions
   - Contained User
+  - dbatools
 
 image: assets/uploads/2025/contained.png
 ---
