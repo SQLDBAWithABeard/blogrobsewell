@@ -11,7 +11,7 @@ tags:
   - Permissions
   - Contained User
 
-image: assets/uploads/2025/mentor.png
+image: assets/uploads/2025/contained.png
 ---
 ## Introduction
 
@@ -37,7 +37,7 @@ So first I tested and I found that I could replicate. I ran it on
 
 `Microsoft SQL Server 2022 (RTM-CU17) (KB5048038) - 16.0.4175.1 (X64)   Dec 13 2024 09:01:53   Copyright (C) 2022 Microsoft Corporation  Developer Edition (64-bit) on Windows Server 2022 Datacenter 10.0 <X64> (Build 20348: ) (Hypervisor)`
 
-Because its what I had available. The person who reported it was running version `16.0.4155.4`
+Because its what I had available. Kristian, who reported it was running version `16.0.4155.4`
 
 I created a contained database.
 
@@ -50,7 +50,7 @@ RECONFIGURE;
 CREATE DATABASE [containedbeard]
 CONTAINMENT = PARTIAL
 ```
-Then a contained user `jessandrob\testuser` as a Windows User (Yes, I used [Jess Pomfret [B](https://jesspomfret.com) and mine test environment :-) ). I then connected as the contained user and tried to create a SQL login.
+Then a contained user `jessandrob\testuser` as a Windows User (Yes, I used [Jess Pomfret [B](https://jesspomfret.com) and mine test environment. Teamwork makes the dream work! ). I then connected as the contained user and tried to create a SQL login.
 
 ```sql
 USE containedbeard
@@ -76,7 +76,7 @@ CREATE LOGIN [JESSANDROB\testuser1] FROM WINDOWS
 >Msg 15247, Level 16, State 1, Line 5
 >User does not have permission to perform this action.
 
-However, if you try to create a login as the same Windows user
+However, if you try to create a login **as the same Windows user**
 
 ```sql
 CREATE LOGIN [JESSANDROB\testuser] FROM WINDOWS
@@ -110,12 +110,15 @@ This is because the contained user does not have the `CONNECT SQL` permission on
 
 >`(Get-DbaLogin -SqlInstance sql1 -Login JESSANDROB\testuser|Remove-DbaLogin -Force` will easily remove the annoying login btw )
 
-The person who got in touch found this confusing. As did I.
+Kristian found this confusing. As did I.
 
-If yopu look in the [documentation](https://learn.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=sql-server-ver16) it states:
+If you look in the [documentation](https://learn.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=sql-server-ver16) it states:
 
 >      The activity of the contained database user is limited to the authenticating database. The database user account must be independently created in each database that the user needs. To change databases, SQL Database users must create a new connection. Contained database users in SQL Server can change databases if an identical user is present in another database.
 
 But nowhere does it say that a contained user can create a login for itself.
 So it is a bit of a gotcha. I think the documentation should be updated to clarify this.
 
+## Conclusion
+
+So, what’s the takeaway? If you’re using contained databases, keep an eye on your vendor applications. They might be trying to do things they shouldn’t, like creating logins they can’t even use. And if you run into this issue, now you know what’s going on—and how to clean it up.
