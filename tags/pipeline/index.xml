@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pipeline on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/pipeline/</link><description>Recent content in Pipeline on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/pipeline/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Pipeline Template Job Names and single quotes</title><link>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</link><pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Azure DevOps Pipeline Template Job Names and single quotes" />&lt;h1 id="the-job-name-deploy_function_app-appears-more-than-once">The job name Deploy_Function_App appears more than once
+&lt;/h1>&lt;p>This was the error I was notified about in a Azure DevOps pipeline when they tried to run it. The error message continued to say that Job Names must be unique within a pipeline.&lt;/p>
+&lt;h2 id="set-up">Set Up
+&lt;/h2>&lt;p>There is a centralised repository of Azure DevOps Pipeline Template Jobs that call the Bicep modules with the required values in the same repo to deploy Azure Infrastructure.&lt;/p></description></item><item><title>What does JS_InvalidFilePath error mean in Azure DevOps?</title><link>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</link><pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post What does JS_InvalidFilePath error mean in Azure DevOps? " />&lt;h1 id="cant-find-loc-string-for-key-js_invalidfilepath">Can't find loc string for key: JS_InvalidFilePath
+&lt;/h1>&lt;p>This was the error I received in my Azure DevOps pipeline when I tried to run it.&lt;/p>
+&lt;p>When I investigated further it said&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">##[debug]workingDirectory=/home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]check path : /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[warning]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=warning;]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]task result: Failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[error]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.issue type=error;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##[debug]Processed: ##vso[task.complete result=Failed;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="what-is-going-on">What is going on?
+&lt;/h1>&lt;p>I was trying to run a simple Azure PowerShell task and had defined it like this (I used VS Code with the Azure Pipelines extension and made use of the intellisense). I had defined it like this.&lt;/p></description></item><item><title>Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster</title><link>https://blog.robsewell.com/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</link><pubDate>Mon, 22 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-151.png" alt="Featured image of post Using Azure DevOps Build Pipeline Templates with Terraform to build an AKS cluster" />&lt;p>In the last few posts I have moved from &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+>building an Azure SQL DB with Terraform using VS Code&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+>automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines&lt;/a> to &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+>using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group&lt;/a>. This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.&lt;/p></description></item></channel></rss>
