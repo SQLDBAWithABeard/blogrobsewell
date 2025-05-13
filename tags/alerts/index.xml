@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alerts on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/alerts/</link><description>Recent content in Alerts on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 24 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/alerts/index.xml" rel="self" type="application/rss+xml"/><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p>When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+>PowerShell Conference EU&lt;/a> in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+>click here&lt;/a> and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+>slides and code here&lt;/a>) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+>Irwin Strachans Active Directory Operations Test&lt;/a> which got me thinking.&lt;/p>
+&lt;p>I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p>
+&lt;p>I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p></description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p>&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+>&lt;/a>&lt;/p>
+&lt;p>This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+>Jen McCown&lt;/a> and is about Enterprise Strategy.&lt;/p>
+&lt;p>Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+>TSQL Tuesdays over 5 years ago&lt;/a> and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+>you search for them&lt;/a>&lt;/p>
+&lt;p>Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+>This post by John Sansom&lt;/a> could have been written for this months party and I recommend that you read it.&lt;/p></description></item></channel></rss>

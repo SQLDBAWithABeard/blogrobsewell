@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Slack on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/slack/</link><description>Recent content in Slack on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 03 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/slack/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting SQL Services, Starting, Stopping and Restarting them with dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</link><pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</guid><description>&lt;p>There was a question in the &lt;a class="link" href="https://sqlcommunity.slack.com/#dbatools" target="_blank" rel="noopener"
+>#dbatools slack channel &lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png"
+loading="lazy"
+alt="dbatools question"
+>&lt;/a>&lt;/p>
+&lt;h3 id="getting-dbatools">Getting dbatools
+&lt;/h3>&lt;p>dbatools enables you to administer SQL Server with PowerShell. To get it simply open PowerShell run&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You can find more details on &lt;a class="link" href="http://dbatools.io/install" target="_blank" rel="noopener"
+>the web-site&lt;/a>&lt;/p>
+&lt;h3 id="finding-the-command">Finding the Command
+&lt;/h3>&lt;p>To find a command you can use the dbatools command &lt;a class="link" href="https://docs.dbatools.io/#Find-DbaCommand" target="_blank" rel="noopener"
+>Find-DbaCommand&lt;/a>
+For commands for service run&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand Service&lt;/code>&lt;/p>
+&lt;p>There are a whole bundle returned&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png"
+loading="lazy"
+alt="find services.png"
+>&lt;/a>&lt;/p></description></item><item><title>Remove-SQLDatabaseSafely My First Contribution to DBATools</title><link>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</link><pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</guid><description>&lt;p>What is DBA Tools?&lt;/p>
+&lt;blockquote>
+&lt;p>A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.&lt;/p>&lt;/blockquote>
+&lt;p>You can read more about &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+>here&lt;/a> and it is &lt;a class="link" href="https://github.com/ctrlbold/dbatools" target="_blank" rel="noopener"
+>freely available for download on GitHub&lt;/a> I thoroughly recommend that [you watch this quick video]&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/PciYdDEBiDM"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>to see just how easy it is to migrate an entire SQL instance in one command Longer session here&lt;/p></description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p>&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+>The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a> made me jump out of my seat.&lt;/p>
+&lt;blockquote>
+&lt;p>The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p>&lt;/blockquote>
+&lt;p>In one release there are &lt;strong>twenty-five&lt;/strong> new CMDLets for the new sqlserver module&lt;/p></description></item></channel></rss>
