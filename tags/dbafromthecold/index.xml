@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dbafromthecold on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dbafromthecold/</link><description>Recent content in Dbafromthecold on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 10 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dbafromthecold/index.xml" rel="self" type="application/rss+xml"/><item><title>Creating SQL Server Containers for versions 2012-2017</title><link>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</link><pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</guid><description>&lt;p>I am working on my &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+>dbatools&lt;/a> and &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+>dbachecks&lt;/a> presentations for &lt;a class="link" href="http://www.sqlsaturday.com/735/eventhome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Finland&lt;/a>, &lt;a class="link" href="https://sqlday.pl/" target="_blank" rel="noopener"
+>SQLDays&lt;/a>, &lt;a class="link" href="http://www.sqlsaturday.com/742/EventHome.aspx" target="_blank" rel="noopener"
+>SQL Saturday Cork&lt;/a> and &lt;a class="link" href="https://sqlgrillen.de/" target="_blank" rel="noopener"
+>SQLGrillen&lt;/a> I want to show the two modules running against a number of SQL Versions so I have installed&lt;/p>
+&lt;ul>
+&lt;li>2 Domain Controllers&lt;/li>
+&lt;li>2 SQL 2017 instances on Windows 2016 with an Availability Group and WideWorldImporters database&lt;/li>
+&lt;li>1 Windows 2016 jump box with all the programmes I need&lt;/li>
+&lt;li>1 Windows 2016 with containers&lt;/li>
+&lt;/ul>
+&lt;p>using a VSTS build and this set of &lt;a class="link" href="https://github.com/SQLDBAWithABeard/ARMTemplates/tree/master/DeployAlwaysOn" target="_blank" rel="noopener"
+>ARM templates and scripts&lt;/a>&lt;/p></description></item></channel></rss>
