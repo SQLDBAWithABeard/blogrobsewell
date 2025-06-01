@@ -17,7 +17,7 @@ image: assets/uploads/2025/fabric-workspace.png
 ---
 ## Introduction
 
-Yesterday we showed how to create a Microsoft Fabric workspace using PowerShell. Today, we will add users to that workspace using the [FabricTools](https://github.com/dataplat/FabricTools) module.
+Yesterday we showed how to [create a Microsoft Fabric workspace using PowerShell](https://blog.robsewell.com/blog/create-a-microsoft-fabric-workspace-with-powershell/). Today, we will add users to that workspace using the [FabricTools](https://github.com/dataplat/FabricTools?WT.mc_id=DP-MVP-5002693) module.
 
 ## Getting the Workspace
 
