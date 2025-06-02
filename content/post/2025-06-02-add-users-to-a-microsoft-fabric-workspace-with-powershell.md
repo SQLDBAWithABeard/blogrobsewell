@@ -13,7 +13,7 @@ tags:
   - FabricTools
   - Users
 
-image: assets/uploads/2025/fabric-workspace.png
+image: assets/uploads/2025/workspaceusers.png
 ---
 ## Introduction
 
