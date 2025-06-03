@@ -12,7 +12,7 @@ tags:
   - Automation
   - FabricTools
 
-image: assets/uploads/2025/06/newfabriclakehouse-portal.png)](../assets/uploads/2025/06/newfabriclakehouse-portal.png
+image: assets/uploads/2025/06/newfabriclakehouse-portal.png
 ---
 ## Introduction
 
