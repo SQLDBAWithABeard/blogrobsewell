@@ -16,7 +16,9 @@ image: assets/uploads/2025/06/newfabriclakehouse-portal.png
 ---
 ## Introduction
 
-Having created a [Microsoft Fabric workspace using PowerShell](https://blog.robsewell.com/blog/create-a-microsoft-fabric-workspace-with-powershell/), [assigned users to it using PowerShell](https://blog.robsewell.com/blog/add-users-to-a-microsoft-fabric-workspace-with-powershell/), and created a [Microsoft Fabric Warehouse using PowerShell](https://blog.robsewell.com/blog/create-a-microsoft-fabric-warehouse-with-powershell/), we now turn our attention to creating a Microsoft Fabric Lakehouse using PowerShell.
+Having created a [Microsoft Fabric workspace using PowerShell](https://blog.robsewell.com/blog/create-a-microsoft-fabric-workspace-with-powershell/), [assigned users to it using PowerShell](https://blog.robsewell.com/blog/add-users-to-a-microsoft-fabric-workspace-with-powershell/), and created a [Microsoft Fabric Warehouse using PowerShell](https://blog.robsewell.com/blog/create-a-microsoft-fabric-warehouse-with-powershell/), we now turn our attention to creating a Microsoft Fabric Lakehouse using PowerShell. These posts all look remarkably similar :-) and thats because the functionality they are showing is exactly same..
+
+Just like [dbatools](dbatools.io) and [dbachecks](https://github.com/dataplat/dbachecks/) creating functions that follow the same pattern makes it easier to learn. This is why FabricTools has chosen to use the same pattern for creating Fabric resources using PowerShell.
 
 ## Fabric Lakehouse
 A [Fabric Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview?WT.mc_id=DP-MVP-5002693) combines the scalability of a data lake with the performance and structure of a data warehouse, providing a unified platform for data storage, management, and analytics.. It allows you to store structured and unstructured data in a single location, making it easier to analyze and visualize your data.

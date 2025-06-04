@@ -16,7 +16,9 @@ image: assets/uploads/2025/06/newfabricdatabase-portal.png
 ---
 ## Introduction
 
-Having created a [workspace, a lakehouse, a warehouse previously](https://blog.robsewell.com/categories/microsoft-fabric/) we now turn our attention to creating a Fabric SQL Database using PowerShell.
+Having created a [workspace, a lakehouse, a warehouse previously](https://blog.robsewell.com/categories/microsoft-fabric/) we now turn our attention to creating a Fabric SQL Database using PowerShell. These posts so far all look remarkably similar and thats because the functionality they are showing is pretty much the same, just with different resources.
+
+Just like [dbatools](dbatools.io) and [dbachecks](https://github.com/dataplat/dbachecks/) creating functions that follow the same pattern makes it easier to learn and use the tools. This is why FabricTools has chosen to use the same pattern for creating Fabric resources using PowerShell.
 
 ## Fabric SQL Database
 
