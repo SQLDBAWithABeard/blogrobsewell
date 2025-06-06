@@ -67,7 +67,7 @@ $Item_name = @{Name='Item Name';Expression={$_.displayName}}
 $Item_type = @{Name='Item Type';Expression={$_.type}}
 Get-FabricItem -WorkspaceId $WorkspaceId | Select $Workspace_text,$Item_name,$Item_type
 ```
-[![Formatted output of Fabric items with calculated properties](../assets/uploads/2025/06/getfabricitems-calculated-pwsh.png)](../assets/uploads/2025/06/getfabricitems-calculated-pwsh.png)
+[![Formatted output of Fabric items with calculated properties](../assets/uploads/2025/06/getfabricitems-calculated-pwsh.png)](../../assets/uploads/2025/06/getfabricitems-calculated-pwsh.png)
 
 It's PowerShell, so you can output to a csv
 
