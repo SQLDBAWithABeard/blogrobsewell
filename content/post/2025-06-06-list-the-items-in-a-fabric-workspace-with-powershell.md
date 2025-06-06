@@ -42,7 +42,7 @@ You can also filter the items by type using the `-Type` parameter. For example, 
 ```powershell
 Get-FabricWorkspace -WorkspaceName $WorkspaceName|Get-FabricItem -type sqldatabase
 ```
-[![List of Fabric SQL Databases in a Workspace](../assets/uploads/2025/06/getfabricitems-sqldatabase-pwsh.png)](../assets/uploads/2025/06/getfabricitems-sqldatabases-pwsh.png)
+[![List of Fabric SQL Databases in a Workspace](../assets/uploads/2025/06/getfabricitems-sqldatabases-pwsh.png)](../assets/uploads/2025/06/getfabricitems-sqldatabases-pwsh.png)
 
 You can also filter by other types such as lakehouse, warehouse, etc.
 
