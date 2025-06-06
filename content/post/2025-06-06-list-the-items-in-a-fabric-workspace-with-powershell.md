@@ -27,18 +27,11 @@ To list the items in a Fabric Workspace with PowerShell, you first need to conne
 ```powershell
 Connect-FabricAccount -TenantId (Get-Secret -Name beard-mvp-tenant-id -AsPlainText)
 ```
-You will need the workspace id that you want to list the items for. You can get it using the `Get-FabricWorkspace` cmdlet. Like this:
+You can list all of the items in a Fabric Workspace by getting the Fabric Workspace and then piping it to the `Get-FabricItem` cmdlet.
 
 ```powershell
 $WorkspaceName = "BlogPostWorkspace"
-$WorkspaceId = (Get-FabricWorkspace -WorkspaceName $WorkspaceName).Id
-```
-Next, you can list the items in the Fabric Workspace using the `Get-FabricItem` cmdlet providing that id.
-
-NOTE: There is an issue I opened on GitHub to allow you to pass the workspace down the PowerShell pipeline. You can track the progress of that issue [here](https://github.com/dataplat/FabricTools/issues/75)
-
-```powershell
-Get-FabricItem -WorkspaceId $WorkspaceId
+Get-FabricWorkspace -WorkspaceName $WorkspaceName|Get-FabricItem
 ```
 This will list all the items in the specified Fabric Workspace. The output will include the item type, name, and other details.
 
@@ -47,7 +40,7 @@ This will list all the items in the specified Fabric Workspace. The output will 
 You can also filter the items by type using the `-Type` parameter. For example, to list only the Fabric SQL databases in the workspace, you can use:
 
 ```powershell
-Get-FabricItem -WorkspaceId $WorkspaceId -type sqldatabase
+Get-FabricWorkspace -WorkspaceName $WorkspaceName|Get-FabricItem -type sqldatabase
 ```
 [![List of Fabric SQL Databases in a Workspace](../assets/uploads/2025/06/getfabricitems-sqldatabase-pwsh.png)](../assets/uploads/2025/06/getfabricitems-sqldatabases-pwsh.png)
 
