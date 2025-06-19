@@ -1,4 +1,4 @@
----
+9---
 title: "Pestering Fabric with PowerShell"
 date: "2025-06-20"
 categories:
@@ -84,7 +84,7 @@ This is because FabricTools is at the stage of the project where a number of dif
 
 ## Quirks
 
-Speaking of quirks there is another one with some of the commands in the Fabric Tools module that will catch out PowerShell professionals right at this moment (June 2025)
+Speaking of quirks, here is another one with some of the commands in the Fabric Tools module that will catch out PowerShell professionals right at this moment (June 2025)
 
 When you run the `BeforeAll` block you will receive this *warning* message
 
@@ -108,7 +108,7 @@ Maybe you can help to fix [the piping for commands issue](https://github.com/dat
 
 # Hey I want to test my Fabric with Pester.
 
-Ok, I shall get back to the point. To test with Pester, once you have gathered all of the information in your `BeforeAll` block you can use test cases like this to loop through. (DRY remember). Again, as with all good PowerShell it will be exactly as is expected (especially when the code is mre consistent)
+Ok, I shall get back to the point. To test with Pester, once you have gathered all of the information in your `BeforeAll` block you can use test cases like this to loop through. (DRY remember). Again, as with all good PowerShell it will be exactly as is expected for any of the resources that you need to test (especially when the code is mre consistent).
 
 You can follow this process
 
@@ -121,7 +121,7 @@ Context "Workspaces" {
 ```
 You have a `Context` block to keep your tests organised and then an `It` block which is your test. You pass a `TestCases` array `@()` to the `It` block. In the title you refer to the *this one* in the loop by using `<_>` and in the test by using `$_`
 
-Then you test with *What I got* `|` *what i expected* `-Because` *This is the reason*
+Then you test with *What I got* `|` *what i expected* `-Because` *This is the reason it should be what is expected*
 
 In the example above, the array of workspace names that was returned should not contain any of the values in the TestCases. This is what it looks like when it passes
 
@@ -131,5 +131,6 @@ and when it fails
 
 [![Failing](./../assets/uploads/2025/06/pesterfails.png)](./../assets/uploads/2025/06/pesterfails.png)
 
+Now you can use Pester to validate any resource in Fabric. 
 
 Happy Pestering :-)
