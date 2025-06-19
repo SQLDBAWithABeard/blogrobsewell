@@ -31,7 +31,7 @@ However, I always say that
 
 ## So how do you test Fabric resources with Pester?
 
-Jess and I wanted the demos to work at the PowerShell Conference Europe, obviously. As we will be creating things and deleting things it is important that before our session we ensure that the things that should be there are there and the things that are not are not. Indeed we have been doing this for [a long time](https://blog.robsewell.com/blog/pester-for-presentations-ensuring-it-goes-ok/). Yes! Jess and I have been PowerShelling for ages!!
+Jess and I wanted the demos to work at the PowerShell Conference Europe, obviously. As we will be creating things and deleting things it is important that before our session we ensure that the things that should be there are there and the things that should not are not. Indeed we have been doing it this way for [a long time](https://blog.robsewell.com/blog/pester-for-presentations-ensuring-it-goes-ok/). Yes! Jess and I have been PowerShelling for ages!!
 
 Anyway. The important thing is to get information with PowerShell and test it with Pester.
 
