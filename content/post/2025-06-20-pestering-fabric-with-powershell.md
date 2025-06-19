@@ -17,7 +17,7 @@ image: assets/uploads/2025/06/exceloutput.png
 ---
 ## Introduction
 
-Next week is the [PowerShell Conference Europe 2025](https://psconf.eu), and Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk)and I will be presenting a session Microsoft Fabric for the PowerShell Pro
+Next week is the [PowerShell Conference Europe 2025](https://psconf.eu), and Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) and I will be presenting a session Microsoft Fabric for the PowerShell Pro
 
 Of course we will be demonstrating [FabricTools](https://www.powershellgallery.com/packages/FabricTools?WT.mc_id=DP-MVP-5002693), a PowerShell module that simplifies the management of Microsoft Fabric resources. You can find it on GitHub at [FabricTools](https://github.com/dataplat/FabricTools?WT.mc_id=DP-MVP-5002693). FabricTools provides functions to create, update, and delete Fabric Lakehouses and other resources. It has been developed and is maintained by members of the community.
 
