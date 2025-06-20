@@ -13,7 +13,7 @@ tags:
   - FabricTools
   - Pester
   - Testing
-image: assets/uploads/2025/06/exceloutput.png
+image: assets/uploads/2025/06/passingpester.png
 ---
 ## Introduction
 
@@ -131,6 +131,6 @@ and when it fails
 
 [![Failing](./../assets/uploads/2025/06/pesterfails.png)](./../assets/uploads/2025/06/pesterfails.png)
 
-Now you can use Pester to validate any resource in Fabric. 
+Now you can use Pester to validate any resource in Fabric.
 
 Happy Pestering :-)
