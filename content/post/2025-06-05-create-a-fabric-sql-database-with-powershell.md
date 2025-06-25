@@ -1,6 +1,6 @@
 ---
 title: "Create a Fabric SQL Database with PowerShell"
-date: "2025-06-05"
+date: "2027-06-05"
 categories:
   - Blog
   - Microsoft Fabric
