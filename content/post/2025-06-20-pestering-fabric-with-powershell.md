@@ -1,6 +1,6 @@
 ---
 title: "Pestering Fabric with PowerShell"
-date: "2025-06-20"
+date: "2027-06-20"
 categories:
   - Blog
   - Microsoft Fabric
