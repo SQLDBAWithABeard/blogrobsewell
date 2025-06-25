@@ -1,6 +1,6 @@
 ---
 title: "Add Users to a Microsoft Fabric Workspace with PowerShell"
-date: "2025-06-02"
+date: "2027-06-02"
 categories:
   - Blog
   - Microsoft Fabric
