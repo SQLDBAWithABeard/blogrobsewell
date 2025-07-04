@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Services on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/services/</link><description>Recent content in Services on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 03 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/services/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting SQL Services, Starting, Stopping and Restarting them with dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</link><pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-services-starting-stopping-and-restarting-them-with-dbatools/</guid><description>&lt;p>There was a question in the &lt;a class="link" href="https://sqlcommunity.slack.com/#dbatools" target="_blank" rel="noopener"
+>#dbatools slack channel &lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/dbatools-question.png"
+loading="lazy"
+alt="dbatools question"
+>&lt;/a>&lt;/p>
+&lt;h3 id="getting-dbatools">Getting dbatools
+&lt;/h3>&lt;p>dbatools enables you to administer SQL Server with PowerShell. To get it simply open PowerShell run&lt;/p>
+&lt;p>&lt;code>Install-Module dbatools&lt;/code>&lt;/p>
+&lt;p>You can find more details on &lt;a class="link" href="http://dbatools.io/install" target="_blank" rel="noopener"
+>the web-site&lt;/a>&lt;/p>
+&lt;h3 id="finding-the-command">Finding the Command
+&lt;/h3>&lt;p>To find a command you can use the dbatools command &lt;a class="link" href="https://docs.dbatools.io/#Find-DbaCommand" target="_blank" rel="noopener"
+>Find-DbaCommand&lt;/a>
+For commands for service run&lt;/p>
+&lt;p>&lt;code>Find-DbaCommand Service&lt;/code>&lt;/p>
+&lt;p>There are a whole bundle returned&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png" target="_blank" rel="noopener"
+>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/12/find-services.png"
+loading="lazy"
+alt="find services.png"
+>&lt;/a>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Source on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/open-source/</link><description>Recent content in Open Source on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/open-source/index.xml" rel="self" type="application/rss+xml"/><item><title>How to fork a GitHub repository and contribute to an open source project</title><link>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</link><pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/CreatePR.png" alt="Featured image of post How to fork a GitHub repository and contribute to an open source project" />&lt;p>I enjoy maintaining open source GitHub repositories such as &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks" target="_blank" rel="noopener"
+>dbachecks&lt;/a> and &lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+>ADSNotebook&lt;/a>. I absolutely love it when people add more functionality to them.&lt;/p>
+&lt;p>To collaborate with a repository in GitHub you need to follow these steps&lt;/p>
+&lt;p>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/GitHub.png"
+loading="lazy"
+>&lt;/p>
+&lt;ul>
+&lt;li>Fork the repository into your own GitHub&lt;/li>
+&lt;li>Clone the repository to your local machine&lt;/li>
+&lt;li>Create a new branch for your changes&lt;/li>
+&lt;li>Make some changes and commit them with useful messages&lt;/li>
+&lt;li>Push the changes to your repository&lt;/li>
+&lt;li>Create a Pull Request from your repository back to the original one&lt;/li>
+&lt;/ul>
+&lt;p>You will need to have &lt;code>git.exe&lt;/code> available which you can download and install from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+>https://git-scm.com/downloads&lt;/a> if required&lt;/p></description></item></channel></rss>
