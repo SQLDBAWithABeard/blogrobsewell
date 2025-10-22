@@ -1,7 +1,6 @@
 ---
 title: "Uploading a Source Folder to Azure File Storage"
 date: "2015-02-01"
-date: "2015-02-01" 
 categories: 
   - Blog
   - Azure
@@ -154,3 +153,4 @@ You can download the function from the Script Center
 [https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe](https://gallery.technet.microsoft.com/scriptcenter/Recursively-upload-a-bfb615fe?WT.mc_id=DP-MVP-5002693)
 
 As also, any comments or queries are welcome and obviously the internet lies so please understand and test all code you find before using it in production
+
