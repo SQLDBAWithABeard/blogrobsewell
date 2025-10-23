@@ -1,12 +1,12 @@
 ---
 title: "PowerShelling SQL Saturday Sessions to the Guidebook app"
 date: "2015-04-07"
-date: "2015-04-07" 
-categories: 
+
+categories:
   - PowerShell
   - Community
   - Automation
-tags: 
+tags:
   - automate
   - Excel
   - PowerShell
@@ -20,17 +20,17 @@ tags:
 Following on from my [previous pos](http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/ "Parsing XML Child Nodes and Converting to DateTime with PowerShell")t about parsing XML where I used the information from [Steve Jones blog post](https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/) to get information from the [SQL Saturday web site](https://www.sqlsaturday.com/) I thought that this information and script may be useful for others performing the same task.
 
 1. Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.
-    
+
     We are looking at using [the Guidebook app](https://guidebook.com/) to provide an app for our attendees with all the session details for [SQL Saturday Exeter](https://www.sqlsaturday.com/372)
-    
+
     The Guidebook admin website requires the data for the sessions in a certain format. You can choose CSV or XLS.
-    
+
     In the admin portal you can download the template
-    
+
     [![down](https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/03/down.jpg)
-    
+
     which gives an Excel file like this
-    
+
 
 [![-excel](https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/03/excel.jpg)
 

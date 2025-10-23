@@ -1,11 +1,11 @@
 ---
 title: "Installing and upgrading default scripts automation - part one - Introduction"
 date: "2015-06-08"
-date: "2015-06-08" 
-categories: 
+
+categories:
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - SQL Agent Jobs
   - Auto Script Install
   - automate

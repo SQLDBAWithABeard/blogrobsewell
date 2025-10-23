@@ -1,12 +1,12 @@
 ---
 title: "Populating My DBA Database for Power Bi with PowerShell - Server Info"
 date: "2015-08-31"
-date: "2015-08-31" 
-categories: 
+
+categories:
   - Power Bi
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - automate
   - automation
   - DBA Database
@@ -30,16 +30,16 @@ In this post I will show how to create the following report
 
 I create the following tables
 
-- dbo.ClientDatabaseLookup 
-- dbo.Clients 
+- dbo.ClientDatabaseLookup
+- dbo.Clients
 - dbo.InstanceList
-- dbo.InstanceScriptLookup 
-- dbo.ScriptList 
-- Info.AgentJobDetail 
-- Info.AgentJobServer 
-- Info.Databases 
-- Info.Scriptinstall 
-- Info.ServerOSInfo 
+- dbo.InstanceScriptLookup
+- dbo.ScriptList
+- Info.AgentJobDetail
+- Info.AgentJobServer
+- Info.Databases
+- Info.Scriptinstall
+- Info.ServerOSInfo
 - Info.SQLInfo
 
 By adding Server name, Instance Name , Port, Environment, NotContactable, and Location into the InstanceList table I can gather all of the information that I need and also easily add more information to other tables as I need to.
@@ -76,7 +76,7 @@ The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to
 To run the script I simply need to add the values for
 ```
 $CentralDBAServer = '' ## Add the address of the instance that holds the DBADatabase
-$CentralDatabaseName= 'DBADatabase' 
+$CentralDatabaseName= 'DBADatabase'
 $LogFile = "\DBADatabaseServerUpdate_" + $Date + ".log" ## Set Path to Log File
 ```
 And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get the [script from here](http://1drv.ms/1N4fqxt) or you can read on to see how it works and how to create the report
@@ -116,7 +116,7 @@ I give the variables some default values in case they are not picked up and set 
 
 Unfortunately the one that worked everywhere remotely errored with the local server so I added a check to see if the server name in the variable matches the global environment variable of Computer Name
 ```
-$OS =  gwmi Win32_OperatingSystem  -ComputerName $Server| select @{name='Name';Expression={($_.caption)}} 
+$OS =  gwmi Win32_OperatingSystem  -ComputerName $Server| select @{name='Name';Expression={($_.caption)}}
 if($Server -eq $env:COMPUTERNAME)
 {$IP = (Get-WmiObject -ComputerName $Server -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"' -ErrorAction Stop).ipaddress[0] }
 else {$IP = [System.Net.Dns]::GetHostAddresses($Server).IPAddressToString }
@@ -125,7 +125,7 @@ Write-Log -Path $LogFile -Message "WMI Info gathered for $Server "
 Once I have all of the information I check if the server already exists in the ServerOs table and choose to either insert or update.
 ```
 	$Exists = Invoke-Sqlcmd -ServerInstance $CentralDBAServer -Database $CentralDatabaseName -Query "SELECT [ServerName] FROM [DBADatabase].[Info].[ServerOSInfo] WHERE ServerName = '$Server'"
-	
+
 	if ($Exists)
 	{
 	$Query = @"

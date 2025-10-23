@@ -1,7 +1,7 @@
 ---
 title: "Spinach and Database Development- SQLSatExeter Keynote"
 date: "2015-04-30"
-date: "2015-04-30"
+
 categories:
   - Community
 tags:

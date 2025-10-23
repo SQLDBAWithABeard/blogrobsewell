@@ -1,12 +1,12 @@
 ---
 title: "Instances and Ports with PowerShell"
 date: "2015-04-22"
-date: "2015-04-22" 
-categories: 
+
+categories:
   - Blog
   - SQL Server
   - PowerShell
-tags: 
+tags:
   - Instance
   - Ports
 
