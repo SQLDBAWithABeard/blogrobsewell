@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TSQL2sDay on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/tsql2sday/</link><description>Recent content in TSQL2sDay on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 11 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/tsql2sday/index.xml" rel="self" type="application/rss+xml"/><item><title>Why Be a Mentor?</title><link>https://blog.robsewell.com/blog/why-be-a-mentor/</link><pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-be-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2025/mentor.png" alt="Featured image of post Why Be a Mentor?" /&gt;&lt;p&gt;&lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://debthedba.wordpress.com/wp-content/uploads/2016/06/tsql2sday-150x150.png"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="https://github.com/amachanic" target="_blank" rel="noopener"
+&gt;github&lt;/a&gt; is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme.&lt;/p&gt;
+&lt;p&gt;This month it is hosted by &lt;a class="link" href="https://debthedba.wordpress.com/" target="_blank" rel="noopener"
+&gt;Deborah&lt;/a&gt; on the &lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+&gt;theme of mentoring and sponsorship&lt;/a&gt;. Thank you Deborah for hosting.&lt;/p&gt;</description></item><item><title>TSQL2sDay - Do I use Notebooks?</title><link>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</link><pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-do-i-use-notebooks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post TSQL2sDay - Do I use Notebooks?" /&gt;&lt;h1 id="do-i-use-notebooks"&gt;Do I use Notebooks?
+&lt;/h1&gt;&lt;p&gt;T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+&gt;a website with all previous posts&lt;/a&gt;. Everyone is welcome to participate in this monthly blog post.&lt;/p&gt;</description></item><item><title>Tooling for TSql2sDay</title><link>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</link><pubDate>Tue, 09 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tooling-for-tsql2sday/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post Tooling for TSql2sDay" /&gt;&lt;h1 id="tooling-for-tsql2sday"&gt;Tooling for TSQL2sDay
+&lt;/h1&gt;&lt;p&gt;T-SQL Tuesday is the brainchild of Adam Machanic (&lt;a class="link" href="http://dataeducation.com/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/adammachanic?lang=en" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones (&lt;a class="link" href="https://voiceofthedba.com/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/way0utwest" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;) organises the event and maintains &lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+&gt;a website with all previous posts&lt;/a&gt;. Everyone is welcome to participate in this monthly blog post.&lt;/p&gt;
+&lt;p&gt;This month’s T-SQL Tuesday is hosted by Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; ). Mikey says:&lt;/p&gt;</description></item><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" /&gt;&lt;h1 id="automation"&gt;Automation
+&lt;/h1&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted --&gt;blog&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;twitter&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Elizabeth&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/p&gt;
+&lt;p&gt;Elizabeth asks&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My invitation to you is I want to know what you have automated to make your life easier?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="from-the-past"&gt;From the Past
+&lt;/h2&gt;&lt;p&gt;I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+&gt;You have to start somewhere&lt;/a&gt; In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;The Best Database Administrators Automate Everything&lt;/a&gt; which I am pleased to see is still available nearly a decade later&lt;/p&gt;</description></item><item><title>#TSQL2sDay – NomNomNomNomNom</title><link>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</link><pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg" alt="Featured image of post #TSQL2sDay – NomNomNomNomNom" /&gt;&lt;p&gt;&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The topic for this months&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt; T-SQL Tuesday #112&lt;/a&gt; hosted by Shane O’Neill (&lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; / &lt;a class="link" href="https://twitter.com/sozdba" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;) is about “dipping into your cookie jar”. This reference means “when times get tough how do you dip into your reserves to keep going”. Shane asks the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;That is what I want from the contributors of this T-SQL Tuesday, those memories that they can think back on for sustenance. Like the humble cookie, I want a humble brag.&lt;/p&gt;</description></item><item><title>#TSQL2sday #94 Lets get all Posh!</title><link>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</guid><description>&lt;p&gt;Write-Output &amp;ldquo;What are you going to automate today?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Welcome to T-SQL Tuesday for September 2017!&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;
+&lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+&gt;T-SQL Tuesday&lt;/a&gt; is a chance for you to join in the SQL Server community and write a blog post on a suggested topic. It makes for a great way to find a bunch of blog posts showing the same subject from many different viewpoints. Please join in and write a blog post, maybe it&amp;rsquo;s your first ever, maybe you haven&amp;rsquo;t blogged for a while but even if you blog every day come and join the party and share your knowledge.&lt;/p&gt;</description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p&gt;&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;Jen McCown&lt;/a&gt; and is about Enterprise Strategy.&lt;/p&gt;
+&lt;p&gt;Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+&gt;TSQL Tuesdays over 5 years ago&lt;/a&gt; and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+&gt;you search for them&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;This post by John Sansom&lt;/a&gt; could have been written for this months party and I recommend that you read it.&lt;/p&gt;</description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;p&gt;&lt;img src="https://i0.wp.com/blog.waynesheffield.com/wayne/wp-content/uploads/2012/04/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;) and is now starting its 6th year, is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme. This month it is hosted by Wayne Sheffield &lt;a class="link" href="http://blog.waynesheffield.com/wayne/archive/2014/12/t-sql-tuesday-61-giving-back/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://www.twitter.com/#/DBAWayne" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; and in the spirit of the holiday season it is about giving. This is my post on giving back, in the little ways as well as the bigger ones, how you can give back and why it not only benefits others but also yourself&lt;/p&gt;</description></item><item><title>#tsql2sday #60 – Something New Learned – Problem Step Recorder</title><link>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</link><pubDate>Tue, 11 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</guid><description>&lt;h3 id="what-is-t-sql-tuesday"&gt;What is T-SQL Tuesday?
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://chrisyatessql.files.wordpress.com/2012/10/sql-tuesday1.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday is a monthly blog party hosted by a different blogger each month. This blog party was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;). You can take part by posting your own participating post that fits the topic of the month and follows the requirements Additionally, if you are interested in hosting a future T-SQL Tuesday, contact Adam Machanic on his blog.&lt;/p&gt;</description></item></channel></rss>
