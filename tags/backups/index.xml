@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backups on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/backups/</link><description>Recent content in Backups on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/backups/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting the SQL Version from a backup using dbatools ………. on PowerShell Core</title><link>https://blog.robsewell.com/blog/getting-the-sql-version-from-a-backup-using-dbatools-.-on-powershell-core/</link><pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-the-sql-version-from-a-backup-using-dbatools-.-on-powershell-core/</guid><description>&lt;p&gt;Following an upgrade to SQL Server the backup share had a number of backups, some from the old version and some from the newer version. I was asked if I had a script to be able to get the SQL Version from the backup file from all of the files in the backup share.&lt;/p&gt;
+&lt;p&gt;With &lt;a class="link" href="http://dbatools,io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; this was easy to accomplish with &lt;a class="link" href="https://docs.dbatools.io/#Read-DbaBackupHeader" target="_blank" rel="noopener"
+&gt;Read-DbaBackuoHeader&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$backupshare = &amp;#34;$share\\keep&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$Instance = &amp;#34;SQL0\\Mirror&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$information = foreach ($BackupFile in (Get-ChildItem $backupshare)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $FileName = @{Name = &amp;#39;FileName&amp;#39;; Expression = {$BackupFile.Name}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Read-DbaBackupHeader -SqlInstance $Instance -Path $BackupFile.FullName | Select-Object $FileName, DatabaseName , CompatibilityLevel, SqlVersion
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$information | Format-Table
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/11/read-dbabackupheader.png"
+loading="lazy"
+alt="read-dbabackupheader.PNG"
+&gt;&lt;/p&gt;</description></item><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Testing SQL Server Access to a share with PowerShell using dbatools</title><link>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</link><pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/testing-sql-server-access-to-a-share-with-powershell-using-dbatools/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Test your Sqlserver backups on Linux with PowerShell and dbatools</title><link>https://blog.robsewell.com/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</link><pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/test-your-sqlserver-backups-on-linux-with-powershell-and-dbatools/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Using Pester with dbatools Test-DbaLastBackup</title><link>https://blog.robsewell.com/blog/using-pester-with-dbatools-test-dbalastbackup/</link><pubDate>Sat, 25 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-pester-with-dbatools-test-dbalastbackup/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Backing up SQL Server on Linux using Ola Hallengrens Maintenance Solution</title><link>https://blog.robsewell.com/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/backing-up-sql-server-on-linux-using-ola-hallengrens-maintenance-solution/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Taking dbatools Test-DbaLastBackup a little further</title><link>https://blog.robsewell.com/blog/taking-dbatools-test-dbalastbackup-a-little-further/</link><pubDate>Wed, 22 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/taking-dbatools-test-dbalastbackup-a-little-further/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Testing Your SQL Server Backups the Easy Way with PowerShell &amp; dbatools</title><link>https://blog.robsewell.com/blog/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/</link><pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Adding a T-SQL Job Step to a SQL Agent Job with PowerShell</title><link>https://blog.robsewell.com/blog/adding-a-t-sql-job-step-to-a-sql-agent-job-with-powershell/</link><pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-t-sql-job-step-to-a-sql-agent-job-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Altering a Job Step on Hundreds of SQL Servers with PowerShell</title><link>https://blog.robsewell.com/blog/altering-a-job-step-on-hundreds-of-sql-servers-with-powershell/</link><pubDate>Mon, 13 Feb 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/altering-a-job-step-on-hundreds-of-sql-servers-with-powershell/</guid><description>&lt;img src="https://dbatools.io/wp-content/uploads/2016/05/dbatools-logo-1.png" alt="Featured image of post Altering a Job Step on Hundreds of SQL Servers with PowerShell" /&gt;&lt;p&gt;I flew to Utrecht last week to present with &lt;!-- raw HTML omitted --&gt;Chrissy LeMaire&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;Sander Stad&lt;!-- raw HTML omitted --&gt; for the joint Dutch SQL and PowerShell User Groups. Whilst I was sat at the airport I got a phone call from my current client.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Them - We need to change the backup path for all of the servers to a different share, how long will it take you?&lt;/p&gt;</description></item><item><title>PowerShell, Pester and Ola Hallengrens Maintenance Solution</title><link>https://blog.robsewell.com/blog/powershell-pester-and-ola-hallengrens-maintenance-solution/</link><pubDate>Sat, 24 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-pester-and-ola-hallengrens-maintenance-solution/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/pester-ola-check.png" alt="Featured image of post PowerShell, Pester and Ola Hallengrens Maintenance Solution" /&gt;&lt;p&gt;If you are a SQL DBA you will have heard of &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;Ola Hallengrens Maintenance solution&lt;/a&gt; If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also &lt;a class="link" href="https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+&gt;watch a video from Ola at SQL Bits&lt;/a&gt;
+Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to &lt;a class="link" href="https://github.com/pester/Pester" target="_blank" rel="noopener"
+&gt;Pester&lt;/a&gt; You can find a great &lt;a class="link" href="https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx" target="_blank" rel="noopener"
+&gt;how to get started here&lt;/a&gt; which will show you how to get Pester and how to get started with TDD.
+This isn’t TDD though this is Environment Validation and this is how I went about creating my test.
+First I thought about what I would look for in SSMS when I had installed the maintenance solution and made a list of the things that I would check which looked something like this. This would be the checklist you would create (or have already created) for yourself or a junior following this install. This is how easy you can turn that checklist into a Pester Test and remove the human element and open your install for automated testing&lt;/p&gt;</description></item><item><title>Converting SQL Agent Job Duration to TimeSpan using PowerShell</title><link>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</link><pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/timespan.png" alt="Featured image of post Converting SQL Agent Job Duration to TimeSpan using PowerShell" /&gt;&lt;p&gt;When you look in msdb for the SQL Agent Job duration you will find that it is an int.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png"
+loading="lazy"
+alt="sysjobshistoiry"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is also the same when you look at &lt;code&gt;Get-SQLAgentJobHistory &lt;/code&gt;from the sqlserver module. (You can get this by &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/mt238290.aspx" target="_blank" rel="noopener"
+&gt;downloading the latest SSMS release from here&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png"
+loading="lazy"
+alt="agentjobhistoryproperties"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This means that when you look at the various duration of the Agent Jobs you get something like this&lt;/p&gt;</description></item><item><title>Remove-SQLDatabaseSafely My First Contribution to DBATools</title><link>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</link><pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</guid><description>&lt;p&gt;What is DBA Tools?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can read more about &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt; and it is &lt;a class="link" href="https://github.com/ctrlbold/dbatools" target="_blank" rel="noopener"
+&gt;freely available for download on GitHub&lt;/a&gt; I thoroughly recommend that [you watch this quick video]&lt;/p&gt;
+&lt;div class="video-wrapper"&gt;
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/PciYdDEBiDM"
+allowfullscreen
+title="YouTube Video"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;to see just how easy it is to migrate an entire SQL instance in one command Longer session here&lt;/p&gt;</description></item><item><title>Using the new SQLServer Powershell module to get SQL Agent Job Information</title><link>https://blog.robsewell.com/blog/using-the-new-sqlserver-powershell-module-to-get-sql-agent-job-information/</link><pubDate>Sun, 03 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-the-new-sqlserver-powershell-module-to-get-sql-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/07/getcomand-sqlagent.png" alt="Featured image of post Using the new SQLServer Powershell module to get SQL Agent Job Information" /&gt;&lt;p&gt;So with the July Release of SSMS everything changed for using PowerShell with SQL. &lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/" target="_blank" rel="noopener"
+&gt;You can read the details here&lt;/a&gt; As I mentioned in my previous post the name of the module has changed to sqlserver&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This means that if you have a PowerShell script doing&lt;/em&gt; Import-Module SQLPS_, it will need to be changed to be_ Import-Module SqlServer &lt;em&gt;in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to&lt;/em&gt; “%Program Files\WindowsPowerShell\Modules\SqlServer_” and hence no update to $env:PSModulePath is required._&lt;/p&gt;</description></item><item><title>DBA Database scripts are on Github</title><link>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</link><pubDate>Mon, 16 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png%29%5D%28/assets/uploads/2016/05/tweets.png" alt="Featured image of post DBA Database scripts are on Github" /&gt;&lt;p&gt;It started with a tweet from Dusty&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png"
+loading="lazy"
+alt="Tweets"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The second session I presented at the fantastic &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PowerShell Conference Europe&lt;/a&gt; was about using the DBA Database to automatically install DBA scripts like &lt;a class="link" href="https://www.brentozar.com/first-aid/sql-server-downloads/" target="_blank" rel="noopener"
+&gt;sp_Blitz, sp_AskBrent, sp_Blitzindex from Brent Ozar&lt;/a&gt; , &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;Ola Hallengrens Maintenance Solution&lt;/a&gt; , &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2012/03/22/released-who-is-active-v11-11.aspx" target="_blank" rel="noopener"
+&gt;Adam Mechanics sp_whoisactive&lt;/a&gt; , &lt;a class="link" href="https://www.brentozar.com/responder/log-sp_whoisactive-to-a-table/" target="_blank" rel="noopener"
+&gt;This fantastic script for logging the results from sp_whoisactive to a table&lt;/a&gt; , Extended events sessions and other goodies for the sanity of the DBA.&lt;/p&gt;</description></item><item><title>Backing up to URL container name – case is important</title><link>https://blog.robsewell.com/blog/backing-up-to-url-container-name-case-is-important/</link><pubDate>Thu, 03 Mar 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/backing-up-to-url-container-name-case-is-important/</guid><description>&lt;p&gt;If you use &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/dn435916.aspx" target="_blank" rel="noopener"
+&gt;SQL Backup to URL&lt;/a&gt; to backup your databases to Azure blob storage remember that for the container name case is important&lt;/p&gt;
+&lt;p&gt;So&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BACKUP LOG [DatabaseName]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;TO URL = N&amp;#39;https://storageaccountname.blob.core.windows.net/containername/databasename_log_dmmyyhhss.trn&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WITH CHECKSUM, NO_COMPRESSION, CREDENTIAL = N&amp;#39;credential&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;will work but&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BACKUP LOG [DatabaseName]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;TO URL = N&amp;#39;https://storageaccountname.blob.core.windows.net/CONTAINERNAME/databasename_log_dmmyyhhss.trn&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WITH CHECKSUM, NO_COMPRESSION, CREDENTIAL = N&amp;#39;credential&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;will give an (400) Bad Request Error which may not be easy to diagnose&lt;/p&gt;</description></item><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p&gt;Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p&gt;
+&lt;p&gt;I have an InstanceList table which looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;dbo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceList&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;IDENTITY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ServerName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AG&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt; &lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DF_InstanceList_Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;DEFAULT&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PK_InstanceList_ID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;PRIMARY&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;CLUSTERED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ASC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PAD_INDEX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;STATISTICS_NORECOMPUTE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IGNORE_DUP_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_ROW_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_PAGE_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p&gt;</description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p&gt;This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+&gt;described here&lt;/a&gt; to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a&gt; so was surprised to see this screen&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p&gt;If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;https://ola.hallengren.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also watch his presentation at SQLBits at this link&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+&gt;http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;where he talks about and demonstrates the solution.&lt;/p&gt;
+&lt;p&gt;It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p&gt;</description></item><item><title>Refreshing Availability Group Database with PowerShell</title><link>https://blog.robsewell.com/blog/refreshing-availability-group-database-with-powershell/</link><pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/refreshing-availability-group-database-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image1.png" alt="Featured image of post Refreshing Availability Group Database with PowerShell" /&gt;&lt;p&gt;Following last weeks post on &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2/" target="_blank" rel="noopener"
+&gt;Refreshing A Mirrored Database with PowerShell&lt;/a&gt; I thought I would write the script to refresh an Availability Group Database.&lt;/p&gt;
+&lt;p&gt;An availability group supports a failover environment for a discrete set of user databases, known as availability databases, that fail over together. An availability group supports a set of primary databases and one to eight sets of corresponding secondary databases.You can read more about Availability groups &lt;a class="link" href="http://msdn.microsoft.com/en-GB/library/ff877884.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;&lt;/p&gt;</description></item><item><title>What Runs on the SQL Server when you run a PowerShell script?–Question from #SQLRelay</title><link>https://blog.robsewell.com/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-%23sqlrelay/</link><pubDate>Sat, 23 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-%23sqlrelay/</guid><description>&lt;p&gt;Last week I ran a PowerShell lab at SQL Relay in Cardiff. There are still a few places available for SQL Relay week 2. &lt;a class="link" href="http://www.sqlrelay.co.uk/" target="_blank" rel="noopener"
+&gt;Take a look here for more details&lt;/a&gt; and follow the twitter &lt;a class="link" href="https://twitter.com/search?q=%23sqlrelay" target="_blank" rel="noopener"
+&gt;hashtag #SQLRelay&lt;/a&gt; for up to date information&lt;/p&gt;
+&lt;p&gt;The link for my slides and demos from the second part are here &lt;a class="link" href="https://t.co/Fik2odyUMA" title="https://t.co/Fik2odyUMA"
+target="_blank" rel="noopener"
+&gt;https://t.co/Fik2odyUMA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whilst we were discussing &lt;a class="link" href="https://blog.robsewell.com/checking-for-a-database-backup-with-powershell/" target="_blank" rel="noopener"
+&gt;Show-LastDatabaseBackup&lt;/a&gt; Kev Chant &lt;a class="link" href="https://twitter.com/KevChant" target="_blank" rel="noopener"
+&gt;@KevChant&lt;/a&gt; asked where it was getting the information from and I answered that PowerShell was running SQL commands under the hood against the server and if you ran profiler that is what you would see. We didn’t have time to do that in Cardiff but I thought I would do it today to show what happens&lt;/p&gt;</description></item><item><title>Show The Last Backups On A Server with PowerShell</title><link>https://blog.robsewell.com/blog/show-the-last-backups-on-a-server-with-powershell/</link><pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-the-last-backups-on-a-server-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;The &lt;code&gt;Show-LastServerBackup&lt;/code&gt; function iterates through each database on the server and takes each of the three properties mentioned in &lt;!-- raw HTML omitted --&gt;yesterdays post&lt;!-- raw HTML omitted --&gt;. However this time I created an empty hash table and added each result to it as follows&lt;/p&gt;
+&lt;p&gt;I created the hash table with &lt;code&gt;@()&lt;/code&gt; and then assign each property to a variable inside the loop and add it to a temporary PSObject with some custom NoteProperties to fit the data&lt;/p&gt;</description></item><item><title>Checking For A Database Backup with PowerShell</title><link>https://blog.robsewell.com/blog/checking-for-a-database-backup-with-powershell/</link><pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-for-a-database-backup-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-LastServerBackup.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Last Backup of each database on a server
+# ————————————————————————
+Function Show-LastDatabaseBackup ($SQLServer, $sqldatabase) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$db = $server.Databases[$sqldatabase]
+Write-Output &amp;quot;Last Full Backup&amp;quot;
+$LastFull = $db.lastbackupdate
+if ($lastfull -eq '01 January 0001 00:00:00')
+{$LastFull = 'NEVER'}
+Write-Output $LastFull
+Write-Output &amp;quot;Last Diff Backup&amp;quot;
+$LastDiff = $db.LastDifferentialBackupDate
+if ($lastdiff -eq '01 January 0001 00:00:00')
+{$Lastdiff = 'NEVER'}
+Write-Output $Lastdiff
+Write-Output &amp;quot;Last Log Backup&amp;quot; $lastLog = $db. LastLogBackupDate
+if ($lastlog -eq '01 January 0001 00:00:00')
+{$Lastlog = 'NEVER'}
+Write-Output $lastlog
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
