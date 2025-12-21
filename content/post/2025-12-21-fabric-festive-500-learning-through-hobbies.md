@@ -24,7 +24,6 @@ As the year draws to a close, it's a time for reflection and setting new goals. 
 For the last few years in our house we (My wife Traci [S](https://bsky.app/profile/tracisewell.com) [L](https://www.linkedin.com/in/traci-sewell-5450452bb) and I) have been participating in the [Festive 500](https://content.rapha.cc/us/en/story/festive500), a cycling challenge that encourages riders to cover 500 kilometers between Christmas Eve and New Year's Eve.
 
 There are a couple of reasons that we enjoy this challenge so much. It helps to counterbalance the indulgent eating and drinking that often accompanies the holiday season. (As Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I often say, we exercise so that we can eat more nice food.) It provides a fun and motivating way to stay active during a time of year when it's easy to become sedentary. Finally, it is a challenge that we can do together, that requires some planning and organising and provides a great sense of achievement.
-ogress throughout the challenge.
 
 # This is a tech blog Rob!
 
@@ -61,7 +60,7 @@ I also learn about the human side of creating something for my tech-adjacent wif
 
 ## The Dashboard
 
-To track our progress in the Festive 500, I created a dashboard using Microsoft Fabric. The dashboard pulls in data from Strava and displays it in a visually appealing and easy-to-understand format.
+To track our progress in the Festive 500, I created a dashboard using Microsoft Fabric. The dashboard pulls in data from Strava and displays it in a visually appealing and easy-to-understand format. (This has last years data so that we could see what it looked like :-) )
 
 [![dashboard](assets/uploads/2025/dashboard-front.png)](../../assets/uploads/2025/dashboard-front.png)
 
