@@ -30,7 +30,7 @@ ogress throughout the challenge.
 
 Yup, I hear you. So why am I mentioning this here?
 
-[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](assets/uploads/2025/stravaworkspace.png)
+[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
 
 You can learn a lot about the technology that you work with by creating solutions and solving problems for personal projects and hobbies, just like you do at work.
 
@@ -46,11 +46,11 @@ Mostly, as I am doing this is for fun, there is much less pressure to deliver so
 
 This also means that I am very aware of backup and recovery :-) I use a ProxMox cluster at home to run my homelab, and I make sure that I have regular backups of all of my LXC's and VMs.
 
-[![backups](assets/uploads/2025/backups.png)](assets/uploads/2025/backups.png)
+[![backups](assets/uploads/2025/backups.png)](../../assets/uploads/2025/backups.png)
 
 I make use of the snapshot capabilities of ProxMox to take snapshots before making any major changes or updates to my systems. This way, if something goes wrong, I can easily revert back to a previous state without losing any data.
 
-[![snapshot](assets/uploads/2025/snappy.png)](assets/uploads/2025/snappy.png)
+[![snapshot](assets/uploads/2025/snappy.png)](../../assets/uploads/2025/snappy.png)
 
 I am a heavy user of Git for version control, even for my personal projects. I use GitHub to host my repositories and make sure to commit my changes regularly. This way, I can track my progress and easily revert back to previous versions if needed.
 
@@ -63,7 +63,7 @@ I also learn about the human side of creating something for my tech-adjacent wif
 
 To track our progress in the Festive 500, I created a dashboard using Microsoft Fabric. The dashboard pulls in data from Strava and displays it in a visually appealing and easy-to-understand format.
 
-[![dashboard](assets/uploads/2025/dashboard-front.png)](assets/uploads/2025/dashboard-front.png)
+[![dashboard](assets/uploads/2025/dashboard-front.png)](../../assets/uploads/2025/dashboard-front.png)
 
 The dashboard includes several key features:
 - **Progress Tracking**: A visual representation of our progress towards the 500-kilometer goal, including distance covered, remaining distance, and average speed.
@@ -73,7 +73,7 @@ The dashboard includes several key features:
 
 There is also a Mobile view so that Traci (and I) can check our progress on the go.
 
-[![dashboard-mobile](assets/uploads/2025/dashboard-mobile.png)](assets/uploads/2025/dashboard-mobile.png)
+[![dashboard-mobile](assets/uploads/2025/dashboard-mobile.png)](../../assets/uploads/2025/dashboard-mobile.png)
 
 ## The Fabric Components
 
@@ -81,7 +81,7 @@ I am not going to go into detail on how I built the dashboard here, as that woul
 
 But here is a screen shot of my Fabric workspace.
 
-[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../content/assets/uploads/2025/stravaworkspace.png)
+[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
 
 ## Happy Holidays!
 
