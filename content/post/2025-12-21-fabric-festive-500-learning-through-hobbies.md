@@ -30,6 +30,8 @@ ogress throughout the challenge.
 
 Yup, I hear you. So why am I mentioning this here?
 
+[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](assets/uploads/2025/stravaworkspace.png)
+
 You can learn a lot about the technology that you work with by creating solutions and solving problems for personal projects and hobbies, just like you do at work.
 
 The Festive 500 provides an excellent opportunity to do just that. By tracking our cycling data throughout the challenge, I can create a dashboard that not only helps us to monitor our progress but also to learn and explore things that I dont often get to do in my day job.
@@ -73,7 +75,7 @@ I am not going to go into detail on how I built the dashboard here, as that woul
 
 But here is a screen shot of my Fabric workspace.
 
-[![strava-workspace](assets/uploads/2025/strava-workspace.png)](assets/uploads/2025/strava-workspace.png)
+[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](assets/uploads/2025/stravaworkspace.png)
 
 ## Happy Holidays!
 
