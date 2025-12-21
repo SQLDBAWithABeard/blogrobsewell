@@ -44,7 +44,13 @@ For me, it is much easier to understand things when I am actually creating somet
 
 Mostly, as I am doing this is for fun, there is much less pressure to deliver something perfect and usually there is no time pressure either. It gives me the freedom to experiment and explore without the constraints often found in work projects. I delete it and restart if I want to, or try something completely different.
 
-This also means that I am very aware of backup and recovery :-) I use a ProxMox cluster at home to run my homelab, and I make sure that I have regular backups of all of my LXC's and VMs. I make use of the snapshot capabilities of ProxMox to take snapshots before making any major changes or updates to my systems. This way, if something goes wrong, I can easily revert back to a previous state without losing any data.
+This also means that I am very aware of backup and recovery :-) I use a ProxMox cluster at home to run my homelab, and I make sure that I have regular backups of all of my LXC's and VMs.
+
+[![backups](assets/uploads/2025/backups.png)](assets/uploads/2025/backups.png)
+
+I make use of the snapshot capabilities of ProxMox to take snapshots before making any major changes or updates to my systems. This way, if something goes wrong, I can easily revert back to a previous state without losing any data.
+
+[![snapshot](assets/uploads/2025/snappy.png)](assets/uploads/2025/snappy.png)
 
 I am a heavy user of Git for version control, even for my personal projects. I use GitHub to host my repositories and make sure to commit my changes regularly. This way, I can track my progress and easily revert back to previous versions if needed.
 
