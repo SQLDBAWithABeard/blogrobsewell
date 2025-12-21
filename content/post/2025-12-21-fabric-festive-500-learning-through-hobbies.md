@@ -81,7 +81,7 @@ I am not going to go into detail on how I built the dashboard here, as that woul
 
 But here is a screen shot of my Fabric workspace.
 
-[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](assets/uploads/2025/stravaworkspace.png)
+[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../content/assets/uploads/2025/stravaworkspace.png)
 
 ## Happy Holidays!
 
