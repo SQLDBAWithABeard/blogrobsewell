@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oslo on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/oslo/</link><description>Recent content in Oslo on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/oslo/index.xml" rel="self" type="application/rss+xml"/><item><title>dbachecks v3 at Data Saturday Oslo</title><link>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-session.jpeg" alt="Featured image of post dbachecks v3 at Data Saturday Oslo" /&gt;&lt;h1 id="dbachecks-v3-at-data-saturday-oslo"&gt;dbachecks v3 at Data Saturday Oslo
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/datasaturdayoslo-session.jpeg"
+loading="lazy"
+alt="dbachecksv3"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On Saturday September 2nd 2023, will be &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;Data Saturday Oslo&lt;/a&gt; in Oslo, Norway.&lt;/p&gt;
+&lt;p&gt;For more information about this free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;DataSaturday0035&lt;/a&gt; where you can sign up. Don&amp;rsquo;t wait, spaces are limited!&lt;/p&gt;
+&lt;p&gt;I will be presenting a session with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+&gt;Mastodon&lt;/a&gt; and Cláudio Silva &lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; introducing dbachecks v3.&lt;/p&gt;
+&lt;h2 id="abstract"&gt;abstract
+&lt;/h2&gt;&lt;p&gt;dbachecks v1 was released back in 2018, bringing together the DBA PowerShell magic of dbatools with pester, a PowerShell testing framework to create a powerful infrastructure validation tool.&lt;/p&gt;</description></item><item><title>The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo</title><link>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</link><pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-trainingday.png" alt="Featured image of post The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo" /&gt;&lt;h2 id="jess-and-rob-are-doing-training-in-oslo-in-september-at-data-saturday-oslo"&gt;Jess and Rob are doing training in Oslo in September at Data Saturday Oslo
+&lt;/h2&gt;&lt;p&gt;On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+&gt;Mastodon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ready to take your DBA skills to the next level in a hybrid environment?
+Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+&gt;Register Here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Designed specifically for DBAs working in hybrid environments, this training day will equip you with the knowledge and tools needed to excel in your role. Whether you&amp;rsquo;re managing on-premises databases, Platform as a Service (PaaS) offerings, or Azure virtual machines, this training has you covered.&lt;/p&gt;</description></item></channel></rss>
