@@ -1,11 +1,11 @@
 ---
 title: "Show AutoGrowth Events with PowerShell to CSV"
 date: "2015-02-15"
-date: "2015-02-15" 
-categories: 
+
+categories:
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - Auto Growth
   - automate
   - automation
@@ -58,7 +58,7 @@ param
 
 Now when I am asked again to provide this information it is as easy as typing
 
-`Show-AutogrowthServer -Server SQL2014Ser12R2` 
+`Show-AutogrowthServer -Server SQL2014Ser12R2`
 
 or
 

@@ -1,6 +1,6 @@
 ---
 title: "Create a Microsoft Fabric Warehouse with PowerShell"
-date: "2025-06-03"
+date: "2027-06-03"
 categories:
   - Blog
   - Microsoft Fabric

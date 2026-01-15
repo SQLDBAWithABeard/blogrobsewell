@@ -1,12 +1,12 @@
 ---
 title: "Populating My DBA Database for Power Bi with PowerShell - SQL Info"
 date: "2015-09-07"
-date: "2015-09-07" 
-categories: 
+
+categories:
   - Power Bi
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - automate
   - automation
   - DBA Database
@@ -85,7 +85,7 @@ CREATE TABLE [Info].[SQLInfo](
 	[InstanceID] [int] NULL,
 	[AGListener] [nvarchar](150) NULL,
 	[AGs] [nvarchar](150) NULL,
- CONSTRAINT [PK__SQL__50A5926BC7005F29] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK__SQL__50A5926BC7005F29] PRIMARY KEY CLUSTERED
 (
 	[SQLInfoID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -105,7 +105,7 @@ The PowerShell script uses Jason Wasser @wasserja Write-Log function to write to
 To run the script I simply need to add the values for
 ```
 $CentralDBAServer = '' ## Add the address of the instance that holds the DBADatabase
-$CentralDatabaseName = 'DBADatabase' 
+$CentralDatabaseName = 'DBADatabase'
 $LogFile = "\DBADatabaseServerUpdate_" + $Date + ".log" ## Set Path to Log File
 ```
 And the script will do the rest. Call the script from a PowerShell Job Step and schedule it to run at the frequency you wish, I gather the information every week. You can get [the script from here](http://1drv.ms/1N4fqxt) or you can read on to see how it works and how to create the report and publish it to powerbi.com
@@ -129,7 +129,7 @@ I give the function an additional parameter which will hold each custom error me
       ,[InstanceName]
       ,[Port]
   FROM [DBADatabase].[dbo].[InstanceList]
-  Where Inactive = 0 
+  Where Inactive = 0
     AND NotContactable = 0
 "@
 try{
@@ -144,7 +144,7 @@ foreach ($ServerName in $ServerNames)
 ## $ServerName
  $InstanceName =  $ServerName|Select InstanceName -ExpandProperty InstanceName
  $Port = $ServerName| Select Port -ExpandProperty Port
-$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName 
+$ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
  $Connection = $ServerName + '\' + $InstanceName + ',' + $Port
 
  try
@@ -153,7 +153,7 @@ $ServerName = $ServerName|Select ServerName -ExpandProperty ServerName
 ```
 Even though I place the creation of the SMO server object in a try block you still need to an additional check to ensure that you can connect and populate the object as the code above creates an empty SMO Server object with the name property set to the $Connection variable if you can't connect to that server and doesn’t error as you may expect The way I have always validated an SMO Server object is to check the version property. There is no justifiable reason for choosing that property, you could choose any one but that’s the one I have always used. I use an if statement to do this ( [This post about Snippets will show you the best way to learn PowerShell code](http://wp.me/p3aio8-cL)) The reference I use for exiting a loop in the way that you want is [this one](http://ss64.com/ps/break.html) In this case we use a continue to carry on iterating the loop
 
-``` 
+```
 if (!( $srv.version)){
  Catch-Block " Failed to Connect to $Connection"
  continue
@@ -213,7 +213,7 @@ This is how I create the two reports you see at the top. I start by connecting t
 
 And I use this query
 ```
-SELECT 
+SELECT
 	IL.ServerName
 	,IL.InstanceName
 	  ,IL.Location

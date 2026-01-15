@@ -1,10 +1,10 @@
 ---
 title: "Using Power Bi with my DBA Database"
 date: "2015-08-16"
-date: "2015-08-16" 
-categories: 
+
+categories:
   - SQL Server
-tags: 
+tags:
   - SQL Agent Jobs
   - automate
   - automation

@@ -1,11 +1,11 @@
 ---
 title: "Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell"
 date: "2015-05-06"
-date: "2015-05-06" 
-categories: 
+
+categories:
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - SQL Agent Jobs
   - automate
   - automation
@@ -69,17 +69,17 @@ $Schedule.Create()
 ```
 I have picked this example for the blog as it shows some of the less obvious gotchas. Setting the active end date could only be achieved by using the Get-Date Cmdlet and defining the date. The schedule frequency interval above is for every day except Sundays. This achieved by using the following table from [MSDN](https://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.agent.jobschedule.frequencyinterval.aspx?WT.mc_id=DP-MVP-5002693) which is always my first port of call when writing these scripts
 
-> - WeekDays.Sunday = 1 
-> - WeekDays.Monday = 2 
-> - WeekDays.Tuesday = 4 
-> - WeekDays.Wednesday = 8 
-> - WeekDays.Thursday = 16 
-> - WeekDays.Friday = 32 
-> - WeekDays.Saturday = 64 
-> - WeekDays.WeekDays = 62 
-> - WeekDays.WeekEnds = 65 
+> - WeekDays.Sunday = 1
+> - WeekDays.Monday = 2
+> - WeekDays.Tuesday = 4
+> - WeekDays.Wednesday = 8
+> - WeekDays.Thursday = 16
+> - WeekDays.Friday = 32
+> - WeekDays.Saturday = 64
+> - WeekDays.WeekDays = 62
+> - WeekDays.WeekEnds = 65
 > - WeekDays.EveryDay = 127
-> 
+>
 > Combine values using an OR logical operator to set more than a single day. For example, combine WeekDays.Monday and WeekDays.Friday (FrequencyInterval = 2 + 32 = 34) to schedule an activity for Monday and Friday.
 
 It is easy using this to set up whichever schedule you wish by combining the numbers. I would advise commenting it in the script so that your future self or following DBAs can understand what is happening.

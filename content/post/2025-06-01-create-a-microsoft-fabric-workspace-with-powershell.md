@@ -1,6 +1,6 @@
 ---
 title: "Create a Microsoft Fabric Workspace with PowerShell"
-date: "2025-06-01"
+date: "2027-06-01"
 categories:
   - Blog
   - Microsoft Fabric

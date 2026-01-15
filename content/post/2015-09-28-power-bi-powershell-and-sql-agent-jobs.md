@@ -1,12 +1,12 @@
 ---
 title: "Power Bi, PowerShell and SQL Agent Jobs"
 date: "2015-09-28"
-date: "2015-09-28" 
-categories: 
+
+categories:
   - Power Bi
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - SQL Agent Jobs
   - automate
   - automation
@@ -103,7 +103,7 @@ try {
         {$successCount += 1; }
         elseif ($jobLastRunOutcome -eq "Unknown")
         {$UnknownCount += 1; }
-    }    
+    }
 }
 ```
 I found that some Jobs had names and descriptions that had ' in them which would cause the SQL update or insert statement to fail so I use the replace method to replace the ' with ''

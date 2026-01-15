@@ -1,12 +1,12 @@
 ---
 title: "Parsing XML Child Nodes and Converting to DateTime with PowerShell"
 date: "2015-03-21"
-date: "2015-03-21" 
-categories: 
+
+categories:
   - Community
   - PowerShell
   - SQL Server
-tags: 
+tags:
   - SQL Saturday Exeter
   - Event Organising
 ---

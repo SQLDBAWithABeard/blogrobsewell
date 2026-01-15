@@ -1,6 +1,6 @@
 ---
 title: "Create a Microsoft Fabric Lakehouse with PowerShell"
-date: "2025-06-04"
+date: "2027-06-04"
 categories:
   - Blog
   - Microsoft Fabric
