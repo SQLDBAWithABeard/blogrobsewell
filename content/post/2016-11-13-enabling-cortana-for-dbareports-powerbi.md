@@ -8,7 +8,7 @@ tags:
   - cortana
   - dbareports
   - dbatools
- 
+
 image: assets/uploads/2016/11/cortana-search-2.png
 ---
 Last week at the Birmingham user group I gave a presentation about PowerShell and SQL Server
@@ -60,9 +60,9 @@ To publish your PowerBi report to [PowerBi.com](https://powerbi.com) either via 
 
 or by using the [PowerBiPS module](https://github.com/DevScope/powerbi-powershell-modules)
 ```
- Install-Module -Name PowerBIPS  
- #Grab the token, will require a sign in  
- $authToken = Get-PBIAuthToken –Verbose  
+ Install-Module -Name PowerBIPS
+ #Grab the token, will require a sign in
+ $authToken = Get-PBIAuthToken –Verbose
  Import-PBIFile –authToken $authToken –filePath “Path to PBIX file” –verbose
 ```
 Enable Cortana
@@ -123,6 +123,10 @@ or
 > When was the last backup for client The Eagles
 
 and get the information they require and a link to the report in PowerBi.com. I am certain that the suits will be absolutely delighted at being able to show off in that way which is why I call it a salary increasing opportunity 🙂
+
+https://youtu.be/-bPqhDK3WGs
+
+ {{< youtube -bPqhDK3WGs >}}
 
 We would love YOU to come and join us at the SQL Community Collaborative
 ------------------------------------------------------------------------
