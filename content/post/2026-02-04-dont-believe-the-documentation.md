@@ -149,8 +149,12 @@ I spent some time investigating, trying different batch sizes, I never got the a
 
 I worked out that only a batch size of 50 was providing any success and less than that was more reliable.
 
-I had to repeatedly run the script with a batch size of 40 until almost all of the links were removed.
+I had to repeatedly run the script with a batch size of 40 until almost all of the links were removed. Each time, I ran through the entire list of links to remove. In another session I checked every minute or so the number of remaining links. I could run through the whole list of links and no links would be removed, then the next time through I would see a few links removed, then none, then a few more, then none, and so on.
 
-Then I worked through the last couple of hundred of links with a batch size of 10, then 5, then finally 1.
+I resynced the number of links and removed the ones that needed to remain a couple of times. In hindsight, I should have stored these in a datastore to make this look up simpler and not so time intensive.
+
+Each time I looped through the links to remove, I hoped that it woud remove all of the links but it was a case of rinse and repeat, and each time I would see some links removed but not all of them. I had to keep running through the list of links to remove until eventually all of the unwanted links were removed.
+
+Then as the script worked through the last couple of hundred of links a batch size of 10, then 5, then finally 1 was the only way that any links would be removed.
 
 An annoying and time consuming process, but eventually all of the unwanted links were removed and luckily the powers that be were understanding of the time taken and the reasons why.
