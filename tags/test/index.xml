@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Test on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/test/</link><description>Recent content in Test on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 19 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/test/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Docker to run Integration Tests for dbachecks</title><link>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</link><pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</guid><description>&lt;p&gt;My wonderful friend &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+&gt;André Kamman&lt;/a&gt; wrote a fantastic blog post this week &lt;a class="link" href="https://andrekamman.com/sql-server-container-instances-via-cloudshell/" target="_blank" rel="noopener"
+&gt;SQL Server Container Instances via Cloudshell&lt;/a&gt; about how he uses containers in Azure to test code against different versions of SQL Server.&lt;/p&gt;
+&lt;p&gt;It reminded me that I do something very similar to test &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend &lt;a class="link" href="https://github.com/ClaudioESSilva" target="_blank" rel="noopener"
+&gt;Cláudio Silva&lt;/a&gt; who has added &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks/pull/582" target="_blank" rel="noopener"
+&gt;agent job history checks.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p&gt;In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+&gt;how to write your first Pester test&lt;/a&gt; to validate something. Here’s a recap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decide the information you wish to test&lt;/li&gt;
+&lt;li&gt;Understand how to get it with PowerShell&lt;/li&gt;
+&lt;li&gt;Understand what makes it pass and what makes it fail&lt;/li&gt;
+&lt;li&gt;Write a Pester Test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p&gt;</description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p&gt;In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+&gt;how to write your first Pester test&lt;/a&gt; to validate something. Here’s a recap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decide the information you wish to test&lt;/li&gt;
+&lt;li&gt;Understand how to get it with PowerShell&lt;/li&gt;
+&lt;li&gt;Understand what makes it pass and what makes it fail&lt;/li&gt;
+&lt;li&gt;Write a Pester Test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p&gt;</description></item><item><title>Creating a PowerShell Module and TDD for Get-SQLDiagRecommendations</title><link>https://blog.robsewell.com/blog/creating-a-powershell-module-and-tdd-for-get-sqldiagrecommendations/</link><pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-powershell-module-and-tdd-for-get-sqldiagrecommendations/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item></channel></rss>

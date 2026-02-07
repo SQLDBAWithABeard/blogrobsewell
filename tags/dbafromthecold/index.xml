@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dbafromthecold on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dbafromthecold/</link><description>Recent content in Dbafromthecold on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 10 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dbafromthecold/index.xml" rel="self" type="application/rss+xml"/><item><title>Creating SQL Server Containers for versions 2012-2017</title><link>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</link><pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-server-containers-for-versions-2012-2017/</guid><description>&lt;p&gt;I am working on my &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; and &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; presentations for &lt;a class="link" href="http://www.sqlsaturday.com/735/eventhome.aspx" target="_blank" rel="noopener"
+&gt;SQL Saturday Finland&lt;/a&gt;, &lt;a class="link" href="https://sqlday.pl/" target="_blank" rel="noopener"
+&gt;SQLDays&lt;/a&gt;, &lt;a class="link" href="http://www.sqlsaturday.com/742/EventHome.aspx" target="_blank" rel="noopener"
+&gt;SQL Saturday Cork&lt;/a&gt; and &lt;a class="link" href="https://sqlgrillen.de/" target="_blank" rel="noopener"
+&gt;SQLGrillen&lt;/a&gt; I want to show the two modules running against a number of SQL Versions so I have installed&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2 Domain Controllers&lt;/li&gt;
+&lt;li&gt;2 SQL 2017 instances on Windows 2016 with an Availability Group and WideWorldImporters database&lt;/li&gt;
+&lt;li&gt;1 Windows 2016 jump box with all the programmes I need&lt;/li&gt;
+&lt;li&gt;1 Windows 2016 with containers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;using a VSTS build and this set of &lt;a class="link" href="https://github.com/SQLDBAWithABeard/ARMTemplates/tree/master/DeployAlwaysOn" target="_blank" rel="noopener"
+&gt;ARM templates and scripts&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
