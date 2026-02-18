@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../clonedforked/fabric-toolbox/tools/MicrosoftFabricMgmt"
+		}
+	],
+	"settings": {}
+}
