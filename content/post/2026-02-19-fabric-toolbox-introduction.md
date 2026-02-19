@@ -48,7 +48,7 @@ A FinOps solution that pulls cost data from Azure Cost Management and breaks it 
 
 This is the one I am most invested in, because Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I have been contributing to it heavily. It is a PowerShell module with over 295 cmdlets covering 48 Fabric resource types — workspaces, Lakehouses, Warehouses, Notebooks, Real-Time Intelligence, RBAC, the Admin API, and more. We will spend two weeks going through it in depth.
 
-## 4 Will be no surprise.
+##4. Will be no surprise.
 
 ## Why Does This Matter?
 
