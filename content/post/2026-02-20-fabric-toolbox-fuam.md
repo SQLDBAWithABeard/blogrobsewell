@@ -17,27 +17,27 @@ image: https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/mai
 
 ## Introduction
 
-Yesterday I [introduced fabric-toolbox](https://blog.robsewell.com/blog/microsoft-fabric/powershell/fabric-toolbox-introduction/) — Microsoft's community-driven repository of Fabric accelerators. Today we look at one of its flagship solutions: **FUAM, the Fabric Unified Admin Monitoring** solution.
+Yesterday I [introduced fabric-toolbox](https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/) — Microsoft's community-driven repository of Fabric accelerators. Today we look at one of its flagship solutions: **FUAM, the Fabric Unified Admin Monitoring** solution.
 
 When you are responsible for a Microsoft Fabric tenant, it will not be very long before you are facing many questions.
 
 Questions like:
 
-- how is my capacity being used?
+- How is my capacity being used?
 - Which workspaces are consuming the most resources?
 - What are my users actually doing?
+- When are my peak usage times?
 
-It does this using Fabric's own native capabilities — no external infrastructure required and stores all that data in a Lakehouse that you can retain for as long as you like.
+You can scabble aroung in the Admin portal and try to piece together the answers, but it is a bit like trying to navigate a city with a paper map — you can get there eventually, but it is slow and painful, and you will probably miss some things along the way.
 
 ## What Is FUAM?
 
-FUAM is a monitoring solution for Microsoft Fabric administrators. It gives you a holistic, near real-time view of your Fabric platform across three main dimensions:
+FUAM is a monitoring solution for Microsoft Fabric administrators. It gives you a holistic, near real-time view of your Fabric platform depending on how frequently you schedule the data collection notebooks to run. It is designed to be a one-stop-shop for all your monitoring needs, providing insights into capacity utilisation, workspace inventory, user activity, and overall health of your Fabric tenant.
 
-- **Capacity utilisation** — how much of your Fabric capacity is being consumed, by whom, and at what times
-- **Workspace and item inventory** — what exists in your tenant, across all workspaces
-- **User activity** — who is doing what, when, across your Fabric environment
+Using FUAM I am able to answer all of those questions and more, and provide folk with  3 bazillion* reports and dashboards to explore the data themselves.
+(*Number may be slightly exaggerated but you get the idea)
 
-The key thing about FUAM is that it is built entirely with Fabric's own capabilities. The data collection, storage, and visualisation all happen inside Fabric itself — using Notebooks (PySpark) for data collection, a Lakehouse for storage, and Power BI reports for visualisation. There is no external database, no external compute, no Azure infrastructure outside of Fabric to manage. Yes, it does consume CUs to run the data collection notebooks and the SQL endpoint for the reports, but that is all part of your Fabric capacity.
+It is all built using Fabric's own native capabilities so can also learn about how to use those capabilities by looking at how FUAM is built. The code is all open source and well documented, so you can see exactly how it works and even contribute if you want to.
 
 [![The fuam core report](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png)](![link](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png))
 
@@ -49,35 +49,28 @@ The README is comprehensive and walks you through the prerequisites, deployment 
 
 ## What You Get
 
-Once deployed, FUAM provides dashboards covering:
+Once deployed, FUAM provides dashboards covering a range of monitoring aspects.
 
-**Capacity Monitoring**
-- CU (Capacity Unit) utilisation over time — smoothed and burst views
-- Which operations and workspaces are driving consumption
-- Throttling alerts — when you are approaching or hitting capacity limits
-- SKU efficiency analysis
-- No deletion of data older than 14 days like the Capacity Metrics App. This is more useful than you might think, because it allows you to do things like correlate CU consumption with specific reports or activities that you know happened at a certain time, and it allows you to build up a picture of usage patterns over time.
+No deletion of data older than 14 days like the Capacity Metrics App. This is more useful than you might think, because it allows you to do things like correlate CU consumption with specific reports or activities that you know happened at a certain time, and it allows you to build up a picture of usage patterns over time.
 
-**Workspace and Item Inventory**
-- All workspaces in your tenant with their assigned capacities
-- Item counts by type and workspace
-- Orphaned workspaces (no capacity assigned, or no active users)
+FUAM extracts the following data from the tenant:
 
-**User Activity**
-- Active users over time
-- Operations by user and by operation type
-- Peak usage times
+Tenant Settings
+Delegated Tenant Settings
+Activities
+Workspaces
+Capacities
+Capacity Metrics
+Tenant meta data (Scanner API)
+Capacity Refreshables
+Git Connections
 
-**Capacity Health**
-- Overload periods
-- Autoscale trigger history (if you use autoscale)
-- Recommendations for right-sizing
+Full list of the reports are [here](https://github.com/microsoft/fabric-toolbox/blob/main/monitoring/fabric-unified-admin-monitoring/media/documentation/FUAM_Core_Report.md)
 
 ## How It Works
 
-FUAM collects data using the Fabric REST APIs and the Microsoft 365 audit log, ingests it into a Lakehouse, and transforms it using PySpark notebooks. Power BI reports connect to the Lakehouse's SQL endpoint to provide the dashboards.
+FUAM collects data using the Fabric REST APIs and the Microsoft 365 audit log, ingests it into a Lakehouse, and transforms it using PySpark notebooks. Power BI reports connect to the Lakehouse's SQL endpoint to provide the dashboards. Simples yeah ? :-) (When somebody else has built it for you!)
 
-The data collection notebooks are designed to be scheduled — typically running every 15-30 minutes for near real-time capacity data, and daily for inventory and activity data.
 
 ## Deployment Overview
 
