@@ -25,12 +25,12 @@ url = "https://github.com/SqlDbaWithABeard"
 icon = "brand-github"
 
 [[social]]
-identifier = "twitter"
-name = "Twitter"
-url = "https://twitter.com/sqldbawithbeard"
+identifier = "githubjr"
+name = "GitHubJR"
+url = "https://github.com/JessandRob"
 
 [social.params]
-icon = "brand-twitter"
+icon = "brand-github"
 
 
 [[social]]
