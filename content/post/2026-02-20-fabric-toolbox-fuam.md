@@ -28,7 +28,7 @@ Questions like:
 - What are my users actually doing?
 - When are my peak usage times?
 
-You can scabble aroung in the Admin portal and try to piece together the answers, but it is a bit like trying to navigate a city with a paper map — you can get there eventually, but it is slow and painful, and you will probably miss some things along the way.
+You can scabble around in the Admin portal and try to piece together the answers, but it is a bit like trying to navigate a city with a paper map — you can get there eventually, but it is slow and painful, and you will probably miss some things along the way.
 
 ## What Is FUAM?
 
@@ -55,15 +55,15 @@ No deletion of data older than 14 days like the Capacity Metrics App. This is mo
 
 FUAM extracts the following data from the tenant:
 
-Tenant Settings
-Delegated Tenant Settings
-Activities
-Workspaces
-Capacities
-Capacity Metrics
-Tenant meta data (Scanner API)
-Capacity Refreshables
-Git Connections
+- Tenant Settings
+- Delegated Tenant Settings
+- Activities
+- Workspaces
+- Capacities
+- Capacity Metrics
+- Tenant meta data (Scanner API)
+- Capacity Refreshables
+- Git Connections
 
 Full list of the reports are [here](https://github.com/microsoft/fabric-toolbox/blob/main/monitoring/fabric-unified-admin-monitoring/media/documentation/FUAM_Core_Report.md)
 
@@ -77,11 +77,11 @@ FUAM collects data using the Fabric REST APIs and the Microsoft 365 audit log, i
 Deployment involves:
 
 1. Creating a dedicated workspace for FUAM in your Fabric tenant
-2. Running the setup notebook from the repository, which creates the Lakehouse, tables, and report
+2. Running the setup notebook from the repository, which creates the Lakehouse, tables, semantic models, and reports
 3. Configuring authentication (FUAM uses a Service Principal to call the Fabric Admin APIs)
 4. Scheduling the data collection notebooks using Fabric's built-in job scheduler
 
-The full step-by-step is in the FUAM README. The Azure portal permissions (granting the Service Principal Fabric Admin access) are the step that tends to catch people out — make sure you follow those carefully.
+The full step-by-step is in the FUAM README. The SPN permissions are the step that tends to catch people out — make sure you follow those carefully.
 
 ## Best of all
 
@@ -91,7 +91,7 @@ For example, last week I used it to identify the details of over 40 thousand rep
 
 You can also build queries on top of the FUAM Lakehouse to enable other teams to help themselves to the data they need without having to give them direct access to the Admin API or run their own data collection.
 
-Trying to build your own Fabric monitoring solutions from scratch is a significant amount of work — API pagination, schema management, Power BI data modelling, refresh scheduling. FUAM does all of that for you, and it is maintained by the CAT team and community, so it improves over time.
+Trying to build your own Fabric monitoring solutions from scratch is a significant amount of work — API pagination, schema management, Power BI data modelling, refresh scheduling. FUAM does all of that for you, and it is maintained by the CAT team and the community, so it improves over time.
 
 If you are managing a Fabric tenant of any real size, FUAM is worth the deployment effort. A few hours of setup buys you ongoing visibility that would otherwise take weeks to build yourself.
 
