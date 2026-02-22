@@ -11,7 +11,7 @@ tags:
   - MicrosoftFabricMgmt
   - Automation
   - PSFramework
-image: assets/uploads/2026/02/microsoftfabricmgmt-intro.png
+image: assets/uploads/2026/02/breakingchanges.png
 ---
 
 ## Introduction

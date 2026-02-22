@@ -11,7 +11,7 @@ tags:
   - MicrosoftFabricMgmt
   - Automation
   - Authentication
-image: assets/uploads/2026/02/microsoftfabricmgmt-install.png
+image: assets/uploads/2026/02/intro.png
 ---
 
 ## Introduction
