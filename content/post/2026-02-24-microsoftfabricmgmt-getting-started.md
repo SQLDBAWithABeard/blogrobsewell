@@ -16,7 +16,7 @@ image: assets/uploads/2026/02/microsoftfabricmgmt-install.png
 
 ## Introduction
 
-Yesterday I [introduced the MicrosoftFabricMgmt module](https://blog.robsewell.com/blog/microsoft-fabric/powershell/introducing-microsoftfabricmgmt/) and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.
+Yesterday I [introduced the MicrosoftFabricMgmt module](https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started) and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.
 
 By the end of this post you will have the module installed, be authenticated, and have your first list of Fabric workspaces in your terminal.
 
