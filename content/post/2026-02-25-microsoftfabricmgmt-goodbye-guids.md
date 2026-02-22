@@ -12,7 +12,7 @@ tags:
   - Automation
   - PSFramework
   - Output Formatting
-image: assets/uploads/2026/02/microsoftfabricmgmt-formatting.png
+image: assets/uploads/2026/02/workspaces.png
 ---
 
 ## Introduction
