@@ -30,7 +30,7 @@ You can check your version with:
 $PSVersionTable.PSVersion
 ```
 
-[![PowerShell 7.4.3 version output displayed in terminal showing Major 7, Minor 4, Patch 3](../assets/uploads/2026/02/psversion.png)](../assets/uploads/2026/02/psversion.png)
+[![PowerShell 7.4.3 version output displayed in terminal showing Major 7, Minor 4, Patch 3](../assets/uploads/2026/02/psversion.png)](../../assets/uploads/2026/02/psversion.png)
 
 ## Installing the Module
 
@@ -60,7 +60,7 @@ Once installed, verify it is available:
 ```powershell
 Get-PsResource -Name MicrosoftFabricMgmt
 ```
-[![Get-PsResource output displaying MicrosoftFabricMgmt version 1.0.4 from PSGallery with module description](../assets/uploads/2026/02/get-psresource.png)](../assets/uploads/2026/02/get-psresource.png)
+[![Get-PsResource output displaying MicrosoftFabricMgmt version 1.0.4 from PSGallery with module description](../assets/uploads/2026/02/get-psresource.png)](../../assets/uploads/2026/02/get-psresource.png)
 
 ## Authentication
 
@@ -87,16 +87,16 @@ Set-FabricApiHeaders -TenantId (Get-Secret -Name FabricTenantId -AsPlainText)
 
 After running `Set-FabricApiHeaders`, your browser or a window will open and prompt you to sign in.
 
-[![Set-FabricApiHeaders authentication dialog showing browser sign-in window with account selection options and Continue button](../assets/uploads/2026/02/setfabricapi.png)](../assets/uploads/2026/02/setfabricapi.png)
+[![Set-FabricApiHeaders authentication dialog showing browser sign-in window with account selection options and Continue button](../assets/uploads/2026/02/setfabricapi.png)](../../assets/uploads/2026/02/setfabricapi.png)
 
 Once authenticated, the module stores your token securely for use in future commands in this session. It will also show how long the token is valid for, so you know when you will need to re-authenticate.
 
-[![Post-login token information displaying token validity and expiration](../assets/uploads/2026/02/postlogin.png)](../assets/uploads/2026/02/postlogin.png)
+[![Post-login token information displaying token validity and expiration](../assets/uploads/2026/02/postlogin.png)](../../assets/uploads/2026/02/postlogin.png)
 
 
 When the token expires, you will need to re-authenticate, any MicrosoftFabricMgmt commands will inform you with a helpful message.
 
-[![Terminal warning message displayed in blue text on dark background stating Breaking Change notice with details about API changes in MicrosoftFabricMgmt module version 1.0.4, advising users to review documentation and update scripts accordingly](../assets/uploads/2026/02/tokenrunout.png)](../assets/uploads/2026/02/tokenrunout.png)
+[![Terminal warning message displayed in blue text on dark background stating Breaking Change notice with details about API changes in MicrosoftFabricMgmt module version 1.0.4, advising users to review documentation and update scripts accordingly](../assets/uploads/2026/02/tokenrunout.png)](../../assets/uploads/2026/02/tokenrunout.png)
 
 ## Breaking Changes
 
@@ -115,7 +115,7 @@ With authentication sorted, let us make sure everything is working:
 Get-FabricWorkspace
 ```
 
-[![Get-FabricWorkspace command output displaying a formatted table with four workspaces. The table columns are Capacity Name, Workspace Name, and Type. Capacity Name shows N/A for most entries except one Trial entry. Workspace names include My workspace (Personal type), BlogPostWorkspace (Workspace type), BeardandPurple (Workspace type), and Microsoft Fabric Capacity Metrics (Workspace type). The output demonstrates the modules intelligent formatting that displays human-readable workspace names instead of GUIDs](../assets/uploads/2026/02/get-fabricworkspace.png)](../assets/uploads/2026/02/get-fabricworkspace.png)
+[![Get-FabricWorkspace command output displaying a formatted table with four workspaces. The table columns are Capacity Name, Workspace Name, and Type. Capacity Name shows N/A for most entries except one Trial entry. Workspace names include My workspace (Personal type), BlogPostWorkspace (Workspace type), BeardandPurple (Workspace type), and Microsoft Fabric Capacity Metrics (Workspace type). The output demonstrates the modules intelligent formatting that displays human-readable workspace names instead of GUIDs](../assets/uploads/2026/02/get-fabricworkspace.png)](../../assets/uploads/2026/02/get-fabricworkspace.png)
 
 You should see your workspaces listed with their display names. Notice how the output shows the **Capacity Name** alongside the workspace details — not raw GUIDs. That is the intelligent output formatting built into the module, and it is the subject of tomorrow's post.
 
@@ -128,7 +128,7 @@ Get-FabricWorkspace -WorkspaceName workyII | Format-List
 Get-FabricWorkspace -WorkspaceName 'Humans read words not GUIDS'
 ```
 
-[![Get-FabricWorkspace command output in dark PowerShell terminal showing a formatted table with Capacity Name, Workspace Name, and Type columns. The table displays multiple workspaces: My workspace (Personal type, N/A capacity), BlogPostWorkspace, BeardandPurple, Microsoft Fabric Capacity Metrics, Strava, NoReports, worky1, workyII, and Humans read words not GUIDS (all Workspace type, N/A capacity except one Trial capacity entry). The command prompt shows mrrob >> in green text. The output demonstrates the modules intelligent formatting that displays human-readable workspace names instead of GUIDs](../assets/uploads/2026/02/get-fabricworkspace1.png)](../assets/uploads/2026/02/get-fabricworkspace1.png)
+[![Get-FabricWorkspace command output in dark PowerShell terminal showing a formatted table with Capacity Name, Workspace Name, and Type columns. The table displays multiple workspaces: My workspace (Personal type, N/A capacity), BlogPostWorkspace, BeardandPurple, Microsoft Fabric Capacity Metrics, Strava, NoReports, worky1, workyII, and Humans read words not GUIDS (all Workspace type, N/A capacity except one Trial capacity entry). The command prompt shows mrrob >> in green text. The output demonstrates the modules intelligent formatting that displays human-readable workspace names instead of GUIDs](../assets/uploads/2026/02/get-fabricworkspace1.png)](../../assets/uploads/2026/02/get-fabricworkspace1.png)
 
 ## Confirming Module Configuration
 
@@ -137,7 +137,7 @@ PSFramework powers the module's configuration system. You can inspect all the co
 ```powershell
 Get-PSFConfig -Module MicrosoftFabricMgmt
 ```
-[![Terminal output showing Get-PSFConfig results for MicrosoftFabricMgmt module settings. The table displays configuration properties including Api.BaseUrl (base URL for Microsoft Fabric API endpoints), Api.ResourceUrl (Azure resource URL for token acquisition), Api.RetryBackoffMultiplier (exponential backoff multiplier set to 2), Api.RetryMaxAttempts (maximum retry attempts set to 3), Api.TimeoutSeconds (default timeout of 30 seconds), Auth.TokenRefreshThresholdSeconds (token refresh threshold of 300 seconds), and Json.DefaultDepth (default JSON conversion depth of 10). Dark terminal background with green command prompt text showing mrrob >>](../assets/uploads/2026/02/config.png)](../assets/uploads/2026/02/config.png)
+[![Terminal output showing Get-PSFConfig results for MicrosoftFabricMgmt module settings. The table displays configuration properties including Api.BaseUrl (base URL for Microsoft Fabric API endpoints), Api.ResourceUrl (Azure resource URL for token acquisition), Api.RetryBackoffMultiplier (exponential backoff multiplier set to 2), Api.RetryMaxAttempts (maximum retry attempts set to 3), Api.TimeoutSeconds (default timeout of 30 seconds), Auth.TokenRefreshThresholdSeconds (token refresh threshold of 300 seconds), and Json.DefaultDepth (default JSON conversion depth of 10). Dark terminal background with green command prompt text showing mrrob >>](../assets/uploads/2026/02/config.png)](../../assets/uploads/2026/02/config.png)
 This shows things like the API base URL, timeout settings, retry attempts, and backoff multiplier. You can adjust these if needed — for example, if you want more retry attempts for a flaky network:
 
 ```powershell
