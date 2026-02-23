@@ -19,7 +19,7 @@ image: assets/uploads/2026/02/workspaces.png
 
 When you work with a REST API that returns GUIDs for everything, human readability goes out the window. You run a query like this in PowerShell to get your Fabric lakehouses and you get something like this returned
 
-[![PowerShell console showing REST API response with GUID-based Lakehouse properties](../assets/uploads/2026/02/restapi.png)](../assets/uploads/2026/02/restapi.png)
+[![PowerShell console showing REST API response with GUID-based Lakehouse properties](../assets/uploads/2026/02/restapi.png)](../../assets/uploads/2026/02/restapi.png)
 
 ## Humans don't work with GUIDs. We want names.
 
@@ -61,11 +61,11 @@ The module uses PSFramework's configuration system as a cache:
 - **First lookup for a single workspace**: ~5s (makes 1 or two additional API calls to resolve the GUIDs for friendly output)
 - **Cached lookup**: ~1s (returns results immediately from the cache without additional API calls)
 
-[![PowerShell console output comparing first and second API calls: first call takes 4ms with 1,137,746 bytes transferred, second cached call takes 6.021s with no data transfer, demonstrating caching efficiency](../assets/uploads/2026/02/first-cache-versus-second.png)](../assets/uploads/2026/02/first-cache-versus-second.png)
+[![PowerShell console output comparing first and second API calls: first call takes 4ms with 1,137,746 bytes transferred, second cached call takes 6.021s with no data transfer, demonstrating caching efficiency](../assets/uploads/2026/02/first-cache-versus-second.png)](../../assets/uploads/2026/02/first-cache-versus-second.png)
 
 The same thing happens for other resources. Lets take a look at the SQL Endpoint for all the lakehouses in my Strava workspace.
 
-[![PowerShell console showing SQL Endpoint resolution for Strava workspace lakehouses: first call takes 10.34 seconds resolving capacity names, workspace names, and SQL Endpoints via API calls; second cached call completes in 3.48 seconds using cached values, demonstrating performance improvement through smart caching](../assets/uploads/2026/02/sqlendpointnameresolution.png)](../assets/uploads/2026/02/sqlendpointnameresolution.png)
+[![PowerShell console showing SQL Endpoint resolution for Strava workspace lakehouses: first call takes 10.34 seconds resolving capacity names, workspace names, and SQL Endpoints via API calls; second cached call completes in 3.48 seconds using cached values, demonstrating performance improvement through smart caching](../assets/uploads/2026/02/sqlendpointnameresolution.png)](../../assets/uploads/2026/02/sqlendpointnameresolution.png)
 
 This time it takes 10 seconds to get the workspace, resolve the capacity name, get the lakehouses in the workspace, resolve the workspace names and then get all of the SQL Endpoints. The second time it only takes 3 seconds because all of the names are cached.
 
@@ -75,7 +75,7 @@ You can see what is cached with:
 Get-PSFConfig -Module MicrosoftFabricMgmt -Name Cache.*
 ```
 
-[![PowerShell console displaying Get-PSFConfig output with MicrosoftFabricMgmt.Cache.* configuration entries, showing cached workspace names and capacity IDs in a formatted table with FullName, Value, and Description columns](../assets/uploads/2026/02/cachednames.png)](../assets/uploads/2026/02/cachednames.png)
+[![PowerShell console displaying Get-PSFConfig output with MicrosoftFabricMgmt.Cache.* configuration entries, showing cached workspace names and capacity IDs in a formatted table with FullName, Value, and Description columns](../assets/uploads/2026/02/cachednames.png)](../../assets/uploads/2026/02/cachednames.png)
 
 ## Clearing the Cache
 
@@ -104,7 +104,7 @@ Get-FabricWorkspace | Select-Object id, displayName, capacityId
 # See all properties on an object
 Get-FabricWorkspace | Get-FabricLakehouse | Get-FabricSQLEndpoint -Raw| Format-List *
 ```
-[![PowerShell console displaying raw data output with original property names, including GUIDs and friendly names](../assets/uploads/2026/02/rawdataformtatted.png)](../assets/uploads/2026/02/rawdataformtatted.png)
+[![PowerShell console displaying raw data output with original property names, including GUIDs and friendly names](../assets/uploads/2026/02/rawdataformtatted.png)](../../assets/uploads/2026/02/rawdataformtatted.png)
 
 
 ## Why This Matters

@@ -21,7 +21,7 @@ image: assets/uploads/2023/wsl-dns-fail.png
 
 When running WSL in a corporate environment, I sometimes an error like the following, where the cli is not able to resolve the IP address correctly. This error is from terraform but I have seen it elsewhere.
 
-[![wsl-dns-resolve](../assets/uploads/2023/wsl-dns-fail.png)](../assets/uploads/2023/wsl-dns-fail.png)
+[![wsl-dns-resolve](../assets/uploads/2023/wsl-dns-fail.png)](../../assets/uploads/2023/wsl-dns-fail.png)
 > ╷
 │ Error: Failed to query available provider packages
 │
@@ -35,7 +35,7 @@ to fix it
 ```
 sudo nano /etc/resolv.conf
 ```
-[![wsl-dns-resolve](../assets/uploads/2023/wsl-dns-resolv.png)](../assets/uploads/2023/wsl-dns-resolv.png)
+[![wsl-dns-resolve](../assets/uploads/2023/wsl-dns-resolv.png)](../../assets/uploads/2023/wsl-dns-resolv.png)
 I normally just change the nameserver to 1.1.1.1
 
 You will need to do this for every tab you open or you can follow the instructions to set it permanently

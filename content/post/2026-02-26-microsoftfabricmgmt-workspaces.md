@@ -29,7 +29,7 @@ Lets explore it in more detail, along with the other workspace management cmdlet
 ```powershell
 Get-FabricWorkspace
 ```
-[![Get-FabricWorkspace output displaying a formatted table with Workspace Name, Capacity Name, and ID columns showing multiple Fabric workspaces](../assets/uploads/2026/02/workspaces.png)](../assets/uploads/2026/02/workspaces.png)
+[![Get-FabricWorkspace output displaying a formatted table with Workspace Name, Capacity Name, and ID columns showing multiple Fabric workspaces](../assets/uploads/2026/02/workspaces.png)](../../assets/uploads/2026/02/workspaces.png)
 
 You can filter by name:
 
@@ -55,7 +55,7 @@ New-FabricWorkspace -WorkspaceName "BlogPost" -WorkspaceDescription "A workspace
 
 ```
 
-[![New-FabricWorkspace output showing the created workspace details](../assets/uploads/2026/02/new-fabricworkspace.png)](../assets/uploads/2026/02/new-fabricworkspace.png)
+[![New-FabricWorkspace output showing the created workspace details](../assets/uploads/2026/02/new-fabricworkspace.png)](../../assets/uploads/2026/02/new-fabricworkspace.png)
 
 it has been created without being assigned to a capacity.
 
@@ -136,7 +136,7 @@ Use `Update-FabricWorkspace` to rename a workspace or update its description. Yo
 ```powershell
 Get-FabricWorkspace -WorkspaceName Breaky | Update-FabricWorkspace -WorkspaceName SnackTime -Description 'Because sometimes snacks take priority'
 ```
-[![PowerShell output showing Get-FabricWorkspace and Update-FabricWorkspace commands updating a workspace named Breaky to SnackTime with description Because sometimes snacks take priority, displaying the updated workspace properties including id, displayName, description, type, capacityId, and CapacityName](../assets/uploads/2026/02/breaky.png)](../assets/uploads/2026/02/breaky.png)
+[![PowerShell output showing Get-FabricWorkspace and Update-FabricWorkspace commands updating a workspace named Breaky to SnackTime with description Because sometimes snacks take priority, displaying the updated workspace properties including id, displayName, description, type, capacityId, and CapacityName](../assets/uploads/2026/02/breaky.png)](../../assets/uploads/2026/02/breaky.png)
 
 
 ## Removing a Workspace
@@ -159,7 +159,7 @@ Or pipe from `Get-FabricWorkspace`:
 $workspaces | ForEach-Object {Get-FabricWorkspace -WorkspaceName $_.Name | Remove-FabricWorkspace -Confirm:$false}
 ```
 
-[![PowerShell output showing Get-FabricWorkspace and Remove-FabricWorkspace commands removing workspaces](../assets/uploads/2026/02/remove-worksapces.png)](../assets/uploads/2026/02/remove-worksapces.png)
+[![PowerShell output showing Get-FabricWorkspace and Remove-FabricWorkspace commands removing workspaces](../assets/uploads/2026/02/remove-worksapces.png)](../../assets/uploads/2026/02/remove-worksapces.png)
 
 
 ## A Practical Example: Dev, Test, Prod

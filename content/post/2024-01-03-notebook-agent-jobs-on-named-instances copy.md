@@ -31,13 +31,13 @@ The first I realised about this problem was when Erland Sommarskog [b](https://w
 
 How very odd I thought. I noticed that it was a named instance, so I tried to recreate the issue on my own named instance DAVE. [I added a new notebook job](https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/) and when I tried to run it. It failed
 
-[![notebookjob](../assets/uploads/2024/newjob.png)](../assets/uploads/2024/newjob.png)
+[![notebookjob](../assets/uploads/2024/newjob.png)](../../assets/uploads/2024/newjob.png)
 
 ### Huh ?
 
 Hmm. But I got a different error.
 
-[![notebookjob](../assets/uploads/2024/joberror.png)](../assets/uploads/2024/joberror.png)
+[![notebookjob](../assets/uploads/2024/joberror.png)](../../assets/uploads/2024/joberror.png)
 
 >'Login failed for user 'NT Service\SQLAGENT$DAVE'
 
@@ -59,7 +59,7 @@ I have the default instance running on this machine. Lets check the error log on
 
 `Get-DbaErrorLog -SqlInstance $ENV:COMPUTERNAME -Source logon`
 
-[![failedlogin](../assets/uploads/2024/logonfailed.png)](../assets/uploads/2024/logonfailed.png)
+[![failedlogin](../assets/uploads/2024/logonfailed.png)](../../assets/uploads/2024/logonfailed.png)
 
 > Login failed for user 'NT Service\SQLAgent$DAVE'. Reason: Could not find a login matching the name provided. [CLIENT: <local machine>]  
 
@@ -75,7 +75,7 @@ and rerun the job, which fails, and get the error message
 
 `Get-DbaAgentJobHistory -SqlInstance $SqlInstance -Job $JobName`
 
-[![no instance](../assets/uploads/2024/noinstance.png)](../assets/uploads/2024/noinstance.png)
+[![no instance](../assets/uploads/2024/noinstance.png)](../../assets/uploads/2024/noinstance.png)
 
 So I have recreated the error.
 
@@ -91,11 +91,11 @@ The code uses `$(ESCAPE_SQUOTE(A THING))` which is passing the Agent Job tokens 
 
 Then it calls `Invoke-SqlCmd` without a `ServerInstance` parameter. If you look at the documentation for the parameter [web](https://learn.microsoft.com/en-us/powershell/module/sqlserver/invoke-sqlcmd?view=sqlserver-ps&WT.mc_id=DP-MVP-5002693#-serverinstance)
 
-[![halp instance](../assets/uploads/2024/serverinstancehelp.png)](../assets/uploads/2024/serverinstancehelp.png)
+[![halp instance](../assets/uploads/2024/serverinstancehelp.png)](../../assets/uploads/2024/serverinstancehelp.png)
 
 it shows the Default Value as `None` but this does not explain what it does. With no value set for the `ServerInstance` parameter, `Invoke-SqlCmd` will try to connect to the default instance as we can see below.
 
-[![halp instance](../assets/uploads/2024/instanceconnect.png)](../assets/uploads/2024/instanceconnect.png)
+[![halp instance](../assets/uploads/2024/instanceconnect.png)](../../assets/uploads/2024/instanceconnect.png)
 
 ## Solution
 
