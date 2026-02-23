@@ -1,0 +1,16 @@
+{
+	"servers": {
+		"fabric-rti": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"microsoft-fabric-rti-mcp==0.1.0"
+			],
+			"env": {
+				"KUSTO_SERVICE_URI": "https://trd-4d0ha0x15hx8yg73xm.z9.kusto.fabric.microsoft.com",
+				"KUSTO_SERVICE_DEFAULT_DB": "casa_della_barba"
+			}
+		}
+	},
+	"inputs": []
+}

@@ -1,6 +1,7 @@
 ---
 title: "New .NET Notebooks are here – PowerShell 7 notebooks are here."
-date: "2020-02-07" 
+slug: new-net-notebooks-are-here-powershell-7-notebooks-are-here
+date: "2020-02-07"
 categories:
   - Blog
   - Jupyter Notebooks
@@ -32,7 +33,7 @@ image: assets/uploads/2020/02/image-13.png
 Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and [added SQL](https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/) kernel where [with a little bit of faffing you could run PowerShell](https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//) and then a [Python kernel that enabled PowerShell](https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/). It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.
 
 > .NET Notebooks Preview 2 is here! Preview 2 includes 🎉[@PowerShell_Team](https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw), [@nteractio](https://twitter.com/nteractio?ref_src=twsrc%5Etfw), and a new tool. Check out our blog to learn more. Congratulations to [@jonsequitur](https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw) [@colombod](https://twitter.com/colombod?ref_src=twsrc%5Etfw) and our entire team[https://t.co/WqNWQWR3Bo](https://t.co/WqNWQWR3Bo)[@dotnet](https://twitter.com/dotnet?ref_src=twsrc%5Etfw) [#jupyter](https://twitter.com/hashtag/jupyter?src=hash&ref_src=twsrc%5Etfw) [#PowerShell](https://twitter.com/hashtag/PowerShell?src=hash&ref_src=twsrc%5Etfw) [#interactiveprogramming](https://twitter.com/hashtag/interactiveprogramming?src=hash&ref_src=twsrc%5Etfw).
-> 
+>
 > — Maria Naggaga (@LadyNaggaga) [February 6, 2020](https://twitter.com/LadyNaggaga/status/1225464258823163906?ref_src=twsrc%5Etfw)
 
 PowerShell 7 Notebooks 🙂
@@ -43,7 +44,7 @@ A notebook experience for PowerShell 7 that sounds amazing. This will enable a t
 The first thing I asked was – Will this come to Azure Data Studio. I got an immediate response from Sydney Smith PowerShell Program Manager saying it is on the roadmap
 
 > Moving this kernel into ADS is on our roadmap! Right now our kernel uses hosted pwsh 7 but we would love to know if you have scenarios that don't work with 7
-> 
+>
 > — Sydney Smith (@sydneysmithreal) [February 6, 2020](https://twitter.com/sydneysmithreal/status/1225488719567818752?ref_src=twsrc%5Etfw)
 
 Install dependencies
@@ -102,10 +103,10 @@ Sometimes new things have errors
 
 I had an error when I tried this first time
 
-> Could not execute because the specified command or file was not found.  
-> Possible reasons for this include:  
-> \* You misspelled a built-in dotnet command.  
-> \* You intended to execute a .NET Core program, but dotnet-interactive does not exist.  
+> Could not execute because the specified command or file was not found.
+> Possible reasons for this include:
+> \* You misspelled a built-in dotnet command.
+> \* You intended to execute a .NET Core program, but dotnet-interactive does not exist.
 > \* You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.
 
 This is easily fixed by adding `%USERPROFILE%\.dotnet\tools` to my path with `set PATH=%PATH%;%USERPROFILE%\.dotnet\tools`
@@ -119,7 +120,7 @@ Running `jupyter kernelspec list` shows that the .NET kernel is installed for C 
 Lets open a Notebook
 --------------------
 
-Now you want to play with it!  
+Now you want to play with it!
 You can run the lab environment using \`jupyter lab\`
 
 ![](https://blog.robsewell.com/assets/uploads/2020/02/image-8.png?fit=630%2C194&ssl=1)
@@ -146,7 +147,7 @@ In the launcher page click the .NET PowerShell button
 
 ![](https://blog.robsewell.com/assets/uploads/2020/02/image-12.png?resize=567%2C171&ssl=1)
 
-  
+
 
 Which will open a new Notebook in the directory that you launched the lab from. You can then add Code or Markdown as I have [described before here](https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/).
 

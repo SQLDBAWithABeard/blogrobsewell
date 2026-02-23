@@ -1,6 +1,7 @@
 ---
 title: ".NET PowerShell Notebooks – Using Pester"
-date: "2020-02-22" 
+slug: net-powershell-notebooks-using-pester
+date: "2020-02-22"
 categories:
   - Blog
   - Jupyter Notebooks
@@ -9,7 +10,7 @@ categories:
 
 tags:
   - net
-  - GitHub 
+  - GitHub
   - pester
   - dbastackexchange
   - PowerShell
@@ -42,7 +43,7 @@ Using Pester
 ------------
 
 Using Pester to validate that an environment is as you expect it is a good resource for incident resolution, potentially enabling you to quickly establish an area to concentrate on for the issue. However, if you try to run Pester in a .NET Notebook you will receive an error
-<PRE class=wp-block-preformatted>Describe: 
+<PRE class=wp-block-preformatted>Describe:
 Line |
    3 | Describe "Checking Problem ...... by $($ENV:USERDOMAIN) $($ENV:UserName)" {
 
@@ -58,7 +59,7 @@ Line |
  Import-Module: The module to process 'Pester.psm1', listed in field 'ModuleToProcess/RootModule' of module manifest 'C:\Users\mrrob\Documents\PowerShell\Modules\Pester\4.9.0\Pester.psd1' was not processed because no valid module was found in any module directory. </PRE>
 Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains [in the issue that I raised](https://github.com/dotnet/interactive/issues/136)
 
-> Yes, it was the CimCmdlets module from the system32 module path that got imported (via the `WinCompat` feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …  
+> Yes, it was the CimCmdlets module from the system32 module path that got imported (via the `WinCompat` feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …
 > The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue [PowerShell/PowerShell#11783](https://github.com/PowerShell/PowerShell/issues/11783) to track this work.
 
 
@@ -67,7 +68,7 @@ Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explain
 Sharing Code AND Results 🙂
 ---------------------------
 
-  
+
 Notebooks – A brilliant way of sharing what you did and the results that you got enabling others to follow along. You can do this with this Notebook. Download it and open it in your Jupyter Lab and you will be able to run it and see all of the errors and the fix on your machine.
 <SCRIPT src="https://gist.github.com/SQLDBAWithABeard/6f911ae171528181d226a11e9a24ad05.js"></SCRIPT>
 
