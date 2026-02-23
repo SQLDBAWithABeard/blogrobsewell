@@ -44,12 +44,12 @@ I will continue to not take myself seriously, to wear fun outfits and allow myse
 
 I hope to have many more photos taken of me, like this one
 
-[![psconfeukeynote](../assets/uploads/2023/20230619_120715.jpg)](../assets/uploads/2023/20230619_120715.jpg)
+[![psconfeukeynote](../assets/uploads/2023/20230619_120715.jpg)](../../assets/uploads/2023/20230619_120715.jpg)
 
 
  where I am giving a keynote at the PowerShell Conference Europe dressed in a rainbow suit and talking about how to communicate with other people appropriately
 
- [![psconfeukeynote](../assets/uploads/2023/psconfeu-keynote.png)](../assets/uploads/2023/psconfeu-keynote.png)
+ [![psconfeukeynote](../assets/uploads/2023/psconfeu-keynote.png)](../../assets/uploads/2023/psconfeu-keynote.png)
 
  Thank you to all of the people who make this happen, to those that support me and challenge me and let me work alongside them to do amazing things.
 
