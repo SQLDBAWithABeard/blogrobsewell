@@ -24,9 +24,12 @@ When you work with a REST API that returns GUIDs for everything, human readabili
 ## Humans don't work with GUIDs. We want names.
 
 Which workspace is `948d3445-54a5-4c2a-85e7-2c3d30933992`?
-Which capacity? Who knows — go look it up. Multiply that by fifty items across ten workspaces and you have a frustrating afternoon ahead of you.
+Which capacity? Who knows — go look it up.
+Multiply that by fifty items across ten workspaces and you have a frustrating afternoon ahead of you.
 
-**MicrosoftFabricMgmt** solves this. Today I want to show you one of the features Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I are most proud of: intelligent output formatting with smart caching.
+The PowerShell Module**[MicrosoftFabricMgmt](https://blog.robsewell.com/tags/microsoftfabricmgmt/)** solves some of this frustration.
+
+Today I want to show you one of the features Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I are most proud of: intelligent output formatting with smart caching.
 
 ## What the Module Does
 
@@ -50,13 +53,23 @@ Behind the scenes, each formatted cmdlet uses PSTypeName decoration and a custom
 
 ## The Caching Magic
 
-Here is where it gets really good. Jess and I are used to working with significant numbers of items and we also remember some of the first feedback from writing `dbachecks` - "This is amazing but it takes so long on 10,000 instances", "I love this but on an instance iwth 2,000 databases it is really slow". We got that feedback in the first weeks of release when we were still glowing with the satisfaction of building something cool. We wanted to make sure that the module was useful for humans as well as machines so we decided that we wouldwoudl take the same approach as dbatools which provides ComputerName, ServerName and InstanceName properties in the output of all of its functions. SMO, the .NET library that communicates with the SQL instances makes it easier to associate resources with their parent resource.
+Here is where it gets really good. Jess and I are used to working with significant numbers of items and we also remember some of the first feedback from writing `dbachecks` -
+
+>"This is amazing but it takes so long on 10,000 instances"
+
+>"I love this but on an instance with 2,000 databases it is really slow".
+
+We got that feedback in the first weeks of release when we were still glowing with the satisfaction of building something cool!
+
+We wanted to make sure that the MicrosoftFabricMgmt module was useful for humans as well as machines so we decided that we would take the same approach as [dbatools](https://dbatools.io/) which provides `ComputerName`, `ServerName` and `InstanceName` properties in the output of all of its functions.
+
+SMO, the .NET library that communicates with the SQL instances makes it easier to associate resources with their parent resource.
 
 The Fabric API is not as helpful. So to make the output human-friendly, we have to make additional API calls to resolve GUIDs to names. This is where caching comes in. We don't want to make an API call every time we need to resolve a name — that would be too slow.
 
 So we came up with this clever caching mechanism that stores resolved names and reuses them across the session. When you run a function that needs to resolve a GUID, it first checks the cache. If the name is already there, it returns it immediately. If not, it makes the API call, stores the result in the cache, and then returns it.
 
-The module uses PSFramework's configuration system as a cache:
+The module uses [PSFramework](https://psframework.org/)'s configuration system as a cache:
 
 - **First lookup for a single workspace**: ~5s (makes 1 or two additional API calls to resolve the GUIDs for friendly output)
 - **Cached lookup**: ~1s (returns results immediately from the cache without additional API calls)
@@ -68,6 +81,8 @@ The same thing happens for other resources. Lets take a look at the SQL Endpoint
 [![PowerShell console showing SQL Endpoint resolution for Strava workspace lakehouses: first call takes 10.34 seconds resolving capacity names, workspace names, and SQL Endpoints via API calls; second cached call completes in 3.48 seconds using cached values, demonstrating performance improvement through smart caching](../assets/uploads/2026/02/sqlendpointnameresolution.png)](../../assets/uploads/2026/02/sqlendpointnameresolution.png)
 
 This time it takes 10 seconds to get the workspace, resolve the capacity name, get the lakehouses in the workspace, resolve the workspace names and then get all of the SQL Endpoints. The second time it only takes 3 seconds because all of the names are cached.
+
+## Seeing the Cache
 
 You can see what is cached with:
 
@@ -112,3 +127,5 @@ Get-FabricWorkspace | Get-FabricLakehouse | Get-FabricSQLEndpoint -Raw| Format-L
 This feature is the difference between results you can act on immediately and results you have to decode. When you are reviewing thirty lakehouses spread across five workspaces and three capacities, seeing `Premium Capacity P1 → Sales Analytics → Sales Lakehouse` is so much more useful than three GUIDs.
 
 Next we start working with workspaces in depth — creating, updating, managing them. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

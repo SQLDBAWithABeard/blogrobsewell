@@ -182,3 +182,5 @@ Consistent, repeatable, and documented in code. That is the PowerShell way.
 Next in this series we look at one of my favourite aspects of MicrosoftFabricMgmt — the PowerShell pipeline. How cmdlets are designed to flow together, and how you can write powerful, idiomatic automation with very little code. See you then.
 
 However, tomorrow will be a different blog post which I am super excited to share.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

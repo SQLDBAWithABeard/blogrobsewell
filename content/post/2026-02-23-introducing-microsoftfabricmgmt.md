@@ -77,3 +77,5 @@ Requires **PowerShell 7** or later. The source code lives at [github.com/microso
 ## See You Tomorrow
 
 The first thing we need to do is get the module installed and prove it works. That is tomorrow's post — installation, dependencies, and your first connection to Microsoft Fabric. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

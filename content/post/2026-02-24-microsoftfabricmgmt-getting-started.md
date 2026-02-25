@@ -147,3 +147,5 @@ Set-PSFConfig -Module MicrosoftFabricMgmt -Name Api.RetryMaxAttempts -Value 5
 ## You Are Ready
 
 That is it! The module is installed, you are authenticated, and you have your workspaces. Tomorrow we look at something that makes this module stand out — the intelligent output formatting that turns GUIDs into names and makes your results actually readable. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)
