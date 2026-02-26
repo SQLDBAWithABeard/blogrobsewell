@@ -18,7 +18,7 @@ image: assets/uploads/2026/02/workspaces.png
 
 The workspace is the fundamental unit of organisation in [Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/fundamentals/microsoft-fabric-overview?WT.mc_id=DP-MVP-5002693). Everything lives inside a workspace — your lakehouses, warehouses, notebooks, pipelines, reports. Managing workspaces is therefore the first practical skill to build, and MicrosoftFabricMgmt makes it straightforward.
 
-We have already seen `Get-FabricWorkspace` in [the installation post](https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started).
+We have already seen `Get-FabricWorkspace` in [the installation post](https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started-installation-and-authentication/).
 
 Lets explore it in more detail, along with the other workspace management cmdlets: `New-FabricWorkspace`, `Update-FabricWorkspace`, and `Remove-FabricWorkspace`. By the end of this post you will be able to list, get details of, create, update, and remove workspaces in your Fabric tenant using PowerShell.
 
@@ -43,7 +43,7 @@ Or by ID:
 Get-FabricWorkspace -WorkspaceId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 ```
 
-Thanks to the intelligent output formatting [we looked at yesterday](https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids/), the results show the Capacity Name, Workspace Name, and other properties in a readable table — no GUID decoding required.
+Thanks to the intelligent output formatting [we looked at yesterday](https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids-intelligent-output-and-smart-caching/), the results show the Capacity Name, Workspace Name, and other properties in a readable table — no GUID decoding required.
 
 ## Creating a Workspace
 
@@ -179,7 +179,7 @@ Consistent, repeatable, and documented in code. That is the PowerShell way.
 
 ## Tomorrow
 
-Next in this series we look at one of my favourite aspects of MicrosoftFabricMgmt — the PowerShell pipeline. How cmdlets are designed to flow together, and how you can write powerful, idiomatic automation with very little code. See you then.
+Next in this series we look at one of my favourite aspects of MicrosoftFabricMgmt — the PowerShell pipeline. How cmdlets are designed to flow together, and how you can write powerful, idiomatic automation with very little code.
 
 However, tomorrow will be a different blog post which I am super excited to share.
 
