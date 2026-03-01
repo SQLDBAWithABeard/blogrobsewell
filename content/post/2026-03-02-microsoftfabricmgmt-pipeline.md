@@ -12,7 +12,7 @@ tags:
   - MicrosoftFabricMgmt
   - Automation
   - Pipeline
-image: assets/uploads/2026/02/microsoftfabricmgmt-pipeline.png
+image: assets/uploads/2026/03/pipingroles.png
 ---
 
 ## Introduction
@@ -33,7 +33,7 @@ Get all Lakehouses across all workspaces:
 Get-FabricWorkspace | Get-FabricLakehouse
 ```
 
-[![PowerShell pipeline chaining Get-FabricWorkspace with Get-FabricLakehouse cmdlets, showing object flow between commands in the terminal](../assets/uploads/2026/03/pipelakehouse.png)](../assets/uploads/2026/03/pipelakehouse.png)
+[![PowerShell terminal displaying a pipeline command Get-FabricWorkspace piped to Get-FabricLakehouse, with output showing three rows in a table format: Capacity Name column shows Trial-20260129T113746Z-4 repeated three times, Workspace Name column shows Strava and Data Roles, Item Name column shows Strava_Lakehouse, StagingLakehouseForDataflows_, and lakey, and Type column shows Lakehouse for all rows. The terminal has a dark theme with green text for the command prompt and white text for the table output, with pink accent highlighting the elapsed time 3.944s at the top](../assets/uploads/2026/03/pipelakehouse.png)](../assets/uploads/2026/03/pipelakehouse.png)
 
 Get all Notebooks across all workspaces:
 
@@ -41,78 +41,53 @@ Get all Notebooks across all workspaces:
 Get-FabricWorkspace | Get-FabricNotebook
 ```
 
-Get all role assignments across all workspaces:
+[![PowerShell terminal displaying a pipeline command Get-FabricWorkspace piped to Get-FabricNotebook, with output showing three rows in a table format: Capacity Name column shows Trial-20260129T113746Z-4 repeated three times, Workspace Name column shows Strava and Data Roles, Item Name column shows Strava_Notebook, StagingNotebookForDataflows_, and notey, and Type column shows Notebook for all rows. The terminal has a dark theme with green text for the command prompt and white text for the table output, with pink accent highlighting the elapsed time 3.944s at the top](../assets/uploads/2026/03/pipentotebooks.png)](../assets/uploads/2026/03/pipentotebooks.png)
+
+How about something neater and super useful.
+
+When the Teams message says "Hey, can you tell me who has access to that workspace?" you can now reply with a single command instead of going to the portal and clicking through multiple screens:
+
 
 ```powershell
-Get-FabricWorkspace | Get-FabricWorkspaceRoleAssignment
+Get-FabricWorkspace -WorkspaceName $WorkspaceName | Get-FabricWorkspaceRoleAssignment
 ```
 
-These are genuine one-liners that do real work. Compare that to manually calling the REST API for each workspace in a loop.
+[![PowerShell terminal showing the command Get-FabricWorkspace -WorkspaceName with a spn piped to Get-FabricWorkspaceRoleAssignment, displaying a table with six rows of output. Columns are Capacity Name showing Trial-20260129T1137 repeated, Workspace Name showing with a spn repeated, Principal showing BeardSqlAdmins, ForBooks, Jess Pomfret, John Morehouse, fabric free 4, and a-test-beard-fabric-sp, Type showing Group, Group, User, User, User, ServicePrincipal, and Role showing Contributor, Viewer, Admin, Admin, Admin, Admin. The terminal has a dark theme with green column headers and white text, with execution time of 483ms displayed at the top in pink](../assets/uploads/2026/03/pipingroles.png)](../assets/uploads/2026/03/pipingroles.png)
 
-## Filtering and Acting
+These are genuine one-liners that do real work. I love it. I have used this sort of flow for many years in SQL Server admin and Azure infrastructure management and it is fantastic to be able to build something the same for Microsoft Fabric.
 
-The real power comes when you combine the pipeline with filtering. Remove all Lakehouses in development workspaces:
+## The additional beauty of Piping
 
-```powershell
-Get-FabricWorkspace |
-    Where-Object { $_.displayName -like "*-dev" } |
-    Get-FabricLakehouse |
-    Remove-FabricLakehouse -Confirm:$false
-```
-
-Get all Notebooks in a specific workspace and export their details:
+Of course, piping commands is not just limited to the same module. You can pipe those results to any other functions that can accept that input which means you can easily export to CSV, JSON, HTML, Excel, Word, or even send an email with the results. The possibilities are endless as I have been saying for years — PowerShell is not just a scripting language, it is an automation platform. The pipeline is the heart of that platform.
 
 ```powershell
-Get-FabricWorkspace -WorkspaceName "Analytics Platform" |
-    Get-FabricNotebook |
-    Select-Object displayName, id, @{N='WorkspaceId';E={$_.workspaceId}} |
-    Export-Csv -Path "Notebooks_$(Get-Date -Format yyyyMMdd).csv" -NoTypeInformation
-```
+# Export all role assignments for a workspace to CSV
+Get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricWorkspaceRoleAssignment | Export-Csv -Path s:\roles.csv
+-noTypeInformation
+# Export all role assignments for a workspace to Excel
+Get-FabricWorkspace -WorkspaceName 'with a spn' | Get-FabricWorkspaceRoleAssignment | Export-Excel -Path s:\roles.xlsx -AutoSize -TableName 'RoleAssignments'
 
-## Tenant-Wide Inventory
-
-Here is a pattern I use regularly — generating a complete inventory of items across all workspaces:
-
-```powershell
-$inventory = Get-FabricWorkspace | ForEach-Object {
-    $ws = $_
-    @(
-        Get-FabricLakehouse -WorkspaceId $ws.id |
-            Select-Object @{N='Workspace';E={$ws.displayName}},
-                          @{N='ItemName';E={$_.displayName}},
-                          @{N='ItemType';E={'Lakehouse'}},
-                          id
-        Get-FabricWarehouse -WorkspaceId $ws.id |
-            Select-Object @{N='Workspace';E={$ws.displayName}},
-                          @{N='ItemName';E={$_.displayName}},
-                          @{N='ItemType';E={'Warehouse'}},
-                          id
-    )
-}
-
-$inventory | Export-Csv -Path "FabricInventory_$(Get-Date -Format yyyyMMdd).csv" -NoTypeInformation
 ```
 
 ## Counting and Grouping
 
-Because `Get-FabricWorkspace` returns a proper collection, standard PowerShell aggregation works:
+You can also pipe to cmdlets that perform calculations or grouping.
+```
+# Count the number of role assignments for a workspace
+Get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricWorkspaceRoleAssignment | Group-Object Type,Role
+
+Count the number of item types in each workspace
+Get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricItem|Group-Object Type
+```
 
 ```powershell
-# Count items per workspace
-Get-FabricWorkspace | ForEach-Object {
-    [PSCustomObject]@{
-        Workspace  = $_.displayName
-        Lakehouses = (Get-FabricLakehouse -WorkspaceId $_.id | Measure-Object).Count
-        Notebooks  = (Get-FabricNotebook -WorkspaceId $_.id | Measure-Object).Count
-    }
-} | Sort-Object Workspace
-
-# Count workspaces per capacity
-Get-FabricWorkspace |
-    Group-Object { Resolve-FabricCapacityName -CapacityId $_.capacityId } |
-    Select-Object Name, Count |
-    Sort-Object Count -Descending
+# Count the number of item types in each workspace
+Get-FabricWorkspace | Get-FabricItem | Group-Object Type
 ```
+
+[![PowerShell terminal displaying a pipeline command Get-FabricWorkspace piped to Get-FabricItem piped to Group-Object Type, with output showing a grouped table format. The Count column displays numerical values, the Name column shows item types including Lakehouse, Notebook, and Dashboard, and a Group column lists the detailed objects. The terminal has a dark theme with green text for the command prompt and white text for the table output, with execution time of 1.234s displayed at the top in pink highlighting the efficiency of the grouped operation](../assets/uploads/2026/03/itemsgroup.png)](../assets/uploads/2026/03/itemsgroup.png)
+
+[![PowerShell terminal displaying a pipeline command Get-FabricWorkspace piped to Get-FabricWorkspaceRoleAssignment piped to Group-Object Type,Role, with output showing a grouped table format. The Count column displays numerical values, the Name column shows role types including Contributor, Viewer, and Admin, and a Group column lists the detailed objects. The terminal has a dark theme with green text for the command prompt and white text for the table output, with execution time of 1.234s displayed at the top in pink highlighting the efficiency of the grouped operation](../assets/uploads/2026/03/rolesgroup.png)](../assets/uploads/2026/03/rolesgroup.png)
 
 ## Why This Matters
 
