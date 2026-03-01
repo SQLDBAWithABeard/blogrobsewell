@@ -23,6 +23,9 @@ I have been introducing the [Microsoft fabric-toolbox](https://github.com/micros
 
 Today I am kicking off a series of posts about **MicrosoftFabricMgmt** — an enterprise-grade PowerShell module that gives you comprehensive, scriptable control over the entire Microsoft Fabric REST API. It is hosted as part of the fabric-toolbox on GitHub.
 
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)
+
+
 ## Who Built It?
 
 This module is a community and Microsoft collaboration. It was started by the talented Tiago Balabuch [L](https://www.linkedin.com/in/tiagobalabuch/) and in the last few weeks Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and myself have made major improvements to the module, and we are really proud of it and excited about how it has turned out.
@@ -78,3 +81,5 @@ Requires **PowerShell 7** or later. The source code lives at [github.com/microso
 ## See You Tomorrow
 
 The first thing we need to do is get the module installed and prove it works. That is tomorrow's post — installation, dependencies, and your first connection to Microsoft Fabric. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

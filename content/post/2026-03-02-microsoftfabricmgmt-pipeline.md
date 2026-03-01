@@ -94,3 +94,5 @@ Get-FabricWorkspace | Get-FabricItem | Group-Object Type
 Pipeline support transforms a collection of individual cmdlets into a composable automation toolkit. You are not just managing one workspace or one Lakehouse — you are managing your entire Fabric estate with readable, maintainable PowerShell.
 
 Tomorrow we look at help and discovery — with over 295 cmdlets in the module, knowing how to find what you need quickly is a skill in itself. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

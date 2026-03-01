@@ -19,6 +19,9 @@ image: assets/uploads/2026/02/intro.png
 
 Yesterday I [introduced the MicrosoftFabricMgmt module](https://blog.robsewell.com/blog/introducing-microsoftfabricmgmt/) and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.
 
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)
+
+
 By the end of this post you will have the module installed, be authenticated, and have your first list of Fabric workspaces in your terminal.
 
 ## Prerequisites
@@ -148,3 +151,5 @@ Set-PSFConfig -Module MicrosoftFabricMgmt -Name Api.RetryMaxAttempts -Value 5
 ## You Are Ready
 
 That is it! The module is installed, you are authenticated, and you have your workspaces. Tomorrow we look at something that makes this module stand out — the intelligent output formatting that turns GUIDs into names and makes your results actually readable. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)

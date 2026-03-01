@@ -113,3 +113,5 @@ Get-FabricWorkspace | Get-FabricLakehouse | Get-FabricSQLEndpoint -Raw| Format-L
 This feature is the difference between results you can act on immediately and results you have to decode. When you are reviewing thirty lakehouses spread across five workspaces and three capacities, seeing `Premium Capacity P1 → Sales Analytics → Sales Lakehouse` is so much more useful than three GUIDs.
 
 Next we start working with workspaces in depth — creating, updating, managing them. See you then.
+
+You can find all of the blog posts about MicrosoftFabricMgmt here - [MicrosoftFabricMgmt Blog Posts](https://blog.robsewell.com/tags/microsoftfabricmgmt/)
