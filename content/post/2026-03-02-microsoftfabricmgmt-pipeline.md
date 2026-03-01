@@ -19,21 +19,11 @@ image: assets/uploads/2026/02/microsoftfabricmgmt-pipeline.png
 
 Last week I showed you [how to work with workspaces](https://blog.robsewell.com/blog/microsoftfabricmgmt-workspaces/) — creating, updating, removing, assigning capacities. But we were doing each operation in isolation. Today I want to show you what happens when you connect those operations together using the PowerShell pipeline.
 
-This is one of my favourite aspects of how Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I designed the module. Every cmdlet that makes sense in a pipeline is built to work in one.
+This is one of my favourite aspects of PowerShell and therefore it was imperative that Jess Pomfret [B](https://jesspomfret.com) [S](https://bsky.app/profile/jpomfret.co.uk) [L](https://www.linkedin.com/in/jpomfret) and I revamped the module to fully support pipeline operations. Every cmdlet that makes sense in a pipeline is built to work in one.
 
-## How It Works Under the Hood
+## How It Works
 
-The magic is `ValueFromPipelineByPropertyName` combined with parameter aliases. Most cmdlets that accept a `WorkspaceId` parameter declare it like this:
-
-```powershell
-[Parameter(ValueFromPipelineByPropertyName = $true)]
-[Alias('id')]
-[string]$WorkspaceId
-```
-
-That `Alias('id')` is the key. When `Get-FabricWorkspace` returns workspace objects, each one has an `id` property. PowerShell sees that the downstream cmdlet has a `WorkspaceId` parameter with an alias of `id`, and wires them together automatically.
-
-No `ForEach-Object`. No `$_.id`. Just a pipe.
+The PowerShell pipeline is a mechanism for passing output from one cmdlet to another, allowing for the chaining of commands. Unlike traditional command execution where output is displayed or stored as text, the pipeline in PowerShell passes objects directly. This object-based approach makes it possible to work with complex data types and leverage the rich set of properties and methods that objects offer.
 
 ## Basic Pipeline Examples
 
@@ -42,6 +32,8 @@ Get all Lakehouses across all workspaces:
 ```powershell
 Get-FabricWorkspace | Get-FabricLakehouse
 ```
+
+[![PowerShell pipeline chaining Get-FabricWorkspace with Get-FabricLakehouse cmdlets, showing object flow between commands in the terminal](../assets/uploads/2026/03/pipelakehouse.png)](../assets/uploads/2026/03/pipelakehouse.png)
 
 Get all Notebooks across all workspaces:
 
