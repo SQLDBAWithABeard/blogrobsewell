@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Box-of-Tricks on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/box-of-tricks/</link><description>Recent content in Box-of-Tricks on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/box-of-tricks/index.xml" rel="self" type="application/rss+xml"/><item><title>Finding Text In All Files In A Folder With PowerShell</title><link>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</link><pubDate>Wed, 25 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</guid><description>&lt;p&gt;Whilst writing my &lt;a class="link" href="https://blog.robsewell.com/?p=434" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks GUI&lt;/a&gt; I realised that I had hard-coded the path to the sqlservers.txt file in several functions and I wanted one place where I could set this. At the top of the GUI script I added a variable and in the ReadMe explained this needed to be set but I needed to change it in all of the functions where it was referenced.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2011/08/04/use-an-easy-powershell-command-to-search-files-for-information.aspx" target="_blank" rel="noopener"
+&gt;The Hey Scripting Guy Blog came to the rescue&lt;/a&gt;&lt;/p&gt;</description></item><item><title>The PowerShell Box Of Tricks GUI</title><link>https://blog.robsewell.com/blog/the-powershell-box-of-tricks-gui/</link><pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-powershell-box-of-tricks-gui/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image86.png" alt="Featured image of post The PowerShell Box Of Tricks GUI" /&gt;&lt;p&gt;When I started as a DBA at MyWork I faced a challenge. Many hundreds of databases, dozens of servers and no idea what was on where. It was remembering this situation when new team members were appointed that lead me to write the &lt;a class="link" href="https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/" target="_blank" rel="noopener"
+&gt;Find-Database script&lt;/a&gt; and I had written a simple GUI using &lt;code&gt;Read-Host&lt;/code&gt; to enable the newbies to see the functions I had created&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image85.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image85.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whilst writing this series of posts I decided that I would create a new GUI&lt;/p&gt;</description></item><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p&gt;There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+&gt;up to date version of this post here&lt;/a&gt; using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools module&lt;/a&gt; and the sqlserver module&lt;/p&gt;
+&lt;p&gt;But if you want to continue with this way read on!!&lt;/p&gt;
+&lt;p&gt;Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Windows Users&lt;/a&gt; or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;SQL Users&lt;/a&gt; using the last two days posts, today we shall add them to a role on a database.&lt;/p&gt;
+&lt;p&gt;As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+&gt;previously&lt;/a&gt; I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p&gt;</description></item><item><title>Creating SQL User and adding to Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</link><pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</guid><description>&lt;p&gt;Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;In yesterdays post &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Creating a Windows User and Adding to SQL Role&lt;/a&gt; we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.&lt;/p&gt;
+&lt;p&gt;It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified&lt;/p&gt;</description></item><item><title>Creating a Windows User and adding to a SQL Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</link><pubDate>Fri, 20 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image67.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image67.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The function does some simple error checking. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the Role object is Null for the Roles and the Contains Method for the Logins&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image98.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image98.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;Add-WindowsAccountToSQLRole FADE2BLACK ‘FADE2BLACK\Test’ public
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;###########################################################
+#
+# NAME: Add-WindowsAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a windows user and add them to a server role
+#
+# USAGE: Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' dbcreator
+# Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' public
+Function Add-WindowsAccountToSQLRole ([String]$Server, [String] $User, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Output &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'WindowsUser'
+$SqlUser.Create()
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Displaying the Windows Event Log with PowerShell</title><link>https://blog.robsewell.com/blog/displaying-the-windows-event-log-with-powershell/</link><pubDate>Wed, 18 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/displaying-the-windows-event-log-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I’ll start by saying this is a bit of a cheat. PowerShell has a perfectly good cmdlet called &lt;a class="link" href="http://technet.microsoft.com/en-us/library/hh849834.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Get-EventLog&lt;/a&gt; and plenty of &lt;a class="link" href="http://technet.microsoft.com/en-us/library/ee176846.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;ways to use it&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#####################################################################
+#
+# NAME: Show-EventLog.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing the windows event logs on a server
+# ————————————————————————
+# Define a server an event log the number of events and display
+# pipe to this and then to out-gridview to only show Errors - where {$_. entryType -match &amp;quot;Error&amp;quot;}
+Function Show-EventLog ($Server, $log, $Latest) {
+Get-EventLog -computername $server -log $log -newest $latest | Out-GridView
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Showing and Killing SQL Server Processes with PowerShell</title><link>https://blog.robsewell.com/blog/showing-and-killing-sql-server-processes-with-powershell/</link><pubDate>Tue, 17 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/showing-and-killing-sql-server-processes-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Create a Server Object and notice that there is a Method named EnumProcesses by piping it to &lt;code&gt;Get-Member&lt;/code&gt; and then look at the Properties and Methods of EnumProcesses&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#######################################################################
+#
+# NAME: Show-SQLProcesses.ps1
+# AUTHOR: Rob Sewell http://sqldbawithabeard.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Processes on a SQL Server
+####################################
+Function Show-SQLProcesses ($SQLServer)
+{
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$Server.EnumProcesses()|Select Spid,BlockingSpid, Login, Host,Status,Program, Command,Database,Cpu,MemUsage |Format-Table -wrap -auto
+$OUTPUT= [System.Windows.Forms.MessageBox]::Show(&amp;quot;Do you want to Kill a process?&amp;quot; , &amp;quot;Question&amp;quot; , 4)
+if ($OUTPUT -eq &amp;quot;YES&amp;quot; )
+{
+$spid = Read-Host &amp;quot;Which SPID?&amp;quot;
+$Server.KillProcess($Spid)
+}
+else
+{
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Show The Last Backups On A Server with PowerShell</title><link>https://blog.robsewell.com/blog/show-the-last-backups-on-a-server-with-powershell/</link><pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-the-last-backups-on-a-server-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;The &lt;code&gt;Show-LastServerBackup&lt;/code&gt; function iterates through each database on the server and takes each of the three properties mentioned in &lt;!-- raw HTML omitted --&gt;yesterdays post&lt;!-- raw HTML omitted --&gt;. However this time I created an empty hash table and added each result to it as follows&lt;/p&gt;
+&lt;p&gt;I created the hash table with &lt;code&gt;@()&lt;/code&gt; and then assign each property to a variable inside the loop and add it to a temporary PSObject with some custom NoteProperties to fit the data&lt;/p&gt;</description></item><item><title>Checking For A Database Backup with PowerShell</title><link>https://blog.robsewell.com/blog/checking-for-a-database-backup-with-powershell/</link><pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-for-a-database-backup-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-LastServerBackup.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Last Backup of each database on a server
+# ————————————————————————
+Function Show-LastDatabaseBackup ($SQLServer, $sqldatabase) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$db = $server.Databases[$sqldatabase]
+Write-Output &amp;quot;Last Full Backup&amp;quot;
+$LastFull = $db.lastbackupdate
+if ($lastfull -eq '01 January 0001 00:00:00')
+{$LastFull = 'NEVER'}
+Write-Output $LastFull
+Write-Output &amp;quot;Last Diff Backup&amp;quot;
+$LastDiff = $db.LastDifferentialBackupDate
+if ($lastdiff -eq '01 January 0001 00:00:00')
+{$Lastdiff = 'NEVER'}
+Write-Output $Lastdiff
+Write-Output &amp;quot;Last Log Backup&amp;quot; $lastLog = $db. LastLogBackupDate
+if ($lastlog -eq '01 January 0001 00:00:00')
+{$Lastlog = 'NEVER'}
+Write-Output $lastlog
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Searching the SQL Error Log with PowerShell</title><link>https://blog.robsewell.com/blog/searching-the-sql-error-log-with-powershell/</link><pubDate>Fri, 13 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/searching-the-sql-error-log-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Search-SQLErrorLog.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for Searching SQL Error Log and exporting and displaying to CSV
+# ————————————————————————
+Function Search-SQLErrorLog ([string] $SearchTerm , [string] $SQLServer) {
+$FileName = 'c:\TEMP\SQLLogSearch.csv'
+$Search = '*' + $SearchTerm + '*'
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$server.ReadErrorLog(5)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |Export-Csv $FileName
+$server.ReadErrorLog(4)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |ConvertTo-Csv |Out-File $FileName -append
+$server.ReadErrorLog(3)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |ConvertTo-Csv |Out-File $FileName -append
+$server.ReadErrorLog(2)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |ConvertTo-Csv |Out-File $FileName -append
+$server.ReadErrorLog(1)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |ConvertTo-Csv |Out-File $FileName -append
+$server.ReadErrorLog(0)| Where-Object {$_.Text -like $Search} | Select LogDate, ProcessInfo, Text |ConvertTo-Csv |Out-File $FileName -append
+Invoke-Item $filename
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>List Databases (and Properties) on SQL Server with PowerShell</title><link>https://blog.robsewell.com/blog/list-databases-and-properties-on-sql-server-with-powershell/</link><pubDate>Wed, 11 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/list-databases-and-properties-on-sql-server-with-powershell/</guid><description>&lt;p&gt;Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt; series. Here is another script which I use to save me time and effort during my daily workload enabling me to spend more time on more important (to me) things!&lt;/p&gt;
+&lt;p&gt;Todays question which I often get asked is What databases are on that server?&lt;/p&gt;
+&lt;p&gt;This is often a follow up to a question that requires the &lt;a class="link" href="https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/" target="_blank" rel="noopener"
+&gt;Find-Database script&lt;/a&gt;. It is often asked by support teams investigating issues. It can also be asked by developers checking the impact of other services on their DEV/UAT environments, by change managers investigating impact of changes, by service managers investigating the impact of downtime, when capacity planning for a new service and numerous other situations.&lt;/p&gt;</description></item><item><title>Reading Todays SQL Error Log With PowerShell</title><link>https://blog.robsewell.com/blog/reading-todays-sql-error-log-with-powershell/</link><pubDate>Wed, 11 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/reading-todays-sql-error-log-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;Show-LatestSQLErrorLog fade2black|Out-File -FilePath c:\temp\log.txt
+Invoke-Item c:\temp\log.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-Last24HoursSQLErrorLog.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for reading last days current SQL Error Log for Server
+# ————————————————————————
+Function Show-Last24HoursSQLErrorLog ([string]$Server) {
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+$logDate = (get-date).AddDays(-1)
+$Results = $srv.ReadErrorLog(0) |Where-Object {$_.LogDate -gt $logDate}| format-table -Wrap -AutoSize
+$Results
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Dropping SQL Users with PowerShell</title><link>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</link><pubDate>Tue, 10 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</guid><description>&lt;p&gt;As you may have noticed, I love PowerShell!&lt;/p&gt;
+&lt;p&gt;I have developed a series of functions over time which save me time and effort whilst still enabling me to provide a good service to my customers. I keep them all in a functions folder and call them whenever. I call it my &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I am going to write a short post about each one over the next few weeks as I write my presentation on the same subject which I will be presenting to SQL User Groups.&lt;/p&gt;</description></item><item><title>Alter SQL Mirroring Endpoint Owner with Powershell</title><link>https://blog.robsewell.com/blog/alter-sql-mirroring-endpoint-owner-with-powershell/</link><pubDate>Sun, 08 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/alter-sql-mirroring-endpoint-owner-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Login domain\user’ has granted one or more permissions. Revoke the permission before dropping the login (Microsoft SQL Server, Error: 15173)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg"
+loading="lazy"
+alt="mirroring endpoitn check"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/alter-endpoint.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/alter-endpoint.jpg"
+loading="lazy"
+alt="alter endpoint"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/alterendpointps.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/alterendpointps.jpg"
+loading="lazy"
+alt="alterendpointPS"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$svrs = ## list of servers Get-Content from text fiel etc
+foreach ($svr in $svrs) {
+$server = New-Object Microsoft.SQLServer.Management.Smo.Server $svrs
+foreach ($endpoint in $server.Endpoints['Mirroring']) {
+if ($endpoint.Owner = 'Domain\User') {
+$endpoint.Owner = 'Domain\NEWUser'
+$endpoint.Alter()
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Creating SQL Server Database with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-server-database-with-powershell/</link><pubDate>Sun, 08 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-server-database-with-powershell/</guid><description>&lt;p&gt;This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.&lt;/p&gt;
+&lt;p&gt;I used my scripts from &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+&gt;My Post on Spinning Up Azure SQL Boxes&lt;/a&gt; to create two servers and then I wanted to create some databases&lt;/p&gt;
+&lt;p&gt;I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases.&lt;/p&gt;</description></item><item><title>Using PowerShell to find a database amongst hundreds</title><link>https://blog.robsewell.com/blog/using-powershell-to-find-a-database-amongst-hundreds/</link><pubDate>Sat, 07 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-powershell-to-find-a-database-amongst-hundreds/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image34.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image34.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I create an empty hash table and then populate it with the results&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image35.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image35.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Set a results variable to the names from the hash table and count the number of records&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image36.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image36.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and call it like this&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image37.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image37.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note that the search uses the contains method so no need for wildcards&lt;/p&gt;
+&lt;p&gt;Results come out like this&lt;/p&gt;</description></item><item><title>Checking Drive Sizes with PowerShell</title><link>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</link><pubDate>Fri, 06 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image31.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image32.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image32.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and here are the results from my Azure VM. (See &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+&gt;My previous posts on how to create your own Azure VMs with PowerShell&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image33.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image33.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#############################################################################
+#
+# NAME: Show-DriveSizes.ps1
+# AUTHOR: Rob Sewell http://sqldbawiththebeard.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for displaying drivesizes
+# USAGE: Show-DriveSizes server1
+###########################################
+Function Show-DriveSizes ([string]$Server) {
+$Date = Get-Date
+Write-Host -foregroundcolor DarkBlue -backgroundcolor yellow &amp;quot;$Server - - $Date&amp;quot;
+#interogate wmi service and return disk information
+$disks = Get-WmiObject -Class Win32_logicaldisk -Filter &amp;quot;Drivetype=3&amp;quot; -ComputerName $Server
+$diskData = $disks | Select DeviceID, VolumeName ,
+# select size in Gbs as int and label it SizeGb
+@{Name = &amp;quot;SizeGB&amp;quot;; Expression = {$_.size / 1GB -as [int]}},
+# select freespace in Gbs and label it FreeGb and two deciaml places
+@{Name = &amp;quot;FreeGB&amp;quot;; Expression = {&amp;quot;{0:N2}&amp;quot; -f ($_.Freespace / 1GB)}},
+# select freespace as percentage two deciaml places and label it PercentFree
+@{Name = &amp;quot;PercentFree&amp;quot;; Expression = {&amp;quot;{0:P2}&amp;quot; -f ($_.Freespace / $_. Size)}}
+$diskdata
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram</title><link>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</link><pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$server | Get-Member
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer|gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer.Operators | gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125717.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_130052.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_174005.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_173953.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174112.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_113931.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_114601.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLServerOperators.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:03/09/2013
+#
+# COMMENTS: Load function for Enumerating Operators and Notifications
+# ————————————————————————
+Function Show-SQLServerOperators ($SQLServer) {
+Write-Output &amp;quot;############### $SQLServer ##########################&amp;quot;
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+foreach ($Operator in $server.JobServer.Operators) {
+$Operator = New-Object (&amp;quot;$SMO.Agent.Operator&amp;quot;) ($server.JobServer, $Operator)
+$OpName = $Operator.Name
+Write-Output &amp;quot;Operator $OpName&amp;quot;
+Write-Output &amp;quot;`n###### Job Notifications ######&amp;quot;
+$Operator.EnumJobNotifications()| Select JobName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+Write-Output &amp;quot;`n###### Alert Notifications #######&amp;quot;
+$Operator.EnumNotifications() | Select AlertName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>SQL login object permissions via PowerShell</title><link>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</link><pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLServerPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Enumerating Server and Database Role permissions or object permissions
+#
+# USAGE Show-SQLServerPermissions Server1
+# ————————————————————————
+Function Show-SQLServerPermissions ($SQLServer) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$selected = &amp;quot;&amp;quot;
+$selected = Read-Host &amp;quot;Enter Selection
+1.) Role Membership or
+2.) Object Permissions&amp;quot;
+Switch ($Selected) {
+1 {
+Write-Host &amp;quot;#### Server Role Membership on $Server ############################################## `n`n&amp;quot;
+foreach ($Role in $Server.Roles) {
+if ($Role.EnumServerRoleMembers().count -ne 0) {
+Write-Host &amp;quot;############### Server Role Membership for $role on $Server #########################`n&amp;quot;
+$Role.EnumServerRoleMembers()
+}
+}
+Write-Host &amp;quot;################################################################ ######################&amp;quot;
+Write-Host &amp;quot;################################################################ ######################`n `n `n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### $Database Permissions on $Server ###############################################`n&amp;quot;
+foreach ($role in $Database.Roles) {
+if ($Role.EnumMembers().count -ne 0) {
+Write-Host &amp;quot;########### Database Role Permissions for $Database $Role on $Server ################`n&amp;quot;
+$Role.EnumMembers()
+}
+}
+}
+}
+2 {
+Write-Host &amp;quot;################## Object Permissions on $Server ################################`n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### Object Permissions on $Database on $Server #################################`n&amp;quot;
+foreach ($user in $database.Users) {
+foreach ($databasePermission in $database. EnumDatabasePermissions($user.Name)) {
+Write-Host $databasePermission.PermissionState $databasePermission.PermissionType &amp;quot;TO&amp;quot; $databasePermission.Grantee
+}
+foreach ($objectPermission in $database. EnumObjectPermissions($user.Name)) {
+Write-Host $objectPermission.PermissionState $objectPermission.PermissionType &amp;quot;ON&amp;quot; $objectPermission.ObjectName &amp;quot;TO&amp;quot; $objectPermission. Grantee
+}
+}
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Checking SQL Server User Role Membership with PowerShell</title><link>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</link><pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLUserPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function to Display the permissions a user has across the estate
+# NOTE - Will not show permissions granted through AD Group Membership
+#
+# USAGE Show-SQLUserPermissions DBAwithaBeard
+Function Show-SQLUserPermissions ($user)
+{
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | out-null
+# Suppress Error messages - They will be displayed at the end
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+#cls
+$Query = @&amp;quot;
+SELECT
+IL.ServerName
+FROM [dbo].[InstanceList] IL
+WHERE NotContactable = 0
+AND Inactive = 0
+AND DatabaseEngine = 'Microsoft SQL Server'
+&amp;quot;@
+Try
+{
+$Results = (Invoke-Sqlcmd -ServerInstance HMDBS02 -Database DBADatabase -Query $query -ErrorAction Stop).ServerName
+}
+catch
+{
+Write-Error &amp;quot;Unable to Connect to the DBADatabase - Please Check&amp;quot;
+}
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$user&amp;quot;,&amp;quot;DOMAIN3\$user&amp;quot;, &amp;quot;DOMAIN4\$user&amp;quot; ,&amp;quot;$user&amp;quot; )
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;Logins for `n $logins displayed below&amp;quot;
+Write-Output &amp;quot;################################# `n&amp;quot;
+#loop through each server and each database and display usernames, servers and databases
+Write-Output &amp;quot; Server Logins&amp;quot;
+foreach($server in $Results)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($login in $logins)
+{
+if($srv.Logins.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $login &amp;quot;
+foreach ($Role in $Srv.Roles)
+{
+$RoleMembers = $Role. EnumServerRoleMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role on $Server&amp;quot;
+}
+}
+}
+else
+{
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;`n Database Logins&amp;quot;
+foreach($server in $servers)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($database in $srv.Databases)
+{
+foreach($login in $logins)
+{
+if($database.Users.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $database , $login &amp;quot;
+foreach($role in $Database.Roles)
+{
+$RoleMembers = $Role.EnumMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role Role on $Database on $Server&amp;quot;
+}
+}
+}
+else
+{
+continue
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Finished - If there are no logins displayed above then no logins were found!&amp;quot;
+Write-Output &amp;quot;#########################################&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

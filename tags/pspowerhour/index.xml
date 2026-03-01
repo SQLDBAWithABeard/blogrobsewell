@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pspowerhour on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/pspowerhour/</link><description>Recent content in Pspowerhour on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/pspowerhour/index.xml" rel="self" type="application/rss+xml"/><item><title>Checking Trace Flags with dbachecks, online docs and PSPowerHour</title><link>https://blog.robsewell.com/blog/checking-trace-flags-with-dbachecks-online-docs-and-pspowerhour/</link><pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-trace-flags-with-dbachecks-online-docs-and-pspowerhour/</guid><description>&lt;p&gt;It’s been a few weeks since i have blogged as I have been busy with a lot of other things. One of which is preparing for &lt;a class="link" href="https://www.pass.org/summit/2018/Sessions/Details.aspxsid=80306" target="_blank" rel="noopener"
+&gt;my SQL Pass Summit pre-con&lt;/a&gt; which has lead to me improving the CI/CD for &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; by adding auto-creation of online documentation, which you can find at &lt;a class="link" href="https://dbachecks.readthedocs.io" target="_blank" rel="noopener"
+&gt;https://dbachecks.readthedocs.io&lt;/a&gt; or by running Get-Help with the -Online switch for any dbachecks command.&lt;/p&gt;
+&lt;p&gt;Get-Help Invoke-DbcCheck -Online&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/09/01-online-help.png"
+loading="lazy"
+alt="01 - online help.png"
+&gt;&lt;/p&gt;</description></item></channel></rss>

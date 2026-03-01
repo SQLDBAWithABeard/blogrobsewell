@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Events on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/events/</link><description>Recent content in Events on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/events/index.xml" rel="self" type="application/rss+xml"/><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" /&gt;&lt;h1 id="a-different-method-for-my-own-site"&gt;A different method for my own site
+&lt;/h1&gt;&lt;p&gt;This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; after a twitter discussion a few weeks ago.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="do-you-need-to"&gt;Do you need to?
+&lt;/h2&gt;&lt;p&gt;My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code&gt;CTRL + K, V&lt;/code&gt; and you can see a live preview of your post as you type.&lt;/p&gt;</description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" /&gt;&lt;h1 id="data-saturdays-has-new-clothes"&gt;Data Saturdays Has New Clothes!
+&lt;/h1&gt;&lt;p&gt;The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+&gt;https://www.dcac.com/&lt;/a&gt; generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+&gt;99designs.com&lt;/a&gt;. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt; for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p&gt;</description></item><item><title>Creating a New Data Saturdays event</title><link>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</link><pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturdays.png" alt="Featured image of post Creating a New Data Saturdays event" /&gt;&lt;h1 id="creating-a-new-data-saturdays-event"&gt;Creating a New Data Saturdays Event
+&lt;/h1&gt;&lt;p&gt;There&amp;rsquo;s a new process to create a Data Saturdays Event page, so I thought I would write an explanation and a run through&lt;/p&gt;
+&lt;h2 id="what-is-data-saturdays-"&gt;What is Data Saturdays ?
+&lt;/h2&gt;&lt;p&gt;Firstly, not everyone will know what a Data Saturday event is, so lets start with that. There are two parts to it.&lt;/p&gt;
+&lt;p&gt;A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.&lt;/p&gt;</description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;p&gt;&lt;img src="https://i0.wp.com/blog.waynesheffield.com/wayne/wp-content/uploads/2012/04/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;) and is now starting its 6th year, is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme. This month it is hosted by Wayne Sheffield &lt;a class="link" href="http://blog.waynesheffield.com/wayne/archive/2014/12/t-sql-tuesday-61-giving-back/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://www.twitter.com/#/DBAWayne" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; and in the spirit of the holiday season it is about giving. This is my post on giving back, in the little ways as well as the bigger ones, how you can give back and why it not only benefits others but also yourself&lt;/p&gt;</description></item></channel></rss>

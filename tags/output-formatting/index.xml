@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Output Formatting on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/output-formatting/</link><description>Recent content in Output Formatting on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/output-formatting/index.xml" rel="self" type="application/rss+xml"/><item><title>MicrosoftFabricMgmt: Goodbye GUIDs - Intelligent Output and Smart Caching</title><link>https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids-intelligent-output-and-smart-caching/</link><pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids-intelligent-output-and-smart-caching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/workspaces.png" alt="Featured image of post MicrosoftFabricMgmt: Goodbye GUIDs - Intelligent Output and Smart Caching" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;When you work with a REST API that returns GUIDs for everything, human readability goes out the window. You run a query like this in PowerShell to get your Fabric lakehouses and you get something like this returned&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="../../assets/uploads/2026/02/restapi.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/restapi.png"
+loading="lazy"
+alt="PowerShell console showing REST API response with GUID-based Lakehouse properties"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="humans-dont-work-with-guids-we-want-names"&gt;Humans don&amp;rsquo;t work with GUIDs. We want names.
+&lt;/h2&gt;&lt;p&gt;Which workspace is &lt;code&gt;948d3445-54a5-4c2a-85e7-2c3d30933992&lt;/code&gt;?
+Which capacity? Who knows — go look it up.
+Multiply that by fifty items across ten workspaces and you have a frustrating afternoon ahead of you.&lt;/p&gt;</description></item></channel></rss>

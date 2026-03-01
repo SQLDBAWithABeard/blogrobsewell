@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YAML on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/yaml/</link><description>Recent content in YAML on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/yaml/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes lab certificates expired</title><link>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</link><pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/kubernetes-lab-certificates-expired/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post Kubernetes lab certificates expired" /&gt;&lt;h1 id="it-wont-start"&gt;It won&amp;rsquo;t start!
+&lt;/h1&gt;&lt;p&gt;I have a 3 node kubernetes cluster running in my office that I have used for my &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Arc-enabled data services&lt;/a&gt; presentations over the last year (&lt;a class="link" href="beard.media/presentations" &gt;Side note, my presentations are here&lt;/a&gt;). A few days ago after a power cut I tried to connect to my cluster with &lt;a class="link" href="https://k8slens.dev/" target="_blank" rel="noopener"
+&gt;Lens&lt;/a&gt; and was not able to.&lt;/p&gt;
+&lt;p&gt;I tried to run &lt;code&gt;kubectl get nodes&lt;/code&gt; but got no response.&lt;/p&gt;
+&lt;h2 id="try-on-the-master-node"&gt;Try on the master node
+&lt;/h2&gt;&lt;p&gt;I used my windows terminal profile that ssh&amp;rsquo;s into the master node and ran&lt;/p&gt;</description></item><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" /&gt;&lt;h1 id="broken-link"&gt;Broken Link
+&lt;/h1&gt;&lt;p&gt;It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+&gt;&lt;/p&gt;
+&lt;p&gt;Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+&gt;404 page &lt;/a&gt; which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p&gt;
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it"&gt;Why do something manual when you can automate it
+&lt;/h2&gt;&lt;p&gt;This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p&gt;</description></item><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" /&gt;&lt;h1 id="a-different-method-for-my-own-site"&gt;A different method for my own site
+&lt;/h1&gt;&lt;p&gt;This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; after a twitter discussion a few weeks ago.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="do-you-need-to"&gt;Do you need to?
+&lt;/h2&gt;&lt;p&gt;My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code&gt;CTRL + K, V&lt;/code&gt; and you can see a live preview of your post as you type.&lt;/p&gt;</description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" /&gt;&lt;h1 id="data-saturdays-has-new-clothes"&gt;Data Saturdays Has New Clothes!
+&lt;/h1&gt;&lt;p&gt;The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+&gt;https://www.dcac.com/&lt;/a&gt; generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+&gt;99designs.com&lt;/a&gt;. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt; for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p&gt;</description></item><item><title>Creating a New Data Saturdays event</title><link>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</link><pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturdays.png" alt="Featured image of post Creating a New Data Saturdays event" /&gt;&lt;h1 id="creating-a-new-data-saturdays-event"&gt;Creating a New Data Saturdays Event
+&lt;/h1&gt;&lt;p&gt;There&amp;rsquo;s a new process to create a Data Saturdays Event page, so I thought I would write an explanation and a run through&lt;/p&gt;
+&lt;h2 id="what-is-data-saturdays-"&gt;What is Data Saturdays ?
+&lt;/h2&gt;&lt;p&gt;Firstly, not everyone will know what a Data Saturday event is, so lets start with that. There are two parts to it.&lt;/p&gt;
+&lt;p&gt;A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.&lt;/p&gt;</description></item></channel></rss>

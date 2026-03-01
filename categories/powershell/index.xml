@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerShell on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/powershell/</link><description>Recent content in PowerShell on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 26 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/powershell/index.xml" rel="self" type="application/rss+xml"/><item><title>MicrosoftFabricMgmt: Workspaces - List, Get, Create, Update, and Remove</title><link>https://blog.robsewell.com/blog/microsoftfabricmgmt-workspaces-list-get-create-update-and-remove/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoftfabricmgmt-workspaces-list-get-create-update-and-remove/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/workspaces.png" alt="Featured image of post MicrosoftFabricMgmt: Workspaces - List, Get, Create, Update, and Remove" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;The workspace is the fundamental unit of organisation in &lt;a class="link" href="https://learn.microsoft.com/en-us/fabric/fundamentals/microsoft-fabric-overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Microsoft Fabric&lt;/a&gt;. Everything lives inside a workspace — your lakehouses, warehouses, notebooks, pipelines, reports. Managing workspaces is therefore the first practical skill to build, and MicrosoftFabricMgmt makes it straightforward.&lt;/p&gt;
+&lt;p&gt;We have already seen &lt;code&gt;Get-FabricWorkspace&lt;/code&gt; in &lt;a class="link" href="https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started-installation-and-authentication/" target="_blank" rel="noopener"
+&gt;the installation post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lets explore it in more detail, along with the other workspace management cmdlets: &lt;code&gt;New-FabricWorkspace&lt;/code&gt;, &lt;code&gt;Update-FabricWorkspace&lt;/code&gt;, and &lt;code&gt;Remove-FabricWorkspace&lt;/code&gt;. By the end of this post you will be able to list, get details of, create, update, and remove workspaces in your Fabric tenant using PowerShell.&lt;/p&gt;</description></item><item><title>MicrosoftFabricMgmt: Goodbye GUIDs - Intelligent Output and Smart Caching</title><link>https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids-intelligent-output-and-smart-caching/</link><pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoftfabricmgmt-goodbye-guids-intelligent-output-and-smart-caching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/workspaces.png" alt="Featured image of post MicrosoftFabricMgmt: Goodbye GUIDs - Intelligent Output and Smart Caching" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;When you work with a REST API that returns GUIDs for everything, human readability goes out the window. You run a query like this in PowerShell to get your Fabric lakehouses and you get something like this returned&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="../../assets/uploads/2026/02/restapi.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/restapi.png"
+loading="lazy"
+alt="PowerShell console showing REST API response with GUID-based Lakehouse properties"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="humans-dont-work-with-guids-we-want-names"&gt;Humans don&amp;rsquo;t work with GUIDs. We want names.
+&lt;/h2&gt;&lt;p&gt;Which workspace is &lt;code&gt;948d3445-54a5-4c2a-85e7-2c3d30933992&lt;/code&gt;?
+Which capacity? Who knows — go look it up.
+Multiply that by fifty items across ten workspaces and you have a frustrating afternoon ahead of you.&lt;/p&gt;</description></item><item><title>MicrosoftFabricMgmt: Getting Started - Installation and Authentication</title><link>https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started-installation-and-authentication/</link><pubDate>Tue, 24 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started-installation-and-authentication/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/intro.png" alt="Featured image of post MicrosoftFabricMgmt: Getting Started - Installation and Authentication" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Yesterday I &lt;a class="link" href="https://blog.robsewell.com/blog/introducing-microsoftfabricmgmt-managing-microsoft-fabric-with-powershell/" target="_blank" rel="noopener"
+&gt;introduced the MicrosoftFabricMgmt module&lt;/a&gt; and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.&lt;/p&gt;
+&lt;p&gt;By the end of this post you will have the module installed, be authenticated, and have your first list of Fabric workspaces in your terminal.&lt;/p&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites
+&lt;/h2&gt;&lt;p&gt;MicrosoftFabricMgmt requires &lt;strong&gt;PowerShell 7 or later&lt;/strong&gt;. It will not work on Windows PowerShell 5.1. If you are still on 5.1, now is a great time to upgrade. You can download PowerShell 7 from &lt;a class="link" href="https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Introducing MicrosoftFabricMgmt: Managing Microsoft Fabric with PowerShell</title><link>https://blog.robsewell.com/blog/introducing-microsoftfabricmgmt-managing-microsoft-fabric-with-powershell/</link><pubDate>Mon, 23 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/introducing-microsoftfabricmgmt-managing-microsoft-fabric-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/breakingchanges.png" alt="Featured image of post Introducing MicrosoftFabricMgmt: Managing Microsoft Fabric with PowerShell" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;If you have been following this blog for a while, you will know that I am a huge fan of using PowerShell to manage and automate things. SQL Server, &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt;, &lt;a class="link" href="https://github.com/dataplat/dbachecks/" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; — automating the boring stuff so we can spend time on the interesting stuff.&lt;/p&gt;
+&lt;p&gt;I have been introducing the &lt;a class="link" href="https://github.com/microsoft/fabric-toolbox" target="_blank" rel="noopener"
+&gt;Microsoft fabric-toolbox&lt;/a&gt; — covering &lt;a class="link" href="https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/" target="_blank" rel="noopener"
+&gt;the toolbox itself&lt;/a&gt;, &lt;a class="link" href="https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/" target="_blank" rel="noopener"
+&gt;FUAM&lt;/a&gt;, and &lt;a class="link" href="https://blog.robsewell.com/blog/fca-fabric-cost-analysis-for-finops/" target="_blank" rel="noopener"
+&gt;FCA&lt;/a&gt;. All excellent tools. But there is one item in the toolbox that I have been personally involved in building, and it is the one I am most excited to write about.&lt;/p&gt;</description></item><item><title>FCA - Fabric Cost Analysis for FinOps</title><link>https://blog.robsewell.com/blog/fca-fabric-cost-analysis-for-finops/</link><pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fca-fabric-cost-analysis-for-finops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/fabric-toolbox-fca.png" alt="Featured image of post FCA - Fabric Cost Analysis for FinOps" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;This week we have been looking at the &lt;a class="link" href="https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/" target="_blank" rel="noopener"
+&gt;fabric-toolbox&lt;/a&gt; ecosystem. It is full of fantastic tools for folk that use Microsoft Fabric, and I have been doing a deep dive into the monitoring solutions in particular.&lt;/p&gt;
+&lt;p&gt;Yesterday we covered &lt;a class="link" href="https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/" target="_blank" rel="noopener"
+&gt;FUAM&lt;/a&gt; — the operational monitoring solution.&lt;/p&gt;
+&lt;p&gt;Today we look at another monitoring tool in the collection: &lt;strong&gt;FCA, the Fabric Cost Analysis&lt;/strong&gt; solution.&lt;/p&gt;
+&lt;p&gt;Where FUAM answers &amp;ldquo;how is my Fabric capacity being used?&amp;rdquo;, FCA answers &amp;ldquo;what is it costing us, and who is spending what?&amp;rdquo;&lt;/p&gt;</description></item><item><title>FUAM - Fabric Unified Admin Monitoring</title><link>https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/</link><pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/</guid><description>&lt;img src="https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_cover_flow.png" alt="Featured image of post FUAM - Fabric Unified Admin Monitoring" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Yesterday I &lt;a class="link" href="https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/" target="_blank" rel="noopener"
+&gt;introduced fabric-toolbox&lt;/a&gt; — Microsoft&amp;rsquo;s community-driven repository of Fabric accelerators. Today we look at one of its flagship solutions: &lt;strong&gt;FUAM, the Fabric Unified Admin Monitoring&lt;/strong&gt; solution.&lt;/p&gt;
+&lt;p&gt;When you are responsible for a Microsoft Fabric tenant, it will not be very long before you are facing many questions.&lt;/p&gt;
+&lt;p&gt;Questions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How is my capacity being used?&lt;/li&gt;
+&lt;li&gt;Which workspaces are consuming the most resources?&lt;/li&gt;
+&lt;li&gt;What are my users actually doing?&lt;/li&gt;
+&lt;li&gt;When are my peak usage times?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can scabble around in the Admin portal and try to piece together the answers, but it is a bit like trying to navigate a city with a paper map — you can get there eventually, but it is slow and painful, and you will probably miss some things along the way.&lt;/p&gt;</description></item><item><title>Introduction to fabric-toolbox - Microsoft Fabric's Community Accelerator Hub</title><link>https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/</link><pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/fabric-toolbox-introduction.png" alt="Featured image of post Introduction to fabric-toolbox - Microsoft Fabric's Community Accelerator Hub" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Today I want to talk about &lt;a class="link" href="https://github.com/microsoft/fabric-toolbox" target="_blank" rel="noopener"
+&gt;fabric-toolbox&lt;/a&gt;, the Microsoft-sponsored, community-driven repository of accelerators, tools, and utilities that exists specifically to help Fabric users get further, faster.&lt;/p&gt;
+&lt;h2 id="what-is-fabric-toolbox"&gt;What Is fabric-toolbox?
+&lt;/h2&gt;&lt;p&gt;fabric-toolbox is a GitHub repository maintained under the Microsoft organisation, led by the Microsoft Customer Acceleration Team (CAT) for Fabric and community contributors. It&amp;rsquo;s a community toolkit, a collection of solutions that go beyond the core product to solve real-world operational, governance, and automation problems.&lt;/p&gt;</description></item><item><title>Don't Believe the Documentation - Coding against the Microsoft Fabric API with PowerShell</title><link>https://blog.robsewell.com/blog/dont-believe-the-documentation-coding-against-the-microsoft-fabric-api-with-powershell/</link><pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dont-believe-the-documentation-coding-against-the-microsoft-fabric-api-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/500.png" alt="Featured image of post Don't Believe the Documentation - Coding against the Microsoft Fabric API with PowerShell" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Firstly, an apology to my friends (especially Randolph) in the documentation team at Microsoft. I know how hard you work to produce accurate and useful documentation, and I appreciate your efforts. This is not a criticism of your work, but rather an observation about the challenges I faced.&lt;/p&gt;
+&lt;p&gt;This is a story about a recent experience and the lessons learned along the way.&lt;/p&gt;
+&lt;h2 id="the-challenge"&gt;The challenge
+&lt;/h2&gt;&lt;p&gt;&amp;ldquo;We need to remove all links that have been shared with the whole organisation from our Fabric tenants&amp;rdquo;&lt;/p&gt;</description></item><item><title>Making Notebook Agent Jobs on Named Instances work</title><link>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</link><pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-notebook-agent-jobs-on-named-instances-work/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2024/ads.png" alt="Featured image of post Making Notebook Agent Jobs on Named Instances work" /&gt;&lt;h2 id="can-you-help-erland-said"&gt;Can you help? Erland said
+&lt;/h2&gt;&lt;p&gt;The first I realised about this problem was when Erland Sommarskog &lt;a class="link" href="https://www.sommarskog.se/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; asked me if I could help with &lt;a class="link" href="https://learn.microsoft.com/en-us/answers/questions/1465685/scheduling-python-notebook-using-sql-server-agent?wt.mc_id=dp-mvp-5002693" target="_blank" rel="noopener"
+&gt;this forum post&lt;/a&gt; The poster was getting an error when trying to run a Notebook Agent Job. The error was a very generic instance not found error&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider&lt;!-- raw HTML omitted --&gt; error: 40 - Could not open a connection to SQL Server) The system cannot find the file specified&lt;/p&gt;</description></item><item><title>When WSL DNS fails you</title><link>https://blog.robsewell.com/blog/when-wsl-dns-fails-you/</link><pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/when-wsl-dns-fails-you/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/wsl-dns-fail.png" alt="Featured image of post When WSL DNS fails you" /&gt;&lt;h1 id="so-that-i-will-remember"&gt;So that I will remember!
+&lt;/h1&gt;&lt;p&gt;When running WSL in a corporate environment, I sometimes an error like the following, where the cli is not able to resolve the IP address correctly. This error is from terraform but I have seen it elsewhere.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="../../assets/uploads/2023/wsl-dns-fail.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2023/wsl-dns-fail.png"
+loading="lazy"
+alt="wsl-dns-resolve"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;╷
+│ Error: Failed to query available provider packages
+│
+│ Could not retrieve the list of available versions for provider hashicorp/random: could not connect to registry.terraform.io: failed to request discovery document: Get
+│ &amp;ldquo;&lt;a class="link" href="https://registry.terraform.io/.well-known/terraform.json%22" target="_blank" rel="noopener"
+&gt;https://registry.terraform.io/.well-known/terraform.json"&lt;/a&gt;: dial tcp: lookup registry.terraform.io on 123.45.67.89:53: read udp 123.45.67.89:51522-&amp;gt;123.45.67.89:53: i/o timeout&lt;/p&gt;</description></item><item><title>dbachecks v3 at Data Saturday Oslo</title><link>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-session.jpeg" alt="Featured image of post dbachecks v3 at Data Saturday Oslo" /&gt;&lt;h1 id="dbachecks-v3-at-data-saturday-oslo"&gt;dbachecks v3 at Data Saturday Oslo
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/datasaturdayoslo-session.jpeg"
+loading="lazy"
+alt="dbachecksv3"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On Saturday September 2nd 2023, will be &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;Data Saturday Oslo&lt;/a&gt; in Oslo, Norway.&lt;/p&gt;
+&lt;p&gt;For more information about this free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;DataSaturday0035&lt;/a&gt; where you can sign up. Don&amp;rsquo;t wait, spaces are limited!&lt;/p&gt;
+&lt;p&gt;I will be presenting a session with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+&gt;Mastodon&lt;/a&gt; and Cláudio Silva &lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; introducing dbachecks v3.&lt;/p&gt;
+&lt;h2 id="abstract"&gt;abstract
+&lt;/h2&gt;&lt;p&gt;dbachecks v1 was released back in 2018, bringing together the DBA PowerShell magic of dbatools with pester, a PowerShell testing framework to create a powerful infrastructure validation tool.&lt;/p&gt;</description></item><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" /&gt;&lt;h1 id="what-is-sqlbits"&gt;What is SQLBits?
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits&lt;/a&gt; is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+&gt;written about SQLBits&lt;/a&gt;, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p&gt;
+&lt;h2 id="where-and-when"&gt;Where and when?
+&lt;/h2&gt;&lt;p&gt;This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p&gt;</description></item><item><title>How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error</title><link>https://blog.robsewell.com/blog/how-to-import-dbatools-from-a-zip-file-from-the-github-release-into-azure-automation-modules-without-an-error/</link><pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-import-dbatools-from-a-zip-file-from-the-github-release-into-azure-automation-modules-without-an-error/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/dbatools.jpg" alt="Featured image of post How to import dbatools from a zip file from the GitHub release into Azure Automation Modules without an error" /&gt;&lt;p&gt;There are a number of methods to import PowerShell modules into Azure automation &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/automation/shared-resources/modules?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;as described in the documentation here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You may however miss an important piece of information hidden in that documentation if you are uploading a module from a GitHub release instead of via the &lt;a class="link" href="https://www.powershellgallery.com/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;PowerShell Gallery&lt;/a&gt;. The name that you refer to the module must match the module name and module folder name in the zip file.&lt;/p&gt;
+&lt;h1 id="method-one---from-gallery"&gt;Method one - from Gallery
+&lt;/h1&gt;&lt;p&gt;This is my preferred method for importing modules into Azure Automation accounts, the only bothersome part is remembering to do it twice, once for 5.1 and once for 7.1 as I am sure that if I forget that will be the one module that I will need!&lt;/p&gt;</description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/bench.jpg" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" /&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/blog/community/Training-Day-Speakers-List" &gt;The last post&lt;/a&gt; showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p&gt;
+&lt;h1 id="what-do-we-need"&gt;What do we need?
+&lt;/h1&gt;&lt;p&gt;The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+&gt;The web page can be found here&lt;/a&gt;. This page is generated from a JSON file.&lt;/p&gt;</description></item><item><title>Using PowerShell to Automate StreamLabs OBS and Show Your Webcam in PowerPoint</title><link>https://blog.robsewell.com/blog/using-powershell-to-automate-streamlabs-obs-and-show-your-webcam-in-powerpoint/</link><pubDate>Mon, 21 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-powershell-to-automate-streamlabs-obs-and-show-your-webcam-in-powerpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/09/scottwitter.png" alt="Featured image of post Using PowerShell to Automate StreamLabs OBS and Show Your Webcam in PowerPoint" /&gt;&lt;h2 id="it-started-with-a-tweet"&gt;It started with a tweet
+&lt;/h2&gt;&lt;p&gt;As with many things in my life it started with a tweet&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/sammydeprez/status/1307674009669074945" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2020/09/scottwitter.png"
+loading="lazy"
+alt="Twitter"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;That looks awesome, I thought, so I watched the YouTube video.Scott has written a C# application that would change the scene depending on some text in the PowerPoint slide notes. Then, by applying a Chroma filter to the display capture and placing the webcam capture appropriately, when the slide changed, the Obs scene changed and the webcam became embedded in the slide!!!!!!!&lt;/p&gt;</description></item><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" /&gt;&lt;h1 id="automation"&gt;Automation
+&lt;/h1&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted --&gt;blog&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;twitter&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Elizabeth&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/p&gt;
+&lt;p&gt;Elizabeth asks&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My invitation to you is I want to know what you have automated to make your life easier?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="from-the-past"&gt;From the Past
+&lt;/h2&gt;&lt;p&gt;I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+&gt;You have to start somewhere&lt;/a&gt; In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;The Best Database Administrators Automate Everything&lt;/a&gt; which I am pleased to see is still available nearly a decade later&lt;/p&gt;</description></item><item><title>Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools</title><link>https://blog.robsewell.com/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</link><pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-16.png" alt="Featured image of post Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools" /&gt;&lt;p&gt;Following on from my posts about using Secret Management &lt;a class="link" href="https://blog.robsewell.com/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+&gt;Good bye Import-CliXml&lt;/a&gt; and &lt;a class="link" href="https://blog.robsewell.com/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/" target="_blank" rel="noopener"
+&gt;running programmes as a different user&lt;/a&gt;, I have another use case.&lt;/p&gt;
+&lt;p&gt;After creating Azure SQL Databases in an Elastic Pool using a process pretty similar to this one &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+&gt;I blogged about last year&lt;/a&gt;, I needed to be able to programmatically create users and assign permissions.&lt;/p&gt;
+&lt;h2 id="i-need-a-user-to-login-with"&gt;I need a user to login with
+&lt;/h2&gt;&lt;p&gt;When I created my Azure SQL Server with Terraform, I set the Azure Admin to be a SPN as you can see in the image from the portal and set it to have an identity using the documentation for &lt;a class="link" href="https://www.terraform.io/docs/providers/azurerm/r/sql_server.html" target="_blank" rel="noopener"
+&gt;azurerm_mssql_server&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Sending a SQL Agent Job results overview to a Microsoft Teams Channel</title><link>https://blog.robsewell.com/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/</link><pubDate>Tue, 28 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-11.png" alt="Featured image of post Sending a SQL Agent Job results overview to a Microsoft Teams Channel" /&gt;&lt;p&gt;Microsoft Teams is fantastic for collaboration. It enables groups of people, teams if you like to be able to communicate, collaborate on documents, hold meetings and much much more.&lt;/p&gt;
+&lt;h2 id="sql-agent-job-overview"&gt;SQL Agent Job Overview
+&lt;/h2&gt;&lt;p&gt;Using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; we can create a simple script to gather the results of Agent Jobs form a list of instances. Maybe it would be good to be able to get the job runs results every 12 hours so that at 6am in the morning the early-bird DBA can quickly identify if there are any failures that need immediate action and at 6pm , the team can check that everything was ok before they clock off.&lt;/p&gt;</description></item><item><title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</title><link>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</link><pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png" alt="Featured image of post Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user" /&gt;&lt;p&gt;Following on from &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+&gt;my last post about the Secret Management module&lt;/a&gt;. I was asked another question.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Can I use this to run applications as my admin account?&lt;/p&gt;
+&lt;p&gt;A user with a beard&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It is good practice to not log into your work station with an account with admin privileges. In many shops, you will need to open applications that can do administration tasks with another set of account credentials.&lt;/p&gt;
+&lt;p&gt;Unfortunately, people being people, they will often store their admin account credentials in a less than ideal manner (OneNote, Notepad ++ etc) to make it easier for them, so that when they right click and run as a different user, they can copy and paste the password.&lt;/p&gt;</description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" /&gt;&lt;p&gt;Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/dotnetnotebooks&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="jaap-is-awesome"&gt;Jaap is awesome
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; blog post&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+&gt;https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="joel-is-also-awesome"&gt;Joel is also awesome!
+&lt;/h2&gt;&lt;p&gt;When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; module BetterCredentials which uses the Windows Credential Manager&lt;/p&gt;</description></item><item><title>Running Jupyter Notebooks as Agent Jobs</title><link>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</link><pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-22.png" alt="Featured image of post Running Jupyter Notebooks as Agent Jobs" /&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; is a great tool for connecting with your data platform whether it is in Azure or on your hardware. &lt;a class="link" href="https://blog.robsewell.com/?s=notebooks" target="_blank" rel="noopener"
+&gt;Jupyter Notebooks&lt;/a&gt; are fantastic, you can have words, pictures, code and code results all saved in one document.&lt;/p&gt;
+&lt;p&gt;I have created a repository in my GitHub &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/Notebooks&lt;/a&gt; where I have stored a number of Jupyter notebooks both for Azure Data Studio and the &lt;a class="link" href="https://blog.robsewell.com/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+&gt;new .NET interactive&lt;/a&gt; notebooks.&lt;/p&gt;</description></item><item><title>Use Jupyter Notebooks to Help People on StackOverFlow</title><link>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post Use Jupyter Notebooks to Help People on StackOverFlow" /&gt;&lt;p&gt;I am sat in the PowerShell Saturday in Hamburg. You can see me on the right of this picture writing &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/pester/net-powershell-notebooks-using-pester/" target="_blank" rel="noopener"
+&gt;my previous blog post!&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/JanDamaschke?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@JanDamaschke&lt;/a&gt; spricht über Asynchrones Logging in &lt;a class="link" href="https://twitter.com/hashtag/powershell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#powershell&lt;/a&gt; mit Classes und Runspaces &lt;img src="https://pbs.twimg.com/media/ERYdg-6XUAAbwBk?format=jpg"
+loading="lazy"
+&gt; (&lt;a class="link" href="https://twitter.com/hhpsug?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;https://twitter.com/hhpsug?ref_src=twsrc%5Etfw&lt;/a&gt;) &lt;a class="link" href="https://twitter.com/hashtag/pssaturday?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#pssaturday&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Christoph Burmeister (@chrburmeister) &lt;a class="link" href="https://twitter.com/chrburmeister/status/1231204011270909954?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;February 22, 2020&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was talking with my friend Mathias Jessen &lt;a class="link" href="https://twitter.com/IISResetMe" target="_blank" rel="noopener"
+&gt;@IISResetMe on Twitter&lt;/a&gt; about notebooks and he said that another great use case was to use them on Stack OverFlow&lt;/p&gt;</description></item><item><title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</title><link>https://blog.robsewell.com/blog/new-net-notebooks-are-here-powershell-7-notebooks-are-here/</link><pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/new-net-notebooks-are-here-powershell-7-notebooks-are-here/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png" alt="Featured image of post New .NET Notebooks are here – PowerShell 7 notebooks are here." /&gt;&lt;p&gt;Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and &lt;a class="link" href="https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;added SQL&lt;/a&gt; kernel where &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//" target="_blank" rel="noopener"
+&gt;with a little bit of faffing you could run PowerShell&lt;/a&gt; and then a &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;Python kernel that enabled PowerShell&lt;/a&gt;. It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.NET Notebooks Preview 2 is here! Preview 2 includes 🎉&lt;a class="link" href="https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@PowerShell_Team&lt;/a&gt;, &lt;a class="link" href="https://twitter.com/nteractio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@nteractio&lt;/a&gt;, and a new tool. Check out our blog to learn more. Congratulations to &lt;a class="link" href="https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@jonsequitur&lt;/a&gt; &lt;a class="link" href="https://twitter.com/colombod?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@colombod&lt;/a&gt; and our entire team&lt;a class="link" href="https://t.co/WqNWQWR3Bo" target="_blank" rel="noopener"
+&gt;https://t.co/WqNWQWR3Bo&lt;/a&gt;&lt;a class="link" href="https://twitter.com/dotnet?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@dotnet&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/jupyter?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#jupyter&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/PowerShell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#PowerShell&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/interactiveprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#interactiveprogramming&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps</title><link>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</link><pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-40.png" alt="Featured image of post Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps" /&gt;&lt;h1 id="fixing-the-failed-to-generate-the-compressed-file-for-module-cprogram-filesdotnetdotnetexe-error-when-deploying-to-the-powershell-gallery-using-azure-devops"&gt;Fixing the Failed to generate the compressed file for module C:\Program Files\dotnet\dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps
+&lt;/h1&gt;&lt;p&gt;The PowerShell module for validating your SQL Server estate &lt;a class="link" href="http://beard.media/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; is deployed via &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&amp;amp;view=mine&amp;amp;definitionId=2" target="_blank" rel="noopener"
+&gt;Azure DevOps, you can see how it is working (or not) via this link&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="grrr-automation-for-the-lose"&gt;Grrr Automation for the Lose!
+&lt;/h2&gt;&lt;p&gt;Until recently, this had worked successfully. In the last few weeks I have been receiving errors&lt;/p&gt;</description></item><item><title>Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook</title><link>https://blog.robsewell.com/blog/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/</link><pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dynamically-creating-azure-data-studio-notebooks-with-powershell-for-an-incident-response-index-notebook/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-39.png" alt="Featured image of post Dynamically Creating Azure Data Studio Notebooks with PowerShell for an Incident Response Index Notebook" /&gt;&lt;p&gt;Now that &lt;a class="link" href="https://aka.ms/azuredatastudio" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; has &lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/release-notes-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;PowerShell Notebooks&lt;/a&gt; and there is a &lt;a class="link" href="https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/" target="_blank" rel="noopener"
+&gt;PowerShell Module for creating notebooks&lt;/a&gt;. I have been asked, more than once, what is the point? What is the use case? How does this help. I hope that this post will spark some ideas of one particular use-case.&lt;/p&gt;
+&lt;p&gt;I showed my silly example PowerShell code to create a PowerShell Notebook that created a PowerShell Notebook to my good friend Nick.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description></item><item><title>Create a PowerShell Notebook for Azure Data Studio with PowerShell</title><link>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</link><pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</guid><description>&lt;p&gt;The latest update to the ADSNotebook PowerShell module &lt;a class="link" href="https://blog.robsewell.com/create-azure-data-studio-sql-notebooks-with-powershell/" target="_blank" rel="noopener"
+&gt;I blogged about here&lt;/a&gt; now enables the creation of PowerShell notebooks with PowerShell.&lt;/p&gt;
+&lt;p&gt;You can install the module with&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Install-Module ADSNotebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you have already installed it you can use&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Update-Module ADSNotebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the latest release, there is an extra parameter for &lt;code&gt;New-AdsWorkBook&lt;/code&gt; of &lt;code&gt;-Type&lt;/code&gt; which will accept either SQL or PowerShell&lt;/p&gt;
+&lt;h2 id="create-a-powershell-notebook-with-powershell-rob"&gt;Create a PowerShell Notebook with PowerShell Rob
+&lt;/h2&gt;&lt;p&gt;OK!&lt;/p&gt;</description></item><item><title>Create Azure Data Studio SQL Notebooks with PowerShell</title><link>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</link><pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</guid><description>&lt;p&gt;At PASS Summit today I gave a presentation about SQL Notebooks in Azure Data Studio for the DBA. I demo’d the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+&gt;PowerShell module ADSNotebook&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-32.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+&gt;which you can also find on GitHub&lt;/a&gt; (where I will be glad to take PR’s to improve it 🙂 )&lt;/p&gt;
+&lt;p&gt;This module has 3 functions&lt;/p&gt;
+&lt;p&gt;This module contains only 3 commands at present&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Convert-ADSPowerShellForMarkdown&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will create the markdown link for embedding PowerShell code in a Text Cell for a SQL Notebook as described &lt;a class="link" href="https://blog.robsewell.com/powershell-in-sql-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;in this blog post&lt;/a&gt;&lt;/p&gt;</description></item><item><title>My current VS Code Extensions and using a workspace file</title><link>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" /&gt;&lt;p&gt;I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p&gt;
+&lt;h2 id="listing-extensions"&gt;Listing Extensions
+&lt;/h2&gt;&lt;p&gt;From the command line you can list your extensions using&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;code --list-extensions
+code-insiders --list-extensions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My list looks like this&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p&gt;</description></item><item><title>PowerShell Notebooks in Azure Data Studio</title><link>https://blog.robsewell.com/blog/powershell-notebooks-in-azure-data-studio/</link><pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-notebooks-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-8.png" alt="Featured image of post PowerShell Notebooks in Azure Data Studio" /&gt;&lt;p&gt;The latest release of the &lt;a class="link" href="https://github.com/microsoft/azuredatastudio#try-out-the-latest-insiders-build-from-master" target="_blank" rel="noopener"
+&gt;insiders edition of Azure Data Studio&lt;/a&gt; brings the first edition of PowerShell Notebooks!&lt;/p&gt;
+&lt;p&gt;You can download the latest insiders edition from the link above, it can be installed alongside the stable release.&lt;/p&gt;
+&lt;p&gt;To access many of the commands available use F1 to open the command palette (like many of my tips this also works in Visual Studio Code). You can then start typing to get the command that you want.&lt;/p&gt;</description></item><item><title>Getting SQL Server installation date with PowerShell using dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</link><pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-7.png" alt="Featured image of post Getting SQL Server installation date with PowerShell using dbatools" /&gt;&lt;p&gt;Most of my writing time at the moment is devoted to  &lt;em&gt;&lt;a class="link" href="https://dbatools.io/book" target="_blank" rel="noopener"
+&gt;Learn dbatools in a Month of Lunches&lt;/a&gt;&lt;/em&gt; which is now available but here is a short post following a question someone asked me.&lt;/p&gt;
+&lt;h2 id="how-can-i-get-the-installation-date-for-sql-server-on-my-estate-into-a-database-with-dbatools-"&gt;How can I get the Installation Date for SQL Server on my estate into a database with dbatools ?
+&lt;/h2&gt;&lt;p&gt;You can get the date that SQL Server was installed using the creation date of the NT Authority\System login using T-SQL&lt;/p&gt;</description></item><item><title>MEAP MEAP – #dbatoolsMoL – Live Book edition</title><link>https://blog.robsewell.com/blog/meap-meap-dbatoolsmol-live-book-edition/</link><pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/meap-meap-dbatoolsmol-live-book-edition/</guid><description>&lt;p&gt;It’s been a busy time!&lt;/p&gt;
+&lt;p&gt;As well as many other things, the fantastical &lt;a class="link" href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life" target="_blank" rel="noopener"
+&gt;BDFL&lt;/a&gt; of &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; Chrissy Lemaire &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+&gt;@cl&lt;/a&gt; and myself have written enough of a chunk of &lt;em&gt;&lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+&gt;Learn dbatools in a Month of Lunches&lt;/a&gt;&lt;/em&gt; that our publisher &lt;a class="link" href="https://beard.media/bookblog" target="_blank" rel="noopener"
+&gt;Manning Publications&lt;/a&gt; have agreed to release it as a MEAP. Not a text book, this book is written in a fun conversational style and split up into chapters that you can read in a lunch-time.&lt;/p&gt;</description></item><item><title>PowerShell in SQL Notebooks in Azure Data Studio</title><link>https://blog.robsewell.com/blog/powershell-in-sql-notebooks-in-azure-data-studio/</link><pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-in-sql-notebooks-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/07/image-4.png" alt="Featured image of post PowerShell in SQL Notebooks in Azure Data Studio" /&gt;&lt;p&gt;I have done a lot of writing in the last few months but you see no blog posts! My wonderful friend Chrissy and I are writing “dbatools in a Month of Lunches” to be published by Manning. That has taken up a lot of my writing mojo. We have hit a little break whilst we have some reviews done ready for the &lt;a class="link" href="https://www.manning.com/meap-program" target="_blank" rel="noopener"
+&gt;MEAP&lt;/a&gt; (For everyone who asks, the answer is the unfulfilling ‘soon’) so it’s time for a blog post!&lt;/p&gt;</description></item><item><title>Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools</title><link>https://blog.robsewell.com/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</link><pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-sql-linux-vm-configuring-sql-installing-pwsh-and-connecting-and-interacting-with-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-125.png" alt="Featured image of post Azure SQL Linux VM – configuring SQL, installing pwsh and connecting and interacting with dbatools" /&gt;&lt;p&gt;In my posts about using Azure Devops to build Azure resources with Terraform, &lt;a class="link" href="https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/" target="_blank" rel="noopener"
+&gt;I built a Linux SQL VM.&lt;/a&gt; I used the &lt;a class="link" href="https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM" target="_blank" rel="noopener"
+&gt;Terraform in this GitHub&lt;/a&gt; repository and created this&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-114.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;h2 id="connecting-with-mobaxterm"&gt;Connecting with MobaXterm
+&lt;/h2&gt;&lt;p&gt;I had set the Network security rules to accept connections only from my static IP using variables in the Build Pipeline. I use &lt;a class="link" href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener"
+&gt;MobaXterm&lt;/a&gt; as my SSH client. Its a free download. I click on sessions&lt;/p&gt;</description></item><item><title>Adding a Folder of Scripts to GitHub</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</link><pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</guid><description>&lt;p&gt;Yesterday there was a tweet from Allen White.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/SQLRunr/status/1113862196201758720" target="_blank" rel="noopener"
+&gt;https://twitter.com/SQLRunr/status/1113862196201758720&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Allen wanted to add his scripts folder to source control but didn&amp;rsquo;t have a how to do it handy. So I thought I would write one. Hopefully this will enable someone new to GitHub and to source control get a folder of scripts under source control&lt;/p&gt;
+&lt;h2 id="github-account"&gt;GitHub account
+&lt;/h2&gt;&lt;p&gt;If you do not have a GitHub account go to &lt;a class="link" href="https://github.com" target="_blank" rel="noopener"
+&gt;https://github.com&lt;/a&gt; and create a new account&lt;/p&gt;</description></item><item><title>Generating a Workload against AdventureWorks with PowerShell</title><link>https://blog.robsewell.com/blog/generating-a-workload-against-adventureworks-with-powershell/</link><pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/generating-a-workload-against-adventureworks-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-51.png" alt="Featured image of post Generating a Workload against AdventureWorks with PowerShell" /&gt;&lt;p&gt;For a later blog post I have been trying to generate some workload against an AdventureWorks database.&lt;/p&gt;
+&lt;p&gt;I found this excellent blog post by Pieter Vanhove &lt;a class="link" href="https://twitter.com/Pieter_Vanhove" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; &lt;a class="link" href="https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/&lt;/a&gt; which references this 2011 post by Jonathan Kehayias &lt;a class="link" href="https://twitter.com/SQLPoolBoy" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;br&gt;
+&lt;a class="link" href="https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/" target="_blank" rel="noopener"
+&gt;https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Both of these run a random query in a single thread so I thought I would use &lt;a class="link" href="https://www.powershellgallery.com/packages/PoshRSJob/1.7.4.4" target="_blank" rel="noopener"
+&gt;PoshRSJob&lt;/a&gt; by Boe Prox &lt;a class="link" href="https://learn-powershell.net/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/proxb" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; to run multiple queries at the same time 🙂&lt;/p&gt;</description></item><item><title>Whats a SQL Notebook in Azure Data Studio?</title><link>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</link><pubDate>Wed, 13 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png" alt="Featured image of post Whats a SQL Notebook in Azure Data Studio?" /&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; is a cross-platform database tool for data professionals using the Microsoft family of on-premises and cloud data platforms on Windows, MacOS, and Linux.&lt;/p&gt;
+&lt;p&gt;Recently Vicky Harp tweeted&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We&amp;rsquo;re getting very close to release of SQL Notebooks in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@AzureDataStudio&lt;/a&gt;! You can give the feature an early spin today with the insider build. &lt;a class="link" href="https://t.co/SEZp7ZdxCp" target="_blank" rel="noopener"
+&gt;pic.twitter.com/SEZp7ZdxCp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1104127412944551936?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;March 8, 2019&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;By the way, you can watch a recording from SQLBits of Vicky’s session&lt;/p&gt;</description></item><item><title>#TSQL2sDay – NomNomNomNomNom</title><link>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</link><pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg" alt="Featured image of post #TSQL2sDay – NomNomNomNomNom" /&gt;&lt;p&gt;&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The topic for this months&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt; T-SQL Tuesday #112&lt;/a&gt; hosted by Shane O’Neill (&lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; / &lt;a class="link" href="https://twitter.com/sozdba" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;) is about “dipping into your cookie jar”. This reference means “when times get tough how do you dip into your reserves to keep going”. Shane asks the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;That is what I want from the contributors of this T-SQL Tuesday, those memories that they can think back on for sustenance. Like the humble cookie, I want a humble brag.&lt;/p&gt;</description></item><item><title>#DataInDevon – Getting up to speed with PowerShell or spend a day with one of four other MVPs :-)</title><link>https://blog.robsewell.com/blog/%23dataindevon-getting-up-to-speed-with-powershell-or-spend-a-day-with-one-of-four-other-mvps-/</link><pubDate>Wed, 06 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/%23dataindevon-getting-up-to-speed-with-powershell-or-spend-a-day-with-one-of-four-other-mvps-/</guid><description>&lt;p&gt;Saturday 27th April is Global Azure Bootcamp day&lt;/p&gt;
+&lt;p&gt;What’s Global Azure Bootcamp?&lt;/p&gt;
+&lt;p&gt;The &lt;a class="link" href="https://global.azurebootcamp.net/" target="_blank" rel="noopener"
+&gt;website&lt;/a&gt; says it best&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;…. communities will come together once again in the sixth great Global Azure Bootcamp event! Each user group will organize their own one day deep dive class on Azure the way they see fit and how it works for their members. The result is that thousands of people get to learn about Azure and join together online under the social hashtag &lt;a class="link" href="https://twitter.com/search?q=%23GlobalAzure" target="_blank" rel="noopener"
+&gt;#GlobalAzure&lt;/a&gt;!&lt;/p&gt;</description></item><item><title>Using Docker to run Integration Tests for dbachecks</title><link>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</link><pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</guid><description>&lt;p&gt;My wonderful friend &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+&gt;André Kamman&lt;/a&gt; wrote a fantastic blog post this week &lt;a class="link" href="https://andrekamman.com/sql-server-container-instances-via-cloudshell/" target="_blank" rel="noopener"
+&gt;SQL Server Container Instances via Cloudshell&lt;/a&gt; about how he uses containers in Azure to test code against different versions of SQL Server.&lt;/p&gt;
+&lt;p&gt;It reminded me that I do something very similar to test &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend &lt;a class="link" href="https://github.com/ClaudioESSilva" target="_blank" rel="noopener"
+&gt;Cláudio Silva&lt;/a&gt; who has added &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks/pull/582" target="_blank" rel="noopener"
+&gt;agent job history checks.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Visual Studio Code Live Sharing Set-Up</title><link>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/07-sign-in.png" alt="Featured image of post Visual Studio Code Live Sharing Set-Up" /&gt;&lt;p&gt;There was an &lt;a class="link" href="https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview" target="_blank" rel="noopener"
+&gt;announcement on the Visual Studio Code blog&lt;/a&gt; about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.&lt;/p&gt;
+&lt;p&gt;It is remarkably easy to set up 🙂&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation
+&lt;/h2&gt;&lt;p&gt;Open Visual Studio Code, open the Extensions side bar (CTRL + SHIFT + X)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/01-open-extensions.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-open-extensions.png"
+loading="lazy"
+alt="01 - open extensions"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Search for Live Share&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/02-search.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/02-search.png"
+loading="lazy"
+alt="02 - search.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click Install and then reload when it has done&lt;/p&gt;</description></item><item><title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services &amp; PowerBi</title><link>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</link><pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</guid><description>&lt;p&gt;Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;http://www.psconf.eu/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ended up creating an interactive PowerBi report to which my good friend and Data Platform MVP Paul Andrew &lt;a class="link" href="https://mrpaulandrew.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; added a bit of magic and I published it. The magnificent Tobias Weltner &lt;a class="link" href="http://www.powertheshell.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/TobiasPSP" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; who organises PSConfEU pointed the domain name &lt;a class="link" href="http://powershell.cool" target="_blank" rel="noopener"
+&gt;http://powershell.cool&lt;/a&gt; at the link. It looks like this.&lt;/p&gt;</description></item><item><title>How to write a PowerShell function to use Confirm, Verbose and WhatIf</title><link>https://blog.robsewell.com/blog/how-to-write-a-powershell-function-to-use-confirm-verbose-and-whatif/</link><pubDate>Thu, 25 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-write-a-powershell-function-to-use-confirm-verbose-and-whatif/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/03-confirm.png" alt="Featured image of post How to write a PowerShell function to use Confirm, Verbose and WhatIf" /&gt;&lt;p&gt;In &lt;a class="link" href="https://blog.robsewell.com/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/" target="_blank" rel="noopener"
+&gt;my last blog post&lt;/a&gt; I showed how to run a script with the WhatIf parameter. This assumes that the commands within the script have been written to use the common parameters Confirm, Verbose and WhatIf.&lt;/p&gt;
+&lt;p&gt;Someone asked me how to make sure that any functions that they write will be able to do this.&lt;/p&gt;
+&lt;p&gt;it is very easy&lt;/p&gt;
+&lt;p&gt;When we define our function we are going to add &lt;code&gt;[cmdletbinding(SupportsShouldProcess)]&lt;/code&gt; at the top&lt;/p&gt;</description></item><item><title>How to run a PowerShell script file with Verbose, Confirm or WhatIf</title><link>https://blog.robsewell.com/blog/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/</link><pubDate>Tue, 23 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Showing-the-results.png" alt="Featured image of post How to run a PowerShell script file with Verbose, Confirm or WhatIf" /&gt;&lt;p&gt;Before you run a PowerShell command that makes a change to something you should check that it is going to do what you expect. You can do this by using the WhatIf parameter for commands that support it. For example, if you wanted to create a New SQL Agent Job Category you would use the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+&gt;awesome dbatools module&lt;/a&gt; and write some code like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;New-DbaAgentJobCategory -SqlInstance ROB-XPS -Category 'Backup'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;before you run it, you can check what it is going to do using&lt;/p&gt;</description></item><item><title>Pester 4.2.0 has a Because…… because :-)</title><link>https://blog.robsewell.com/blog/pester-4.2.0-has-a-because-because-/</link><pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/pester-4.2.0-has-a-because-because-/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/01-Because-1.png" alt="Featured image of post Pester 4.2.0 has a Because…… because :-)" /&gt;&lt;p&gt;I was going through my demo for the &lt;a class="link" href="http://meetu.ps/e/DdYV6/gHMdv/g" target="_blank" rel="noopener"
+&gt;South Coast User Group meeting&lt;/a&gt; tonight and decided to add some details about the Because parameter available in the Pester pre-release version 4.2.0.&lt;/p&gt;
+&lt;p&gt;To install a pre-release version you need to get the latest  &lt;a class="link" href="https://go.microsoft.com/fwlink/?linkid=846259" target="_blank" rel="noopener"
+&gt;PowerShellGet&lt;/a&gt; module. This is pre-installed with PowerShell v6 but for earlier versions open PowerShell as administrator and run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Install-Module PowerShellGet
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can try out the Pester pre-release version (once you have the latest PowerShellGet) by installing it from the &lt;a class="link" href="http://powershellgallery.com" target="_blank" rel="noopener"
+&gt;PowerShell Gallery&lt;/a&gt; with&lt;/p&gt;</description></item><item><title>Using the AST in Pester for dbachecks</title><link>https://blog.robsewell.com/blog/using-the-ast-in-pester-for-dbachecks/</link><pubDate>Mon, 15 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-the-ast-in-pester-for-dbachecks/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Pester-results-1.png" alt="Featured image of post Using the AST in Pester for dbachecks" /&gt;&lt;p&gt;TagLine – My goal – Chrissy will appreciate Unit Tests one day 🙂&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://dbatools.io/new-module-coming-soon/" target="_blank" rel="noopener"
+&gt;Chrissy has written about dbachecks&lt;/a&gt; the new up and coming community driven open source PowerShell module for SQL DBAs to validate their SQL Server estate. we have taken some of the ideas that we have presented about a way of using &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; with &lt;a class="link" href="https://github.com/Pester/Pester" target="_blank" rel="noopener"
+&gt;Pester&lt;/a&gt; to validate that everything is how it should be and placed them into a meta data driven framework to make things easy for anyone to use. It is looking really good and I am really excited about it. It will be released very soon.&lt;/p&gt;</description></item><item><title>#TSQL2sday #94 Lets get all Posh!</title><link>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-94-lets-get-all-posh/</guid><description>&lt;p&gt;Write-Output &amp;ldquo;What are you going to automate today?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Welcome to T-SQL Tuesday for September 2017!&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;
+&lt;a class="link" href="http://tsqltuesday.com/" target="_blank" rel="noopener"
+&gt;T-SQL Tuesday&lt;/a&gt; is a chance for you to join in the SQL Server community and write a blog post on a suggested topic. It makes for a great way to find a bunch of blog posts showing the same subject from many different viewpoints. Please join in and write a blog post, maybe it&amp;rsquo;s your first ever, maybe you haven&amp;rsquo;t blogged for a while but even if you blog every day come and join the party and share your knowledge.&lt;/p&gt;</description></item><item><title>Announcing PSDay.UK – Whats a PSDay?</title><link>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</link><pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</guid><description>&lt;p&gt;On Thursday evening I attended the joint London WinOps and PowerShell User Group. It was an excellent evening with two great sessions by Jaap Brasser and Filip Verloy.&lt;/p&gt;
+&lt;h2 id="psdayuk"&gt;PSDay.UK
+&lt;/h2&gt;&lt;p&gt;There was also an exciting announcement about PSDay.UK  &lt;a class="link" href="https://psday.uk" target="_blank" rel="noopener"
+&gt;https://psday.uk&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Look look&lt;br&gt;
+A whole day of PowerShell&lt;br&gt;
+In London&lt;br&gt;
+Just after &lt;a class="link" href="https://twitter.com/WinOpsLDN" target="_blank" rel="noopener"
+&gt;@WinOpsLDN&lt;/a&gt;&lt;br&gt;
+It&amp;rsquo;s going to be awesome&lt;a class="link" href="https://t.co/CAQqoc2cgX" target="_blank" rel="noopener"
+&gt;https://t.co/CAQqoc2cgX&lt;/a&gt;&lt;br&gt;
+Follow &lt;a class="link" href="https://twitter.com/psdayuk" target="_blank" rel="noopener"
+&gt;@psdayuk&lt;/a&gt; &lt;a class="link" href="https://t.co/3RFHpXpRI1" target="_blank" rel="noopener"
+&gt;pic.twitter.com/3RFHpXpRI1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/888111785022169088" target="_blank" rel="noopener"
+&gt;July 20, 2017&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PSDay.UK is a one day PowerShell event providing the opportunity for you to spend a whole day learning PowerShell from renowned experts from the UK and international speaking community. It will be held at&lt;/p&gt;</description></item><item><title>Setting the default file type for a new file in VS Code</title><link>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</guid><description>&lt;p&gt;Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.&lt;/p&gt;
+&lt;p&gt;To change the language for the file use CTRL +K, M.&lt;/p&gt;
+&lt;p&gt;That’s CTRL and K together and then M afterwards separately.&lt;/p&gt;
+&lt;p&gt;then you can choose the language for the file. It looks like this&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-change-language.gif"
+loading="lazy"
+alt="01 - Change language"
+&gt;&lt;/p&gt;
+&lt;p&gt;However, if you just want your new file to open as a particular language every time you can change this in the settings.&lt;/p&gt;</description></item><item><title>Deploying a Windows Data Science Virtual Machine to Azure with PowerShell easily</title><link>https://blog.robsewell.com/blog/deploying-a-windows-data-science-virtual-machine-to-azure-with-powershell-easily/</link><pubDate>Sun, 18 Dec 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/deploying-a-windows-data-science-virtual-machine-to-azure-with-powershell-easily/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/rdp-file.png" alt="Featured image of post Deploying a Windows Data Science Virtual Machine to Azure with PowerShell easily" /&gt;&lt;p&gt;This weekend (10 December 2016), I went to Slovenia for a &lt;a class="link" href="http://www.sqlsaturday.com/567/eventhome.aspx" target="_blank" rel="noopener"
+&gt;SQL Saturday&lt;/a&gt;. As always, it was an amazing event well organised by &lt;a class="link" href="https://twitter.com/MladenPrajdic" target="_blank" rel="noopener"
+&gt;Mladen Prajdic&lt;/a&gt;, &lt;a class="link" href="http://sqlblog.com/blogs/dejan_sarka/default.aspx" target="_blank" rel="noopener"
+&gt;Dejan Sarka&lt;/a&gt;, and &lt;a class="link" href="https://twitter.com/MatijaLah" target="_blank" rel="noopener"
+&gt;Matija Lah&lt;/a&gt; in a fabulous setting amongst fabulous scenery. I highly recommend it and, also, &lt;a class="link" href="https://en.wikipedia.org/wiki/Ljubljana" target="_blank" rel="noopener"
+&gt;Ljubljana&lt;/a&gt;  is a wonderful place to be in December with all the lights and markets.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/12/wp_20161209_19_21_06_pro.jpg" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/12/wp_20161209_19_21_06_pro.jpg"
+loading="lazy"
+alt="WP_20161209_19_21_06_Pro.jpg"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whilst I was there I was asked by someone if you could deploy data science virtual machines in Azure with PowerShell. I said I was sure that it could be done and agreed I would write a blog post, so here it is.&lt;/p&gt;</description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p&gt;I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+&gt;PSConfAsia&lt;/a&gt; conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+&gt;Ravi Chaganti&lt;/a&gt; spoke about DSC&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+&gt;&lt;/p&gt;</description></item><item><title>Making Start-Demo work with multi-line commands without a backtick</title><link>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</link><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" alt="Featured image of post Making Start-Demo work with multi-line commands without a backtick" /&gt;&lt;p&gt;I love to speak about PowerShell. I really enjoy giving presentations and when I saw Start-Demo being used at the PowerShell Conference in Hanover I started to make use of it in my presentations.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Start-Demo&lt;/code&gt; was written in 2007 by a fella who knows PowerShell pretty well 🙂  &lt;a class="link" href="https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/" target="_blank" rel="noopener"
+&gt;https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It was then updated in 2012 by Max Trinidad &lt;a class="link" href="http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/" target="_blank" rel="noopener"
+&gt;http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This enabled support for multi-line code using backticks at the end of each line. This works well but I dislike having to use the backticks in foreach loops, it confuses people who think that they need to be included and to my mind looks a bit messy&lt;/p&gt;</description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p&gt;&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+&gt;The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a&gt; made me jump out of my seat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In one release there are &lt;strong&gt;twenty-five&lt;/strong&gt; new CMDLets for the new sqlserver module&lt;/p&gt;</description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p&gt;When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+&gt;click here&lt;/a&gt; and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+&gt;slides and code here&lt;/a&gt;) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+&gt;Irwin Strachans Active Directory Operations Test&lt;/a&gt; which got me thinking.&lt;/p&gt;
+&lt;p&gt;I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p&gt;
+&lt;p&gt;I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p&gt;</description></item><item><title>DBA Database scripts are on Github</title><link>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</link><pubDate>Mon, 16 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png%29%5D%28/assets/uploads/2016/05/tweets.png" alt="Featured image of post DBA Database scripts are on Github" /&gt;&lt;p&gt;It started with a tweet from Dusty&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png"
+loading="lazy"
+alt="Tweets"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The second session I presented at the fantastic &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PowerShell Conference Europe&lt;/a&gt; was about using the DBA Database to automatically install DBA scripts like &lt;a class="link" href="https://www.brentozar.com/first-aid/sql-server-downloads/" target="_blank" rel="noopener"
+&gt;sp_Blitz, sp_AskBrent, sp_Blitzindex from Brent Ozar&lt;/a&gt; , &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;Ola Hallengrens Maintenance Solution&lt;/a&gt; , &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2012/03/22/released-who-is-active-v11-11.aspx" target="_blank" rel="noopener"
+&gt;Adam Mechanics sp_whoisactive&lt;/a&gt; , &lt;a class="link" href="https://www.brentozar.com/responder/log-sp_whoisactive-to-a-table/" target="_blank" rel="noopener"
+&gt;This fantastic script for logging the results from sp_whoisactive to a table&lt;/a&gt; , Extended events sessions and other goodies for the sanity of the DBA.&lt;/p&gt;</description></item><item><title>PowerShell Pester Testing for Parameter Validation</title><link>https://blog.robsewell.com/blog/powershell-pester-testing-for-parameter-validation/</link><pubDate>Sun, 31 Jan 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-pester-testing-for-parameter-validation/</guid><description>&lt;p&gt;This error caught me out. I am putting this post here firstly to remind me if I do it again adn also to help others who may hit the same issue.&lt;/p&gt;
+&lt;p&gt;Today I am rewriting a function to create a Hyper-V VM so that I can properly script the creation of my labs for demos and other things. I am doing this because I want to use DSC to create an availability group and want to be able to tear down and recreate the machines (but thats for another day)&lt;/p&gt;</description></item><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p&gt;&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;Jen McCown&lt;/a&gt; and is about Enterprise Strategy.&lt;/p&gt;
+&lt;p&gt;Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+&gt;TSQL Tuesdays over 5 years ago&lt;/a&gt; and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+&gt;you search for them&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;This post by John Sansom&lt;/a&gt; could have been written for this months party and I recommend that you read it.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Use Twitter to get #PowerShell help</title><link>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</link><pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</guid><description>&lt;p&gt;A quick post today just to add some weight to something that Mike Fal &lt;a class="link" href="http://www.mikefal.net/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/Mike_Fal" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; has kicked off. The &lt;a class="link" href="https://twitter.com/hashtag/sqlhelp" target="_blank" rel="noopener"
+&gt;#SQLHelp hashtag&lt;/a&gt; is well known and well used with in the SQL world. It is a fantastic resource and one that I recommend to all SQL folk I meet who are not aware of it. &lt;a class="link" href="https://www.brentozar.com/archive/2009/12/i-need-sqlhelp/" target="_blank" rel="noopener"
+&gt;Heres how it started&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mike has suggested that there should be a similar resource for PowerShell questions &lt;a class="link" href="https://twitter.com/search?q=%23PoShHelp" target="_blank" rel="noopener"
+&gt;#PoSHHelp&lt;/a&gt;. We want to create a useful and positive place for people to go with their PowerShell queries and some good folks like Mike,  &lt;a class="link" href="http://t.co/NfvkfJXMjp" target="_blank" rel="noopener"
+&gt;Shawn Melton&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/wsmelton" target="_blank" rel="noopener"
+&gt;@wsmelton&lt;/a&gt;), &lt;a class="link" href="http://t.co/K8jsx6WHcc" target="_blank" rel="noopener"
+&gt;Adam Bertram&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/adbertram" target="_blank" rel="noopener"
+&gt;@adbertram&lt;/a&gt;), &lt;a class="link" href="http://t.co/U5LLtwWDPI" target="_blank" rel="noopener"
+&gt;Derik Hammer&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/SQLHammer" target="_blank" rel="noopener"
+&gt;@SQLHammer&lt;/a&gt;), &lt;a class="link" href="http://learn-PowerShell.net/" target="_blank" rel="noopener"
+&gt;Boe Prox&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/proxb" target="_blank" rel="noopener"
+&gt;@proxb&lt;/a&gt;), myself  and others will be looking for your PowerShell problems and try to assist you over Twitter with the same care and grace as Sqlhelp.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p&gt;Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+&gt;Installing and upgrading default scripts automation - part one - Introduction&lt;/a&gt; which is a series I will continue later.&lt;/p&gt;</description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p&gt;This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+&gt;described here&lt;/a&gt; to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a&gt; so was surprised to see this screen&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Installing and upgrading default scripts automation - part one - Introduction</title><link>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</link><pubDate>Mon, 08 Jun 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</guid><description>&lt;p&gt;First I must say thank you to all of the wonderful people who have put time and effort into providing free tools and scripts to enable not only myself but all SQL DBAs to ease their work. For this series I especially thank&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Brent Ozar - &lt;a class="link" href="http://www.brentozar.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/BrentO" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ola Hallengren - &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adam Mechanic - &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jared Zagelbaum - &lt;a class="link" href="https://jaredzagelbaum.wordpress.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/JaredZagelbaum" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aim of this series is to share the methodology and the scripts that I have used to resolve this issue.&lt;/p&gt;</description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p&gt;If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;https://ola.hallengren.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also watch his presentation at SQLBits at this link&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+&gt;http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;where he talks about and demonstrates the solution.&lt;/p&gt;
+&lt;p&gt;It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p&gt;</description></item><item><title>Instances and Ports with PowerShell</title><link>https://blog.robsewell.com/blog/instances-and-ports-with-powershell/</link><pubDate>Wed, 22 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/instances-and-ports-with-powershell/</guid><description>&lt;p&gt;Just a quick post and a day late for &lt;a class="link" href="https://twitter.com/hashtag/sqlnewblogger" target="_blank" rel="noopener"
+&gt;#SQLNewBlogger&lt;/a&gt; There are some excellent posts on that hashtag and I recommend that you read them&lt;/p&gt;
+&lt;p&gt;When you know a server name but not the name of the instances or the ports that they are using this function will be of use&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;#
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.SYNOPSIS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Shows the Instances and the Port Numbers on a SQL Server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.DESCRIPTION
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;This function will show the Instances and the Port Numbers on a SQL Server using WMI
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.PARAMETER Server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;The Server Name
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.EXAMPLE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Get-SQLInstancesPort Fade2Black
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;This will display the instances and the port numbers on the server Fade2Black
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.NOTES
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;AUTHOR: Rob Sewell sqldbawithabeard.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;DATE: 22/04/2015
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;function Get-SQLInstancesPort {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; param ([string]$Server)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [system.reflection.assembly]::LoadWithPartialName(&amp;#34;Microsoft.SqlServer.Smo&amp;#34;)|Out-Null
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; [system.reflection.assembly]::LoadWithPartialName(&amp;#34;Microsoft.SqlServer.SqlWmiManagement&amp;#34;)|Out-Null
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $mc = new-object Microsoft.SqlServer.Management.Smo.Wmi.ManagedComputer $Server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $Instances = $mc.ServerInstances
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; foreach ($Instance in $Instances) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $port = @{Name = &amp;#34;Port&amp;#34;; Expression = {$_.ServerProtocols[&amp;#39;Tcp&amp;#39;].IPAddresses[&amp;#39;IPAll&amp;#39;].IPAddressProperties[&amp;#39;TcpPort&amp;#39;].Value}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $Parent = @{Name = &amp;#34;Parent&amp;#34;; Expression = {$_.Parent.Name}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $Instance|Select $Parent, Name, $Port
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</link><pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</guid><description>&lt;p&gt;Following on from my &lt;a class="link" href="http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/" title="Parsing XML Child Nodes and Converting to DateTime with PowerShell"
+target="_blank" rel="noopener"
+&gt;previous pos&lt;/a&gt;t about parsing XML where I used the information from &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+&gt;Steve Jones blog post&lt;/a&gt; to get information from the &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+&gt;SQL Saturday web site&lt;/a&gt; I thought that this information and script may be useful for others performing the same task.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.&lt;/p&gt;</description></item><item><title>Parsing XML Child Nodes and Converting to DateTime with PowerShell</title><link>https://blog.robsewell.com/blog/parsing-xml-child-nodes-and-converting-to-datetime-with-powershell/</link><pubDate>Sat, 21 Mar 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/parsing-xml-child-nodes-and-converting-to-datetime-with-powershell/</guid><description>&lt;p&gt;As part of my organiser role for SQLSaturday Exeter (&lt;a class="link" href="http://sqlsatexeter.azurewebsites.net" target="_blank" rel="noopener"
+&gt;Training Day Information here&lt;/a&gt; and &lt;a class="link" href="https://www.sqlsaturday.com/372/" target="_blank" rel="noopener"
+&gt;Saturday Information here&lt;/a&gt;) I needed to get some schedule information to input into a database.&lt;/p&gt;
+&lt;p&gt;I had read &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+&gt;Steve Jones blog posts on Downloading SQL Saturday Data&lt;/a&gt; and followed the steps there to download the data from the SQL Saturday website for our event.&lt;/p&gt;
+&lt;p&gt;A typical session is held in the XML like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;event&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;importID&amp;gt;27608&amp;lt;/importID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;speakers&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;speaker&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;id&amp;gt;27608&amp;lt;/id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;name&amp;gt;William Durkin&amp;lt;/name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/speaker&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/speakers&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;track&amp;gt;Track 2&amp;lt;/track&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;location&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;name&amp;gt;Buccaneer&amp;#39;s Refuge &amp;lt;/name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/location&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;title&amp;gt;Stories from the Trenches: Upgrading SQL with Minimal Downtime&amp;lt;/title&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;description&amp;gt;SQL Server has come a long way in the last few years, with Microsoft investing heavily in High Availability features. This session will show you how to use these features to enable you to safely upgrade a SQL Server, while ensuring you have a return path if things should go wrong. You will leave the session knowing what features you can use to upgrade either the OS, Hardware or SQL Server version while keeping your maintenance window to a minimum. The session will apply to Standard Edition as well as Enterprise Edition, so doesn&amp;#39;t only apply to &amp;#39;High Rollers&amp;#39;!&amp;lt;/description&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;startTime&amp;gt;4/25/2015 3:20:00 PM&amp;lt;/startTime&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;endTime&amp;gt;4/25/2015 4:10:00 PM&amp;lt;/endTime&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/event&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; &lt;/p&gt;</description></item><item><title>Triggering a System Center Configuration Manager deployment task</title><link>https://blog.robsewell.com/blog/triggering-a-system-center-configuration-manager-deployment-task/</link><pubDate>Wed, 18 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/triggering-a-system-center-configuration-manager-deployment-task/</guid><description>&lt;p&gt;A slightly different topic today.&lt;/p&gt;
+&lt;p&gt;Once you have built up knowledge, you become the person that people ask to solve things. This is something I really enjoy, taking a problem and solving it for people and in the process teaching them and enabling them to automate more things.&lt;/p&gt;
+&lt;p&gt;A colleague was performing a new deployment of a product via SCCM and wanted to trigger the clients to update and receive the new update instead of waiting for it to be scheduled.&lt;/p&gt;</description></item><item><title>Show AutoGrowth Events with PowerShell to CSV</title><link>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</link><pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</guid><description>&lt;p&gt;This week I was reading Pinal Daves post about Autogrowth Events&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/" target="_blank" rel="noopener"
+&gt;http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;as it happened I had a requirement to make use of the script only a few days later. I was asked to provide the information in a CSV so that the person who required the information could manipulate it in Excel.&lt;/p&gt;
+&lt;p&gt;I am a great believer in Automation. If you are going to do something more than once then automate it so I wrote two functions, added them to TFS and now they will be available to all of my team members next time they load PowerShell.&lt;/p&gt;</description></item><item><title>Uploading a Source Folder to Azure File Storage</title><link>https://blog.robsewell.com/blog/uploading-a-source-folder-to-azure-file-storage/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/uploading-a-source-folder-to-azure-file-storage/</guid><description>&lt;p&gt;Azure File Storage enables you to present an Azure Storage Account to your IaaS VMs as a share using SMB. You can fid out further details here&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/%c2%a0" title="http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/ "
+target="_blank" rel="noopener"
+&gt;http://azure.microsoft.com/en-gb/documentation/articles/storage-dotnet-how-to-use-files/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Once you have created your Azure File Storage Account and connected your Azure Virtual Machines to it, you may need to upload data from your premises into the storage to enable it to be accessed by the Virtual Machines&lt;/p&gt;
+&lt;p&gt;To accomplish this I wrote a function and called it Upload-ToAzureFileStorage&lt;/p&gt;</description></item><item><title>Refreshing A SQL Mirrored Database Using Powershell</title><link>https://blog.robsewell.com/blog/refreshing-a-sql-mirrored-database-using-powershell/</link><pubDate>Mon, 25 Aug 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/refreshing-a-sql-mirrored-database-using-powershell/</guid><description>&lt;p&gt;SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. &lt;a class="link" href="http://msdn.microsoft.com/en-gb/library/ms189852.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;You can read more about it on MSDN here&lt;/a&gt; and &lt;a class="link" href="http://www.brentozar.com/archive/2013/07/database-mirroring-faq/" target="_blank" rel="noopener"
+&gt;Jes Borland wrote a useful post answering many questions here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring. There are other scenarios but this post covers the automation of restoring a mirrored database from a backup.&lt;/p&gt;</description></item><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p&gt;There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+&gt;up to date version of this post here&lt;/a&gt; using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools module&lt;/a&gt; and the sqlserver module&lt;/p&gt;
+&lt;p&gt;But if you want to continue with this way read on!!&lt;/p&gt;
+&lt;p&gt;Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Windows Users&lt;/a&gt; or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;SQL Users&lt;/a&gt; using the last two days posts, today we shall add them to a role on a database.&lt;/p&gt;
+&lt;p&gt;As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+&gt;previously&lt;/a&gt; I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p&gt;</description></item></channel></rss>

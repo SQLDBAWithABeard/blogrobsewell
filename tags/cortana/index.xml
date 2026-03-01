@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cortana on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/cortana/</link><description>Recent content in Cortana on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 13 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/cortana/index.xml" rel="self" type="application/rss+xml"/><item><title>Enabling Cortana for dbareports PowerBi</title><link>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</link><pubDate>Sun, 13 Nov 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enabling-cortana-for-dbareports-powerbi/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/cortana-search-2.png" alt="Featured image of post Enabling Cortana for dbareports PowerBi" /&gt;&lt;p&gt;Last week at the Birmingham user group I gave a presentation about PowerShell and SQL Server&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg"
+loading="lazy"
+alt="saved-image-from-tweetium-8"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It was a very packed session as I crammed in the &lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/" target="_blank" rel="noopener"
+&gt;new sqlserver module&lt;/a&gt;, &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports&lt;/a&gt; 🙂 On reflection I think this is a bit too much for a one hour session but at the end of the session I demo’d live Cortana using the dbareports dataset and returning a Cortana PowerBi page.&lt;/p&gt;</description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p&gt;I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+&gt;PSConfAsia&lt;/a&gt; conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+&gt;Ravi Chaganti&lt;/a&gt; spoke about DSC&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+&gt;&lt;/p&gt;</description></item></channel></rss>
