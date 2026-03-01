@@ -1,6 +1,7 @@
 ---
 title: "Introducing MicrosoftFabricMgmt: Managing Microsoft Fabric with PowerShell"
 date: "2026-02-23"
+slug: "introducing-microsoftfabricmgmt"
 categories:
   - Blog
   - Microsoft Fabric

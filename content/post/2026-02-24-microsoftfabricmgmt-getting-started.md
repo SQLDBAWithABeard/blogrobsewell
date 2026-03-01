@@ -1,6 +1,7 @@
 ---
 title: "MicrosoftFabricMgmt: Getting Started - Installation and Authentication"
 date: "2026-02-24"
+slug: "microsoftfabricmgmt-getting-started"
 categories:
   - Blog
   - Microsoft Fabric
@@ -16,7 +17,7 @@ image: assets/uploads/2026/02/intro.png
 
 ## Introduction
 
-Yesterday I [introduced the MicrosoftFabricMgmt module](https://blog.robsewell.com/blog/microsoftfabricmgmt-getting-started) and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.
+Yesterday I [introduced the MicrosoftFabricMgmt module](https://blog.robsewell.com/blog/introducing-microsoftfabricmgmt/) and explained what it can do. Today we are getting hands on — installing the module, sorting out dependencies, and making your first connection to Microsoft Fabric.
 
 By the end of this post you will have the module installed, be authenticated, and have your first list of Fabric workspaces in your terminal.
 

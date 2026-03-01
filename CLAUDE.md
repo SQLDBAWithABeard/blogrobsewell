@@ -16,6 +16,7 @@ All work is in this blog folder (`s:/blogrobsewell`). The `s:/clonedforked/fabri
 ---
 title: "Title Here"
 date: "YYYY-MM-DD"
+slug: "url-slug-here"
 categories:
   - Blog
   - Microsoft Fabric
@@ -25,6 +26,18 @@ tags:
 image: assets/uploads/YYYY/image-name.png
 ---
 ```
+
+## Blog Post URLs
+
+Every post **must** include a `slug` field in its front matter. Hugo uses this to generate the post's URL.
+
+**URL format**: `https://blog.robsewell.com/blog/{slug}/` — always include the trailing slash.
+
+For the MicrosoftFabricMgmt series, slugs match the filename without the date prefix:
+- File `2026-03-04-microsoftfabricmgmt-psframework-logging.md` → `slug: "microsoftfabricmgmt-psframework-logging"`
+- URL: `https://blog.robsewell.com/blog/microsoftfabricmgmt-psframework-logging/`
+
+When cross-linking between posts, always use: `[link text](https://blog.robsewell.com/blog/{slug}/)`
 
 ## Images
 
