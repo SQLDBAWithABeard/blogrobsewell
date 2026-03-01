@@ -12,7 +12,7 @@ tags:
   - Data
   - Chief Data Officer
   - Microsoft Azure
-image: assets/uploads/2026/zure-cdo.png
+image: assets/uploads/2026/02/rob-zure.png
 ---
 
 ## The Great Job Title Debate
