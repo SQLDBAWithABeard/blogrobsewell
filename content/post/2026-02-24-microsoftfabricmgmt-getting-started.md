@@ -1,6 +1,7 @@
 ---
 title: "MicrosoftFabricMgmt: Getting Started - Installation and Authentication"
 date: "2026-02-24"
+slug: "microsoftfabricmgmt-getting-started"
 categories:
   - Blog
   - Microsoft Fabric
