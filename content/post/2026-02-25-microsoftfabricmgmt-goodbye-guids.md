@@ -1,6 +1,7 @@
 ---
 title: "MicrosoftFabricMgmt: Goodbye GUIDs - Intelligent Output and Smart Caching"
 date: "2026-02-25"
+slug: "microsoftfabricmgmt-goodbye-guids"
 categories:
   - Blog
   - Microsoft Fabric
