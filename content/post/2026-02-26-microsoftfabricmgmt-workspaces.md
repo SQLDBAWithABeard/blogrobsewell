@@ -1,6 +1,7 @@
 ---
 title: "MicrosoftFabricMgmt: Workspaces - List, Get, Create, Update, and Remove"
 date: "2026-02-26"
+slug: "microsoftfabricmgmt-workspaces"
 categories:
   - Blog
   - Microsoft Fabric
