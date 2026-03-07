@@ -1,6 +1,6 @@
 ---
 title: "MicrosoftFabricMgmt: Notebooks and Data Pipelines"
-date: "2026-03-10"
+date: "2026-03-13"
 slug: "microsoftfabricmgmt-notebooks-and-pipelines"
 categories:
   - Blog

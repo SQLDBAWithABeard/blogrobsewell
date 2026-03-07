@@ -83,6 +83,7 @@ Remove-FabricWorkspaceRoleAssignment `
 This is the question every data platform team should be able to answer:
 
 ```powershell
+#ONLY ON Workspaces the caller is an Admin on.
 Get-FabricWorkspace |
     Get-FabricWorkspaceRoleAssignment |
     Where-Object { $_.role -eq "Admin" } |
@@ -91,6 +92,8 @@ Get-FabricWorkspace |
 ```
 
 I run something like this during access reviews. It takes a few seconds and gives you a complete picture. Compare that to clicking through dozens of workspace settings pages.
+
+NOTE: You can only see role assignments for workspaces where you have admin access. You are going to need an excellent process to enable this or some additional scripting.
 
 ## Standardising Access for a Project
 
