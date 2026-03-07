@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Documentation on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/documentation/</link><description>Recent content in Documentation on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/documentation/index.xml" rel="self" type="application/rss+xml"/><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>SQL VNext sp_configure on Windows and Linux with dbatools</title><link>https://blog.robsewell.com/blog/sql-vnext-sp_configure-on-windows-and-linux-with-dbatools/</link><pubDate>Mon, 27 Feb 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-vnext-sp_configure-on-windows-and-linux-with-dbatools/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Converting SQL Agent Job Duration to TimeSpan using PowerShell</title><link>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</link><pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/converting-sql-agent-job-duration-to-timespan-using-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/timespan.png" alt="Featured image of post Converting SQL Agent Job Duration to TimeSpan using PowerShell" /&gt;&lt;p&gt;When you look in msdb for the SQL Agent Job duration you will find that it is an int.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/sysjobshistoiry.png"
+loading="lazy"
+alt="sysjobshistoiry"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is also the same when you look at &lt;code&gt;Get-SQLAgentJobHistory &lt;/code&gt;from the sqlserver module. (You can get this by &lt;a class="link" href="https://msdn.microsoft.com/en-us/library/mt238290.aspx" target="_blank" rel="noopener"
+&gt;downloading the latest SSMS release from here&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/agentjobhistoryproperties.png"
+loading="lazy"
+alt="agentjobhistoryproperties"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This means that when you look at the various duration of the Agent Jobs you get something like this&lt;/p&gt;</description></item><item><title>Using the new SQLServer Powershell module to get SQL Agent Job Information</title><link>https://blog.robsewell.com/blog/using-the-new-sqlserver-powershell-module-to-get-sql-agent-job-information/</link><pubDate>Sun, 03 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-the-new-sqlserver-powershell-module-to-get-sql-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/07/getcomand-sqlagent.png" alt="Featured image of post Using the new SQLServer Powershell module to get SQL Agent Job Information" /&gt;&lt;p&gt;So with the July Release of SSMS everything changed for using PowerShell with SQL. &lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/" target="_blank" rel="noopener"
+&gt;You can read the details here&lt;/a&gt; As I mentioned in my previous post the name of the module has changed to sqlserver&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This means that if you have a PowerShell script doing&lt;/em&gt; Import-Module SQLPS_, it will need to be changed to be_ Import-Module SqlServer &lt;em&gt;in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to&lt;/em&gt; “%Program Files\WindowsPowerShell\Modules\SqlServer_” and hence no update to $env:PSModulePath is required._&lt;/p&gt;</description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p&gt;When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+&gt;click here&lt;/a&gt; and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+&gt;slides and code here&lt;/a&gt;) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+&gt;Irwin Strachans Active Directory Operations Test&lt;/a&gt; which got me thinking.&lt;/p&gt;
+&lt;p&gt;I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p&gt;
+&lt;p&gt;I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p&gt;&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;Jen McCown&lt;/a&gt; and is about Enterprise Strategy.&lt;/p&gt;
+&lt;p&gt;Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+&gt;TSQL Tuesdays over 5 years ago&lt;/a&gt; and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+&gt;you search for them&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;This post by John Sansom&lt;/a&gt; could have been written for this months party and I recommend that you read it.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p&gt;Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p&gt;
+&lt;p&gt;I have an InstanceList table which looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;dbo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceList&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;IDENTITY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ServerName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AG&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt; &lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DF_InstanceList_Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;DEFAULT&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PK_InstanceList_ID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;PRIMARY&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;CLUSTERED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ASC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PAD_INDEX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;STATISTICS_NORECOMPUTE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IGNORE_DUP_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_ROW_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_PAGE_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p&gt;</description></item><item><title>Installing and upgrading default scripts automation - part one - Introduction</title><link>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</link><pubDate>Mon, 08 Jun 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</guid><description>&lt;p&gt;First I must say thank you to all of the wonderful people who have put time and effort into providing free tools and scripts to enable not only myself but all SQL DBAs to ease their work. For this series I especially thank&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Brent Ozar - &lt;a class="link" href="http://www.brentozar.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/BrentO" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ola Hallengren - &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adam Mechanic - &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jared Zagelbaum - &lt;a class="link" href="https://jaredzagelbaum.wordpress.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/JaredZagelbaum" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aim of this series is to share the methodology and the scripts that I have used to resolve this issue.&lt;/p&gt;</description></item><item><title>Making a Change Log Easier With PowerShell</title><link>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</link><pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</guid><description>&lt;p&gt;Having a Change Log is a good thing. A quick and simple place to find out what has changed on a server and when. This can be invaluable when troubleshooting, matching a change to a symptom especially when assessed alongside your performance counter collection. Here is a simple way to make use of a change log and automate it&lt;/p&gt;
+&lt;p&gt;Create a simple table&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;USE [MDW]
+GO
+CREATE TABLE [dbo].[ChangeLog](
+[ChangeID] [int] IDENTITY(1,1) PRIMARY KEY ,
+[Date] [datetime] NOT NULL,
+[Server] [varchar](50) NOT NULL,
+[UserName] [nvarchar](50) NOT NULL,
+[Change] [nvarchar](max) NOT NULL,
+)
+GO
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can keep this on a central server or create a database on each server, whichever fits your needs best. You can add other columns if you want your information in a different format&lt;/p&gt;</description></item><item><title>#tsql2sday #60 – Something New Learned – Problem Step Recorder</title><link>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</link><pubDate>Tue, 11 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</guid><description>&lt;h3 id="what-is-t-sql-tuesday"&gt;What is T-SQL Tuesday?
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://chrisyatessql.files.wordpress.com/2012/10/sql-tuesday1.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday is a monthly blog party hosted by a different blogger each month. This blog party was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;). You can take part by posting your own participating post that fits the topic of the month and follows the requirements Additionally, if you are interested in hosting a future T-SQL Tuesday, contact Adam Machanic on his blog.&lt;/p&gt;</description></item><item><title>Refreshing Availability Group Database with PowerShell</title><link>https://blog.robsewell.com/blog/refreshing-availability-group-database-with-powershell/</link><pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/refreshing-availability-group-database-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/09/image1.png" alt="Featured image of post Refreshing Availability Group Database with PowerShell" /&gt;&lt;p&gt;Following last weeks post on &lt;a class="link" href="https://blog.robsewell.com/refreshing-a-sql-mirrored-database-using-powershell-2/" target="_blank" rel="noopener"
+&gt;Refreshing A Mirrored Database with PowerShell&lt;/a&gt; I thought I would write the script to refresh an Availability Group Database.&lt;/p&gt;
+&lt;p&gt;An availability group supports a failover environment for a discrete set of user databases, known as availability databases, that fail over together. An availability group supports a set of primary databases and one to eight sets of corresponding secondary databases.You can read more about Availability groups &lt;a class="link" href="http://msdn.microsoft.com/en-GB/library/ff877884.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;&lt;/p&gt;</description></item><item><title>SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram</title><link>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</link><pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$server | Get-Member
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer|gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer.Operators | gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125717.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_130052.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_174005.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_173953.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174112.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_113931.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_114601.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLServerOperators.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:03/09/2013
+#
+# COMMENTS: Load function for Enumerating Operators and Notifications
+# ————————————————————————
+Function Show-SQLServerOperators ($SQLServer) {
+Write-Output &amp;quot;############### $SQLServer ##########################&amp;quot;
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+foreach ($Operator in $server.JobServer.Operators) {
+$Operator = New-Object (&amp;quot;$SMO.Agent.Operator&amp;quot;) ($server.JobServer, $Operator)
+$OpName = $Operator.Name
+Write-Output &amp;quot;Operator $OpName&amp;quot;
+Write-Output &amp;quot;`n###### Job Notifications ######&amp;quot;
+$Operator.EnumJobNotifications()| Select JobName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+Write-Output &amp;quot;`n###### Alert Notifications #######&amp;quot;
+$Operator.EnumNotifications() | Select AlertName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Documenting SQL Server the easy way with Power Doc</title><link>https://blog.robsewell.com/blog/documenting-sql-server-the-easy-way-with-power-doc/</link><pubDate>Thu, 09 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/documenting-sql-server-the-easy-way-with-power-doc/</guid><description>&lt;p&gt;You know how it is. Question questions questions. As a DBA you are the fount of all knowledge. You are the protector of the data after all so obviously you know every little thing that is needed to be known.&lt;/p&gt;
+&lt;p&gt;Frequently, I am asked&lt;/p&gt;
+&lt;p&gt;How many processors does that server have?&lt;br&gt;
+How much RAM is on that server? What type?&lt;br&gt;
+What OS? Which Patches were installed&lt;/p&gt;
+&lt;p&gt;or more SQL based questions about configuration&lt;/p&gt;</description></item><item><title>Those Pesky ‘s</title><link>https://blog.robsewell.com/blog/those-pesky-s/</link><pubDate>Mon, 11 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/those-pesky-s/</guid><description>&lt;h3 id="changing-domain-names-in-a-column"&gt;Changing Domain Names in a Column
+&lt;/h3&gt;&lt;p&gt;A quick little post for today. Not particularly SQL related but the points at the end are relevant.&lt;/p&gt;
+&lt;p&gt;I had a task when moving a service to a new development area to change the domain name within columns in several tables from “DOMAIN1\USER” to “DOMAIN2\USER”&lt;/p&gt;
+&lt;p&gt;In SQL I was able to do this quite easily as follows&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;USE [DATABASENAME]
+GO
+-- Declare variables
+DECLARE @Live nvarchar(10)
+DECLARE @Dev nvarchar(10)
+-- Set the variable to the Domains
+Set @Live = 'Live Domain'
+Set @Dev = 'Dev Domain'
+--Update tables
+UPDATE [TABLENAME]
+SET [User] = REPLACE([User], @Live, @Dev)
+GO
+UPDATE [TABLENAME]
+SET [Group] = REPLACE([Group], @Live, @Dev)
+GO
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I also had to do the same for some Oracle databases too and this is where the fun started!&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PSConfEU on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/psconfeu/</link><description>Recent content in PSConfEU on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/psconfeu/index.xml" rel="self" type="application/rss+xml"/><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" /&gt;&lt;p&gt;Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/dotnetnotebooks&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="jaap-is-awesome"&gt;Jaap is awesome
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; blog post&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+&gt;https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="joel-is-also-awesome"&gt;Joel is also awesome!
+&lt;/h2&gt;&lt;p&gt;When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; module BetterCredentials which uses the Windows Credential Manager&lt;/p&gt;</description></item><item><title>Version Update, Code Signing and publishing to the PowerShell Gallery with VSTS</title><link>https://blog.robsewell.com/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/</link><pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/32-Dashboard.png" alt="Featured image of post Version Update, Code Signing and publishing to the PowerShell Gallery with VSTS" /&gt;&lt;p&gt;At the fabulous &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; I presented about Continuous Delivery to the PowerShell Gallery with VSTS and explained how we use VSTS to enable CD for &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt;. We even released a new version during the session 🙂&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;So how do we achieve this?&lt;/p&gt;
+&lt;p&gt;We have a few steps&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a project and link to our GitHub&lt;/li&gt;
+&lt;li&gt;Run unit uests with Pester to make sure that our code is doing what we expect.&lt;/li&gt;
+&lt;li&gt;Update our module version and commit the change to GitHub&lt;/li&gt;
+&lt;li&gt;Sign our code with a code signing certificate&lt;/li&gt;
+&lt;li&gt;Publish to the PowerShell Gallery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="create-project-and-link-to-github"&gt;Create Project and link to GitHub
+&lt;/h2&gt;&lt;p&gt;First you need to create a VSTS project by going to &lt;a class="link" href="https://www.visualstudio.com/" target="_blank" rel="noopener"
+&gt;https://www.visualstudio.com/&lt;/a&gt; This is free for up to 5 users with 1 concurrent CI/CD queue limited to a maximum of 60 minutes run time which should be more than enough for your PowerShell module.&lt;/p&gt;</description></item><item><title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services &amp; PowerBi</title><link>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</link><pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</guid><description>&lt;p&gt;Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;http://www.psconf.eu/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ended up creating an interactive PowerBi report to which my good friend and Data Platform MVP Paul Andrew &lt;a class="link" href="https://mrpaulandrew.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; added a bit of magic and I published it. The magnificent Tobias Weltner &lt;a class="link" href="http://www.powertheshell.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/TobiasPSP" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; who organises PSConfEU pointed the domain name &lt;a class="link" href="http://powershell.cool" target="_blank" rel="noopener"
+&gt;http://powershell.cool&lt;/a&gt; at the link. It looks like this.&lt;/p&gt;</description></item><item><title>Announcing PSDay.UK – Whats a PSDay?</title><link>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</link><pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</guid><description>&lt;p&gt;On Thursday evening I attended the joint London WinOps and PowerShell User Group. It was an excellent evening with two great sessions by Jaap Brasser and Filip Verloy.&lt;/p&gt;
+&lt;h2 id="psdayuk"&gt;PSDay.UK
+&lt;/h2&gt;&lt;p&gt;There was also an exciting announcement about PSDay.UK  &lt;a class="link" href="https://psday.uk" target="_blank" rel="noopener"
+&gt;https://psday.uk&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Look look&lt;br&gt;
+A whole day of PowerShell&lt;br&gt;
+In London&lt;br&gt;
+Just after &lt;a class="link" href="https://twitter.com/WinOpsLDN" target="_blank" rel="noopener"
+&gt;@WinOpsLDN&lt;/a&gt;&lt;br&gt;
+It&amp;rsquo;s going to be awesome&lt;a class="link" href="https://t.co/CAQqoc2cgX" target="_blank" rel="noopener"
+&gt;https://t.co/CAQqoc2cgX&lt;/a&gt;&lt;br&gt;
+Follow &lt;a class="link" href="https://twitter.com/psdayuk" target="_blank" rel="noopener"
+&gt;@psdayuk&lt;/a&gt; &lt;a class="link" href="https://t.co/3RFHpXpRI1" target="_blank" rel="noopener"
+&gt;pic.twitter.com/3RFHpXpRI1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/888111785022169088" target="_blank" rel="noopener"
+&gt;July 20, 2017&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PSDay.UK is a one day PowerShell event providing the opportunity for you to spend a whole day learning PowerShell from renowned experts from the UK and international speaking community. It will be held at&lt;/p&gt;</description></item><item><title>Using Twitter with VS Code</title><link>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</link><pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p&gt;Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+&gt;I wrote about using Power Bi to display my checkins&lt;/a&gt;. I only started this in June and this is where I have been :-)&lt;/p&gt;</description></item><item><title>Making Start-Demo work with multi-line commands without a backtick</title><link>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</link><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-start-demo-work-with-multi-line-commands-without-a-backtick/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/08/start-demo2.png" alt="Featured image of post Making Start-Demo work with multi-line commands without a backtick" /&gt;&lt;p&gt;I love to speak about PowerShell. I really enjoy giving presentations and when I saw Start-Demo being used at the PowerShell Conference in Hanover I started to make use of it in my presentations.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Start-Demo&lt;/code&gt; was written in 2007 by a fella who knows PowerShell pretty well 🙂  &lt;a class="link" href="https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/" target="_blank" rel="noopener"
+&gt;https://blogs.msdn.microsoft.com/powershell/2007/03/03/start-demo-help-doing-demos-using-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It was then updated in 2012 by Max Trinidad &lt;a class="link" href="http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/" target="_blank" rel="noopener"
+&gt;http://www.maxtblog.com/2012/02/powershell-start-demo-now-allows-multi-lines-onliners/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This enabled support for multi-line code using backticks at the end of each line. This works well but I dislike having to use the backticks in foreach loops, it confuses people who think that they need to be included and to my mind looks a bit messy&lt;/p&gt;</description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p&gt;When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+&gt;click here&lt;/a&gt; and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+&gt;slides and code here&lt;/a&gt;) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+&gt;Irwin Strachans Active Directory Operations Test&lt;/a&gt; which got me thinking.&lt;/p&gt;
+&lt;p&gt;I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p&gt;
+&lt;p&gt;I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p&gt;</description></item><item><title>DBA Database scripts are on Github</title><link>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</link><pubDate>Mon, 16 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dba-database-scripts-are-on-github/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png%29%5D%28/assets/uploads/2016/05/tweets.png" alt="Featured image of post DBA Database scripts are on Github" /&gt;&lt;p&gt;It started with a tweet from Dusty&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/tweets.png"
+loading="lazy"
+alt="Tweets"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The second session I presented at the fantastic &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PowerShell Conference Europe&lt;/a&gt; was about using the DBA Database to automatically install DBA scripts like &lt;a class="link" href="https://www.brentozar.com/first-aid/sql-server-downloads/" target="_blank" rel="noopener"
+&gt;sp_Blitz, sp_AskBrent, sp_Blitzindex from Brent Ozar&lt;/a&gt; , &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;Ola Hallengrens Maintenance Solution&lt;/a&gt; , &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2012/03/22/released-who-is-active-v11-11.aspx" target="_blank" rel="noopener"
+&gt;Adam Mechanics sp_whoisactive&lt;/a&gt; , &lt;a class="link" href="https://www.brentozar.com/responder/log-sp_whoisactive-to-a-table/" target="_blank" rel="noopener"
+&gt;This fantastic script for logging the results from sp_whoisactive to a table&lt;/a&gt; , Extended events sessions and other goodies for the sanity of the DBA.&lt;/p&gt;</description></item></channel></rss>
