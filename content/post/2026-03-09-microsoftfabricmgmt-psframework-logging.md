@@ -26,15 +26,7 @@ MicrosoftFabricMgmt uses [PSFramework](https://psframework.org/) for all its int
 
 Every significant action inside MicrosoftFabricMgmt writes a structured log message using `Write-PSFMessage`. You do not need to configure anything to benefit from this — the messages are written automatically as cmdlets run.
 
-The log levels used are:
-
-| Level | Description |
-|-------|-------------|
-| `Debug` | Detailed internal state, usually not needed day-to-day |
-| `Verbose` | What the cmdlet is doing step-by-step |
-| `Host` | Summary output, always visible |
-| `Warning` | Something unexpected happened but the cmdlet continued |
-| `Error` | The cmdlet could not complete its work |
+There are many log levels available, but the ones used in the module are Important, Verbose and Debug.
 
 ## Viewing the In-Memory Log
 
