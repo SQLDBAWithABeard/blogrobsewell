@@ -12,7 +12,7 @@ tags:
   - MicrosoftFabricMgmt
   - Automation
   - Error Handling
-image: assets/uploads/2026/03/microsoftfabricmgmt-error-handling.png
+image: assets/uploads/2026/03/lro.png
 ---
 
 ## Introduction
@@ -48,6 +48,8 @@ This means a typical API call that hits a rate limit does not blow up your scrip
 
 Some Fabric operations do not complete instantly. Creating a Lakehouse, deploying a Notebook, or running a refresh can take seconds to minutes. The Fabric API handles these as Long Running Operations (LROs) — the initial API call returns an operation ID, and you poll for completion.
 
+[![PowerShell terminal on a dark background with a Microsoft Fabric logo watermark showing New-FabricSQLDatabase with SQLDatabaseName the_one_after_that_one and workspace id, then messages Request accepted. The operation is being processed. The operation is running asynchronously. SQL Database the_one_after_that_one created successfully. The output shows OperationId 9251b462-b6ef-4e95-98f2-2b9579d05348 and a Location URL, followed by Get-FabricLongRunningOperation using that OperationId with status Succeeded, createdTimeUtc 07/03/2026 18:00:23, lastUpdatedTimeUtc 07/03/2026 18:00:36, percentComplete 100, and an empty error field. The overall tone is calm and successful completion of an async operation](../assets/uploads/2026/03/lro.png)](../assets/uploads/2026/03/lro.png)
+
 MicrosoftFabricMgmt handles this transparently for the common create and modify operations. But for cases where you need to track an operation explicitly, you can use `Get-FabricLongRunningOperation`:
 
 ```powershell
@@ -66,8 +68,6 @@ if ($operation.Status -eq 'Succeeded') {
     Write-Error "Operation failed: $($operation.Error.Message)"
 }
 ```
-
-In practice, you rarely need to write this loop yourself — the module waits for LROs to complete by default for most create operations. But it is good to know the function is there when you need direct control.
 
 ## Writing Your Own Error Handling
 
@@ -88,9 +88,6 @@ catch {
 
 The `-ErrorRecord $_` parameter on `Write-PSFMessage` is important — it captures the full exception details in the structured log. When you review the logs later, you get the stack trace and error details alongside your message, not just a string. We covered PSFramework logging in [yesterday's post](https://blog.robsewell.com/blog/microsoftfabricmgmt-psframework-logging/).
 
-## Descriptive Error Messages
-
-One thing I genuinely appreciate about the module is that errors reference names, not GUIDs. If a workspace operation fails, the error message tells you which workspace by display name, not by `f9e8d7c6-b5a4-9876-5432-1fedcba98765`. This sounds minor but it saves real time when debugging at 9 AM after a failed overnight job.
 
 ## Checking for Existing Resources
 
@@ -98,7 +95,7 @@ A common pattern in idempotent scripts is checking whether something already exi
 
 ```powershell
 # Create workspace only if it does not exist
-$existing = Get-FabricWorkspace -WorkspaceName "MyWorkspace" -ErrorAction SilentlyContinue
+$existing = Get-FabricWorkspace -WorkspaceName "MyWorkspace"
 
 if (-not $existing) {
     $workspace = New-FabricWorkspace -WorkspaceName "MyWorkspace"
@@ -109,7 +106,7 @@ if (-not $existing) {
 }
 ```
 
-`-ErrorAction SilentlyContinue` suppresses the error if the workspace is not found and returns `$null` instead. This makes the "check before create" pattern clean and readable.
+This makes the "check before create" pattern clean and readable.
 
 ## Putting It All Together
 
@@ -142,6 +139,8 @@ finally {
     Wait-PSFMessage  # Ensure all log messages are flushed to disk
 }
 ```
+
+
 
 ## Tomorrow
 
