@@ -91,6 +91,8 @@ Get-FabricWorkspace |
     Sort-Object workspaceName
 ```
 
+[![PowerShell console screenshot showing command Get-FabricWorkspace piped to Get-FabricWorkspaceRoleAssignment and a dark terminal table listing Fabric workspace access. Table columns are Capacity Name, Workspace Name, Principal, Type, and Role. Visible rows show capacity Trial-20260129T1137… with workspace with a spn and principals BeardSqlAdmins as Group Contributor, ForBooks as Group Viewer, Jess Pomfret as User Admin, John Morehouse as User Admin, fabric_free_4 as User Admin, and a-test-beard-fabric-sp as ServicePrincipal Admin. Environment is a black command line window with bright green headers and white data text. Tone is focused, practical, and audit oriented](../assets/uploads/2026/03/access.png)](../assets/uploads/2026/03/access.png)
+
 I run something like this during access reviews. It takes a few seconds and gives you a complete picture. Compare that to clicking through dozens of workspace settings pages.
 
 NOTE: You can only see role assignments for workspaces where you have admin access. You are going to need an excellent process to enable this or some additional scripting.
