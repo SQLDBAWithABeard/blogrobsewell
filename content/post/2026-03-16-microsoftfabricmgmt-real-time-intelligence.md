@@ -14,7 +14,7 @@ tags:
   - Real-Time Intelligence
   - Eventhouse
   - Eventstream
-image: assets/uploads/2026/03/microsoftfabricmgmt-rti.png
+image: assets/uploads/2026/03/geteventhouse.png
 ---
 
 ## Introduction

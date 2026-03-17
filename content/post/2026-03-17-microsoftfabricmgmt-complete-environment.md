@@ -12,7 +12,7 @@ tags:
   - MicrosoftFabricMgmt
   - Automation
   - DevOps
-image: assets/uploads/2026/03/microsoftfabricmgmt-complete-environment.png
+image: assets/uploads/2026/03/environmentcreation.png
 ---
 
 ## Introduction
