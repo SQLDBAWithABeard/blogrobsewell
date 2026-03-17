@@ -143,7 +143,7 @@ $WksIds| ForEach-Object { Get-FabricItem -WorkspaceId $_ }
 Write-PSFMessage -Level Host -Message "Created the following Permissions for $ProjectName environment" -FunctionName $fn
 $WksIds| ForEach-Object { Get-FabricWorkspaceRoleAssignment -WorkspaceId $_ |Select DisplayName,Type,Role }
 Wait-PSFMessage
-``
+```
 
 This is what the output looks like when I run it:
 
