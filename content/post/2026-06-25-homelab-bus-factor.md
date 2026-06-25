@@ -26,6 +26,8 @@ Because the only real documentation for how any of it fits together is the squis
 
 I don't mean to be morbid about it. But it's a fair question, and it's one we techies are very good at not asking: **if I got hit by a bus tomorrow, could Traci keep the lights on?**
 
+Now there is already the [eol-dr from Chrissy](https://github.com/potatoqualitee/eol-dr/blob/main/checklist.md) — a checklist for what to do if the worst happens. But it doesn't cover the *how*. It doesn't explain how to actually keep the humming box humming, or what to do if it stops. And when I asked Traci if she could.
+
 The honest answer was no. Not because she isn't capable — she's wonderfully capable — but because nobody could. There was nothing to keep them on *with*. No map. No "if this light goes red, do that." Just a humming box and a grieving partner being asked to reverse-engineer years of midnight rabbit-holes.
 
 That bothered me enough to do something about it.
@@ -212,8 +214,6 @@ But the gap between "it's all in my head" and "it's written down in plain Englis
 
 If you've got a box humming in a cupboard that your household quietly depends on, I'd gently suggest you do the same. Point the AI at it, tell it the reader has never seen a server in their life, and ask it for the document you hope nobody ever has to open.
 
-Traci, if you're reading this — it's the file called "Homelab Documentation," it's pinned up next to the server, and you start at the top. 🥂
-
----
+Traci, if you're reading this — it's the file called "Homelab Documentation," it's in the repo that Jess has access to, and it's the one thing I hope you never have to use. But if you do, it should be enough to keep the lights on.
 
 *And no, I'm not planning on going anywhere. But the photos, the heating and the backups don't know that, and neither does the bus.*
