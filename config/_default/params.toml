@@ -22,7 +22,7 @@ lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
 emoji = "💜"
-subtitle = "A blog about all things PowerShell, SQLBits, Community, dbatools, dbatoolsMoL, dbachecks, Azure, SQL, PSConfEU and more"
+subtitle = "Field notes from a SQL DBA with a beard — real PowerShell, real Fabric, and the fixes that stuck."
 
 [sidebar.avatar]
 enabled = true

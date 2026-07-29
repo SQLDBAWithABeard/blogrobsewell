@@ -1,0 +1,70 @@
+{{- /* Single-post article for "The Working Log": the post rendered as an open commit.
+       The post title is the page <h1> (a commit subject), not the sidebar site-name. */ -}}
+<article class="{{ if .Params.image }}has-image {{ end }}main-article">
+    <header class="article-header">
+        {{- $image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
+        {{ if $image.exists }}
+            <div class="article-image">
+                {{ if $image.resource }}
+                    {{- $t := $image.resource.Resize "1200x" -}}
+                    <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}"
+                        loading="lazy" alt="{{ .Title }}" />
+                {{ else }}
+                    <img src="{{ $image.permalink }}" loading="lazy" alt="{{ .Title }}" />
+                {{ end }}
+            </div>
+        {{ end }}
+
+        <div class="article-details">
+            {{ if .Params.categories }}
+            <header class="article-category">
+                {{ range (.GetTerms "categories") }}
+                    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                {{ end }}
+            </header>
+            {{ end }}
+
+            <h1 class="article-title">{{ .Title }}</h1>
+
+            {{ with .Params.description }}
+                <p class="article-subtitle">{{ . }}</p>
+            {{ end }}
+
+            {{ partial "article/components/series.html" (dict "page" . "mode" "ribbon") }}
+
+            <div class="commit-meta">
+                <span class="commit-meta__author">
+                    {{ with .Site.Params.sidebar.avatar.src }}
+                        {{ $a := resources.Get . }}
+                        {{ if $a }}<img src="{{ ($a.Resize "44x").RelPermalink }}" width="22" height="22" alt="" loading="lazy">{{ end }}
+                    {{ end }}
+                    Rob Sewell
+                </span>
+                {{ if not .Date.IsZero }}
+                    <span class="commit-meta__item">
+                        {{ partial "helper/icon" "date" }}
+                        <time datetime='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>{{ .Date | time.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") }}</time>
+                    </span>
+                {{ end }}
+                {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
+                {{ if $showReadingTime }}
+                    <span class="commit-meta__item">
+                        {{ partial "helper/icon" "clock" }}
+                        <span>{{ T "article.readingTime" .ReadingTime }}</span>
+                    </span>
+                {{ end }}
+                <span class="commit-meta__hash" title="content ref">{{ substr (crypto.SHA256 .RelPermalink) 0 7 }}</span>
+            </div>
+        </div>
+    </header>
+
+    {{ partial "article/components/content" . }}
+
+    {{ partial "article/components/series.html" (dict "page" . "mode" "pager") }}
+
+    {{ partial "article/components/footer" . }}
+
+    {{ if or .Params.math .Site.Params.article.math }}
+        {{ partialCached "article/components/math.html" . }}
+    {{ end }}
+</article>

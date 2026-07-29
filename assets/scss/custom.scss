@@ -1,0 +1,896 @@
+/* =============================================================================
+   THE WORKING LOG — custom world layer over hugo-theme-stack
+   A blog as a version-controlled engineering history. Imported last by the
+   theme's style.scss, so :root overrides here win over the theme defaults.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Tokens — remap the theme's CSS variables to the world palette.
+   Light = warm graphite-on-ledger; Dark = warm charcoal. Both first-class.
+   -------------------------------------------------------------------------- */
+:root {
+    /* World primitives */
+    --bg: #f2f0ea;
+    --surface: #fbfaf6;
+    --surface-2: #ece9e1;
+    --ink: #232019;
+    --muted: #574f44;
+    --faint: #6e6659;
+    --rule: #ded8cc;
+    --accent: #a85418;
+    --accent-strong: #7f3e11;
+    --accent-tint: rgba(168, 84, 24, 0.10);
+    --added: #2f6b2a;
+    --added-tint: rgba(47, 107, 42, 0.10);
+    --removed: #a5352a;
+    --removed-tint: rgba(165, 53, 42, 0.09);
+
+    /* Map theme variables → world */
+    --body-background: var(--bg);
+    --accent-color: var(--accent);
+    --accent-color-darker: var(--accent-strong);
+    --accent-color-text: #fbfaf6;
+    --body-text-color: var(--muted);
+
+    --card-background: var(--surface);
+    --card-background-selected: #f3efe6;
+    --card-text-color-main: var(--ink);
+    --card-text-color-secondary: var(--muted);
+    --card-text-color-tertiary: var(--faint);
+    --card-separator-color: var(--rule);
+
+    --card-border-radius: 6px;
+    --tag-border-radius: 4px;
+
+    --blockquote-background-color: #f0ede4;
+    --blockquote-border-size: 2px;
+    --heading-border-size: 2px;
+
+    --code-background-color: var(--surface-2);
+    --code-text-color: var(--ink);
+    --pre-background-color: #1b1811;
+    --pre-text-color: #ece5d7;
+
+    --table-border-color: var(--rule);
+    --tr-even-background-color: #efece4;
+    --kbd-border-color: var(--rule);
+
+    --link-background-color: 168, 84, 24;      /* accent, for the .link highlight */
+    --link-background-opacity: 0.20;
+    --link-background-opacity-hover: 0.32;
+
+    --scrollbar-thumb: #d3ccbe;
+
+    /* Fonts */
+    --base-font-family: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --article-font-family: var(--base-font-family);
+    --code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    --article-font-size: 1.7rem;
+    --article-line-height: 1.8;
+
+    /* Softer, warmer, offset shadows (never zero-offset halos) */
+    --shadow-l1: 0 1px 2px rgba(40, 32, 20, 0.05), 0 2px 8px rgba(40, 32, 20, 0.04);
+    --shadow-l2: 0 4px 10px rgba(40, 32, 20, 0.07), 0 12px 28px rgba(40, 32, 20, 0.06);
+    --shadow-l3: 0 10px 24px rgba(40, 32, 20, 0.08);
+    --shadow-l4: 0 24px 48px rgba(40, 32, 20, 0.12);
+
+    --section-separation: 34px;
+}
+
+:root[data-scheme="dark"] {
+    --bg: #17150f;
+    --surface: #201d16;
+    --surface-2: #12100b;
+    --ink: #ece5d7;
+    --muted: #b7ad9a;
+    --faint: #968c79;
+    --rule: #322d24;
+    --accent: #e1913f;
+    --accent-strong: #f0a85c;
+    --accent-tint: rgba(225, 145, 63, 0.14);
+    --added: #79b968;
+    --added-tint: rgba(121, 185, 104, 0.13);
+    --removed: #e4796b;
+    --removed-tint: rgba(228, 121, 107, 0.13);
+
+    --accent-color-text: #17150f;
+    --card-background-selected: #26221a;
+    --blockquote-background-color: #1c1912;
+    --code-background-color: var(--surface-2);
+    --code-text-color: var(--ink);
+    --pre-background-color: #100e09;
+    --pre-text-color: #ece5d7;
+    --tr-even-background-color: #26221a;
+    --link-background-color: 225, 145, 63;
+    --link-background-opacity: 0.22;
+    --link-background-opacity-hover: 0.36;
+    --scrollbar-thumb: #3a342a;
+
+    --shadow-l1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-l2: 0 6px 16px rgba(0, 0, 0, 0.45), 0 14px 34px rgba(0, 0, 0, 0.4);
+    --shadow-l3: 0 12px 28px rgba(0, 0, 0, 0.5);
+    --shadow-l4: 0 24px 52px rgba(0, 0, 0, 0.6);
+}
+
+/* -----------------------------------------------------------------------------
+   2. Base + reading refinements
+   -------------------------------------------------------------------------- */
+body {
+    font-feature-settings: "cv05" 1, "ss01" 1;
+    letter-spacing: -0.006em;
+}
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-strong); }
+
+/* Section labels — mono ref style, quiet */
+.section-title {
+    font-family: var(--code-font-family);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--faint);
+}
+
+/* Reading measure: prose sits at a comfortable measure; code/media go wide. */
+.article-content {
+    letter-spacing: -0.003em;
+}
+.article-content > p,
+.article-content > ul,
+.article-content > ol,
+.article-content > h1,
+.article-content > h2,
+.article-content > h3,
+.article-content > h4,
+.article-content > blockquote {
+    max-width: 70ch;
+}
+.article-content > ul,
+.article-content > ol { padding-inline-start: 1.4em; }
+
+/* Headings — tighter, more presence; keep the accent tick but thin */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-top: 1.9em;
+    margin-bottom: 0.7em;
+}
+.article-content h2 { font-size: 2.3rem; }
+.article-content h3 { font-size: 1.95rem; }
+
+/* Header anchor — visible on hover AND keyboard focus (a11y) */
+.article-content :is(h1,h2,h3,h4,h5,h6) a.header-anchor:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* Content links — clear underline affordance + the highlighter fill on hover */
+.article-content a.link {
+    color: var(--accent);
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+}
+
+/* Inline code — now AA (ink on warm inset), with a hairline for definition */
+.article-content code {
+    border: 1px solid var(--rule);
+    font-size: 0.85em;
+    padding: 1px 5px;
+}
+
+/* -----------------------------------------------------------------------------
+   3. Global focus-visible — keyboard users always see where they are
+   -------------------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* -----------------------------------------------------------------------------
+   4. Masthead — the left sidebar reads as a repo header
+   -------------------------------------------------------------------------- */
+.left-sidebar {
+    header {
+        .site-avatar .site-logo {
+            border-radius: 8px;                 /* squared avatar = an author, not a bubble */
+            box-shadow: var(--shadow-l1);
+            border: 1px solid var(--rule);
+        }
+        .site-avatar .emoji {
+            border-radius: 6px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+        }
+        .site-name {
+            font-family: var(--code-font-family);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            line-height: 1.3;
+            a { color: var(--ink); }
+            a:hover { color: var(--accent); }
+        }
+        /* `main` branch chip under the repo name */
+        .site-name::after {
+            content: "main";
+            display: inline-block;
+            margin-inline-start: 8px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+            background: var(--accent-tint);
+            border: 1px solid var(--rule);
+            border-radius: 999px;
+            padding: 1px 8px;
+            vertical-align: middle;
+        }
+        .site-description {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+    }
+
+    /* Social + menu items */
+    .menu-social a { color: var(--faint); }
+    .menu-social a:hover { color: var(--accent); }
+    .menu a span { color: var(--muted); }
+    .menu .current a span { color: var(--accent); font-weight: 600; }
+}
+
+/* -----------------------------------------------------------------------------
+   5. Home — the `git log` timeline of commit-rows
+   -------------------------------------------------------------------------- */
+.article-list {
+    gap: 0;
+
+    /* Reset the theme's big-card treatment on our log rows */
+    article.log-entry {
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+    }
+}
+
+.log-entry {
+    position: relative;
+    padding: 1.6rem 0 1.6rem 3.4rem;
+
+    &::before {                                   /* the timeline rail */
+        content: "";
+        position: absolute;
+        left: 0.85rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--rule);
+    }
+    &:first-child::before { top: 2.2rem; }
+    &:last-child::before { bottom: calc(100% - 2.2rem); }
+
+    &__link {
+        display: block;
+        color: inherit;
+    }
+
+    &__dot {                                       /* commit dot */
+        position: absolute;
+        left: calc(0.85rem - 5px);
+        top: 2rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 2px solid var(--rule);
+        transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        color: var(--faint);
+        margin-bottom: 6px;
+    }
+    &__hash {
+        color: var(--faint);
+        background: var(--surface-2);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        padding: 0 6px;
+    }
+
+    &__title {
+        font-family: var(--base-font-family);
+        font-size: 2.05rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.28;
+        margin: 0 0 6px;
+        color: var(--ink);
+        transition: color 0.15s ease;
+        max-width: 60ch;
+    }
+
+    &__desc {
+        margin: 0 0 10px;
+        color: var(--muted);
+        font-size: 1.55rem;
+        line-height: 1.55;
+        max-width: 66ch;
+    }
+
+    &__refs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-family: var(--code-font-family);
+        font-size: 1.25rem;
+    }
+
+    /* hover — the whole row lights the dot + title, faint tint */
+    &:hover {
+        .log-entry__dot { border-color: var(--accent); background: var(--accent); transform: scale(1.12); }
+        .log-entry__title { color: var(--accent); }
+    }
+}
+
+/* Ref chips (category / branch / stat) — quiet, monospace, git-ref flavored */
+.ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface);
+    line-height: 1.7;
+}
+.ref--cat::before { content: ""; }
+.ref--branch {
+    color: var(--accent);
+    background: var(--accent-tint);
+    font-weight: 500;
+}
+.ref--stat {
+    border: 0;
+    color: var(--added);
+    background: none;
+    padding-inline: 2px;
+}
+
+/* Staggered reveal — one authored moment (log streaming in) */
+@keyframes log-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .article-list .log-entry {
+        animation: log-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @for $i from 1 through 8 {
+        .article-list .log-entry:nth-child(#{$i}) { animation-delay: #{$i * 0.045}s; }
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   6. Article page — the post as an open commit
+   -------------------------------------------------------------------------- */
+.article-page .main-article {
+    max-width: 88rem;
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow-l1);
+
+    .article-header .article-details {
+        padding-bottom: 0;
+    }
+}
+
+/* Commit-subject H1 */
+.main-article .article-title {
+    font-family: var(--base-font-family);
+    font-weight: 800;
+    letter-spacing: -0.028em;
+    line-height: 1.14;
+    font-size: 3rem;
+    color: var(--ink);
+    @include respond(md) { font-size: 3.6rem; }
+    a { color: var(--ink); }
+}
+
+/* Commit metadata line (date · reading time · hash) */
+.commit-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-family: var(--code-font-family);
+    font-size: 1.35rem;
+    color: var(--faint);
+    margin-top: 4px;
+
+    .commit-meta__author { color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+    .commit-meta__author img { width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--rule); }
+    svg { width: 16px; height: 16px; stroke-width: 1.6; vertical-align: middle; }
+    .commit-meta__hash {
+        color: var(--faint);
+        background: var(--surface-2);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        padding: 0 6px;
+    }
+}
+
+.article-category {
+    a {
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        font-weight: 500;
+        background: var(--accent-tint) !important;
+        color: var(--accent) !important;
+        border: 1px solid var(--rule);
+        border-radius: 999px;
+        padding: 2px 12px;
+        &:hover { background: var(--accent) !important; color: var(--accent-color-text) !important; }
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   7. Series — branch ribbon (top) + parent/child pager (bottom)
+   -------------------------------------------------------------------------- */
+.series-ribbon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding: 10px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--accent-tint);
+    font-family: var(--code-font-family);
+    font-size: 1.35rem;
+
+    &__branch { color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    &__count { color: var(--muted); }
+    &__link { margin-inline-start: auto; color: var(--accent); font-weight: 500; }
+    svg { width: 16px; height: 16px; }
+}
+
+.series-pager {
+    margin: var(--card-padding);
+    margin-top: 0;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    @include respond(md) { grid-template-columns: 1fr 1fr; }
+
+    &__head {
+        grid-column: 1 / -1;
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        color: var(--faint);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    a {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 14px 16px;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        background: var(--surface);
+        color: var(--ink);
+        transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+
+        &:hover { border-color: var(--accent); background: var(--card-background-selected); transform: translateY(-1px); }
+    }
+    &__dir { font-family: var(--code-font-family); font-size: 1.2rem; color: var(--faint); }
+    &__title { font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+    a.series-pager__next { text-align: right; align-items: flex-end; }
+    a.series-pager__prev { grid-column: 1; }
+    a.series-pager__next { grid-column: -2; }
+}
+
+/* -----------------------------------------------------------------------------
+   8. Code — first-class, warm dark surface, diff-aware gutter, copper copy
+   -------------------------------------------------------------------------- */
+.article-content {
+    .highlight,
+    pre {
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .highlight { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25); }
+
+    /* line-number gutter tone */
+    .highlight .lntable .lnt { color: #6c6656; }
+
+    .copyCodeButton {
+        background: rgba(255, 255, 255, 0.06);
+        color: #ece5d7;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: none;
+        font-family: var(--code-font-family);
+        font-size: 1.2rem;
+        border-radius: 4px;
+        &:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    }
+}
+
+/* Blockquotes as "diff notes" — earned colored gutter (added-note by default) */
+.article-content blockquote {
+    border-inline-start: 2px solid var(--accent);
+    background: var(--accent-tint);
+    color: var(--ink);
+    border-radius: 0 6px 6px 0;
+}
+
+/* -----------------------------------------------------------------------------
+   9. Compact & tile lists (archives, taxonomy, related) — align to world
+   -------------------------------------------------------------------------- */
+.article-list--compact {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    article:not(:last-of-type) { border-bottom: 1px solid var(--rule); }
+    .article-title { font-weight: 600; letter-spacing: -0.015em; }
+    .article-time { font-family: var(--code-font-family); font-size: 1.25rem; }
+}
+
+.article-list--tile article {
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    .article-title { letter-spacing: -0.015em; }
+}
+
+/* Section (taxonomy/list) header card */
+.section-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow-l1);
+    .section-term { font-family: var(--code-font-family); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+    .section-count { color: var(--faint); font-family: var(--code-font-family); }
+}
+
+/* Article footer tags — neutralize theme's inline pastel colors → git refs */
+.article-tags a {
+    background: var(--surface) !important;
+    color: var(--muted) !important;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--code-font-family);
+    font-size: 1.25rem;
+    padding: 2px 10px 2px 8px;
+    &::before { content: "#"; color: var(--accent); opacity: 0.75; margin-inline-end: 1px; }
+    &:hover { color: var(--accent) !important; border-color: var(--accent); }
+}
+
+/* -----------------------------------------------------------------------------
+   10. Widgets (right sidebar) — quiet cards on the world
+   -------------------------------------------------------------------------- */
+.widget {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow-l1);
+}
+.widget .search-form input,
+.search-form input {
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    color: var(--ink);
+}
+.widget--tagCloud .tagCloud-tags a,
+.article-list--tile .article-title { letter-spacing: -0.01em; }
+
+.widget--tagCloud .tagCloud-tags a {
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: var(--code-font-family);
+    font-size: 1.25rem;
+    &::before { content: "#"; color: var(--accent); opacity: 0.7; }
+    &:hover { color: var(--accent); border-color: var(--accent); }
+}
+
+.widget--toc {
+    border: 1px solid var(--rule);
+    #TableOfContents li.active-class > a {
+        border-inline-start: 2px solid var(--accent);
+        color: var(--accent);
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   11. Pagination — mono, ref-styled
+   -------------------------------------------------------------------------- */
+.pagination {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow-l1);
+    .page-link {
+        font-family: var(--code-font-family);
+        color: var(--muted);
+        &.current { background: var(--accent); color: var(--accent-color-text); }
+        &:hover:not(.current):not(.disabled) { color: var(--accent); }
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   12. 404 — "detached HEAD", warm
+   -------------------------------------------------------------------------- */
+.not-found-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow-l1);
+    padding: var(--card-padding);
+
+    .not-found-code {
+        font-family: var(--code-font-family);
+        color: var(--removed);
+        font-size: 1.4rem;
+        letter-spacing: 0.02em;
+    }
+    .article-title { font-family: var(--code-font-family); font-size: 2.4rem; }
+    .article-subtitle { color: var(--muted); font-weight: normal; }
+}
+
+/* -----------------------------------------------------------------------------
+   13. Footer
+   -------------------------------------------------------------------------- */
+.footer {
+    color: var(--faint);
+    font-family: var(--code-font-family);
+    font-size: 1.25rem;
+    a { color: var(--faint); }
+    a:hover { color: var(--accent); }
+}
+
+/* -----------------------------------------------------------------------------
+   14. Home — "Latest on main" featured commit (the hero above the log)
+   -------------------------------------------------------------------------- */
+.latest-commit {
+    margin-bottom: var(--section-separation);
+
+    &__label {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--faint);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 14px;
+
+        code {
+            color: var(--accent);
+            background: var(--accent-tint);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            padding: 1px 7px;
+            font-size: 0.95em;
+        }
+    }
+    &__pulse {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .latest-commit__pulse { animation: head-pulse 2.6s ease-out infinite; }
+    @keyframes head-pulse {
+        0%   { box-shadow: 0 0 0 0 var(--accent-tint); }
+        70%  { box-shadow: 0 0 0 9px rgba(0, 0, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+    }
+}
+
+.feature {
+    background: var(--surface);
+    border: 1px solid var(--rule);                /* HEAD is marked by the "Latest on main" label + prominence */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-l2);
+
+    &__image {
+        display: block;
+        img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1000 / 440;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--rule);
+        }
+    }
+    &__body { padding: 22px; @include respond(md) { padding: 32px; } }
+    &__refs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-family: var(--code-font-family);
+        font-size: 1.25rem;
+        margin-bottom: 14px;
+    }
+    &__title {
+        font-family: var(--base-font-family);
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin: 0 0 14px;
+        @include respond(md) { font-size: 3.4rem; }
+        a { color: var(--ink); }
+        a:hover { color: var(--accent); }
+    }
+    &__desc {
+        color: var(--muted);
+        font-size: 1.7rem;
+        line-height: 1.5;
+        margin: 0 0 18px;
+        max-width: 62ch;
+    }
+    &__meta {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        color: var(--faint);
+        margin-bottom: 20px;
+        .feature__hash {
+            background: var(--surface-2);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            padding: 0 6px;
+        }
+    }
+    &__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--code-font-family);
+        font-weight: 600;
+        font-size: 1.45rem;
+        color: var(--accent);
+        transition: gap 0.2s ease, color 0.2s ease;
+        &:hover { gap: 13px; color: var(--accent-strong); }
+    }
+}
+
+.log-section .section-title { margin-bottom: 4px; }
+
+/* -----------------------------------------------------------------------------
+   15. Archive — year-marked commit timeline
+   -------------------------------------------------------------------------- */
+.archives-header {
+    margin-bottom: var(--section-separation);
+    .section-term {
+        font-family: var(--code-font-family);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        font-size: 2.6rem;
+    }
+}
+.archives-group {
+    margin-bottom: var(--section-separation);
+    scroll-margin-top: 20px;                       /* year jumps don't stick to the top edge */
+}
+
+/* Quick index (jump to year · browse categories / tags) */
+.archive-index {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    box-shadow: var(--shadow-l1);
+    padding: 18px 20px;
+    margin-bottom: var(--section-separation);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__group {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        @include respond(sm) {
+            grid-template-columns: 92px 1fr;
+            gap: 10px 16px;
+            align-items: start;
+        }
+        & + & { border-top: 1px solid var(--rule); padding-top: 16px; }
+    }
+    &__label {
+        font-family: var(--code-font-family);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--faint);
+        padding-top: 3px;
+    }
+    &__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .ref {
+        font-family: var(--code-font-family);
+        font-size: 1.25rem;
+        transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+        &:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-tint); }
+    }
+}
+.ref__count {
+    color: var(--faint);
+    opacity: 0.7;
+    margin-left: 6px;
+    font-size: 0.92em;
+}
+.ref--more {
+    color: var(--accent);
+    border-color: var(--rule);
+    background: var(--accent-tint);
+    font-weight: 500;
+}
+
+/* Taxonomy index — the full term cloud (/categories/, /tags/) */
+.term-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 6px;
+    .ref {
+        font-family: var(--code-font-family);
+        font-size: 1.3rem;
+        padding: 3px 11px;
+        transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+        &:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-tint); }
+    }
+}
+
+.archives-year {
+    font-family: var(--code-font-family);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--faint);
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+    a { color: var(--faint); }
+    a:hover { color: var(--accent); }
+    &::before { content: "⎇ "; color: var(--accent); }
+}

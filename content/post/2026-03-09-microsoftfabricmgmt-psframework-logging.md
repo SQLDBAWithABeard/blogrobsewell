@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: Structured Logging with PSFramework"
 date: "2026-03-09"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-psframework-logging"
 categories:
   - Blog

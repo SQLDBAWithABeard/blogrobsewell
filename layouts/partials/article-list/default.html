@@ -1,0 +1,17 @@
+{{- /* Home log entry — one post as a commit-row on the timeline ("The Working Log"). */ -}}
+<article class="log-entry">
+    <a class="log-entry__link" href="{{ .RelPermalink }}">
+        <span class="log-entry__dot" aria-hidden="true"></span>
+        <div class="log-entry__meta">
+            <time datetime='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>{{ .Date.Format "2006-01-02" }}</time>
+            <span class="log-entry__hash">{{ substr (crypto.SHA256 .RelPermalink) 0 7 }}</span>
+        </div>
+        <h2 class="log-entry__title">{{ .Title }}</h2>
+        {{ with .Params.description }}<p class="log-entry__desc">{{ . }}</p>{{ end }}
+        <div class="log-entry__refs">
+            {{ range (.GetTerms "categories") }}<span class="ref ref--cat">{{ .LinkTitle }}</span>{{ end }}
+            {{ with .Params.series }}<span class="ref ref--branch">⎇ {{ index . 0 }}</span>{{ end }}
+            <span class="ref ref--stat">+{{ .ReadingTime }} min read</span>
+        </div>
+    </a>
+</article>

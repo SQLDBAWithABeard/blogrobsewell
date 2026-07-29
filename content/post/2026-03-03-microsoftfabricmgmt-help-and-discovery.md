@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: Help and Discovery - Finding Your Way Around 295+ Cmdlets"
 date: "2026-03-03"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-help-and-discovery"
 categories:
   - Blog

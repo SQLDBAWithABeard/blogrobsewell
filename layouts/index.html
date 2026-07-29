@@ -1,0 +1,65 @@
+{{ define "main" }}
+    {{- $posts := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+    {{- $posts = where $posts "Params.hidden" "!=" true -}}
+    {{- $posts = $posts.ByDate.Reverse -}}
+    {{- $latest := index $posts 0 -}}
+
+    {{/* ── Latest commit on main — the featured most-recent post ── */}}
+    {{ with $latest }}
+    <section class="latest-commit">
+        <div class="latest-commit__label">
+            <span class="latest-commit__pulse" aria-hidden="true"></span>
+            Latest on <code>main</code>
+        </div>
+
+        <article class="feature">
+            {{- $image := partialCached "helper/image" (dict "Context" . "Type" "article") .RelPermalink "article" -}}
+            {{ if $image.exists }}
+                <a class="feature__image" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+                    {{ if $image.resource }}
+                        {{- $t := $image.resource.Fill "1000x520" -}}
+                        <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" loading="eager" alt="">
+                    {{ else }}
+                        <img src="{{ $image.permalink }}" loading="eager" alt="">
+                    {{ end }}
+                </a>
+            {{ end }}
+
+            <div class="feature__body">
+                <div class="feature__refs">
+                    {{ range (.GetTerms "categories") }}<span class="ref ref--cat">{{ .LinkTitle }}</span>{{ end }}
+                    {{ with .Params.series }}<span class="ref ref--branch">⎇ {{ index . 0 }}</span>{{ end }}
+                </div>
+
+                <h2 class="feature__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+                {{ with .Params.description }}<p class="feature__desc">{{ . }}</p>{{ end }}
+
+                <div class="feature__meta">
+                    <time datetime='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>{{ .Date.Format "2006-01-02" }}</time>
+                    <span class="feature__hash">{{ substr (crypto.SHA256 .RelPermalink) 0 7 }}</span>
+                    <span>{{ T "article.readingTime" .ReadingTime }}</span>
+                </div>
+
+                <a class="feature__cta" href="{{ .RelPermalink }}">Read this commit →</a>
+            </div>
+        </article>
+    </section>
+    {{ end }}
+
+    {{/* ── Commit history — the full git log, no pagination ── */}}
+    <section class="log-section">
+        <h2 class="section-title">Commit history</h2>
+        <section class="article-list">
+            {{ range after 1 $posts }}
+                {{ partial "article-list/default" . }}
+            {{ end }}
+        </section>
+    </section>
+
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

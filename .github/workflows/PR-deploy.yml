@@ -1,44 +1,51 @@
 name: Build and Deploy PR Preview
 
-# From this post:
-  # https://rmoff.net/2022/04/06/using-github-actions-to-build-automagic-hugo-previews-of-draft-articles/
+# Token-free PR previews: builds the site and publishes it to
+# gh-pages/pr-preview/pr-<N>/ using only the built-in GITHUB_TOKEN
+# (no surge.sh account or SURGE_TOKEN required). Auto-torn-down on close.
 
 on:
   pull_request:
-
+    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pr-preview-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
   build_preview:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: "0.164.0"
-        extended: true
-    - name: Setup base URL env var
-      run: |
-        export PRNUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        echo BASEURL="https://SQLDBAWithABeard-blogrobsewell-build_preview-pr-"$PRNUMBER".surge.sh/" >> $GITHUB_ENV
-    - name: Report base URL env var
-      run: echo "${{ env.BASEURL }}"
+      - name: Setup Go (Hugo modules need a Go toolchain)
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
 
-    - name: Build
-      # working-directory: content
-      run: hugo --minify --baseURL "${{ env.BASEURL }}" --buildDrafts --buildFuture
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
 
-    - name: Deploy
-      uses: afc163/surge-preview@v1
-      id: preview_step
-      with:
-        surge_token: ${{ secrets.SURGE_TOKEN }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        dist: public
-        failOnError: 'true'
-        teardown: true
-        build: |
-          echo Deploying to surge.sh
+      - name: Build
+        if: github.event.action != 'closed'
+        run: |
+          hugo --minify --buildDrafts --buildFuture \
+            --baseURL "https://blog.robsewell.com/pr-preview/pr-${{ github.event.number }}/"
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./public/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
