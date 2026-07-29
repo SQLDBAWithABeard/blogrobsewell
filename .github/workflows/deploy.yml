@@ -59,7 +59,7 @@ jobs:
                   branch: gh-pages
                   folder: public
                   clean: true
-                  # Preserve token-free PR previews (gh-pages/pr-preview/**) so a
-                  # production deploy doesn't wipe them. Requires single-commit off.
-                  clean-exclude: |
-                      pr-preview/
+                  # Keep gh-pages a single commit (the site is ~1.2GB; preserving
+                  # history would balloon the repo). PR previews are ephemeral by
+                  # design — rossjrw/pr-preview-action re-deploys them on each PR push.
+                  single-commit: true
