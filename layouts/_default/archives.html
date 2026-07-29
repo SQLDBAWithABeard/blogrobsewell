@@ -1,0 +1,64 @@
+{{ define "body-class" }}template-archives{{ end }}
+{{ define "main" }}
+    <header class="archives-header">
+        <h1 class="section-term">{{ .Title }}</h1>
+    </header>
+
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ $filtered := where $pages "Params.hidden" "!=" true }}
+
+    {{/* Quick index — jump to a year, or browse by category / tag. */}}
+    <nav class="archive-index" aria-label="Archive index">
+        <div class="archive-index__group">
+            <span class="archive-index__label">Years</span>
+            <div class="archive-index__chips">
+                {{ range $filtered.GroupByDate "2006" }}
+                    {{ $id := lower (replace .Key " " "-") }}
+                    <a class="ref" href="#{{ $id }}">{{ .Key }}<span class="ref__count">{{ len .Pages }}</span></a>
+                {{ end }}
+            </div>
+        </div>
+
+        {{ with .Site.Taxonomies.categories }}
+        <div class="archive-index__group">
+            <span class="archive-index__label">Categories</span>
+            <div class="archive-index__chips">
+                {{ range (.ByCount | first 24) }}
+                    <a class="ref" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}<span class="ref__count">{{ .Count }}</span></a>
+                {{ end }}
+                {{ if gt (len .) 24 }}
+                    <a class="ref ref--more" href="{{ `/categories/` | relLangURL }}">all {{ len . }} categories →</a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+
+        {{ with .Site.Taxonomies.tags }}
+        <div class="archive-index__group">
+            <span class="archive-index__label">Tags</span>
+            <div class="archive-index__chips">
+                {{ range (.ByCount | first 24) }}
+                    <a class="ref" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}<span class="ref__count">{{ .Count }}</span></a>
+                {{ end }}
+                {{ if gt (len .) 24 }}
+                    <a class="ref ref--more" href="{{ `/tags/` | relLangURL }}">all {{ len . }} tags →</a>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </nav>
+
+    {{ range $filtered.GroupByDate "2006" }}
+    {{ $id := lower (replace .Key " " "-") }}
+    <section class="archives-group" id="{{ $id }}">
+        <h2 class="archives-year"><a href="{{ $.RelPermalink }}#{{ $id }}">{{ .Key }}</a></h2>
+        <section class="article-list">
+            {{ range .Pages }}
+                {{ partial "article-list/default" . }}
+            {{ end }}
+        </section>
+    </section>
+    {{ end }}
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}

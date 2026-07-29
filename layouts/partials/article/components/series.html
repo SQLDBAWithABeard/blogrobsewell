@@ -1,0 +1,55 @@
+{{- /*
+  Series navigation for "The Working Log".
+  Call with: (dict "page" . "mode" "ribbon")  → the branch ribbon (top of a post)
+             (dict "page" . "mode" "pager")   → parent/child pager (bottom of a post)
+  Ordering is by date ascending within the series taxonomy term.
+*/ -}}
+{{- $page := .page -}}
+{{- $mode := .mode -}}
+{{- with $page.Params.series -}}
+    {{- $name := index . 0 -}}
+    {{- $term := $page.Site.GetPage (printf "/series/%s" ($name | urlize)) -}}
+    {{- with $term -}}
+        {{- $posts := $term.Pages.ByDate -}}
+        {{- $total := len $posts -}}
+        {{- $s := newScratch -}}
+        {{- $s.Set "idx" -1 -}}
+        {{- range $i, $p := $posts -}}
+            {{- if eq $p.RelPermalink $page.RelPermalink -}}{{- $s.Set "idx" $i -}}{{- end -}}
+        {{- end -}}
+        {{- $idx := $s.Get "idx" -}}
+        {{- if and (ge $idx 0) (gt $total 1) -}}
+            {{- $part := add $idx 1 -}}
+            {{- $branchSVG := `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M18 10.5V12a4 4 0 0 1-4 4H6"/><path d="M6 8.5v7"/></svg>` -}}
+            {{- if eq $mode "ribbon" -}}
+                <div class="series-ribbon">
+                    <span class="series-ribbon__branch">{{ $branchSVG | safeHTML }} {{ $name }}</span>
+                    <span class="series-ribbon__count">Part {{ $part }} of {{ $total }}</span>
+                    <a class="series-ribbon__link" href="{{ $term.RelPermalink }}">View the series →</a>
+                </div>
+            {{- else if eq $mode "pager" -}}
+                <nav class="series-pager" aria-label="Series navigation">
+                    <div class="series-pager__head">{{ $branchSVG | safeHTML }} {{ $name }} · Part {{ $part }} of {{ $total }}</div>
+                    {{- if gt $idx 0 -}}
+                        {{- $prev := index $posts (sub $idx 1) -}}
+                        <a class="series-pager__prev" href="{{ $prev.RelPermalink }}">
+                            <span class="series-pager__dir">← Previous commit</span>
+                            <span class="series-pager__title">{{ $prev.Title }}</span>
+                        </a>
+                    {{- else -}}
+                        <span aria-hidden="true"></span>
+                    {{- end -}}
+                    {{- if lt $idx (sub $total 1) -}}
+                        {{- $next := index $posts (add $idx 1) -}}
+                        <a class="series-pager__next" href="{{ $next.RelPermalink }}">
+                            <span class="series-pager__dir">Next commit →</span>
+                            <span class="series-pager__title">{{ $next.Title }}</span>
+                        </a>
+                    {{- else -}}
+                        <span aria-hidden="true"></span>
+                    {{- end -}}
+                </nav>
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}

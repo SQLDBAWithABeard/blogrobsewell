@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: The PowerShell Pipeline - Idiomatic Automation"
 date: "2026-03-02"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-pipeline"
 categories:
   - Blog

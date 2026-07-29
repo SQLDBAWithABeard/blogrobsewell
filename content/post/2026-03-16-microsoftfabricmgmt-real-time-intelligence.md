@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: Real-Time Intelligence - Eventhouses and Eventstreams"
 date: "2026-03-16"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-real-time-intelligence"
 categories:
   - Blog

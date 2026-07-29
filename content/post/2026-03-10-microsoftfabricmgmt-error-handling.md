@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: Error Handling - Retry Logic and Long Running Operations"
 date: "2026-03-10"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-error-handling"
 categories:
   - Blog

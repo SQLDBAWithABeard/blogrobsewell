@@ -1,6 +1,8 @@
 ---
 title: "MicrosoftFabricMgmt: Building a Complete Fabric Environment with PowerShell"
 date: "2026-03-17"
+series:
+  - MicrosoftFabricMgmt
 slug: "microsoftfabricmgmt-complete-environment"
 categories:
   - Blog

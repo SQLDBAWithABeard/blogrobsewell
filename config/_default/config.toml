@@ -17,3 +17,10 @@ hasCJKLanguage = false
 
 # Change it to your Disqus shortname before using
 #disqusShortname = "hugo-theme-stack"
+
+# Taxonomies — `series` added for multi-part post navigation ("The Working Log" redesign).
+# category/tag are re-declared because defining [taxonomies] overrides Hugo's defaults.
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"

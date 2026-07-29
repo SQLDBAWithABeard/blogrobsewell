@@ -1,3 +1,32 @@
+{{/*
+  ── DIRECTION CONTRACT ─────────────────────────────────────────────────────────
+  "The Working Log" — Impeccable redesign · mode: Read
+  (Durable in this template source. Hugo strips HTML comments from rendered output,
+   so the contract lives here and is handed to the finish reviewer directly.)
+
+  THESIS  A blog as a version-controlled engineering history. Every post is a dated,
+          signed commit; series are branches followed commit-to-commit; the archive is
+          a timeline scanned like `git log`. Refuses the centered-card-with-sidebar rut.
+  OWN-WORLD  Warm graphite-on-ledger light + warm charcoal dark, both first-class. One
+          copper accent used sparingly; functional diff green/red only in code + callouts.
+          Hanken Grotesk for reading, JetBrains Mono for code/metadata/hashes. Commit-row
+          log, timeline spine, branch ribbons, diff-gutter emphasis, ref chips.
+  STORY   A practitioner arrives mid-task, trusts a dated reproducible entry, copies the
+          code, and walks the series commit-to-commit without leaving the page.
+  FIRST VIEWPORT  Repo-header masthead (avatar as author, human tagline, `main` ref) over
+          a `git log` timeline of commit-rows; the article opens as a commit — title as H1
+          subject, metadata line, branch ribbon, warm body, diff-aware code, prev/next pager.
+  FORM    Version-control log; direction #3 of the ordered list; assignment seed 4b2a9ab1.
+  FINISH  unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  ───────────────────────────────────────────────────────────────────────────────
+*/}}
+
+{{/* Fonts — preconnected stylesheet (replaces the theme's JS-injected Lato). */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+{{/* Microsoft Clarity analytics */}}
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
