@@ -47,7 +47,7 @@ name = "BlueSky"
 url = "https://bsky.app/profile/robsewell.bsky.social"
 
 [social.params]
-icon = "brand-mastodon"
+icon = "brand-bluesky"
 
 [[social]]
 identifier = "linkedin"
