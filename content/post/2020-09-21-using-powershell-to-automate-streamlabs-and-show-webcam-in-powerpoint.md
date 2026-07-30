@@ -32,7 +32,7 @@ That looks awesome, I thought, so I watched the YouTube video.Scott has written 
 
 It is truly awesome but it is for Obs and I use StreamLabs and I wondered if it could be done with PowerShell.
 
-(If you just want the code, [you can find it here](https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1))
+(If you just want the code, [you can find it here](https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1?WT.mc_id=DP-MVP-5002693))
 
 ## Listen to PowerPoint Events with PowerShell
 
@@ -42,35 +42,35 @@ The first thing that we need to do is to find out when the PowerPoint Slide has 
 
 You can create a PowerPoint Com Object with
 
-    `$Application = New-Object -ComObject PowerPoint.Application`
+     `$Application = New-Object -ComObject PowerPoint.Application` 
 
 and make it visible with
 
-    `$Application.Visible = 'MsoTrue'`
+     `$Application.Visible = 'MsoTrue'` 
 
 ### Get the Slide Number and Notes
 
 Next step is to get the slide number. It is not truly required for the code, but I like to print it out so that I know which slide I was on for trouble shooting.
 
-Looking at [Scotts code here](https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs#L34) I worked out that the slide number via PowerShell was
+Looking at [Scotts code here](https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs?WT.mc_id=DP-MVP-5002693#L34) I worked out that the slide number via PowerShell was
 
-    `$slideNumber = $PowerPoint.SlideShowWindows[1].view.Slide.SlideIndex`
+     `$slideNumber = $PowerPoint.SlideShowWindows[1].view.Slide.SlideIndex` 
 
-The notes (by looking at [code](https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs#L37)) can be accessed at
+The notes (by looking at [code](https://github.com/shanselman/PowerPointToOBSSceneSwitcher/blob/accf2c40d0f1cbb31287751bd7be4ae2fe0d3bb7/Program.cs?WT.mc_id=DP-MVP-5002693#L37)) can be accessed at
 
-    `$notes = $PowerPoint.SlideShowWindows[1].View.Slide.NotesPage.Shapes[2].TextFrame.TextRange.Text`
+     `$notes = $PowerPoint.SlideShowWindows[1].View.Slide.NotesPage.Shapes[2].TextFrame.TextRange.Text` 
 
-then parse the notes to get the scene name which is defined as `OBS:SceneName`
+then parse the notes to get the scene name which is defined as  `OBS:SceneName` 
 
-    `$SceneName = ($notes -split "`r")[0] -replace 'OBS:', ''`
+     `$SceneName = ($notes -split "` r")[0] -replace 'OBS:', ''`
 
 The first part gets the first line and it was thanks to Andreas on twitch who got this working, Thank you Andreas.
 
 ### Listen to an Event
 
-With PowerShell, you can subscribes to events and take action when they fire. The event that we are going to subscribe to is called `SlideShowNextSlide`
+With PowerShell, you can subscribes to events and take action when they fire. The event that we are going to subscribe to is called  `SlideShowNextSlide` 
 
-    `$subscriber = Register-ObjectEvent -InputObject $PowerPoint -EventName SlideShowNextSlide -Action $action `
+     `$subscriber = Register-ObjectEvent -InputObject $PowerPoint -EventName SlideShowNextSlide -Action $action ` 
 
 We have defined an $action variable in the code but we need to provide an action and this is where things got a little tricky.
 
@@ -91,7 +91,7 @@ So Rob traversed a rabbit warren of investigation to understand how to send mess
 
 Now I had everything I needed to create a connection to SLOBS via named pipes. SLOBS needs to be started here!
 
-```
+ ```
     # Create Client
     $npipeClient = New-Object System.IO.Pipes.NamedPipeClientStream($Env:ComputerName, 'slobs', [System.IO.Pipes.PipeDirection]::InOut, [System.IO.Pipes.PipeOptions]::None, [System.Security.Principal.TokenImpersonationLevel]::Impersonation)
     $npipeClient.Connect()
@@ -107,11 +107,11 @@ Now I had everything I needed to create a connection to SLOBS via named pipes. S
 
     # Receive message
     $pipeReader.ReadLine()
-```
+``` 
 ### Which messages?
 
 Next I needed to get the messages to send formatted correctly. Looking at the [API docs](https://stream-labs.github.io/streamlabs-obs-api-docs/docs/index.html#examples) I saw
-```
+ ```
     {
       "jsonrpc": "2.0",
       "id": 1,
@@ -120,19 +120,19 @@ Next I needed to get the messages to send formatted correctly. Looking at the [A
           "resource": "ScenesService"
       }
     }
-```
+``` 
 So I was able to get the current available scenes with
-```
+ ```
     $scenesMessage = '{"jsonrpc": "2.0","id": 6,"method": "getScenes","params": {"resource": "ScenesService"}}'
     $pipeWriter.WriteLine($scenesMessage)
     ($pipeReader.ReadLine() | ConvertFrom-Json).result | Select Name, id
-```
+``` 
 ![Get SLOBS Scenes](https://blog.robsewell.com//assets/uploads/2020/09/getslobsscenes.png)
 
 ### Change Scenes
 
 The last part of the jigsaw was to change the scene via the named pipe connection
-```
+ ```
     $scenesMessage = '{"jsonrpc": "2.0","id": 6,"method": "getScenes","params": {"resource": "ScenesService"}}'
     $pipeWriter.WriteLine($scenesMessage)
     $scenes = ($pipeReader.ReadLine() | ConvertFrom-Json).result | Select Name, id
@@ -140,14 +140,14 @@ The last part of the jigsaw was to change the scene via the named pipe connectio
     $MakeSceneActiveMessage = '{    "jsonrpc": "2.0",    "id": 1,    "method": "makeSceneActive",    "params": {        "resource": "ScenesService","args": ["' + $SceneId + '"]}}'
     $pipeWriter.WriteLine($MakeSceneActiveMessage)
     $switchResults = $pipeReader.ReadLine() | ConvertFrom-Json
-```
+``` 
 Which looks like this :-)
 
 <iframe width="650" height="250" src="https://blog.robsewell.com//assets/uploads/2020/09/ChangeScenes.mp4" frameborder="0" allowfullscreen></iframe>
 
 ## Setting up PowerPoint and Scenes
 
-With the PowerShell set up, we next need to set it up to use the scenes. I followed Scotts example and used `OBS:SceneName` as the reference to the Scene. I added this to the first line of the notes on a slide
+With the PowerShell set up, we next need to set it up to use the scenes. I followed Scotts example and used  `OBS:SceneName`  as the reference to the Scene. I added this to the first line of the notes on a slide
 
 ![Slide Notes](https://blog.robsewell.com//assets/uploads/2020/09/pptxnotes.png)
 
@@ -173,11 +173,11 @@ The image below shows form left to right, the Chroma Key settings, the scene in 
 
 Normally, I would do this on seperate screens of course!
 
-I set up each slide like this and then I closed the PowerPoint and ran the code, [you can find it here,](https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1))leaving PowerShell running in the background. This opened PowerPoint and I opened the deck and started the slide show and as I navigate through the slide, the scene changes and so does the webcam position :-)
+I set up each slide like this and then I closed the PowerPoint and ran the code, [you can find it here,](https://github.com/SQLDBAWithABeard/Functions/blob/master/PowerPointSlobs.ps1?WT.mc_id=DP-MVP-5002693))leaving PowerShell running in the background. This opened PowerPoint and I opened the deck and started the slide show and as I navigate through the slide, the scene changes and so does the webcam position :-)
 
 You can see a test run below
 
  {{< youtube 7a22pymG4XQ >}}
 
 
-and [the demo pptx can be found here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2020/test.pptx)
+and [the demo pptx can be found here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2020/test.pptx?WT.mc_id=DP-MVP-5002693)

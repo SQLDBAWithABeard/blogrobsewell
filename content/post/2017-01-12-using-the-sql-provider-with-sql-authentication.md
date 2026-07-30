@@ -10,7 +10,7 @@ tags:
 
 ---
 <P>Whilst having a conversation with <A href="https://twitter.com/cl" target=_blank>Chrissy LeMaire</A>&nbsp;last week about using the SQL Provider. She asked if it could use SQL Authentication. I had no idea but said I would find out. This is how and what I did.</P>
-<P>I am going to demonstrate this in <A href="https://code.visualstudio.com/" target=_blank>Visual Studio Code</A> with the <A href="https://blogs.msdn.microsoft.com/powershell/2015/11/16/announcing-powershell-language-support-for-visual-studio-code-and-more/?WT.mc_id=DP-MVP-5002693" target=_blank>PowerShell extension installed</A> but I have also&nbsp;tested this in PowerShell version 5.1.14393.576 on Windows 10 and PowerShell Version 5.0.10586.117&nbsp;on Windows 8.1 but it will work across other versions I believe</P>
+<P>I am going to demonstrate this in <A href="https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693" target=_blank>Visual Studio Code</A> with the <A href="https://blogs.msdn.microsoft.com/powershell/2015/11/16/announcing-powershell-language-support-for-visual-studio-code-and-more/?WT.mc_id=DP-MVP-5002693" target=_blank>PowerShell extension installed</A> but I have also&nbsp;tested this in PowerShell version 5.1.14393.576 on Windows 10 and PowerShell Version 5.0.10586.117&nbsp;on Windows 8.1 but it will work across other versions I believe</P>
 <P>First we need to import the sqlserver module</P><PRE class="lang:ps decode:true">Import-Module sqlserver
 </PRE>
 <P>Then if we run Get-PSDrive we can see our SQL Server PS Drive</P>

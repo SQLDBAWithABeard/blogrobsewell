@@ -17,9 +17,9 @@ Last week I ran a PowerShell lab at SQL Relay in Cardiff. There are still a few 
 
 The link for my slides and demos from the second part are here [https://t.co/Fik2odyUMA](https://t.co/Fik2odyUMA "https://t.co/Fik2odyUMA")
 
-Whilst we were discussing [Show-LastDatabaseBackup](https://blog.robsewell.com/checking-for-a-database-backup-with-powershell/) Kev Chant [@KevChant](https://twitter.com/KevChant) asked where it was getting the information from and I answered that PowerShell was running SQL commands under the hood against the server and if you ran profiler that is what you would see. We didn’t have time to do that in Cardiff but I thought I would do it today to show what happens
+Whilst we were discussing [Show-LastDatabaseBackup](/blog/checking-for-a-database-backup-with-powershell/) Kev Chant [@KevChant](https://twitter.com/KevChant) asked where it was getting the information from and I answered that PowerShell was running SQL commands under the hood against the server and if you ran profiler that is what you would see. We didn’t have time to do that in Cardiff but I thought I would do it today to show what happens
 
-A reminder of what `Show-LastDatabaseBackup` function does
+A reminder of what  `Show-LastDatabaseBackup`  function does
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/11/image10.png)](https://blog.robsewell.com/assets/uploads/2013/11/image10.png)
 

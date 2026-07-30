@@ -29,10 +29,10 @@ Managing SQL servers at enterprise scale is not a straightforward task. Your aim
 So here are a few points that I think you should consider if you look after SQL in an Enterprise environment.
 
 - Enterprise Strategy will undoubtedly garner a whole host of excellent posts and Jen will provide a round up post which will I am certain will be an excellent resource. [Take a look here](http://www.midnightdba.com/Jen/2015/09/the-tsql2sday-70-roundup/)
-- Know where your instances are and have a single place that you can reference them from. Some people recommend a [Central Management Server](https://msdn.microsoft.com/en-us/library/bb895144.aspx?f=255&MSPPError=-2147217396) but I find this too restrictive for my needs. I use an InstanceList table in my DBA Database with the following columns [ServerName], [InstanceName] , [Port] , [AG] , [Inactive] , [Environment] and [Location]. This enables me to target instances not just by name but by environment (Dev, Test, Pre-Prod, Live etc), by location or by joining the InstanceList table with another table I can target by the application or any number of other factors. I also capture information about the servers at windows and SQL level to this database so I can target the SQL 2012 servers specifically if need be or any other metric. This is very powerful and enables far greater flexibility than the CMS in my opinion.
+- Know where your instances are and have a single place that you can reference them from. Some people recommend a [Central Management Server](https://msdn.microsoft.com/en-us/library/bb895144.aspx?f=255&MSPPError=-2147217396&WT.mc_id=DP-MVP-5002693) but I find this too restrictive for my needs. I use an InstanceList table in my DBA Database with the following columns [ServerName], [InstanceName] , [Port] , [AG] , [Inactive] , [Environment] and [Location]. This enables me to target instances not just by name but by environment (Dev, Test, Pre-Prod, Live etc), by location or by joining the InstanceList table with another table I can target by the application or any number of other factors. I also capture information about the servers at windows and SQL level to this database so I can target the SQL 2012 servers specifically if need be or any other metric. This is very powerful and enables far greater flexibility than the CMS in my opinion.
 - Use PowerShell (no surprise I would mention this!) PowerShell is a brilliant tool for automation and I use it all of the time
 - Get used to using this piece of PowerShell code
-```
+ ```
 	 $Query = @"
 	 SELECT [ServerName],[InstanceName],[Port]
 	  FROM [DBADatabase].[dbo].[InstanceList]
@@ -53,12 +53,12 @@ So here are a few points that I think you should consider if you look after SQL 
 	 try
 	 {
 	 $srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $Connection
-```
+``` 
 Notice the query variable above, this is where the power lies as it enables you to gather all the instances that you need for your task as described in the bullet post above. Once you get used to doing this you can do things like this identify all the instances with Remote DAC disabled using a query against the DBA Database and then enable it on all servers by adding this code to the loop above
-```
+ ```
 $srv.RemoteDacEnabled = $true
 $srv.alter()
-```
+``` 
 Very quick very simple and very very powerful. You can also use this to run TSQL scripts against the instances you target but there are some [added complications with Invoke-SQLCmd](https://www.bing.com/search?q=issues%20with%20invoke-sqlcmd&form=EDGEAR&qs=PF&cvid=bafe07c6afd54a6cb0ce7a1583300a79&pq=issues%20with%20invoke-sqlcmd&elv=AF!A!XC!KoOyC2FxnVd!deIwlgRcylR4EqUAG2rfVDNS) that you need to be aware of
 
 - BE CAREFUL. Test and understand and test before you run any script on a live system especially using a script like this which enables you to target ALL of your servers. You must definitely check that your $ServerNames array contains only the instances you need before you make any changes. You need to be ultra-cautious when it is possible to do great damage

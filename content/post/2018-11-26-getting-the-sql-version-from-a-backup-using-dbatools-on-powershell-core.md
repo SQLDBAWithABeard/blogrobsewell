@@ -13,7 +13,7 @@ tags:
 Following an upgrade to SQL Server the backup share had a number of backups, some from the old version and some from the newer version. I was asked if I had a script to be able to get the SQL Version from the backup file from all of the files in the backup share.
 
 With [dbatools](http://dbatools,io) this was easy to accomplish with [Read-DbaBackuoHeader](https://docs.dbatools.io/#Read-DbaBackupHeader)
-```
+ ```
 $backupshare = "$share\\keep"
 $Instance = "SQL0\\Mirror"
 
@@ -22,10 +22,10 @@ $information = foreach ($BackupFile in (Get-ChildItem $backupshare)) {
     Read-DbaBackupHeader -SqlInstance $Instance -Path $BackupFile.FullName | Select-Object  $FileName, DatabaseName , CompatibilityLevel, SqlVersion
 }
 $information | Format-Table
-```
+``` 
 ![read-dbabackupheader.PNG](https://blog.robsewell.com/assets/uploads/2018/11/read-dbabackupheader.png)
 
-You can get more information about the backup using `Read-DbaBackupHeader` and as it is PowerShell it is easy to put this information into any format that you wish, maybe into a database with [`Write-DbaDataTable`](https://docs.dbatools.io/#Write-DbaDataTable)
+You can get more information about the backup using  `Read-DbaBackupHeader`  and as it is PowerShell it is easy to put this information into any format that you wish, maybe into a database with [ `Write-DbaDataTable` ](https://docs.dbatools.io/#Write-DbaDataTable)
 
 > So I looked at [https://t.co/MUw7Dw7CRv](https://t.co/MUw7Dw7CRv)
 > 
@@ -47,9 +47,9 @@ So the code example you see above was running on Windows 10 using PowerShell 6.1
 
 If you want to try PowerShell Core, you can follow the instructions
 
-*   [Here for Windows](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6)
-*   [Here for Linux](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-linux?view=powershell-6)
-*   [Or here for MacOs](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-macos?view=powershell-6)
+*   [Here for Windows](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6&WT.mc_id=DP-MVP-5002693)
+*   [Here for Linux](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-linux?view=powershell-6&WT.mc_id=DP-MVP-5002693)
+*   [Or here for MacOs](https://docs.microsoft.com/en-gb/powershell/scripting/setup/installing-powershell-core-on-macos?view=powershell-6&WT.mc_id=DP-MVP-5002693)
 
 Happy Automating!
 

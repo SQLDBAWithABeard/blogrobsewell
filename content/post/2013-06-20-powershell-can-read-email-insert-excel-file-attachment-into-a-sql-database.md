@@ -14,11 +14,11 @@ So at our SQL SouthWest User Group session last week we had sessions from Jonath
 
 What it does is open an Outlook com object, search for an email with a certain subject and save it in the temp folder and then import it into a SQL database. This needs to be done on a machine with Outlook and Excel installed. It is possible to process the email using EWS in an Exchange environment and other people have written scripts to do so.
 
-It uses two functions Out-Datatable from [http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd](http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd)
+It uses two functions Out-Datatable from [http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd](http://gallery.technet.microsoft.com/scriptcenter/4208a159-a52e-4b99-83d4-8048468d29dd?WT.mc_id=DP-MVP-5002693)
 
 and Write-Datatable from
 
-[http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae](http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae)
+[http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae](http://gallery.technet.microsoft.com/scriptcenter/2fdeaf8d-b164-411c-9483-99413d6053ae?WT.mc_id=DP-MVP-5002693)
 
 The first takes the output from parsing the Excel File and converts it into a datatable object which can then be piped to the second which uses the BulkCopy method. Alternatively if you require it you could add each row of the excel file to an array and then use Invoke-SQLCmd to insert the data row by row.
 

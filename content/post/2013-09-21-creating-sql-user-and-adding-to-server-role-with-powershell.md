@@ -16,7 +16,7 @@ tags:
 ---
 Another post in the [PowerShell Box of Tricks](https://blog.robsewell.com/tags/#box-of-tricks) series.
 
-In yesterdays post [Creating a Windows User and Adding to SQL Role](https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/) we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.
+In yesterdays post [Creating a Windows User and Adding to SQL Role](/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/) we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.
 
 It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified
 

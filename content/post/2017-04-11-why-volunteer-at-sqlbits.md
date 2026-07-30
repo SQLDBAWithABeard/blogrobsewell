@@ -14,7 +14,7 @@ tags:
 
 WARNING – Contains Orange and light-hearted photos 😉
 
-I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?
+I have returned home from SQLBitsundefinedThe Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?
 
 Many months of work
 -------------------
@@ -67,11 +67,11 @@ Sometimes we have to resolve our own issues. We had folks who were called by the
 
 ![WP_20170406_10_43_41_Pro.jpg](https://blog.robsewell.com/assets/uploads/2017/04/wp_20170406_10_43_41_pro.jpg)
 
-We answer numerous questions from the 1500 or so attendees (and the odd sheep) who came this year.
+We answer numerous questions from theundefinedor so attendees (and the odd sheep) who came this year.
 
 ![rchard.jpg](https://blog.robsewell.com/assets/uploads/2017/04/rchard.jpg)
 
-From timings and locations to taxi numbers or restaurants. Unfortunately I did [not beat last years](https://blog.robsewell.com/a-day-in-the-life-of-a-sqlbits-volunteer/) “Best question I have been asked at SQLBits” which was
+From timings and locations to taxi numbers or restaurants. Unfortunately I did [not beat last years](/blog/a-day-in-the-life-of-a-sqlbits-volunteer/) “Best question I have been asked at SQLBits” which was
 
 > Excuse me, I have a Dalek in the van . What would you like me to do with it?
 
@@ -84,11 +84,11 @@ So why do we do it?
 
 I asked the guys and gals this question and in their own words, this is why they do it
 
-> Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days are 11 hours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.
+> Being a volunteer at SQLBits is not easy. I’m writing this three days after the event and my legs are still sore. Most days areundefinedhours long and you will be standing for most of them. Very often the sessions are full, so you’ll be giving up your seat to one of the attendees. Lunches and breaks are shorter as you are either cleaning down the last session or getting ready for the next. When things go wrong, and they do, you’ll need to get them fixed as quickly as possible even if you have not had  coffee yet.
 >
 > You do get to attend sessions but you might not always get your first choice. This can be both a good and bad thing. Very often I have filled in on sessions that I normally wouldn’t attend as they are outside my direct area of work, only to find them the most interesting as I get to see how the other half lives.
 >
-> So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is a 150 miles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.
+> So why do I keep coming back? Well it’s fun. We have a laugh, even on reception when it’s busy you get to joke with the attendees, speakers and other helpers. There is pizza, beer and jokes while bag packing. Odd expresso calls!  Working along side some else is a great way to get to know them. I live outside the normal SQL community structures, my nearest user group is aundefinedmiles away. So I don’t get to interact with other SQL family members as often as others. But even so, I know as soon as I walk into SQL Bits, there will be a chorus of, “Hey Conan, how have you been?” from people I haven’t seen in a year. There is also something about wearing a bright orange shirt that seems to attract interactions from the attendees.
 >
 > All because of the of the experience that is being a volunteer.
 >

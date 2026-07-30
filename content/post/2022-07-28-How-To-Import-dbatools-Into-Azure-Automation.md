@@ -28,7 +28,7 @@ This is my preferred method for importing modules into Azure Automation accounts
 
 ## Find the module
 
-Go to the Module page for the automation account and then Add module and browse the gallery and search for [dbatools](dbatools.io) (other modules are available!) and install it
+Go to the Module page for the automation account and then Add module and browse the gallery and search for [dbatools](https://dbatools.io) (other modules are available!) and install it
 
 ![image](https://user-images.githubusercontent.com/6729780/181550108-e6096986-3392-4585-a57a-5c515c2890bf.png)
 
@@ -36,7 +36,7 @@ It will take a few moments to install but you will see it in the list with a gre
 
 ![image](https://user-images.githubusercontent.com/6729780/181548887-0ec695e4-41b9-45b3-8ab3-a004968c2323.png)#
 
-Then it is available in all of my PowerShell 7.1 runbooks in my automation account - Here I have just run `Get-DbaToolsConfig` in a test runbook to prove that the module has imported
+Then it is available in all of my PowerShell 7.1 runbooks in my automation account - Here I have just run   `Get-DbaToolsConfig`   in a test runbook to prove that the module has imported
 
 ![image](https://user-images.githubusercontent.com/6729780/181550937-7e89c7b3-31e8-4af1-b965-c82f2f63562f.png)
 
@@ -50,7 +50,7 @@ To demonstrate, I will remove the dbatools module from the Automation Account
 
 and download the latest release from GitHub directly
 
-[https://github.com/dataplat/dbatools/releases/tag/v1.1.118](https://github.com/dataplat/dbatools/releases/tag/v1.1.118)
+[https://github.com/dataplat/dbatools/releases/tag/v1.1.118](https://github.com/dataplat/dbatools/releases/tag/v1.1.118?WT.mc_id=DP-MVP-5002693)
 
 If you are unable to use the PowerShell Gallery to get the latest dbatools release, I would always use the official signed release.
 
@@ -62,7 +62,7 @@ and once it is imported successfully and I have a green tick
 
 ![image](https://user-images.githubusercontent.com/6729780/181564377-df8c707e-24ec-43eb-8d57-702fcb39400b.png)
 
-I can run the test - Again I just ran `Get-DbaToolsConfig`
+I can run the test - Again I just ran   `Get-DbaToolsConfig`  
 
 ![image](https://user-images.githubusercontent.com/6729780/181569077-2b2e59e2-4bf1-46b6-851f-2e624cf9c43c.png)
 
@@ -76,7 +76,7 @@ This method will work with both PowerShell 5.1 and PowerShell 7.1, you will just
 
 # When it goes wrong
 
-If you do not rename the module correctly but leave it as the name of file `dbatools-signed` in this example
+If you do not rename the module correctly but leave it as the name of file   `dbatools-signed`   in this example
 
 ![image](https://user-images.githubusercontent.com/6729780/181571939-b881b4bc-4449-4569-b71a-66142436158a.png)
 .

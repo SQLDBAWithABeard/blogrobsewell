@@ -35,7 +35,7 @@ One way is to use the [Azure Arc Jumpstart website](https://azurearcjumpstart.io
 
 I like playing with [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?WT.mc_id=DP-MVP-5002693) which is a domain-specific language or DSL for deploying Azure resources.
 
-I have [created a repository on GitHub ](https://github.com/SQLDBAWithABeard/Beard-Aks-AEDS) which you can use to create your own AKS cluster with an Azure Arc Enabled directly connected Data Controller and SQL Managed Instance either 1 node replica or 3 node replica.
+I have [created a repository on GitHub ](https://github.com/SQLDBAWithABeard/Beard-Aks-AEDS?WT.mc_id=DP-MVP-5002693) which you can use to create your own AKS cluster with an Azure Arc Enabled directly connected Data Controller and SQL Managed Instance either 1 node replica or 3 node replica.
 
 There is even the code to create an Azure Virtual Machine and install the required tooling if you need it.
 

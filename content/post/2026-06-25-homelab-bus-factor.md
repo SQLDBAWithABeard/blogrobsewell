@@ -26,7 +26,7 @@ Because the only real documentation for how any of it fits together is the squis
 
 I don't mean to be morbid about it. But it's a fair question, and it's one we techies are very good at not asking: **if I got hit by a bus tomorrow, could Traci keep the lights on?**
 
-Now there is already the [eol-dr from Chrissy](https://github.com/potatoqualitee/eol-dr/blob/main/checklist.md) — a checklist for what to do if the worst happens. But it doesn't cover the *how*. It doesn't explain how to actually keep the humming box humming, or what to do if it stops. And when I asked Traci if she could.
+Now there is already the [eol-dr from Chrissy](https://github.com/potatoqualitee/eol-dr/blob/main/checklist.md?WT.mc_id=DP-MVP-5002693) — a checklist for what to do if the worst happens. But it doesn't cover the *how*. It doesn't explain how to actually keep the humming box humming, or what to do if it stops. And when I asked Traci if she could.
 
 The honest answer was no. Not because she isn't capable — she's wonderfully capable — but because nobody could. There was nothing to keep them on *with*. No map. No "if this light goes red, do that." Just a humming box and a grieving partner being asked to reverse-engineer years of midnight rabbit-holes.
 
@@ -77,7 +77,7 @@ It opened with a summary that even I, who built the thing, found clarifying:
 
 And then — this is the part that made me sit up — it drew me a picture. An actual diagram, from a text description, showing how the whole thing hangs together:
 
-```mermaid
+ ```mermaid
 flowchart LR
     subgraph CLUSTER["🖥️ The cluster (3 servers working as one)"]
         N1["<b>node 1</b><br/>main workhorse<br/>12 cores / 64 GB"]
@@ -97,7 +97,7 @@ flowchart LR
     style PBS fill:#fef7e0,stroke:#f9ab00
     style NAS fill:#e6f4ea,stroke:#34a853
     style ZFS fill:#e6f4ea,stroke:#34a853
-```
+``` 
 
 For someone who has never logged into any of it, that single picture does an enormous amount of work. Three servers, one backup machine, two copies of everything. That's the whole homelab in one glance.
 
@@ -144,7 +144,7 @@ Then a glossary, so none of the words further up are a wall:
 
 This was the section I most wanted to get right, because it's the bit that actually matters if I'm not around. Everything backs itself up automatically, overnight, with no human involved — and crucially, into **two separate places** so a single failure can't wipe out both. Another picture, again drawn straight from the description of how I'd set it up:
 
-```mermaid
+ ```mermaid
 flowchart LR
     subgraph GUESTS["The mini-servers on the cluster"]
         SMALL["Everyday containers<br/>(dashboards, monitoring...)"]
@@ -160,7 +160,7 @@ flowchart LR
     style NAS fill:#e6f4ea,stroke:#34a853
     style HEAVY fill:#fce8e6,stroke:#ea4335
     style PHOTOS fill:#fef7e0,stroke:#f9ab00
-```
+``` 
 
 And it spelled out the schedule in a way nobody needs a manual to follow:
 
@@ -177,16 +177,16 @@ It even understood *why* I'd split it up that way — the small stuff backed up 
 And then the bit that I think genuinely closes the gap — the "what do I do if…" entries. Here's the one for a failed backup, with the real addresses replaced:
 
 > ### …a backup failed (I got a failure email)
-> 1. Open the server dashboard at `https://<server-address>` and log in.
+> 1. Open the server dashboard at  `https://<server-address>`  and log in.
 > 2. Click the machine → **Tasks** at the bottom → find the red backup task → read the message.
-> 3. Most common cause: the backup drive was switched off or unreachable. Check the NAS at `<nas-address>` is powered on.
+> 3. Most common cause: the backup drive was switched off or unreachable. Check the NAS at  `<nas-address>`  is powered on.
 > 4. Re-run it: **Backup → select the job → Run now**.
 
 Nobody needs to *understand* the cluster to follow that. They just need to follow it.
 
 And finally, the thing I asked for to pin on the wall — the one-page card, stripped of the real values:
 
-```
+ ```
 CLUSTER:        <name>        (management dashboard: https://<address>)
 NODES:          node1 <ip> | node2 <ip> | node3 <ip>
 BACKUP SERVER:  <address>     (dashboard: https://<address>)
@@ -198,7 +198,7 @@ GOLDEN RULES:   • Keep at least two nodes powered on.
                 • Keep the NAS powered on — backups need it.
                 • Watch for the nightly backup emails. If they stop, something is wrong.
                 • Never restart two nodes at once.
-```
+``` 
 
 Four golden rules. If Traci only ever read those four lines, she'd be in a dramatically better position than she was the day before I started.
 

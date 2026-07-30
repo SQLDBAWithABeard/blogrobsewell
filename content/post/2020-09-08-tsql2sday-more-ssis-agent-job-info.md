@@ -55,7 +55,7 @@ I have tried my best at all times to follow this advice in the last decade and p
 - I use PowerShell (a lot!) to automate all sorts of routine tasks including migrating this blog
 - I use [Jupyter Notebooks](https://blog.robsewell.com/tags/#jupyter-notebooks) to enable myself and others to automate Run Books, Training, Documentation, Demonstrations, Incident Response. You can find my notebooks [here](https://beard.media/Notebooks)
 - I use Azure DevOps to automate infrastructure creation and changes with terraform and delivery of changes to code as well as unit testing.
-- I use GitHub actions to create this blog, publish the [ADSNotebook](https://www.powershellgallery.com/packages/ADSNotebook) module
+- I use GitHub actions to create this blog, publish the [ADSNotebook](https://www.powershellgallery.com/packages/ADSNotebook?WT.mc_id=DP-MVP-5002693) module
 - I use [Chocolatey](https://chocolatey.org/) to install and update software
 - I have used Desired State Configuration to ensure that infrastructure is as it is expected to be
 
@@ -78,34 +78,34 @@ This meant that the team member responsible for checking in the morning, could s
 
 ### Automate it
 
-In the SSISDB database there is an `event_messages` view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)
+In the SSISDB database there is an  `event_messages`  view so if I could query that and filter by the Execution ID then I could get the message and place it into the Teams message. Now the Teams message contains the error for the SSIS execution and each time this happens it probably saves the team member 4 or 5 minutes :-)
 
 In the code below, I
 
 1. check if the failure comes from an SSIS instance
     if($Inst -in ($SSISInstances)){
 2. Get the Execution ID from the Error message
-    `$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value`
+     `$ExecutionId = [regex]::matches($BaseerrMessage, 'Execution ID: (\d{3,})').groups[1].value` 
 3. Create a query for the SSISDB
 
-    `$SSISQuery = @"`
-    `SELECT * FROM catalog.event_messages em`
-    `WHERE em.operation_id = $ExecutionId`
-    `AND (em.event_name = 'OnError')`
-    `ORDER BY em.event_message_id;`
-    `"@`
+     `$SSISQuery = @"` 
+     `SELECT * FROM catalog.event_messages em` 
+     `WHERE em.operation_id = $ExecutionId` 
+     `AND (em.event_name = 'OnError')` 
+     `ORDER BY em.event_message_id;` 
+     `"@` 
 
 4. Set the Error Message and the Execution Path to variables
-`$errMessage = $SSISQueryResults.Message`
-`$ExecutionPath = $SSISQueryResults.execution_path`
+ `$errMessage = $SSISQueryResults.Message` 
+ `$ExecutionPath = $SSISQueryResults.execution_path` 
 5. Get the Error Message for none SSIS failures
-`}else{`
-`$errMessage = $j.group[-1].Message`
-`$ExecutionPath = 'the job'`
-`}`
+ `}else{` 
+ `$errMessage = $j.group[-1].Message` 
+ `$ExecutionPath = 'the job'` 
+ `}` 
 6. Create the Teams message
 
-You will see that I used `SELECT *` because someone will always ask for some extra information in the future!
+You will see that I used  `SELECT *`  because someone will always ask for some extra information in the future!
 
 ![](https://blog.robsewell.com/assets/images/happyrob.jpg)
 

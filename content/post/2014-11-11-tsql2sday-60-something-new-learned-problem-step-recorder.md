@@ -83,7 +83,7 @@ PSR allows you add keyboard input manually. You may need this if you need to inc
 
 In the results this looks like
 
-Step 1: (09/11/2014 12:56:22) User Comment: “[http://www.microsoft.com/en-gb/download/details.aspx?id=42573](http://www.microsoft.com/en-gb/download/details.aspx?id=42573)”
+Step 1: (09/11/2014 12:56:22) User Comment: “[http://www.microsoft.com/en-gb/download/details.aspx?id=42573](http://www.microsoft.com/en-gb/download/details.aspx?id=42573&WT.mc_id=DP-MVP-5002693)”
 
 [![untitled1](https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png)](https://blog.robsewell.com/assets/uploads/2014/11/untitled1.png)
 

@@ -43,7 +43,7 @@ Joel is also awesome!
 
 When people wanted a method of storing credentials that didn't involve files on disk I would suggest Joel Bennett’s [t](https://twitter.com/jaykul) module BetterCredentials which uses the Windows Credential Manager  
   
-[https://www.powershellgallery.com/packages/BetterCredentials/4.5](https://www.powershellgallery.com/packages/BetterCredentials/4.5)
+[https://www.powershellgallery.com/packages/BetterCredentials/4.5](https://www.powershellgallery.com/packages/BetterCredentials/4.5?WT.mc_id=DP-MVP-5002693)
 
 Microsoft? Also awesome!
 ------------------------

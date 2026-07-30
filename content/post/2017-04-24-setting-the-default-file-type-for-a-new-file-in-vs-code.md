@@ -60,4 +60,4 @@ If you get it wrong and Press CTRL + K + M then you will open the Extensions sea
 
 ![07 - incorrect.PNG](https://blog.robsewell.com/assets/uploads/2017/04/07-incorrect.png)
 
-This is a brilliant feature enabling you to copy key mappings for the programmes you use all the time and save you from learning the Code key mappings. You can find the keymaps in the [Extensions Marketplace](https://marketplace.visualstudio.com/search?target=vscode&category=Keymaps&sortBy=Relevance) as well as by pressing CTRL + K + M
+This is a brilliant feature enabling you to copy key mappings for the programmes you use all the time and save you from learning the Code key mappings. You can find the keymaps in the [Extensions Marketplace](https://marketplace.visualstudio.com/search?target=vscode&category=Keymaps&sortBy=Relevance&WT.mc_id=DP-MVP-5002693) as well as by pressing CTRL + K + M

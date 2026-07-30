@@ -15,7 +15,7 @@ Last week at the Birmingham user group I gave a presentation about PowerShell an
 
 [![saved-image-from-tweetium-8](/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg)](/assets/uploads/2016/11/saved-image-from-tweetium-8.jpg)
 
-It was a very packed session as I crammed in the [new sqlserver module](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/), [dbatools](https://dbatools.io) and [dbareports](https://dbareports.io) 🙂 On reflection I think this is a bit too much for a one hour session but at the end of the session I demo’d live Cortana using the dbareports dataset and returning a Cortana PowerBi page.
+It was a very packed session as I crammed in the [new sqlserver module](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/?WT.mc_id=DP-MVP-5002693), [dbatools](https://dbatools.io) and [dbareports](https://dbareports.io) 🙂 On reflection I think this is a bit too much for a one hour session but at the end of the session I demo’d live Cortana using the dbareports dataset and returning a Cortana PowerBi page.
 
 As always it took a couple of goes to get it right but when it goes correctly it is fantastic. I call it a salary increasing opportunity! Someone afterwards asked me how it was done so I thought that was worth a blog post
 
@@ -36,7 +36,7 @@ and then change the size of the report page by clicking on the paintbrush icon 
 
 This creates a page that is optimised for Cortana to display and also will be the first place that Cortana will look to answer the question
 
-> Power BI first looks for answers in [Answer Pages](https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-desktop-entity-cards/) and then searches your datasets and reports for other answers and displays them in the form of visualizations. The highest-scoring results display first as _best matches_, followed by links to other possible answers and applications. Best matches come from Power BI Answer Pages or Power BI reports.
+> Power BI first looks for answers in [Answer Pages](https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-desktop-entity-cards/?WT.mc_id=DP-MVP-5002693) and then searches your datasets and reports for other answers and displays them in the form of visualizations. The highest-scoring results display first as _best matches_, followed by links to other possible answers and applications. Best matches come from Power BI Answer Pages or Power BI reports.
 
 Rename the page so that it contains the words or phrase you expect to be in the question such as “Servers By Version” You will help Cortana and PowerBi to get your results better if you use some of the column names in your dataset
 
@@ -54,17 +54,17 @@ If your users are likely to use a number of different words in their questions y
 Publish your PBIX file to PowerBi.com
 -------------------------------------
 
-To publish your PowerBi report to [PowerBi.com](https://powerbi.com) either via the Publish button in [PowerBi desktop](http://go.microsoft.com/fwlink/?LinkID=521662)
+To publish your PowerBi report to [PowerBi.com](https://powerbi.com) either via the Publish button in [PowerBi desktop](http://go.microsoft.com/fwlink/?LinkID=521662&WT.mc_id=DP-MVP-5002693)
 
 [![publish](/assets/uploads/2016/11/publish.png)](/assets/uploads/2016/11/publish.png)
 
-or by using the [PowerBiPS module](https://github.com/DevScope/powerbi-powershell-modules)
-```
+or by using the [PowerBiPS module](https://github.com/DevScope/powerbi-powershell-modules?WT.mc_id=DP-MVP-5002693)
+ ```
  Install-Module -Name PowerBIPS
  #Grab the token, will require a sign in
  $authToken = Get-PBIAuthToken –Verbose
  Import-PBIFile –authToken $authToken –filePath “Path to PBIX file” –verbose
-```
+``` 
 Enable Cortana
 --------------
 
@@ -102,7 +102,7 @@ The conditions for Cortana to work
 
 You will need to have added your work or school Microsoft ID to the computer or phone that you want to use Cortana on and that account must be able to access the dataset either because it is the dataset owner or because a dashboard using that dataset has been shared with that account.
 
-**[From this page on PowerBi.com](https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-enable/)**
+**[From this page on PowerBi.com](https://powerbi.microsoft.com/en-us/documentation/powerbi-service-cortana-enable/?WT.mc_id=DP-MVP-5002693)**
 
 > When a new dataset or custom Cortana Answer Page is added to Power BI and enabled for Cortana it can take up to 30 minutes for results to begin appearing in Cortana. Logging in and out of Windows 10, or otherwise restarting the Cortana process in Windows 10, will allow new content to appear immediately.
 
@@ -131,9 +131,9 @@ https://youtu.be/-bPqhDK3WGs
 We would love YOU to come and join us at the SQL Community Collaborative
 ------------------------------------------------------------------------
 
-Help us make `dbatools`, `dbareports` and `Invoke-SQLCmd2` even better. You can join in by forking the repos in GitHub and writing your code and then performing a PR but we would much rather that you came and discussed new requests in our Trello boards, raised issues in GitHub and generally discussed the modules in the SQL Server Community Slack `#dbatools` `#dbareports`. We are also looking for assistance with our wiki pages, Pester tests and appveyor integration for our builds and any comments people want to make
+Help us make  `dbatools` ,  `dbareports`  and  `Invoke-SQLCmd2`  even better. You can join in by forking the repos in GitHub and writing your code and then performing a PR but we would much rather that you came and discussed new requests in our Trello boards, raised issues in GitHub and generally discussed the modules in the SQL Server Community Slack  `#dbatools`   `#dbareports` . We are also looking for assistance with our wiki pages, Pester tests and appveyor integration for our builds and any comments people want to make
 
-[SQL Server Collaborative GitHub Organisation holding the modules.](https://github.com/sqlcollaborative/) Go here to raise issues, fork the repositories or download the code
+[SQL Server Collaborative GitHub Organisation holding the modules.](https://github.com/sqlcollaborative/?WT.mc_id=DP-MVP-5002693) Go here to raise issues, fork the repositories or download the code
 
 [dbatools Trello for discussion about new cmdlets](https://dbatools.io/trello)
 

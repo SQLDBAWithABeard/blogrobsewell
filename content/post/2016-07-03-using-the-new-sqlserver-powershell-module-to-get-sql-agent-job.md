@@ -14,28 +14,28 @@ tags:
 
 image: assets/uploads/2016/07/getcomand-sqlagent.png
 ---
-So with the July Release of SSMS everything changed for using PowerShell with SQL. [You can read the details here](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/) As I mentioned in my previous post the name of the module has changed to sqlserver
+So with the July Release of SSMS everything changed for using PowerShell with SQL. [You can read the details here](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-powershell-july-2016-update/?WT.mc_id=DP-MVP-5002693) As I mentioned in my previous post the name of the module has changed to sqlserver
 
 > _This means that if you have a PowerShell script doing_ Import-Module SQLPS_, it will need to be changed to be_ Import-Module SqlServer _in order to take advantage of the new provider functionality and new CMDLETs. The new module will be installed to_ “%Program Files\WindowsPowerShell\Modules\SqlServer_” and hence no update to $env:PSModulePath is required._
 
-You can download [the latest SSMS release here](https://msdn.microsoft.com/en-us/library/mt238290.aspx) Once you have installed and rebooted you can start to look at the new Powershell CMDlets
+You can download [the latest SSMS release here](https://msdn.microsoft.com/en-us/library/mt238290.aspx?WT.mc_id=DP-MVP-5002693) Once you have installed and rebooted you can start to look at the new Powershell CMDlets
 
-`Import-module sqlserver`
+ `Import-module sqlserver` 
 
 Take a look at cmdlets
 
-`  Get-command -module sqlserver`
+ `  Get-command -module sqlserver` 
 
 Today I want to look at agent jobs
 
-`  Get-command *sqlagent*`
+ `  Get-command *sqlagent*` 
 
 [![getcomand sqlagent](/assets/uploads/2016/07/getcomand-sqlagent.png)](/assets/uploads/2016/07/getcomand-sqlagent.png)
 
 So I decided to see how to gather the information I gather for the DBADatabase [as described here](/power-bi-powershell-and-sql-agent-jobs/)
 
 This is the query I use to insert the data for the server level agent job information.
-```
+ ```
   $Query = @"
 INSERT INTO [Info].[AgentJobServer]
  ([Date]
@@ -58,10 +58,10 @@ AND [Port] = '$Port')
  ,'$JobsDisabled'
  ,'$UnknownCount')
 "@
-```
+``` 
 So Get-SQLAgentJob looks like the one I need. Lets take a look at the help. This should be the starting point whenever you use a new cmdlet
 
-`  Get-Help Get-SqlAgentJob -Full`
+ `  Get-Help Get-SqlAgentJob -Full` 
 
 Which states
 
@@ -69,28 +69,28 @@ Which states
 
 That sounds like it will meet my needs. Lets take a look
 
-` Get-SqlAgentJob -ServerInstance $Connection|ft -AutoSize`
+ ` Get-SqlAgentJob -ServerInstance $Connection|ft -AutoSize` 
 
 [![sqlinstances](/assets/uploads/2016/07/sqlinstances.png)](/assets/uploads/2016/07/sqlinstances.png)
 
 I can get the information I require like this
-```
+ ```
  $JobCount = (Get-SqlAgentJob -ServerInstance $Connection ).Count
 $successCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.LastRunOutcome -eq 'Succeeded'}.Count
 $failedCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.LastRunOutcome -eq 'Failed'}.Count
 $JobsDisabled = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.IsEnabled -eq $false}.Count
 $UnknownCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.LastRunOutcome -eq 'Unknown'}.Count
-```
+``` 
 NOTE – That code is for PowerShell V4 and V5, if you are using earlier versions of PowerShell you would need to use
-```
+ ```
  $JobCount = (Get-SqlAgentJob -ServerInstance $Connection ).Count
 $successCount = (Get-SqlAgentJob -ServerInstance $Connection|Where-Object {$_.LastRunOutcome -eq 'Succeeded'}).Count
 $failedCount = (Get-SqlAgentJob -ServerInstance $Connection |Where-Object {$_.LastRunOutcome -eq 'Failed'}).Count
 $JobsDisabled = (Get-SqlAgentJob -ServerInstance $Connection |Where-Object{$_.IsEnabled -eq $false}).Count
 $UnknownCount = (Get-SqlAgentJob -ServerInstance $Connection |Where-Object{$_.LastRunOutcome -eq 'Unknown'}).Count
-```
+``` 
 But to make the code more performant it is better to do this
-```
+ ```
   [pscustomobject]$Jobs= @{}
 $Jobs.JobCount = (Get-SqlAgentJob -ServerInstance $Connection ).Count
 $Jobs.successCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.LastRunOutcome -eq 'Succeeded'}.Count
@@ -98,7 +98,7 @@ $Jobs.failedCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.Last
 $Jobs.JobsDisabled = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.IsEnabled -eq $false}.Count
 $Jobs.UnknownCount = (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.LastRunOutcome -eq 'Unknown'}.Count
 $Jobs
-```
+``` 
 [![jobs](/assets/uploads/2016/07/jobs.png)](/assets/uploads/2016/07/jobs.png)
 
 Using Measure-Command showed that this completed in  
@@ -108,18 +108,18 @@ TotalSeconds : 2.9045701
 
 Note that
 
-`  (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.Enabled -eq $false}.Count`
+ `  (Get-SqlAgentJob -ServerInstance $Connection ).where{$_.Enabled -eq $false}.Count` 
 
 Does not work. I had to check the properties using
-```
+ ```
   Get-SqlAgentJob -ServerInstance $Connection |Get-Member -Type Properties
-```
+``` 
 Which showed me
 
-`IsEnabled Property bool IsEnabled {get;set;}`
+ `IsEnabled Property bool IsEnabled {get;set;}` 
 
 So I tested this against the various SQL versions I had in my lab using this code
-```
+ ```
  $Table = $null
 $Table = New-Object System.Data.DataTable "Jobs"
 $Col1 = New-Object System.Data.DataColumn ServerName,([string])
@@ -166,14 +166,14 @@ $Row.UnknownCount = $JobHistory.where{$_.LastRunOutcome -eq 'Unknown'}.Count
 $Table.Rows.Add($row)
 }
 $Table|ft
-```
+``` 
 Here are the results
 
 [![job data table](/assets/uploads/2016/07/job-data-table.png)](/assets/uploads/2016/07/job-data-table.png)
 
 I also had a look at Get-SQLAgentJobHistory Lets take a look at the help
 
-` Get-help get-SQLAgentJobHistory -showwindow`
+ ` Get-help get-SQLAgentJobHistory -showwindow` 
 
 > DESCRIPTION
 > 
@@ -187,17 +187,17 @@ I also had a look at Get-SQLAgentJobHistory Lets take a look at the help
 
 So I ran
 
- `Get-SqlAgentJobHistory -ServerInstance sql2014ser12r2`
+  `Get-SqlAgentJobHistory -ServerInstance sql2014ser12r2` 
 
 And got back a whole load of information. Every job history available on the server. Too much to look it immediately to work out what to do
 
 So I looked at just one job
 
-` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive'`
+ ` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive'` 
 
 And got back the last months worth of history for that one job as that is the schedule used to purge the job history for this server So then I added -Since Yesterday to only get the last 24 hours history
 
-` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday`
+ ` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday` 
 
 [![agentjobdetail](/assets/uploads/2016/07/agentjobdetail.png)](/assets/uploads/2016/07/agentjobdetail.png)
 
@@ -218,15 +218,15 @@ The Since Parameter is described as
 
 When I run
 
-` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday |Measure-Object`
+ ` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday |Measure-Object` 
 
 I get
 
-`Count : 3`
+ `Count : 3` 
 
 And if I run
 
-` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday |select RunDate,StepID,Server,JobName,StepName,Message|Out-GridView`
+ ` Get-SqlAgentJobHistory -ServerInstance SQL2014Ser12R2 -JobName 'DatabaseBackup - SYSTEM_DATABASES - FULL - Local G Drive' -Since Yesterday |select RunDate,StepID,Server,JobName,StepName,Message|Out-GridView` 
 
 I get
 
@@ -236,7 +236,7 @@ Which matches the view I see in SSMS Agent Job History
 
 [![jobhistory](/assets/uploads/2016/07/jobhistory.png)](/assets/uploads/2016/07/jobhistory.png)
 
-So `Get-SqlAgentJobHistory` will enable you to use PowerShell to gather information about the Job history for each step of the Agent Jobs and also the message which I can see being very useful.
+So  `Get-SqlAgentJobHistory`  will enable you to use PowerShell to gather information about the Job history for each step of the Agent Jobs and also the message which I can see being very useful.
 
 Come and join us in the SQL Community Slack to discuss these CMDLets and all things SQL Community [https://sqlps.io/slack](https://sqlps.io/slack)
 

@@ -16,7 +16,7 @@ image: assets/uploads/2026/02/fabric-toolbox-introduction.png
 
 ## Introduction
 
-Today I want to talk about [fabric-toolbox](https://github.com/microsoft/fabric-toolbox), the Microsoft-sponsored, community-driven repository of accelerators, tools, and utilities that exists specifically to help Fabric users get further, faster.
+Today I want to talk about [fabric-toolbox](https://github.com/microsoft/fabric-toolbox?WT.mc_id=DP-MVP-5002693), the Microsoft-sponsored, community-driven repository of accelerators, tools, and utilities that exists specifically to help Fabric users get further, faster.
 
 ## What Is fabric-toolbox?
 
@@ -60,6 +60,6 @@ There is much much more to find there also.
 
 ## Getting Started
 
-The main repository is at [github.com/microsoft/fabric-toolbox](https://github.com/microsoft/fabric-toolbox). Each tool has its own README with installation and usage instructions. I will cover each one in the posts that follow.
+The main repository is at [github.com/microsoft/fabric-toolbox](https://github.com/microsoft/fabric-toolbox?WT.mc_id=DP-MVP-5002693). Each tool has its own README with installation and usage instructions. I will cover each one in the posts that follow.
 
 Tomorrow we start with FUAM. See you then.

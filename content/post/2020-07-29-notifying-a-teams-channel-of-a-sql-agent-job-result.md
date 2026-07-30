@@ -16,7 +16,7 @@ tags:
 image: assets/uploads/2020/07/image-18.png
 
 ---
-Following on from [yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel](https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/), I was given another challenge
+Following on from [yesterdays post about creating an overview of SQL Agent Job Results and sending it to a Teams channel](/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/), I was given another challenge
 
 > Can you write a job step that I can add to SQL Agent jobs that can send the result of that job to a Teams Channel
 > 
@@ -81,7 +81,7 @@ I tried all sorts of ways of casting and converting this value in SQL and PowerS
 Send the information to Teams
 -----------------------------
 
-Following the [same pattern as yesterdays post](https://blog.robsewell.com/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/), I created a function to send a message, depending on the outcome of the job and post it to the Teams function.  
+Following the [same pattern as yesterdays post](/blog/sending-a-sql-agent-job-results-overview-to-a-microsoft-teams-channel/), I created a function to send a message, depending on the outcome of the job and post it to the Teams function.  
   
 Again, I used Enter-PsSession to run the Teams notification from a machine that can send the message. (I have also included the code to do this without requiring that below so that you can send the message from the same machine that runs the job if required)
 

@@ -10,7 +10,7 @@ tags:
   - PowerShell
 
 ---
-<P><A href="https://code.visualstudio.com/" rel=noopener target=_blank>VS Code</A> is my coding tool of choice. I love that one lightweight editor <A href="https://blog.robsewell.com/why-vs-code-increases-my-productivity/" rel=noopener target=_blank>can do so much</A> and as PowerShell is usually the language that I write in I really love the <A href="https://github.com/PowerShell/vscode-powershell/blob/master/CHANGELOG.md?wt.mc_id=DX_883151" rel=noopener target=_blank>PowerShell extension</A></P>
+<P><A href="https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>VS Code</A> is my coding tool of choice. I love that one lightweight editor <A href="/blog/why-vs-code-increases-my-productivity/" rel=noopener target=_blank>can do so much</A> and as PowerShell is usually the language that I write in I really love the <A href="https://github.com/PowerShell/vscode-powershell/blob/master/CHANGELOG.md?wt.mc_id=DX_883151" rel=noopener target=_blank>PowerShell extension</A></P>
 <H2>Help</H2>
 <P>When you write a PowerShell function that is going to be used by someone other than you, you don’t want to be the guy or gal that has to support it indefinitely. You should write good help to enable your users to simply type</P><PRE class="lang:ps decode:true">Get-Help NAMEOFCOMMAND</PRE>
 <P>and get all of the help that they need to use the command</P>
@@ -30,21 +30,21 @@ tags:
 <P>-SqlCredential Credential object used to connect to the SQL Server as a different user</P>
 <P>Required? false<BR>Position? 2<BR>Default value<BR>Accept pipeline input? false<BR>Accept wildcard characters? false</P>
 <P>-Silent []<BR>Use this switch to disable any kind of verbose messages</P>
-<P>Required? false<BR>Position? named<BR>Default value False<BR>Accept pipeline input? false<BR>Accept wildcard characters? false<BR>This cmdlet supports the common parameters: Verbose, Debug,<BR>ErrorAction, ErrorVariable, WarningAction, WarningVariable,<BR>OutBuffer, PipelineVariable, and OutVariable. For more information, see<BR>about_CommonParameters (<A href="http://go.microsoft.com/fwlink/?LinkID=113216" rel=nofollow>http://go.microsoft.com/fwlink/?LinkID=113216</A>).</P>
+<P>Required? false<BR>Position? named<BR>Default value False<BR>Accept pipeline input? false<BR>Accept wildcard characters? false<BR>This cmdlet supports the common parameters: Verbose, Debug,<BR>ErrorAction, ErrorVariable, WarningAction, WarningVariable,<BR>OutBuffer, PipelineVariable, and OutVariable. For more information, see<BR>about_CommonParameters (<A href="http://go.microsoft.com/fwlink/?LinkID=113216&WT.mc_id=DP-MVP-5002693" rel=nofollow>http://go.microsoft.com/fwlink/?LinkID=113216</A>).</P>
 <P>INPUTS</P>
 <P>OUTPUTS</P>
 <P>NOTES</P>
-<P>Copyright (C) 2016 Jakob Bindslet (jakob@bindslet.dk)</P>
-<P>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by<BR>the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</P>
+<P>Copyright (C)undefinedJakob Bindslet (jakob@bindslet.dk)</P>
+<P>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by<BR>the Free Software Foundation, either versionundefinedof the License, or (at your option) any later version.</P>
 <P>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of<BR>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</P>
 <P>You should have received a copy of the GNU General Public License along with this program. If not, see .</P>
-<P>————————– EXAMPLE 1 ————————–</P>
+<P>————————– EXAMPLEundefined————————–</P>
 <P>PS C:\&gt;Get-DbaLastGoodCheckDb -SqlInstance ServerA\sql987</P>
 <P>Returns a custom object displaying Server, Database, DatabaseCreated, LastGoodCheckDb, DaysSinceDbCreated, DaysSinceLastGoodCheckDb, Status and<BR>DataPurityEnabled</P>
-<P>————————– EXAMPLE 2 ————————–</P>
+<P>————————– EXAMPLEundefined————————–</P>
 <P>PS C:\&gt;Get-DbaLastGoodCheckDb -SqlInstance ServerA\sql987 -SqlCredential (Get-Credential sqladmin) | Format-Table -AutoSize</P>
 <P>Returns a formatted table displaying Server, Database, DatabaseCreated, LastGoodCheckDb, DaysSinceDbCreated, DaysSinceLastGoodCheckDb, Status<BR>and DataPurityEnabled.<BR>Authenticates with SQL Server using alternative credentials.</P>
-<P>RELATED LINKS<BR>DBCC CHECKDB:<BR><A href="https://msdn.microsoft.com/en-us/library/ms176064.aspx" rel=nofollow>https://msdn.microsoft.com/en-us/library/ms176064.aspx</A><BR><A href="http://www.sqlcopilot.com/dbcc-checkdb.html" rel=nofollow>http://www.sqlcopilot.com/dbcc-checkdb.html</A><BR>Data Purity:<BR><A href="http://www.sqlskills.com/blogs/paul/checkdb-from-every-angle-how-to-tell-if-data-purity-checks-will-be-run/" rel=nofollow>http://www.sqlskills.com/blogs/paul/checkdb-from-every-angle-how-to-tell-if-data-purity-checks-will-be-run/</A><BR><A href="https://www.mssqltips.com/sqlservertip/1988/ensure-sql-server-data-purity-checks-are-performed/" rel=nofollow>https://www.mssqltips.com/sqlservertip/1988/ensure-sql-server-data-purity-checks-are-performed/</A></P></BLOCKQUOTE>
+<P>RELATED LINKS<BR>DBCC CHECKDB:<BR><A href="https://msdn.microsoft.com/en-us/library/ms176064.aspx?WT.mc_id=DP-MVP-5002693" rel=nofollow>https://msdn.microsoft.com/en-us/library/ms176064.aspx</A><BR><A href="http://www.sqlcopilot.com/dbcc-checkdb.html" rel=nofollow>http://www.sqlcopilot.com/dbcc-checkdb.html</A><BR>Data Purity:<BR><A href="http://www.sqlskills.com/blogs/paul/checkdb-from-every-angle-how-to-tell-if-data-purity-checks-will-be-run/" rel=nofollow>http://www.sqlskills.com/blogs/paul/checkdb-from-every-angle-how-to-tell-if-data-purity-checks-will-be-run/</A><BR><A href="https://www.mssqltips.com/sqlservertip/1988/ensure-sql-server-data-purity-checks-are-performed/" rel=nofollow>https://www.mssqltips.com/sqlservertip/1988/ensure-sql-server-data-purity-checks-are-performed/</A></P></BLOCKQUOTE>
 <P>So anyone who needs to use the command can see what it is, a full description, what each parameter is for, some examples and some links to more information</P>
 <P>So what I used to do was put a snippet of code like this at the top of my function and then fill in the blanks</P><PRE class="lang:ps decode:true">&lt;#
 .SYNOPSIS
@@ -61,7 +61,7 @@ General notes
 Link to more information
 #&gt;</PRE>
 <P>The latest release of the PowerShell extension for VS Code has made that process so much simpler 🙂 Thank you David and Keith</P>
-<P>Now you can simply type ## (edited May 2018 you can configure this to &lt;# in the user settings) and your help will be dynamically created. You will still have to fill in some of the blanks but it is a lot easier.</P>
+<P>Now you can simply type ## (edited Mayundefinedyou can configure this to &lt;# in the user settings) and your help will be dynamically created. You will still have to fill in some of the blanks but it is a lot easier.</P>
 <P>Here it is in action in its simplest form</P>
 <P><IMG class="alignnone size-full wp-image-5796" alt="Pester - Simple.gif" src="https://blog.robsewell.com/assets/uploads/2017/06/pester-simple.gif?resize=630%2C384&amp;ssl=1" width=630 height=384 data-recalc-dims="1" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/06/pester-simple.gif?fit=630%2C384&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/06/pester-simple.gif?fit=300%2C183&amp;ssl=1" data-image-description="" data-image-title="Pester – Simple" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="1002,610" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/06/pester-simple.gif?fit=1002%2C610&amp;ssl=1" data-permalink="https://blog.robsewell.com/vs-code-automatic-dynamic-powershell-help/pester-simple/#main" data-attachment-id="5796"></P>
 <P>But it gets better than that. When you add parameters to your function code they are added to the help as well. Also, all you have to do is to tab between the different entries in the help to move between them</P>

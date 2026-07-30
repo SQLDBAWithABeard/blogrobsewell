@@ -41,7 +41,7 @@ I found a [user group near me](http://sqlsouthwest.co.uk) and went along to a me
 
 Come along.
 
-Simply coming along will bring benefit. Other people will be interested in what you have to say even if you are in week 0 of your first ever job. Your view will still be valued. Everyone can learn from everybody and NO-ONE knows it all.
+Simply coming along will bring benefit. Other people will be interested in what you have to say even if you are in weekundefinedof your first ever job. Your view will still be valued. Everyone can learn from everybody and NO-ONE knows it all.
 
 There will come a point where you will pass on a piece of knowledge or an idea or a way of working and someone will say thank you I didn’t know that. You just gave back. It may even be someone you look up to, someone whose knowledge and experience far outweighs yours whose word you hang on to. That feels good.
 
@@ -49,7 +49,7 @@ You may ask the questions that others thought but didnt ask and boy are they gla
 
 What will you get? More than you can ever put in. Free training, often free pizza, knowledge, advice,guidance, contacts, support, a network of people in your field, notice of job openings, swag, fun, friends, more social events and more and more
 
-The user groups are run by volunteers in their own time out of the goodness of their hearts. They will always need your help. Turn up 5 minutes earlier and help set out the chairs or put out the handouts or assist with the tech. You just gave back. Afterwards before going to the pub clear the tables, help carry the boxes, put the pizza evidence in the bin. You just gave back
+The user groups are run by volunteers in their own time out of the goodness of their hearts. They will always need your help. Turn upundefinedminutes earlier and help set out the chairs or put out the handouts or assist with the tech. You just gave back. Afterwards before going to the pub clear the tables, help carry the boxes, put the pizza evidence in the bin. You just gave back
 
 ### SQL Saturdays and other community events
 
@@ -77,7 +77,7 @@ I write posts to record my learning for myself. To document my knowledge. I use 
 
 I also write posts to expand my knowledge and this is the same for speaking. When I am writing a blog post or a presentation I will read and watch videos and ensure I know more about it. The process of creating that content will improve my own knowledge and work practices and you will find that, as you write your blog posts you will have a deeper knowledge also. When you give your presentations you will learn as you answer questions or find the answer to the question afterwards (It’s ok to do that) that you are improving yourself and your knowledge.You will also be giving back.
 
-Putting your information online will enable people to find it. Sure you can worry about SEO and getting to the top of search pages but you know that [sometimes the answer is on the ninth page](https://blog.robsewell.com/powershell-wont-save-when-running-as-a-scheduled-job/). What you write will be of benefit to others and by taking the time to post you will be giving back to the community
+Putting your information online will enable people to find it. Sure you can worry about SEO and getting to the top of search pages but you know that [sometimes the answer is on the ninth page](/blog/powershell-wont-save-when-running-as-a-scheduled-job/). What you write will be of benefit to others and by taking the time to post you will be giving back to the community
 
 You can do one, many or all of those and you will be giving back. I hope you do
 
@@ -87,7 +87,7 @@ You will find me at SQL Saturday Exeter. I am again one of the fabulous SQL Sout
 
 ![](https://tsqlninja.files.wordpress.com/2014/03/wp_20140321_003_thumb.jpg)
 
-who are again organising a SQL Saturday in Exeter in the UK on April 24th/25th 2015 You can find out more here [http://sqlsouthwest.co.uk/sql-saturday-372/](http://sqlsouthwest.co.uk/sql-saturday-372/%C2%A0)
+who are again organising a SQL Saturday in Exeter in the UK on April 24th/25thundefinedYou can find out more here [http://sqlsouthwest.co.uk/sql-saturday-372/](http://sqlsouthwest.co.uk/sql-saturday-372/%C2%A0)
 
 You still have time, if you are quick, to submit a session to speak or present a pre-con at Exeter. Submissions close on 15th December and [we would love to have yours](http://sqlsouthwest.co.uk/2014/10/29/sql-saturday-exeter-2015-looking-for-training-day-submissions/)
 

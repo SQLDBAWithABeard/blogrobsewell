@@ -23,15 +23,15 @@ When it is things that you as a presenter could have been able to foresee, like 
 
 I use Pester to ensure that my environment for my presentation is as I expect and in fact, in Hanover when I ran through my Pester test for my NUC environment I found that one of my SQL Servers had decided to be in a different time zone and therefore the SQL Service would not authenticate and start. I was able to quickly remove the references to that server and save myself from a sea of red during my demos.
 
-For those that don’t know, [Pester is a PowerShell module for Test Driven Development](https://github.com/pester/Pester).
+For those that don’t know, [Pester is a PowerShell module for Test Driven Development](https://github.com/pester/Pester?WT.mc_id=DP-MVP-5002693).
 
 > Pester provides a framework for running unit tests to execute and validate PowerShell commands from within PowerShell. Pester consists of a simple set of functions that expose a testing domain-specific language (DSL) for isolating, running, evaluating and reporting the results of PowerShell commands.
 
-If you have PowerShell version 5 then you will have Pester already installed, although you should update it to the latest version. If not, you can get [Pester from the PowerShell Gallery](https://www.powershellgallery.com/packages/Pester/)—follow the instructions on that page to install it. [This is a good post to start learning about Pester](https://www.simple-talk.com/sysadmin/powershell/practical-powershell-unit-testing-getting-started/).
+If you have PowerShell version 5 then you will have Pester already installed, although you should update it to the latest version. If not, you can get [Pester from the PowerShell Gallery](https://www.powershellgallery.com/packages/Pester/?WT.mc_id=DP-MVP-5002693)—follow the instructions on that page to install it. [This is a good post to start learning about Pester](https://www.simple-talk.com/sysadmin/powershell/practical-powershell-unit-testing-getting-started/).
 
 What can you test? Everything. Well, specifically everything that you can write a PowerShell command to check. So when I am setting up for my presentation I check the following things. I add new things to my tests as I think of them or as I observe things that may break my presentations. Most recently that was ensuring that my Visual Studio Code session was running under the correct user. I did that like this:
 
-```powershell
+ `` `powershell
 Describe "Presentation Test" {
     Context "VSCode" {
         It "Should be using the right username" {

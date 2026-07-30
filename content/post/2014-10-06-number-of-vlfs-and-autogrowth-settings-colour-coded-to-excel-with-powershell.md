@@ -36,7 +36,7 @@ It is much better to make use of the system you already use to record your datab
     $Query = 'SELECT Name FROM dbo.databases WHERE CONDITION meets your needs'
     $Servers = Invoke-Sqlcmd -ServerInstance MANAGEMENTSERVER -Database DBADATABASE -Query $query
 
-I then create a foreach loop and a server SMO object (Did you read my [blog post](https://blog.robsewell.com/powershell-snippets-a-great-learning-tool) about snippets? the code for a SMO Server snippet is there) returned the number of rows for DBCC LOGINFO and the information I wanted.
+I then create a foreach loop and a server SMO object (Did you read my [blog post](/blog/powershell-snippets-a-great-learning-tool/) about snippets? the code for a SMO Server snippet is there) returned the number of rows for DBCC LOGINFO and the information I wanted.
 
     foreach ($Server in $Servers)
        {
@@ -58,16 +58,16 @@ I did this by using my Excel Snippet
           Text = @'
           # Create a .com object for Excel
         `$xl = new-object -comobject excel.application
-        `$xl.Visible = `$true # Set this to False when you run in production
-        `$wb = `$xl.Workbooks.Add() # Add a workbook
-        `$ws = `$wb.Worksheets.Item(1) # Add a worksheet
-        `$cells=`$ws.Cells
+          `$xl.Visible = `  $true # Set this to False when you run in production
+          `$wb = `  $xl.Workbooks.Add() # Add a workbook
+          `$ws = `  $wb.Worksheets.Item(1) # Add a worksheet
+          `$cells=`  $ws.Cells
         #Do Some Stuff - perhaps -
-          `$cells.item(`$row,`$col)=`'Server`'
-          `$cells.item(`$row,`$col).font.size=16
-          `$Cells.item(`$row,`$col).Columnwidth = 10
+            `$cells.item(`  $row,  `$col)=`  'Server`'
+            `$cells.item(`  $row,`$col).font.size=16
+            `$Cells.item(`  $row,`$col).Columnwidth = 10
           `$col++
-        `$wb.Saveas(`'C:\temp\Test`$filename.xlsx`')
+          `$wb.Saveas(`  'C:\temp\Test  `$filename.xlsx`  ')
         `$xl.quit()
         Stop-Process -Name EXCEL
         '@
@@ -102,27 +102,27 @@ and placed the relevant bits into the foreach loop
            $col++
            $cells.item($row,$col)=$logFile.FileName
 
-I had to use the `ToString()` method on the Type property to get Excel to display the text. I wanted to set the colour for the VLF cells to yellow or red dependant on their value and the colour of the growth type cell to red if the value was Percent. This was achieved like this
+I had to use the   `ToString()`   method on the Type property to get Excel to display the text. I wanted to set the colour for the VLF cells to yellow or red dependant on their value and the colour of the growth type cell to red if the value was Percent. This was achieved like this
 
     if($VLF -gt $TooMany)
        {
-         $cells.item($row,$col).Interior.ColorIndex = 6 # Yellow
+         $cells.item($row,$col).Interior.ColorIndex =`$cells.item(`# Yellow
        }
        if($VLF -gt $WayTooMany)
        {
-         $cells.item($row,$col).Interior.ColorIndex = 3 # Red
+         $cells.item($row,$col).Interior.ColorIndex =`$cells=`# Red
        }
        if($Type -eq 'Percent')
        {
-         $cells.item($row,$col).Interior.ColorIndex = 3 #Red
+         $cells.item($row,$col).Interior.ColorIndex =`$cells=`#Red
        }
 
 I also found [this excellent post](http://theolddogscriptingblog.wordpress.com/2010/06/01/powershell-excel-cookbook-ver-2/) by which has many many snippets of code to work with excel sheets.
 
 I used
 
-    $cells.item($row,$col).HorizontalAlignment = 3 #center
-    $cells.item($row,$col).HorizontalAlignment = 4 #right
+    $cells.item($row,$col).HorizontalAlignment =`$cells=`#center
+    $cells.item($row,$col).HorizontalAlignment =`$cells.item(`#right
     $ws.UsedRange.EntireColumn.AutoFit()
 
 although I had to move the Title so that it was after the above line so that it looked ok.
@@ -131,5 +131,5 @@ although I had to move the Title so that it was after the above line so that it 
 ![image](https://blog.robsewell.com/assets/uploads/2014/10/image_thumb.png)  
 ](https://blog.robsewell.com/wp-content/uploads/2014/10/image.png)
 
-[You can find the script here.](https://gallery.technet.microsoft.com/scriptcenter/Number-of-VLFs-and-7ee0182a) As always test it somewhere safe first, understand what it is doing and any questions get in touch.
+[You can find the script here.](https://gallery.technet.microsoft.com/scriptcenter/Number-of-VLFs-and-7ee0182a?WT.mc_id=DP-MVP-5002693) As always test it somewhere safe first, understand what it is doing and any questions get in touch.
 

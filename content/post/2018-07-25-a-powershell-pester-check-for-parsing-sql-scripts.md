@@ -16,9 +16,9 @@ This is a quick Pester test I wrote to ensure that some SQL Scripts in a directo
 
 It simply runs through all of the .sql files and runs the parser against them and checks the errors. In the case of failures it will output where it failed in the error message in the failed Pester result as well.
 
-You will need [dbatools module installed](http://dbatools.io/install) on the instance and at least [version 4 of the Pester module](https://github.com/pester/Pester/wiki/Installation-and-Updatehttps://github.com/pester/Pester/wiki/Installation-and-Update) as well
+You will need [dbatools module installed](http://dbatools.io/install) on the instance and at least [version 4 of the Pester module](https://github.com/pester/Pester/wiki/Installation-and-Updatehttps://github.com/pester/Pester/wiki/Installation-and-Update?WT.mc_id=DP-MVP-5002693) as well
 
-```
+ ```
 Describe "Testing SQL" {
     Context "Running Parser" {
         ## Load assembly
@@ -39,4 +39,4 @@ Describe "Testing SQL" {
         }
     }
 }
-```
+``` 

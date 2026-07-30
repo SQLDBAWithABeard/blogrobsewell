@@ -50,7 +50,7 @@ I have really enjoyed working out how to run PowerShell in the markdown in a SQL
 >
 > — Anthony E. Nocentino (@nocentino) [June 20, 2019](https://twitter.com/nocentino/status/1141709511700467712?ref_src=twsrc%5Etfw)
 
-OK enough magic puns lets talk about PowerShell in SQL Notebooks. You can read about [how to create a SQL Notebook and run T-SQL queries here](https://blog.robsewell.com/whats-a-sql-notebook-in-azure-data-studio/), (you no longer need the Insider Edition by the way)
+OK enough magic puns lets talk about PowerShell in SQL Notebooks. You can read about [how to create a SQL Notebook and run T-SQL queries here](/blog/whats-a-sql-notebook-in-azure-data-studio/), (you no longer need the Insider Edition by the way)
 
 PowerShell in Markdown!
 -----------------------
@@ -91,28 +91,28 @@ you can make Azure Data Studio (and Visual Studio Code) work exactly how you wan
 
 ![](https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?w=630&ssl=1)](https://i1.wp.com/user-images.githubusercontent.com/6729780/59566321-84233d80-9056-11e9-9643-e9e15e85a2f0.png?ssl=1)
 
-This also enables you to see the command that is called when you use a keyboard shortcut. For example, you can see that for the focus terminal command it says `workbench.action.terminal.focus`.
+This also enables you to see the command that is called when you use a keyboard shortcut. For example, you can see that for the focus terminal command it says   `workbench.action.terminal.focus`  .
 
-It turns out that you can call this as a link in a Markdown document using HTML with `<a href="">` and adding `command:` prior to the command text. When the link is clicked the command will run. Cool 🙂
+It turns out that you can call this as a link in a Markdown document using HTML with   `<a href="">`   and adding   `command:`   prior to the command text. When the link is clicked the command will run. Cool 🙂
 
 For this to be able to work (you read the warning above?) you need to set the Notebook to be trusted by clicking this button.
 
 ![](https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?w=630&ssl=1)](https://i0.wp.com/user-images.githubusercontent.com/6729780/59566360-365b0500-9057-11e9-87fb-1f8cbbb6e9e2.png?ssl=1)
 
-This will allow any command to be run. Of course, people with beards will helpfully advise when this is required for a [SQL Notebook](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/05%20-Working%20with%20dbachecks%20Validation%20Results.ipynb). (Safe to say people attempting nefarious actions will try the same with your users)
+This will allow any command to be run. Of course, people with beards will helpfully advise when this is required for a [SQL Notebook](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/05%20-Working%20with%20dbachecks%20Validation%20Results.ipynb?WT.mc_id=DP-MVP-5002693). (Safe to say people attempting nefarious actions will try the same with your users)
 
 ![](https://blog.robsewell.com/assets/uploads/2019/07/image-1.png)
 
-Now that we know how to run an Azure Data Studio command using a link in a markdown cell the next step is to run a PowerShell command. I headed to the [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/integrated-terminal) and found
+Now that we know how to run an Azure Data Studio command using a link in a markdown cell the next step is to run a PowerShell command. I headed to the [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/integrated-terminal?WT.mc_id=DP-MVP-5002693) and found
 
 > Send text from a keybinding
-> The `workbench.action.terminal.sendSequence` command can be used to send a specific sequence of text to the terminal, including escape sequence
+> The   `workbench.action.terminal.sendSequence`   command can be used to send a specific sequence of text to the terminal, including escape sequence
 
 That’s the command we need, however, we still need to craft the command so that it will work as a link. It needs to be converted into a URL.
 
 I started by using this website [https://www.url-encode-decode.com/](https://www.url-encode-decode.com/) to do this. This is **how you can check the code in other peoples notebook, use the decode capability.**
 
-Encoding `Set-Location C:\dbachecks` gives `Set-Location+C%3A%5Cdbacheck``
+Encoding   `Set-Location C:\dbachecks`   gives   `Set-Location+C%3A%5Cdbacheck`  `
 
 ![](https://i0.wp.com/user-images.githubusercontent.com/6729780/59567164-e5044300-9061-11e9-802b-7b28c3aee345.png?w=630&ssl=1)
 
@@ -123,14 +123,14 @@ If only it was that easy!!
 Some Replacing is required
 --------------------------
 
-The + needs to be replaced with a space or `%20`
+The + needs to be replaced with a space or   `%20`  
 
-You also need to double the `\` and replace the `%3A` with a `:`
-The `"` needs to be replaced with `\u022`, the `'` with `\u027`, the curly braces won’t work unless you remove the `%0D%0A`. Got all that? Good!
+You also need to double the   `\`   and replace the   `%3A`   with a   `:`  
+The   `"`   needs to be replaced with   `\u022`  , the   `'`   with   `\u027`  , the curly braces won’t work unless you remove the   `%0D%0A`  . Got all that? Good!
 
-Once you have written your PowerShell, encoded it, performed the replacements, you add `\u000D` at the end of the code to pass an enter to run the code and then place all of that into a link like this
+Once you have written your PowerShell, encoded it, performed the replacements, you add   `\u000D`   at the end of the code to pass an enter to run the code and then place all of that into a link like this
 
-`<a href="command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 PLACE THE ENCODED CODE HERE %22%7D">Link Text</a>`
+  `<a href="command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 PLACE THE ENCODED CODE HERE %22%7D">Link Text</a>`  
 
 This means that if you want to add the PowerShell code to set a location and then list the files and folders in that location to a Markdown cell using PowerShell like this
 
@@ -139,14 +139,14 @@ This means that if you want to add the PowerShell code to set a location and the
 
 You would end up with a link like this
 
-`` `<a href="command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 Set-Location C:%5C%5Cdbachecks \u000D Get-ChildItem \u000D %22%7D">Set Location and list files</a` ``>
+  ``     `<a href="command:workbench.action.terminal.sendSequence?%7B%22text%22%3A%22 Set-Location C:%5C%5Cdbachecks \u000D Get-ChildItem \u000D %22%7D">Set Location and list files</a`     ``  >
 
 Doing something more than once?
 -------------------------------
 
-I don’t want to remember that all of the time so I wrote a PowerShell function. You can find it on GitHub [https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1](https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1)
+I don’t want to remember that all of the time so I wrote a PowerShell function. You can find it on GitHub [https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1](https://github.com/SQLDBAWithABeard/Functions/blob/master/Convert-ADSPowerShellForMarkdown.ps1?WT.mc_id=DP-MVP-5002693)
 
-This will take a PowerShell command and turn it into a link that will work in an Azure Data Studio markdown. It’s not magic, it’s PowerShell. There is a –`ToClipboard` parameter which will copy the code to the clipboard ready for you to paste into the cell (On Windows machines only)
+This will take a PowerShell command and turn it into a link that will work in an Azure Data Studio markdown. It’s not magic, it’s PowerShell. There is a –  `ToClipboard`   parameter which will copy the code to the clipboard ready for you to paste into the cell (On Windows machines only)
 
 Giants
 ------
@@ -166,6 +166,6 @@ You could possibly use something like it for your incident response SQL Notebook
 
 It’s also cool that GitHub renders the notebook in a browser (You can’t run PowerShell or T-SQL from there though, you need Azure Data Studio!)
 
-[https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb)
+[https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb](https://github.com/SQLDBAWithABeard/Presentations/blob/master/2019/Berlin%20SQL%20User%20Group/04%20-%20Glenn%20Berry%20Notebook.ipynb?WT.mc_id=DP-MVP-5002693)
 
 ![](https://blog.robsewell.com/assets/uploads/2019/07/image-4.png)

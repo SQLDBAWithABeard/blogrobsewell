@@ -31,7 +31,7 @@ First up we need to get the data. I took a look at the [Swarm developers page](h
 I added the limit 5000 as the default number of checkins returned was too small for my needs and the date was that days date.
 
 You can do this in Powershell using code I got from the magnificent [Stephen Owen’s blog post](https://foxdeploy.com/2015/11/02/using-powershell-and-oauth/)
-```
+ ```
 ## Enter the details
 $Clientid =''  ## Enter ClientId from foursquare
 $redirect = '' ## enter redirect url from client app in foursquare
@@ -63,7 +63,7 @@ Write-output "Received a token, $AuthToken"
 Write-Output "So the URL for your PowerBi Data is :-"
 $PowerBiUrl = "https://api.foursquare.com/v2/users/self/checkins?limit=5000&oauth_token=$AuthToken&v=20160829"
 $PowerBiUrl | Clip
-```
+``` 
 I checked the URL in a browser and confirmed that it returned a json object. Keep that URL safe you will need it in a minute. That code above has placed it in your clipboard. If you want to jump straight to the report using the download stop here and go to the end
 
 So now lets move to Power BI. Go to [powerbi.com](http://powerbi.com) and download the PowerBi Desktop. Its free. You will need to create an account using a school or work email address if you wish to put your reports in powerbi.com
@@ -130,7 +130,7 @@ Now we need to create a calculated column for the time and a measure for the cou
 `Time = VAR UnixDays = [createdAt]/(60*60*24)  
 RETURN (DATEVALUE("1/1/1970")+UnixDays)`
 
-`CountCheckins = COUNT(checkins[Time])`
+ `CountCheckins = COUNT(checkins[Time])` 
 
 and we can move onto the report side of things. Frist we are going to download a custom visual. Go to the [PowerBi Custom Visuals Page](https://app.powerbi.com/visuals/) and download the Timeline visual[![powerbi5.PNG](/assets/uploads/2016/10/powerbi5.png)](/assets/uploads/2016/10/powerbi5.png)
 
@@ -159,7 +159,7 @@ Show me count checkins in Amsterdam by category as a donut
 
 [![powerbi7.PNG](/assets/uploads/2016/10/powerbi7.png)](/assets/uploads/2016/10/powerbi7.png)
 
-If you want to use the blank report, [download it from here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/PowerBi%20and%20Api%20Blog%20Demo.pbix) open it in PowerBi Desktop, click Edit Queries and Source and add your own URL and click Apply and then Refresh
+If you want to use the blank report, [download it from here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/PowerBi%20and%20Api%20Blog%20Demo.pbix?WT.mc_id=DP-MVP-5002693) open it in PowerBi Desktop, click Edit Queries and Source and add your own URL and click Apply and then Refresh
 
 [![powerbi9.gif](/assets/uploads/2016/10/powerbi9.gif)](/assets/uploads/2016/10/powerbi9.gif)
 

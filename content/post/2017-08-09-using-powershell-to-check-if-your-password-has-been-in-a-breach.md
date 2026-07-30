@@ -14,7 +14,7 @@ tags:
 <P>Recently <A href="https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/" rel=noopener target=_blank>Troy announced on his blog</A></P>
 <BLOCKQUOTE>
 <P>This blog post introduces a new service I call “Pwned Passwords”, gives you guidance on how to use it and ultimately, provides you with 306 million passwords you can download for free and use to protect your own systems.</P></BLOCKQUOTE>
-<P>So I thought I would write a quick PowerShell script to make use of it and place it on the <A href="https://www.powershellgallery.com/packages/Get-PwnedPassword/1.0/DisplayScript" rel=noopener target=_blank>PowerShell Gallery</A></P>
+<P>So I thought I would write a quick PowerShell script to make use of it and place it on the <A href="https://www.powershellgallery.com/packages/Get-PwnedPassword/1.0/DisplayScript?WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>PowerShell Gallery</A></P>
 <P>You can install it using</P><PRE class="toolbar:2 nums:false lang:ps decode:true">Install-Script -Name Get-PwnedPassword</PRE>
 <P>You will be asked if you want to add ‘C:\Program Files\WindowsPowerShell\Scripts’ to your PATH environment variable if this is the first script you have installed</P>
 <P>Then load it into your session with a period and a space.</P><PRE class="toolbar:2 nums:false lang:ps decode:true ">. Get-PwnedPassword.ps1</PRE>

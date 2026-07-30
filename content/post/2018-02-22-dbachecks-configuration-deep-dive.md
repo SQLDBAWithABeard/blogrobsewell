@@ -214,7 +214,7 @@ Creating an environment config and exporting it to use any time we like
 So lets make this a lot more useful. Lets create a configuration for our production environment and save it to disk (or even source control it!) so that we can use it again and again. We can also then pass it to other members of our team or even embed it in an automated process or our CI/CD system
 
 Lets build up a configuration for a number of tests for my “production” environment. I will not explain them all here but let you read through the code and the comments to see what has been set. You will see that some of them are due to me running the test on a single machine with one drive.
-```
+ ```
 # The computername we will be testing
 Set-DbcConfig -Name app.computername -Value localhost                                                                                                                                                                                                          
 # The Instances we want to test
@@ -264,7 +264,7 @@ Set-DbcConfig -Name command.invokedbccheck.excludecheck -Value LogShipping,Exten
 # How many months before a build is unsupported do I want to fail the test?
 Set-DbcConfig -Name policy.build.warningwindow -Value 6
 Get-Dbcconfig | ogv
-```
+``` 
 When I run this I get
 
 ![](assets/uploads/2018/02/08-configuration.png)
@@ -309,7 +309,7 @@ Development Environment Configuration
 
 So now we know how to set a SQL Authentication configuration we can create our development environment configuration like so. As you can see below the values are different for the checks and more checks have been skipped. I wont explain it all, if it doesn’t make sense ask a question in the comments or in the dbachecks in SQL Server Community Slack
 
-```
+ ```
 #region Dev Config
 # The Instances we want to test
 Set-DbcConfig -Name app.sqlinstance -Value 'localhost,1401' ,'localhost,1402','localhost,1403', 'localhost,1404' 
@@ -349,7 +349,7 @@ Set-DbcConfig -Name policy.build.warningwindow -Value 6
 Set-DbcConfig -Name command.invokedbccheck.excludecheck -Value LogShipping,ExtendedEvent, HADR, SaReNamed, PseudoSimple,spn, DiskSpace, DatabaseCollation,Agent,Backup,UnusedIndex,LogfileCount,FileGroupBalanced,LogfileSize,MaintenanceSolution,ServerNameMatch
 
 Export-DbcConfig -Path C:\Users\dbachecks\Desktop\development_config.json
-```
+``` 
 
 Using The Different Configurations
 ----------------------------------
@@ -362,7 +362,7 @@ Now I have two configurations, one for my Production Environment and one for my 
 *   Run my tests with that configuration and create a json file for my Power Bi labelled development
 *   Start Power Bi to show those results
 
-```
+ ```
 # Import the production config
 Import-DbcConfig C:\Users\dbachecks\Desktop\production_config.json
 # Run the tests with the production config and create/update the production json
@@ -373,7 +373,7 @@ Import-DbcConfig C:\Users\dbachecks\Desktop\development_config.json
 Invoke-DbcCheck -AllChecks -Show Fails -PassThru |Update-DbcPowerBiDataSource -Environment Development
 # Open the PowerBi
 Start-DbcPowerBi
-```
+``` 
 I have published the Power Bi so that you can see what it would like and have a click around (maybe you can see improvements you would like to contribute)
 
 now we can see how each environment is performing according to our settings for each environment  
@@ -391,7 +391,7 @@ Here’s how.
 *   Export it using to  C:\Users\dbachecks\Desktop\APP1-Dev_config.json
 
 Then run
-```
+ ```
 # Import the production config
 Import-DbcConfig C:\Users\dbachecks\Desktop\APP1-Prod_config.json
 # Run the tests with the production config and create/update the production json
@@ -401,13 +401,13 @@ Import-DbcConfig C:\Users\dbachecks\Desktop\APP1-Dev_config.json
 # Run the tests with the production config and create/update the development json
 Invoke-DbcCheck -AllChecks -Show Fails -PassThru |Update-DbcPowerBiDataSource -Environment APP1 -Append
 Start-DbcPowerBi
-```
+``` 
 Notice that this time there is an Append on the last Invoke-DbcCheck this creates a single json file for the PowerBi and the results look like this. Now we have the results for our application and both the production environment localhost and the development container localhost,1401  
 
 It’s Open Source – We Want Your Ideas, Issues, New Code
 -------------------------------------------------------
 
-dbachecks is open-source [available on GitHub for anyone to contribute](https://github.com/potatoqualitee/dbachecks)
+dbachecks is open-source [available on GitHub for anyone to contribute](https://github.com/potatoqualitee/dbachecks?WT.mc_id=DP-MVP-5002693)
 
 We would love you to contribute. Please open issues for new tests, enhancements, bugs. Please fork the repository and add code to improve the module. please give feedback to make this module even more useful
 
@@ -422,9 +422,9 @@ Chrissy Lemaire [@cl](https://twitter.com/cl)
 
 Fred Weinmann [@FredWeinmann](https://twitter.com/FredWeinmann)
 
-Cláudio Silva [@ClaudioESSilva](https://github.com/ClaudioESSilva)
+Cláudio Silva [@ClaudioESSilva](https://github.com/ClaudioESSilva?WT.mc_id=DP-MVP-5002693)
 
-Stuart Moore [@napalmgram](https://github.com/napalmgram)
+Stuart Moore [@napalmgram](https://github.com/napalmgram?WT.mc_id=DP-MVP-5002693)
 
 Shawn Melton [@wsmelton](https://twitter.com/wsmelton)
 

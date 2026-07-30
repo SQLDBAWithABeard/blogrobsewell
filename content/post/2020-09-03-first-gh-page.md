@@ -13,7 +13,7 @@ Last night I started the experiment that has been in my head for a while now, to
 
 Thank you Chrissy [Blog](https://blog.netnerds.net/) [Twitter](https://twitter.com/cl) for the push!
 
-I followed the instructions from her blog post [Migrating my WordPress sites to GitHub Pages](https://blog.netnerds.net/2020/08/migrating-my-wordpress-sites-to-github-pages/) but chose to use the [Minimal Mistakes theme](https://github.com/mmistakes/minimal-mistakes)
+I followed the instructions from her blog post [Migrating my WordPress sites to GitHub Pages](https://blog.netnerds.net/2020/08/migrating-my-wordpress-sites-to-github-pages/) but chose to use the [Minimal Mistakes theme](https://github.com/mmistakes/minimal-mistakes?WT.mc_id=DP-MVP-5002693)
 
 I like the search at the top and the [404 page :-)](https://blog.robsewell.com/404.html)
 

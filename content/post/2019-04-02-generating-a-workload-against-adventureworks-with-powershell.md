@@ -25,13 +25,13 @@ For a later blog post I have been trying to generate some workload against an Ad
 I found this excellent blog post by Pieter Vanhove [t](https://twitter.com/Pieter_Vanhove) [https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/](https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/?WT.mc_id=DP-MVP-5002693) which references this 2011 post by Jonathan Kehayias [t](https://twitter.com/SQLPoolBoy)  
 [https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/](https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/)
 
-Both of these run a random query in a single thread so I thought I would use [PoshRSJob](https://www.powershellgallery.com/packages/PoshRSJob/1.7.4.4) by Boe Prox [b](https://learn-powershell.net/) | [t](https://twitter.com/proxb) to run multiple queries at the same time 🙂
+Both of these run a random query in a single thread so I thought I would use [PoshRSJob](https://www.powershellgallery.com/packages/PoshRSJob/1.7.4.4?WT.mc_id=DP-MVP-5002693) by Boe Prox [b](https://learn-powershell.net/) | [t](https://twitter.com/proxb) to run multiple queries at the same time 🙂
 
 To install PoshRSJob, like with any PowerShell module, you run
     
     Install-Module -Name PoshRSJob
 
-I downloaded AdventureWorksBOLWorkload zip from Pieters blog post and extracted to my `C:\temp folder`. I created a `Invoke-RandomWorkload` function which you can get from my [functions repository in GitHub](https://github.com/SQLDBAWithABeard/Functions). The guts of the function are
+I downloaded AdventureWorksBOLWorkload zip from Pieters blog post and extracted to my  `C:\temp folder` . I created a  `Invoke-RandomWorkload`  function which you can get from my [functions repository in GitHub](https://github.com/SQLDBAWithABeard/Functions?WT.mc_id=DP-MVP-5002693). The guts of the function are
 
      1.. $NumberOfJobs | Start-RSJob -Name "WorkLoad"  -Throttle $Throttle -ScriptBlock  {
 

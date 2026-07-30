@@ -38,12 +38,12 @@ so here it is! Looking forward to seeing the comparison between the [PowerShell 
 
 This is an overview of how it works
 
-*   A [Microsoft Flow](https://flow.microsoft.com/) looks for tweets with the [#PSConfEU](https://twitter.com/search?q=%23PSConfEU&src=typd) hashtag and then gets the information about the tweet
-*   [Microsoft Cognitive Services Text Analysis API](https://azure.microsoft.com/en-gb/services/cognitive-services/text-analytics/) analyses the sentiment of the tweet and provides a score between 0 (negative) and 1 (positive)
-*   Details about the tweet and the sentiment are saved in [Azure SQL database](https://azure.microsoft.com/en-gb/services/sql-database/)
+*   A [Microsoft Flow](https://flow.microsoft.com/?WT.mc_id=DP-MVP-5002693) looks for tweets with the [#PSConfEU](https://twitter.com/search?q=%23PSConfEU&src=typd) hashtag and then gets the information about the tweet
+*   [Microsoft Cognitive Services Text Analysis API](https://azure.microsoft.com/en-gb/services/cognitive-services/text-analytics/?WT.mc_id=DP-MVP-5002693) analyses the sentiment of the tweet and provides a score between 0 (negative) and 1 (positive)
+*   Details about the tweet and the sentiment are saved in [Azure SQL database](https://azure.microsoft.com/en-gb/services/sql-database/?WT.mc_id=DP-MVP-5002693)
 *   A [PowerBi](http://PowerBi.com) report uses that data and provides the report
 
-You will find all of the resources and the scripts to do all of the below in [the GitHub repo.](https://github.com/SQLDBAWithABeard/PowerShellCool) So clone it and navigate to the filepath
+You will find all of the resources and the scripts to do all of the below in [the GitHub repo.](https://github.com/SQLDBAWithABeard/PowerShellCool?WT.mc_id=DP-MVP-5002693) So clone it and navigate to the filepath
 
 Create Database
 ---------------
@@ -237,9 +237,9 @@ Copy the Endpoint URL as you will need it.Then save one of  the keys for the ne
 Create the Flow
 ---------------
 
-I have exported the Flow to a zip file and also the json for a PowerApp (no details about that in this post). Both are available in the [GitHub repo](https://github.com/SQLDBAWithABeard/PowerShellCool). I have submitted a template but it is not available yet.
+I have exported the Flow to a zip file and also the json for a PowerApp (no details about that in this post). Both are available in the [GitHub repo](https://github.com/SQLDBAWithABeard/PowerShellCool?WT.mc_id=DP-MVP-5002693). I have submitted a template but it is not available yet.
 
-Navigate to [https://flow.microsoft.com/](https://flow.microsoft.com/) and sign in
+Navigate to [https://flow.microsoft.com/](https://flow.microsoft.com/?WT.mc_id=DP-MVP-5002693) and sign in
 
 Creating Connections
 --------------------
@@ -256,7 +256,7 @@ click new connection and search for SQL Server
 
 [![18 - import step 6.png](https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png)](https://blog.robsewell.com/assets/uploads/2018/02/18-import-step-6.png)
 
-Enter the SQL Server Name (value of `$AzureSQLServer`) , Database Name , User Name and Password from the steps above
+Enter the SQL Server Name (value of  `$AzureSQLServer` ) , Database Name , User Name and Password from the steps above
 
 [![19 - import step 7.png](https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png)](https://blog.robsewell.com/assets/uploads/2018/02/19-import-step-7.png)
 
@@ -271,7 +271,7 @@ If you have a premium account you can import the flow, click Import
 
 [![12 - choose import.png](https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png)](https://blog.robsewell.com/assets/uploads/2018/02/12-choose-import.png)
 
-and choose the import.zip from the [GitHub Repo](https://github.com/SQLDBAWithABeard/PowerShellCool)
+and choose the import.zip from the [GitHub Repo](https://github.com/SQLDBAWithABeard/PowerShellCool?WT.mc_id=DP-MVP-5002693)
 
 [![13 import step 1.png](https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png)](https://blog.robsewell.com/assets/uploads/2018/02/13-import-step-1.png)
 
@@ -366,11 +366,11 @@ Give the flow a name at the top and click save flow
 Connect PowerBi
 ---------------
 
-Open the PSConfEU Twitter Analysis Direct.pbix from the [GitHub repo](https://github.com/SQLDBAWithABeard/PowerShellCool) in PowerBi Desktop. Click the arrow next to Edit Queries and then change data source settings
+Open the PSConfEU Twitter Analysis Direct.pbix from the [GitHub repo](https://github.com/SQLDBAWithABeard/PowerShellCool?WT.mc_id=DP-MVP-5002693) in PowerBi Desktop. Click the arrow next to Edit Queries and then change data source settings
 
 [![32 change data source.png](https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png)](https://blog.robsewell.com/assets/uploads/2018/02/32-change-data-source.png)
 
-Click Change source and enter the server (value of `$AzureSQLServer`) and the database name. It will alert you to apply changes
+Click Change source and enter the server (value of  `$AzureSQLServer` ) and the database name. It will alert you to apply changes
 
 [![33 apply changes.png](https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png)](https://blog.robsewell.com/assets/uploads/2018/02/33-apply-changes.png)
 

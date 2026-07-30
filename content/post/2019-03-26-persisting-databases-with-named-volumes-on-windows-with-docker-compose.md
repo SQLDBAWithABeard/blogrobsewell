@@ -54,7 +54,7 @@ So feel free to carry on reading, it’s a fun story and it shows how you can pe
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-20.png>)
 
-The command completed successfully but as you can see on the left the container is red because it is not running. (I am using the [Docker Explorer extension for Visual Studio C](https://marketplace.visualstudio.com/items?itemName=formulahendry.docker-explorer)
+The command completed successfully but as you can see on the left the container is red because it is not running. (I am using the [Docker Explorer extension for Visual Studio C](https://marketplace.visualstudio.com/items?itemName=formulahendry.docker-explorer&WT.mc_id=DP-MVP-5002693)
 
 I inspected the logs from the container using
 
@@ -67,7 +67,7 @@ which returned
 > This program has encountered a fatal error and cannot continue running at Tue Mar 26 19:40:35 20  
 > 19  
 > The following diagnostic information is available:  
-> `Reason: 0x00000006 Status: 0x40000015 Message: Kernel bug check Address: 0x6b643120`  
+>  `Reason: 0x00000006 Status: 0x40000015 Message: Kernel bug check Address: 0x6b643120`   
 > Parameters: 0x10861f680  
 > Stacktrace: 000000006b72d63f 000000006b64317b 000000006b6305ca  
 > 000000006b63ee02 000000006b72b83a 000000006b72a29d  
@@ -179,7 +179,7 @@ To make sure there is nothing up my sleeve I altered the docker-compose file to 
                   - /var/lib/docker/volumes/mssqluser/_data:/var/opt/sqlserver
                   - /var/lib/docker/volumes/mssqlsystem/_data:/var/opt/mssql
 
-I ran `docker-compose up -d` again and connected to the new container and lo and behold the container is still there
+I ran  `docker-compose up -d`  again and connected to the new container and lo and behold the container is still there
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-27.png>)
 

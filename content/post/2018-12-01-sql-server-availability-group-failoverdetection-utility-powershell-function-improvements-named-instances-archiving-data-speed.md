@@ -10,7 +10,7 @@ tags:
   - PowerShell
 
 ---
-In [my last post I wrote about a new function](https://blog.robsewell.com/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/) for gathering the data and running the [FailoverDetection utility](https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy/) by the [Tiger Team](https://twitter.com/mssqltiger) to analyse availability group failovers. I have updated it following some comments and using it for a day.
+In [my last post I wrote about a new function](/blog/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/) for gathering the data and running the [FailoverDetection utility](https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy/?WT.mc_id=DP-MVP-5002693) by the [Tiger Team](https://twitter.com/mssqltiger) to analyse availability group failovers. I have updated it following some comments and using it for a day.
 
 ### Don’t forget the named instances Rob!
 
@@ -42,13 +42,13 @@ This will show in the prompt how long it took to run the previous statement .
 
 [![speed.png](https://blog.robsewell.com/assets/uploads/2018/11/speed.png)](https://blog.robsewell.com/assets/uploads/2018/11/speed.png)
 
-In the image above (which you can click to get a larger version as with all images on this blog) you can see that it took 18ms to set the date variable, FOUR MINUTES and FORTY THREE seconds to get the system log in the last 2 days using Get-EventLog and 29.1 seconds using Get-WinEvent and a FilterHashtable.
+In the image above (which you can click to get a larger version as with all images on this blog) you can see that it took 18ms to set the date variable, FOUR MINUTES and FORTY THREE seconds to get the system log in the lastundefineddays using Get-EventLog and 29.1 seconds using Get-WinEvent and a FilterHashtable.
 
 ### Getting the function
 
-This function requires PowerShell version 5 and the [dbatools](http://dbatools.io) module.
+This function requires PowerShell versionundefinedand the [dbatools](http://dbatools.io) module.
 
-You can get the function from [my GitHub Functions Repository here (at the moment – will be adding to dbatools see below)](https://github.com/SQLDBAWithABeard/Functions/blob/master/Invoke-SqlFailOverDetection.ps1)
+You can get the function from [my GitHub Functions Repository here (at the moment – will be adding to dbatools see below)](https://github.com/SQLDBAWithABeard/Functions/blob/master/Invoke-SqlFailOverDetection.ps1?WT.mc_id=DP-MVP-5002693)
 
 Load the function by either running the code or if you have it saved as a file dot-sourcing it.
 
@@ -60,7 +60,7 @@ The next thing you should do is what you should always do with a new PowerShell 
 
 Get-Help Invoke-SqlFailOverDetection -Detailed
 
-You will find plenty of examples to get you going and explanations of all of the parameters and more info [on my previous post.](https://blog.robsewell.com/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/)
+You will find plenty of examples to get you going and explanations of all of the parameters and more info [on my previous post.](/blog/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/)
 
 Happy Automating!
 

@@ -21,7 +21,7 @@ tags:
 image: assets/uploads/2019/04/image-151.png
 
 ---
-In the last few posts I have moved from [building an Azure SQL DB with Terraform using VS Code](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/) to [automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) to [using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/). This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.
+In the last few posts I have moved from [building an Azure SQL DB with Terraform using VS Code](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/) to [automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines](/blog/building-azure-sql-db-with-terraform-using-azure-devops/) to [using Task Groups in Azure DevOps to reuse the same Build Process and build an Azure Linux SQL VM and Network Security Group](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/). This evolution is fantastic but Task Groups can only be used in the same Azure DevOps repository. It would be brilliant if I could use Configuration as Code for the Azure Build Pipeline and store that in a separate source control repository which can be used from any Azure DevOps Project.
 
 Luckily, you can 😉 You can use [Azure DevOps Job Templates](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops?WT.mc_id=DP-MVP-5002693) to achieve this. There is a limitation at present, you can only use them for Build Pipelines and not Release Pipelines.
 
@@ -30,9 +30,9 @@ The aim of this little blog series was to have a single Build Pipeline stored as
 Creating a Build Pipeline Template
 ----------------------------------
 
-I created a [GitHub repository](https://github.com/SQLDBAWithABeard/Presentations-BuildTemplates) to hold my Build Templates, feel free to use them as a base for your own but please don’t try and use the repo for your own builds.
+I created a [GitHub repository](https://github.com/SQLDBAWithABeard/Presentations-BuildTemplates?WT.mc_id=DP-MVP-5002693) to hold my Build Templates, feel free to use them as a base for your own but please don’t try and use the repo for your own builds.
 
-The easiest way to create a Build Template is to already have a Build Pipeline. This cannot be done from a Task Group but I still have the Build Pipeline from my [automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) blog post.
+The easiest way to create a Build Template is to already have a Build Pipeline. This cannot be done from a Task Group but I still have the Build Pipeline from my [automating the build process for the Azure SQL DB using Azure DevOps Build Pipelines](/blog/building-azure-sql-db-with-terraform-using-azure-devops/) blog post.
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-132.png)
 
@@ -125,14 +125,14 @@ I copy that and paste it into a new file in my BuildTemplates repository. (I hav
 
 Now I can use this yaml as configuration as code for my Build Pipeline 🙂 It can be used from any Azure DevOps project. Once you start looking at the code and the [documentation for the yaml](https://docs.microsoft.com/en-gb/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema?WT.mc_id=DP-MVP-5002693) schema you can begin to write your pipelines as YAML, but sometimes it is easier to just create build pipeline or even just a job step in the browser and click the view yaml button!
 
-Create an AKS Cluster with a SQL 2019 container using Terraform and Build templates
+Create an AKS Cluster with a SQLundefinedcontainer using Terraform and Build templates
 -----------------------------------------------------------------------------------
 
-I have a [GitHub Repository with the Terraform code to build a simple AKS cluster](https://github.com/SQLDBAWithABeard/Presentations-AKS). This could not have been achieved without [Richard Cheney’s article](https://azurecitadel.com/automation/terraform/lab8/) I am not going to explain how it all works for this blog post or some of the negatives of doing it this way. Instead lets build an Azure DevOps Build Pipeline to build it with Terraform using Configuration as Code (the yaml file)
+I have a [GitHub Repository with the Terraform code to build a simple AKS cluster](https://github.com/SQLDBAWithABeard/Presentations-AKS?WT.mc_id=DP-MVP-5002693). This could not have been achieved without [Richard Cheney’s article](https://azurecitadel.com/automation/terraform/lab8/) I am not going to explain how it all works for this blog post or some of the negatives of doing it this way. Instead lets build an Azure DevOps Build Pipeline to build it with Terraform using Configuration as Code (the yaml file)
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-134.png)
 
-I am going to create a new Azure DevOps Build Pipeline and as in the previous posts connect it to the [GitHub Repository holding the Terraform code](https://github.com/SQLDBAWithABeard/Presentations-AKS).
+I am going to create a new Azure DevOps Build Pipeline and as in the previous posts connect it to the [GitHub Repository holding the Terraform code](https://github.com/SQLDBAWithABeard/Presentations-AKS?WT.mc_id=DP-MVP-5002693).
 
 This time I am going to choose the Configuration as code template
 
@@ -142,7 +142,7 @@ I am going to give it a name and it will show me that it needs the path to the y
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-136.png)
 
-Clicking the 3 ellipses will pop-up a file chooser and I pick the build.yaml file
+Clicking theundefinedellipses will pop-up a file chooser and I pick the build.yaml file
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-137.png)
 
@@ -174,7 +174,7 @@ If I want to edit the pipeline it looks a little different
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-152.png)
 
-The variables and triggers can be found under the 3 ellipses on the top right
+The variables and triggers can be found under theundefinedellipses on the top right
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-153.png)
 
@@ -194,7 +194,7 @@ and the resources are built
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-144.png)
 
-and in Visual Studio Code with the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) installed I can connect to the cluster by clicking the 3 ellipses and Add Existing Cluster
+and in Visual Studio Code with the [Kubernetes extension](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools&WT.mc_id=DP-MVP-5002693) installed I can connect to the cluster by clicking theundefinedellipses and Add Existing Cluster
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-145.png)
 

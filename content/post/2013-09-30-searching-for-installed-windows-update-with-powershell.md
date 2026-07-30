@@ -23,7 +23,7 @@ It also only adds the output to the collection if the KB is in the HotFixID prop
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image109.png)](https://blog.robsewell.com/assets/uploads/2013/09/image109.png)
 
-If we use [Measure-Command](http://blogs.msdn.com/b/rob/archive/2013/04/19/measuring-how-long-commands-take-in-windows.aspx) to compare the two we can see
+If we use [Measure-Command](http://blogs.msdn.com/b/rob/archive/2013/04/19/measuring-how-long-commands-take-in-windows.aspx?WT.mc_id=DP-MVP-5002693) to compare the two we can see
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image110.png)](https://blog.robsewell.com/assets/uploads/2013/09/image110.png)
 

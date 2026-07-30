@@ -60,7 +60,7 @@ Whilst the initial use case is incident response, this could easily be adapted f
 Notebooks
 ---------
 
-There are a number of Notebooks for different issue stored in directories. For this post, I have used the Notebooks from Microsoft that explain SQL 2019 features and troubleshooting which you can find in their GitHub repositories by [following this link](https://github.com/microsoft/sql-server-samples/tree/master/samples/features/sql2019notebooks)
+There are a number of Notebooks for different issue stored in directories. For this post, I have used the Notebooks from Microsoft that explain SQL 2019 features and troubleshooting which you can find in their GitHub repositories by [following this link](https://github.com/microsoft/sql-server-samples/tree/master/samples/features/sql2019notebooks?WT.mc_id=DP-MVP-5002693)
 
 The Azure DevOps deploys the Notebooks to a directory which then looks something like this
 
@@ -74,7 +74,7 @@ Create an Index Notebook
 Here is the code to create an index Notebook
 <SCRIPT src="https://gist.github.com/SQLDBAWithABeard/e2c0a410d5ec749bcda6fd2da9f83703.js"></SCRIPT>
 
-This creates a Notebook in the root of the folder. It also uses the new `-Collapse` parameter in `New-AdsNoteBookCell` that creates the code blocks with the code collapsed so that it looks neater. The index Notebook looks like this in the root of the folder
+This creates a Notebook in the root of the folder. It also uses the new  `-Collapse`  parameter in  `New-AdsNoteBookCell`  that creates the code blocks with the code collapsed so that it looks neater. The index Notebook looks like this in the root of the folder
 
 [![](https://blog.robsewell.com/assets/uploads/2019/11/image-39.png?resize=630%2C680&ssl=1)](https://blog.robsewell.com/assets/uploads/2019/11/image-39.png?ssl=1)
 

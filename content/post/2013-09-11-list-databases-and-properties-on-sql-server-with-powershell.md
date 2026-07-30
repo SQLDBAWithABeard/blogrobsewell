@@ -17,7 +17,7 @@ Another post in the [PowerShell Box of Tricks](https://blog.robsewell.com/tags/#
 
 Todays question which I often get asked is What databases are on that server?
 
-This is often a follow up to a question that requires the [Find-Database script](https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/). It is often asked by support teams investigating issues. It can also be asked by developers checking the impact of other services on their DEV/UAT environments, by change managers investigating impact of changes, by service managers investigating the impact of downtime, when capacity planning for a new service and numerous other situations.
+This is often a follow up to a question that requires the [Find-Database script](/blog/using-powershell-to-find-a-database-amongst-hundreds/). It is often asked by support teams investigating issues. It can also be asked by developers checking the impact of other services on their DEV/UAT environments, by change managers investigating impact of changes, by service managers investigating the impact of downtime, when capacity planning for a new service and numerous other situations.
 
 A simple quick and easy question made simpler with this function which can also be called when creating documentation
 
@@ -31,7 +31,7 @@ and use the results as you need</P>
 
 This only shows you the name but if you need more information about your databases then have a look and see what you require.
 
-Use \`Get-Member\` to see what is there. I ran the following code to count the number of Properties available for Databases (Using PowerShell V3 on SQL Server 2012 SP1 11.0.3350.0 )
+Use \ `Get-Member\`  to see what is there. I ran the following code to count the number of Properties available for Databases (Using PowerShell V3 on SQL ServerundefinedSP1 11.0.3350.0 )
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image56.png)](https://blog.robsewell.com/assets/uploads/2013/09/image56.png)
 
@@ -54,7 +54,7 @@ So select Name becomes
 
     Select @{label="Size GB";Expression={"{0:N3}" -f ($_.Size/1024)}}
 
-<P>The Column Heading is Size GB and the data is the Size property divided by 1024 to 3 decimal places</P>
+<P>The Column Heading is Size GB and the data is the Size property divided byundefinedtoundefineddecimal places</P>
 <P>then your code would look like this</P>
 
     $srv.databases|select @{label="Server";Expression={$_.Parent.name}},` 
@@ -158,7 +158,7 @@ and here is the full code
             } 
     
             ## Check for connectivity
-            if ((Test-Connection $ServerName -count 1 -Quiet) -eq $false) {
+            if ((Test-Connection $ServerName -count`n The Databases on $Server and their Size in MB `-Quiet) -eq $false) {
                 Write-Error "Could not connect to $ServerName - Server did not     respond to ping"
                 $_.Exception
                 continue
@@ -186,7 +186,7 @@ and here is the full code
                     continue
                 }
             }
-            Write-Output "`n The Databases on $Server and their Size in MB `n"
+            Write-Output " `n The Databases on $Server and their Size in MB ` n"
             $Return
         }
     }

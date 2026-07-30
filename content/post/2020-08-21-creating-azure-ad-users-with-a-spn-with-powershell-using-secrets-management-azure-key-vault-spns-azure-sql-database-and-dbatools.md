@@ -24,9 +24,9 @@ tags:
 image: assets/uploads/2020/08/image-16.png
 
 ---
-Following on from my posts about using Secret Management [Good bye Import-CliXml](https://blog.robsewell.com/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/) and [running programmes as a different user](https://blog.robsewell.com/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/), I have another use case.
+Following on from my posts about using Secret Management [Good bye Import-CliXml](/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/) and [running programmes as a different user](/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/), I have another use case.
 
-After creating Azure SQL Databases in an Elastic Pool using a process pretty similar to this one [I blogged about last year](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/), I needed to be able to programmatically create users and assign permissions.
+After creating Azure SQL Databases in an Elastic Pool using a process pretty similar to this one [I blogged about last year](/blog/building-azure-sql-db-with-terraform-using-azure-devops/), I needed to be able to programmatically create users and assign permissions.
 
 I need a user to login with
 ---------------------------
@@ -89,7 +89,7 @@ For the Secret Management Module to manage the Azure Key Vault, you first need t
 
 Ensure that you have permissions to connect by following the details in the network security documentation [https://docs.microsoft.com/en-us/azure/key-vault/general/network-security](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security?WT.mc_id=DP-MVP-5002693) and the secure access documentation [https://docs.microsoft.com/en-us/azure/key-vault/general/secure-your-key-vault](https://docs.microsoft.com/en-us/azure/key-vault/general/secure-your-key-vault?WT.mc_id=DP-MVP-5002693)
 
-Then you can run `Register-SecretVault` . You need to provide the local name for the key vault, the module name `Az.KeyVault`, and a `VaultParameters` hashtable with the KeyVault name and the Azure Subscription ID. You can register other types of Key Vaults to the Secret Management module in this way and they will require different values for the `VaultParameters` parameter.
+Then you can run  `Register-SecretVault`  . You need to provide the local name for the key vault, the module name  `Az.KeyVault` , and a  `VaultParameters`  hashtable with the KeyVault name and the Azure Subscription ID. You can register other types of Key Vaults to the Secret Management module in this way and they will require different values for the  `VaultParameters`  parameter.
 
     $KeyVaultName = 'beard-key-vault'
     Register-SecretVault -Name BeardKeyVault -ModuleName Az.KeyVault -VaultParameters @{ AZKVaultName = $KeyVaultName; SubscriptionId = $AzureSubscription.Subscription.Id }
@@ -123,7 +123,7 @@ Can my user connect?
 
 If I try to connect in Azure Data Studio to my Azure SQL Database with my AAD account to the temp-sql-db-beard database. It fails.
 
-By the way a great resource for troubleshooting the SQL error 18456 failure states can be found here [https://sqlblog.org/2020/07/28/troubleshooting-error-18456](https://sqlblog.org/2020/07/28/troubleshooting-error-18456)
+By the way a great resource for troubleshooting the SQL errorundefinedfailure states can be found here [https://sqlblog.org/2020/07/28/troubleshooting-error-18456](https://sqlblog.org/2020/07/28/troubleshooting-error-18456)
 
 ![](https://blog.robsewell.com/assets/uploads/2020/08/image-13.png)
 
@@ -152,7 +152,7 @@ Excellent 🙂
 Add a user to the user database
 -------------------------------
 
-I can then add my user to the temp-sql-db-beard Database. I need to create a new connection to the user database as you cannot use the `USE [DatabaseName]` statement
+I can then add my user to the temp-sql-db-beard Database. I need to create a new connection to the user database as you cannot use the  `USE [DatabaseName]`  statement
 
     $Userdatabasename = 'temp-sql-db-beard'
 

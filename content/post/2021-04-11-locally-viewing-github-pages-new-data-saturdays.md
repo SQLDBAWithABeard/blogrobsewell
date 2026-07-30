@@ -42,21 +42,21 @@ This is a fantastic use case for using a Docker container. I can host all of the
 
 Also, other people have already done a lot of the work so I dont have to.  
 
-I am running Docker in WSL2. I followed these [instructions](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2) to set it up. It doesn't take very long.
+I am running Docker in WSL2. I followed these [instructions](https://code.visualstudio.com/blogs/2020/03/02/docker-in-wsl2?WT.mc_id=DP-MVP-5002693) to set it up. It doesn't take very long.
 
-With thanks to Hans Kristian Flaatten [GitHub](https://github.com/Starefossen) - [Twitter](https://twitter.com/Starefossen) who has created [this docker image](https://github.com/Starefossen/docker-github-pages) it is as easy as running this from the local directory of the site repository
+With thanks to Hans Kristian Flaatten [GitHub](https://github.com/Starefossen?WT.mc_id=DP-MVP-5002693) - [Twitter](https://twitter.com/Starefossen) who has created [this docker image](https://github.com/Starefossen/docker-github-pages?WT.mc_id=DP-MVP-5002693) it is as easy as running this from the local directory of the site repository
 
-````
+ ````
 docker run -it --rm -v "$PWD":/usr/src/app -p "4000:4000" starefossen/github-pages
-````
+``` `
 
 If you are not using WSL but native Docker on Windows, then the command to run is slightly different
 
-````
+ ````
 docker run -it --rm -v .:/usr/src/app -p "4000:4000" starefossen/github-pages
-````
+``` `
 
-As soon as the container has started running and built the site I can see my changes locally in my browser at `http://localhost:4000/` There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.
+As soon as the container has started running and built the site I can see my changes locally in my browser at  `http://localhost:4000/`  There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.
 
 [![localdev](https://blog.robsewell.com//assets/uploads/2021/localdev.jpg)](https://blog.robsewell.com//assets/uploads/2021/localdev.jpg)
 
@@ -70,7 +70,7 @@ I shall go back to editing the site now.
 
 # A little 'Feature' if you are working on your event page
 
-If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts `http://0.0.0.0:4000/` like [http://0.0.0.0:4000/2021-04-17-datasaturday0005/](http://0.0.0.0:4000/2021-04-17-datasaturday0005/). This will not work on a Windows machine so you will have to replace `0.0.0.0` in the address bar with `localhost`
+If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts  `http://0.0.0.0:4000/`  like [http://0.0.0.0:4000/2021-04-17-datasaturday0005/](http://0.0.0.0:4000/2021-04-17-datasaturday0005/). This will not work on a Windows machine so you will have to replace  `0.0.0.0`  in the address bar with  `localhost` 
 
 [![0000](https://blog.robsewell.com/assets/uploads/2021/0000.jpg)](https://blog.robsewell.com/assets/uploads/2021/0000.jpg)
 

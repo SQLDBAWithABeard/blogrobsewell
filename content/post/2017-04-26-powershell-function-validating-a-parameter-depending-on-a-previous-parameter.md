@@ -15,21 +15,21 @@ image: assets/uploads/2017/04/01-more-help.png
 ---
 I was chatting on the [SQL Community Slack](https://sqlps.io/slack) with my friend Sander Stad [b](http://www.sqlstad.nl/) | [t](https://twitter.com/sqlstad) about some functions he is writing for the amazing PowerShell SQL Server Community module [dbatools](https://dbatools.io). He was asking my opinion as to how to enable user choice or options for Agent Schedules and I said that he should validate the input of the parameters. He said that was difficult as if the parameter was Weekly the frequency values required would be different from if the parameter was Daily or Monthly. That’s ok, I said, you can still validate the parameter.
 
-You can read more about Parameters either online [here](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_parameters) or [here](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_functions_advanced_parameters) or by running
-```
+You can read more about Parameters either online [here](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_parameters?WT.mc_id=DP-MVP-5002693) or [here](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.core/about/about_functions_advanced_parameters?WT.mc_id=DP-MVP-5002693) or by running
+ ```
 Get-Help About_Parameters
 Get-Help About_Functions_Parameters
-```
+``` 
 You can also find more help information with
 
-`Get-Help About_*Parameters*`
+ `Get-Help About_*Parameters*` 
 
 [![01 more help.PNG](https://blog.robsewell.com/assets/uploads/2017/04/01-more-help.png)](https://blog.robsewell.com/assets/uploads/2017/04/01-more-help.png)
 
 This is not a post about using Parameters, [google for those](https://www.google.co.uk/search?q=powershell+about+paramters&ie=&oe=#safe=strict&q=powershell+parameters&spf=370) but this is what I showed him.
 
 Lets create a simple function that accepts 2 parameters Word and Number
-```
+ ```
  function Test-validation
 {
     Param
@@ -39,13 +39,13 @@ Lets create a simple function that accepts 2 parameters Word and Number
     )
 Return "$Word and $Number"
 }
-```
+``` 
 We can run it with any parameters
 
 [![02 any parameters](https://blog.robsewell.com/assets/uploads/2017/04/02-any-parameters.png)](https://blog.robsewell.com/assets/uploads/2017/04/02-any-parameters.png)
 
-If we wanted to restrict the Word parameter to only accept Sun, Moon or Earth we can use the [ValidateSetAttribute](https://msdn.microsoft.com/en-us/library/ms714434(v=vs.85).aspx) as follows
-```
+If we wanted to restrict the Word parameter to only accept Sun, Moon or Earth we can use the [ValidateSetAttribute](https://msdn.microsoft.com/en-us/library/ms714434(v=vs.85).aspx?WT.mc_id=DP-MVP-5002693) as follows
+ ```
  function Test-validation
 {
     Param
@@ -56,7 +56,7 @@ If we wanted to restrict the Word parameter to only accept Sun, Moon or Earth we
     )
 Return "$Word and $Number"
 }
-```
+``` 
 Now if we try and set a value for the $Word parameter that isn’t sun moon or earth then we get an error
 
 [![03 parameter error.PNG](https://blog.robsewell.com/assets/uploads/2017/04/03-parameter-error.png)](https://blog.robsewell.com/assets/uploads/2017/04/03-parameter-error.png)
@@ -69,16 +69,16 @@ But what Sander wanted was to validate the value of the second parameter dependi
 *   If word is moon, number must be 3 or 4
 *   If word is earth, number must be 5 or 6
 
-We can use the [ValidateScriptAttribute](https://msdn.microsoft.com/en-us/library/system.management.automation.validatescriptattribute(v=vs.85).aspx)  to do this. This requires a script block which returns True or False. You can access the current parameter with `$_` so we can use a script block like this
-```
+We can use the [ValidateScriptAttribute](https://msdn.microsoft.com/en-us/library/system.management.automation.validatescriptattribute(v=vs.85).aspx?WT.mc_id=DP-MVP-5002693)  to do this. This requires a script block which returns True or False. You can access the current parameter with  `$_`  so we can use a script block like this
+ ```
 {
     if($Word -eq 'Sun'){$_ -eq 1 -or $_ -eq 2}
     elseif($Word -eq 'Moon'){$_ -eq 3 -or $_ -eq 4}
     elseif($Word -eq 'earth'){$_ -eq 5 -or $_ -eq 6}
 }
-```
+``` 
 The function now looks like
-```
+ ```
 function Test-validation
 {
     Param
@@ -94,7 +94,7 @@ function Test-validation
     )
 Return "$Word and $Number"
 }
-```
+``` 
 It will still fail if we use the wrong “Word” in the same way but now if we enter earth and 7 we get this
 
 [![04 parameter error.PNG](https://blog.robsewell.com/assets/uploads/2017/04/04-parameter-error.png)](https://blog.robsewell.com/assets/uploads/2017/04/04-parameter-error.png)
@@ -122,7 +122,7 @@ In this example, the error message
 > + FullyQualifiedErrorId : ParameterArgumentValidationError,Test-validation
 
 is not obvious to a none-coder so we could make it easier. As we are passing in a script block we can just add a comment like this. I added a spare line above and below to make it stand out a little more
-```
+ ```
 function Test-validation
 {
     Param
@@ -143,7 +143,7 @@ function Test-validation
     )
 Return "$Word and $Number"
 }
-```
+``` 
 Now if you enter the wrong parameter you get this
 
 [![07 more help.PNG](https://blog.robsewell.com/assets/uploads/2017/04/07-more-help.png)](https://blog.robsewell.com/assets/uploads/2017/04/07-more-help.png)

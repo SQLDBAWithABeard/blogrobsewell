@@ -92,8 +92,8 @@ $_
 </PRE>
 <P>&nbsp;</P>
 <H2>An easier way</H2>
-<P>My fabulous friend and MVP <A class="ProfileHeaderCard-nameLink u-textInheritColor js-nav" href="https://twitter.com/ravikanth">Ravikanth Chaganti</A> has told me of a better way using&nbsp;<A href="https://docs.microsoft.com/en-gb/powershell/module/Microsoft.PowerShell.Utility/Import-PowerShellDataFile?view=powershell-5.1" rel=noopener target=_blank>Import-PowerShellDataFile</A></P>
-<P>This command is available on PowerShell v5 and above. There is no need to use regex now 🙂 You can just get the manifest as an object and then use the <A href="https://docs.microsoft.com/en-us/powershell/module/powershellget/update-modulemanifest?view=powershell-5.1" rel=noopener target=_blank>Update-ModuleManifest</A> to update the file</P><PRE class="wrap:false lang:ps decode:true ">$manifest = Import-PowerShellDataFile .\BeardAnalysis.psd1 
+<P>My fabulous friend and MVP <A class="ProfileHeaderCard-nameLink u-textInheritColor js-nav" href="https://twitter.com/ravikanth">Ravikanth Chaganti</A> has told me of a better way using&nbsp;<A href="https://docs.microsoft.com/en-gb/powershell/module/Microsoft.PowerShell.Utility/Import-PowerShellDataFile?view=powershell-5.1&WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>Import-PowerShellDataFile</A></P>
+<P>This command is available on PowerShell v5 and above. There is no need to use regex now 🙂 You can just get the manifest as an object and then use the <A href="https://docs.microsoft.com/en-us/powershell/module/powershellget/update-modulemanifest?view=powershell-5.1&WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>Update-ModuleManifest</A> to update the file</P><PRE class="wrap:false lang:ps decode:true ">$manifest = Import-PowerShellDataFile .\BeardAnalysis.psd1 
 [version]$version = $Manifest.ModuleVersion
 # Add one to the build of the version number
 [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1) 

@@ -12,8 +12,8 @@ tags:
 
 ---
 <P>Another post in the <A href="https://blog.robsewell.com/tags/#box-of-tricks" rel=noopener target=_blank>PowerShell Box of Tricks</A> series. Here is another script which I use to save me time and effort during my daily workload enabling me to spend more time on more important (to me) things!</P>
-<P>Yesterday we looked at <A href="https://blog.robsewell.com/reading-todays-sql-error-log-with-powershell/" rel=noopener target=_blank>Reading Todays SQL Error Log</A> Today we are going to search all* of the SQL Error Logs. This is usually used by DBAs to troubleshoot issues</P>
-<P>The SQL Server Error Logs (by default) are located in the folder Program Files\Microsoft SQL Server\MSSQL.<EM>n</EM>\MSSQL\LOG\ERRORLOG and are named as ERRORLOG.<EM>n</EM> files. The most recent has no extension the rest 1 to 6.</P>
+<P>Yesterday we looked at <A href="/blog/reading-todays-sql-error-log-with-powershell/" rel=noopener target=_blank>Reading Todays SQL Error Log</A> Today we are going to search all* of the SQL Error Logs. This is usually used by DBAs to troubleshoot issues</P>
+<P>The SQL Server Error Logs (by default) are located in the folder Program Files\Microsoft SQL Server\MSSQL.<EM>n</EM>\MSSQL\LOG\ERRORLOG and are named as ERRORLOG.<EM>n</EM> files. The most recent has no extension the restundefinedto 6.</P>
 <P>Using PowerShell you can easily find the location of the SQL Error Log using the ErrorLogPath Property</P>
 <P><A href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image63.png"><IMG title=image style="BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BACKGROUND-IMAGE: none; BORDER-BOTTOM-WIDTH: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; DISPLAY: inline; PADDING-RIGHT: 0px; BORDER-TOP-WIDTH: 0px" border=0 alt=image src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image_thumb63.png?resize=630%2C53" width=630 height=53 data-recalc-dims="1" loading="lazy"></A></P>
 <P>You can also read it with PowerShell using the ReadErrorLog Method. This has the following properties LogDate, Processinfo and Text. You can easily filter by any of those with a bit of PowerShell 🙂</P>
@@ -50,5 +50,5 @@ tags:
 
 
 <P>&nbsp;</P>
-<P>* Technically we are only searching the default number of 7 but if your environment is different you can easily add the lines to the function</P>
+<P>* Technically we are only searching the default number ofundefinedbut if your environment is different you can easily add the lines to the function</P>
 

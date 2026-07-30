@@ -65,8 +65,8 @@ I then reproduced the error and opened the log file this is what I got
 > at System.Management.Automation.Runspaces.PipelineBase.Invoke(IEnumerable input)  
 > at System.Management.Automation.PowerShell.Worker.ConstructPipelineAndDoWork(Runspace rs, Boolean performSyncInvoke)  
 > at System.Management.Automation.PowerShell.Worker.CreateRunspaceIfNeededAndDoWork(Runspace rsToUse, Boolean isSync)  
-> at System.Management.Automation.PowerShell.CoreInvokeHelper\[TInput,TOutput\](PSDataCollection\`1 input, PSDataCollection\`1 output, PSInvocationSettings settings)  
-> at System.Management.Automation.PowerShell.CoreInvoke\[TInput,TOutput\](PSDataCollection\`1 input, PSDataCollection\`1 output, PSInvocationSettings settings)  
+> at System.Management.Automation.PowerShell.CoreInvokeHelper\[TInput,TOutput\](PSDataCollection\ `1 input, PSDataCollection\` 1 output, PSInvocationSettings settings)  
+> at System.Management.Automation.PowerShell.CoreInvoke\[TInput,TOutput\](PSDataCollection\ `1 input, PSDataCollection\` 1 output, PSInvocationSettings settings)  
 > at System.Management.Automation.PowerShell.Invoke(IEnumerable input, PSInvocationSettings settings)  
 > at Microsoft.PowerShell.EditorServices.AnalysisService.InvokePowerShell(String command, IDictionary`2 paramArgMap)  
 > at System.Threading.Tasks.Task`1.InnerInvoke()  
@@ -85,7 +85,7 @@ I then reproduced the error and opened the log file this is what I got
 Open an issue on GitHub
 -----------------------
 
-I couldnt quickly see what was happening so [I opened an issue](https://github.com/PowerShell/vscode-powershell/issues/1193) on the [vscode-powershell repo](https://github.com/PowerShell/vscode-powershell) by going to issues and clicking new issue and following the instructions
+I couldnt quickly see what was happening so [I opened an issue](https://github.com/PowerShell/vscode-powershell/issues/1193?WT.mc_id=DP-MVP-5002693) on the [vscode-powershell repo](https://github.com/PowerShell/vscode-powershell?WT.mc_id=DP-MVP-5002693) by going to issues and clicking new issue and following the instructions
 
 [![new issue.png](https://blog.robsewell.com/assets/uploads/2018/02/new-issue.png)](https://blog.robsewell.com/assets/uploads/2018/02/new-issue.png)
 

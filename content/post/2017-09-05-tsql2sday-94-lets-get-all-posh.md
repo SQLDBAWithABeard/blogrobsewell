@@ -40,7 +40,7 @@ It is no surprise to those that know me that I will choose PowerShell as the top
 
 If you don't know or use PowerShell GREAT! That's awesome.
 
-Please spend an hour or so with it and tell us how you got on and what and how you learned. Just like [Erik and Brent did](https://www.brentozar.com/archive/2017/07/live-blogging-erik-vs-PowerShell/). You could install one of the community modules like [dbatools](https://dbatools.io), [dbareports](https://dbareports.io) , [SQLDiagAPI](https://www.PowerShellgallery.com/packages/SQLDiagAPI)  or the Microsoft ones [sqlserver](https://www.PowerShellgallery.com/packages/Sqlserver) or [SSRS](https://github.com/Microsoft/ReportingServicesTools) and try them out and tell us what you learned.
+Please spend an hour or so with it and tell us how you got on and what and how you learned. Just like [Erik and Brent did](https://www.brentozar.com/archive/2017/07/live-blogging-erik-vs-PowerShell/). You could install one of the community modules like [dbatools](https://dbatools.io), [dbareports](https://dbareports.io) , [SQLDiagAPI](https://www.PowerShellgallery.com/packages/SQLDiagAPI?WT.mc_id=DP-MVP-5002693)  or the Microsoft ones [sqlserver](https://www.PowerShellgallery.com/packages/Sqlserver?WT.mc_id=DP-MVP-5002693) or [SSRS](https://github.com/Microsoft/ReportingServicesTools?WT.mc_id=DP-MVP-5002693) and try them out and tell us what you learned.
 
 If you want help whilst doing this please make use of the #PowerShellhelp channel in the [SQL Server Community Slack](https://sqlps.io/slack)
 

@@ -38,7 +38,7 @@ tags:
 <P>You need to practice.</P>
 <P>You need to practice your demos.</P>
 <P>You need to practice your demos more than once.</P>
-<P>Being able to reset your demos and run them through will teach you more skills. <A href="https://blog.robsewell.com/pester-for-presentations-ensuring-it-goes-ok/" rel=noopener target=_blank>Using Pester to make sure your environment is in place correctly will help.</A></P>
+<P>Being able to reset your demos and run them through will teach you more skills. <A href="/blog/pester-for-presentations-ensuring-it-goes-ok/" rel=noopener target=_blank>Using Pester to make sure your environment is in place correctly will help.</A></P>
 <P>Run your demos with your machine set up as it will be for the presentation. If you need to have PowerPoint, SSMS, Visual Studio, Visual Studio Code and three SQL instances running then practice with them all running. You should do this so that your timings when running your demos are the same as when you actual present your session. This is even more important if you are doing a webinar as that software will require some of your machines resources which may slow your demo down.</P>
 <P>Knowing that your demos are consistently repeatable and how long they will take will also help to give you the confidence that your presentation will be ok.</P>
 <H2>Deal with them</H2>

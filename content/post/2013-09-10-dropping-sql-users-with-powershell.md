@@ -20,7 +20,7 @@ I am going to write a short post about each one over the next few weeks as I wri
 
 Todays post is not about a question but about a routine task DBAs do. Dropping Logins
 
-Whilst best practice says add users to active directory groups, add the group to roles and give the roles the correct permissions there are many situations where this is not done and DBAs are required to manually remove logins. This can be a time consuming task but one that is essential. There was a time at MyWork when this was achieved via a script that identified which servers had a users login and the task was to connect to each server in SSMS and remove the user from each database and then drop the server login. As you can imagine it was not done diligently. Prior to an audit I was tasked with ensuring that users that had left MyWork did not have logins to any databases. It was this that lead to the [Checking for SQL Logins](https://blog.robsewell.com/checking-for-sql-server-logins-with-powershell/) script and to this one
+Whilst best practice says add users to active directory groups, add the group to roles and give the roles the correct permissions there are many situations where this is not done and DBAs are required to manually remove logins. This can be a time consuming task but one that is essential. There was a time at MyWork when this was achieved via a script that identified which servers had a users login and the task was to connect to each server in SSMS and remove the user from each database and then drop the server login. As you can imagine it was not done diligently. Prior to an audit I was tasked with ensuring that users that had left MyWork did not have logins to any databases. It was this that lead to the [Checking for SQL Logins](/blog/checking-for-sql-server-logins-with-powershell/) script and to this one
 
 It starts exactly the same as the Checking for SQL Logins script by grabbing the list of SQL Servers from the text file and creating an array of user names including all the domains as I work in a multi-domain environment
 
@@ -36,7 +36,7 @@ Repeat the process for the servers and send or save the report as required. Simp
 
 #### IMPORTANT NOTE
 
-This script will not delete logins if they have granted permissions to other users. I always recommend running the [Checking for SQL Logins](https://blog.robsewell.com/checking-for-sql-server-logins-with-powershell/) script after running this script to ensure all logins have been dropped
+This script will not delete logins if they have granted permissions to other users. I always recommend running the [Checking for SQL Logins](/blog/checking-for-sql-server-logins-with-powershell/) script after running this script to ensure all logins have been dropped
 
 This script can be found
 
@@ -76,9 +76,9 @@ This script can be found
     
         #loop through each server and each database and 
         Write-Output "#########################################"
-        Write-Output "`n Database Logins`n"  
+        Write-Output " `n Database Logins` n"  
         foreach ($server in $servers) {      
-            if (Test-Connection $Server -Count 1 -Quiet) {	
+            if (Test-Connection $Server -Count`n Servers Logins`-Quiet) {	
                 $srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server')     $server
                 #drop database users
                 foreach ($database in $srv.Databases) {
@@ -95,10 +95,10 @@ This script can be found
         }
         
         Write-Output "`n#########################################"
-        Write-Output "`n Servers Logins`n" 
+        Write-Output " `n Servers Logins` n" 
           
         foreach ($server in $servers) {      	
-            if (Test-Connection $Server -Count 1 -Quiet) {
+            if (Test-Connection $Server -Count`n Servers Logins`-Quiet) {
                 $srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server')     $server
                 #drop server logins
                 foreach ($login in $logins) {

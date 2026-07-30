@@ -33,11 +33,11 @@ Now this means that you get to see my awesome [404 page ](https://blog.robsewell
 
 This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.
 
-So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts [Running GitHub Pages locally](2021-04-11-locally-viewing-github-pages-new-data-saturdays.md) or [Running GitHub Pages locally with a Remote Theme (this site has a remote theme)](2021-04-15-locally-viewing-github-pages-locally-with-remote-theme.md). Then I could see the changes locally before pushing them to the repository.
+So the easy thing to do is to edit the code to add the corrected link, push the change and have GitHub Pages do its thing. If I wanted to validate it first then I could use docker and containers as discussed in these two blog posts [Running GitHub Pages locally](/blog/viewing-github-pages-locally-for-data-saturdays/) or [Running GitHub Pages locally with a Remote Theme (this site has a remote theme)](/blog/viewing-github-pages-locally-with-a-remote-theme/). Then I could see the changes locally before pushing them to the repository.
 
-But my brain didn't work in that way. Instead it thought "Hmmm maybe I could do this in the browser in [GitHub Codespaces](https://github.com/features/codespaces) and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code"
+But my brain didn't work in that way. Instead it thought "Hmmm maybe I could do this in the browser in [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=DP-MVP-5002693) and then it could work locally as it will have a dev container (development container) configuration and VS Code will just open that in Docker itself, no need for running docker commands manually and I can write blog posts anywhere there is a browser or VS Code"
 
-The most wonderful Jess Pomfret [Blog](https://jesspomfret.com) [Twitter](https://twitter.com/@jpomfret) and I delivered a [dbatools](https://dbatools.io) Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the [PowerShell Conference Europe](psconf.eu) about using dev containers so I had a little knowledge of how it can be done.
+The most wonderful Jess Pomfret [Blog](https://jesspomfret.com) [Twitter](https://twitter.com/@jpomfret) and I delivered a [dbatools](https://dbatools.io) Training Day at SQL Bits this year which we developed and ran using dev containers. We also presented a session at the [PowerShell Conference Europe](https://psconf.eu) about using dev containers so I had a little knowledge of how it can be done.
 
 # How easy is it ?
 
@@ -51,7 +51,7 @@ First I went to the repository for my website and opened a codespace by clicking
 
 ## Add the development container configuration
 
-Using `CTRL SHIFT + P` to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files
+Using   `CTRL SHIFT + P`   to open the command palette and typing codespaces and choosing the Add Development Container Configuration Files
 
 ![Add the configuration](assets/uploads/2022/07/add-config.png)
 
@@ -64,24 +64,24 @@ and follow the prompts
 
 ## The config files are created
 
-This will create a `.devcontainer` directory with
+This will create a   `.devcontainer`   directory with
 - devcontainer.json
 - Dockerfile
 - post-create.sh
 
-Which will do all that you need. You can stop here. You will just need to run `jekyll serve` to start the website.
+Which will do all that you need. You can stop here. You will just need to run   `jekyll serve`   to start the website.
 
 ## Automatic regeneration
 
 To make it automatically regenerate. I added
 
-`bundle exec jekyll serve --force-polling`
+  `bundle exec jekyll serve --force-polling`  
 
 to the end of the post-create.sh file. This will automatically start the website and regenerate it everytime I make a change :-)
 
 ## View the logs
 
-You can watch the logs of the regeneration with View Creation Log from the command palette - Use `CTRL SHIFT + P` to open it. Then you can see the log output in real-time.
+You can watch the logs of the regeneration with View Creation Log from the command palette - Use   `CTRL SHIFT + P`   to open it. Then you can see the log output in real-time.
 
 ![look at the logs](assets/uploads/2022/07/view-creation-log.png)
 
@@ -95,7 +95,7 @@ If you click that you get a live view of the website so that you can validate th
 
 # And VS Code?
 
-This showed it being created in codespaces in the browser, you can have the same effect in VS Code by adding a `.devcontainer` directory and copying the files from the [vs code dev containers repo](https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/jekyll/.devcontainer)
+This showed it being created in codespaces in the browser, you can have the same effect in VS Code by adding a   `.devcontainer`   directory and copying the files from the [vs code dev containers repo](https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/jekyll/.devcontainer?WT.mc_id=DP-MVP-5002693)
 
 The rest is pretty much the same except the url!
 

@@ -28,7 +28,7 @@ We had discussed previously that it didn’t feel quite right that these communi
  SQL Server Community Collaborative
 -----------------------------------
 
-is born at [https://github.com/sqlcollaborative](https://github.com/sqlcollaborative)
+is born at [https://github.com/sqlcollaborative](https://github.com/sqlcollaborative?WT.mc_id=DP-MVP-5002693)
 
 Nothing much changes except the name. we have even found that all the old links work and GitHub desktop updated. We will continue to make great commands with all of our fantastic collaborators. Discussions will happen in Slack and organisation in Trello and we will continue to grow and learn and teach and share and create together.
 

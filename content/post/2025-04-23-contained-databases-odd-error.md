@@ -29,19 +29,19 @@ It started with a question.
 
 I said No.
 
-Kristian said - Look at this. They had caught a 3rd party vendor running `CREATE LOGIN` statements which had errored. Fortunately, they had used contained databases for the vendor database and the connecting user because they wanted to reduce the surface area that it was able to affect.
+Kristian said - Look at this. They had caught a 3rd party vendor running   `CREATE LOGIN`   statements which had errored. Fortunately, they had used contained databases for the vendor database and the connecting user because they wanted to reduce the surface area that it was able to affect.
 
 ## Always check your sources
 
 So first I tested and I found that I could replicate. I ran it on
 
-`Microsoft SQL Server 2022 (RTM-CU17) (KB5048038) - 16.0.4175.1 (X64)   Dec 13 2024 09:01:53   Copyright (C) 2022 Microsoft Corporation  Developer Edition (64-bit) on Windows Server 2022 Datacenter 10.0 <X64> (Build 20348: ) (Hypervisor)`
+  `Microsoft SQL Server 2022 (RTM-CU17) (KB5048038) - 16.0.4175.1 (X64)   Dec 13 2024 09:01:53   Copyright (C) 2022 Microsoft Corporation  Developer Edition (64-bit) on Windows Server 2022 Datacenter 10.0 <X64> (Build 20348: ) (Hypervisor)`  
 
-Because its what I had available. Kristian, who reported it was running version `16.0.4155.4`
+Because its what I had available. Kristian, who reported it was running version   `16.0.4155.4`  
 
 I created a contained database.
 
-```sql
+  ```sql
 — Running as sysadmin
 
 EXEC sp_configure 'contained database authentication', 1;
@@ -49,10 +49,10 @@ RECONFIGURE;
 
 CREATE DATABASE [containedbeard]
 CONTAINMENT = PARTIAL
-```
-Then a contained user `jessandrob\testuser` as a Windows User (Yes, I used [Jess Pomfret [B](https://jesspomfret.com) and mine test environment. Teamwork makes the dream work! ). I then connected as the contained user and tried to create a SQL login.
+```  
+Then a contained user   `jessandrob\testuser`   as a Windows User (Yes, I used [Jess Pomfret [B](https://jesspomfret.com) and mine test environment. Teamwork makes the dream work! ). I then connected as the contained user and tried to create a SQL login.
 
-```sql
+  ```sql
 USE containedbeard
 GO
 CREATE USER [jessandrob\testuser]
@@ -60,7 +60,7 @@ CREATE USER [jessandrob\testuser]
 --- Connected as jessandrob\testuser the contained database user
 
 CREATE LOGIN IwillFail WITH PASSWORD='whocares!!0'
-```
+```  
 
 As expected this fails with
 
@@ -70,25 +70,25 @@ As expected this fails with
 
 Which is as expected. The same thing also happens if you try to create a windows login for a different account
 
-```sql
+  ```sql
 CREATE LOGIN [JESSANDROB\testuser1] FROM WINDOWS
-```
+```  
 >Msg 15247, Level 16, State 1, Line 5
 >User does not have permission to perform this action.
 
 However, if you try to create a login **as the same Windows user**
 
-```sql
+  ```sql
 CREATE LOGIN [JESSANDROB\testuser] FROM WINDOWS
-```
+```  
 
 The Login gets created.
 
 ## YAY!!! Oh wait... NAY!!!
 
-Lets take a closer look at the login with some [dbatools](dbatools.io).
+Lets take a closer look at the login with some [dbatools](https://dbatools.io).
 
-```powershell
+  ```powershell
 
 PS > Get-DbaLogin -SqlInstance sql1 -Login JESSANDROB\testuser
 
@@ -103,16 +103,16 @@ HasAccess          : False
 IsLocked           :
 IsDisabled         : False
 MustChangePassword :
-```
-Notice the `HasAccess` property is set to `False`. This means that the login cannot connect to the SQL Server instance.
+```  
+Notice the   `HasAccess`   property is set to   `False`  . This means that the login cannot connect to the SQL Server instance.
 
-This is because the contained user does not have the `CONNECT SQL` permission on the server. The login is created, but it cannot be used to connect to the SQL Server instance.
+This is because the contained user does not have the   `CONNECT SQL`   permission on the server. The login is created, but it cannot be used to connect to the SQL Server instance.
 
->`(Get-DbaLogin -SqlInstance sql1 -Login JESSANDROB\testuser|Remove-DbaLogin -Force` will easily remove the annoying login btw )
+>  `(Get-DbaLogin -SqlInstance sql1 -Login JESSANDROB\testuser|Remove-DbaLogin -Force`   will easily remove the annoying login btw )
 
 Kristian found this confusing. As did I.
 
-If you look in the [documentation](https://learn.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=sql-server-ver16) it states:
+If you look in the [documentation](https://learn.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=sql-server-ver16&WT.mc_id=DP-MVP-5002693) it states:
 
 >      The activity of the contained database user is limited to the authenticating database. The database user account must be independently created in each database that the user needs. To change databases, SQL Database users must create a new connection. Contained database users in SQL Server can change databases if an identical user is present in another database.
 

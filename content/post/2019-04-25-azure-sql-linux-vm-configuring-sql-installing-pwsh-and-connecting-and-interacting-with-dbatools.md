@@ -21,7 +21,7 @@ tags:
 image: assets/uploads/2019/04/image-125.png
 
 ---
-In my posts about using Azure Devops to build Azure resources with Terraform, [I built a Linux SQL VM.](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/) I used the [Terraform in this GitHub](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM) repository and created this
+In my posts about using Azure Devops to build Azure resources with Terraform, [I built a Linux SQL VM.](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/) I used the [Terraform in this GitHub](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM?WT.mc_id=DP-MVP-5002693) repository and created this
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-114.png)
 
@@ -73,7 +73,7 @@ and pwsh is ready for use
 Installing dbatools
 -------------------
 
-To install [dbatools](http://dbatools.io) from the [Powershell Gallery](https://www.powershellgallery.com/packages/dbatools) simply run
+To install [dbatools](http://dbatools.io) from the [Powershell Gallery](https://www.powershellgallery.com/packages/dbatools?WT.mc_id=DP-MVP-5002693) simply run
 
    Install-Module dbatools -Scope CurrentUser
 

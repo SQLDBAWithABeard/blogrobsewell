@@ -23,7 +23,7 @@ tags:
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image32.png )](https://blog.robsewell.com/assets/uploads/2013/09/image32.png)
 
-and here are the results from my Azure VM. (See [My previous posts on how to create your own Azure VMs with PowerShell](https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/))
+and here are the results from my Azure VM. (See [My previous posts on how to create your own Azure VMs with PowerShell](/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/))
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image33.png)](https://blog.robsewell.com/assets/uploads/2013/09/image33.png)
 

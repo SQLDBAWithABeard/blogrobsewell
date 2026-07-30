@@ -16,7 +16,7 @@ tags:
 image: assets/uploads/2013/11/image7.png
 
 ---
-This post could also have been titled confusion with `foreach` or `For-EachObject`
+This post could also have been titled confusion with  `foreach`  or  `For-EachObject` 
 
 The scenario – Having created a blank database a number of users and permissions for an external consultant to create a test database for an application I got a phone call.
 
@@ -30,7 +30,7 @@ That ought to do it. Loop through the tables and drop each one. But when I ran i
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/11/image.png)](https://blog.robsewell.com/assets/uploads/2013/11/image4.png)
 
-What I did (which I should have done first up but time pressures hadn’t allowed) was drop the database and write a script to recreate it and all the users and permissions required using my [Create Windows User Function](https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/) and [Add User to Database Role Function](https://blog.robsewell.com/add-user-to-database-role-with-powershell/) but it got me thinking.
+What I did (which I should have done first up but time pressures hadn’t allowed) was drop the database and write a script to recreate it and all the users and permissions required using my [Create Windows User Function](/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/) and [Add User to Database Role Function](https://blog.robsewell.com/add-user-to-database-role-with-powershell/) but it got me thinking.
 
 So I went home and [fired up my Azure VMs](https://blog.robsewell.com/?p=534) and had a play and found two ways of resolving it. But first lets understand what is happening here. I [read this post](http://blog.incworx.com/blog/sharepoint-developer-blog/collection-was-modified-enumeration-operation-may-not-execute-looks-hard-but-it-isnt-v2) which explains it quite well for his script.
 
@@ -60,8 +60,8 @@ Now following the advice from above we can do the following
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/11/image8.png)](https://blog.robsewell.com/assets/uploads/2013/11/image8.png)
 
-First we count the number of tables and set it to a variable and then create a for loop. Note if you put `$i –le $tables`.Count then the script will only delete 4 tables! In the script block we are setting the `$table` variable to the first in the collection and then drops it. List the table names again to check or run `$tables.Count` and you will see that all the tables have been deleted.
+First we count the number of tables and set it to a variable and then create a for loop. Note if you put  `$i –le $tables` .Count then the script will only delete`$tables.Count`tables! In the script block we are setting the  `$table`  variable to the first in the collection and then drops it. List the table names again to check or run  `$tables.Count`  and you will see that all the tables have been deleted.
 
-This was the other solution I found. It makes use of the scripter method to script the Drop commands for the tables add them to a Query string and pass that to `Invoke-SQLCmd` to run it.
+This was the other solution I found. It makes use of the scripter method to script the Drop commands for the tables add them to a Query string and pass that to  `Invoke-SQLCmd`  to run it.
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/11/image9.png)](https://blog.robsewell.com/assets/uploads/2013/11/image9.png)

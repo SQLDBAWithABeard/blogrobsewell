@@ -23,7 +23,7 @@ Create a configuration and save it
 
 Let’s define a configuration and call it production. This is something that I do all of the time so that I can easily run a set of checks with the configuration that I want.
 
-```
+ ```
 # The computername we will be testing
 Set-DbcConfig -Name app.computername -Value $sql0,$SQl1
 # The Instances we want to test
@@ -78,17 +78,17 @@ Set-DbcConfig -Name app.cluster -Value $SQL0
 Set-DbcConfig -Name domain.name -Value 'TheBeard.Local'
 ## I also skip the ping check for the listener as we are in Azure
 Set-DbcConfig -Name skip.hadr.listener.pingcheck -Value $true
-```
+``` 
 Now I can export that configuration to a json file and store on a file share or in source control using the code below. This makes it easy to embed the checks into an automation solution
 
-`Export-DbcConfig -Path Git:\\Production.Json`
+ `Export-DbcConfig -Path Git:\\Production.Json` 
 
 and then I can use it with
 
-```
+ ```
 Import-DbcConfig -Path Git:\\Production.Json
 Invoke-DbcCheck
-```
+``` 
 
 [![01 - Invoke-DbcCheck](assets/uploads/2018/05/01-Invoke-DbcCheck.png)](assets/uploads/2018/05/01-Invoke-DbcCheck.png)
 
@@ -99,13 +99,13 @@ Add results to a database
 
 This only gets us the test results on the screen, so if we want to save them to a database we have to use the PassThru parameter for Invoke-DbcCheck. I will run the checks again, save them to a variable
 
-`$Testresults = Invoke-DbcCheck -PassThru -Show Fails`
+ `$Testresults = Invoke-DbcCheck -PassThru -Show Fails` 
 
 Then I can use the [dbatools](http://dbatools.io) [Write-DbaDatatable](https://dbatools.io/functions/write-dbadatatable/) command to write the results to a table in a database. I need to do this twice, once for the summary and once for the test results
-```
+ ```
 $Testresults | Write-DbaDataTable -SqlInstance $sql0 -Database tempdb -Table Prod_dbachecks_summary -AutoCreateTable
 $Testresults.TestResult | Write-DbaDataTable -SqlInstance $sql0 -Database tempdb -Table Prod_dbachecks_detail -AutoCreateTable
-```
+``` 
 and I get two tables one for the summary
 
 [![02 - summary](assets/uploads/2018/05/02-summary.png)](assets/uploads/2018/05/02-summary.png)
@@ -122,7 +122,7 @@ Create tables and triggers
 This is one way of doing it. I am not sure it is the best way but it works! I always look forward to how people take ideas and move them forward so if you have a better/different solution please blog about it and reference it in the comments below
 
 First I created a staging table for the summary results
-```
+ ```
 CREATE TABLE [dbachecks].[Prod_dbachecks_summary_stage](
 	[TagFilter] [nvarchar](max) NULL,
 	[ExcludeTagFilter] [nvarchar](max) NULL,
@@ -137,9 +137,9 @@ CREATE TABLE [dbachecks].[Prod_dbachecks_summary_stage](
 	[TestResult] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-```
+``` 
 and a destination table with a primary key and a date column which defaults to todays date
-```
+ ```
 CREATE TABLE [dbachecks].[Prod_dbachecks_summary](
 	[SummaryID] [int] IDENTITY(1,1) NOT NULL,
 	[TestDate] [date] NOT NULL,
@@ -163,9 +163,9 @@ GO
 
 ALTER TABLE [dbachecks].[Prod_dbachecks_summary] ADD  CONSTRAINT [DF_Prod_dbachecks_summary_TestDate]  DEFAULT (getdate()) FOR [TestDate]
 GO
-```
+``` 
 and added an INSERT trigger to the staging table
-```
+ ```
 CREATE TRIGGER [dbachecks].[Load_Prod_Summary] 
    ON   [dbachecks].[Prod_dbachecks_summary_stage]
    AFTER INSERT
@@ -184,9 +184,9 @@ GO
 
 ALTER TABLE [dbachecks].[Prod_dbachecks_summary_stage] ENABLE TRIGGER [Load_Prod_Summary]
 GO
-```
+``` 
 and for the details I do the same thing. A details table
-```
+ ```
 CREATE TABLE [dbachecks].[Prod_dbachecks_detail](
 	[DetailID] [int] IDENTITY(1,1) NOT NULL,
 	[SummaryID] [int] NOT NULL,
@@ -215,9 +215,9 @@ GO
 
 ALTER TABLE [dbachecks].[Prod_dbachecks_detail] CHECK CONSTRAINT [FK_Prod_dbachecks_detail_Prod_dbachecks_summary]
 GO
-```
+``` 
 A stage table
-```
+ ```
 CREATE TABLE [dbachecks].[Prod_dbachecks_detail_stage](
 	[ErrorRecord] [nvarchar](max) NULL,
 	[ParameterizedSuiteName] [nvarchar](max) NULL,
@@ -233,9 +233,9 @@ CREATE TABLE [dbachecks].[Prod_dbachecks_detail_stage](
 	[StackTrace] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-```
+``` 
 with a trigger
-```
+ ```
 CREATE TRIGGER [dbachecks].[Load_Prod_Detail] 
    ON   [dbachecks].[Prod_dbachecks_detail_stage]
    AFTER INSERT
@@ -256,23 +256,23 @@ GO
 
 ALTER TABLE [dbachecks].[Prod_dbachecks_detail_stage] ENABLE TRIGGER [Load_Prod_Detail]
 GO
-```
+``` 
 
-Then I can use `Write-DbaDatatable` with a couple of extra parameters, `FireTriggers` to run the trigger, `Truncate` and `Confirm:$false` to avoid any confirmation because I want this to run without any interaction and I can get the results into the database.
-```
+Then I can use  `Write-DbaDatatable`  with a couple of extra parameters,  `FireTriggers`  to run the trigger,  `Truncate`  and  `Confirm:$false`  to avoid any confirmation because I want this to run without any interaction and I can get the results into the database.
+ ```
 $Testresults | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_summary_stage -FireTriggers -Truncate -Confirm:$False
 $Testresults.TestResult | Write-DbaDataTable -SqlInstance $Instance -Database $Database -Schema dbachecks -Table Prod_dbachecks_detail_stage -FireTriggers -Truncate -Confirm:$False
-```
+``` 
 [![detail with stage](assets/uploads/2018/05/detail-with-stage.png)](assets/uploads/2018/05/detail-with-stage.png)
 
 Which means that I can now query some of this data and also create PowerBi reports for it.
 
 To enable me to have results for the groups in dbachecks I have to do a little bit of extra manipulation. I can add all of the checks to the database using
-```
+ ```
 Get-DbcCheck | Write-DbaDataTable -SqlInstance $sql0 -Database ValidationResults -Schema dbachecks -Table Checks -Truncate -Confirm:$False -AutoCreateTable
-```
+``` 
 But because the Ola Hallengren Job names are configuration items I need to update the values for those checks which I can do as follows
-```
+ ```
 $query = "
 UPDATE [dbachecks].[Checks] SET [Describe] = 'Ola - " + (Get-DbcConfigValue -Name ola.jobname.systemfull) + "' WHERE [Describe] = 'Ola - `$SysFullJobName'
 UPDATE [dbachecks].[Checks] SET [Describe] = 'Ola - " + (Get-DbcConfigValue -Name ola.jobname.UserFull) + "' WHERE [Describe] = 'Ola - `$UserFullJobName'
@@ -287,8 +287,8 @@ UPDATE [dbachecks].[Checks] SET [Describe] = 'Ola - " + (Get-DbcConfigValue -Nam
 UPDATE [dbachecks].[Checks] SET [Describe] = 'Ola - " + (Get-DbcConfigValue -Name ola.jobname.PurgeBackupHistory) + "' WHERE [Describe] = 'Ola - `$PurgeBackupJobName'
 "
 Invoke-DbaSqlQuery -SqlInstance $SQL0 -Database ValidationResults -Query $query
-```
-You can get a sample Power Bi report in [my Github which also has the code from this blog post](https://github.com/SQLDBAWithABeard/dbachecks-expanded)
+``` 
+You can get a sample Power Bi report in [my Github which also has the code from this blog post](https://github.com/SQLDBAWithABeard/dbachecks-expanded?WT.mc_id=DP-MVP-5002693)
 
 Then you just need to open in PowerBi Desktop and
 
@@ -313,7 +313,7 @@ or even by a group of tests for an instance
 
 [![08 - filter by instance and insance](assets/uploads/2018/05/08-filter-by-instance-and-insance.png)](assets/uploads/2018/05/08-filter-by-instance-and-insance.png)
 
-Hopefully, this will give you some ideas of what you can do with your dbachecks results. [You can find all of the code and the PowerBi in my GitHub](https://github.com/SQLDBAWithABeard/dbachecks-expanded)
+Hopefully, this will give you some ideas of what you can do with your dbachecks results. [You can find all of the code and the PowerBi in my GitHub](https://github.com/SQLDBAWithABeard/dbachecks-expanded?WT.mc_id=DP-MVP-5002693)
 
 Happy Validating!
 

@@ -22,7 +22,7 @@ image: assets/uploads/2019/11/image-40.png
 ---
 
 # Fixing the Failed to generate the compressed file for module C:\Program Files\dotnet\dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps
-The PowerShell module for validating your SQL Server estate [dbachecks](http://beard.media/dbachecks) is deployed via [Azure DevOps, you can see how it is working (or not) via this link](https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&view=mine&definitionId=2)
+The PowerShell module for validating your SQL Server estate [dbachecks](http://beard.media/dbachecks) is deployed via [Azure DevOps, you can see how it is working (or not) via this link](https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&view=mine&definitionId=2&WT.mc_id=DP-MVP-5002693)
 
 Grrr Automation for the Lose!
 -----------------------------
@@ -40,17 +40,17 @@ Until recently, this had worked successfully. In the last few weeks I have been 
     + CategoryInfo          : InvalidOperation: (:) [Write-Error], WriteErrorException
     2019-11-25T22:44:46.8459493Z     + FullyQualifiedErrorId : FailedToCreateCompressedModule,Publish-PSArtifactUtility
 
-You can see these errors in the [release pipeline logs here](https://dev.azure.com/sqlcollaborative/dbachecks/_apps/hub/ms.vss-releaseManagement-web.cd-release-progress?_a=release-environment-logs&releaseId=127&environmentId=127)
+You can see these errors in the [release pipeline logs here](https://dev.azure.com/sqlcollaborative/dbachecks/_apps/hub/ms.vss-releaseManagement-web.cd-release-progress?_a=release-environment-logs&releaseId=127&environmentId=127&WT.mc_id=DP-MVP-5002693)
 
 Confusion
 ---------
 
-This was very frustrating as it was stopping the continuous delivery to the PowerShell Gallery. It was even more confusing as I was successfully deploying the [ADSNotebook module](http://beard.media/ADSNotebook) to the gallery using the same method as [you can see here](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_build/results?buildId=541).
+This was very frustrating as it was stopping the continuous delivery to the PowerShell Gallery. It was even more confusing as I was successfully deploying the [ADSNotebook module](http://beard.media/ADSNotebook) to the gallery using the same method as [you can see here](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_build/results?buildId=541&WT.mc_id=DP-MVP-5002693).
 
 Raise an Issue on GitHub
 ------------------------
 
-I went and looked at the [PowerShellGet GitHub repository](https://github.com/PowerShell/PowerShellGet/) and opened an [issue](https://github.com/PowerShell/PowerShellGet/issues/554) I also found [another issue regarding Required Modules](https://github.com/PowerShell/PowerShellGet/issues/551)
+I went and looked at the [PowerShellGet GitHub repository](https://github.com/PowerShell/PowerShellGet/?WT.mc_id=DP-MVP-5002693) and opened an [issue](https://github.com/PowerShell/PowerShellGet/issues/554?WT.mc_id=DP-MVP-5002693) I also found [another issue regarding Required Modules](https://github.com/PowerShell/PowerShellGet/issues/551?WT.mc_id=DP-MVP-5002693)
 
 But this doesn't help to get dbachecks released.
 
@@ -78,7 +78,7 @@ Can I Automate it?
 
 I would rather not have to deploy manually though, and as I use hosted agents my access to the operating system is limited so I wondered if I could place the nuget.exe in the user profile and it would get used or if it would look for the the latest one. Turns out it uses the one in the user profile 🙂
 
-So now I have this code as a step in my Azure DevOps Release pipeline before calling `Publish-Module` and we have automated the releases again.
+So now I have this code as a step in my Azure DevOps Release pipeline before calling  `Publish-Module`  and we have automated the releases again.
 
 <SCRIPT src="https://gist.github.com/SQLDBAWithABeard/5d36cd1401f1496f9b09ee3354a4d3d9.js"></SCRIPT>
 

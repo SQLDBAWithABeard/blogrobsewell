@@ -19,25 +19,25 @@ Get-Help Invoke-DbcCheck -Online
 
 ![01 - online help.png](https://blog.robsewell.com/assets/uploads/2018/09/01-online-help.png)
 
-I will blog about how dbachecks uses [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/) to do this another time
+I will blog about how dbachecks uses [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/?WT.mc_id=DP-MVP-5002693) to do this another time
 
 PSPowerHour
 -----------
 
-The PowerShell community members [Michael T Lombardi](https://twitter.com/barbariankb) and [Warren Frame](http://twitter.com/psCookieMonster) have created [PSPowerHour](https://github.com/PSPowerHour/PSPowerHour). PSPowerHour is “like a virtual User Group, with a lightning-demo format, and room for non-PowerShell-specific content. Eight community members will give a demo each PowerHour.”
+The PowerShell community members [Michael T Lombardi](https://twitter.com/barbariankb) and [Warren Frame](http://twitter.com/psCookieMonster) have created [PSPowerHour](https://github.com/PSPowerHour/PSPowerHour?WT.mc_id=DP-MVP-5002693). PSPowerHour is “like a virtual User Group, with a lightning-demo format, and room for non-PowerShell-specific content. Eight community members will give a demo each PowerHour.”
 
 [Chrissy](http://twitter.com/cl) blogged about the first one [on the dbatools blog](https://dbatools.io/pspowerhour/)
 
-You can watch the videos on the [Youtube channel](https://www.youtube.com/channel/UCtHKcGei3EjxBNYQCFZ3WNQ) and keep an eye out for more online [PSPowerHours via twitter](https://twitter.com/hashtag/PSPowerHoursrc=hash) or [the GitHub page](https://github.com/PSPowerHour/PSPowerHour).
+You can watch the videos on the [Youtube channel](https://www.youtube.com/channel/UCtHKcGei3EjxBNYQCFZ3WNQ) and keep an eye out for more online [PSPowerHours via twitter](https://twitter.com/hashtag/PSPowerHoursrc=hash) or [the GitHub page](https://github.com/PSPowerHour/PSPowerHour?WT.mc_id=DP-MVP-5002693).
 
-While watching the first group of sessions [Andrew Wickham](https://twitter.com/awickham) demonstrated using dbatools with trace flags and I thought that needs to be added to dbachecks so I created [an issue.](https://github.com/sqlcollaborative/dbachecks/issues/529) Anyone can do this to file improvements as well as bugs for members of the team to code.
+While watching the first group of sessions [Andrew Wickham](https://twitter.com/awickham) demonstrated using dbatools with trace flags and I thought that needs to be added to dbachecks so I created [an issue.](https://github.com/sqlcollaborative/dbachecks/issues/529?WT.mc_id=DP-MVP-5002693) Anyone can do this to file improvements as well as bugs for members of the team to code.
 
 Trace Flags
 -----------
 
 The previous release of dbachecks brought 2 new checks for traceflags. One for traceflags expected to be running and one for traceflags not expected to be running.
 
-You will need to have installed [dbachecks from the PowerShell Gallery](https://www.powershellgallery.com/packages/dbachecks) to do this. This can be done using
+You will need to have installed [dbachecks from the PowerShell Gallery](https://www.powershellgallery.com/packages/dbachecks?WT.mc_id=DP-MVP-5002693) to do this. This can be done using
 
 Install-Module -Name dbachecks
 
@@ -73,7 +73,7 @@ Invoke-DbcCheck -Check TraceFlagsExpected
 
 ![check 1.png](https://blog.robsewell.com/assets/uploads/2018/09/check-1.png)
 
-Maybe this instance is required to have [trace flag 1117 enabled](https://blogs.msdn.microsoft.com/sql_pfe_blog/2017/07/18/trace-flag-1117-growth-and-contention/) so that [all files in a file group grow equally](https://www.brentozar.com/archive/2014/06/trace-flags-1117-1118-tempdb-configuration/), you can set the trace flag you expect to be running using
+Maybe this instance is required to have [trace flag 1117 enabled](https://blogs.msdn.microsoft.com/sql_pfe_blog/2017/07/18/trace-flag-1117-growth-and-contention/?WT.mc_id=DP-MVP-5002693) so that [all files in a file group grow equally](https://www.brentozar.com/archive/2014/06/trace-flags-1117-1118-tempdb-configuration/), you can set the trace flag you expect to be running using
 
 Set-DbcConfig -Name policy.traceflags.expected -Value 1117
 
@@ -98,7 +98,7 @@ Enable-DbaTraceFlag -SqlInstance $instance -TraceFlag 1117
 
 This time when we run the check
 
-`Invoke-DbcCheck -Check TraceFlagsExpected`
+ `Invoke-DbcCheck -Check TraceFlagsExpected` 
 
 it passes
 
@@ -106,20 +106,20 @@ it passes
 
 If you just need to see what trace flags are enabled you can use
 
-`Get-DbaTraceFlag -SqlInstance $instance`
+ `Get-DbaTraceFlag -SqlInstance $instance` 
 
 ![get trace flag.png](https://blog.robsewell.com/assets/uploads/2018/09/get-trace-flag.png)
 
 Reset the configuration for the expected trace flag to an empty array and then set the configuration for traceflags we do not expect to be running to 1117
-```
+ ```
 Set-DbcConfig -Name policy.traceflags.expected -Value @()
 Set-DbcConfig -Name policy.traceflags.notexpected -Value 1117
-```
+``` 
 ![set config 2.png](https://blog.robsewell.com/assets/uploads/2018/09/set-config-2.png)
 
 and then run the trace flags not expected to be running check with
 
-`Invoke-DbcCheck -Check TraceFlagsNotExpected`
+ `Invoke-DbcCheck -Check TraceFlagsNotExpected` 
 
 It will fail as 1117 is still running
 
@@ -132,13 +132,13 @@ and give the message
 
 So to resolve this failing check we need to disable the trace flag and we can do that with dbatools using
 
-`Disable-DbaTraceFlag -SqlInstance $instance -TraceFlag 1117`
+ `Disable-DbaTraceFlag -SqlInstance $instance -TraceFlag 1117` 
 
 ![disable trace flag](https://blog.robsewell.com/assets/uploads/2018/09/disable-trace-flag-1.png)
 
 and now when we run the check
 
-`Invoke-DbcCheck -Check TraceFlagsNotExpected`
+ `Invoke-DbcCheck -Check TraceFlagsNotExpected` 
 
 it passes
 
@@ -146,11 +146,11 @@ it passes
 
 The checks also work with multiple traceflags so you can set multiple values for trace flags that are not expexted to be running
 
-`Set-DbcConfig -Name policy.traceflags.notexpected -Value 1117, 1118`
+ `Set-DbcConfig -Name policy.traceflags.notexpected -Value 1117, 1118` 
 
 and as we saw earlier, you can run both trace flag checks using
 
-`Invoke-DbcCheck -Check TraceFlag`
+ `Invoke-DbcCheck -Check TraceFlag` 
 
 ![multi checks.png](https://blog.robsewell.com/assets/uploads/2018/09/multi-checks.png)
 

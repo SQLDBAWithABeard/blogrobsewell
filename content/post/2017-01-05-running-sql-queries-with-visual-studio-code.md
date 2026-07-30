@@ -13,7 +13,7 @@ tags:
 ---
 Reading this blog post by [Shawn Melton Introduction of Visual Studio Code for DBAs](http://www.sqlshack.com/introduction-visual-studio-code-dbas/) reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code
 
-To download Code go to this link [https://code.visualstudio.com/download](https://code.visualstudio.com/download) and choose your operating system. Code works on Windows, Linux and Mac
+To download Code go to this link [https://code.visualstudio.com/download](https://code.visualstudio.com/download?WT.mc_id=DP-MVP-5002693) and choose your operating system. Code works on Windows, Linux and Mac
 
 ![00-code-download](https://blog.robsewell.com/assets/uploads/2017/01/00-code-download.png)
 

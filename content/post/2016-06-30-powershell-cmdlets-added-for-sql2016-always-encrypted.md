@@ -22,7 +22,7 @@ tags:
   - "trello-board"
 ---
 
-[The post on the SQLServer blog at TechNet by the SQL Server Tools Team today](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/) made me jump out of my seat.
+[The post on the SQLServer blog at TechNet by the SQL Server Tools Team today](https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/?WT.mc_id=DP-MVP-5002693) made me jump out of my seat.
 
 > The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you
 

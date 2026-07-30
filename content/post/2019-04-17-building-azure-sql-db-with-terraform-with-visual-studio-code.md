@@ -86,7 +86,7 @@ So I can put that code into a file (name it main.tf) and alter it with the value
     }
 
     variable "SqlServerName" {
-      description = "The name of the Azure SQL Server to be     created or to have the database on - needs to be unique,     lowercase between 3 and 24 characters including the prefix"
+      description = "The name of the Azure SQL Server to be     created or to have the database on - needs to be unique,     lowercase betweenundefinedandundefinedcharacters including the prefix"
       default     = "jeremy"
     }
     variable "SQLServerAdminUser" {
@@ -99,7 +99,7 @@ So I can put that code into a file (name it main.tf) and alter it with the value
     }
 
     variable "SqlDatabaseName" {
-      description = "The name of the Azure SQL database on - needs     to be unique, lowercase between 3 and 24 characters     including the prefix"
+      description = "The name of the Azure SQL database on - needs     to be unique, lowercase betweenundefinedandundefinedcharacters     including the prefix"
       default     = "jsdb"
     }
 
@@ -153,12 +153,12 @@ and my main.tf then looks like this.
       }
     }
 
-You can find these files in my [GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB/tree/master/Manual) here.
+You can find these files in my [GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB/tree/master/Manual?WT.mc_id=DP-MVP-5002693) here.
 
 Alright – deploy something
 --------------------------
 
-To deploy the code that I have written I need to download Terraform from [https://www.terraform.io/downloads.html](https://www.terraform.io/downloads.html) and then extract the exe to a folder in my PATH. (I chose C:\\Windows). Then in Visual Studio Code I installed two extensions The [Terraform Extension by Mikael Olenfalk](https://marketplace.visualstudio.com/items?itemName=mauve.terraform) which enables syntax highlighting and auto-completion for the tf files and the [Azure Terraform](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform) extension. You will need also need [Node.js from here](https://nodejs.org/en/).
+To deploy the code that I have written I need to download Terraform from [https://www.terraform.io/downloads.html](https://www.terraform.io/downloads.html) and then extract the exe to a folder in my PATH. (I chose C:\\Windows). Then in Visual Studio Code I installed two extensions The [Terraform Extension by Mikael Olenfalk](https://marketplace.visualstudio.com/items?itemName=mauve.terraform&WT.mc_id=DP-MVP-5002693) which enables syntax highlighting and auto-completion for the tf files and the [Azure Terraform](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform&WT.mc_id=DP-MVP-5002693) extension. You will need also need [Node.js from here](https://nodejs.org/en/).
 
 With those in place I navigated to the directory holding my files in Visual Studio Code and pressed F1 and started typing azure terraform and chose Azure Terraform Init
 
@@ -172,7 +172,7 @@ I press F1 again and this time choose Azure Terraform plan. This is going to sho
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-41.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-41.png?ssl=1)
 
-You can see the what is going to be created. It is going to create 3 things
+You can see the what is going to be created. It is going to createundefinedthings
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-42.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-42.png?ssl=1)
 
@@ -196,7 +196,7 @@ Then once I have finished with using the sqlinstance. I can press F1 again and c
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-47.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-47.png?ssl=1)
 
-and you will see the progress for 46 seconds
+and you will see the progress forundefinedseconds
 
 ![](https://blog.robsewell.com/assets/uploads/2019/04/image-50.png)
 
@@ -204,8 +204,8 @@ and all of the resources have gone.
 
 Thats a good start. This enables me to create resources quickly and easily and keep the configuration for them safely in source control and easy to use.
 
-[In my next post I will create an Azure DevOps pipeline to deploy an AZure SQL Db withTerraform](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/).
+[In my next post I will create an Azure DevOps pipeline to deploy an AZure SQL Db withTerraform](/blog/building-azure-sql-db-with-terraform-using-azure-devops/).
 
 [The post after will show how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/)
 
-[The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)
+[The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)

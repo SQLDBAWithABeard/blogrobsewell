@@ -19,7 +19,7 @@ He was getting an error whilst trying to set CLR Enabled during an automatic ins
 
 I was unable to replicate his problem on my servers so I looked at other methods that may assist as well as following up with him to try and understand what was causing his issue. In doing so I worked out the following method to change the CLR Enabled setting by SMO and thought it worth a blog post to share
 
-One way around his issue is to define and then call [Invoke-SQLCmd2 by Chad Miller](http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894) within his script. So his script would look in part as follows
+One way around his issue is to define and then call [Invoke-SQLCmd2 by Chad Miller](http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894?WT.mc_id=DP-MVP-5002693) within his script. So his script would look in part as follows
 
 ![](https://blog.robsewell.com/assets/uploads/2014/05/050514_0904_enableclrwi1.png)
 

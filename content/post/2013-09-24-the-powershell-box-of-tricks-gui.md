@@ -18,7 +18,7 @@ image: assets/uploads/2013/09/image86.png
   
 
 ---
-When I started as a DBA at MyWork I faced a challenge. Many hundreds of databases, dozens of servers and no idea what was on where. It was remembering this situation when new team members were appointed that lead me to write the [Find-Database script](https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/) and I had written a simple GUI using `Read-Host` to enable the newbies to see the functions I had created
+When I started as a DBA at MyWork I faced a challenge. Many hundreds of databases, dozens of servers and no idea what was on where. It was remembering this situation when new team members were appointed that lead me to write the [Find-Database script](/blog/using-powershell-to-find-a-database-amongst-hundreds/) and I had written a simple GUI using  `Read-Host`  to enable the newbies to see the functions I had created
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image85.png)](https://blog.robsewell.com/assets/uploads/2013/09/image85.png)
 
@@ -26,7 +26,7 @@ Whilst writing this series of posts I decided that I would create a new GUI
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image86.png)](https://blog.robsewell.com/assets/uploads/2013/09/image86.png)
 
-I wanted the choice to be made and then the form to close so I had to use a separate function for calling all the functions referenced in the form. This function takes an input `$x` and depending on the value runs a particular code block. Inside the code block I ask some questions using `Read-Host` to set the variables, load the function and run it as shown below for [Show-DriveSizes](https://blog.robsewell.com/checking-drive-sizes-with-powershell/)
+I wanted the choice to be made and then the form to close so I had to use a separate function for calling all the functions referenced in the form. This function takes an input  `$x`  and depending on the value runs a particular code block. Inside the code block I ask some questions using  `Read-Host`  to set the variables, load the function and run it as shown below for [Show-DriveSizes](/blog/checking-drive-sizes-with-powershell/)
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image87.png)](https://blog.robsewell.com/assets/uploads/2013/09/image87.png)
 
@@ -50,7 +50,7 @@ We need a Text Box for the User to put their choice in. Again the code is fairly
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image92.png)](https://blog.robsewell.com/assets/uploads/2013/09/image92.png)
 
-The next bit of code enables the user to use Enter and Escape keys to Go or to Quit. Notice that both call the `Close()` method to close the Form and return to the PowerShell console
+The next bit of code enables the user to use Enter and Escape keys to Go or to Quit. Notice that both call the  `Close()`  method to close the Form and return to the PowerShell console
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image93.png)](https://blog.robsewell.com/assets/uploads/2013/09/image93.png)
 
@@ -62,6 +62,6 @@ and finally Activate the Form, Show it and run the function to call the correct 
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image95.png)](https://blog.robsewell.com/assets/uploads/2013/09/image95.png)
 
-The `Return-Answer` function simply calls the `Return-Function` function. I am not sure if that is the best way of doing it but it works in the way i wanted it to
+The  `Return-Answer`  function simply calls the  `Return-Function`  function. I am not sure if that is the best way of doing it but it works in the way i wanted it to
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image96.png)](https://blog.robsewell.com/assets/uploads/2013/09/image96.png)

@@ -19,7 +19,7 @@ image: assets/uploads/2018/01/02-Pester-results-1.png
 ---
 TagLine – My goal – Chrissy will appreciate Unit Tests one day 🙂
 
-[Chrissy has written about dbachecks](https://dbatools.io/new-module-coming-soon/) the new up and coming community driven open source PowerShell module for SQL DBAs to validate their SQL Server estate. we have taken some of the ideas that we have presented about a way of using [dbatools](http://dbatools.io) with [Pester](https://github.com/Pester/Pester) to validate that everything is how it should be and placed them into a meta data driven framework to make things easy for anyone to use. It is looking really good and I am really excited about it. It will be released very soon.
+[Chrissy has written about dbachecks](https://dbatools.io/new-module-coming-soon/) the new up and coming community driven open source PowerShell module for SQL DBAs to validate their SQL Server estate. we have taken some of the ideas that we have presented about a way of using [dbatools](http://dbatools.io) with [Pester](https://github.com/Pester/Pester?WT.mc_id=DP-MVP-5002693) to validate that everything is how it should be and placed them into a meta data driven framework to make things easy for anyone to use. It is looking really good and I am really excited about it. It will be released very soon.
 
 Chrissy and I will be doing a pre-con at [SQLBits](http://sqlbits.com) where we will talk in detail about how this works. [You can find out more and sign up here](http://sqlbits.com/information/event17/Reliable_Repeatable__Automated_PowerShell_for_DBAs/trainingdetails.aspx)
 

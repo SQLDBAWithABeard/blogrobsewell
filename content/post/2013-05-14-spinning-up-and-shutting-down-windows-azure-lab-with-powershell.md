@@ -10,7 +10,7 @@ tags:
 ---
 So at SQL Bits I went to [Chris Testa-O’Neill’s](http://sqlbits.com/Speakers/Chris_Testa-O_Neill) session on certification. This has inspired me to start working on passing the MCSE exams. My PC at home doesn’t have much grunt and my tablet wont run SQL. I considered some new hardware but I knew I would have a hard time getting authorisation from the Home Financial Director (Mrs F2B) despite my all the amazing justification and benefits I could provide!!
 
-So I looked at [Windows Azure](http://www.windowsazure.com/en-us/) as a means of having some servers to play with. After watching [this video](http://blogs.msdn.com/b/plankytronixx/archive/2013/03/19/video-explanation-of-pop-up-labs-in-the-cloud.aspx) and then [this video](http://channel9.msdn.com/Series/Windows-Azure-Virtual-Machines-and-Networking-Tutorials/Creating-Windows-Azure-Virtual-Machines-with-PowerShell) I took the plunge and dived in.
+So I looked at [Windows Azure](http://www.windowsazure.com/en-us/) as a means of having some servers to play with. After watching [this video](http://blogs.msdn.com/b/plankytronixx/archive/2013/03/19/video-explanation-of-pop-up-labs-in-the-cloud.aspx?WT.mc_id=DP-MVP-5002693) and then [this video](http://channel9.msdn.com/Series/Windows-Azure-Virtual-Machines-and-Networking-Tutorials/Creating-Windows-Azure-Virtual-Machines-with-PowerShell?WT.mc_id=DP-MVP-5002693) I took the plunge and dived in.
 
 After setting up my account I read a few blogs about Powershell and Windows Azure.
 
@@ -24,17 +24,17 @@ First you’ll need [Microsoft Web Platform Installer](http://www.microsoft.com/
 
 This gives you all the Windows Azure Powershell Cmdlets.
 
-`Get-AzurePublishSettingsFile` which will give you a download for a file.  PowerShell will use this to control your Windows Azure so although you need it now, keep it safe and probably out of your usual directories so it doesn’t get compromised.
+ `Get-AzurePublishSettingsFile`  which will give you a download for a file.  PowerShell will use this to control your Windows Azure so although you need it now, keep it safe and probably out of your usual directories so it doesn’t get compromised.
 
-`Import-AzurePublishSettingsFile` and the file path to import it into Powershell.
+ `Import-AzurePublishSettingsFile`  and the file path to import it into Powershell.
 
-`Get-AzureSubscription` to see the results and note the subscription name.
+ `Get-AzureSubscription`  to see the results and note the subscription name.
 
 Now we create a storage account
 
     New-AzureStorageAccount -StorageAccountName chooseaname -label 'a label' -Description 'The Storage Account for the Lab Spin Up and Down' -Location 'West Europe'
 
-`Get-AzureLocation `will show you the available locations if you want a different one.I then set the storage account to be default for my subscription
+ `Get-AzureLocation ` will show you the available locations if you want a different one.I then set the storage account to be default for my subscription
 
     Set-AzureSubscription -SubscriptionName 'Subscription Name from Earlier' -CurrentStorageAccount 'theoneyouchose'
 
@@ -52,7 +52,7 @@ First we set some variables
     $Service = 'theservicenameyouchoose'
     $Location = 'West Europe'
 
-To choose an image run `Get-AzureVMImage|select name` and pick the one for you. I chose a size of extra small as it is cheaper. As I won’t be pushing the servers very hard I don’t need any extra grunt. Set up a service the first time and use the location switch but then to use the same service again remove the location switch otherwise you will get an error stating DNS name already in use which is a little confusing until you know.
+To choose an image run  `Get-AzureVMImage|select name`  and pick the one for you. I chose a size of extra small as it is cheaper. As I won’t be pushing the servers very hard I don’t need any extra grunt. Set up a service the first time and use the location switch but then to use the same service again remove the location switch otherwise you will get an error stating DNS name already in use which is a little confusing until you know.
 
     $vm = New-AzureVMConfig -Name $SQL1 -InstanceSize $size -ImageName $image |
     Add-AzureProvisioningConfig -AdminUsername $AdminUser -Password $password -Windows |
@@ -77,7 +77,7 @@ The next bit of the script downloads the RDP shortcut to a folder on the desktop
     Get-AzureRemoteDesktopFile -ServiceName $Service -name $SQL1 -LocalPath $SQL1RDP
     Invoke-Expression $SQL1RDP
 
-The `Invoke-Expression` will open up a RDP connection but unless you have gone to get a cuppa I would check in your management portal before trying to connect as the server may still be provisioning. In fact,I would go to your Windows Azure Management Portal and check your virtual machine tab where you will see your VMs being provisioned
+The  `Invoke-Expression`  will open up a RDP connection but unless you have gone to get a cuppa I would check in your management portal before trying to connect as the server may still be provisioning. In fact,I would go to your Windows Azure Management Portal and check your virtual machine tab where you will see your VMs being provisioned
 
 Now you have three servers but to be able to connect to them from your desktop and practice managing them you still need to do a bit of work. RDP to each server run the following script in Powershell.
 
@@ -96,11 +96,11 @@ Now you have three servers but to be able to connect to them from your desktop a
     netsh advfirewall firewall set rule group="Windows Firewall Remote Management" new enable =yes
     netsh advfirewall firewall set rule group="windows management instrumentation (wmi)" new enable =yes\
 
-I use netsh advfirewall as I find it easy and I understand it. I know you can do it with `Set-NetFirewallProfile` but that’s the beauty of Powershell you can still use all your old cmd knowledge as well. This will allow you to remote manage the servers. You can do it from your laptop with the creation of some more endpoints but I just use one server as a management server for my learning.
+I use netsh advfirewall as I find it easy and I understand it. I know you can do it with  `Set-NetFirewallProfile`  but that’s the beauty of Powershell you can still use all your old cmd knowledge as well. This will allow you to remote manage the servers. You can do it from your laptop with the creation of some more endpoints but I just use one server as a management server for my learning.
 
 The last part of the script changes SQL to Mixed authentication mode and creates a SQL user with sysadmin and restarts the SQL service on each server and that’s it. Its ready to go.
 
-Open up SSMS on your desktop and connect to `YourServiceName.Cloudapp.Net, PortNumber` (57500-5702 in this example)
+Open up SSMS on your desktop and connect to  `YourServiceName.Cloudapp.Net, PortNumber`  (57500-5702 in this example)
 To remove all of the implementation run the code that is commented out in steps. First it assigns a variable to each VHD, then it removes the VM. You should then wait a while before removing the VHDs as it takes a few minutes to remove the lease and finally remove the RDP shortcuts as next time they will be different.
 
     <#

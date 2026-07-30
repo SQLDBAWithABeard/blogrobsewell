@@ -15,7 +15,7 @@ tags:
 ---
 This morning I have been setting up my Azure Servers in preparation for my presentation to the Cardiff SQL User Group this month.
 
-I used my scripts from [My Post on Spinning Up Azure SQL Boxes](https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/) to create two servers and then I wanted to create some databases
+I used my scripts from [My Post on Spinning Up Azure SQL Boxes](/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/) to create two servers and then I wanted to create some databases
 
 I decided it was time to write a Create-Database function using a number of scripts that I have used to create individual databases.
 
@@ -27,7 +27,7 @@ Whilst finalising the function I didn’t quite get it right sometimes and was f
 
 Not the most useful of errors to troubleshoot. The issue could be anywhere in the script
 
-You can view the last errors PowerShell has shown using $Errors. This gives you the last 500 errors but you can see the last error by using $Error\[0\] if you pipe it to Format-List you can get a more detailed error message so I added a try catch to the function which gave me an error message I could resolve.
+You can view the last errors PowerShell has shown using $Errors. This gives you the lastundefinederrors but you can see the last error by using $Error\[0\] if you pipe it to Format-List you can get a more detailed error message so I added a try catch to the function which gave me an error message I could resolve.
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image40.png)](https://blog.robsewell.com/assets/uploads/2013/09/image40.png)
 
@@ -79,7 +79,7 @@ It can then be called as follows
 
 or by setting all the parameters 
 
-    Create-Database -Server Fade2black -DBName DatabaseTest -SysFileSize 10 -UserFileSize 15 -LogFileSize 20 -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize 250 -DBRecModel FULL
+    Create-Database -Server Fade2black -DBName DatabaseTest -SysFileSizeundefined-UserFileSizeundefined-LogFileSizeundefined-UserFileGrowthundefined-UserFileMaxSizeundefined-LogFileGrowthundefined-LogFileMaxSizeundefined-DBRecModel FULL
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image50.png)](https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/image50.png)
 
@@ -97,8 +97,8 @@ The script can be found here
     # COMMENTS: Load function for creating a database
     #           Only Server and DB Name are mandatory the rest will be set to     small defaults
     #
-    # USAGE:  Create-Database -Server Fade2black -DBName Test35 -SysFileSize 10     -UserFileSize 15 -LogFileSize 20
-    # -UserFileGrowth 7 -UserFileMaxSize 150 -LogFileGrowth 8 -LogFileMaxSize     250 -DBRecModel FULL
+    # USAGE:  Create-Database -Server Fade2black -DBName Test35 -SysFileSizeundefined    -UserFileSizeundefined-LogFileSize 20
+    # -UserFileGrowthundefined-UserFileMaxSizeundefined-LogFileGrowthundefined-LogFileMaxSize    undefined-DBRecModel FULL
     # ————————————————————————
     
     

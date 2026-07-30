@@ -11,10 +11,10 @@ tags:
 ---
 When you look after more than a few SQL Servers you will need to perform the same actions against a number of  them and that is where PowerShell will be of great benefit. Recently I needed to ensure that all SQL Servers had a certain Extended Event Session set to auto-start and that it was running. I have used the Always On health session in the example below but you could use the same code below and do this for any Extended Event session. Just note that the code below checks for the existence of an Availability Group which may not be what you require.
 
-As always when I started to look at Powershell for a solution [I turned to MSDN and found this page](https://msdn.microsoft.com/en-us/library/ff877887.aspx) and also a quick search [found Mike Fals blogpost](http://www.mikefal.net/2015/06/09/tsql2sday-powershell-and-extended-events/) which showed me how to get going.
+As always when I started to look at Powershell for a solution [I turned to MSDN and found this page](https://msdn.microsoft.com/en-us/library/ff877887.aspx?WT.mc_id=DP-MVP-5002693) and also a quick search [found Mike Fals blogpost](http://www.mikefal.net/2015/06/09/tsql2sday-powershell-and-extended-events/) which showed me how to get going.
 
 I used my [DBA Database as described in my previous posts ](/using-power-bi-with-my-dba-database/)and created a query to check for all of the servers that were active and contactable
-```
+ ```
 SELECT
 
 IL.ServerName
@@ -28,9 +28,9 @@ AND Inactive = 0
 and used Invoke-SQLCMD to gather the Server Names
 
 $Results = (Invoke-Sqlcmd -ServerInstance $DBADatabaseServer -Database DBADatabase -Query $query -ErrorAction Stop).ServerName
-```
+``` 
 Then it was a case of looping through the servers and connecting to the XEvent Store and checking if the required extended event was started and set to auto-start and if not altering those settings
-```
+ ```
 ## Can we connect to the XEStore?
 if(Test-Path SQLSERVER:\XEvent\$Server)
 {
@@ -50,9 +50,9 @@ if($Running -eq $false)
 $XEStore.Sessions[$XEName].Start()
 }
 }
-```
-Very quick and simple and hopefully of use to people, this could easily be turned into a function. The full script is below and also available [here on the Powershell gallery](https://www.powershellgallery.com/packages/Set-ExtendedEventsSessionstoAutoStart/1.0/DisplayScript) or by running  `Save-Script -Name Set-ExtendedEventsSessionstoAutoStart -Path <path>`
-```
+``` 
+Very quick and simple and hopefully of use to people, this could easily be turned into a function. The full script is below and also available [here on the Powershell gallery](https://www.powershellgallery.com/packages/Set-ExtendedEventsSessionstoAutoStart/1.0/DisplayScript?WT.mc_id=DP-MVP-5002693) or by running   `Save-Script -Name Set-ExtendedEventsSessionstoAutoStart -Path <path>` 
+ ```
 <#
 .Synopsis
    Connects to the servers in the DBA Database and for Servers above 2012 sets alwayson_health Extended Events Sessions to Auto-Start and starts it if it is not running
@@ -150,4 +150,4 @@ foreach($Server in $Results)
             ##  Write-Output "$server not 2012 or above"
             }
 }
-```
+``` 

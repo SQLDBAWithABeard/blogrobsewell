@@ -16,11 +16,11 @@ image: assets/uploads/2014/11/opsman1.jpg
 ---
 Operational Insights is a service that has been added in preview to Azure. It enables you to collect, combine, correlate and visualize all your machine data in one place. It can collect data from all of your machines either via SCOM or by using an agent. Once the data is collected Operational Insights has a number of Intelligence Packs which have pre-configured rules and algorithms to provide analysis in various areas including for SQL Server
 
-[http://azure.microsoft.com/en-gb/services/operational-insights/](http://azure.microsoft.com/en-gb/services/operational-insights/)
+[http://azure.microsoft.com/en-gb/services/operational-insights/](http://azure.microsoft.com/en-gb/services/operational-insights/?WT.mc_id=DP-MVP-5002693)
 
 I thought I would take a look. I have an installation of SCOM in my lab on my laptop and I read the instructions to see how to connect it to Operational Insights. (You don’t have to have a SCOM installation to use Operational insights you can make use of an agent as well just follow the steps from the page below)
 
-[http://azure.microsoft.com/en-us/trial/operational-insights-get-started/](http://azure.microsoft.com/en-us/trial/operational-insights-get-started/)
+[http://azure.microsoft.com/en-us/trial/operational-insights-get-started/](http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?WT.mc_id=DP-MVP-5002693)
 
 It really is very simple
 
@@ -34,7 +34,7 @@ Once you have done that, if you have an installation of SCOM 2012 you need to be
 
 If you have SCOM 2012R2 the connector is already installed and to connect your SCOM to Operational Insights is very very easy as you can see on
 
-[http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&step3=SCOMcustomer](http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&step3=SCOMcustomer)
+[http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&step3=SCOMcustomer](http://azure.microsoft.com/en-us/trial/operational-insights-get-started/?step2=withaccount&step3=SCOMcustomer&WT.mc_id=DP-MVP-5002693)
 
 1.  In the Operations Manager Console, click Administration.
 2.  Under Administration, select System Center Advisor, and then click Advisor Connection.
@@ -64,7 +64,7 @@ There are also two ‘coming soon’ Intelligence packs
 
 You then (if you are like me) have a period of frustration whilst you wait for all of the data to be uploaded and aggregated but once it is you sign into the Operational Insights Portal
 
-[https://preview.opinsights.azure.com](https://preview.opinsights.azure.com) and it will look like this
+[https://preview.opinsights.azure.com](https://preview.opinsights.azure.com?WT.mc_id=DP-MVP-5002693) and it will look like this
 
 [![opsman1](https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg)](https://blog.robsewell.com/assets/uploads/2014/11/opsman1.jpg)
 
@@ -103,7 +103,7 @@ By looking at the search for the Operations and Monitoring Focus Area shown abov
 
 > Type:SQLAssessmentRecommendation IsRollup=true RecommendationPeriod=2014-11 FocusArea=”Operations and Monitoring” RecommendationResult=Failed | sort RecommendationWeight desc
 
-I saw that `RecommendationResult=Failed` and changed it to `RecommendationResult=Passed`. This enabled me to see all of the Recommendations that had been passed in the Focus Area and clicking the export button downloaded a csv file. I deleted `RecommendationResult=Passed` from the search and that gave me all of the recommendations that made up that Focus Area
+I saw that  `RecommendationResult=Failed`  and changed it to  `RecommendationResult=Passed` . This enabled me to see all of the Recommendations that had been passed in the Focus Area and clicking the export button downloaded a csv file. I deleted  `RecommendationResult=Passed`  from the search and that gave me all of the recommendations that made up that Focus Area
 
 - Operations and Monitoring Focus Area
 - Recommendation

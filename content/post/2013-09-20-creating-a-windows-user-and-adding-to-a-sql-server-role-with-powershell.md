@@ -13,7 +13,7 @@ tags:
 
 ---
 <P>Another post in the <A href="https://blog.robsewell.com/tags/#box-of-tricks" rel=noopener target=_blank>PowerShell Box of Tricks</A> series.</P>
-<P>In a previous post <A href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" rel=noopener target=_blank>Checking SQL Server User Role Membership</A> we showed how to check which roles users were added to. This function allows you to add Windows Users to Server Roles. A nice simple function which can easily be piped into to allow users to be added form a list in a text file, csv file or even from Active Directory. This makes it easy to recreate Dev and Test environments and can be added to Disaster Recovery processes.</P>
+<P>In a previous post <A href="/blog/checking-sql-server-user-role-membership-with-powershell/" rel=noopener target=_blank>Checking SQL Server User Role Membership</A> we showed how to check which roles users were added to. This function allows you to add Windows Users to Server Roles. A nice simple function which can easily be piped into to allow users to be added form a list in a text file, csv file or even from Active Directory. This makes it easy to recreate Dev and Test environments and can be added to Disaster Recovery processes.</P>
 <P>We create a Login Object, set the Logintype and create it with the Create Method. It is then added to the Role specified.</P>
 
 [![image](https://blog.robsewell.com/assets/uploads/2013/09/image67.png)](https://blog.robsewell.com/assets/uploads/2013/09/image67.png)

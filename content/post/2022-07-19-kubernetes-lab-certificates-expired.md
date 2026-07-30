@@ -23,15 +23,15 @@ image: assets/uploads/2022/containers.jpg
 
 # It won't start!
 
-I have a 3 node kubernetes cluster running in my office that I have used for my [Azure Arc-enabled data services](https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693) presentations over the last year ([Side note, my presentations are here](beard.media/presentations)). A few days ago after a power cut I tried to connect to my cluster with [Lens](https://k8slens.dev/) and was not able to.
+I have a 3 node kubernetes cluster running in my office that I have used for my [Azure Arc-enabled data services](https://azure.microsoft.com/en-gb/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693) presentations over the last year ([Side note, my presentations are here](https://beard.media/presentations)). A few days ago after a power cut I tried to connect to my cluster with [Lens](https://k8slens.dev/) and was not able to.
 
-I tried to run `kubectl get nodes` but got no response.
+I tried to run  `kubectl get nodes`  but got no response.
 
 ## Try on the master node
 
 I used my windows terminal profile that ssh's into the master node and ran
 
-`systemctl status kubelet`
+ `systemctl status kubelet` 
 
 this resulted in
 
@@ -54,7 +54,7 @@ Jul 07 19:37:47 beardlinux kubelet[1201]: E0707 09:37:47.418240    1201 kubelet.
 
 So beardlinux is the master node that we are running on so why can it not be found?
 
-`journalctl -u kubelet -n 50`
+ `journalctl -u kubelet -n 50` 
 
 that will show me, i thought. It showed
 
@@ -93,13 +93,13 @@ so after some investigation I found
 > Jul 06 08:03:09 beardlinux kubelet[1021]: I0706 08:03:09.755007    1021 kubelet_node_status.go:71] Attempting to register node beardlinux
 Jul 06 08:03:09 beardlinux kubelet[1021]: E0706 08:03:09.755338    1021 kubelet_node_status.go:93] Unable to register node "beardlinux" with API server: Post "https://192.168.2.62:6443/api/v1/nodes": dial tcp 192.168.2.62:6443: connect: connection refused
 
-which lead me to an issue on GitHub where there was a [comment](https://github.com/kubernetes/kubeadm/issues/1026#issuecomment-768832968) to check for expired certificates
+which lead me to an issue on GitHub where there was a [comment](https://github.com/kubernetes/kubeadm/issues/1026?WT.mc_id=DP-MVP-5002693#issuecomment-768832968) to check for expired certificates
 
 ## Do I have expired certificates?
 
 You can check your certificates using
 
-`kubeadm certs check-expiration`
+ `kubeadm certs check-expiration` 
 
 which resulted in
 
@@ -107,7 +107,7 @@ which resulted in
 
 ## And renewing them
 
-They are renewed using `kubeadm certs renew all`
+They are renewed using  `kubeadm certs renew all` 
 
 >root@beardlinux:/home/rob# kubeadm certs renew all
 [renew] Reading configuration from the cluster...

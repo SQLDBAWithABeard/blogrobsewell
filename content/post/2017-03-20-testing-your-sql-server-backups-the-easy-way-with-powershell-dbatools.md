@@ -12,7 +12,7 @@ tags:
   - restore
 
 ---
-<P>In a <A href="https://blog.robsewell.com/restoring-an-entire-sql-server-user-databases-with-powershell-using-dbatools/">previous post</A> I wrote about how easy it was to restore a whole SQL Servers user databases from a&nbsp; directory&nbsp;using the <A href="https://dbatools.io">dbatools module.</A> Maybe it is a good idea to look at for disaster recovery scenarios but&nbsp;even PowerShell is&nbsp;going to be useless if your backups don’t work</P>
+<P>In a <A href="/blog/restoring-an-entire-sql-server-user-databases-with-powershell-using-dbatools/">previous post</A> I wrote about how easy it was to restore a whole SQL Servers user databases from a&nbsp; directory&nbsp;using the <A href="https://dbatools.io">dbatools module.</A> Maybe it is a good idea to look at for disaster recovery scenarios but&nbsp;even PowerShell is&nbsp;going to be useless if your backups don’t work</P>
 <P>But setting up a solution to test your backups (technically test your restores) is difficult isn’t it?</P>
 <P>Lets use the <A href="https://dbatools.io" rel=noopener target=_blank>dbatools module</A> and see how easy it is</P>
 <P>The dbatools module has a command called <A href="https://dbatools.io/functions/Test-DbaLastBackup/" rel=noopener target=_blank>Test-DbaLastBackup </A>if you look at the page or at the help&nbsp;using</P>
@@ -42,7 +42,7 @@ tags:
 <P>Its possible to reduce the amount of checks that are done. If you only want to do a Verify Only on the backup then you can use the -VerifyOnly switch, you can skip the DBCC check by using the -NoCheck switch and you can leave the test restore databases on the server using the -NoDrop switch</P>
 <P>Happy Automating</P>
 <P>&nbsp;</P>
-<P>NOTE – The major 1.0 release of dbatools due in the summer 2017 may have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using</P><PRE class="lang:ps decode:true"> Get-Module dbatools</PRE>
+<P>NOTE – The major 1.0 release of dbatools due in the summerundefinedmay have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using</P><PRE class="lang:ps decode:true"> Get-Module dbatools</PRE>
 <P>and update it using an Administrator PowerShell session with</P><PRE class="lang:ps decode:true"> Update-Module dbatools</PRE>
 <P>You may find that you get no output from Update-Module as you have the latest version. If&nbsp;you have not installed the&nbsp;module from the PowerShell Gallery using</P><PRE class="lang:ps decode:true">Install-Module dbatools</PRE>
 <P>Then you can use</P><PRE class="lang:ps decode:true">Update-dbatools</PRE>

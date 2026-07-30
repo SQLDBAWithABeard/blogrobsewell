@@ -25,29 +25,29 @@ You can create a module for your SQL Instance. I look up [the resource informati
 
 # Parameters
 
-At the top of the file you need to define parameters to enabled you to pass in different values for the deployment. You can find information about [Bicep parameters in the docs on GitHub](https://github.com/Azure/bicep/blob/main/docs/spec/parameters.md).
+At the top of the file you need to define parameters to enabled you to pass in different values for the deployment. You can find information about [Bicep parameters in the docs on GitHub](https://github.com/Azure/bicep/blob/main/docs/spec/parameters.md?WT.mc_id=DP-MVP-5002693).
 
-You define a parameter using the keyword `param`. At a minimum you need a name and a datatype. An obvious one for this usecase would be the name of the SQL Instance which could be defined as
+You define a parameter using the keyword  `param` . At a minimum you need a name and a datatype. An obvious one for this usecase would be the name of the SQL Instance which could be defined as
 
-````
+ ````
 param SqlInstanceName string
-````
+``` `
 
 Perhaps your organisation has a requirement for all of the data to be stored in a particular region. You might want to have a default value for your location parameter. You can define a default parameter by assigning it with an equals sign.
 
-````
+ ````
 param location string = 'northeurope'
-````
+``` `
 Some parameters that you would like to use will only allow certain values. You can define those as follows
-````
+ ````
 @allowed([
   'Enabled'
   'Disabled'
 ])
 param transparentDataEncryption string = 'Enabled'
-````
+``` `
 
-````
+ ````
 targetScope = 'resourceGroup'
 param SqlInstanceName string
 param location string = 'northeurope'
@@ -113,6 +113,6 @@ resource symbolicname 'Microsoft.Sql/servers/databases@2020-11-01-preview' = [fo
     licenseType: licenseType
   }
 }]
-````
+``` `
 
 

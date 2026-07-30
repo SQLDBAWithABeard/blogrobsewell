@@ -20,7 +20,7 @@ How Do I Know Which Checks There Are?
 
 OK you just need to run
 
-`Get-DbcCheck`
+ `Get-DbcCheck` 
 
 and it will show you
 
@@ -35,7 +35,7 @@ How Do I Know Which Configurations There Are?
 
 So to do that you just need to run
 
-`Get-DbcConfig`
+ `Get-DbcConfig` 
 
 and it will show you
 
@@ -54,11 +54,11 @@ Ping – light bulb moment!
 
 It’s always really useful to give something you have built to people who have never seen it before and then listen to what they say. Their new eyes and different experiences or expectations will give you lots of insight
 
-None of the amazing contributors to dbachecks had thought of this scenario so I decided to fix this. First I asked for an [issue to be raised in GitHub](https://github.com/sqlcollaborative/dbachecks/issues) because an issue can be an improvement or a suggestion not just a bug.
+None of the amazing contributors to dbachecks had thought of this scenario so I decided to fix this. First I asked for an [issue to be raised in GitHub](https://github.com/sqlcollaborative/dbachecks/issues?WT.mc_id=DP-MVP-5002693) because an issue can be an improvement or a suggestion not just a bug.
 
 Then I fixed it so that it would do what was required. Thank you Nick for this feedback and for helping to improve dbachecks
 
-I improved `Get-DbcCheck` so that now it shows the configuration item related to each check
+I improved  `Get-DbcCheck`  so that now it shows the configuration item related to each check
 
 It is easier to see (and sort or search) if you use Out-GridView
 

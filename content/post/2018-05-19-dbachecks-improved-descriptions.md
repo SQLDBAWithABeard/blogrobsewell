@@ -13,7 +13,7 @@ tags:
 image: assets/uploads/2018/05/04-get-dbacheck-ogv.png
 
 ---
-With the latest release of [dbachecks](https://www.powershellgallery.com/packages/dbachecks/1.1.128) we have added a new check for testing that foreign keys and constraints are trusted thanks to Cláudio Silva [b](https://claudioessilva.eu/) | [t](https://twitter.com/ClaudioESSilva)
+With the latest release of [dbachecks](https://www.powershellgallery.com/packages/dbachecks/1.1.128?WT.mc_id=DP-MVP-5002693) we have added a new check for testing that foreign keys and constraints are trusted thanks to Cláudio Silva [b](https://claudioessilva.eu/) | [t](https://twitter.com/ClaudioESSilva)
 
 To get the latest release you will need to run
 
@@ -29,19 +29,19 @@ This has the added effect that it means that just running Get-DbcCheck in the co
 
 [![01 - get-dbccheck.png](assets/uploads/2018/05/01-get-dbccheck.png)](assets/uploads/2018/05/01-get-dbccheck.png)
 
-You can use the [Format-Table](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-table?view=powershell-5.1) command (or its alias ft at the command line) and select the properties to display using
+You can use the [Format-Table](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-table?view=powershell-5.1&WT.mc_id=DP-MVP-5002693) command (or its alias ft at the command line) and select the properties to display using
 
     Get-DbcCheck | ft -Property UniqueTag, Description -Wrap
 
 [![02 - get-dbccheck format table](assets/uploads/2018/05/02-get-dbccheck-format-table.png)](assets/uploads/2018/05/02-get-dbccheck-format-table.png)
 
-or you can use [Format-List ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-list?view=powershell-5.1)(or its alias fl at the command line)
+or you can use [Format-List ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/format-list?view=powershell-5.1&WT.mc_id=DP-MVP-5002693)(or its alias fl at the command line)
 
     Get-DbcCheck | fl
 
 [![03 get-dbccheck format list.png](assets/uploads/2018/05/03-get-dbccheck-format-list.png)](assets/uploads/2018/05/03-get-dbccheck-format-list.png)
 
-Or you can use [Out-GridView](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-gridview?view=powershell-5.1) (or its alias ogv at the command line) (Incidentally, could you also thumbs up [this issue on Github](https://github.com/PowerShell/PowerShell/issues/3957) to get Out-GridView functionality in PowerShell 6)
+Or you can use [Out-GridView](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-gridview?view=powershell-5.1&WT.mc_id=DP-MVP-5002693) (or its alias ogv at the command line) (Incidentally, could you also thumbs up [this issue on Github](https://github.com/PowerShell/PowerShell/issues/3957?WT.mc_id=DP-MVP-5002693) to get Out-GridView functionality in PowerShell 6)
 
     Get-DbcCheck | ogv
 

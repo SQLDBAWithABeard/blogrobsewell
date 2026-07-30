@@ -39,11 +39,11 @@ Using FUAM I am able to answer all of those questions and more, and provide folk
 
 It is all built using Fabric's own native capabilities so can also learn about how to use those capabilities by looking at how FUAM is built. The code is all open source and well documented, so you can see exactly how it works and even contribute if you want to.
 
-[![The fuam core report](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png)](![link](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png))
+[![The fuam core report](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png)](https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_core_1.png)
 
 ## Where to Find It
 
-FUAM lives in the fabric-toolbox repository at [github.com/microsoft/fabric-toolbox/tree/main/monitoring/fabric-unified-admin-monitoring](https://github.com/microsoft/fabric-toolbox/tree/main/monitoring/fabric-unified-admin-monitoring).
+FUAM lives in the fabric-toolbox repository at [github.com/microsoft/fabric-toolbox/tree/main/monitoring/fabric-unified-admin-monitoring](https://github.com/microsoft/fabric-toolbox/tree/main/monitoring/fabric-unified-admin-monitoring?WT.mc_id=DP-MVP-5002693).
 
 The README is comprehensive and walks you through the prerequisites, deployment steps, and what each dashboard component shows.
 
@@ -65,7 +65,7 @@ FUAM extracts the following data from the tenant:
 - Capacity Refreshables
 - Git Connections
 
-Full list of the reports are [here](https://github.com/microsoft/fabric-toolbox/blob/main/monitoring/fabric-unified-admin-monitoring/media/documentation/FUAM_Core_Report.md)
+Full list of the reports are [here](https://github.com/microsoft/fabric-toolbox/blob/main/monitoring/fabric-unified-admin-monitoring/media/documentation/FUAM_Core_Report.md?WT.mc_id=DP-MVP-5002693)
 
 ## How It Works
 

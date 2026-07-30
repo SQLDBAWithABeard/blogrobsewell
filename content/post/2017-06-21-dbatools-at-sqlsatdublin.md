@@ -11,7 +11,7 @@ tags:
 ---
 This weekend [SQL Saturday Dublin](http://www.sqlsaturday.com/620/EventHome.aspx) occurred. For those that don’t know [SQL Saturdays](http://www.sqlsaturday.com/) are free conferences with local and international speakers providing great sessions in the Data Platform sphere.
 
-Chrissy LeMaire and I presented our session PowerShell SQL Server: Modern Database Administration with [dbatools](https://dbatools.io/). You can find [slides and code here](https://github.com/sqlcollaborative/community-presentations/tree/master/rob-sewell-chrissy-lemaire) . We were absolutely delighted to be named Best Speaker which was decided from the attendees average evaluation.
+Chrissy LeMaire and I presented our session PowerShell SQL Server: Modern Database Administration with [dbatools](https://dbatools.io/). You can find [slides and code here](https://github.com/sqlcollaborative/community-presentations/tree/master/rob-sewell-chrissy-lemaire?WT.mc_id=DP-MVP-5002693) . We were absolutely delighted to be named Best Speaker which was decided from the attendees average evaluation.
 
 > Wow, [@cl](https://twitter.com/cl) and i won the coveted best speaker award at [#SqlSatDublin](https://twitter.com/hashtag/SqlSatDublin?src=hash) Thank you so much. We are so pleased [pic.twitter.com/f0MPTJf74p](https://t.co/f0MPTJf74p)
 >
@@ -58,7 +58,7 @@ We recommend though that you are using PowerShell v5.1 with SSMS or SMO for SQL 
 Installation
 ------------
 
-We love how easy and simple the installation of [dbatools](https://dbatools.io/) is. As long as you have access to the internet (and permission from your companies security team to install 3rd party tools. Please don’t break your companies policies) you can simply install the module from the [PowerShell Gallery](https://www.powershellgallery.com/) using
+We love how easy and simple the installation of [dbatools](https://dbatools.io/) is. As long as you have access to the internet (and permission from your companies security team to install 3rd party tools. Please don’t break your companies policies) you can simply install the module from the [PowerShell Gallery](https://www.powershellgallery.com/?WT.mc_id=DP-MVP-5002693) using
 
 Install-Module dbatools
 
@@ -66,7 +66,7 @@ If you are not a local administrator on your machine you can use the -Scope para
 
 Install-Module dbatools -Scope CurrentUser
 
-Incidentally, if you or your security team have concerns about the quality or trust of the content in the PowerShell Gallery please [read this post](https://blogs.msdn.microsoft.com/powershell/2015/08/06/powershell-gallery-new-security-scan/) which explains the steps that are taken when code is uploaded.
+Incidentally, if you or your security team have concerns about the quality or trust of the content in the PowerShell Gallery please [read this post](https://blogs.msdn.microsoft.com/powershell/2015/08/06/powershell-gallery-new-security-scan/?WT.mc_id=DP-MVP-5002693) which explains the steps that are taken when code is uploaded.
 
 If you cannot use the PowerShell Gallery then you can use this line of code to install from GitHub
 
@@ -109,7 +109,7 @@ Then how to use it to restore an entire instance worth of backups to the latest 
 
 Then how to use [Get-DbaDatabase](https://dbatools.io/functions/Get-DbaDatabase/) to get all of the databases on an instance and pass them to [Backup-DbaDatabase](https://dbatools.io/functions/Backup-DbaDatabase) to back up an entire instance.
 
-We look at the Backup history of some databases using [Get-DbaBackupHistory](https://dbatools.io/functions/Get-DbaBackupHistory/) and [Out-GridView](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/out-gridview) and examine detailed information about a backup file using [Read-DbaBackupHeader.](https://dbatools.io/functions/Read-DbaBackupHeader/)
+We look at the Backup history of some databases using [Get-DbaBackupHistory](https://dbatools.io/functions/Get-DbaBackupHistory/) and [Out-GridView](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/out-gridview?WT.mc_id=DP-MVP-5002693) and examine detailed information about a backup file using [Read-DbaBackupHeader.](https://dbatools.io/functions/Read-DbaBackupHeader/)
 
 We give thanks to Stuart Moore for his amazing work on these and several other backup and restore commands.
 
@@ -183,7 +183,7 @@ More
 
 So you want to know more about [dbatools](https://dbatools.io/) ? You can click the link and explore the website
 
-You can look at [source code on GitHub](https://github.com/sqlcollaborative/dbatools/)
+You can look at [source code on GitHub](https://github.com/sqlcollaborative/dbatools/?WT.mc_id=DP-MVP-5002693)
 
 You can join us in the [SQL Community Slack](https://sqlps.io/slack) in the #dbatools channel
 
@@ -191,7 +191,7 @@ You can watch videos on [YouTube](https://dbatools.io/youtube)
 
 You can [see a list of all of the presentations](https://dbatools.io/presentations) and get a lot of the slides and demos
 
-If you want to see the slides and demos from our Dublin presentation you can find them [here](https://github.com/sqlcollaborative/community-presentations/tree/master/rob-sewell-chrissy-lemaire)
+If you want to see the slides and demos from our Dublin presentation you can find them [here](https://github.com/sqlcollaborative/community-presentations/tree/master/rob-sewell-chrissy-lemaire?WT.mc_id=DP-MVP-5002693)
 
 Volunteers
 ----------

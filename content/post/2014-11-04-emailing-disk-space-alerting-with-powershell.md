@@ -100,4 +100,4 @@ I run the script in a Powershell Step in an SQL Agent Job every 5 minutes and no
 
 [![image](https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png)](https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png)
 
-[You can find the script here](https://github.com/SQLDBAWithABeard/OldCodeFromBlog/tree/master/EmailingDiskAlertPost)
+[You can find the script here](https://github.com/SQLDBAWithABeard/OldCodeFromBlog/tree/master/EmailingDiskAlertPost?WT.mc_id=DP-MVP-5002693)

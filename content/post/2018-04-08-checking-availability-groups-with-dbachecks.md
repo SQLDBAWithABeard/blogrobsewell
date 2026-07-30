@@ -26,7 +26,7 @@ If you have already installed dbachecks it is important to make sure that you up
 
 Update-Module dbachecks
 
-If you want to try dbachecks, you can install it from the [PowerShell Gallery](https://www.powershellgallery.com/packages/dbachecks) by running
+If you want to try dbachecks, you can install it from the [PowerShell Gallery](https://www.powershellgallery.com/packages/dbachecks?WT.mc_id=DP-MVP-5002693) by running
 
 Install-Module dbachecks # -Scope CurrentUser # if not running as admin
 

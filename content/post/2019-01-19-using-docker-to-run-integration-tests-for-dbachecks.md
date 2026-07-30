@@ -20,12 +20,12 @@ tags:
 ---
 My wonderful friend [André Kamman](https://twitter.com/AndreKamman) wrote a fantastic blog post this week [SQL Server Container Instances via Cloudshell](https://andrekamman.com/sql-server-container-instances-via-cloudshell/) about how he uses containers in Azure to test code against different versions of SQL Server.
 
-It reminded me that I do something very similar to test [dbachecks](http://dbachecks.io) code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend [Cláudio Silva](https://github.com/ClaudioESSilva) who has added [agent job history checks.](https://github.com/sqlcollaborative/dbachecks/pull/582)
+It reminded me that I do something very similar to test [dbachecks](http://dbachecks.io) code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend [Cláudio Silva](https://github.com/ClaudioESSilva?WT.mc_id=DP-MVP-5002693) who has added [agent job history checks.](https://github.com/sqlcollaborative/dbachecks/pull/582?WT.mc_id=DP-MVP-5002693)
 
 GitHub PR VS Code Extension
 ---------------------------
 
-I use the [GitHub Pull Requests extension for VS Code](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) to work with pull requests for [dbachecks](https://github.com/sqlcollaborative/dbachecks/pulls). This enables me to see all of the information about the Pull Request, merge it, review it, comment on it all from VS Code
+I use the [GitHub Pull Requests extension for VS Code](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github&WT.mc_id=DP-MVP-5002693) to work with pull requests for [dbachecks](https://github.com/sqlcollaborative/dbachecks/pulls?WT.mc_id=DP-MVP-5002693). This enables me to see all of the information about the Pull Request, merge it, review it, comment on it all from VS Code
 
 ![](https://blog.robsewell.com/assets/uploads/2019/01/GitHub-Pull-Request-VsCode-Extension.png)
 
@@ -41,12 +41,12 @@ This will update all of the files in my local repository with all of the changes
 
 <VIDEO src="https://blog.robsewell.com/assets/uploads/2019/01/pull-request-checkout.mp4" controls></VIDEO>
 
-You can see at the bottom left that the branch changes from development to the name of the PR.[](https://blog.robsewell.com/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/)
+You can see at the bottom left that the branch changes from development to the name of the PR.[](/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/)
 
 Running The Unit Tests
 ----------------------
 
-The first thing that I do is to run the Unit Tests for the module. These will test that the code is following all of the guidelines that we require and that the tests are formatted in the correct way for the Power Bi to parse. I have blogged about this [here](https://blog.robsewell.com/using-the-ast-in-pester-for-dbachecks/) and [here](https://blog.robsewell.com/using-the-powershell-ast-to-find-a-foreach-method/) and we use this Pester in our CI process in Azure DevOps which I described [here.](https://blog.robsewell.com/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/)
+The first thing that I do is to run the Unit Tests for the module. These will test that the code is following all of the guidelines that we require and that the tests are formatted in the correct way for the Power Bi to parse. I have blogged about this [here](/blog/using-the-ast-in-pester-for-dbachecks/) and [here](/blog/using-the-powershell-ast-to-find-a-foreach-method/) and we use this Pester in our CI process in Azure DevOps which I described [here.](/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/)
 
 I navigate to the root of the dbachecks repository on my local machine and run
 
@@ -66,18 +66,18 @@ The difference between Unit tests and Integration tests in a nutshell is that th
 Multiple Versions of SQL Server
 -------------------------------
 
-As I have described [before](https://blog.robsewell.com/creating-sql-server-containers-for-versions-2012-2017/) my friend and former colleague Andrew Pruski [b](http://dbafromthecold.com) | [t](http://twitter.com/dbafromthecold) has many resources for running SQL in containers. This means that I can quickly and easily create fresh uncontaminated instances of SQL 2012, 2014, 2016 and 2017 really quickly.
+As I have described [before](/blog/creating-sql-server-containers-for-versions-2012-2017/) my friend and former colleague Andrew Pruski [b](http://dbafromthecold.com) | [t](http://twitter.com/dbafromthecold) has many resources for running SQL in containers. This means that I can quickly and easily create fresh uncontaminated instances of SQL 2012, 2014,undefinedandundefinedreally quickly.
 
 ![](https://blog.robsewell.com/assets/uploads/2019/01/creating-contatiners.png)
 
-I can create 4 instances of different versions of SQL in (a tad over) 1 minute. How about you?
+I can createundefinedinstances of different versions of SQL in (a tad over)undefinedminute. How about you?
 
-Imagine how long it would take to run the installers for 4 versions of SQL and the pain you would have trying to uninstall them and make sure everything is ‘clean’. Even images that have been sysprep’d won’t be done in 1 minute.
+Imagine how long it would take to run the installers forundefinedversions of SQL and the pain you would have trying to uninstall them and make sure everything is ‘clean’. Even images that have been sysprep’d won’t be done inundefinedminute.
 
 Docker Compose Up ?
 -------------------
 
-So what is this magic command that has enabled me to do this? docker compose uses a YAML file to define multi-container applications. This means that with a file called docker-compose.yml like [this](https://gist.github.com/SQLDBAWithABeard/b589d499484af4ebfb7d637cb6b4efa3)
+So what is this magic command that has enabled me to do this? docker compose uses a YAML file to define multi-container applications. This means that with a file called docker-compose.yml like [this](https://gist.github.com/SQLDBAWithABeard/b589d499484af4ebfb7d637cb6b4efa3?WT.mc_id=DP-MVP-5002693)
 
     version: '3.7'
     
@@ -115,11 +115,11 @@ and in that directory just run
 
     docker-compose up -d
 
-and 4 SQL containers are available to you. You can interact with them via SSMS if you wish with localhost comma PORTNUMBER. The port numbers in the above file are 15586, 15587,15588 and 15589
+andundefinedSQL containers are available to you. You can interact with them via SSMS if you wish with localhost comma PORTNUMBER. The port numbers in the above file are 15586, 15587,15588 and 15589
 
 ![](https://blog.robsewell.com/assets/uploads/2019/01/containers.png?resize=630%2C188&ssl=1)](https://blog.robsewell.com/assets/uploads/2019/01/containers.png?ssl=1)
 
-Now it must be noted, as I [describe here](https://blog.robsewell.com/creating-sql-server-containers-for-versions-2012-2017/) that first I pulled the images to my laptop. The first time you run docker compose will take significantly longer if you haven’t pulled the images already (pulling the images will take quite a while depending on your broadband speed)
+Now it must be noted, as I [describe here](/blog/creating-sql-server-containers-for-versions-2012-2017/) that first I pulled the images to my laptop. The first time you run docker compose will take significantly longer if you haven’t pulled the images already (pulling the images will take quite a while depending on your broadband speed)
 
 Credential
 ----------
@@ -156,7 +156,7 @@ Now I can start to run my Integration tests. First reset the dbachecks configura
     # We are using SQL authentication
     $null = Set-DbcConfig -Name policy.connection.authscheme     -Value SQL
     # sometimes its a bit slower than the default value
-    $null = Set-DbcConfig -Name policy.network.latencymaxms -Value     100 # because the containers run a bit slow!
+    $null = Set-DbcConfig -Name policy.network.latencymaxms -Value    undefined# because the containers run a bit slow!
 
 Then I will run the dbachecks connectivity checks and save the results to a variable without showing any output
 
@@ -167,7 +167,7 @@ I can then use Pester to check that dbachecks has worked as expected by testing 
     Describe "Testing the checks are running as expected" -Tag     Integration {
         Context "Connectivity Checks" {
             It "All Tests should pass" {
-                $ConnectivityTests.FailedCount | Should -Be 0     -Because "We expect all of the checks to run and     pass with default settings"
+                $ConnectivityTests.FailedCount | Should -Beundefined    -Because "We expect all of the checks to run and     pass with default settings"
             }
         }
     }
@@ -204,7 +204,7 @@ So we will check the same things on real actual SQL Servers. First though we nee
     docker exec -ti integration_sql2016_1 powershell start-service     SQLSERVERAGENT
     docker exec -ti integration_sql2017_1 powershell start-service     SQLSERVERAGENT
 
-Unfortunately, the agent service wont start in the SQL 2014 container so I cant run agent integration tests for that container but it’s better than no integration tests.
+Unfortunately, the agent service wont start in the SQLundefinedcontainer so I cant run agent integration tests for that container but it’s better than no integration tests.
 
 ![](https://blog.robsewell.com/assets/uploads/2019/01/agent-wont-start.png)
 
@@ -220,24 +220,24 @@ We want the check to pass if the configured value for the dbachecks configuratio
 If You Are Doing Something More Than Once ……
 --------------------------------------------
 
-Let’s automate that. We are going to be repeatedly running those three tests for each setting that we are running integration tests for. I have created 3 functions for this again checking that FailedCount or Passed Count is 0 depending on the test.
+Let’s automate that. We are going to be repeatedly running those three tests for each setting that we are running integration tests for. I have createdundefinedfunctions for this again checking that FailedCount or Passed Count isundefineddepending on the test.
 
     function Invoke-DefaultCheck {
         It "All Checks should pass with default for $Check" {
             $Tests = get-variable "$($Check)default"  -ValueOnly
-            $Tests.FailedCount | Should -Be 0 -Because "We expect     all of the checks to run and pass with default setting     (Yes we may set some values before but you get my     drift)"
+            $Tests.FailedCount | Should -Beundefined-Because "We expect     all of the checks to run and pass with default setting     (Yes we may set some values before but you get my     drift)"
         }
     }
     function Invoke-ConfigCheck {
         It "All Checks should fail when config changed for $Check"     {
             $Tests = get-variable "$($Check)configchanged"      -ValueOnly
-            $Tests.PassedCount | Should -Be 0 -Because "We expect     all of the checks to run and fail when we have changed     the config values"
+            $Tests.PassedCount | Should -Beundefined-Because "We expect     all of the checks to run and fail when we have changed     the config values"
         }
     }
     function Invoke-ValueCheck {
         It "All Checks should pass when setting changed for     $Check" {
             $Tests = get-variable "$($Check) value changed"    -ValueOnly
-            $Tests.FailedCount | Should -Be 0 -Because "We expect     all of the checks to run and pass when we have changed     the settings to match the config values"
+            $Tests.FailedCount | Should -Beundefined-Because "We expect     all of the checks to run and pass when we have changed     the settings to match the config values"
         }
     }
 
@@ -320,8 +320,8 @@ There is another integration test there for the error logs count. This works in 
 Merge the Changes
 -----------------
 
-So with all the tests passing I can merge the PR into the development branch and Azure DevOps will start a build. Ultimately, I would like to add the integration to the build as well following [André](https://twitter.com/AndreKamman)‘s blog post but for now I used the GitHub Pull Request extension to merge the pull request into development which started a [build](https://sqlcollaborative.visualstudio.com/dbachecks/_build/results?buildId=365&view=results) and then merged that into master which signed the code and deployed it to the PowerShell gallery as you can see [here](https://sqlcollaborative.visualstudio.com/dbachecks/_releaseProgress?_a=release-environment-logs&releaseId=81&environmentId=81) and the result is
+So with all the tests passing I can merge the PR into the development branch and Azure DevOps will start a build. Ultimately, I would like to add the integration to the build as well following [André](https://twitter.com/AndreKamman)‘s blog post but for now I used the GitHub Pull Request extension to merge the pull request into development which started a [build](https://sqlcollaborative.visualstudio.com/dbachecks/_build/results?buildId=365&view=results&WT.mc_id=DP-MVP-5002693) and then merged that into master which signed the code and deployed it to the PowerShell gallery as you can see [here](https://sqlcollaborative.visualstudio.com/dbachecks/_releaseProgress?_a=release-environment-logs&releaseId=81&environmentId=81&WT.mc_id=DP-MVP-5002693) and the result is
 
-[https://www.powershellgallery.com/packages/dbachecks/1.1.164](https://www.powershellgallery.com/packages/dbachecks/1.1.164)
+[https://www.powershellgallery.com/packages/dbachecks/1.1.164](https://www.powershellgallery.com/packages/dbachecks/1.1.164?WT.mc_id=DP-MVP-5002693)
 
 ![](https://blog.robsewell.com/assets/uploads/2019/01/powershell-gallery.png)

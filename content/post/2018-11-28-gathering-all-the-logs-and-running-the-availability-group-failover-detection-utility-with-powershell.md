@@ -12,11 +12,11 @@ tags:
 ---
 30/11/2018 – Function has been updated to deal with named instances.
 
-Last week the Tiger Team released their Availability Group Failover Detection Utility which will provide root cause analysis on Cluster Logs, SQL Error Logs, and the Availability groups extended events logs. There is a [blog post here](https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy) and the tool can be downloaded from the [Tiger Team GitHub Repository](https://github.com/Microsoft/tigertoolbox/tree/master/Always-On/FailoverDetection)
+Last week the Tiger Team released their Availability Group Failover Detection Utility which will provide root cause analysis on Cluster Logs, SQL Error Logs, and the Availability groups extended events logs. There is a [blog post here](https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy?WT.mc_id=DP-MVP-5002693) and the tool can be downloaded from the [Tiger Team GitHub Repository](https://github.com/Microsoft/tigertoolbox/tree/master/Always-On/FailoverDetection?WT.mc_id=DP-MVP-5002693)
 
 ### A Bit of Faffing*
 
-It states on the [readme](https://github.com/Microsoft/tigertoolbox/blob/master/README.md) for the Tiger Team GitHub Repository.
+It states on the [readme](https://github.com/Microsoft/tigertoolbox/blob/master/README.md?WT.mc_id=DP-MVP-5002693) for the Tiger Team GitHub Repository.
 
 > Repository for Tiger team for “as-is” solutions and tools/scripts that the team publishes.
 
@@ -24,11 +24,11 @@ The important words are “as-is” sometimes these tools need a bit of faffing 
 
 There is a pre-requisite and sometimes a little “fixing” that you need to do to get it to run correctly.
 
-First, install the “Microsoft Visual C++ Redistributable for Visual Studio 2017” [from here.](https://visualstudio.microsoft.com/downloads/) On the download page, scroll down to the “Other Tools and Frameworks” section to download the redistributable (x64 version).
+First, install the “Microsoft Visual C++ Redistributable for Visual Studio 2017” [from here.](https://visualstudio.microsoft.com/downloads/?WT.mc_id=DP-MVP-5002693) On the download page, scroll down to the “Other Tools and Frameworks” section to download the redistributable (x64 version).
 
 ![cdistributable.PNG](https://blog.robsewell.com/assets/uploads/2018/11/cdistributable.png)
 
-Then when you run `FailoverDetection.exe` you may get strong name validation errors like.
+Then when you run  `FailoverDetection.exe`  you may get strong name validation errors like.
 
 [![strong name.png](https://blog.robsewell.com/assets/uploads/2018/11/strong-name.png)](https://blog.robsewell.com/assets/uploads/2018/11/strong-name.png)
 
@@ -38,13 +38,13 @@ Then when you run `FailoverDetection.exe` you may get strong name validation err
 
 Then you will need to run the sn.exe tool which is in the zip file. Use this syntax.
 
-`.\sn.exe -Vr PATHTODLLFile`
+ `.\sn.exe -Vr PATHTODLLFile` 
 
 [![stroingname fix.png](https://blog.robsewell.com/assets/uploads/2018/11/stroingname-fix.png)](https://blog.robsewell.com/assets/uploads/2018/11/stroingname-fix.png)
 
 I had to do it for two DLLs.
 
-NOTE – If you get an error like this when running sn.exe (or any executable) from PowerShell it means that you have missed the `.\` (dot whack) in front of the executable name.
+NOTE – If you get an error like this when running sn.exe (or any executable) from PowerShell it means that you have missed the  `.\`  (dot whack) in front of the executable name.
 
 [![striong name fail.png](https://blog.robsewell.com/assets/uploads/2018/11/striong-name-fail.png)](https://blog.robsewell.com/assets/uploads/2018/11/striong-name-fail.pnghttps://blog.robsewell.com/assets/uploads/2018/11/striong-name-fail.png)
 
@@ -62,7 +62,7 @@ To run the Failover Detection Utility you need to gather the following informati
 
 Once you have gathered all of that data then you need to alter the configuration file for the executable.
 
-```
+ ```
 {
     "Data Source Path": "Path to Data File",
     "Health Level": 3,
@@ -72,7 +72,7 @@ Once you have gathered all of that data then you need to alter the configuration
         "Replica3"
     \]
 }
-```
+``` 
 ### Running The Tool
 
 Once you have done that you can then run the Failover Detection Utility. You can double click the exe,
@@ -117,24 +117,24 @@ When I saw the data that needed to be gathered for this tool, I quickly turned t
 
 This function requires PowerShell version 5, the failovercluster module and and the [dbatools](http://dbatools.io) module.
 
-You can get the function from [my GitHub Functions Repository here (at the moment – will be adding to dbatools see below)](https://github.com/SQLDBAWithABeard/Functions/blob/master/Invoke-SqlFailOverDetection.ps1)
+You can get the function from [my GitHub Functions Repository here (at the moment – will be adding to dbatools see below)](https://github.com/SQLDBAWithABeard/Functions/blob/master/Invoke-SqlFailOverDetection.ps1?WT.mc_id=DP-MVP-5002693)
 
 Load the function by either running the code or if you have it saved as a file dot-sourcing it.
 
-`. .\Invoke-SqlFailOverDetection.ps1`
+ `. .\Invoke-SqlFailOverDetection.ps1` 
 
 There are two .’s with a space in between and then a \ without a space. so Dot Space Dot Whack path to file.
 
 The next thing you should do is what you should always do with a new PowerShell function, look at the help.
 
-`Get-Help Invoke-SqlFailOverDetection -Detailed`
+ `Get-Help Invoke-SqlFailOverDetection -Detailed` 
 
 You will find plenty of examples to get you going and explanations of all of the parameters.
 
 Let’s see it in action.
 
 First lets run with a -WhatIf switch which will show us what will happen without performing any state changing actions.
-```
+ ```
 $InstallationFolder = 'C:\temp\failoverdetection\new\Install'
 $DownloadFolder = 'C:\temp\failoverdetection\new\Download'
 $DataFolder = 'C:\temp\failoverdetection\new\Data'
@@ -147,7 +147,7 @@ DataFolder = $DataFolder
 InstallationFolder = $InstallationFolder
 }
 Invoke-SqlFailOverDetection @invokeSqlFailOverDetectionSplat -WhatIf
-```
+``` 
 [![whatif.PNG](https://blog.robsewell.com/assets/uploads/2018/11/whatif-2.png)](https://blog.robsewell.com/assets/uploads/2018/11/whatif-2.png)
 
 So you can see that if we run it without the -WhatIf switch it will
@@ -162,7 +162,7 @@ So you can see that if we run it without the -WhatIf switch it will
 NOTE : – I have limited the gathering of the system event log to the last 2 days to limit the amount of time spent dealing with a large system log. I gather all of the SQL Error logs in the Error log path as that works for the first scenario I wrote this for, your mileage may vary.
 
 So if we want to run the command we can remove the -WhatIf switch.
-```
+ ```
 $InstallationFolder = 'C:\temp\failoverdetection\new\Install'
 $DownloadFolder = 'C:\temp\failoverdetection\new\Download'
 $DataFolder = 'C:\temp\failoverdetection\new\Data'
@@ -175,7 +175,7 @@ DataFolder = $DataFolder
 InstallationFolder = $InstallationFolder
 }
 Invoke-SqlFailOverDetection @invokeSqlFailOverDetectionSplat
-```
+``` 
 It can take a little while to run depending on the number of replicas, size of logs etc but once it has started running you can do other things.
 
 It will require being run as an account with permissions to all of the folders specified and Windows and SQL permissions on all of the replicas in the Availability Group.
@@ -191,7 +191,7 @@ The results can be found in the results folder.
 [![resultsjson.PNG](https://blog.robsewell.com/assets/uploads/2018/11/resultsjson.png)](https://blog.robsewell.com/assets/uploads/2018/11/resultsjson.png)
 
 If I have already run the tool, I can use the Analyze switch to save gathering the data again. I also use the AlreadyDownloaded switch as I do not need to download the zip file again.
-```
+ ```
 $invokeSqlFailOverDetectionSplat = @{
 DownloadFolder = $DownloadFolder
 SQLInstance = $SQLInstance
@@ -201,13 +201,13 @@ AlreadyDownloaded = $true
 Analyze = $true
 }
 Invoke-SqlFailOverDetection @invokeSqlFailOverDetectionSplat
-```
+``` 
 [![analyze.PNG](https://blog.robsewell.com/assets/uploads/2018/11/analyze.png)](https://blog.robsewell.com/assets/uploads/2018/11/analyze.png)
 
 and the results are again saved in the results folder.
 
 I can show the results on the screen as well as saving them as JSON with the Show parameter.
-```
+ ```
 $InstallationFolder = 'C:\temp\failoverdetection\Install'
 $DownloadFolder = 'C:\temp\failoverdetection\Download'
 $DataFolder = 'C:\temp\failoverdetection\Data'
@@ -223,7 +223,7 @@ Analyze = $true
 Show = $true
 }
 Invoke-SqlFailOverDetection @invokeSqlFailOverDetectionSplat
-```
+``` 
 [![show.PNG](https://blog.robsewell.com/assets/uploads/2018/11/show.png)](https://blog.robsewell.com/assets/uploads/2018/11/show.png)
 
 You will then need to press enter to get the next lot of results.
@@ -232,7 +232,7 @@ You will then need to press enter to get the next lot of results.
 
 ### Why Not Add This To dbatools?
 
-I haven’t added this to [dbatools](http://dbatools.io) (yet) because I wrote it in this way for a particular need and [dbatools](http://dbatools.io) requires support for PowerShell V3 . I have, however created an issue a[dded to this issue in the dbatools GitHub Repository](https://github.com/sqlcollaborative/dbatools/issues/4601) (as this is how you to start the process of adding things to [dbatools](http://dbatools.io)) so hopefully we can get it in there soon as well – in which case I will come back and update this post.
+I haven’t added this to [dbatools](http://dbatools.io) (yet) because I wrote it in this way for a particular need and [dbatools](http://dbatools.io) requires support for PowerShell V3 . I have, however created an issue a[dded to this issue in the dbatools GitHub Repository](https://github.com/sqlcollaborative/dbatools/issues/4601?WT.mc_id=DP-MVP-5002693) (as this is how you to start the process of adding things to [dbatools](http://dbatools.io)) so hopefully we can get it in there soon as well – in which case I will come back and update this post.
 
 Happy Automating!
 

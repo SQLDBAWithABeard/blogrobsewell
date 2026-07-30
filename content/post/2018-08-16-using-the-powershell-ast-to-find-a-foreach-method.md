@@ -25,7 +25,7 @@ Automation for the win
 Because I believe in automation I do not want to have to hard code these values anywhere but create them when the module is imported so we use a json file to feed Get-DbcCheck and populate the Json file when we import the module. This is done using the [method that I described here](/using-the-ast-in-pester-for-dbachecks/) and means that whenever a new check is added it is automatically available in Get-DbcCheck without any extra work.
 
 We use code like this
-```
+ ```
 ## Parse the file with AST
 $CheckFileAST = [Management.Automation.Language.Parser]::ParseInput($check, [ref]$null, [ref]$null)
 ## Old code we can use the describes
@@ -50,11 +50,11 @@ $Describes = $CheckFileAST.FindAll([Func[Management.Automation.Language.Ast, boo
     elseif ($Describe.Parent -match "Get-ClusterObject") {
         $Type = "ClusteNode"
     }
-```
-First we parse the code with the AST and store that in the CheckFileAST variable, then we use the FindAll method to find any command elements that match “Describe” which conveniently gets our describes and then we can simply match the Parent object which holds some code to each function that we use to get our values to be passed to the tests `Get-ComputerName`, `Get-Instance`, `Get-ClusterObject` and set the type appropriately.
+``` 
+First we parse the code with the AST and store that in the CheckFileAST variable, then we use the FindAll method to find any command elements that match “Describe” which conveniently gets our describes and then we can simply match the Parent object which holds some code to each function that we use to get our values to be passed to the tests  `Get-ComputerName` ,  `Get-Instance` ,  `Get-ClusterObject`  and set the type appropriately.
 
 which when run against a check like this
-```
+ ```
 Describe "Backup Path Access" -Tags BackupPathAccess, Storage, DISA, $filename {
     @(Get-Instance).ForEach{
         if ($NotContactable -contains $psitem) {
@@ -77,7 +77,7 @@ Describe "Backup Path Access" -Tags BackupPathAccess, Storage, DISA, $filename {
         }
     }
 }
-```
+``` 
 will find the describe block and get the title “Backup Path Access”  and the tags BackupPathAccess, Storage, DISA, $filename and then find the Get-Instance and set the type to SqlInstance
 
 Until Rob breaks it!
@@ -98,7 +98,7 @@ It runs the following checks
 - Instance Connection
 
 and it was looping through the computer names for each check like this
-```
+ ```
 Describe "Server Power Plan Configuration" -Tags PowerPlan, $filename {
     @(Get-ComputerName).ForEach{
     }
@@ -127,9 +127,9 @@ Describe "Disk Allocation Unit" -Tags DiskAllocationUnit, $filename {
     @(Get-ComputerName).ForEach{
     }
 }
-```
+``` 
 I altered it to have only one loop for the computer names like so
-```
+ ```
 @(Get-ComputerName).ForEach{
     Describe "Server Power Plan Configuration" -Tags PowerPlan, $filename {
     }
@@ -148,46 +148,46 @@ Describe "Instance Connection" -Tags InstanceConnection, Connectivity, $filename
     @(Get-Instance).ForEach{
     }
 }
-```
+``` 
 and immediately in testing my checks for the Server Tag decreased in time by about 60% 🙂
 
 I was very happy.
 
-Then I added it to the dbachecks module on my machine, loaded the module and realised that my Json file for `Get-DbcCheck `was no longer being populated for the type because this line
-```
+Then I added it to the dbachecks module on my machine, loaded the module and realised that my Json file for  `Get-DbcCheck ` was no longer being populated for the type because this line
+ ```
 elseif ($Describe.Parent-match"Get-ComputerName"-or$Describe.Parent-match"AllServerInfo")
-```
+``` 
 was no longer true.
 
 AST for other things
 --------------------
 
-So I googled [Management.Automation.Language.Ast](http://Management.Automation.Language.Ast) the first result lead me to [docs.microsoft](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.language.invokememberexpressionast?view=powershellsdk-1.1.0) There are a number of different language elements available there and I found [InvokeMemberExpressionAst](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.language.invokememberexpressionast?view=powershellsdk-1.1.0) which will let me find any methods that have been invoked, so now I can find the loops with
-```
+So I googled [Management.Automation.Language.Ast](http://Management.Automation.Language.Ast) the first result lead me to [docs.microsoft](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.language.invokememberexpressionast?view=powershellsdk-1.1.0&WT.mc_id=DP-MVP-5002693) There are a number of different language elements available there and I found [InvokeMemberExpressionAst](https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.language.invokememberexpressionast?view=powershellsdk-1.1.0&WT.mc_id=DP-MVP-5002693) which will let me find any methods that have been invoked, so now I can find the loops with
+ ```
 $ComputerNameForEach = $CheckFileAST.FindAll([Func[Management.Automation.Language.Ast, bool]] {
         param ($ast)
         $ast -is [System.Management.Automation.Language.InvokeMemberExpressionAst]
     }, $true)
-```
+``` 
 When I examined the object returned I could see that I could further limit the result to get only the method for Get-ComputerName and then if I choose the Extent I can get the code of that loop
-```
+ ```
 ## New code uses a Computer Name loop to speed up execution so need to find that as well
 $ComputerNameForEach=$CheckFileAST.FindAll([Func[Management.Automation.Language.Ast,bool]] {
 param ($ast)
 $ast-is [System.Management.Automation.Language.InvokeMemberExpressionAst] -and$ast.expression.Subexpression.Extent.Text-eq'Get-ComputerName'
 }, $true).Extent
-```
+``` 
 and now I can match the Tags to the type again :-)
-```
+ ```
 if ($ComputerNameForEach-match$title) {
 $type="ComputerName"
 }
-```
-and now `Get-DbcCheck` is returning the right results and the checks are a little faster
+``` 
+and now  `Get-DbcCheck`  is returning the right results and the checks are a little faster
 
 [![](assets/uploads/2018/08/server.png)](assets/uploads/2018/08/server.png)
 
-You can find [dbachecks on the PowerShell Gallery](http://powershellgallery.com/packages/dbachecks) or install it using
+You can find [dbachecks on the PowerShell Gallery](http://powershellgallery.com/packages/dbachecks?WT.mc_id=DP-MVP-5002693) or install it using
 
 Install-Module dbachecks -Scope CurrentUser
 

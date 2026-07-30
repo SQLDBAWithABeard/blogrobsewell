@@ -10,11 +10,11 @@ tags:
 
 ---
 
-Edit 2022 - 
+Editundefined- 
 
 Find your User Groups here [Azure Data Community](https://www.meetup.com/en-AU/pro/azuredatatechgroups)
 
-The timing was good enough that I could offer to do a talk based on my [previous post on Windows Azure](https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/) for my SQL User Group [SQL SouthWest](http://sqlsouthwest.co.uk/) when Jonathan and Annette.( [@FatherJack](https://twitter.com/fatherjack) and [@MrsFatherJack](https://twitter.com/Mrs_Fatherjack)) put out a call for volunteers (Edit Sept 2020 - Brave enough to say now that Jonathan just told me I was doing it !! In the nicest possible way).
+The timing was good enough that I could offer to do a talk based on my [previous post on Windows Azure](/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/) for my SQL User Group [SQL SouthWest](http://sqlsouthwest.co.uk/) when Jonathan and Annette.( [@FatherJack](https://twitter.com/fatherjack) and [@MrsFatherJack](https://twitter.com/Mrs_Fatherjack)) put out a call for volunteers (Edit Septundefined- Brave enough to say now that Jonathan just told me I was doing it !! In the nicest possible way).
 
 I did my best with the [7 P’s](http://en.wikipedia.org/wiki/7_Ps_(military_adage)). I ran through it at lunchtime, I made sure I had power and a HDMI lead after checking with Jonathan, I got a glass of water. I knew the first line I was going to say
 

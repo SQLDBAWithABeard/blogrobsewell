@@ -20,7 +20,7 @@ tags:
 image: assets/uploads/2019/10/image-8.png
 
 ---
-The latest release of the [insiders edition of Azure Data Studio](https://github.com/microsoft/azuredatastudio#try-out-the-latest-insiders-build-from-master) brings the first edition of PowerShell Notebooks!
+The latest release of the [insiders edition of Azure Data Studio](https://github.com/microsoft/azuredatastudio?WT.mc_id=DP-MVP-5002693#try-out-the-latest-insiders-build-from-master) brings the first edition of PowerShell Notebooks!
 
 You can download the latest insiders edition from the link above, it can be installed alongside the stable release.
 
@@ -89,9 +89,9 @@ You can clear the results from every code block using the clear results button a
 
 ![](https://blog.robsewell.com/assets/uploads/2019/10/image-18.png )
 
-Otherwise, you can save the results with the Notebook by saving it. This is the part that is missing from running PowerShell in the Markdown blocks in a [SQL Notebook as I described here](https://blog.robsewell.com/powershell-in-sql-notebooks-in-azure-data-studio/)
+Otherwise, you can save the results with the Notebook by saving it. This is the part that is missing from running PowerShell in the Markdown blocks in a [SQL Notebook as I described here](/blog/powershell-in-sql-notebooks-in-azure-data-studio/)
 
  ![](https://blog.robsewell.com/assets/uploads/2019/10/image-19.png )
 
-I am looking forward to how this develops. You can find my sample PowerShell notebook (with the code results) [here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/powershell.ipynb)
+I am looking forward to how this develops. You can find my sample PowerShell notebook (with the code results) [here](https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/powershell.ipynb?WT.mc_id=DP-MVP-5002693)
 

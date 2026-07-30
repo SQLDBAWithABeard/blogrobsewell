@@ -32,7 +32,7 @@ Create a simple table
 
 You can keep this on a central server or create a database on each server, whichever fits your needs best. You can add other columns if you want your information in a different format
 
-Once you have your table you can create a couple of Powershell functions to easily and quickly add to and retrieve data from the table. I make use of [Invoke-SQLCMD2](https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1) in these functions
+Once you have your table you can create a couple of Powershell functions to easily and quickly add to and retrieve data from the table. I make use of [Invoke-SQLCMD2](https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1?WT.mc_id=DP-MVP-5002693) in these functions
 
 This can then be included in any automation tasks that you use to update your environments whether you are using automated deployment methods for releases or using SCCM to patch your environments making it easy to update and also easy to automate by making it part of your usual deployment process.
 

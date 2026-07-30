@@ -15,7 +15,7 @@ He already knew that he could use [Copy-DbaAgentJob](https://dbatools.io/functio
 Compare-Object
 --------------
 
-I told him about [Compare-Object](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/compare-object?view=powershell-5.1) a function available in PowerShell for precisely this task. Take these two SQL instances and their respective Agent Jobs
+I told him about [Compare-Object](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/compare-object?view=powershell-5.1&WT.mc_id=DP-MVP-5002693) a function available in PowerShell for precisely this task. Take these two SQL instances and their respective Agent Jobs
 
 ![agentjobcompare.png](https://blog.robsewell.com/assets/uploads/2017/11/agentjobcompare.png?resize=630%2C363&ssl=1)
 
@@ -118,7 +118,7 @@ Which is much better and hopefully more useful but it only works with 2 instance
 I have more than 2 instances
 ----------------------------
 
-So if we have more than 2 instances it gets a little more complicated as Compare-Object only supports two arrays. I threw together a quick function to compare each instance with the main instance. This is very rough and will work for now but I have also created [a feature request issue on the dbatools repository](https://github.com/sqlcollaborative/dbatools/issues/2610) so someone (maybe you ?? ) could go and help create those commands
+So if we have more than 2 instances it gets a little more complicated as Compare-Object only supports two arrays. I threw together a quick function to compare each instance with the main instance. This is very rough and will work for now but I have also created [a feature request issue on the dbatools repository](https://github.com/sqlcollaborative/dbatools/issues/2610?WT.mc_id=DP-MVP-5002693) so someone (maybe you ?? ) could go and help create those commands
 
 FunctionCompare-AgentJobs {
     Param(

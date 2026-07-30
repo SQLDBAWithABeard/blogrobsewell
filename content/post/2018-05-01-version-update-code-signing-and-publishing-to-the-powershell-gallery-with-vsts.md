@@ -33,7 +33,7 @@ We have a few steps
 Create Project and link to GitHub
 ---------------------------------
 
-First you need to create a VSTS project by going to [https://www.visualstudio.com/](https://www.visualstudio.com/) This is free for up to 5 users with 1 concurrent CI/CD queue limited to a maximum of 60 minutes run time which should be more than enough for your PowerShell module.
+First you need to create a VSTS project by going to [https://www.visualstudio.com/](https://www.visualstudio.com/?WT.mc_id=DP-MVP-5002693) This is free for up to 5 users with 1 concurrent CI/CD queue limited to a maximum of 60 minutes run time which should be more than enough for your PowerShell module.
 
 [![01 - sign up.png](assets/uploads/2018/05/01-sign-up-1.png)](assets/uploads/2018/05/01-sign-up-1.png)
 
@@ -53,7 +53,7 @@ next you need to link your project to your GitHub (or other source control provi
 
 [![05 - github auth.png](assets/uploads/2018/05/05-github-auth.png)](assets/uploads/2018/05/05-github-auth.png)
 
-You can either authorise with OAuth or you can [provide a PAT token following the instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/). Once that is complete choose your repo. Save the PAT as you will need it later in the process!
+You can either authorise with OAuth or you can [provide a PAT token following the instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/?WT.mc_id=DP-MVP-5002693). Once that is complete choose your repo. Save the PAT as you will need it later in the process!
 
 [![06 - choose repo.png](assets/uploads/2018/05/06-choose-repo.png)](assets/uploads/2018/05/06-choose-repo.png)
 
@@ -76,9 +76,9 @@ i chose the hosted queue but you can download an agent to your build server if y
 Run Unit Tests with Pester
 --------------------------
 
-We have a number of Unit tests in our [tests folder in dbachecks](https://github.com/sqlcollaborative/dbachecks/tree/development/tests) so we want to run them to ensure that everything is as it should be and the new code will not break existing functionality (and for dbachecks the [format of the PowerBi](/using-the-ast-in-pester-for-dbachecks/))
+We have a number of Unit tests in our [tests folder in dbachecks](https://github.com/sqlcollaborative/dbachecks/tree/development/tests?WT.mc_id=DP-MVP-5002693) so we want to run them to ensure that everything is as it should be and the new code will not break existing functionality (and for dbachecks the [format of the PowerBi](/using-the-ast-in-pester-for-dbachecks/))
 
-You can use the [Pester Test Runner Build Task](https://marketplace.visualstudio.com/items?itemName=richardfennellBM.BM-VSTS-PesterRunner-Task) from the folk at [Black Marble](http://blackmarble.com/) by clicking on the + sign next to Phase 1 and searching for Pester
+You can use the [Pester Test Runner Build Task](https://marketplace.visualstudio.com/items?itemName=richardfennellBM.BM-VSTS-PesterRunner-Task&WT.mc_id=DP-MVP-5002693) from the folk at [Black Marble](http://blackmarble.com/) by clicking on the + sign next to Phase 1 and searching for Pester
 
 [![10 - Pester task runner.png](assets/uploads/2018/05/10-Pester-task-runner.png)](assets/uploads/2018/05/10-Pester-task-runner.png)
 
@@ -150,7 +150,7 @@ catch {
     Write-Error "Failed to add $pwd to PSModulePAth - $_"
 }
 
-I use the [Configuration module](https://github.com/PoshCode/Configuration) from [Joel Bennett](https://twitter.com/jaykul) to get the required module versions for the required modules and then add the path to $ENV:PSModulePath so that the modules will be imported. I think this is because the modules did not import correctly without it.
+I use the [Configuration module](https://github.com/PoshCode/Configuration?WT.mc_id=DP-MVP-5002693) from [Joel Bennett](https://twitter.com/jaykul) to get the required module versions for the required modules and then add the path to $ENV:PSModulePath so that the modules will be imported. I think this is because the modules did not import correctly without it.
 
 Once I have the modules I can then run Pester as follows
 
@@ -253,7 +253,7 @@ catch {
     Write-Output "Failed to update GitHub"
 }
 
-I use Get-Content Set-Content as I had errors with the Update-ModuleManifest but Adam Murray [g](https://github.com/muzzar78) | [t](https://twitter.com/muzzar78) uses this code to update the version using the BuildID from VSTS
+I use Get-Content Set-Content as I had errors with the Update-ModuleManifest but Adam Murray [g](https://github.com/muzzar78?WT.mc_id=DP-MVP-5002693) | [t](https://twitter.com/muzzar78) uses this code to update the version using the BuildID from VSTS
 
 $newVersion = New-Object version -ArgumentList 1, 0, 0, $env:BUILD_BUILDID
 $Public  = @(Get-ChildItem -Path $ModulePath\\Public\\*.ps1)
@@ -386,11 +386,11 @@ for the release definitions, click the environment and then options and integrat
 
 [![34 - Release Badge](assets/uploads/2018/05/34-Release-Badge.png)](assets/uploads/2018/05/34-Release-Badge.png)
 
-You can then copy the URL and use it in your readme [like this on dbachecks](https://github.com/sqlcollaborative/dbachecks)
+You can then copy the URL and use it in your readme [like this on dbachecks](https://github.com/sqlcollaborative/dbachecks?WT.mc_id=DP-MVP-5002693)
 
 [![35 - dbachecks readme badges.png](assets/uploads/2018/05/35-dbachecks-readme-badges.png)](assets/uploads/2018/05/35-dbachecks-readme-badges.png)
 
-The SQL Collaborative has joined the preview of enabling public access to VSTS projects as [detailed in this blog post](https://blogs.msdn.microsoft.com/devops/2018/04/27/vsts-public-projects-limited-preview/) So you can [see the dbachecks build and release without the need to log in](https://sqlcollaborative.visualstudio.com/dbachecks/dbachecks%20Team/_build) and soon [the dbatools process as well](https://sqlcollaborative.visualstudio.com/dbatools/_build)
+The SQL Collaborative has joined the preview of enabling public access to VSTS projects as [detailed in this blog post](https://blogs.msdn.microsoft.com/devops/2018/04/27/vsts-public-projects-limited-preview/?WT.mc_id=DP-MVP-5002693) So you can [see the dbachecks build and release without the need to log in](https://sqlcollaborative.visualstudio.com/dbachecks/dbachecks%20Team/_build?WT.mc_id=DP-MVP-5002693) and soon [the dbatools process as well](https://sqlcollaborative.visualstudio.com/dbatools/_build?WT.mc_id=DP-MVP-5002693)
 
 I hope you found this useful and if you have any questions or comments please feel free to contact me
 

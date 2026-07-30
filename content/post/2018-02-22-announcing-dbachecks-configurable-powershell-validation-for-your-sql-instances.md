@@ -330,7 +330,7 @@ Test Results are for other People as well
 
 It is all very well and good being able to run tests and get the results on our screen. It will be very useful for people to be able to validate a new SQL instance for example or run a morning check or the first step of an incident response. But test results are also useful for other people so we need to be able to share them
 
-We have created a Power Bi Dashboard that comes with the dbachecks module to enable easy sharing of the test results. You can also send the results via email using Send-DbcMailMessage. we have an [open issue for putting them into a database](https://github.com/potatoqualitee/dbachecks/issues/270) that we would love you to help resolve.
+We have created a Power Bi Dashboard that comes with the dbachecks module to enable easy sharing of the test results. You can also send the results via email using Send-DbcMailMessage. we have an [open issue for putting them into a database](https://github.com/potatoqualitee/dbachecks/issues/270?WT.mc_id=DP-MVP-5002693) that we would love you to help resolve.
 
 To get the results into PowerBi you can run
 
@@ -359,7 +359,7 @@ Of course it is Powerbi so you can publish this report. Here it is so that you c
 It’s Open Source – We Want Your Ideas, Issues, New Code
 -------------------------------------------------------
 
-dbachecks is open-source [available on GitHub for anyone to contribute](https://github.com/potatoqualitee/dbachecks)
+dbachecks is open-source [available on GitHub for anyone to contribute](https://github.com/potatoqualitee/dbachecks?WT.mc_id=DP-MVP-5002693)
 
 We would love you to contribute. Please open issues for new tests, enhancements, bugs. Please fork the repository and add code to improve the module. please give feedback to make this module even more useful
 

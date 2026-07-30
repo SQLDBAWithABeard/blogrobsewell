@@ -23,7 +23,7 @@ tags:
 Every good DBA should have a DBA database. A place to store information about all of their instances and databases.
 
 I have an InstanceList table which looks like this
-```
+ ```
 CREATE TABLE [dbo].[InstanceList](
 [InstanceID] [int] IDENTITY(1,1) NOT NULL,
 [ServerName] [nvarchar](50) NOT NULL,
@@ -38,19 +38,31 @@ CONSTRAINT [PK_InstanceList_ID] PRIMARY KEY CLUSTERED
 [InstanceID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-```
+``` 
 I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically
 
-I have 4 scripts
+I have```
+Operating System Edition = SWITCH('Info ServerOSInfo'[OperatingSystem], "Microsoft Windows Server 2012 Datacenter", "DataCenter",
+"Microsoft Windows Server 2012 Standard","Standard",
+"Microsoft Windows Server 2012 R2 Datacenter", "DataCenter",
+"Microsoft Windows Server 2008 R2 Standard", "Standard",
+"Microsoft Windows Server 2008 R2 Enterprise", "Enterprise",
+"Microsoft® Windows Server® 2008 Standard", "Standard",
+"Microsoft® Windows Server® 2008 Enterprise","Enterprise",
+"Microsoft(R) Windows(R) Server 2003, Standard Edition", "Standard",
+"Microsoft(R) Windows(R) Server 2003, Enterprise Edition", "Enterprise",
+"Microsoft Windows 2000 Server", "Server 2000",
+"Unknown")
+```scripts
 
 - ServerInfo which gathers Windows OS information such as Version and edition of the operating system, number of processors,amount of RAM, IP address, domain name etc
 - SQLInfo which gathers information about the instance such as SQL version, edition, collation, max and min memory, MAXDOP , service accounts and start modes, default file locations etc
 - Database information such as size, data usage, index usage, last backup dates, owner and many more
 - Agent Job which gathers the outcome of the jobs that have run, their names, category into two tables one for a server rollup and one for details about each job
 
-Recently I have received a lot of requests for information from various sources, auditors asking about encryption and backup policies, Project managers asking about database and sql versions, compliance asking about numbers of Windows 2003 servers or SQL 2005 servers, system teams asking which serves in a particular location can be turned off at which time dependant on which system they are supporting for a power down
+Recently I have received a lot of requests for information from various sources, auditors asking about encryption and backup policies, Project managers asking about database and sql versions, compliance asking about numbers of Windowsundefinedservers or SQLundefinedservers, system teams asking which serves in a particular location can be turned off at which time dependant on which system they are supporting for a power down
 
-Before we had the DBA database holding all of the information about the instances we would have struggled to be able to compile this information and when I saw Power Bi was released to GA I thought that it would be a good place to start to learn about it. By using data that I understood and answering questions that I knew the format of the answer I could be more confident about experimenting - ie. if I know I have 100 servers then any result for servers that exceeds that is incorrect
+Before we had the DBA database holding all of the information about the instances we would have struggled to be able to compile this information and when I saw Power Bi was released to GA I thought that it would be a good place to start to learn about it. By using data that I understood and answering questions that I knew the format of the answer I could be more confident about experimenting - ie. if I know I haveundefinedservers then any result for servers that exceeds that is incorrect
 
 I have never been a BI guy, I claim no expertise in the correct methods of manipulating the data. There may very well be better methods of achieving these results and if there please feel free to comment below so that I can improve my knowledge and keep on learning
 
@@ -79,21 +91,21 @@ It then asked me which tables I wanted to load so I said all of them :-)
 Once I had loaded the data I looked at the queries and renamed some of the columns to make more sense to me. I also created some calculated columns by clicking New Column
 
 I created a relative date column using this code from Chris Webb [http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/](http://blog.crossjoin.co.uk/2013/01/24/building-relative-date-reports-in-powerpivot/)
-```
+ ```
 Relative Date Offset=INT([Date] – TODAY()
 
 Relative Date=IF([Relative Date Offset]=0
 , "Today"
 , "Today " & IF([Relative Date Offset]>0, "+", "") & [Relative Date Offset])
-```
+``` 
 This will enable me to show data for the last day
 
 I also did the same for days of the week
-```
+ ```
 DayOfWeek = CONCATENATE(WEEKDAY('Info AgentJobDetail'[LastRunTime],2),FORMAT('InfoAgentJobDetail'[LastRunTime]," -dddd"))
-```
+``` 
 Because I struggled to show the information about the Operating system I also created two columns for OS name and OS edition by adding columns as shown below
-```
+ ```
 Operating System Version = SWITCH('Info ServerOSInfo'[OperatingSystem], "Microsoft Windows Server 2012 Datacenter", "Server 2012",
 "Microsoft Windows Server 2012 Standard","Server 2012",
 "Microsoft Windows Server 2012 R2 Datacenter", "Server 2012 R2",
@@ -106,9 +118,9 @@ Operating System Version = SWITCH('Info ServerOSInfo'[OperatingSystem], "Microso
 "Microsoft(R) Windows(R) Server 2003, Enterprise Edition", "Server 2003",
 "Microsoft Windows 2000 Server", "Server 2000",
 "Unknown")
-```
+``` 
 And
-```
+ ```
 Operating System Edition = SWITCH('Info ServerOSInfo'[OperatingSystem], "Microsoft Windows Server 2012 Datacenter", "DataCenter",
 "Microsoft Windows Server 2012 Standard","Standard",
 "Microsoft Windows Server 2012 R2 Datacenter", "DataCenter",
@@ -120,7 +132,7 @@ Operating System Edition = SWITCH('Info ServerOSInfo'[OperatingSystem], "Microso
 "Microsoft(R) Windows(R) Server 2003, Enterprise Edition", "Enterprise",
 "Microsoft Windows 2000 Server", "Server 2000",
 "Unknown")
-```
+``` 
 Then I started to play with the data.
 
 This is probably not how a professional would phrase it but I would say that if you don't know how to use a new application be brave and give it a try.
@@ -147,13 +159,13 @@ If I click on the table and then donut chart in the visualisations it changes to
 
 So you can quickly see how you want the data displayed
 
-I then decided to look at the number of SQL 2005 instances that I had and as I had relationships between SQLInfo and Instancelist and Clients I could build a more dynamic report.
+I then decided to look at the number of SQLundefinedinstances that I had and as I had relationships between SQLInfo and Instancelist and Clients I could build a more dynamic report.
 
 I created a donut chart with SQLVersion as the legend and InstanceID as the values and a table of SQLVersion, ServerName and Instance Name. I also created a card that was count of InstanceID
 
 [![10](https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/08/10.png)
 
-Now it starts getting really useful. If I want to know how many SQL 2005 instances I have I simply click on SQL2005 in the donut chart and the rest of the report changes
+Now it starts getting really useful. If I want to know how many SQLundefinedinstances I have I simply click on SQL2005 in the donut chart and the rest of the report changes
 
 [![11](https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/08/11.png)
 
@@ -167,11 +179,11 @@ and create two tables one of client with a count of instanceid and one location 
 
 [![13](https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/08/13.png)
 
-Look at how it dynamically changes as you click on the data labels - This is very cool and makes me smile every time!! I altered the colour saturation colours to make it easier to see. Now if I am asked about SQL 2005 servers I can quickly click on SQL 2005 and
+Look at how it dynamically changes as you click on the data labels - This is very cool and makes me smile every time!! I altered the colour saturation colours to make it easier to see. Now if I am asked about SQLundefinedservers I can quickly click on SQLundefinedand
 
 [![14](https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/08/14.png)
 
-I can see that there are 32 instances, most are in Southampton, and which clients they support
+I can see that there areundefinedinstances, most are in Southampton, and which clients they support
 
 If I click a location rather than SQL version the report alters like so
 
@@ -187,16 +199,16 @@ I also created a report for my Agent Jobs to enable me to quickly and easily see
 
 [![17](https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/08/17.png)
 
-I did this by filtering the report by Relative Date Offset greater than -1 (today) and `isenabled = True` and `Outcome = Failed`
+I did this by filtering the report by Relative Date Offset greater than -1 (today) and  `isenabled = True`  and  `Outcome = Failed` 
 
 There are many many more ways I can see this being useful and I hope I have given you some ideas and encouraged you to try for yourself and find out more
 
 I have written further posts about this
 
-[**Populating My DBA Database for Power Bi with PowerShell – Server Info**](https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-server-info/ )
+[**Populating My DBA Database for Power Bi with PowerShell – Server Info**](/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/ )
 
-[**Populating My DBA Database for Power Bi with PowerShell – SQL Info**](https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-sql-info)
+[**Populating My DBA Database for Power Bi with PowerShell – SQL Info**](/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/)
 
-[**Populating My DBA Database for Power Bi with PowerShell – Databases**](https://blog.robsewell.com/power%20bi/powershell/sql%20server/populating-my-dba-database-for-power-bi-with-powershell-databases/)
+[**Populating My DBA Database for Power Bi with PowerShell – Databases**](/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/)
 
-[**Power Bi, PowerShell and SQL Agent Jobs**](https://blog.robsewell.com/power%20bi/powershell/sql%20server/power-bi-powershell-and-sql-agent-jobs/)
+[**Power Bi, PowerShell and SQL Agent Jobs**](/blog/power-bi-powershell-and-sql-agent-jobs/)

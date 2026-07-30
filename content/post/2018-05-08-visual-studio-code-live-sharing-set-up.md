@@ -17,7 +17,7 @@ tags:
 image: assets/uploads/2018/05/07-sign-in.png
 
 ---
-There was an [announcement on the Visual Studio Code blog](https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview) about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.
+There was an [announcement on the Visual Studio Code blog](https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview?WT.mc_id=DP-MVP-5002693) about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.
 
 It is remarkably easy to set up 🙂
 
@@ -86,7 +86,7 @@ Choose the one that you want to use and do your 2FA.
 
 [![08 - 2FA.png](assets/uploads/2018/05/08-2FA.png)](assets/uploads/2018/05/08-2FA.png)
 
-You do have 2FA on your Microsoft and GitHub (and all the other services)? If not go and set it up now – [here for Microsoft](https://account.live.com/proofs/manage/additional?mkt=en-US&refd=account.microsoft.com&refp=security) and [here for GitHub ](https://github.com/settings/security)
+You do have 2FA on your Microsoft and GitHub (and all the other services)? If not go and set it up now – [here for Microsoft](https://account.live.com/proofs/manage/additional?mkt=en-US&refd=account.microsoft.com&refp=security) and [here for GitHub ](https://github.com/settings/security?WT.mc_id=DP-MVP-5002693)
 
 Once you have signed in you will get this notification which you can close
 
@@ -130,7 +130,7 @@ You can then collaborate on your code and share the session. In the video below 
 <SCRIPT src="https://s0.wp.com/wp-content/plugins/video/assets/js/next/videopress-iframe.js"></SCRIPT>
 </DIV>
 
-So that shows how easy it is to install and to use. You can dive deeper [using the documentation](https://docs.microsoft.com/en-us/visualstudio/liveshare/).
+So that shows how easy it is to install and to use. You can dive deeper [using the documentation](https://docs.microsoft.com/en-us/visualstudio/liveshare/?WT.mc_id=DP-MVP-5002693).
 
 Happy Collaborating 🙂
 

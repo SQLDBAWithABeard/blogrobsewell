@@ -32,11 +32,11 @@ The first bit is up to you. I cannot decide what you need to test for on your se
 
 Now we need the PowerShell command to return the information to test for. We need a command that will get information about logins on a SQL server and if it can return disabled logins then all the better.
 
-As always when starting to use PowerShell with SQL Server I would start with [dbatools](http://dbatools.io). If we run [Find-DbaCommand](https://dbatools.io/functions/find-dbacommand/) we can search for commands in the module that support logins. (If you have chosen something non-SQL Server related then you can use [Get-Command](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command?view=powershell-5.1) or the internet to find the command you need.)
+As always when starting to use PowerShell with SQL Server I would start with [dbatools](http://dbatools.io). If we run [Find-DbaCommand](https://dbatools.io/functions/find-dbacommand/) we can search for commands in the module that support logins. (If you have chosen something non-SQL Server related then you can use [Get-Command](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command?view=powershell-5.1&WT.mc_id=DP-MVP-5002693) or the internet to find the command you need.)
 
 ![find-dbacommand.png](https://blog.robsewell.com/assets/uploads/2017/11/find-dbacommand.png?resize=630%2C169&ssl=1)
 
 [Get-DbaLogin](https://dbatools.io/functions/get-dbalogin/) looks like the one that we want. Now we need to understand how to use it. Always, always use Get-Help to do this. If we run
 
-```powershell
+ `` `powershell
 Get-Help Get-DbaLogins -detailed

@@ -13,7 +13,7 @@ This error caught me out. I am putting this post here firstly to remind me if I 
 
 Today I am rewriting a function to create a Hyper-V VM so that I can properly script the creation of my labs for demos and other things. I am doing this because I want to use DSC to create an availability group and want to be able to tear down and recreate the machines (but thats for another day)
 
-I also have been looking at [Pester](https://github.com/pester/Pester) which is a framework for running unit tests within PowerShell
+I also have been looking at [Pester](https://github.com/pester/Pester?WT.mc_id=DP-MVP-5002693) which is a framework for running unit tests within PowerShell
 
 You will find some good blog posts about starting with Pester [here](https://www.google.co.uk/search?q=PowerShell+pester+tutorial&ie=&oe=)
 

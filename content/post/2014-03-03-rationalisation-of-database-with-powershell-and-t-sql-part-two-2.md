@@ -14,7 +14,7 @@ tags:
 image: assets/uploads/2014/03/030314_2100_rationalisa1.png
 
 ---
-In the [previous post](https://blog.robsewell.com/rationalisation-of-database-with-powershell-and-t-sql-part-one/) I showed the script to create an Excel Workbook, colour coded showing the last used date for all of the databases on servers in my sqlservers.txt file. After gathering that information over several months, there is then a requirement for someone to make a decision as to which databases can be removed.
+In the [previous post](/blog/rationalisation-of-database-with-powershell-and-t-sql-part-one/) I showed the script to create an Excel Workbook, colour coded showing the last used date for all of the databases on servers in my sqlservers.txt file. After gathering that information over several months, there is then a requirement for someone to make a decision as to which databases can be removed.
 
 Obviously there will be some databases that are read-only or if not set specifically as read-only may only be used for reference without data being added. You should hopefully have knowledge of these databases and be able to take them off the list quickly.
 
@@ -44,7 +44,7 @@ The reasoning for these steps is best explained by watching this video
 
 I could have used PowerShell to do this by examining The SMO for the Server and the JobServer but this time I decided to challenge myself by writing it in T-SQL as I am weaker in that area. The script below is the result of that work. It works for me. I expect that there are other ways of doing this and please feel free to point out any errors or suggestions. That is how I learn. Hopefully these posts will be of use to other DBAs like myself.
 
-As always with anything you read on the internet. Validate and test. This script works for me on SQL Servers 2005, 2008,2008R2 and 2012 but if you are thinking of running it in your own Production Environment – DON’T.
+As always with anything you read on the internet. Validate and test. This script works for me on SQL Servers 2005, 2008,2008R2 andundefinedbut if you are thinking of running it in your own Production Environment – DON’T.
 
 Well not until you have tested it somewhere safe first J
 
@@ -107,7 +107,7 @@ And using the variables to create and execute the T-SQL for each of the steps ab
 
 It is pointless to move onto the next step of the previous one has failed so I created some error handling as follows
 
-    if @@error != 0 raiserror('Rationalisation Script failed at Verify Restore', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at Verify Restore', 20, -1) with log
     GO
 
 I created the T-SQL for the agent job by first creating the restore script and adding it to a variable and then right-clicking on a previously created restore database job and using the script to new window command
@@ -214,7 +214,7 @@ It was then a case of adding single quotes and reading the code until it would s
 
     -- Break out if error raised We need to do some work if there are errors here
 
-    if @@error != 0 raiserror('Rationalisation Script failed at DBCC', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at DBCC', 20, -1) with log
     GO
 
     -- Declare and set variables
@@ -244,7 +244,7 @@ It was then a case of adding single quotes and reading the code until it would s
 
     -- Break Out if there are errors here - If there is no backup we don't want to continue
 
-    if @@error != 0 raiserror('Rationalisation Script failed at Backup', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at Backup', 20, -1) with log
     GO
 
     DECLARE @PATH nvarchar(300)
@@ -253,7 +253,7 @@ It was then a case of adding single quotes and reading the code until it would s
     RESTORE VERIFYONLY
     FROM DISK = @PATH;
 
-    if @@error != 0 raiserror('Rationalisation Script failed at Verify Restore', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at Verify Restore', 20, -1) with log
     GO
     -- Declare variables for dropping database
 
@@ -272,7 +272,7 @@ It was then a case of adding single quotes and reading the code until it would s
 
     EXECUTE(@DROPSQL)
     GO
-    if @@error != 0 raiserror('Rationalisation Script failed at Drop Database', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at Drop Database', 20, -1) with log
     GO
 
     --Declare variables for creating Job
@@ -318,7 +318,7 @@ It was then a case of adding single quotes and reading the code until it would s
     IF NOT EXISTS (SELECT name FROM msdb.dbo.syscategories WHERE name=N''[Uncategorized (Local)]'' AND category_class=1)
     BEGIN
     EXEC @ReturnCode = msdb.dbo.sp_add_category @class=N''JOB'', @type=N''LOCAL'', @name=N''[Uncategorized (Local)]''
-    IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+    IF (@@ERROR &lt;&gt;undefinedOR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
 
     END
 
@@ -340,7 +340,7 @@ It was then a case of adding single quotes and reading the code until it would s
     		@description=@JobDesc,
     		@category_name=N''[Uncategorized (Local)]'',
     		@owner_login_name=N''THEBEARD\Rob'', @job_id = @jobId OUTPUT
-    IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+    IF (@@ERROR &lt;&gt;undefinedOR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
     /****** Object:  Step [Restore Database]    Script Date: 01/18/2014 14:12:04 ******/
     EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N''Restore Database'',
     		@step_id=1,
@@ -371,11 +371,11 @@ It was then a case of adding single quotes and reading the code until it would s
     EXEC sp_changedbowner @loginame = N''''THEBEARD\Rob'''', @map = false'',
     		@database_name=N''master'',
     		@flags=0
-    IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+    IF (@@ERROR &lt;&gt;undefinedOR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
     EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
-    IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+    IF (@@ERROR &lt;&gt;undefinedOR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
     EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N''(local)''
-    IF (@@ERROR &lt;&gt; 0 OR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
+    IF (@@ERROR &lt;&gt;undefinedOR @ReturnCode &lt;&gt; 0) GOTO QuitWithRollback
     COMMIT TRANSACTION
     GOTO EndSave
     QuitWithRollback:
@@ -390,7 +390,7 @@ It was then a case of adding single quotes and reading the code until it would s
 
     EXECUTE(@JOBSql)
 
-    if @@error != 0 raiserror('Rationalisation Script failed at Create Job', 20, -1) with log
+    if @@error !=undefinedraiserror('Rationalisation Script failed at Create Job', 20, -1) with log
     GO
 
     DROP Table #vars

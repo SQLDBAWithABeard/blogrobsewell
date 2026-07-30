@@ -29,7 +29,7 @@ which gives a result like this
 
 ![](https://blog.robsewell.com/assets/uploads/2018/01/01-Whatif.png)
 
-This makes it easy to do at the command line but when we get confident with PowerShell we will want to write scripts to perform tasks using more than one command. So how can we ensure that we can check that those will do what we are expecting without actually running the script and see what happens? Of course, there are Unit and integration testing that should be performed using [Pester](https://blog.robsewell.com/writing-dynamic-and-random-tests-cases-for-pester/) when developing the script but there will still be occasions when we want to see what this script will do this time in this environment.
+This makes it easy to do at the command line but when we get confident with PowerShell we will want to write scripts to perform tasks using more than one command. So how can we ensure that we can check that those will do what we are expecting without actually running the script and see what happens? Of course, there are Unit and integration testing that should be performed using [Pester](/blog/writing-dynamic-and-random-tests-cases-for-pester/) when developing the script but there will still be occasions when we want to see what this script will do this time in this environment.
 
 Lets take an example. We want to place our SQL Agent jobs into specific custom categories depending on their name. We might write a script like this
 

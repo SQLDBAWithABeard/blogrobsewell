@@ -16,7 +16,7 @@ tags:
   - PowerShell
 
 ---
-The latest update to the ADSNotebook PowerShell module [I blogged about here](https://blog.robsewell.com/create-azure-data-studio-sql-notebooks-with-powershell/) now enables the creation of PowerShell notebooks with PowerShell.
+The latest update to the ADSNotebook PowerShell module [I blogged about here](/blog/create-azure-data-studio-sql-notebooks-with-powershell/) now enables the creation of PowerShell notebooks with PowerShell.
 
 You can install the module with
 
@@ -26,14 +26,14 @@ or if you have already installed it you can use
 
     Update-Module ADSNotebook
 
-In the latest release, there is an extra parameter for `New-AdsWorkBook` of `-Type` which will accept either SQL or PowerShell
+In the latest release, there is an extra parameter for   `New-AdsWorkBook`   of   `-Type`   which will accept either SQL or PowerShell
 
 Create a PowerShell Notebook with PowerShell Rob
 ------------------------------------------------
 
 OK!
 
-Here is some code to create a PowerShell Notebook. First we will create some cells using `New-AdsWorkBookCell` including all the markdown to add images and links. You can find my notebooks which explain how to write the markdown for your notebooks in my [GitHub Presentations Repository](https://github.com/SQLDBAWithABeard/Presentations/tree/master/2019/PASS%20Summit/SQL%20Notebooks%20in%20Azure%20Data%20Studio%20for%20the%20DBA)
+Here is some code to create a PowerShell Notebook. First we will create some cells using   `New-AdsWorkBookCell`   including all the markdown to add images and links. You can find my notebooks which explain how to write the markdown for your notebooks in my [GitHub Presentations Repository](https://github.com/SQLDBAWithABeard/Presentations/tree/master/2019/PASS%20Summit/SQL%20Notebooks%20in%20Azure%20Data%20Studio%20for%20the%20DBA?WT.mc_id=DP-MVP-5002693)
 
 <PRE class=wp-block-code><CODE>$introCelltext = "# Welcome to my Auto Generated PowerShell Notebook
 
@@ -41,16 +41,16 @@ Here is some code to create a PowerShell Notebook. First we will create some cel
 ![image](https://user-images.githubusercontent.com/6729780/68845538-7afcd200-06c3-11ea-952e-e4fe72a68fc8.png)  
 
 dbatools is an open-source PowerShell Module for administering SQL Servers.
-You can read more about dbatools and find the documentation at [dbatools.io](dbatools.io)
+You can read more about dbatools and find the documentation at [dbatools.io](https://dbatools.io)
 "
 $SecondCelltext = "### Installation
-You can install dbatools from the PowerShell Gallery using `Install-Module dbatools`
+You can install dbatools from the PowerShell Gallery using   `Install-Module dbatools`  
 "
 
 $thirdcelltext = "Install-Module dbatools"
 
 $fourthCelltext = "### Getting Help
-You should always use `Get-Help` to fins out how to use dbatools (and any PowerShell) commands"
+You should always use   `Get-Help`   to fins out how to use dbatools (and any PowerShell) commands"
 
 $fifthcelltext = "Get-Help Get-DbaDatabase"
 $sixthCelltext = "Try a command now. get the name, owner and collation of the user databases on the local instance"

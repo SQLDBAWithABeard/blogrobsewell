@@ -19,7 +19,7 @@ Thank you to the ever wonderful Ben [for the suggestion to blog](https://www.new
 
 # In the beginning
 
-It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first [SQLBits Conference](https://sqlbits.com) (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists [here](https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/)
+It was around May ofundefinedthat I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first [SQLBits Conference](https://sqlbits.com) (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists [here](/blog/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/)
 
 At the next SQL SouthWest User Group (as it was known then) Jonathan had said and next meeting we will have a session from Rob about PowerShell and Azure VMs. That was pretty much it. I thought why not give it a go. The worst that happens is that I don't like it and don't ever do it again. (Narrator - exactly the opposite happened - He loved it and does it [at every opportunity](https://sessionize.com/rob-sewell/))
 

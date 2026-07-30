@@ -16,7 +16,7 @@ tags:
 
 image: assets/uploads/2019/04/image-49.png
 ---
-In [my last post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/) I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.
+In [my last post](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/) I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.
 
 Of course, I haven't stopped there, who wants to manually run code to create things. There was a lot of install this and set up that. I would rather give the code to a build system and get it to run it. I can then even set it to automatically deploy new infrastructure when I commit some code to alter the configuration.
 
@@ -42,11 +42,11 @@ I then chose Empty Job on the next page. See the Configuration as code choice? W
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-54.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-54.png?ssl=1)
 
-The next page allows us to give the build a good name and choose the Agent Pool that we want to use. Azure DevOps gives 7 different hosted agents running Linux, Mac, Windows or you can download an agent and run it on your own cpus. We will use the default agent for this process.
+The next page allows us to give the build a good name and choose the Agent Pool that we want to use. Azure DevOps givesundefineddifferent hosted agents running Linux, Mac, Windows or you can download an agent and run it on your own cpus. We will use the default agent for this process.
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-55.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-55.png?ssl=1)
 
-Clicking on Agent Job 1 enables me to change the name of the Agent Job. I could also choose a different type of Agent for different jobs within the same pipeline. This would be useful for testing different OS’s for example but for right now I shall just name it properly.
+Clicking on Agent Jobundefinedenables me to change the name of the Agent Job. I could also choose a different type of Agent for different jobs within the same pipeline. This would be useful for testing different OS’s for example but for right now I shall just name it properly.
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-65.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-65.png?ssl=1)
 
@@ -106,11 +106,11 @@ I then add this code to get the access key and overwrite the variable.
 Infrastructure as Code
 ----------------------
 
-In [my GitHub repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB) I now have the following folders
+In [my GitHub repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLDB?WT.mc_id=DP-MVP-5002693) I now have the following folders
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-64.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-64.png?ssl=1)
 
-The manual folders hold the code [from the last blog post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/). In the Build folder, the main.tf file is identical and looks like this.
+The manual folders hold the code [from the last blog post](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/). In the Build folder, the main.tf file is identical and looks like this.
 
     provider "azurerm" {
         version = "=1.24.0"
@@ -173,7 +173,7 @@ The variables.tf folder looks like this.
     }
 
     variable "SqlServerName" {
-      description = "The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase between 3 and 24 characters including the prefix"
+      description = "The name of the Azure SQL Server to be created or to have the database on - needs to be unique, lowercase betweenundefinedandundefinedcharacters including the prefix"
       default     = "__SqlServerName__"
     }
 
@@ -186,7 +186,7 @@ The variables.tf folder looks like this.
       default     = "__SQLServerAdminPassword__"
     }
     variable "SqlDatabaseName" {
-      description = "The name of the Azure SQL database on - needs to be unique, lowercase between 3 and 24 characters including the prefix"
+      description = "The name of the Azure SQL database on - needs to be unique, lowercase betweenundefinedandundefinedcharacters including the prefix"
       default     = "__SqlDatabaseName__"
     }
 
@@ -226,7 +226,7 @@ But the build job hasn’t been set up yet. First we need to replace the values 
 Replace the Tokens
 ------------------
 
-I installed the [Replace Tokens Task](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens) from the marketplace and added that to the build.
+I installed the [Replace Tokens Task](https://marketplace.visualstudio.com/items?itemName=qetza.replacetokens&WT.mc_id=DP-MVP-5002693) from the marketplace and added that to the build.
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-72.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-72.png?ssl=1)
 
@@ -248,7 +248,7 @@ Under control options there is a check box to enable or disable the steps so onc
 Running the Terraform in Azure DevOps
 -------------------------------------
 
-With everything set up we can now run the Terraform. I installed the [Terraform task](https://marketplace.visualstudio.com/items?itemName=petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform) from the marketplace and added a task. We are going to follow the same process as the last blog post, init, plan, apply but this time we are going to automate it 🙂
+With everything set up we can now run the Terraform. I installed the [Terraform task](https://marketplace.visualstudio.com/items?itemName=petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Release-Terraform&WT.mc_id=DP-MVP-5002693) from the marketplace and added a task. We are going to follow the same process as the last blog post, init, plan, apply but this time we are going to automate it 🙂
 
 First we will initialise
 
@@ -278,7 +278,7 @@ The arguments are
 
     apply -auto-approve
 
-This will negate the requirement for the “Only “yes” will be accepted to approve” [from the manual steps post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/)!
+This will negate the requirement for the “Only “yes” will be accepted to approve” [from the manual steps post](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/)!
 
 Build a Thing
 -------------
@@ -334,6 +334,6 @@ This is brilliant, I can set up the same solution for different repositories for
 
 [The next post will show how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/)
 
-[The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)
+[The post after that will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)
 
-[The first post showed how to build an Azure SQL Database with Terraform using VS Code](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/)
+[The first post showed how to build an Azure SQL Database with Terraform using VS Code](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/)

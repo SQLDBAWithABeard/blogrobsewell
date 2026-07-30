@@ -38,7 +38,7 @@ Call For Data Speakers enables speakers to sign up to receive an email when a ne
 
 # YES even you. Please join.
 
-I have created some automation that will make adding (and removing) yourself from this list easy to do. You can just go straight to [the repo](https://github.com/dataplat/DataSpeakers) and follow the instructions if you dont want to read any more here.
+I have created some automation that will make adding (and removing) yourself from this list easy to do. You can just go straight to [the repo](https://github.com/dataplat/DataSpeakers?WT.mc_id=DP-MVP-5002693) and follow the instructions if you dont want to read any more here.
 
 I see this as a resource for everybody, famouse or not, new or old. I absolutely want **you to add yourself**, if you have content that can be used to provide a full day of training. Please don't let imposter syndrome get in the way. Right now, all you are doing is listing your idea for people to see. Hopefully soon event organisers will get in touch and say hey I see you present on ... please would you submit to our event for a training day.
 
@@ -50,7 +50,7 @@ This process is all automated and driven by GitHub Issues.
 
 ## To add yourself as a speaker
 
-Open the [Issues Page](https://github.com/dataplat/DataSpeakers/issues) and click new issue.
+Open the [Issues Page](https://github.com/dataplat/DataSpeakers/issues?WT.mc_id=DP-MVP-5002693) and click new issue.
 
 
 ![open a new issue](https://raw.githubusercontent.com/dataplat/DataSpeakers/main/images/newissue.png)

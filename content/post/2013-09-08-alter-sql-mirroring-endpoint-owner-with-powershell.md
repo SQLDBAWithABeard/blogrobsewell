@@ -17,7 +17,7 @@ tags:
 
 >Login domain\user’ has granted one or more permissions. Revoke the permission before dropping the login (Microsoft SQL Server, Error: 15173)
 
-<P>I used the <A href="https://blog.robsewell.com/sql-login-object-permissions-via-powershell" rel=noopener target=_blank>Show-SQLPermissions</A> function and added the .grantor property to try and locate the permission the account had granted but it came back blank. A bit of googling and <A href="http://en.wikipedia.org/wiki/Eureka_effect" rel=noopener target=_blank>a AHA moment</A>&nbsp;and I remembered mirroring</P>
+<P>I used the <A href="/blog/sql-login-object-permissions-via-powershell/" rel=noopener target=_blank>Show-SQLPermissions</A> function and added the .grantor property to try and locate the permission the account had granted but it came back blank. A bit of googling and <A href="http://en.wikipedia.org/wiki/Eureka_effect" rel=noopener target=_blank>a AHA moment</A>&nbsp;and I remembered mirroring</P>
 <P>I checked the mirroring endpoints</P>
 
 [![mirroring endpoitn check](https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg)](https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg)

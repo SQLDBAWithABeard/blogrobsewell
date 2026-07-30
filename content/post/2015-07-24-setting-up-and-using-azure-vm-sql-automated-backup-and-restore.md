@@ -39,7 +39,7 @@ From [https://msdn.microsoft.com/en-gb/library/dn449496(v=sql.120).aspx](https:/
 How to set it up.
 
 If you are using the GUI then you will find SQL Automated Backup in the optional config blade of the set up. You can follow the steps [here to set it up](http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693). If (like me) you want to use PowerShell then use the following code after you have created your Virtual Machine
-```
+ ```
 $storageaccount = "<storageaccountname>"
 $storageaccountkey = (Get-AzureStorageKey -StorageAccountName $storageaccount).Primary
 $storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -StorageAccountKey $storageaccountkey
@@ -47,7 +47,7 @@ $storagecontext = New-AzureStorageContext -StorageAccountName $storageaccount -S
 $encryptionpassword = (Get-Credential -message 'Backup Encryption Password' -User 'IGNOREUSER').password
 $autobackupconfig = New-AzureVMSqlServerAutoBackupConfig -StorageContext $storagecontext -Enable -RetentionPeriod 10 -EnableEncryption -CertificatePassword $encryptionpassword
 Get-AzureVM -ServiceName <vmservicename> -Name <vmname> | Set-AzureVMSqlServerExtension -AutoBackupSettings $autobackupconfig | Update-AzureVM
-```
+``` 
 Once you have run the code, Azure will take care of the rest. Add a couple of databases to your instance and look in the storage account and you will see this
 
 [![2](https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/07/2.png)
@@ -63,14 +63,14 @@ It will also create a credential
 [![5](images/5.png)](https://sqldbawithabeard.com/wp-content/uploads/2015/07/5.png)
 
 You can use the same credential to back up your system databases. If like me you use [Ola Hallengrens excellent Maintenance Solution](https://ola.hallengren.com/) then simply change your systems backup job as follows
-```
+ ```
 USE [msdb]
 GO
 EXEC msdb.dbo.sp_update_jobstep @job_name = 'DatabaseBackup - SYSTEM_DATABASES - FULL', @step_id=1 ,
 		@command=N'sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q "EXECUTE [dbo].[DatabaseBackup] @Databases = ''SYSTEM_DATABASES'', "https://myaccount.blob.core.windows.net/mycontainer"
 		,  @Credential = ''AutoBackup_Credential'', @BackupType = ''FULL'', @Verify = ''Y'', @CleanupTime = NULL, @CheckSum = ''Y'', @LogToTable = ''Y''" -b'
 GO
-```
+``` 
 If you need to restore your database then you can use the GUI and when you choose restore you will see this screen
 
 [![6](https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/07/6.png)
@@ -80,7 +80,7 @@ Enter your storage account and the key which you can get from the Azure portal. 
 [![7](https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png?w=300)](https://sqldbawithabeard.com/wp-content/uploads/2015/07/7.png)
 
 There are all of your backups ready to restore to any point in time that you choose. By clicking script the T-SQL is generated which looks like this
-```
+ ```
 USE [master]
 BACKUP LOG [Test] TO  URL = N'https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_LogBackup_2015-07-16_06-21-26.bak'
 WITH  CREDENTIAL = N'AutoBackup_Credential' ,
@@ -107,12 +107,12 @@ WITH  CREDENTIAL = N'AutoBackup_Credential' ,  FILE = 1,  NORECOVERY,  NOUNLOAD,
 RESTORE LOG [Test] FROM  URL = N'https://sqlbackupstoragebeard.blob.core.windows.net/asqlvm9-mssqlserver/Test_b8bb98d7a235487d9789b3ee8759cf3e_20150716060004+00.log'
 WITH  CREDENTIAL = N'AutoBackup_Credential' ,  FILE = 1,  NOUNLOAD,  STATS = 5
 GO
-```
+``` 
 There is an important note. Remember this when you have just set it up so that you don’t think that you have done it wrong (which is what I did!)
 
 When you enable Automated Patching for the first time, Azure configures the SQL Server IaaS Agent in the background. During this time, the portal will not show that Automated Patching is configured. Wait several minutes for the agent to be installed, configured. After that the portal will reflect the new settings.
 
-From <[https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx](https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx)\>
+From <[https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx](https://msdn.microsoft.com/en-us/library/azure/dn961166.aspx?WT.mc_id=DP-MVP-5002693)\>
 
 And also look out for this
 

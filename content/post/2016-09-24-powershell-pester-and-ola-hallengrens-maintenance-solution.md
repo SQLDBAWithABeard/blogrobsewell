@@ -17,7 +17,7 @@ tags:
 image: assets/uploads/2016/09/pester-ola-check.png
 ---
 If you are a SQL DBA you will have heard of [Ola Hallengrens Maintenance solution](https://ola.hallengren.com/) If you haven’t go and click the link and look at the easiest way to ensure that all of your essential database maintenance is performed. You can also [watch a video from Ola at SQL Bits](https://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution)
-Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to [Pester](https://github.com/pester/Pester) You can find a great [how to get started here](https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx) which will show you how to get Pester and how to get started with TDD.
+Recently I was thinking about how I could validate that this solution was installed in the way that I wanted it to be so I turned to [Pester](https://github.com/pester/Pester?WT.mc_id=DP-MVP-5002693) You can find a great [how to get started here](https://mcpmag.com/articles/2016/05/19/test-powershell-modules-with-pester.aspx) which will show you how to get Pester and how to get started with TDD.
 This isn’t TDD though this is Environment Validation and this is how I went about creating my test.
 First I thought about what I would look for in SSMS when I had installed the maintenance solution and made a list of the things that I would check which looked something like this. This would be the checklist you would create (or have already created) for yourself or a junior following this install. This is how easy you can turn that checklist into a Pester Test and remove the human element and open your install for automated testing
 
@@ -35,12 +35,12 @@ First I thought about what I would look for in SSMS when I had installed the mai
 
 I can certainly say that I have run through that check in my head and also written it down in an installation guide in the past. If I was being more careful I would have checked if there were the correct folders in the folder I was backing up to.
 
-Ola’s script uses a default naming convention so this makes it easy. There should be a `SERVERNAME` or `SERVERNAME$INSTANCENAME` folder or if there is an Availability Group a `CLUSTERNAME$AGNAME` and in each of those a FULL DIFF and LOG folder which I can add to my checklist
+Ola’s script uses a default naming convention so this makes it easy. There should be a  `SERVERNAME`  or  `SERVERNAME$INSTANCENAME`  folder or if there is an Availability Group a  `CLUSTERNAME$AGNAME`  and in each of those a FULL DIFF and LOG folder which I can add to my checklist
 
 So now we have our checklist we just need to turn in into a Pester Environmental Validation script
 
-It would be useful to be able to pass in a number of instances so we will start with a foreach loop and then a [Describe Block](https://github.com/pester/Pester/wiki/Describe) then split the server name and instance name, get the agent jobs and set the backup folder name
-```
+It would be useful to be able to pass in a number of instances so we will start with a foreach loop and then a [Describe Block](https://github.com/pester/Pester/wiki/Describe?WT.mc_id=DP-MVP-5002693) then split the server name and instance name, get the agent jobs and set the backup folder name
+ ```
 $ServerName = $Server.Split('\')[0]
 $InstanceName = $Server.Split('\')[1]
 $ServerName = $ServerName.ToUpper()
@@ -64,27 +64,27 @@ if($CheckForBackups -eq $true)
 $CheckForDBFolders -eq $true
 }
 $Root = $Share + '\' + $Folder
-```
-I also set the Agent service display name so I can get its status. I split the jobs up using a [Context block](https://github.com/pester/Pester/wiki/Context), one each for Backups, Database maintenance and solution clean up but they all follow the same pattern. .First get the jobs
-```
+``` 
+I also set the Agent service display name so I can get its status. I split the jobs up using a [Context block](https://github.com/pester/Pester/wiki/Context?WT.mc_id=DP-MVP-5002693), one each for Backups, Database maintenance and solution clean up but they all follow the same pattern. .First get the jobs
+ ```
 $Jobs = $Jobs.Where{($_.Name -like 'DatabaseBackup - SYSTEM_DATABASES - FULL*' + $JobSuffix + '*') -or ($_.Name -like 'DatabaseBackup - USER_DATABASES - FULL*' + $JobSuffix + '*') -or ($_.Name -like 'DatabaseBackup - USER_DATABASES - DIFF*' + $JobSuffix + '*') -or ($_.Name -like 'DatabaseBackup - USER_DATABASES - LOG*' + $JobSuffix + '*')}
-```
-Then we can iterate through them and check them but first lets test the Agent Service. You do this with an [It Block](https://github.com/pester/Pester/wiki/It) and in it put a single test like this
+``` 
+Then we can iterate through them and check them but first lets test the Agent Service. You do this with an [It Block](https://github.com/pester/Pester/wiki/It?WT.mc_id=DP-MVP-5002693) and in it put a single test like this
 
-`actual-value | Should Be expected-value`
+ `actual-value | Should Be expected-value` 
 
 So to check the Agent Job is running we can do this
-```
+ ```
 (Get-service -ComputerName $ServerName -DisplayName $DisplayName).Status | Should Be 'Running'
-```
-To find out how to get the right values for any test I check using get member so to see what is available for a job I gathered the Agent Jobs into a variable using the `Get-SQLAgentJob` command in the new sqlserver module (which you can get by installing the [latest SSMS from here](https://msdn.microsoft.com/en-us/library/mt238290.aspx)) and then explored their properties using [Get-Member](https://technet.microsoft.com/en-us/library/hh849928.aspx) and the values using [Select Object](https://technet.microsoft.com/en-us/library/hh849895.aspx)
-```
+``` 
+To find out how to get the right values for any test I check using get member so to see what is available for a job I gathered the Agent Jobs into a variable using the  `Get-SQLAgentJob`  command in the new sqlserver module (which you can get by installing the [latest SSMS from here](https://msdn.microsoft.com/en-us/library/mt238290.aspx?WT.mc_id=DP-MVP-5002693)) and then explored their properties using [Get-Member](https://technet.microsoft.com/en-us/library/hh849928.aspx?WT.mc_id=DP-MVP-5002693) and the values using [Select Object](https://technet.microsoft.com/en-us/library/hh849895.aspx?WT.mc_id=DP-MVP-5002693)
+ ```
 $jobs = Get-SqlAgentJob -ServerInstance $server
 ($Jobs | Get-Member -MemberType Property).name
 $Jobs[0] | Select-Object *
-```
+``` 
 then using a foreach to loop through them I can check that the jobs, exists, is enabled, has a schedule and succeeded last time it ran like this
-```
+ ```
 $Jobs = $Jobs.Where{($_.Name -eq 'DatabaseIntegrityCheck - SYSTEM_DATABASES') -or ($_.Name -eq 'DatabaseIntegrityCheck - USER_DATABASES') -or ($_.Name -eq 'IndexOptimize - USER_DATABASES')}
 foreach($job in $Jobs)
 {
@@ -104,16 +104,16 @@ It '$JobName Job succeeded' {
 $Job.LastRunOutCome | Should Be 'Succeeded'
 }
 }
-```
-So I have checked the agent and the jobs and now I want to check the folders exist. First for the instance using [`Test-Path`](https://technet.microsoft.com/en-us/library/hh849776.aspx) so the user running the PowerShell session must have privileges and access to list the files and folders
-```
+``` 
+So I have checked the agent and the jobs and now I want to check the folders exist. First for the instance using [ `Test-Path` ](https://technet.microsoft.com/en-us/library/hh849776.aspx?WT.mc_id=DP-MVP-5002693) so the user running the PowerShell session must have privileges and access to list the files and folders
+ ```
 Context '$Share Share For $Server' {
 It 'Should have the root folder $Root' {
 Test-Path $Root | Should Be $true
 }
-```
+``` 
 The for every database we need to set some variables for the Folder path. We don’t back up tempdb so we ignore that and then check if the server is SQL2012 or above and if it is check if the database is a member of an availability group and set the folder name appropriately
-```
+ ```
   foreach($db in $dbs.Where{$_ -ne 'tempdb'})
 {
 
@@ -158,9 +158,9 @@ Context &amp;quot;Folder Check for $db on $Server on $Share&amp;quot; {
 It &amp;quot;Should have a folder for $db database&amp;quot; {
 Test-Path $Dbfolder |Should Be $true
 }
-```
-But we need some logic for checking for folders because Ola is smart and checks for Log Shipping databases so as not to break the LSN chain and system databases only have full folders and simple recovery databases only have full and diff folders. I used the `System.IO.Directory` Exists method as I found it slightly quicker for UNC Shares
-```
+``` 
+But we need some logic for checking for folders because Ola is smart and checks for Log Shipping databases so as not to break the LSN chain and system databases only have full folders and simple recovery databases only have full and diff folders. I used the  `System.IO.Directory`  Exists method as I found it slightly quicker for UNC Shares
+ ```
 If($CheckForDBFolders -eq $True)
 {
 Context 'Folder Check for $db on $Server on $Share' {
@@ -196,16 +196,16 @@ It 'Has a Full Folder' {
 }#
 } # End Check for db folders
 }
-```
-and a similar thing for the files in the folders although this caused me some more issues with performance. I first used Get-ChildItem but in folders where a log backup is running every 15 minutes it soon became very slow. So I then decided to compare the create time of the folder with the last write time which was significantly quicker for directories with a number of files but then fell down when there was a single file in the directory so if the times match I revert back to `Get-ChildItem`.
+``` 
+and a similar thing for the files in the folders although this caused me some more issues with performance. I first used Get-ChildItem but in folders where a log backup is running every 15 minutes it soon became very slow. So I then decided to compare the create time of the folder with the last write time which was significantly quicker for directories with a number of files but then fell down when there was a single file in the directory so if the times match I revert back to  `Get-ChildItem` .
 
-If anyone has a better more performant option I would be interested in knowing. I used Øyvind Kallstad PowerShell Conference session Chasing the seconds [Slides](https://github.com/psconfeu/2016/tree/master/%C3%98yvind%20Kallstad) and Video
+If anyone has a better more performant option I would be interested in knowing. I used Øyvind Kallstad PowerShell Conference session Chasing the seconds [Slides](https://github.com/psconfeu/2016/tree/master/%C3%98yvind%20Kallstad?WT.mc_id=DP-MVP-5002693) and Video
 
  {{< youtube erwAsXZnQ58 >}}
 
 
-and tried the methods in there with [Measure-Command](https://technet.microsoft.com/en-us/library/hh849910.aspx) but this was the best I came up with
-```
+and tried the methods in there with [Measure-Command](https://technet.microsoft.com/en-us/library/hh849910.aspx?WT.mc_id=DP-MVP-5002693) but this was the best I came up with
+ ```
 If($CheckForBackups -eq $true)
 {
 Context ' File Check For $db on $Server on $Share' {
@@ -267,11 +267,11 @@ $Logwrite |Should BeGreaterThan (Get-Date).AddMinutes(-30)
 }# Simple Recovery
 }
 }# Check for backups
-```
+``` 
 You could just run the script you have just created from your check-list, hopefully this blog post can help you see that you  can do so.
 
 But I like the message showing number of tests and successes and failures at the bottom and I want to use parameters in my script. I can do this like this
-```
+ ```
 [CmdletBinding()]
 ## Pester Test to check OLA
 Param(
@@ -283,9 +283,9 @@ $Share ,
 [switch]$NoDatabaseRestoreCheck,
 [switch]$DontCheckJobOutcome
 )
-```
-and then call it using [`Invoke-Pester`](https://github.com/pester/Pester/wiki/Invoke-Pester) with the parameters like this
-```
+``` 
+and then call it using [ `Invoke-Pester` ](https://github.com/pester/Pester/wiki/Invoke-Pester?WT.mc_id=DP-MVP-5002693) with the parameters like this
+ ```
 $Script = @{
 Path = $Path;
 Parameters = @{ Instance = Instance;
@@ -297,20 +297,20 @@ NoDatabaseRestoreCheck= $true;
 DontCheckJobOutcome = $true}
 }
 Invoke-Pester -Script $Script
-```
-but that’s a bit messy, hard to remember and won’t encourage people newer to Powershell to use it so I wrapped it in a function with some help and examples and put it in GitHub `Test-OlaInstance.ps1` and `Test-Ola`. There is one thing to remember. You will need to add the path to `Test-Ola.ps1` on Line 90 of `Test-OlaInstance `so that the script can find it
+``` 
+but that’s a bit messy, hard to remember and won’t encourage people newer to Powershell to use it so I wrapped it in a function with some help and examples and put it in GitHub  `Test-OlaInstance.ps1`  and  `Test-Ola` . There is one thing to remember. You will need to add the path to  `Test-Ola.ps1`  on Line 90 of  `Test-OlaInstance ` so that the script can find it
 
 Once you have that you can call it for a single instance or a number of instances like so. Here I check for Folders and Backup files
-```
+ ```
 $Servers =  'SQL2008Ser2008','SQL2012Ser08AG1','SQL2012Ser08AG2','SQL2014Ser12R2'
 Test-OLAInstance -Instance $Servers -Share 'H:\' -CheckForBackups
-```
+``` 
 and get  a nice result like this. In a little under 20 seconds I completed my checklist for 4 servers including checking if the files and folders exist for 61 databases 🙂 (The three failures were my Integrity Check jobs holding some test corrupt databases)
 
 [![pester ola check.PNG](/assets/uploads/2016/09/pester-ola-check.png)](/assets/uploads/2016/09/pester-ola-check.png)
 
 This gives me a nice and simple automated method of checking if Ola’s maintenance script has been correctly installed. I can use this for one server or many by passing in an array of servers (although they must use the same folder for backing up whether that is UNC or local) I can also add this to an automated build process to ensure that everything has been deployed correctly.
 
-[You can find the two scripts on GitHub here](https://github.com/SQLDBAWithABeard/Functions)
+[You can find the two scripts on GitHub here](https://github.com/SQLDBAWithABeard/Functions?WT.mc_id=DP-MVP-5002693)
 
 I hope you find it useful

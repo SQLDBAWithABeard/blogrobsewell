@@ -37,7 +37,7 @@ Hehe. I LOVE notebooks. I use them all of the time and every day.
 - I have a repository on GitHub with many notebooks [https://beard.media/Notebooks](https://beard.media/Notebooks). 
 - I have given presentations about notebooks [https://beard.media/presentations](https://beard.media/presentations) 
 - I have videos on my youtube channel about notebooks [https://beard.media/notebooksyoutube](https://beard.media/notebooksyoutube)
-- I have written a [PowerShell Module](https://www.powershellgallery.com/packages/ADSNotebook/0.0.20201008.1) to create Notebooks []
+- I have written a [PowerShell Module](https://www.powershellgallery.com/packages/ADSNotebook/0.0.20201008.1?WT.mc_id=DP-MVP-5002693) to create Notebooks []
 
 I have assisted clients with using notebooks to
 
@@ -51,7 +51,7 @@ I have assisted clients with using notebooks to
 - Use notebooks to investigate Azure environments and Azure Data Services
 - and more
 
-I use notebooks to validate dbachecks PRs, to demonstrate [dbachecks](https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbachecks) and [dbatools](https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbatools) with docker that anyone can use.
+I use notebooks to validate dbachecks PRs, to demonstrate [dbachecks](https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbachecks?WT.mc_id=DP-MVP-5002693) and [dbatools](https://github.com/SQLDBAWithABeard/JupyterNotebooks/tree/master/notebooks/NotDotNet/dbatools?WT.mc_id=DP-MVP-5002693) with docker that anyone can use.
 
 I am thoroughly looking forward to seeing what other people do with notebooks. I love how the community helps us all to develop and move forward by sharing.
 

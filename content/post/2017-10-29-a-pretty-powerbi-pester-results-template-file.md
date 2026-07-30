@@ -34,10 +34,10 @@ slug: power%20bi/powershell/a-pretty-powerbi-pester-results-template-file
 <H2>It’s not going to be perfect</H2>
 <P>It’s not going to work in all circumstances and I expect that with some test results it will display the results in a less than optimal manner but you should be able to modify this to suit your needs.</P>
 <P>Please give it a try and see how you get on</P>
-<P>Here is a sample report created with <A href="https://github.com/SQLDBAWithABeard/Presentations/tree/master/PSConfAsia%202017%20-%20Green%20is%20Good%20Red%20is%20Bad" rel=noopener target=_blank>Demo 1 from my Green is Good session </A></P>
+<P>Here is a sample report created with <A href="https://github.com/SQLDBAWithABeard/Presentations/tree/master/PSConfAsia%202017%20-%20Green%20is%20Good%20Red%20is%20Bad?WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>Demo 1 from my Green is Good session </A></P>
 <P>You can click around and change the data you can see and also look at the other 4 pages</P>
 <P><IFRAME height=600 src="https://app.powerbi.com/view?r=eyJrIjoiNjA2ZjhlOTMtODJiNi00ZTNjLWE0NWUtMDczMmI1ZGYyYzk3IiwidCI6ImIxMjIyNDdlLTFlYmYtNGI1Mi1iMzA5LWMyYWE3NDM2ZmM2YiIsImMiOjh9" frameBorder=0 width=800 allowfullscreen="allowfullscreen"></IFRAME></P>
-<P>Here is another one that I created using my <A href="https://github.com/SQLDBAWithABeard/dbatools-scripts" rel=noopener target=_blank>dbatools-scripts repo</A> and a config file. Again, have a click around and see what it does.</P><PRE class="lang:ps decode:true">$Config = (Get-Content GIT:\dbatools-scripts\TestConfig.json) -join "`n" | ConvertFrom-Json
+<P>Here is another one that I created using my <A href="https://github.com/SQLDBAWithABeard/dbatools-scripts?WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>dbatools-scripts repo</A> and a config file. Again, have a click around and see what it does.</P><PRE class="lang:ps decode:true">$Config = (Get-Content GIT:\dbatools-scripts\TestConfig.json) -join "`n" | ConvertFrom-Json
 $PesterResults = Invoke-Pester .\dbatools-scripts\ -PassThru
 $PesterResults.TestResult | Convertto-Json |Out-File C:\temp\dbatools-scripts-pester.json</PRE>
 <P><IFRAME height=600 src="https://app.powerbi.com/view?r=eyJrIjoiNjkyMDkxMzgtMzI3YS00NjAxLTg3YzQtNTZhMDQ5YTc2NWVhIiwidCI6ImIxMjIyNDdlLTFlYmYtNGI1Mi1iMzA5LWMyYWE3NDM2ZmM2YiIsImMiOjh9" frameBorder=0 width=800 allowfullscreen="allowfullscreen"></IFRAME></P>

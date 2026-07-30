@@ -25,13 +25,13 @@ Firstly, not everyone will know what a Data Saturday event is, so lets start wit
 
 A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.
 
-The Data Saturdays resource is an [open-source repository](https://github.com/sqlcollaborative/datasaturdays) which enables event organisers to easily build a web presence as an entry point into their event. It integrates with other free event management solutions such as [Sessionize](https://sessionize.com) enabling Call For Speakers, easily integrating the schedule, room links and speaker walls. The website is [https://datasaturdays.com](https://datasaturdays.com)
+The Data Saturdays resource is an [open-source repository](https://github.com/sqlcollaborative/datasaturdays?WT.mc_id=DP-MVP-5002693) which enables event organisers to easily build a web presence as an entry point into their event. It integrates with other free event management solutions such as [Sessionize](https://sessionize.com) enabling Call For Speakers, easily integrating the schedule, room links and speaker walls. The website is [https://datasaturdays.com](https://datasaturdays.com)
 
 Here is a screenshot of the first Data Saturday "in" Pordenone.
 
 ![Pordenone](https://blog.robsewell.com//assets/uploads/2021/datasaturday1.png)
 
-The marvelous [Gianluca Sartori](https://twitter.com/spaghettidba) and I started this to enable Pordenone to hold an event. We open-sourced the [code](https://github.com/sqlcollaborative/datasaturdays) and hosted it in the [SQL Collaborative GitHub organisation](https://github.com/sqlcollaborative/) alongside community tools such as [dbatools](https://dbatools.io) with a [MIT licence](https://github.com/sqlcollaborative/DataSaturdays/blob/main/LICENSE) so that it is free for anyone to use and to collaborate with. The website is hosted on [GitHub Pages](https://pages.github.com/) which generates static pages using [Jekyll](https://docs.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll). We figured that this not only enabled a quick free solution but also offered opportunities for people to enrich their skills by collaborating.
+The marvelous [Gianluca Sartori](https://twitter.com/spaghettidba) and I started this to enable Pordenone to hold an event. We open-sourced the [code](https://github.com/sqlcollaborative/datasaturdays?WT.mc_id=DP-MVP-5002693) and hosted it in the [SQL Collaborative GitHub organisation](https://github.com/sqlcollaborative/?WT.mc_id=DP-MVP-5002693) alongside community tools such as [dbatools](https://dbatools.io) with a [MIT licence](https://github.com/sqlcollaborative/DataSaturdays/blob/main/LICENSE?WT.mc_id=DP-MVP-5002693) so that it is free for anyone to use and to collaborate with. The website is hosted on [GitHub Pages](https://pages.github.com/?WT.mc_id=DP-MVP-5002693) which generates static pages using [Jekyll](https://docs.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll?WT.mc_id=DP-MVP-5002693). We figured that this not only enabled a quick free solution but also offered opportunities for people to enrich their skills by collaborating.
 
 We wanted to include other community leaders to assist with guiding the project and we were proud that everyone we asked to be involved accepted. The people who are Admins of the project (who can approve changes to the code and therefore the website) in addition to Gianluca and I are : -
 
@@ -52,7 +52,7 @@ The old method of creating an event involved the organiser providing the require
 
 ## Automation Automation AUTOMATION !
 
-I love automation, I get a real buzz out of taking manual monotonous tasks and automating them. I looked at the process we were following and took the bait and decided to automate it. I have created a data-driven process for creating and updating the event web-page and the rest of this blog post is an accompaniment to [the official documentation in the Wiki in the Data Saturdays GitHub repository](https://github.com/sqlcollaborative/DataSaturdays/wiki). I might also blog about how I did it.
+I love automation, I get a real buzz out of taking manual monotonous tasks and automating them. I looked at the process we were following and took the bait and decided to automate it. I have created a data-driven process for creating and updating the event web-page and the rest of this blog post is an accompaniment to [the official documentation in the Wiki in the Data Saturdays GitHub repository](https://github.com/sqlcollaborative/DataSaturdays/wiki?WT.mc_id=DP-MVP-5002693). I might also blog about how I did it.
 
 If you wish to just watch a video, you can find that here
 
@@ -60,17 +60,17 @@ If you wish to just watch a video, you can find that here
 
 ## Creating a New Data Saturday Event
 
-How do you create a new event? The steps are laid out in the [wiki](https://github.com/sqlcollaborative/DataSaturdays/wiki)
+How do you create a new event? The steps are laid out in the [wiki](https://github.com/sqlcollaborative/DataSaturdays/wiki?WT.mc_id=DP-MVP-5002693)
 
 ### Tooling
 
-We suggest that you use [Visual Studio Code](http://aka.ms/vscode) as the editor to make these changes. Visual Studio Code is a superb free lightweight cross-platform code editor. To reduce the frustration we also suggest that you add the [YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) to Visual Studio Code as this will help to identify any problems with YAML.
+We suggest that you use [Visual Studio Code](http://aka.ms/vscode) as the editor to make these changes. Visual Studio Code is a superb free lightweight cross-platform code editor. To reduce the frustration we also suggest that you add the [YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml&WT.mc_id=DP-MVP-5002693) to Visual Studio Code as this will help to identify any problems with YAML.
 
 ### Fork the Data Saturdays Repository
 
 I have previously written a blog post that [explains how to contribute to an open-source repository which you can also use as reference for some of these steps](https://blog.robsewell.com/blog/source%20control/jupyter%20notebooks/azure%20data%20studio/dbatools/dbachecks/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/)
 
-We are using GitHub as the source control for the website, so you will need to signup for a [GitHub account](https://github.com/) if you do not have one already. This is free. Once you have that, navigate to the [Data Saturdays repository](https://github.com/sqlcollaborative/datasaturdays) and click on the Fork button
+We are using GitHub as the source control for the website, so you will need to signup for a [GitHub account](https://github.com/?WT.mc_id=DP-MVP-5002693) if you do not have one already. This is free. Once you have that, navigate to the [Data Saturdays repository](https://github.com/sqlcollaborative/datasaturdays?WT.mc_id=DP-MVP-5002693) and click on the Fork button
 
 ![fork](https://blog.robsewell.com//assets/uploads/2021/fork.png)
 
@@ -82,11 +82,11 @@ It will only take a few seconds and you will have a fork of the repository in yo
 
 ### Clone the Repository to your machine
 
-To work with the code, you need to clone it to your own machine (There are other options like [codespaces](https://github.com/features/codespaces) which I love, but we will leave that for another time) Click on the green Code button and copy the URL using the button
+To work with the code, you need to clone it to your own machine (There are other options like [codespaces](https://github.com/features/codespaces?WT.mc_id=DP-MVP-5002693) which I love, but we will leave that for another time) Click on the green Code button and copy the URL using the button
 
 ![cloneweb](https://blog.robsewell.com//assets/uploads/2021/cloneweb.png)
 
-then in Visual Studio Code `CTRL + SHIFT + P` will open the Command Palette and search for clone
+then in Visual Studio Code  `CTRL + SHIFT + P`  will open the Command Palette and search for clone
 
 ![clonevs](https://blog.robsewell.com//assets/uploads/2021/clonevs.png)
 
@@ -104,15 +104,15 @@ and give it a new name
 
 ### Create the Markdown File
 
-Now you can start to create the data for your event. First you need to see what the next available number is. Check the `_data/events` directory to see what has gone before you.
+Now you can start to create the data for your event. First you need to see what the next available number is. Check the  `_data/events`  directory to see what has gone before you.
 
 ![getnextnumber](https://blog.robsewell.com//assets/uploads/2021/getnextnumber.png)
 
-In the `_posts` directory, create a new file with the following naming convention `YYYY-MM-DD-datasaturdayXXXX.md` where `XXXX` is the next number available. An example name is `2021-06-12-datasaturday0007.md`
+In the  `_posts`  directory, create a new file with the following naming convention  `YYYY-MM-DD-datasaturdayXXXX.md`  where  `XXXX`  is the next number available. An example name is  `2021-06-12-datasaturday0007.md` 
 
 In the file you place the following content
 
-````
+ ````
 ---
 layout: post
 title: "The Name of the Data Saturday in double quotes"
@@ -121,7 +121,7 @@ tags: [event]
 comments: false
 data: datasaturdayXXXX
 ---
-````
+``` `
 The 3 dashes are important to keep. The name must be in double quotes and the data must match your number. It should look like this.
 
 ![markdown](https://blog.robsewell.com//assets/uploads/2021/markdown.png)
@@ -132,11 +132,11 @@ Save the file.
 
 This is the most important file. This file is the one that will feed the page that you use. This is the file that you will update as your event timeline progresses.
 
-In the `_data/events` directory create a new file named `datasaturdayXXXX.yml` (The XXXX is your number again) example `datasaturday0007.yml`
+In the  `_data/events`  directory create a new file named  `datasaturdayXXXX.yml`  (The XXXX is your number again) example  `datasaturday0007.yml` 
 
 In this file paste all the following
 
-````
+ ````
 name: "This is the name of your event inside the double quotes"
 date: The date of your event in YYYY-MM-DD HH:mm:ss TZ IE 2021-06-12 08:00:00 -0000
 
@@ -170,7 +170,7 @@ organizers:
   - name: Your name
     twitter: https://twitter.com/TWITTERNAME
     email: Contact email or not
-````
+``` `
 Now you have to fill in your own data. The fields have explanations in them, the wiki has descriptions and you can always refer back to this blog post also. Some are obvious like name and date, some will take a little thought like description and some you won't have yet like your Sessionize API URLs.
 
 This file can be altered any time that you like during your event timeline as more information becomes available or you wish to change things. Each time, you can create a Pull Request to the Data Saturdays repository but before that **It is really important** that you check your YAML.

@@ -63,7 +63,7 @@ After some error checking the first thing is to create server and database SMO o
 
 (Added Extra – Use New-ISESnippet to create a SMO Server Snippet and use CTRL + J to find it
 
-    New-IseSnippet -Title SMO-Server -Description "Create A SQL Server SMO Object" -Text "`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `$server"
+    New-IseSnippet -Title SMO-Server -Description "Create A SQL Server SMO Object" -Text "  `$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `  $server"
 
 #### Remove Mirroring
 
@@ -84,11 +84,11 @@ Once mirroring has been removed we can restore the database. [Stuart Moore’s G
     $restore.sqlrestore($PrincipalServer)
     $restore.Devices.Remove($restoredevice)
 
-The bug is as follows, if your restore is going to take longer than 10 minutes and you are using an earlier version of SQL than SQL 2012 SP1 CU8 then you will find that the restore fails after 10 minutes. This is the default timeout. You may try to set the
+The bug is as follows, if your restore is going to take longer thanundefinedminutes and you are using an earlier version of SQL than SQLundefinedSP1 CU8 then you will find that the restore fails afterundefinedminutes. This is the default timeout. You may try to set the
 
     $srv.ConnectionContext.StatementTimeout
 
-Value to a larger value or 0 and this will work after SQL 2012 SP1 CU8 but prior to that you will still face the same error. The simple workaround is to use [Invoke-SQLCmd2](http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894) and to script the restore as follows
+Value to a larger value or`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `and this will work after SQLundefinedSP1 CU8 but prior to that you will still face the same error. The simple workaround is to use [Invoke-SQLCmd2](http://gallery.technet.microsoft.com/scriptcenter/7985b7ef-ed89-4dfd-b02a-433cc4e30894?WT.mc_id=DP-MVP-5002693) and to script the restore as follows
 
     #Set up Restore using refresh backup
     
@@ -98,14 +98,14 @@ Value to a larger value or 0 and this will work after SQL 2012 SP1 CU8 but prior
     $restore.ReplaceDatabase = $True
     $restore.Devices.add($restoredevice)
     #Perform Restore
-    $restore.sqlrestore($PrincipalServer) # if query time &amp;lt; 600 seconds
+    $restore.sqlrestore($PrincipalServer) # if query time &amp;lt;undefinedseconds
     # $query = $restore.Script($PrincipalServer) # if using Invoke-SQLCMD2
     $restore.Devices.Remove($restoredevice)
 
 
 #### perform a transaction backup of the principle database
 
-We need to have a full and transaction log backup to set up mirroring. Again you may need to use the script method if your backup will take longer than 600 seconds.
+We need to have a full and transaction log backup to set up mirroring. Again you may need to use the script method if your backup will take longer thanundefinedseconds.
 
     #Setup Trans Backup
     $Backup = New-Object Microsoft.SqlServer.Management.Smo.Backup|Out-Null
@@ -119,10 +119,10 @@ We need to have a full and transaction log backup to set up mirroring. Again you
     $Backup.Devices.Add($BackupDevice)
     # Perform Backup
     $Backup.SqlBackup($PrincipalServer)
-    # $query = $Backup.Script($PrincipalServer) # if query time &amp;lt; 600 seconds
+    # $query = $Backup.Script($PrincipalServer) # if query time &amp;lt;undefinedseconds
     $Backup.Devices.Remove($BackupDevice)
     
-    # Invoke-Sqlcmd2 –ServerInstance $PrincipalServer –Database master –Query $query –ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 –ServerInstance $PrincipalServer –Database master –Query $query –ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
 
 
 #### Restore both backups on the mirror server with no recovery
@@ -136,11 +136,11 @@ To complete the mirroring set up we need to restore the backups onto the mirror 
     $restore.ReplaceDatabase = $True
     $restore.NoRecovery = $true
     $restore.Devices.add($restoredevice)
-    $restore.sqlrestore($MirrorServer) # if query time &amp;lt; 600 seconds
+    $restore.sqlrestore($MirrorServer) # if query time &amp;lt;undefinedseconds
     # $query = $restore.Script($MirrorServer) # if using Invoke-SQLCMD2
     $restore.Devices.Remove($restoredevice)
     
-    # Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
     
     # Set up Restore of Log Backup on Mirror Server
     $restore = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Restore|Out-Null
@@ -168,18 +168,18 @@ You recreate mirroring in the same way as you would if you were using T-SQL simp
 
 You will need to resolve any users and permissions on your destination servers. I do not know a way to do this with PowerShell and would be interested if anyone has found a way to replace the password or the SID on a user object, please contact me if you know.
 
-Many people do this with the [sp\_rev\_logins stored procedure](http://support.microsoft.com/kb/918992) which will create the T-SQL for recreating the logins. However, Powershell cannot read the outputs of the message window where the script prints the script. If you know that your logins are staying static then run sp\_rev\_logins and store the output in a sql file and call it with Invoke-SQLCmd2
+Many people do this with the [sp\_rev\_logins stored procedure](http://support.microsoft.com/kb/918992?WT.mc_id=DP-MVP-5002693) which will create the T-SQL for recreating the logins. However, Powershell cannot read the outputs of the message window where the script prints the script. If you know that your logins are staying static then run sp\_rev\_logins and store the output in a sql file and call it with Invoke-SQLCmd2
 
     $SQL = ‘’ #Path to File
     Invoke-Sqlcmd2 –ServerInstance $Server –Database master –InputFile $SQL
 
 The other option is to [set up a SSIS package following this blog post](http://dbadiaries.com/how-to-transfer-logins-to-another-sql-server-or-instance) and call it from Powershell as follows
 
-**2020 Edit ** - You should use [dbatools](dbatools.io) to do this
+**2020 Edit ** - You should use [dbatools](https://dbatools.io) to do this
 
     Invoke-Command –ComputerName $Server –scriptblock {DTExec.exe /File “PATHTOPackage.dtsx”}
 
-This requires [Powershell Remoting](http://technet.microsoft.com/en-us/magazine/ff700227.aspx) to have been set up on the server which may or may not be available to you in your environment.
+This requires [Powershell Remoting](http://technet.microsoft.com/en-us/magazine/ff700227.aspx?WT.mc_id=DP-MVP-5002693) to have been set up on the server which may or may not be available to you in your environment.
 
 IMPORTANT NOTE – The script does not include any methods for resolving orphaned users so you will need to test and then add your own solution to the script.
 
@@ -189,7 +189,7 @@ Lastly you want to check that the script has run successfully and that mirroring
 
     #Check that correct file and backup date used
     
-    $query = "SELECT TOP 1 [rs].[destination_database_name] as 'database',
+    $query = "SELECT TOPundefined[rs].[destination_database_name] as 'database',
     [rs].[restore_date] as 'restoredate',
     [bs].[backup_finish_date] as 'backuptime',
     [bmf].[physical_device_name] as 'Filename'
@@ -377,11 +377,11 @@ Here is the script
     $restore.ReplaceDatabase = $True
     $restore.Devices.add($restoredevice)
     #Perform Restore
-    $restore.sqlrestore($PrincipalServer) # if query time< 600 seconds
+    $restore.sqlrestore($PrincipalServer) # if query time<undefinedseconds
     # $query = $restore.Script($PrincipalServer) # if using Invoke-SQLCMD2
     $restore.Devices.Remove($restoredevice)
     
-    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
     
     # Set up Full Backup
     $Backup = New-Object Microsoft.SqlServer.Management.Smo.Backup
@@ -392,10 +392,10 @@ Here is the script
     $Backup.Devices.Add($BackupDevice)
     # Perform Backup
     $Backup.SqlBackup($PrincipalServer)
-    # $query = $Backup.Script($PrincipalServer) # if query time< 600 seconds
+    # $query = $Backup.Script($PrincipalServer) # if query time<undefinedseconds
     $Backup.Devices.Remove($BackupDevice)
     
-    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
     
      
     #Setup Trans Backup
@@ -410,10 +410,10 @@ Here is the script
     $Backup.Devices.Add($BackupDevice)
     # Perform Backup
     $Backup.SqlBackup($PrincipalServer)
-    # $query = $Backup.Script($PrincipalServer) # if query time< 600 seconds
+    # $query = $Backup.Script($PrincipalServer) # if query time<undefinedseconds
     $Backup.Devices.Remove($BackupDevice)
     
-    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 -ServerInstance $PrincipalServer -Database master -Query $query -ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
     
     #Set up Restore of Full Backup on Mirror Server
     $restore = New-Object -TypeName Microsoft.SqlServe r.Management.Smo.Restore|Out-Null
@@ -422,11 +422,11 @@ Here is the script
     $restore.ReplaceDatabase = $True
     $restore.NoRecovery = $true
     $restore.Devices.add($restoredevice)
-    $restore.sqlrestore($MirrorServer) # if query time< 600 seconds
+    $restore.sqlrestore($MirrorServer) # if query time<undefinedseconds
     # $query = $restore.Script($MirrorServer) # if using Invoke-SQLCMD2
     $restore.Devices.Remove($restoredevice)
     
-    # Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout 0 # comment out if not used
+    # Invoke-Sqlcmd2 -ServerInstance $MirrorServer -Database master -Query $query -ConnectionTimeout`$srv = New-Object Microsoft.SqlServer.Management.Smo.Server `# comment out if not used
     
     
     # Set up Restore of Log Backup on Mirror Server
@@ -451,7 +451,7 @@ Here is the script
     
     #Check that correct file and backup date used
     
-    $query = "SELECT TOP 20 [rs].[destination_database_name] as 'database', 
+    $query = "SELECT TOPundefined[rs].[destination_database_name] as 'database', 
     [rs].[restore_date] as 'restoredate', 
     [bs].[backup_finish_date] as 'backuptime', 
     [bmf].[physical_device_name] as 'Filename'

@@ -18,9 +18,9 @@ image: assets/uploads/2026/02/breakingchanges.png
 
 ## Introduction
 
-If you have been following this blog for a while, you will know that I am a huge fan of using PowerShell to manage and automate things. SQL Server, [dbatools](https://dbatools.io), [dbachecks](https://github.com/dataplat/dbachecks/) — automating the boring stuff so we can spend time on the interesting stuff.
+If you have been following this blog for a while, you will know that I am a huge fan of using PowerShell to manage and automate things. SQL Server, [dbatools](https://dbatools.io), [dbachecks](https://github.com/dataplat/dbachecks/?WT.mc_id=DP-MVP-5002693) — automating the boring stuff so we can spend time on the interesting stuff.
 
-I have been introducing the [Microsoft fabric-toolbox](https://github.com/microsoft/fabric-toolbox) — covering [the toolbox itself](https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/), [FUAM](https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/), and [FCA](https://blog.robsewell.com/blog/fca-fabric-cost-analysis-for-finops/). All excellent tools. But there is one item in the toolbox that I have been personally involved in building, and it is the one I am most excited to write about.
+I have been introducing the [Microsoft fabric-toolbox](https://github.com/microsoft/fabric-toolbox?WT.mc_id=DP-MVP-5002693) — covering [the toolbox itself](https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/), [FUAM](https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/), and [FCA](https://blog.robsewell.com/blog/fca-fabric-cost-analysis-for-finops/). All excellent tools. But there is one item in the toolbox that I have been personally involved in building, and it is the one I am most excited to write about.
 
 Today I am kicking off a series of posts about **MicrosoftFabricMgmt** — an enterprise-grade PowerShell module that gives you comprehensive, scriptable control over the entire Microsoft Fabric REST API. It is hosted as part of the fabric-toolbox on GitHub.
 
@@ -32,7 +32,7 @@ This module is a community and Microsoft collaboration. It was started by the ta
 
 In short: a lot.
 
-It wraps almost the entire Microsoft Fabric REST API in a PowerShell module, with a consistent, intuitive interface that follows PowerShell best practices. It is designed to be used by everyone — from the person who just wants to automate a few tasks in their Fabric tenant, to the person who is building an enterprise-grade automation framework for managing hundreds of tenants and thousands of resources. Jess and I have added verification against the official [Microsoft Fabric REST API specifications](https://github.com/microsoft/fabric-rest-api-specs)
+It wraps almost the entire Microsoft Fabric REST API in a PowerShell module, with a consistent, intuitive interface that follows PowerShell best practices. It is designed to be used by everyone — from the person who just wants to automate a few tasks in their Fabric tenant, to the person who is building an enterprise-grade automation framework for managing hundreds of tenants and thousands of resources. Jess and I have added verification against the official [Microsoft Fabric REST API specifications](https://github.com/microsoft/fabric-rest-api-specs?WT.mc_id=DP-MVP-5002693)
 
 - **295+ cmdlets** covering 48 different Microsoft Fabric resource types
 - **Lakehouses, Warehouses, Notebooks, Pipelines, Eventstreams, KQL Databases, ML Models, and much more**
@@ -45,9 +45,9 @@ The raw data is still there if you want it.
 
 - **Full PowerShell pipeline support - my favourite improvement** — You can now pipe workspaces to get their lakehouses, pipe to get their SQL Endpoints, pipe to ge the SQL Endpoints connection string all in one line of code. The PowerShell way :-)
 
-```powershell
+ ```powershell
 Get-FabricWorkspace -WorkspaceName Strava | Get-FabricLakehouse | Get-FabricSQLEndpoint | Get-FabricSQLEndpointConnectionString
-```
+``` 
 
 [![PowerShell terminal showing a one-line command that pipes Get-FabricWorkspace through Get-FabricLakehouse, Get-FabricSQLEndpoint, and Get-FabricSQLEndpointConnectionString, with the returned connection string displayed below: zawnblnppzdeepebkkpim537tey-iu2i3fffkqvezfbphfq6tbezzsi.datawarehouse.fabric.microsoft.com. The terminal has a dark background with green text, demonstrating the PowerShell pipeline capability that chains multiple MicrosoftFabricMgmt commands together](../assets/uploads/2026/02/onelineofcode.png)](../../assets/uploads/2026/02/onelineofcode.png)
 
@@ -58,7 +58,7 @@ Get-FabricWorkspace -WorkspaceName Strava | Get-FabricLakehouse | Get-FabricSQLE
 
 The current release represents a major step forward from earlier versions.
 
-You can see the full list of changes in the [changelog](https://github.com/microsoft/fabric-toolbox/blob/main/tools/MicrosoftFabricMgmt/output/CHANGELOG.md#104---2026-02-16]
+You can see the full list of changes in the [changelog](https://github.com/microsoft/fabric-toolbox/blob/main/tools/MicrosoftFabricMgmt/output/CHANGELOG.md?WT.mc_id=DP-MVP-5002693#104---2026-02-16)
 
 
 
@@ -70,11 +70,11 @@ Over the next few weeks I am going to take you from installing the module for th
 
 You can install **MicrosoftFabricMgmt** right now from the [PowerShell Gallery](https://www.powershellgallery.com/packages/MicrosoftFabricMgmt?WT.mc_id=DP-MVP-5002693):
 
-```powershell
+ ```powershell
 Install-PsResource -Name MicrosoftFabricMgmt
-```
+``` 
 
-Requires **PowerShell 7** or later. The source code lives at [github.com/microsoft/fabric-toolbox](https://github.com/microsoft/fabric-toolbox/tree/main/tools/MicrosoftFabricMgmt), and that is also where you can raise issues and submit pull requests.
+Requires **PowerShell 7** or later. The source code lives at [github.com/microsoft/fabric-toolbox](https://github.com/microsoft/fabric-toolbox/tree/main/tools/MicrosoftFabricMgmt?WT.mc_id=DP-MVP-5002693), and that is also where you can raise issues and submit pull requests.
 
 ## See You Tomorrow
 

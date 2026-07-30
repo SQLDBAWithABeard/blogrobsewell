@@ -52,7 +52,7 @@ If you want to skip right to the sign up please fill out the form linked [on thi
 
 The Azure Data Community will provide
 
-- The Community Landing Page [aka.ms/datacommunity](aka.ms/datacommunity?WT.mc_id=DP-MVP-5002693) which is central gateway for useful Azure Data Community resources from blog posts and videos to the user groups.
+- The Community Landing Page [aka.ms/datacommunity](https://aka.ms/datacommunity?WT.mc_id=DP-MVP-5002693) which is central gateway for useful Azure Data Community resources from blog posts and videos to the user groups.
 - Meetup Pro fees, fully paid for by Microsoft saving user groups leaders from paying out of their own pocket or finding sponsorship.
 - A centralised way to find groups and events in the Data Community [https://www.meetup.com/pro/azuredatatechgroups/](https://www.meetup.com/pro/azuredatatechgroups/)
 

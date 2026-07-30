@@ -31,7 +31,7 @@ I really like being able to control infrastructure with code. I have used [Terra
 
 ## Existing State
 
-Terraform will deploy the required changes to your infrastructure by comparing the existing state which is stored in a state file with the expected state which is created by running the plan command. If someone alters the Azure resource via the portal, Azure CLI or Azure PowerShell all kinds of mayhem can occur normally failure in deployment and time spent troubleshooting. It is possible to use the [`import` command in Terraform](https://www.terraform.io/docs/cli/commands/import.html) to get the existing resource state into the state file so that the comparison is performed against the existing state of the resource but this requires a lot of manual intervention.
+Terraform will deploy the required changes to your infrastructure by comparing the existing state which is stored in a state file with the expected state which is created by running the plan command. If someone alters the Azure resource via the portal, Azure CLI or Azure PowerShell all kinds of mayhem can occur normally failure in deployment and time spent troubleshooting. It is possible to use the [ `import`  command in Terraform](https://www.terraform.io/docs/cli/commands/import.html) to get the existing resource state into the state file so that the comparison is performed against the existing state of the resource but this requires a lot of manual intervention.
 
 Bicep deploys the changes by comparing the existing state of the Azure resources with the expected state in the code. This, for me, is a super benefit and reduces the complications of those type of errors.
 
@@ -43,7 +43,7 @@ Bicep immediately supports all preview and GA versions for Azure Services, I don
 
 ## Authoring
 
-I love [Visual Studio Code](https://code.visualstudio.com) and there is a [super extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&WT.mc_id=devops-13338-abewan) that makes authoring a joy.
+I love [Visual Studio Code](https://code.visualstudio.com?WT.mc_id=DP-MVP-5002693) and there is a [super extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&WT.mc_id=devops-13338-abewan) that makes authoring a joy.
 
 ## What If Support
 
@@ -61,7 +61,7 @@ Bicep is free :-)
 
 OK, let's see an example. I would like to deploy an Azure SQL Database into a Resource Group. I will need an Azure SQL Server resource and an Azure SQL Database resource. The [Azure Templates site](https://docs.microsoft.com/en-us/azure/templates/?WT.mc_id=DP-MVP-5002693) has the examples that I need. The [Azure SQL Server page](https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers?tabs=bicep?WT.mc_id=DP-MVP-5002693) shows the Bicep code I need and the explanations of the expected values.
 
-````
+ ````
 resource symbolicname 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: 'string'
   location: 'string'
@@ -87,14 +87,14 @@ resource symbolicname 'Microsoft.Sql/servers@2020-11-01-preview' = {
     }
   }
 }
-````
-I create a file with a `.bicep` extension in VS Code
+``` `
+I create a file with a  `.bicep`  extension in VS Code
 
 [![bicepfile](https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png)](https://blog.robsewell.com/assets/uploads/2021/Bicep/bicepfile.png)
 
 and add only the required values. (NOTE - this is just an example and I would never recommend that you would put the password for anything in a file in plain text, we will cover how to handle secrets later. )
 
-````
+ ````
 resource sql 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: 'beardsqlrand01'
   location: 'northeurope'
@@ -104,14 +104,14 @@ resource sql 'Microsoft.Sql/servers@2020-11-01-preview' = {
     version: '12.0'
   }
 }
-````
+``` `
 ## Validate the deployment with WhatIf
 
 I created an empty Resource Group for my test
 
-````
+ ````
 New-AzResourceGroup -Name 'BicepTest' -Location 'northeurope'
-````
+``` `
 
 Next, I am going to check that the code that I have written will perform the actions that I expect. I am hoping to get
 
@@ -119,9 +119,9 @@ Next, I am going to check that the code that I have written will perform the act
 - In the location North Europe
 - With an admin login and password as stated in the file (NO Don't ever do this in Production)
 
-I do this using the Azure PowerShell command `New-AzResourceGroupDeployment` and give it the Resource Group Name and the path to the file
+I do this using the Azure PowerShell command  `New-AzResourceGroupDeployment`  and give it the Resource Group Name and the path to the file
 
-````
+ ````
 # Validate the deployment with Whatif
 $DeploymentConfig = @{
     ResourceGroupName = 'BicepTest' 
@@ -129,7 +129,7 @@ $DeploymentConfig = @{
     WhatIf   = $true
 }
 New-AzResourceGroupDeployment @DeploymentConfig
-````
+``` `
 
 The first thing this does is check the status of the resources in the resource group
 
@@ -139,9 +139,9 @@ then it provides a list of what it will do. In this example there is only one re
 
 [![whatifresult](https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png)](https://blog.robsewell.com/assets/uploads/2021/Bicep/whatifresult.png)
 
-This tells us that there will be a creation of 1 resource and that the values are as I expect them. As I am happy with that I can then deploy the infrastructure by changing the `WhatIf` value to false
+This tells us that there will be a creation of 1 resource and that the values are as I expect them. As I am happy with that I can then deploy the infrastructure by changing the  `WhatIf`  value to false
 
-````
+ ````
 # Deploy the changes
 $DeploymentConfig = @{
     ResourceGroupName = 'BicepTest' 
@@ -149,7 +149,7 @@ $DeploymentConfig = @{
     WhatIf   = $false
 }
 New-AzResourceGroupDeployment @DeploymentConfig
-````
+``` `
 
 # Deployment can be seen in the Azure Portal
 
@@ -173,7 +173,7 @@ and my resource has been created
 
 I have my Azure SQL Instance, next I need a database. I look up [the resource information](https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693) and add the required information to my bicep file.
 
-````
+ ````
 resource sql 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: 'beardsqlrand01'
   location: 'northeurope'
@@ -193,13 +193,13 @@ resource sql 'Microsoft.Sql/servers@2020-11-01-preview' = {
    properties: {}
  }
 }
-````
+``` `
 
 This is a super simple example. The database resource is defined within the SQL Instance resource with a name and a SKU.
 
 We validate it in exactly the same way as before. This time we will see that we can incrementally add or change resources to our deployment and validate what will happen.
 
-````
+ ````
 # Validate the deployment with Whatif
 $DeploymentConfig = @{
     ResourceGroupName = 'BicepTest' 
@@ -207,7 +207,7 @@ $DeploymentConfig = @{
     WhatIf   = $true
 }
 New-AzResourceGroupDeployment @DeploymentConfig
-````
+``` `
 
 This time the result looks a little different as we already have a resource in the Resource Group.
 
@@ -227,7 +227,7 @@ This tells you that it will create the Azure SQL Database, it will not change th
 
 I am happy with that validation, so I deploy the changes, again using the same code as before.
 
-````
+ ````
 # Deploy the changes
 $DeploymentConfig = @{
     ResourceGroupName = 'BicepTest' 
@@ -235,7 +235,7 @@ $DeploymentConfig = @{
     WhatIf   = $false
 }
 New-AzResourceGroupDeployment @DeploymentConfig
-````
+``` `
 
 If I look in the portal I can see the deployment
 
@@ -256,9 +256,9 @@ Thats all there is to Bicep.
 
 Now that my test has finished I will remove the Resource Group. If you are following along, this is how to do that
 
-````
+ ````
 Remove-AzResourceGroup -Name BicepTest -Force
-````
+``` `
 
 # All of the code
 

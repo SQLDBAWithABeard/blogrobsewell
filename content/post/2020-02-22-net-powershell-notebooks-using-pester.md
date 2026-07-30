@@ -57,13 +57,13 @@ Line |
      | cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included,
      | verify that the path is correct and try again.
  Import-Module: The module to process 'Pester.psm1', listed in field 'ModuleToProcess/RootModule' of module manifest 'C:\Users\mrrob\Documents\PowerShell\Modules\Pester\4.9.0\Pester.psd1' was not processed because no valid module was found in any module directory. </PRE>
-Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains [in the issue that I raised](https://github.com/dotnet/interactive/issues/136)
+Thats odd, why is it failing there? Dongbo Wang from the PowerShell team explains [in the issue that I raised](https://github.com/dotnet/interactive/issues/136?WT.mc_id=DP-MVP-5002693)
 
-> Yes, it was the CimCmdlets module from the system32 module path that got imported (via the `WinCompat` feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …
-> The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue [PowerShell/PowerShell#11783](https://github.com/PowerShell/PowerShell/issues/11783) to track this work.
+> Yes, it was the CimCmdlets module from the system32 module path that got imported (via the  `WinCompat`  feature added in PS7). This is because currently the PS kernel don’t ship all the built-in modules along with it …
+> The built-in modules are not published anywhere and are platform specific, it’s hard for an application that host powershell to ship them along. We have the issue [PowerShell/PowerShell#11783](https://github.com/PowerShell/PowerShell/issues/11783?WT.mc_id=DP-MVP-5002693) to track this work.
 
 
-[You can see all of this including all the results in this notebook that I have created and shared on GitHub and also below as a gist to embed in this blog post](https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/DotNet%20Notebook/01-PesterWontRun.ipynb)
+[You can see all of this including all the results in this notebook that I have created and shared on GitHub and also below as a gist to embed in this blog post](https://github.com/SQLDBAWithABeard/Presentations/blob/master/Notebooks/DotNet%20Notebook/01-PesterWontRun.ipynb?WT.mc_id=DP-MVP-5002693)
 
 Sharing Code AND Results 🙂
 ---------------------------

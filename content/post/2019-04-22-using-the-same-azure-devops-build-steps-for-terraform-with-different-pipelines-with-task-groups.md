@@ -19,7 +19,7 @@ tags:
 image: assets/uploads/2019/04/image-107.png
 
 ---
-In my [last post](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) I showed how to build an Azure DevOps Pipeline for a Terraform build of an Azure SQLDB. This will take the terraform code and build the required infrastructure.
+In my [last post](/blog/building-azure-sql-db-with-terraform-using-azure-devops/) I showed how to build an Azure DevOps Pipeline for a Terraform build of an Azure SQLDB. This will take the terraform code and build the required infrastructure.
 
 The plan all along has been to enable me to build _different_ environments depending on the requirement. Obviously I can repeat the steps from the last post for a new repository containing a Terraform code for a different environment but
 
@@ -76,7 +76,7 @@ This will also alter the current Build Pipeline to use the Task Group. Now we ha
 Using the Task Group with a new Build Pipeline to build an Azure Linux SQL VM
 -----------------------------------------------------------------------------
 
-Lets re-use the build steps to create an Azure SQL Linux VM. First I created a [new GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM) for my Terraform code. Using the docs I created the Terraform to create a resource group, a Linux SQL VM, a virtual network, a subnet, a NIC for the VM, a public IP for the VM, a network security group with two rules, one for SQL and one for SSH. It will look like this
+Lets re-use the build steps to create an Azure SQL Linux VM. First I created a [new GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations-AzureSQLVM?WT.mc_id=DP-MVP-5002693) for my Terraform code. Using the docs I created the Terraform to create a resource group, a Linux SQL VM, a virtual network, a subnet, a NIC for the VM, a public IP for the VM, a network security group with two rules, one for SQL and one for SSH. It will look like this
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-114.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-114.png?ssl=1)
 
@@ -88,7 +88,7 @@ again we are going to select Empty job (although the next post will be about the
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-99.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-99.png?ssl=1)
 
-[As before](https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/) we will name the Build Pipeline and the Agent Job Step and click the + to add a new task. This time we will search for the Task Group name that we created
+[As before](/blog/building-azure-sql-db-with-terraform-using-azure-devops/) we will name the Build Pipeline and the Agent Job Step and click the + to add a new task. This time we will search for the Task Group name that we created
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-100.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-100.png?ssl=1)
 
@@ -100,7 +100,7 @@ and when I click save and queue
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-102.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-102.png?ssl=1)
 
-It runs for less than 7 minutes
+It runs for less thanundefinedminutes
 
 [![](https://blog.robsewell.com/assets/uploads/2019/04/image-118.png)](https://blog.robsewell.com/assets/uploads/2019/04/image-118.png?ssl=1)
 
@@ -135,9 +135,9 @@ which will show you what will be affected.
 
 Now I can run the same build steps for any Build Pipeline and alter them all in a single place using Task Groups simplifying the administration of the Build Pipelines.
 
-[The next post will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](https://blog.robsewell.com/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)
+[The next post will show how to use Azure DevOps templates to use the same build steps across many projects and build pipelines and will build a simple AKS cluster](/blog/using-azure-devops-build-pipeline-templates-with-terraform-to-build-an-aks-cluster/)
 
-[The first post showed how to build an Azure SQLDB with Terraform using VS Code](https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/)
+[The first post showed how to build an Azure SQLDB with Terraform using VS Code](/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/)
 
 [The second post showed how to use Azure DevOps Task Groups to use the same build steps in multiple pipelines and build an Azure Linux SQL Server VM](https://blog.robsewell.com/using-the-same-azure-devops-build-steps-for-terraform-with-different-pipelines-with-task-groups/)
 

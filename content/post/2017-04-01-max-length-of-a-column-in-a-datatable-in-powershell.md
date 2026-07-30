@@ -19,7 +19,7 @@ tags:
 <BLOCKQUOTE>
 <P>Exception calling “WriteToServer” with “1” argument(s): “The given value of type String from the data source cannot be converted to type nvarchar of the<BR>specified target column.”<BR>At line:356 char:4<BR>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $bulkCopy.WriteToServer($InputObject)<BR>+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>+ CategoryInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : NotSpecified: (:) [], MethodInvocationException<BR>+ FullyQualifiedErrorId : InvalidOperationException</P></BLOCKQUOTE>
 <P>Hmm, it says that it can’t convert a string to a nvarchar, that doesn’t sound right.To find out what was happening I used a little bit of code that I use every single day</P><PRE class="lang:ps decode:true"> $Error[0] | Fl -force</PRE>
-<P>All errors from your current session are stored in the $error array so [0] accesses the most recent one and fl is an alias for <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/format-list" rel=noopener target=_blank>Format-List</A> and the force switch expands the object. This is what I saw</P>
+<P>All errors from your current session are stored in the $error array so [0] accesses the most recent one and fl is an alias for <A href="https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.utility/format-list?WT.mc_id=DP-MVP-5002693" rel=noopener target=_blank>Format-List</A> and the force switch expands the object. This is what I saw</P>
 <P><IMG class="alignnone size-full wp-image-4028" alt="03 expanded error.PNG" src="https://blog.robsewell.com/assets/uploads/2017/03/03-expanded-error.png?resize=630%2C355&amp;ssl=1" width=630 height=355 data-recalc-dims="1" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/03/03-expanded-error.png?fit=630%2C355&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/03/03-expanded-error.png?fit=300%2C169&amp;ssl=1" data-image-description="" data-image-title="03 expanded error" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="1298,731" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/03/03-expanded-error.png?fit=1298%2C731&amp;ssl=1" data-permalink="https://blog.robsewell.com/max-length-of-a-column-in-a-datatable-in-powershell/03-expanded-error/#main" data-attachment-id="4028"></P>
 <BLOCKQUOTE>
 <P>System.Management.Automation.MethodInvocationException: Exception calling “WriteToServer” with “1” argument(s): “The given value of<BR>type String from the data source cannot be converted to type nvarchar of the specified target column.” —&gt;<BR>System.InvalidOperationException: The given value of type String from the data source cannot be converted to type nvarchar of the<BR>specified target column. —&gt; System.InvalidOperationException: String or binary data would be truncated.</P></BLOCKQUOTE>
@@ -49,7 +49,7 @@ Write-Output "$column max length is $max"
 <DIV>
 <DIV><IMG class="alignnone size-full wp-image-4045" alt="05 - how long.PNG" src="https://blog.robsewell.com/assets/uploads/2017/03/05-how-long.png?resize=514%2C483&amp;ssl=1" width=514 height=483 data-recalc-dims="1" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/03/05-how-long.png?fit=514%2C483&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/03/05-how-long.png?fit=300%2C282&amp;ssl=1" data-image-description="" data-image-title="05 – how long" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="514,483" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/03/05-how-long.png?fit=514%2C483&amp;ssl=1" data-permalink="https://blog.robsewell.com/max-length-of-a-column-in-a-datatable-in-powershell/05-how-long/#main" data-attachment-id="4045"></DIV>
 <DIV></DIV></DIV>
-<P>I keep this little snippet in <A href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Snippets%20List.ps1">my snippets list for PowerShell ISE which you can find here</A></P>
+<P>I keep this little snippet in <A href="https://github.com/SQLDBAWithABeard/Functions/blob/master/Snippets%20List.ps1?WT.mc_id=DP-MVP-5002693">my snippets list for PowerShell ISE which you can find here</A></P>
 <DIV></DIV>
 <DIV>Here is the code to add this as a snippet to ISE</DIV>
 <DIV></DIV>
@@ -62,18 +62,18 @@ $snippet = @{
  Title = 'Max Length of Datatable'
  Description = 'Takes a datatable object and iterates through it to get the max length of the string columns - useful for data loads'
  Text = @"
-`$columns = (`$datatable | Get-Member -MemberType Property).Name
-foreach(`$column in `$Columns)
+ `$columns = (` $datatable | Get-Member -MemberType Property).Name
+foreach( `$column in ` $Columns)
 {
 `$max = 0
-foreach (`$a in `$datatable)
+foreach ( `$a in ` $datatable)
 {
-if(`$max -lt `$a.`$column.length)
+if( `$max -lt ` $a.`$column.length)
 {
-`$max = `$a.`$column.length
+ `$max = ` $a.`$column.length
 }
 }
-Write-Output "`$column max length is `$max"
+Write-Output " `$column max length is ` $max"
 }
 
 "@

@@ -15,10 +15,10 @@ tags:
   - restore
 
 ---
-<P>In <A href="https://blog.robsewell.com/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/">previous posts</A> I have shown how to use <A href="https://dbatools.io/functions/test-dbalastbackup/" target=_blank>Test-DbaLastBackup</A> from <A href="https://dbatools.io" target=_blank>dbatools</A> and <A href="https://blog.robsewell.com/taking-dbatools-test-dbalastbackup-a-little-further/" target=_blank>how you can make use of the results</A>. Today we will look at using &nbsp;<A href="https://github.com/pester/Pester" target=_blank>Pester</A>&nbsp;with the results</P>
+<P>In <A href="/blog/testing-your-sql-server-backups-the-easy-way-with-powershell-dbatools/">previous posts</A> I have shown how to use <A href="https://dbatools.io/functions/test-dbalastbackup/" target=_blank>Test-DbaLastBackup</A> from <A href="https://dbatools.io" target=_blank>dbatools</A> and <A href="/blog/taking-dbatools-test-dbalastbackup-a-little-further/" target=_blank>how you can make use of the results</A>. Today we will look at using &nbsp;<A href="https://github.com/pester/Pester?WT.mc_id=DP-MVP-5002693" target=_blank>Pester</A>&nbsp;with the results</P>
 <BLOCKQUOTE>
 <P>Pester provides a framework for <STRONG>running unit tests to execute and validate PowerShell commands from within PowerShell</STRONG>. Pester consists of a simple set of functions that expose a testing domain-specific language (DSL) for isolating, running, evaluating and reporting the results of PowerShell commands.</P></BLOCKQUOTE>
-<P>we shall use it to validate our results. First we need to gather our results as we have seen before, In this example I have set the MaxMb to 5 so change that if you are playing along</P><PRE class="lang:ps decode:true">Import-Module dbatools
+<P>we shall use it to validate our results. First we need to gather our results as we have seen before, In this example I have set the MaxMb toundefinedso change that if you are playing along</P><PRE class="lang:ps decode:true">Import-Module dbatools
 $TestServer = 'SQL2016N1'
 $Server = 'SQL2016N2'
 $servers = 'SQL2016N1','SQL2016N2'
@@ -49,7 +49,7 @@ $Result.BackupTaken| Should BeGreaterThan (Get-Date).AddDays(-7)
 <DIV></DIV>
 <DIV><IMG class="alignnone size-full wp-image-4102" alt="01 - pester script.PNG" src="https://blog.robsewell.com/assets/uploads/2017/03/01-pester-script.png?resize=630%2C336&amp;ssl=1" width=630 height=336 data-recalc-dims="1" loading="lazy" data-large-file="https://blog.robsewell.com/assets/uploads/2017/03/01-pester-script.png?fit=630%2C336&amp;ssl=1" data-medium-file="https://blog.robsewell.com/assets/uploads/2017/03/01-pester-script.png?fit=300%2C160&amp;ssl=1" data-image-description="" data-image-title="01 – pester script" data-image-meta='{"aperture":"0","credit":"","camera":"","caption":"","created_timestamp":"0","copyright":"","focal_length":"0","iso":"0","shutter_speed":"0","title":"","orientation":"0"}' data-comments-opened="1" data-orig-size="898,479" data-orig-file="https://blog.robsewell.com/assets/uploads/2017/03/01-pester-script.png?fit=898%2C479&amp;ssl=1" data-permalink="https://blog.robsewell.com/using-pester-with-dbatools-test-dbalastbackup/01-pester-script/#main" data-attachment-id="4102"></DIV>
 <DIV></DIV>
-<DIV>We can save the script to a file and use the <A href="https://github.com/pester/Pester/wiki/Invoke-Pester" target=_blank>Invoke-Pester</A> to call it like this.</DIV>
+<DIV>We can save the script to a file and use the <A href="https://github.com/pester/Pester/wiki/Invoke-Pester?WT.mc_id=DP-MVP-5002693" target=_blank>Invoke-Pester</A> to call it like this.</DIV>
 <DIV></DIV>
 <DIV><PRE class="lang:ps decode:true">Invoke-Pester C:\temp\BackupPester.ps1</PRE></DIV>
 <DIV></DIV>
@@ -104,7 +104,7 @@ Invoke-Item $HTML</PRE></DIV>
 <DIV></DIV>
 <DIV></DIV>
 <DIV>
-<P>NOTE – The major 1.0 release of dbatools due in the summer 2017 may have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using</P><PRE class="lang:ps decode:true"> Get-Module dbatools</PRE>
+<P>NOTE – The major 1.0 release of dbatools due in the summerundefinedmay have breaking changes which will stop the above code from working. There are also new commands coming which may replace this command. This blog post was written using dbatools version 0.8.942 You can check your version using</P><PRE class="lang:ps decode:true"> Get-Module dbatools</PRE>
 <P>and update it using an Administrator PowerShell session with</P><PRE class="lang:ps decode:true"> Update-Module dbatools</PRE>
 <P>You may find that you get no output from Update-Module as you have the latest version. If&nbsp;you have not installed the&nbsp;module from the PowerShell Gallery using</P><PRE class="lang:ps decode:true">Install-Module dbatools</PRE>
 <P>Then you can use</P><PRE class="lang:ps decode:true">Update-dbatools</PRE></DIV>

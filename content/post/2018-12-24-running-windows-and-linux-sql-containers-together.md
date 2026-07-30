@@ -97,13 +97,13 @@ Now, if you are running Linux containers, this is an easy fix. All you have to d
 
 But in Windows containers that option is not available.
 
-If you go a-googling you will find that [Shawn Melton](https://twitter.com/wsmelton) created an [issue for thi](https://github.com/Microsoft/mssql-docker/issues/293)s many months ago, which gets referenced by [this issue](https://github.com/Microsoft/opengcs/issues/145) for the guest compute service, which references t[his PR](https://github.com/moby/moby/pull/37296) in moby. But as this hasn’t been merged into master yet it is not available. I got bored of waiting for this and decided to look a bit deeper today.
+If you go a-googling you will find that [Shawn Melton](https://twitter.com/wsmelton) created an [issue for thi](https://github.com/Microsoft/mssql-docker/issues/293?WT.mc_id=DP-MVP-5002693)s many months ago, which gets referenced by [this issue](https://github.com/Microsoft/opengcs/issues/145?WT.mc_id=DP-MVP-5002693) for the guest compute service, which references t[his PR](https://github.com/moby/moby/pull/37296?WT.mc_id=DP-MVP-5002693) in moby. But as this hasn’t been merged into master yet it is not available. I got bored of waiting for this and decided to look a bit deeper today.
 
 ### Get It Working Just For Fun
 
 So, you read the warning at the top?
 
-Now let’s get it working. I take zero credit here. All of the work was done by Brian Weeteling [b](https://www.brianweet.com/) | [G](https://github.com/brianweet) in [this post](https://www.brianweet.com/2018/04/26/running-mssql-server-linux-using-lcow.html)
+Now let’s get it working. I take zero credit here. All of the work was done by Brian Weeteling [b](https://www.brianweet.com/) | [G](https://github.com/brianweet?WT.mc_id=DP-MVP-5002693) in [this post](https://www.brianweet.com/2018/04/26/running-mssql-server-linux-using-lcow.html)
 
 So you can follow Brians examples and check out the source code and compile it as he says or you can [download the exe](https://www.brianweet.com/assets/mssql-linux/dockerd.rar) that he has made available (remember the warning?)
 

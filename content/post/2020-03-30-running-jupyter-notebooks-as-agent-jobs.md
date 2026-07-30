@@ -21,13 +21,13 @@ image: assets/uploads/2020/03/image-22.png
 ---
 [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693) is a great tool for connecting with your data platform whether it is in Azure or on your hardware. [Jupyter Notebooks](https://blog.robsewell.com/?s=notebooks) are fantastic, you can have words, pictures, code and code results all saved in one document.
 
-I have created a repository in my GitHub [https://beard.media/Notebooks](https://beard.media/Notebooks) where I have stored a number of Jupyter notebooks both for Azure Data Studio and the [new .NET interactive](https://blog.robsewell.com/new-net-notebooks-are-here-powershell-7-notebooks-are-here/) notebooks.
+I have created a repository in my GitHub [https://beard.media/Notebooks](https://beard.media/Notebooks) where I have stored a number of Jupyter notebooks both for Azure Data Studio and the [new .NET interactive](/blog/new-net-notebooks-are-here-powershell-7-notebooks-are-here/) notebooks.
 
 Another thing that you can do with notebooks is run them as Agent Jobs and save the results of the run.
 
 ### Notebooks running T-SQL
 
-This works easily for T-SQL notebooks. I am going to [use this one](https://github.com/SQLDBAWithABeard/JupyterNotebooks/blob/master/notebooks/NotDotNet/Audit/AUDIT%20-%20T-SQL%20Gather%20Permissions%20Notebook%20Template.ipynb) that I created that uses T-SQL to gather permissions using old code that was in a share somewhere. We can run the notebook and get the permissions and save the notebook and the results will be available for all time (unless you delete the notebook!)
+This works easily for T-SQL notebooks. I am going to [use this one](https://github.com/SQLDBAWithABeard/JupyterNotebooks/blob/master/notebooks/NotDotNet/Audit/AUDIT%20-%20T-SQL%20Gather%20Permissions%20Notebook%20Template.ipynb?WT.mc_id=DP-MVP-5002693) that I created that uses T-SQL to gather permissions using old code that was in a share somewhere. We can run the notebook and get the permissions and save the notebook and the results will be available for all time (unless you delete the notebook!)
 
 [![](https://blog.robsewell.com/assets/uploads/2020/03/image.png?fit=630%2C327&ssl=1)](https://blog.robsewell.com/assets/uploads/2020/03/image.png?ssl=1)
 

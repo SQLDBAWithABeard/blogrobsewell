@@ -54,7 +54,7 @@ I am going to list these in alphabetical order by display name for ease (my ease
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-1.png )
 
-Because Chrissy LeMaire and I are writing [dbatools in a Month of Lunches](https://beard.media/book) using AsciiDoc, it makes sense to have an extension enabling previewing and syntax, you can find it [here](https://marketplace.visualstudio.com/items?itemName=stayfool.vscode-asciidoc)
+Because Chrissy LeMaire and I are writing [dbatools in a Month of Lunches](https://beard.media/book) using AsciiDoc, it makes sense to have an extension enabling previewing and syntax, you can find it [here](https://marketplace.visualstudio.com/items?itemName=stayfool.vscode-asciidoc&WT.mc_id=DP-MVP-5002693)
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-2.png )
 
@@ -106,7 +106,7 @@ Working with Kubernetes? This extension adds another view for interacting with y
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-15.png )
 
-Visual Studio Live Share enables you to collaborate in real-time in Visual Studio Code with your colleagues or friends. I blogged about this [here](https://blog.robsewell.com/visual-studio-code-live-sharing-set-up/) ms-vsliveshare.vsliveshare
+Visual Studio Live Share enables you to collaborate in real-time in Visual Studio Code with your colleagues or friends. I blogged about this [here](/blog/visual-studio-code-live-sharing-set-up/) ms-vsliveshare.vsliveshare
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-16.png )
 
@@ -122,7 +122,7 @@ I have both the PowerShell extension ms-vscode.powershell and the PowerShell pre
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-19.png )
 
-This suite of extensions enables easy remote development so that you can develop your PowerShell scripts, for example, inside a ubuntu container running PowerShell 7 or inside Windows Subsystem for LInux ms-vscode-remote.vscode-remote-extensionpack_Preview_
+This suite of extensions enables easy remote development so that you can develop your PowerShell scripts, for example, inside a ubuntu container running PowerShellundefinedor inside Windows Subsystem for LInux ms-vscode-remote.vscode-remote-extensionpack_Preview_
 
 ![](https://blog.robsewell.com/assets/uploads/2019/11/image-20.png )
 

@@ -38,9 +38,9 @@ So in the interest of learning about something new I decided to give it a try.
 
 Install The Insiders Edition
 ----------------------------
-Unlike [Visual Studio Code](https://code.visualstudio.com/) which has a link to the insiders download on the front page, you will have to [visit the GitHub repository for the links to download the insiders release of Azure Data Studio](https://github.com/Microsoft/azuredatastudio#azure-data-studio). Scroll down and you will see
+Unlike [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693) which has a link to the insiders download on the front page, you will have to [visit the GitHub repository for the links to download the insiders release of Azure Data Studio](https://github.com/Microsoft/azuredatastudio?WT.mc_id=DP-MVP-5002693#azure-data-studio). Scroll down and you will see
 
-Try out the latest insiders build from `master`:
+Try out the latest insiders build from   `master`  :
 
 *   [Windows User Installer – **Insiders build**](https://azuredatastudio-update.azurewebsites.net/latest/win32-x64-user/insider)
 *   [Windows System Installer – **Insiders build**](https://azuredatastudio-update.azurewebsites.net/latest/win32-x64/insider)
@@ -48,12 +48,12 @@ Try out the latest insiders build from `master`:
 *   [macOS ZIP – **Insiders build**](https://azuredatastudio-update.azurewebsites.net/latest/darwin/insider)
 *   [Linux TAR.GZ – **Insiders build**](https://azuredatastudio-update.azurewebsites.net/latest/linux-x64/insider)
 
-See the [change log](https://github.com/Microsoft/azuredatastudio/blob/master/CHANGELOG.md) for additional details of what’s in this release.
+See the [change log](https://github.com/Microsoft/azuredatastudio/blob/master/CHANGELOG.md?WT.mc_id=DP-MVP-5002693) for additional details of what’s in this release.
 Once you have installed you can connect to an instance, right click and choose New Notebook or you can use File – New Notebook
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image.png)
 
-Incidentally, I use the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG) to create the containers and I map `C:\MSSQL\BACKUP\KEEP` on my local machine (where my backups are) to `/var/opt/mssql/backups` on the containers on lines 10 and 17 of the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.
-The `Create-Ag.ps1` shows the code and creates an AG with [dbatools.](http://dbatools.io) But I digress!
+Incidentally, I use the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG?WT.mc_id=DP-MVP-5002693) to create the containers and I map   `C:\MSSQL\BACKUP\KEEP`   on my local machine (where my backups are) to   `/var/opt/mssql/backups`   on the containers on linesundefinedandundefinedof the docker-compose so change as required . If you want to follow along then put the ValidationResults.bak in the folder on your local machine.
+The   `Create-Ag.ps1`   shows the code and creates an AG with [dbatools.](http://dbatools.io) But I digress!
 
 Install Notebook Dependencies
 -----------------------------
@@ -69,13 +69,13 @@ and take a few minutes to run
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-3.png)
 
-It took all but 11 minutes on my machine
+It took all butundefinedminutes on my machine
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-4.png)
 
 Create a Notebook
 -----------------
-OK, so now that we have the dependencies installed we can create a notebook. I decided to use the ValidationResults database that [I use for my dbachecks demos and describe here](https://blog.robsewell.com/dbachecks-save-the-results-to-a-database-for-historical-reporting/). I need to restore it from my local folder that I have mapped as a volume to my container. Of course, I use dbatools for this 🙂
+OK, so now that we have the dependencies installed we can create a notebook. I decided to use the ValidationResults database that [I use for my dbachecks demos and describe here](/blog/dbachecks-save-the-results-to-a-database-for-historical-reporting/). I need to restore it from my local folder that I have mapped as a volume to my container. Of course, I use dbatools for this 🙂
 
     # U: sqladmin P: dbatools.IO
     $cred = Get-Credential
@@ -120,7 +120,7 @@ This is fun and I can see plenty of uses for it. Go and have a play with SQL not
 Source Control
 --------------
 
-I used CTRL K, CTRL O to open a folder and saved my notebook in my local Presentations folder which is source controlled. When I opened the explorer CTRL + SHIFT + E I can see that the folder and the file are colour coded green and have a U next to them marking them as Untracked. I can also see that the source control icon has a 1 for the number of files with changes and in the bottom left that I am in the master branch.
+I used CTRL K, CTRL O to open a folder and saved my notebook in my local Presentations folder which is source controlled. When I opened the explorer CTRL + SHIFT + E I can see that the folder and the file are colour coded green and have a U next to them marking them as Untracked. I can also see that the source control icon has a`C:\MSSQL\BACKUP\KEEP`for the number of files with changes and in the bottom left that I am in the master branch.
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-12.png)
 
@@ -148,7 +148,7 @@ When I have made all my changes and committed them with good commit messages
 
 ![](https://i2.wp.com/imgs.xkcd.com/comics/git_commit.png?w=630&ssl=1)
 
-I can see that there are 3 local changes ready to be pushed to by remote repository (GitHub in this case) and 0 remote commits in this branch by looking at the bottom left
+I can see that there are`Create-Ag.ps1`local changes ready to be pushed to by remote repository (GitHub in this case) and`master`remote commits in this branch by looking at the bottom left
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-18.png)
 
@@ -156,4 +156,4 @@ I can click on the “roundy roundy” icon (I don't know its proper name 😊) 
 
 ![](https://blog.robsewell.com/assets/uploads/2019/03/image-19.png)
 
-Personally I never press OK, Don’t Show Again because I like the double check and to think “Is this really what I want to do right now”. Once I press OK my changes will be synched with the remote repository. Explaining this means that you can find the notebook I have used in my [Presentations GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations/tree/master/Notebooks) which means that you can run the Notebook too using the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG) and the instructions further up in the post.
+Personally I never press OK, Don’t Show Again because I like the double check and to think “Is this really what I want to do right now”. Once I press OK my changes will be synched with the remote repository. Explaining this means that you can find the notebook I have used in my [Presentations GitHub Repository](https://github.com/SQLDBAWithABeard/Presentations/tree/master/Notebooks?WT.mc_id=DP-MVP-5002693) which means that you can run the Notebook too using the [docker-compose file here](https://github.com/SQLDBAWithABeard/DockerStuff/tree/master/dbatools-2-instances-AG?WT.mc_id=DP-MVP-5002693) and the instructions further up in the post.

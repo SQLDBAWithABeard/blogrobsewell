@@ -42,11 +42,11 @@ There are about 8,500 links to remove, so I will need to batch them into groups 
 
 ## The PowerShell
 
-I used the [MicrosoftFabricMgmt PowerShell module from Microsoft's fabric-toolbox](https://github.com/microsoft/fabric-toolbox/tree/main/tools/MicrosoftFabricMgmt) to do this task.
+I used the [MicrosoftFabricMgmt PowerShell module from Microsoft's fabric-toolbox](https://github.com/microsoft/fabric-toolbox/tree/main/tools/MicrosoftFabricMgmt?WT.mc_id=DP-MVP-5002693) to do this task.
 
 NOTE - Not all of the functionality is available today as I have written it to do this task and it has not been released.
 
-```powershell
+ ```powershell
 # Connect to the Fabric tenant
 Set-FabricAPIHeaders -TenantId (Get-Secret -Name "FabricTenantId" -AsPlainText)
 # Get all the sharing links in the organisation
@@ -98,12 +98,12 @@ $RemovingLinkArray = $WideSharedReportsToRemove | ForEach-Object {
     type = "Report"
   }
 }
-```
+``` 
 I was super careful to double check at each point that each step used the correct data.
 
 With the list of reports to remove created and validated, I can then batch them into groups of 500 and call the Bulk Remove Sharing Links API.
 
-```powershell
+ ```powershell
 $totalReports = $RemovingLinkArray.Count
 $x = 0
 $batchSize = 500
@@ -115,7 +115,7 @@ $x += $batchSize
 Write-PSFMessage -Level Important "Total attempted so far: $x out of $totalReports."
 Start-Sleep -Seconds 10
 }
-```
+``` 
 
 Job done. All links removed except the ones we wanted to keep.
 
@@ -125,10 +125,10 @@ When I ran the script, it completed successfully.
 
 But when I check the links remaining there were still thousands of links remaining.
 
-The output from the script showed the OperationId of the long running operation. I used the `Get-FabricLongRunningOperation` cmdlet to check the status of some of them.
+The output from the script showed the OperationId of the long running operation. I used the  `Get-FabricLongRunningOperation`  cmdlet to check the status of some of them.
 
 which produced this output:
-```
+ ```
 {
 "status": "Failed",
 "createdTimeUtc": "2026-02-09T13:07:28.951536",
@@ -139,7 +139,7 @@ which produced this output:
 "message": "PowerBISqlOperationException"
 }
 }
-```
+``` 
 
 which appeared in no search results but seems to indicate an internal server error.
 

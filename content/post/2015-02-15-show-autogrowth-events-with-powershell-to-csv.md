@@ -24,25 +24,25 @@ I am a great believer in Automation. If you are going to do something more than 
 
 Why two functions? Well Pinal Daves script gets the information from the default trace for a single database but there may be times when you need to know the autogrowth events that happened on a server with multiple databases.
 
-I use a very simple method for doing this as I have not found the correct way to parse the default trace with PowerShell. The functions rely on [Invoke-SQLCMD2](https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1) which I also have in my functions folder and pass the query from Pinal Daves Blog post as a here string
+I use a very simple method for doing this as I have not found the correct way to parse the default trace with PowerShell. The functions rely on [Invoke-SQLCMD2](https://github.com/RamblingCookieMonster/PowerShell/blob/master/Invoke-Sqlcmd2.ps1?WT.mc_id=DP-MVP-5002693) which I also have in my functions folder and pass the query from Pinal Daves Blog post as a here string
 
-`$Results = Invoke-Sqlcmd2 -ServerInstance $Server -Database master -Query $Query`
+ `$Results = Invoke-Sqlcmd2 -ServerInstance $Server -Database master -Query $Query` 
 
 To output to CSV I use the [Export-CSV cmdlet](https://technet.microsoft.com/en-us/library/hh849932.aspx?WT.mc_id=DP-MVP-5002693)
 
-```
+ ```
 if($CSV)
 {
 $Results| Export-Csv -Path $CSV
 }
-```
-And to open the CSV I add a `[switch]` parameter. You can find out more about parameters [here](https://technet.microsoft.com/en-us/library/hh847743.aspx?WT.mc_id=DP-MVP-5002693) or by
+``` 
+And to open the CSV I add a  `[switch]`  parameter. You can find out more about parameters [here](https://technet.microsoft.com/en-us/library/hh847743.aspx?WT.mc_id=DP-MVP-5002693) or by
 
-`Get-Help about_Functions_Advanced_Parameters`
+ `Get-Help about_Functions_Advanced_Parameters` 
 
 so the parameter block of my function looks like
 
-```
+ ```
 param
 (
 [Parameter(Mandatory=$true)]
@@ -54,15 +54,15 @@ param
 [Parameter(Mandatory=$false)]
 [switch]$ShowCSV
 )
-```
+``` 
 
 Now when I am asked again to provide this information it is as easy as typing
 
-`Show-AutogrowthServer -Server SQL2014Ser12R2`
+ `Show-AutogrowthServer -Server SQL2014Ser12R2` 
 
 or
 
-`Show-AutogrowthDatabase -Server SQL2014Ser12R2 -Database Autogrowth`
+ `Show-AutogrowthDatabase -Server SQL2014Ser12R2 -Database Autogrowth` 
 
 and the results will be displayed as below
 
@@ -70,12 +70,12 @@ and the results will be displayed as below
 
 just a side note. Pinal Daves script uses @@servername in the where clause and if you have renamed your host the script will be blank. The resolution to this is to runt he following T-SQL
 
-``` 
+ ``` 
 sp_dropserver 'OLDSERVERNAME';
 GO
 sp_addserver NEWSERVERNAME, local;
 GO
-```
+``` 
 
 You can find the scripts here
 

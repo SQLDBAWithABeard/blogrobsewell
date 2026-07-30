@@ -15,7 +15,7 @@ image: assets/uploads/2025/mentor.png
 
 [![](https://debthedba.wordpress.com/wp-content/uploads/2016/06/tsql2sday-150x150.png)](https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/)
 
-T-SQL Tuesday, which was started by Adam Machanic ([github](https://github.com/amachanic) is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme.
+T-SQL Tuesday, which was started by Adam Machanic ([github](https://github.com/amachanic?WT.mc_id=DP-MVP-5002693) is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme.
 
 This month it is hosted by [Deborah](https://debthedba.wordpress.com/) on the [theme of mentoring and sponsorship](https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/). Thank you Deborah for hosting.
 
