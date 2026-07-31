@@ -37,13 +37,13 @@ Describe "Create Hyper V from Base Tests" {
         test-path function:\create-hypervmfrombase | should be $true
         }
         It "Should error when VMName exists" {
-        $VMName = (Get-VM|Select -First 1 Name).Name
+        $VMName = (Get-VM|Select -FirstundefinedName).Name
         create-hypervmfrombase -VMName $VMName |should throw
         }
 
 I thought that what I was testing was that the function threw an error when an incorrect parameter was passed. The should throw should be true but what I got was
 
-[![pester error3](../assets/uploads/2016/01/pester-error3_thumb.jpg "pester error3")](../../assets/uploads/2016/01/pester-error3.jpg)
+[![pester error3](/assets/uploads/2016/01/pester-error3_thumb.jpg "pester error3")](../../assets/uploads/2016/01/pester-error3.jpg)
 
 So I was getting the correct error but not passing the test. It was a simple fix. Simply adding curly braces around the call to the function
 
@@ -56,7 +56,7 @@ Describe "Create Hyper V from Base Tests" {
         test-path function:\create-hypervmfrombase | should be $true
         }
         It "Should error when VMName exists" {
-        $VMName = (Get-VM|Select -First 1 Name).Name
+        $VMName = (Get-VM|Select -FirstundefinedName).Name
         {create-hypervmfrombase -VMName $VMName} |should throw
         }
     }
@@ -64,6 +64,6 @@ Describe "Create Hyper V from Base Tests" {
 
 and we pass the test.
 
-[![pester success2](../assets/uploads/2016/01/pester-success2_thumb.jpg "pester success2")](../../assets/uploads/2016/01/pester-success2.jpg)
+[![pester success2](/assets/uploads/2016/01/pester-success2_thumb.jpg "pester success2")](../../assets/uploads/2016/01/pester-success2.jpg)
 
 

@@ -22,9 +22,9 @@ image: https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png
 
 # Data Saturdays Has New Clothes!
 
-The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.
+The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After overundefinedvotes the results came in.
 
-[![newclothes](https://blog.robsewell.com//assets/uploads/2021/newdatasaturdayclothes.jpg)](https://twitter.com/datasaturdays/status/1380152923498352644)
+[![newclothes](/assets/uploads/2021/newdatasaturdayclothes.jpg)](https://twitter.com/datasaturdays/status/1380152923498352644)
 
 Denny Cherry & Associates Consulting [https://www.dcac.com/](https://www.dcac.com/) generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via [99designs.com](https://99designs.com). THANK YOU Denny and many thanks to Monica Rathbun [twitter](https://twitter.com/SQLEspresso) - [blog](https://sqlespresso.com/) for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.
 
@@ -46,19 +46,19 @@ I am running Docker in WSL2. I followed these [instructions](https://code.visual
 
 With thanks to Hans Kristian Flaatten [GitHub](https://github.com/Starefossen?WT.mc_id=DP-MVP-5002693) - [Twitter](https://twitter.com/Starefossen) who has created [this docker image](https://github.com/Starefossen/docker-github-pages?WT.mc_id=DP-MVP-5002693) it is as easy as running this from the local directory of the site repository
 
- ````
+  ````
 docker run -it --rm -v "$PWD":/usr/src/app -p "4000:4000" starefossen/github-pages
-``` `
+```  `
 
 If you are not using WSL but native Docker on Windows, then the command to run is slightly different
 
- ````
+  ````
 docker run -it --rm -v .:/usr/src/app -p "4000:4000" starefossen/github-pages
-``` `
+```  `
 
-As soon as the container has started running and built the site I can see my changes locally in my browser at  `http://localhost:4000/`  There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.
+As soon as the container has started running and built the site I can see my changes locally in my browser at   `http://localhost:4000/`   There are a few warnings as it builds that can be ignored. These are due to the autoomatic dynamic page generation code.
 
-[![localdev](https://blog.robsewell.com//assets/uploads/2021/localdev.jpg)](https://blog.robsewell.com//assets/uploads/2021/localdev.jpg)
+[![localdev](/assets/uploads/2021/localdev.jpg)](/assets/uploads/2021/localdev.jpg)
 
 # Develop and Test
 
@@ -70,7 +70,7 @@ I shall go back to editing the site now.
 
 # A little 'Feature' if you are working on your event page
 
-If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts  `http://0.0.0.0:4000/`  like [http://0.0.0.0:4000/2021-04-17-datasaturday0005/](http://0.0.0.0:4000/2021-04-17-datasaturday0005/). This will not work on a Windows machine so you will have to replace  `0.0.0.0`  in the address bar with  `localhost` 
+If you are following the wiki documentation to create or edit your event, you will find there is a little complication. When you click on yours or any event link on the front page it will take you to a page that starts   `http://0.0.0.0:4000/`   like [http://0.0.0.0:4000/2021-04-17-datasaturday0005/](http://0.0.0.0:4000/2021-04-17-datasaturday0005/). This will not work on a Windows machine so you will have to replace   `0.0.0.0`   in the address bar with   `localhost`  
 
 [![0000](https://blog.robsewell.com/assets/uploads/2021/0000.jpg)](https://blog.robsewell.com/assets/uploads/2021/0000.jpg)
 

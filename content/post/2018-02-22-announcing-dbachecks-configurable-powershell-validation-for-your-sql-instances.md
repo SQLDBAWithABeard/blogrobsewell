@@ -20,7 +20,7 @@ For the last couple of months members of the [dbatools](http://dbatools.io) tea
 Validate Your SQL Instances?
 ----------------------------
 
-What do I mean by validate your SQL Instances? You want to know if your SQL Instances are (still) set up in the way that you want them to be or that you have not missed any configurations when setting them up. With dbachecks you can use any or all of the 80 checks to ensure one or many SQL Instances are as you want them to be. Using Pester, dbachecks will validate your SQL Instance(s) against default settings or ones that you configure yourself.
+What do I mean by validate your SQL Instances? You want to know if your SQL Instances are (still) set up in the way that you want them to be or that you have not missed any configurations when setting them up. With dbachecks you can use any or all of theundefinedchecks to ensure one or many SQL Instances are as you want them to be. Using Pester, dbachecks will validate your SQL Instance(s) against default settings or ones that you configure yourself.
 
 Installation
 ------------
@@ -43,12 +43,12 @@ To be able to use these (and any PowerShell) commands, your first step should al
 
 Get-Help Send-DbcMailMessage
 
-[![](assets/uploads/2018/02/01a-get-help.png)](assets/uploads/2018/02/01a-get-help.png)
+[![](/assets/uploads/2018/02/01a-get-help.png)](/assets/uploads/2018/02/01a-get-help.png)
 
 80 Checks
 ---------
 
-At the time of release, dbachecks has 80 checks. You can see all of the checks by running
+At the time of release, dbachecks hasundefinedchecks. You can see all of the checks by running
 
 Get-DbcCheck
 
@@ -150,13 +150,13 @@ For example, a different user for a database owner. The code to write the test f
 
 With dbachecks we have made this much simpler enabling you to set configuration items at run-time or for your session and enabling you to export and import them so you can create different configs for different use cases
 
-There are 108 configuration items at present. You can see the current configuration by running
+There areundefinedconfiguration items at present. You can see the current configuration by running
 
 Get-DbcConfig
 
 which will show you the name of the config, the value it is currently set and the description
 
-[![](assets/uploads/2018/02/01-configs.png)](assets/uploads/2018/02/01-configs.png)
+[![](/assets/uploads/2018/02/01-configs.png)](/assets/uploads/2018/02/01-configs.png)
 
 You can see all of the configs and their descriptions here
  **Name** | **Description** 
@@ -202,7 +202,7 @@ You can see all of the configs and their descriptions here
  **policy.database.filebalancetolerance** | Percentage for Tolerance for checking for balanced files in a filegroups 
  **policy.database.filegrowthexcludedb** | Databases to exclude from the file growth check 
  **policy.database.filegrowthtype** | Growth Type should be 'kb' or 'percent' 
- **policy.database.filegrowthvalue** | The auto growth value (in kb) should be equal or higher than this value. Example: A value of 65535 means at least 64MB.  
+ **policy.database.filegrowthvalue** | The auto growth value (in kb) should be equal or higher than this value. Example: A value ofundefinedmeans at least 64MB.  
  **policy.database.logfilecount** | The number of Log files expected on a database 
  **policy.database.logfilesizecomparison** | How to compare data and log file size, options are maximum or average 
  **policy.database.logfilesizepercentage** | Maximum percentage of Data file Size that logfile is allowed to be. 
@@ -264,7 +264,7 @@ You can see all of the configs and their descriptions here
  **skip.diffbackuptest** | Skip the Differential backup test 
  **skip.logfilecounttest** | Skip the logfilecount test 
  **skip.logshiptesting** | Skip the logshipping test 
- **skip.tempdb1118** | Don't run test for Trace Flag 1118 
+ **skip.tempdb1118** | Don't run test for Trace Flagundefined
  **skip.tempdbfilecount** | Don't run test for Temp Database File Count 
  **skip.tempdbfilegrowthpercent** | Don't run test for Temp Database File Growth in Percent 
  **skip.tempdbfilesizemax** | Don't run test for Temp Database Files Max Size 
@@ -277,15 +277,15 @@ You can quickly run a single check by calling Invoke-DbcCheck.
 
 Invoke-DbcCheck -SqlInstance localhost -Check FailedJob
 
-[![](assets/uploads/2018/02/02-failed-jobs.png)](assets/uploads/2018/02/02-failed-jobs.png)
+[![](/assets/uploads/2018/02/02-failed-jobs.png)](/assets/uploads/2018/02/02-failed-jobs.png)
 
 Excellent, my agent jobs have not failed 🙂
 
 Invoke-DbcCheck -SqlInstance localhost -Check LastGoodCheckDb
 
-[![](assets/uploads/2018/02/03-dbcc-check.png)](assets/uploads/2018/02/03-dbcc-check.png)
+[![](/assets/uploads/2018/02/03-dbcc-check.png)](/assets/uploads/2018/02/03-dbcc-check.png)
 
-Thats good, all of my databases have had a successful DBCC CHECKDB within the last 7 days.
+Thats good, all of my databases have had a successful DBCC CHECKDB within the lastundefineddays.
 
 Setting a Configuration
 -----------------------
@@ -294,7 +294,7 @@ To save me from having to specify the instance I want to run my tests against I 
 
 Set-DbcConfig -Name app.sqlinstance -Value localhost, 'localhost\\PROD1'
 
-[![](assets/uploads/2018/02/04-setting-instances-config.png)](assets/uploads/2018/02/04-setting-instances-config.png)
+[![](/assets/uploads/2018/02/04-setting-instances-config.png)](/assets/uploads/2018/02/04-setting-instances-config.png)
 
 Then whenever I call Invoke-DbcCheck it will run against those instances for the SQL checks
 
@@ -304,18 +304,18 @@ Invoke-DbcCheck -Check LastDiffBackup
 
 I can see that I dont have a diff backup for the databases on both instances. Better stop writing this and deal with that !!
 
-[![](assets/uploads/2018/02/05-last-backup.png)](assets/uploads/2018/02/05-last-backup.png)
+[![](/assets/uploads/2018/02/05-last-backup.png)](/assets/uploads/2018/02/05-last-backup.png)
 
 The configurations are stored in the registry but you can export them and then import them for re-use easily. I have written another blog post about that.
 
 The Show Parameter
 ------------------
 
-Getting the results of the tests on the screen is cool but if you are running a lot of tests against a lot of instances then you might find that you have 3 failed tests out of 15000! This will mean a lot of scrolling through green text looking for the red text and you may find that your PowerShell buffer doesnt hold all of your test results leaving you very frustrated.
+Getting the results of the tests on the screen is cool but if you are running a lot of tests against a lot of instances then you might find that you haveundefinedfailed tests out of 15000! This will mean a lot of scrolling through green text looking for the red text and you may find that your PowerShell buffer doesnt hold all of your test results leaving you very frustrated.
 
 dbachecks supports the Pester Show parameter enabling you to filter the output of the results to the screen. The available values are Summary, None, Fails, Inconclusive, Passed, Pending and Skipped
 
-[![](assets/uploads/2018/02/06-show.png)](assets/uploads/2018/02/06-show.png)
+[![](/assets/uploads/2018/02/06-show.png)](/assets/uploads/2018/02/06-show.png)
 
 in my opinion by far the most useful one is Fails as this will show you only the failed tests with the context to enable you to see which tests have failed
 
@@ -323,7 +323,7 @@ Invoke-DbcCheck -Check Agent -Show Fails
 
 If we check all of the checks tagged as Agent we can easily see that most passed but The Job That Fails (surprisingly) failed. All of the other tests that were run for the agent service, operators, failsafe operator, database mail and all other agent jobs all passed in the example below
 
-[![](assets/uploads/2018/02/07-Jobs-that-filed.png)](assets/uploads/2018/02/07-Jobs-that-filed.png)
+[![](/assets/uploads/2018/02/07-Jobs-that-filed.png)](/assets/uploads/2018/02/07-Jobs-that-filed.png)
 
 Test Results are for other People as well
 -----------------------------------------
@@ -344,7 +344,7 @@ Invoke-DbcCheck -AllChecks -Show Fails -PassThru |Update-DbcPowerBiDataSource -E
 
 it will run all of the dbachecks using your configuration for your Development environment, output only the failed tests to the screen and save the results in your windows\\temp\\dbachecks folder with a suffix of Development and you would end up with two files in the folder
 
-[![](assets/uploads/2018/02/08-test-results.png)](assets/uploads/2018/02/08-test-results.png)
+[![](/assets/uploads/2018/02/08-test-results.png)](/assets/uploads/2018/02/08-test-results.png)
 
 You can then simply run
 
@@ -352,7 +352,7 @@ Start-DbcPowerBi
 
 and as long as you have the (free) Powerbi Desktop then you will see this. You will need to refresh the data to get your test results
 
-[![](assets/uploads/2018/02/09-PowerBi.png)](assets/uploads/2018/02/09-PowerBi.png)
+[![](/assets/uploads/2018/02/09-PowerBi.png)](/assets/uploads/2018/02/09-PowerBi.png)
 
 Of course it is Powerbi so you can publish this report. Here it is so that you can click around and see what it looks like
 

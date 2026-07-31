@@ -35,9 +35,9 @@ It is important to note that this script is designed to be run in an environment
 
 ## The Script
 
-I save this script as `Create-FabricEnvironment.ps1` and run it from my local machine or a jump box that has access to the Microsoft Fabric environment. You could also run this from any CI/CD pipeline.
+I save this script as  `Create-FabricEnvironment.ps1`  and run it from my local machine or a jump box that has access to the Microsoft Fabric environment. You could also run this from any CI/CD pipeline.
 
-```powershell
+ ```powershell
 #requires -Module MicrosoftFabricMgmt
 
 <#
@@ -145,15 +145,15 @@ $WksIds| ForEach-Object { Get-FabricItem -WorkspaceId $_ }
 Write-PSFMessage -Level Host -Message "Created the following Permissions for $ProjectName environment" -FunctionName $fn
 $WksIds| ForEach-Object { Get-FabricWorkspaceRoleAssignment -WorkspaceId $_ |Select DisplayName,Type,Role }
 Wait-PSFMessage
-```
+``` 
 
 This is what the output looks like when I run it:
 
-[![environmentcreation](../assets/uploads/2026/03/environmentcreation.png)](../../assets/uploads/2026/03/environmentcreation.png)
+[![environmentcreation](/assets/uploads/2026/03/environmentcreation.png)](../../assets/uploads/2026/03/environmentcreation.png)
 
 Here is a workspace after running the script, showing the Lakehouses and Warehouse that were created:
 
-[![environmentcreationinfabric](../assets/uploads/2026/03/environmentcreationinfabric.png)](../../assets/uploads/2026/03/environmentcreationinfabric.png)
+[![environmentcreationinfabric](/assets/uploads/2026/03/environmentcreationinfabric.png)](../../assets/uploads/2026/03/environmentcreationinfabric.png)
 
 
 ## What This Script Demonstrates

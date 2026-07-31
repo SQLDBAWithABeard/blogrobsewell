@@ -20,11 +20,11 @@ How Do I Know Which Checks There Are?
 
 OK you just need to run
 
- `Get-DbcCheck` 
+  `Get-DbcCheck`  
 
 and it will show you
 
-[![01 - get-dbcchecks.png](assets/uploads/2018/05/01-get-dbcchecks.png)](assets/uploads/2018/05/01-get-dbcchecks.png)
+[![01 - get-dbcchecks.png](/assets/uploads/2018/05/01-get-dbcchecks.png)](/assets/uploads/2018/05/01-get-dbcchecks.png)
 
 It will show you the group, the type (does it need a computer name or an instance name), The description, the unique tag for running just that check and all the tags that will run that check
 
@@ -35,11 +35,11 @@ How Do I Know Which Configurations There Are?
 
 So to do that you just need to run
 
- `Get-DbcConfig` 
+  `Get-DbcConfig`  
 
 and it will show you
 
-[![02 - dbcconfig.png](assets/uploads/2018/05/02-dbcconfig.png)](assets/uploads/2018/05/02-dbcconfig.png)
+[![02 - dbcconfig.png](/assets/uploads/2018/05/02-dbcconfig.png)](/assets/uploads/2018/05/02-dbcconfig.png)
 
 You can see the name, the current value and the description
 
@@ -58,13 +58,13 @@ None of the amazing contributors to dbachecks had thought of this scenario so I 
 
 Then I fixed it so that it would do what was required. Thank you Nick for this feedback and for helping to improve dbachecks
 
-I improved  `Get-DbcCheck`  so that now it shows the configuration item related to each check
+I improved   `Get-DbcCheck`   so that now it shows the configuration item related to each check
 
 It is easier to see (and sort or search) if you use Out-GridView
 
     Get-DbcCheck | Out-GridView
 
-[![03 - New dbccheck.png](assets/uploads/2018/05/03-New-dbccheck.png)](assets/uploads/2018/05/03-New-dbccheck.png)
+[![03 - New dbccheck.png](/assets/uploads/2018/05/03-New-dbccheck.png)](/assets/uploads/2018/05/03-New-dbccheck.png)
 
 So now you can see which configuration can be set for each check!
 

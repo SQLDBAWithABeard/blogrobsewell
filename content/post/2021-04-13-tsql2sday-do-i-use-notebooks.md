@@ -20,7 +20,7 @@ image: assets/images/TSQL2sDay150x150.jpg
 
 # Do I use Notebooks?
 
-T-SQL Tuesday is the brainchild of Adam Machanic ([Blog](http://dataeducation.com/)  [Twitter](https://twitter.com/adammachanic?lang=en)). The first T-SQL Tuesday invitation was in December 2009 and it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones ([Blog](https://voiceofthedba.com/)  [Twitter](https://twitter.com/way0utwest)) organises the event and maintains [a website with all previous posts](http://tsqltuesday.com/). Everyone is welcome to participate in this monthly blog post.
+T-SQL Tuesday is the brainchild of Adam Machanic ([Blog](http://dataeducation.com/)  [Twitter](https://twitter.com/adammachanic?lang=en)). The first T-SQL Tuesday invitation was in Decemberundefinedand it is still going strong. It is a monthly blog party on the second Tuesday of each month. Currently, Steve Jones ([Blog](https://voiceofthedba.com/)  [Twitter](https://twitter.com/way0utwest)) organises the event and maintains [a website with all previous posts](http://tsqltuesday.com/). Everyone is welcome to participate in this monthly blog post.
 
 This month’s T-SQL Tuesday is hosted by Steve. Steve says: 
 
@@ -57,5 +57,5 @@ I am thoroughly looking forward to seeing what other people do with notebooks. I
 
 # All this and
 
-[![nodatascientist](assets/uploads/2021/nodatascientist.png)](https://www.advancinganalytics.co.uk/)  
+[![nodatascientist](/assets/uploads/2021/nodatascientist.png)](https://www.advancinganalytics.co.uk/)  
 Thank you - [https://www.advancinganalytics.co.uk/](https://www.advancinganalytics.co.uk/)

@@ -39,20 +39,23 @@ Format:
 
 For posts in `content/post/`, paths relative to the site root use `../assets/uploads/...` or `assets/uploads/...` — follow the pattern already used in the post being edited.
 
-## Microsoft Links
+## Microsoft & GitHub Links
 
-All links to Microsoft domains (learn.microsoft.com, docs.microsoft.com, etc.) **must** have the MVP tracking tag appended:
+All links to Microsoft domains (learn.microsoft.com, docs.microsoft.com, msdn.microsoft.com, azure.microsoft.com, technet, powershellgallery.com, visualstudio.com, aka.ms, etc.) **and to github.com** **must** have the MVP tracking tag appended:
 
 ```
 ?WT.mc_id=DP-MVP-5002693
 ```
 
-If the URL already has a query string, use `&WT.mc_id=DP-MVP-5002693` instead.
+If the URL already has a query string, use `&WT.mc_id=DP-MVP-5002693` instead. If the URL has a `#fragment`, put the tag **before** the fragment (`...?WT.mc_id=DP-MVP-5002693#section`).
+
+Do **not** add the tag to URLs inside code blocks or to image sources — only to actual links.
 
 Examples:
 - `https://learn.microsoft.com/en-us/fabric/fundamentals/workspaces?WT.mc_id=DP-MVP-5002693`
 - `https://www.powershellgallery.com/?WT.mc_id=DP-MVP-5002693`
 - `https://code.visualstudio.com/?WT.mc_id=DP-MVP-5002693`
+- `https://github.com/dataplat/dbatools?WT.mc_id=DP-MVP-5002693`
 
 ## People — Social Links
 
@@ -133,7 +136,7 @@ This blog covers:
 ## What NOT to Do
 
 - Do not modify anything in `s:/clonedforked/fabric-toolbox/`
-- Do not add Microsoft tracking tags to non-Microsoft URLs
+- Do not add the MVP tracking tag to URLs other than Microsoft domains and github.com (see "Microsoft & GitHub Links")
 - Do not strip existing tracking tags from links
 - Do not change the voice to be more formal or corporate
 - Do not create new files outside `content/post/` and `assets/uploads/` unless explicitly asked

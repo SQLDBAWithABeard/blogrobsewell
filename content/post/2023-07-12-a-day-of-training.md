@@ -42,7 +42,7 @@ Rest assured, you don't need any specific equipment or tools to attend this trai
 
 Secure your spot now by registering at the Eventbrite page: [Register Here](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217).
 
-[![training day](assets/uploads/2023/datasaturdayoslo-trainingday.png)](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217)
+[![training day](/assets/uploads/2023/datasaturdayoslo-trainingday.png)](https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217)
 
 ## Who are we?
 
@@ -58,4 +58,4 @@ Ready to take your DBA skills to the next level in a hybrid environment? Don't m
 
 For more information about the free Saturday event, visit the official event page at [DataSaturday0035](https://datasaturdays.com/2023-09-02-datasaturday0035/). Don't wait, spaces are limited!
 
-Join us on Friday 1st September 2023 for a power-packed day of learning, networking, and enhancing your DBA skills. We can't wait to see you there!
+Join us on Friday 1st Septemberundefinedfor a power-packed day of learning, networking, and enhancing your DBA skills. We can't wait to see you there!

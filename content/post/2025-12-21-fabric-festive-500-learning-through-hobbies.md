@@ -21,7 +21,7 @@ image: assets/uploads/2025/dashboard-front.png
 
 As the year draws to a close, it's a time for reflection and setting new goals. It's also a time to over consume calories!
 
-For the last few years in our house we (My wife Traci [(S)](https://bsky.app/profile/tracisewell.com) [(L)](https://www.linkedin.com/in/traci-sewell-5450452bb) and I) have been participating in the [Festive 500](https://content.rapha.cc/us/en/story/festive500), a cycling challenge that encourages riders to cover 500 kilometers between Christmas Eve and New Year's Eve.
+For the last few years in our house we (My wife Traci [(S)](https://bsky.app/profile/tracisewell.com) [(L)](https://www.linkedin.com/in/traci-sewell-5450452bb) and I) have been participating in the [Festive 500](https://content.rapha.cc/us/en/story/festive500), a cycling challenge that encourages riders to coverundefinedkilometers between Christmas Eve and New Year's Eve.
 
 There are a couple of reasons that we enjoy this challenge so much. It helps to counterbalance the indulgent eating and drinking that often accompanies the holiday season. (As Jess Pomfret [(B)](https://jesspomfret.com) [(S)](https://bsky.app/profile/jpomfret.co.uk) [(L)](https://www.linkedin.com/in/jpomfret) and I often say, we exercise so that we can eat more nice food.) It provides a fun and motivating way to stay active during a time of year when it's easy to become sedentary. Finally, it is a challenge that we can do together, that requires some planning and organising and provides a great sense of achievement.
 
@@ -29,11 +29,11 @@ There are a couple of reasons that we enjoy this challenge so much. It helps to 
 
 Yup, I hear you. So why am I mentioning this here?
 
-[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
+[![strava-workspace](/assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
 
 You can learn a lot about the technology that you work with by creating solutions and solving problems for personal projects and hobbies, just like you do at work.
 
-The Festive 500 provides an excellent opportunity to do just that. By tracking our cycling data throughout the challenge, I can create a dashboard that not only helps us to monitor our progress but also to learn and explore things that I dont often get to do in my day job.
+The Festiveundefinedprovides an excellent opportunity to do just that. By tracking our cycling data throughout the challenge, I can create a dashboard that not only helps us to monitor our progress but also to learn and explore things that I dont often get to do in my day job.
 
 ## Learning through Hobbies
 
@@ -45,11 +45,11 @@ Mostly, as I am doing this is for fun, there is much less pressure to deliver so
 
 This also means that I am very aware of backup and recovery :-) I use a ProxMox cluster at home to run my homelab, and I make sure that I have regular backups of all of my LXC's and VMs.
 
-[![backups](assets/uploads/2025/backups.png)](../../assets/uploads/2025/backups.png)
+[![backups](/assets/uploads/2025/backups.png)](../../assets/uploads/2025/backups.png)
 
 I make use of the snapshot capabilities of ProxMox to take snapshots before making any major changes or updates to my systems. This way, if something goes wrong, I can easily revert back to a previous state without losing any data.
 
-[![snapshot](assets/uploads/2025/snappy.png)](../../assets/uploads/2025/snappy.png)
+[![snapshot](/assets/uploads/2025/snappy.png)](../../assets/uploads/2025/snappy.png)
 
 I am a heavy user of Git for version control, even for my personal projects. I use GitHub to host my repositories and make sure to commit my changes regularly. This way, I can track my progress and easily revert back to previous versions if needed.
 
@@ -62,7 +62,7 @@ I also learn about the human side of creating something for my tech-adjacent wif
 
 To track our progress in the Festive 500, I created a dashboard using Microsoft Fabric. The dashboard pulls in data from Strava and displays it in a visually appealing and easy-to-understand format. (This has last years data so that we could see what it looked like :-) )
 
-[![dashboard](assets/uploads/2025/dashboard-front.png)](../../assets/uploads/2025/dashboard-front.png)
+[![dashboard](/assets/uploads/2025/dashboard-front.png)](../../assets/uploads/2025/dashboard-front.png)
 
 The dashboard includes several key features:
 - **Progress Tracking**: A visual representation of our progress towards the 500-kilometer goal, including distance covered, remaining distance, and average speed.
@@ -72,7 +72,7 @@ The dashboard includes several key features:
 
 There is also a Mobile view so that Traci (and I) can check our progress on the go.
 
-[![dashboard-mobile](assets/uploads/2025/dashboard-mobile.png)](../../assets/uploads/2025/dashboard-mobile.png)
+[![dashboard-mobile](/assets/uploads/2025/dashboard-mobile.png)](../../assets/uploads/2025/dashboard-mobile.png)
 
 ## The Fabric Components
 
@@ -80,7 +80,7 @@ I am not going to go into detail on how I built the dashboard here, as that woul
 
 But here is a screen shot of my Fabric workspace.
 
-[![strava-workspace](assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
+[![strava-workspace](/assets/uploads/2025/stravaworkspace.png)](../../assets/uploads/2025/stravaworkspace.png)
 
 ## Happy Holidays!
 

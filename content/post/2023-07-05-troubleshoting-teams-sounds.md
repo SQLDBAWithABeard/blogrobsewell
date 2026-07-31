@@ -33,6 +33,6 @@ But sometimes that is due to there being nobody speaking in the meeting or the i
 
 This is one method that I use to try to narrow down where the issue is. Use live captions to see what Teams is "hearing". I like to use live captions, especially when working with teams of people for whom English is a second language as it is often better at cutting through the accent than I am and it also gives me a chance to read back to ensure that I have understood hte sentence correctly.
 
-You can turn on Live Captions by clicking the 3 dots (hamburger menu) in the meeting and then `Language and speech` and `Turn on live captions` It will ask you which language the meeting is in and you are done. Now you will be able to see if other people are speaking and also if Teams is "hearing" you and troubleshoot accordingly.
+You can turn on Live Captions by clicking theundefineddots (hamburger menu) in the meeting and then  `Language and speech`  and  `Turn on live captions`  It will ask you which language the meeting is in and you are done. Now you will be able to see if other people are speaking and also if Teams is "hearing" you and troubleshoot accordingly.
 
-[![teams live captions](assets/uploads/2023/teams-live-captions.png)](assets/uploads/2023/teams-live-captions.png)
+[![teams live captions](/assets/uploads/2023/teams-live-captions.png)](/assets/uploads/2023/teams-live-captions.png)

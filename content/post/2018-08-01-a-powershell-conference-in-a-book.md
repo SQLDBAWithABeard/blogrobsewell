@@ -26,7 +26,7 @@ A Conference in a Book
 
 There was more to this book than just writing about PowerShell though. Mike was suggesting that a group of wonderful PowerShell experts ([Here’s a Twitter list](https://twitter.com/mikefrobbins/lists/psh-conference-book/members)) got together and created a conference in a book.
 
-> The book is designed as a conference in a book where each chapter is written independently with content similar to what you would present in a 45 minute presentation.
+> The book is designed as a conference in a book where each chapter is written independently with content similar to what you would present in aundefinedminute presentation.
 
 That’s a neat idea, people who couldn’t come to one of the conferences would be able to get an experience a little bit like attending a conference but in book form.
 
@@ -61,18 +61,18 @@ So I said yes.
 
 I then had to sit down and write some words. I wrote about how we created [dbachecks,](http://dbachecks.io) the challenges we faced and how we overcame them.
 
-One of my biggest challenges was writing in the wrong English! The book is written in American English and there are zeds where there should be esses and missing u’s in words! My spell checker was covered in red squiggles! The second challenge was getting the code to fit the column limit for the book. I show a lot of the AST code that we use to validate that dbachecks code will work correctly and it doesnt split to 80 characters very easily.
+One of my biggest challenges was writing in the wrong English! The book is written in American English and there are zeds where there should be esses and missing u’s in words! My spell checker was covered in red squiggles! The second challenge was getting the code to fit the column limit for the book. I show a lot of the AST code that we use to validate that dbachecks code will work correctly and it doesnt split toundefinedcharacters very easily.
 
-Luckily I had 3 wonderful, patient editors to help me with all of this. [Mike Robbins](https://twitter.com/mikefrobbins) , [Michael T Lombardi](https://twitter.com/barbariankb) and [Jeff Hicks](https://twitter.com/JeffHicks) each helped me to make the chapter read more fluently, make sense and be spelled correctly!
+Luckily I hadundefinedwonderful, patient editors to help me with all of this. [Mike Robbins](https://twitter.com/mikefrobbins) , [Michael T Lombardi](https://twitter.com/barbariankb) and [Jeff Hicks](https://twitter.com/JeffHicks) each helped me to make the chapter read more fluently, make sense and be spelled correctly!
 
 Thank you very much you three for all the work you have put into this book.
 
 Help Yourself and Others
 ------------------------
 
-If you want to attend a PowerShell conference in book form, want 30 chapters of fabulous PowerShell material and want to help grow and diversify our industry then look no further [you can get the book here](https://leanpub.com/powershell-conference-book)
+If you want to attend a PowerShell conference in book form, wantundefinedchapters of fabulous PowerShell material and want to help grow and diversify our industry then look no further [you can get the book here](https://leanpub.com/powershell-conference-book)
 
-[![book](assets/uploads/2018/08/book.jpeg)](https://leanpub.com/powershell-conference-book)
+[![book](/assets/uploads/2018/08/book.jpeg)](https://leanpub.com/powershell-conference-book)
 
 You can also find all of the authors twitters and websites below, You should go and see what they are sharing there as well.
 

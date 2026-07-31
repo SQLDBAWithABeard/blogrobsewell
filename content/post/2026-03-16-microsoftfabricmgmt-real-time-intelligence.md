@@ -29,7 +29,7 @@ An Eventhouse is the container for Real-Time Intelligence data. Think of it as t
 
 ### Getting Eventhouses
 
-```powershell
+ ```powershell
 # All Eventhouses in a workspace
 get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricEventhouse
 
@@ -38,27 +38,27 @@ get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricEventhouse -Eventhous
 
 # All Eventhouses across all workspaces
 Get-FabricWorkspace | Get-FabricEventhouse
-```
+``` 
 
-[![Get Eventhouse](../assets/uploads/2026/03/geteventhouse.png)](../../assets/uploads/2026/03/geteventhouse.png)
+[![Get Eventhouse](/assets/uploads/2026/03/geteventhouse.png)](../../assets/uploads/2026/03/geteventhouse.png)
 
 ### Creating an Eventhouse
 
-```powershell
+ ```powershell
 $eventhouse = New-FabricEventhouse `
     -WorkspaceId $workspace.id `
     -EventhouseName "TelemetryStore" `
     -EventhouseDescription "Real-time telemetry data store"
 
-```
+``` 
 
 ### Removing an Eventhouse
 
-```powershell
+ ```powershell
 get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricEventhouse -EventhouseName no15eventhouse |Remove-FabricEventhouse
-```
+``` 
 
-[![remove-eventhouse](../assets/uploads/2026/03/remove-eventhoues.png)](../../assets/uploads/2026/03/remove-eventhoues.png)
+[![remove-eventhouse](/assets/uploads/2026/03/remove-eventhoues.png)](../../assets/uploads/2026/03/remove-eventhoues.png)
 
 
 ## Eventstreams
@@ -67,7 +67,7 @@ An Eventstream is an event ingestion pipeline — it connects event sources (Eve
 
 Guess what? Managing Eventstreams is just as easy as Eventhouses:
 
-```powershell
+ ```powershell
 # All Eventstreams in a workspace
 get-FabricWorkspace -WorkspaceName 'with a spn' |Get-FabricEventstream
 
@@ -93,13 +93,13 @@ $removeEventstreamParams = @{
 
 Remove-FabricEventstream @removeEventstreamParams
 
-```
+``` 
 
 ## RTI Inventory
 
 For a governance view of your real-time infrastructure:
 
-```powershell
+ ```powershell
 $report = Get-FabricWorkspace | ForEach-Object {
     $ws = $_
     [PSCustomObject]@{
@@ -111,8 +111,8 @@ $report = Get-FabricWorkspace | ForEach-Object {
 } | Where-Object { $_.Eventhouses -gt 0 -or $_.Eventstreams -gt 0 }
 
 $report | Sort-Object Workspace | Format-Table -AutoSize
-```
-[![description](../assets/uploads/2026/03/report.png)](../../assets/uploads/2026/03/report.png)
+``` 
+[![description](/assets/uploads/2026/03/report.png)](../../assets/uploads/2026/03/report.png)
 
 Of course, you can export this report to CSV or Excel for further analysis or sharing with your team. You can do all of the things that you need because this is PowerShell, and you have the full power of the language at your disposal.
 
