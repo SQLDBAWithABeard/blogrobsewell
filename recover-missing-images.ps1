@@ -1,17 +1,27 @@
 # recover-missing-images.ps1
 #
-# Recovers the 128 images that are referenced by posts but missing from
+# Recovers the images that are referenced by posts but missing from
 # content/assets/uploads/ (casualties of the original WordPress -> Hugo migration).
 #
-# RUN THIS ON YOUR OWN MACHINE from the repo root. It could NOT be run from the
-# build server because WordPress.com IP-blocks that datacenter's media requests.
+# It copies them from a local WordPress media export instead of downloading,
+# because WordPress.com blocks media requests from some IPs.
+#
+# RUN THIS ON YOUR OWN MACHINE from the repo root:
 #
 #   pwsh ./recover-missing-images.ps1
+#   # or with a different export location:
+#   pwsh ./recover-missing-images.ps1 -ExportRoot 'E:\Downloads\media-export-46782976-from-0-to-11467'
 #
-# It downloads each image, saves it under content/assets/uploads/, and writes any
-# it still could not find to still-missing-images.txt. Then commit the new files.
+# The export is laid out as <ExportRoot>\YYYY\MM\filename.ext, matching the
+# uploads paths. For each missing image it looks in the matching year/month
+# folder first, then falls back to a recursive search by filename across the
+# whole export. Recovered files are written under content/assets/uploads/ and
+# anything still not found is listed in still-missing-images.txt.
 
-$base = 'newsqldbawiththebeard'
+param(
+    [string]$ExportRoot = 'E:\Downloads\media-export-46782976-from-0-to-11467'
+)
+
 $paths = @(
   '/assets/uploads/2013/08/image1.png',
   '/assets/uploads/2013/08/image2.png',
@@ -143,36 +153,57 @@ $paths = @(
   '/assets/uploads/2022/containers2.jpg'
 )
 
+if (-not (Test-Path $ExportRoot)) {
+    Write-Error "Export folder not found: $ExportRoot`nPass the correct path with -ExportRoot."
+    return
+}
+
+# Build a one-time index of every file in the export, keyed by lowercased basename,
+# so the recursive fallback is fast even for a large export.
+Write-Host "Indexing export at $ExportRoot ..." -ForegroundColor Cyan
+$index = @{}
+Get-ChildItem -Path $ExportRoot -Recurse -File | ForEach-Object {
+    $key = $_.Name.ToLowerInvariant()
+    if (-not $index.ContainsKey($key)) { $index[$key] = $_.FullName }
+}
+Write-Host "Indexed $($index.Count) files." -ForegroundColor Cyan
+
 $ok = 0; $skip = 0; $fail = @()
 foreach ($p in $paths) {
-    $rel  = $p -replace '^/assets/uploads/', ''            # e.g. 2017/07/foo.png
+    # Sanitise: keep only YYYY/MM/filename.ext, dropping any trailing junk
+    # (e.g. ")](/assets/...", a doubled "...pnghttps://...", or a trailing ">").
+    if ($p -notmatch '/assets/uploads/(?<rel>\d{4}/(?:\d{2}/)?[^/]*?\.(?:png|jpe?g|gif))') {
+        Write-Host "SKIP (unparseable) $p" -ForegroundColor DarkGray
+        continue
+    }
+    $rel  = $Matches['rel']                                 # e.g. 2017/07/foo.png
+    $name = Split-Path $rel -Leaf
     $dest = Join-Path 'content/assets/uploads' $rel
     if (Test-Path $dest) { $skip++; continue }
-    $dir = Split-Path $dest -Parent
-    if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
-    $urls = @(
-        "https://i0.wp.com/$base.wordpress.com/wp-content/uploads/$rel",   # Jetpack CDN (usually works)
-        "https://$base.wordpress.com/wp-content/uploads/$rel",             # direct
-        "https://$base.files.wordpress.com/$rel"                          # files subdomain
-    )
-    $done = $false
-    foreach ($u in $urls) {
-        try {
-            Invoke-WebRequest -Uri $u -OutFile $dest -UseBasicParsing -TimeoutSec 30 `
-                -Headers @{ 'User-Agent' = 'Mozilla/5.0'; 'Referer' = "https://$base.wordpress.com/" }
-            if ((Get-Item $dest).Length -gt 200) { $done = $true; break }
-            Remove-Item $dest -Force -ErrorAction SilentlyContinue
-        } catch { }
+    # 1) exact year/month/filename in the export
+    $src = Join-Path $ExportRoot ($rel -replace '/', [IO.Path]::DirectorySeparatorChar)
+    if (-not (Test-Path $src)) {
+        # 2) fall back to any file with the same name anywhere in the export
+        $src = $index[$name.ToLowerInvariant()]
     }
-    if ($done) { $ok++; Write-Host "OK   $rel" -ForegroundColor Green }
-    else       { $fail += $p; Write-Host "MISS $rel" -ForegroundColor Yellow }
+
+    if ($src -and (Test-Path $src)) {
+        $dir = Split-Path $dest -Parent
+        if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
+        Copy-Item -Path $src -Destination $dest -Force
+        $ok++
+        Write-Host "OK   $rel" -ForegroundColor Green
+    } else {
+        $fail += $rel
+        Write-Host "MISS $rel" -ForegroundColor Yellow
+    }
 }
 
 Write-Host ""
-Write-Host "Recovered $ok, already-present $skip, still-missing $($fail.Count) of $($paths.Count)."
+Write-Host "Recovered $ok, already-present $skip, still-missing $($fail.Count)."
 if ($fail.Count) {
     $fail | Set-Content 'still-missing-images.txt'
-    Write-Host "Wrote still-missing-images.txt (these may be permanently gone)."
+    Write-Host "Wrote still-missing-images.txt (not found in the export)."
 }
-Write-Host "Next: git add content/assets/uploads ; git commit -m 'recover missing images from WordPress'"
+Write-Host "Next: git add content/assets/uploads ; git commit -m 'recover missing images from WordPress export'"
