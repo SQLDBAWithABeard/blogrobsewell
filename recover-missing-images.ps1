@@ -159,30 +159,29 @@ if (-not (Test-Path $ExportRoot)) {
 }
 
 # The export renames files as "<randomchars>-<originalfilename>", so we can't
-# match on an exact basename. Instead we match by the ORIGINAL name as a suffix
-# ("*-image-10.png") scoped to the target YEAR/MONTH folder.
+# match on an exact basename -- we match the ORIGINAL name as a suffix
+# ("*-image-10.png"). But generic paste names like image-10.png recur across
+# many months (one copy per editing session), so a bare suffix match is
+# ambiguous (8-10 hits each).
 #
-# Why the month folder is the disambiguator: WordPress dedupes original
-# filenames WITHIN a month folder -- it never stores two files both called
-# "image-10.png" under .../2019/04/ (the second becomes "image-10-1.png"). So
-# the many "*-image-10.png" collisions across the export live in DIFFERENT
-# months, and the uploads path already pins the exact month. Scoping the suffix
-# match to that one folder collapses each generic name to a single file.
+# The disambiguator is the EDITING SESSION: every image pasted into one post is
+# uploaded to the SAME month folder in the export. So we resolve a post's images
+# as a GROUP -- all uploads paths that share a referenced folder (e.g. the
+# 2019/04 post's image-1..image-18, image-152, image-153). We find the single
+# export folder that holds the most of that group's names (its "home" folder,
+# revealed by the names that match uniquely, like image-152/153), then take each
+# image from that one folder. Within a folder the original name is unique, so
+# that collapses every generic name to exactly one file.
 #
-# Index every file once, grouped by its "YYYY/MM" (or "YYYY") folder relative
-# to the export root, so the per-image lookup is fast.
+# Precedence per image: exact same-folder match > lone export-wide match >
+# home-folder match > ambiguous (dumped with candidate folders for a manual pick).
 Write-Host "Indexing export at $ExportRoot ..." -ForegroundColor Cyan
 $rootFull = (Resolve-Path $ExportRoot).Path.TrimEnd('\','/')
-$byFolder = @{}
-Get-ChildItem -Path $ExportRoot -Recurse -File | ForEach-Object {
-    $folder = (Split-Path $_.FullName -Parent).Substring($rootFull.Length).Trim('\','/') -replace '\\','/'
-    $key = $folder.ToLowerInvariant()
-    if (-not $byFolder.ContainsKey($key)) { $byFolder[$key] = New-Object System.Collections.ArrayList }
-    [void]$byFolder[$key].Add($_)
-}
-Write-Host "Indexed $($byFolder.Values.Count) folders." -ForegroundColor Cyan
+$allFiles = @(Get-ChildItem -Path $ExportRoot -Recurse -File)
+function Rel-Folder($f) { $f.Directory.FullName.Substring($rootFull.Length).Trim('\','/') -replace '\\','/' }
+Write-Host "Indexed $($allFiles.Count) files." -ForegroundColor Cyan
 
-# Find files in $files whose name equals $orig or ends with "-$orig" (the hash-prefix form).
+# Files whose name equals $orig or ends with "-$orig" (the hash-prefix form).
 function Find-Match($files, $orig) {
     if (-not $files) { return @() }
     $lc = $orig.ToLowerInvariant()
@@ -192,57 +191,88 @@ function Find-Match($files, $orig) {
     })
 }
 
-$ok = 0; $skip = 0; $fail = @(); $ambiguous = @()
+# Parse + sanitise every path into a work item, grouped by its referenced folder.
+$items = @()
 foreach ($p in $paths) {
-    # Sanitise: keep only YYYY/MM/filename.ext, dropping any trailing junk
+    # Keep only YYYY/MM/filename.ext, dropping any trailing junk
     # (e.g. ")](/assets/...", a doubled "...pnghttps://...", or a trailing ">").
     if ($p -notmatch '/assets/uploads/(?<rel>\d{4}/(?:\d{2}/)?[^/]*?\.(?:png|jpe?g|gif))') {
         Write-Host "SKIP (unparseable) $p" -ForegroundColor DarkGray
         continue
     }
-    $rel    = $Matches['rel']                               # e.g. 2019/04/image-10.png
-    $name   = Split-Path $rel -Leaf                         # image-10.png
-    $folder = (Split-Path $rel -Parent) -replace '\\','/'   # 2019/04
-    $dest   = Join-Path 'content/assets/uploads' $rel
-    if (Test-Path $dest) { $skip++; continue }
+    $rel = $Matches['rel']
+    $items += [pscustomobject]@{
+        Rel    = $rel
+        Name   = Split-Path $rel -Leaf
+        Folder = (Split-Path $rel -Parent) -replace '\\','/'
+        Dest   = Join-Path 'content/assets/uploads' $rel
+        Cands  = Find-Match $allFiles (Split-Path $rel -Leaf)   # export-wide candidates
+    }
+}
 
-    # 1) suffix match scoped to the exact YEAR/MONTH folder (authoritative)
-    $cands = Find-Match $byFolder[$folder.ToLowerInvariant()] $name
-    $scope = 'month'
+# For each referenced folder, infer the export "home" folder: the export folder
+# containing a matching candidate for the most images in the group.
+$home = @{}
+foreach ($grp in ($items | Group-Object Folder)) {
+    $tally = @{}
+    foreach ($it in $grp.Group) {
+        foreach ($ef in (@($it.Cands | ForEach-Object { Rel-Folder $_ }) | Sort-Object -Unique)) {
+            if (-not $tally.ContainsKey($ef)) { $tally[$ef] = 0 }
+            $tally[$ef]++
+        }
+    }
+    if ($tally.Count) {
+        $best = ($tally.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 1)
+        $home[$grp.Name] = $best.Key
+        Write-Host ("group {0,-9} -> home export folder '{1}' (covers {2}/{3} images)" -f `
+            $grp.Name, $best.Key, $best.Value, $grp.Count) -ForegroundColor Cyan
+    }
+}
 
-    # 2) only if the month folder yielded nothing, widen to the whole export
-    if ($cands.Count -eq 0) {
-        $cands = Find-Match ($byFolder.Values | ForEach-Object { $_ }) $name
-        $scope = 'export-wide'
+$ok = 0; $skip = 0; $fail = @(); $ambiguous = @()
+foreach ($it in $items) {
+    if (Test-Path $it.Dest) { $skip++; continue }
+
+    $chosen = $null; $why = ''
+    # 1) exact same-folder match (referenced folder present in export)
+    $same = @($it.Cands | Where-Object { (Rel-Folder $_) -ieq $it.Folder })
+    if ($same.Count -eq 1) { $chosen = $same[0]; $why = 'exact-folder' }
+    # 2) a single export-wide candidate -- unambiguous by itself
+    elseif ($it.Cands.Count -eq 1) { $chosen = $it.Cands[0]; $why = 'lone' }
+    # 3) the group's inferred home folder
+    elseif ($home.ContainsKey($it.Folder)) {
+        $inHome = @($it.Cands | Where-Object { (Rel-Folder $_) -ieq $home[$it.Folder] })
+        if ($inHome.Count -eq 1) { $chosen = $inHome[0]; $why = "home:$($home[$it.Folder])" }
     }
 
-    if ($cands.Count -eq 1) {
-        $dir = Split-Path $dest -Parent
+    if ($chosen) {
+        $dir = Split-Path $it.Dest -Parent
         if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-        Copy-Item -Path $cands[0].FullName -Destination $dest -Force
+        Copy-Item -Path $chosen.FullName -Destination $it.Dest -Force
         $ok++
-        if ($scope -eq 'month') { Write-Host "OK    $rel" -ForegroundColor Green }
-        else { Write-Host "OK?   $rel  (no month-folder match; used export-wide: $($cands[0].Name))" -ForegroundColor DarkYellow }
+        $tag = if ($why -eq 'exact-folder') { 'OK  ' } else { 'OK? ' }
+        Write-Host "$tag $($it.Rel)  [$why -> $($chosen.Name)]" -ForegroundColor Green
     }
-    elseif ($cands.Count -gt 1) {
-        Write-Host "AMBIG $rel  ($($cands.Count) candidates in $scope scope)" -ForegroundColor Magenta
-        $ambiguous += "$rel  [$scope]:"
-        $ambiguous += ($cands | ForEach-Object { "    $($_.FullName)" })
+    elseif ($it.Cands.Count -gt 1) {
+        Write-Host "AMBIG $($it.Rel)  ($($it.Cands.Count) candidates)" -ForegroundColor Magenta
+        $ambiguous += "$($it.Rel):"
+        $ambiguous += ($it.Cands | ForEach-Object { "    [$(Rel-Folder $_)]  $($_.FullName)" })
     }
     else {
-        $fail += $rel
-        Write-Host "MISS  $rel" -ForegroundColor Yellow
+        $fail += $it.Rel
+        Write-Host "MISS  $($it.Rel)" -ForegroundColor Yellow
     }
 }
 
 Write-Host ""
 Write-Host "Recovered $ok, already-present $skip, ambiguous $(($ambiguous | Where-Object { $_ -notlike '    *' }).Count), still-missing $($fail.Count)."
+Write-Host "Review the 'home:' / OK? picks above -- those are inferred, not exact."
 if ($fail.Count) {
     $fail | Set-Content 'still-missing-images.txt'
     Write-Host "Wrote still-missing-images.txt (not found in the export at all)."
 }
 if ($ambiguous.Count) {
     $ambiguous | Set-Content 'ambiguous-images.txt'
-    Write-Host "Wrote ambiguous-images.txt -- more than one candidate; copy the right one by hand."
+    Write-Host "Wrote ambiguous-images.txt -- candidates listed with their export folder; copy the right one by hand."
 }
 Write-Host "Next: git add content/assets/uploads ; git commit -m 'recover missing images from WordPress export'"
