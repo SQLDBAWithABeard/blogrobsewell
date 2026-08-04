@@ -212,7 +212,7 @@ foreach ($p in $paths) {
 
 # For each referenced folder, infer the export "home" folder: the export folder
 # containing a matching candidate for the most images in the group.
-$home = @{}
+$grpHome = @{}
 foreach ($grp in ($items | Group-Object Folder)) {
     $tally = @{}
     foreach ($it in $grp.Group) {
@@ -223,7 +223,7 @@ foreach ($grp in ($items | Group-Object Folder)) {
     }
     if ($tally.Count) {
         $best = ($tally.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 1)
-        $home[$grp.Name] = $best.Key
+        $grpHome[$grp.Name] = $best.Key
         Write-Host ("group {0,-9} -> home export folder '{1}' (covers {2}/{3} images)" -f `
             $grp.Name, $best.Key, $best.Value, $grp.Count) -ForegroundColor Cyan
     }
@@ -240,9 +240,9 @@ foreach ($it in $items) {
     # 2) a single export-wide candidate -- unambiguous by itself
     elseif ($it.Cands.Count -eq 1) { $chosen = $it.Cands[0]; $why = 'lone' }
     # 3) the group's inferred home folder
-    elseif ($home.ContainsKey($it.Folder)) {
-        $inHome = @($it.Cands | Where-Object { (Rel-Folder $_) -ieq $home[$it.Folder] })
-        if ($inHome.Count -eq 1) { $chosen = $inHome[0]; $why = "home:$($home[$it.Folder])" }
+    elseif ($grpHome.ContainsKey($it.Folder)) {
+        $inHome = @($it.Cands | Where-Object { (Rel-Folder $_) -ieq $grpHome[$it.Folder] })
+        if ($inHome.Count -eq 1) { $chosen = $inHome[0]; $why = "home:$($grpHome[$it.Folder])" }
     }
 
     if ($chosen) {
