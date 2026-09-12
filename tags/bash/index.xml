@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bash on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/bash/</link><description>Recent content in Bash on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Changing to Upper Case in VS Code</title><link>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</link><pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/uppercase.png" alt="Featured image of post Changing to Upper Case in VS Code" /&gt;&lt;h1 id="now-i-know-this"&gt;Now I know this!
+&lt;/h1&gt;&lt;p&gt;I was using some code that I had written for Azure Pipelines for a Windows agent which had &lt;code&gt;$(System.AgentToken)&lt;/code&gt; as the variable name and all other pre-defined variables were the same PascalCase and separated by &lt;code&gt;.&lt;/code&gt; but the Linux agent needed all upper case and separated by &lt;code&gt;_&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In VS Code &lt;code&gt;CTRL SHIFT P&lt;/code&gt; to open the command pallette and then search for uppercase :-)&lt;/p&gt;
+&lt;div class="video-wrapper"&gt;
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/0Hkh46dnC7Y"
+allowfullscreen
+title="YouTube Video"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;Simples&lt;/p&gt;</description></item><item><title>When WSL DNS fails you</title><link>https://blog.robsewell.com/blog/when-wsl-dns-fails-you/</link><pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/when-wsl-dns-fails-you/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/wsl-dns-fail.png" alt="Featured image of post When WSL DNS fails you" /&gt;&lt;h1 id="so-that-i-will-remember"&gt;So that I will remember!
+&lt;/h1&gt;&lt;p&gt;When running WSL in a corporate environment, I sometimes an error like the following, where the cli is not able to resolve the IP address correctly. This error is from terraform but I have seen it elsewhere.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="../../assets/uploads/2023/wsl-dns-fail.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2023/wsl-dns-fail.png"
+loading="lazy"
+alt="wsl-dns-resolve"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;╷
+│ Error: Failed to query available provider packages
+│
+│ Could not retrieve the list of available versions for provider hashicorp/random: could not connect to registry.terraform.io: failed to request discovery document: Get
+│ &amp;ldquo;&lt;a class="link" href="https://registry.terraform.io/.well-known/terraform.json%22" target="_blank" rel="noopener"
+&gt;https://registry.terraform.io/.well-known/terraform.json"&lt;/a&gt;: dial tcp: lookup registry.terraform.io on 123.45.67.89:53: read udp 123.45.67.89:51522-&amp;gt;123.45.67.89:53: i/o timeout&lt;/p&gt;</description></item><item><title>How to download terraform providers</title><link>https://blog.robsewell.com/blog/how-to-download-terraform-providers/</link><pubDate>Thu, 17 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-download-terraform-providers/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/terraform.png" alt="Featured image of post How to download terraform providers" /&gt;&lt;h1 id="so-that-i-will-remember"&gt;So that I will remember!
+&lt;/h1&gt;&lt;p&gt;It took me too long to find this. The google-fu was failing. How to download terraform providers. How can I download terraform providers. Downloading terraform providers. Getting terraform providers locally. I even checked for my favourite misspelling!&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="../../assets/uploads/2023/terraform.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2023/terraform.png"
+loading="lazy"
+alt="terrafrom"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;but actually the answer to downloading the terraform providers locally for the mirror is in the documentation &lt;a class="link" href="https://developer.hashicorp.com/terraform/cli/commands/providers/mirror" target="_blank" rel="noopener"
+&gt;https://developer.hashicorp.com/terraform/cli/commands/providers/mirror&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;terraform providers mirror&lt;/code&gt; command downloads the providers required for the current configuration and copies them into a directory in the local filesystem.&lt;/p&gt;</description></item></channel></rss>

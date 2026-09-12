@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codespaces on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/codespaces/</link><description>Recent content in Codespaces on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/codespaces/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" /&gt;&lt;h1 id="broken-link"&gt;Broken Link
+&lt;/h1&gt;&lt;p&gt;It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+&gt;&lt;/p&gt;
+&lt;p&gt;Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+&gt;404 page &lt;/a&gt; which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p&gt;
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it"&gt;Why do something manual when you can automate it
+&lt;/h2&gt;&lt;p&gt;This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p&gt;</description></item></channel></rss>

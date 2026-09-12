@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Community on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/community/</link><description>Recent content in Community on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/community/index.xml" rel="self" type="application/rss+xml"/><item><title>The Label on My Drawer Has Changed</title><link>https://blog.robsewell.com/blog/the-label-on-my-drawer-has-changed/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-label-on-my-drawer-has-changed/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/rob-zure.png" alt="Featured image of post The Label on My Drawer Has Changed" /&gt;&lt;h2 id="the-great-job-title-debate"&gt;The Great Job Title Debate
+&lt;/h2&gt;&lt;p&gt;I posted a few things on LinkedIn recently about job titles. The discussion was lively — as it always is — and the general vibe was something along the lines of &amp;ldquo;titles don&amp;rsquo;t define what you do, they&amp;rsquo;re just the label on the drawer.&amp;rdquo; A drawer full of skills, experiences, weird technical rabbit holes at midnight, blog posts, conference talks, and approximately one thousand cups of tea remains the same drawer regardless of what&amp;rsquo;s written on the front.&lt;/p&gt;</description></item><item><title>Why Be a Mentor?</title><link>https://blog.robsewell.com/blog/why-be-a-mentor/</link><pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-be-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2025/mentor.png" alt="Featured image of post Why Be a Mentor?" /&gt;&lt;p&gt;&lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://debthedba.wordpress.com/wp-content/uploads/2016/06/tsql2sday-150x150.png"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="https://github.com/amachanic" target="_blank" rel="noopener"
+&gt;github&lt;/a&gt; is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme.&lt;/p&gt;
+&lt;p&gt;This month it is hosted by &lt;a class="link" href="https://debthedba.wordpress.com/" target="_blank" rel="noopener"
+&gt;Deborah&lt;/a&gt; on the &lt;a class="link" href="https://debthedba.wordpress.com/2025/03/04/t-sql-tuesday-184-the-invitation/" target="_blank" rel="noopener"
+&gt;theme of mentoring and sponsorship&lt;/a&gt;. Thank you Deborah for hosting.&lt;/p&gt;</description></item><item><title>dbachecks v3 at Data Saturday Oslo</title><link>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</link><pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-v3-at-data-saturday-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-session.jpeg" alt="Featured image of post dbachecks v3 at Data Saturday Oslo" /&gt;&lt;h1 id="dbachecks-v3-at-data-saturday-oslo"&gt;dbachecks v3 at Data Saturday Oslo
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/datasaturdayoslo-session.jpeg"
+loading="lazy"
+alt="dbachecksv3"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On Saturday September 2nd 2023, will be &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;Data Saturday Oslo&lt;/a&gt; in Oslo, Norway.&lt;/p&gt;
+&lt;p&gt;For more information about this free Saturday event, visit the official event page at &lt;a class="link" href="https://datasaturdays.com/2023-09-02-datasaturday0035/" target="_blank" rel="noopener"
+&gt;DataSaturday0035&lt;/a&gt; where you can sign up. Don&amp;rsquo;t wait, spaces are limited!&lt;/p&gt;
+&lt;p&gt;I will be presenting a session with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+&gt;Mastodon&lt;/a&gt; and Cláudio Silva &lt;a class="link" href="https://claudioessilva.eu/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/claudioessilva" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; introducing dbachecks v3.&lt;/p&gt;
+&lt;h2 id="abstract"&gt;abstract
+&lt;/h2&gt;&lt;p&gt;dbachecks v1 was released back in 2018, bringing together the DBA PowerShell magic of dbatools with pester, a PowerShell testing framework to create a powerful infrastructure validation tool.&lt;/p&gt;</description></item><item><title>The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo</title><link>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</link><pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-dba-in-a-hybrid-environment-elevate-your-skills-with-jess-pomfret-and-rob-sewell-in-oslo/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/datasaturdayoslo-trainingday.png" alt="Featured image of post The DBA in a hybrid environment: Elevate Your Skills with Jess Pomfret and Rob Sewell in Oslo" /&gt;&lt;h2 id="jess-and-rob-are-doing-training-in-oslo-in-september-at-data-saturday-oslo"&gt;Jess and Rob are doing training in Oslo in September at Data Saturday Oslo
+&lt;/h2&gt;&lt;p&gt;On Friday September 1st 2023, I am lucky enough to be delivering a full days training in Oslo, Norway with Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://tech.lgbt/@Jpomfret" target="_blank" rel="noopener"
+&gt;Mastodon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ready to take your DBA skills to the next level in a hybrid environment?
+Secure your spot now by registering at the Eventbrite page: &lt;a class="link" href="https://www.eventbrite.com/e/the-dba-in-a-hybrid-environment-tickets-643006990217" target="_blank" rel="noopener"
+&gt;Register Here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Designed specifically for DBAs working in hybrid environments, this training day will equip you with the knowledge and tools needed to excel in your role. Whether you&amp;rsquo;re managing on-premises databases, Platform as a Service (PaaS) offerings, or Azure virtual machines, this training has you covered.&lt;/p&gt;</description></item><item><title>Email Subject - Congratulations On Your MVP Award - #MVPBuzz</title><link>https://blog.robsewell.com/blog/email-subject-congratulations-on-your-mvp-award-mvpbuzz/</link><pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/email-subject-congratulations-on-your-mvp-award-mvpbuzz/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/MVP_Logo_Horizontal.png" alt="Featured image of post Email Subject - Congratulations On Your MVP Award - #MVPBuzz" /&gt;&lt;h1 id="grateful"&gt;Grateful
+&lt;/h1&gt;&lt;p&gt;I never take it for granted and again I am humbled and indeed honoured (*) to again receive the MVP Award for my contributions in&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data Platform&lt;/li&gt;
+&lt;li&gt;Cloud and Datacenter Management&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="what-did-i-do-last-year-"&gt;What did I do last year ?
+&lt;/h1&gt;&lt;p&gt;You can see most of it on &lt;a class="link" href="https://mvp.microsoft.com/en-us/PublicProfile/5002693?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;my public MVP profile&lt;/a&gt; Here is a summary&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;18 sessions at conferences including SQLBits, PSCOnfEU, PASS Summit, Data Scotland, Data Grillen, PSConfEU MiniCon, PSDayUK, South Coast Summit&lt;/li&gt;
+&lt;li&gt;6 sessions for User Groups - in person and remote&lt;/li&gt;
+&lt;li&gt;Conference Organising Committee member for SQLBits, PSConfEU and PSDayUK&lt;/li&gt;
+&lt;li&gt;Mentoring of new speakers&lt;/li&gt;
+&lt;li&gt;Open Source Projects Contributions - Microsoft projects, dbatools, dbachecks, Data Saturdays, Call For Data Speakers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;also some other things that I cannot talk about, normally related to feedback about new products or functionality to Microsoft Product Groups&lt;/p&gt;</description></item><item><title>SQLBits 2023 in Newport - A beards viewpoint</title><link>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</link><pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits 2023 in Newport - A beards viewpoint" /&gt;&lt;h1 id="what-is-sqlbits"&gt;What is SQLBits?
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits&lt;/a&gt; is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+&gt;written about SQLBits&lt;/a&gt;, it is close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p&gt;
+&lt;h2 id="committee"&gt;Committee
+&lt;/h2&gt;&lt;p&gt;The SQLBits committee is responsible for the running of the conference, the selection of general sessions and training days, helpers, sponsors, venue, dates, child care, theme, logo, the party, the website, charity support, hotels, bars, delegate app, helpers app, sponsors app, food, drinks, entertainment, prizes, swag, t-shirts, mugs, code of conduct, badges, printing, freight, stickers, lanyards, bags,on-site therapist, pens, notepads&amp;hellip; and everything else that goes into making SQLBits the best conference it can be!!&lt;/p&gt;</description></item><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" /&gt;&lt;h1 id="what-is-sqlbits"&gt;What is SQLBits?
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits&lt;/a&gt; is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+&gt;written about SQLBits&lt;/a&gt;, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p&gt;
+&lt;h2 id="where-and-when"&gt;Where and when?
+&lt;/h2&gt;&lt;p&gt;This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p&gt;</description></item><item><title>#NewStarNovember - Being a mentor</title><link>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</link><pubDate>Sun, 27 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-being-a-mentor/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars.jpg" alt="Featured image of post #NewStarNovember - Being a mentor" /&gt;&lt;p&gt;Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+&gt;for the suggestion to blog&lt;/a&gt;. Check out #NewStarNovember for more blog posts.&lt;/p&gt;
+&lt;h1 id="who-was-your-mentor"&gt;Who was your mentor?
+&lt;/h1&gt;&lt;p&gt;I have never had an official mentor but I am so very very grateful to all of the people who have helped, supported and inspired me throughout my career.&lt;/p&gt;
+&lt;p&gt;I feel so privileged to be able to reach out to so many wonderful people and ask questions and receive advice.&lt;/p&gt;</description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars1.jpg" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" /&gt;&lt;p&gt;Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+&gt;for the suggestion to blog&lt;/a&gt;. Check out #NewStarNovember for more blog posts.&lt;/p&gt;
+&lt;h1 id="in-the-beginning"&gt;In the beginning
+&lt;/h1&gt;&lt;p&gt;It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits Conference&lt;/a&gt; (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;&lt;/p&gt;</description></item><item><title>How Do You Show Keystrokes On Screen</title><link>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-do-you-show-keystrokes-on-screen/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers.jpg" alt="Featured image of post How Do You Show Keystrokes On Screen" /&gt;&lt;p&gt;It started with a tweet from Benni De Jagere &lt;a class="link" href="https://bennidejagere.com/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/BenniDeJagere" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; about how to show the keystrokes on the screen.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h1 id="it-depends"&gt;It depends
+&lt;/h1&gt;&lt;p&gt;The best answer is always &amp;ldquo;it depends&amp;rdquo; and the correct response to this to determine how much to trust this information is &amp;ldquo;what does it depend uponW&amp;rdquo;&lt;/p&gt;
+&lt;h1 id="what-does-it-depend-upon"&gt;what does it depend upon?
+&lt;/h1&gt;&lt;p&gt;It depends upon which programme you are using and wish to demonstrate.&lt;/p&gt;</description></item><item><title>GitHub Action Workflow Protected branch update failed</title><link>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-action-workflow-protected-branch-update-failed/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/noentry.jpg" alt="Featured image of post GitHub Action Workflow Protected branch update failed" /&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/blog/community/dev%20containers/powershell/github/Creating-A-Training-Day-Speakers-List-With-GitHub-Actions-From-A-GitHub-Issue/" &gt;The last post&lt;/a&gt; showed how we created an easy process to update a web-page using a GitHub Issue and two GitHub Actions.&lt;/p&gt;
+&lt;h1 id="protecting-the-repository"&gt;Protecting the repository
+&lt;/h1&gt;&lt;p&gt;I opened the repository in the browser and GitHub and was provided with a warning that said&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2022/07/protectbranch.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/protectbranch.png"
+loading="lazy"
+alt="protect your branch"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Clicking on the protect this branch button gave the reasoning.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Protect your most important branches
+Branch protection rules define whether collaborators can delete or force push to the branch and set requirements for any pushes to the branch, such as passing status checks or a linear commit history.&lt;/p&gt;</description></item><item><title>Creating A Training Day Speakers List with GitHub Action from a GitHub Issue</title><link>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</link><pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-training-day-speakers-list-with-github-action-from-a-github-issue/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/bench.jpg" alt="Featured image of post Creating A Training Day Speakers List with GitHub Action from a GitHub Issue" /&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/blog/community/Training-Day-Speakers-List" &gt;The last post&lt;/a&gt; showed the resource that we created to enable speakers to let events know that they have content for pre-cons/training days. This post will describe how the automation was created using a GitHub Issue and two GitHub Actions.&lt;/p&gt;
+&lt;h1 id="what-do-we-need"&gt;What do we need?
+&lt;/h1&gt;&lt;p&gt;The idea was to have a form for user input that could easily allow a person to add themselves and some information to a web page. The page holds a list of speakers who can present training day sessions for data platform events. &lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+&gt;The web page can be found here&lt;/a&gt;. This page is generated from a JSON file.&lt;/p&gt;</description></item><item><title>Training Day Speakers List</title><link>https://blog.robsewell.com/blog/training-day-speakers-list/</link><pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/training-day-speakers-list/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/magnify.jpg" alt="Featured image of post Training Day Speakers List" /&gt;&lt;p&gt;How do data platform events find Training Day/Pre-Con speakers?&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://callfordataspeakers.com/precon" target="_blank" rel="noopener"
+&gt;So we built a thing for speakers to add themselves and for events to find them&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I think event organisers know who the &lt;em&gt;big names&lt;/em&gt; are and the topics that they can deliver for full day training sessions or pre-cons as they are also known. Finding other speakers and finding speakers who can deliver on different topics is a little more difficult.&lt;/p&gt;</description></item><item><title>GitHub Pages in Dev Containers and Codespaces</title><link>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</link><pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/github-pages-in-dev-containers-and-codespaces/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2022/containers2.jpg" alt="Featured image of post GitHub Pages in Dev Containers and Codespaces" /&gt;&lt;h1 id="broken-link"&gt;Broken Link
+&lt;/h1&gt;&lt;p&gt;It started with a message from Mikey Bronowski ( &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/@MikeyBronowski" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; )&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2022/07/mikey-dm.png"
+loading="lazy"
+alt="message from Mikey"
+&gt;&lt;/p&gt;
+&lt;p&gt;Now this means that you get to see my awesome &lt;a class="link" href="https://blog.robsewell.com/justsomethingsad" target="_blank" rel="noopener"
+&gt;404 page &lt;/a&gt; which makes me laugh every time! It is not a very good look though and does not help people who are reading the blog.&lt;/p&gt;
+&lt;h2 id="why-do-something-manual-when-you-can-automate-it"&gt;Why do something manual when you can automate it
+&lt;/h2&gt;&lt;p&gt;This blog is running on GitHub Pages via a repository. Every time a change is pushed to the repo a GitHub Action runs which rebuilds the jekyll site and makes it available.&lt;/p&gt;</description></item><item><title>Viewing GitHub Pages Locally With a Remote Theme</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-with-a-remote-theme/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally With a Remote Theme" /&gt;&lt;h1 id="a-different-method-for-my-own-site"&gt;A different method for my own site
+&lt;/h1&gt;&lt;p&gt;This blog post is for Mikey Bronowski &lt;a class="link" href="https://twitter.com/mikeybronowski" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://www.bronowski.it/blog/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; and Jonathan Allen &lt;a class="link" href="https://twitter.com/fatherjack" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; - &lt;a class="link" href="https://fatherjack.github.io/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; after a twitter discussion a few weeks ago.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How can I see my GitHub Pages site locally when I use a remote theme?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="do-you-need-to"&gt;Do you need to?
+&lt;/h2&gt;&lt;p&gt;My first answer is do you need to see them? Once you have your theme set up as you like, you can view your blog in Visual Studio Code using the keyboard shortcut &lt;code&gt;CTRL + K, V&lt;/code&gt; and you can see a live preview of your post as you type.&lt;/p&gt;</description></item><item><title>Viewing GitHub Pages Locally For Data Saturdays</title><link>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/viewing-github-pages-locally-for-data-saturdays/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Viewing GitHub Pages Locally For Data Saturdays" /&gt;&lt;h1 id="data-saturdays-has-new-clothes"&gt;Data Saturdays Has New Clothes!
+&lt;/h1&gt;&lt;p&gt;The Data Saturdays Admins asked the community to vote on their favourite logo for the Data Saturdays website. After over 400 votes the results came in.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/datasaturdays/status/1380152923498352644" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2021/newdatasaturdayclothes.jpg"
+loading="lazy"
+alt="newclothes"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Denny Cherry &amp;amp; Associates Consulting &lt;a class="link" href="https://www.dcac.com/" target="_blank" rel="noopener"
+&gt;https://www.dcac.com/&lt;/a&gt; generously supported Data Saturdays and paid for the artist to design the logo and create the artifacts via &lt;a class="link" href="https://99designs.com" target="_blank" rel="noopener"
+&gt;99designs.com&lt;/a&gt;. THANK YOU Denny and many thanks to Monica Rathbun &lt;a class="link" href="https://twitter.com/SQLEspresso" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; - &lt;a class="link" href="https://sqlespresso.com/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt; for all of the hard work in organising and administering all of the requirements and handling all of the communication with the artists.&lt;/p&gt;</description></item><item><title>Creating a New Data Saturdays event</title><link>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</link><pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-new-data-saturdays-event/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/datasaturdays.png" alt="Featured image of post Creating a New Data Saturdays event" /&gt;&lt;h1 id="creating-a-new-data-saturdays-event"&gt;Creating a New Data Saturdays Event
+&lt;/h1&gt;&lt;p&gt;There&amp;rsquo;s a new process to create a Data Saturdays Event page, so I thought I would write an explanation and a run through&lt;/p&gt;
+&lt;h2 id="what-is-data-saturdays-"&gt;What is Data Saturdays ?
+&lt;/h2&gt;&lt;p&gt;Firstly, not everyone will know what a Data Saturday event is, so lets start with that. There are two parts to it.&lt;/p&gt;
+&lt;p&gt;A Data Saturday is an event that provides (usually free) training and information sessions about Azure Data and SQL Server. At present they are hosted online.&lt;/p&gt;</description></item><item><title>Microsoft Values The Community</title><link>https://blog.robsewell.com/blog/microsoft-values-the-community/</link><pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/microsoft-values-the-community/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/MSCommunity.png" alt="Featured image of post Microsoft Values The Community" /&gt;&lt;h1 id="what-happens-next"&gt;What Happens Next?
+&lt;/h1&gt;&lt;p&gt;When PASS announced that operations would cease, a common question was &amp;ldquo;OK, so what happens now? To SQL Saturdays?, to the summit?, to the local user groups?&amp;rdquo; The answers to some of those questions will lie in other conversations but for right now, let&amp;rsquo;s talk about Local User Groups.&lt;/p&gt;
+&lt;h1 id="user-groups"&gt;User Groups
+&lt;/h1&gt;&lt;p&gt;User groups are a fantastic way to expand your knowledge and your network. A place to find like minded people performing similar roles that you can learn from and get support from.&lt;/p&gt;</description></item><item><title>#TSQL2sDay – NomNomNomNomNom</title><link>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</link><pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-nomnomnomnomnom/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/pille-riin-priske-1238490-unsplash.jpg" alt="Featured image of post #TSQL2sDay – NomNomNomNomNom" /&gt;&lt;p&gt;&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The topic for this months&lt;a class="link" href="https://nocolumnname.blog/2019/03/05/t-sql-tuesday-112-dipping-into-your-cookie-jar/" target="_blank" rel="noopener"
+&gt; T-SQL Tuesday #112&lt;/a&gt; hosted by Shane O’Neill (&lt;a class="link" href="https://nocolumnname.blog/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; / &lt;a class="link" href="https://twitter.com/sozdba" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt;) is about “dipping into your cookie jar”. This reference means “when times get tough how do you dip into your reserves to keep going”. Shane asks the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;That is what I want from the contributors of this T-SQL Tuesday, those memories that they can think back on for sustenance. Like the humble cookie, I want a humble brag.&lt;/p&gt;</description></item><item><title>#tsql2sday – Giving Back – Reprise</title><link>https://blog.robsewell.com/blog/tsql2sday-giving-back-reprise/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-giving-back-reprise/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg" alt="Featured image of post #tsql2sday – Giving Back – Reprise" /&gt;&lt;p&gt;&lt;a class="link" href="https://scribnasium.com/2018/05/giving-back-t-sql-tuesday-102-invite/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/08/tsql2sday.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It’s TSQL Tuesday again! This month our host is Riley Major (&lt;a class="link" href="https://scribnasium.com/about-me/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;/&lt;a class="link" href="https://twitter.com/RileyMajor" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;) and the subject is &lt;em&gt;Giving Back&lt;/em&gt;. He’s given us two options here (as well as the side option of &lt;em&gt;your favorite 2017 improvement&lt;/em&gt;). Pick a way that you’d like to give back to the community and talk about it, or if you already give back,  tell us how and why you started.&lt;/p&gt;
+&lt;p&gt;There will be a lot of excellent posts on this subject and one of the things that I like is that you can go to &lt;a class="link" href="http://tsqltuesday.com" target="_blank" rel="noopener"
+&gt;http://tsqltuesday.com&lt;/a&gt; and look up all of the entries which means that for a particular topic you can find a bunch of blog posts from different angles (I miss-typed that as angels first and yes they are all angels!) whether it is &lt;a class="link" href="http://tsqltuesday.com/tag/career-improvement/" target="_blank" rel="noopener"
+&gt;career improvement&lt;/a&gt; or technical like say &lt;a class="link" href="http://tsqltuesday.com/tag/extended-events/" target="_blank" rel="noopener"
+&gt;Extended Events&lt;/a&gt; it is all there waiting for you 🙂&lt;/p&gt;</description></item><item><title>Announcing PSDay.UK – Whats a PSDay?</title><link>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</link><pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/announcing-psday.uk-whats-a-psday/</guid><description>&lt;p&gt;On Thursday evening I attended the joint London WinOps and PowerShell User Group. It was an excellent evening with two great sessions by Jaap Brasser and Filip Verloy.&lt;/p&gt;
+&lt;h2 id="psdayuk"&gt;PSDay.UK
+&lt;/h2&gt;&lt;p&gt;There was also an exciting announcement about PSDay.UK  &lt;a class="link" href="https://psday.uk" target="_blank" rel="noopener"
+&gt;https://psday.uk&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Look look&lt;br&gt;
+A whole day of PowerShell&lt;br&gt;
+In London&lt;br&gt;
+Just after &lt;a class="link" href="https://twitter.com/WinOpsLDN" target="_blank" rel="noopener"
+&gt;@WinOpsLDN&lt;/a&gt;&lt;br&gt;
+It&amp;rsquo;s going to be awesome&lt;a class="link" href="https://t.co/CAQqoc2cgX" target="_blank" rel="noopener"
+&gt;https://t.co/CAQqoc2cgX&lt;/a&gt;&lt;br&gt;
+Follow &lt;a class="link" href="https://twitter.com/psdayuk" target="_blank" rel="noopener"
+&gt;@psdayuk&lt;/a&gt; &lt;a class="link" href="https://t.co/3RFHpXpRI1" target="_blank" rel="noopener"
+&gt;pic.twitter.com/3RFHpXpRI1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Rob Sewell (@sqldbawithbeard) &lt;a class="link" href="https://twitter.com/sqldbawithbeard/status/888111785022169088" target="_blank" rel="noopener"
+&gt;July 20, 2017&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PSDay.UK is a one day PowerShell event providing the opportunity for you to spend a whole day learning PowerShell from renowned experts from the UK and international speaking community. It will be held at&lt;/p&gt;</description></item><item><title>Why Volunteer at SQLBits ?</title><link>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</link><pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</guid><description>&lt;p&gt;WARNING – Contains Orange and light-hearted photos 😉&lt;/p&gt;
+&lt;p&gt;I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?&lt;/p&gt;
+&lt;h2 id="many-months-of-work"&gt;Many months of work
+&lt;/h2&gt;&lt;p&gt;First though, you need to know that the SQLBits conference is organised and run by volunteers. All of the committee spend many, many long hours, out of their own free time, for many months before and after the event to ensure that the attendees, sponsors, speakers and volunteers experience is trouble free. I think that they do an amazing and fantastic job and repeatedly pull off the best, most enjoyable conference that I have been to.&lt;/p&gt;</description></item><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p&gt;Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+&gt;I wrote about using Power Bi to display my checkins&lt;/a&gt;. I only started this in June and this is where I have been :-)&lt;/p&gt;</description></item><item><title>A Day In The Life of a SQLBits Volunteer</title><link>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</link><pubDate>Tue, 10 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" alt="Featured image of post A Day In The Life of a SQLBits Volunteer" /&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So SQLBits has finished for another year. About 1500 people registered for the largest SQL Conference in Europe held over 4 days in Liverpool last week. 2 days of full day sessions and 2 days of shorter sessions, a pub quiz, a party (literally) out of this world.&lt;/p&gt;
+&lt;p&gt;It is organised and run by volunteers&lt;/p&gt;
+&lt;p&gt;Yes, you’re right.&lt;/p&gt;
+&lt;p&gt;Wow.&lt;/p&gt;
+&lt;p&gt;Of course we must pay special thanks to Simon, Darren, Chris, Jonathan, Annette, Allan and Alex without forgetting all that JRJ has done. They ensured that the venue, sessions, speakers, sponsors, audio visual and not forgetting the amazing party by &lt;!-- raw HTML omitted --&gt;Sneaky Experience (Thank you Julia),&lt;!-- raw HTML omitted --&gt; all occurred at the right time in the right place with the right people and the work and effort they have put in cannot be over-estimated but this post isn’t about those generous, inspiring, amazing folk
+Several people asked me what a volunteer does and how they can become one and hopefully this post will answer both of those questions. More than 40 people volunteered to help at SQL Bits&lt;/p&gt;</description></item><item><title>Enterprise Strategies - A #TSQL2sDay post</title><link>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</link><pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/enterprise-strategies-a-tsql2sday-post/</guid><description>&lt;p&gt;&lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This months TSQL2sDay blog post party is hosted by &lt;a class="link" href="http://www.midnightdba.com/Jen/2015/09/time-for-t-sql-tuesday-70/" target="_blank" rel="noopener"
+&gt;Jen McCown&lt;/a&gt; and is about Enterprise Strategy.&lt;/p&gt;
+&lt;p&gt;Adam Mechanic started &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/archive/2009/11/30/invitation-to-participate-in-t-sql-tuesday-001-date-time-tricks.aspx" target="_blank" rel="noopener"
+&gt;TSQL Tuesdays over 5 years ago&lt;/a&gt; and you will find many brilliant posts under that heading if &lt;a class="link" href="https://www.google.co.uk/#q=tsql2sday" target="_blank" rel="noopener"
+&gt;you search for them&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Managing SQL servers at enterprise scale is not a straightforward task. Your aim as a DBA should be to simplify it as much as possible and to automate everything that you possibly can. &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;This post by John Sansom&lt;/a&gt; could have been written for this months party and I recommend that you read it.&lt;/p&gt;</description></item><item><title>Use Twitter to get #PowerShell help</title><link>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</link><pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-twitter-to-get-%23powershell-help/</guid><description>&lt;p&gt;A quick post today just to add some weight to something that Mike Fal &lt;a class="link" href="http://www.mikefal.net/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/Mike_Fal" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; has kicked off. The &lt;a class="link" href="https://twitter.com/hashtag/sqlhelp" target="_blank" rel="noopener"
+&gt;#SQLHelp hashtag&lt;/a&gt; is well known and well used with in the SQL world. It is a fantastic resource and one that I recommend to all SQL folk I meet who are not aware of it. &lt;a class="link" href="https://www.brentozar.com/archive/2009/12/i-need-sqlhelp/" target="_blank" rel="noopener"
+&gt;Heres how it started&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mike has suggested that there should be a similar resource for PowerShell questions &lt;a class="link" href="https://twitter.com/search?q=%23PoShHelp" target="_blank" rel="noopener"
+&gt;#PoSHHelp&lt;/a&gt;. We want to create a useful and positive place for people to go with their PowerShell queries and some good folks like Mike,  &lt;a class="link" href="http://t.co/NfvkfJXMjp" target="_blank" rel="noopener"
+&gt;Shawn Melton&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/wsmelton" target="_blank" rel="noopener"
+&gt;@wsmelton&lt;/a&gt;), &lt;a class="link" href="http://t.co/K8jsx6WHcc" target="_blank" rel="noopener"
+&gt;Adam Bertram&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/adbertram" target="_blank" rel="noopener"
+&gt;@adbertram&lt;/a&gt;), &lt;a class="link" href="http://t.co/U5LLtwWDPI" target="_blank" rel="noopener"
+&gt;Derik Hammer&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/SQLHammer" target="_blank" rel="noopener"
+&gt;@SQLHammer&lt;/a&gt;), &lt;a class="link" href="http://learn-PowerShell.net/" target="_blank" rel="noopener"
+&gt;Boe Prox&lt;/a&gt;(&lt;a class="link" href="https://twitter.com/proxb" target="_blank" rel="noopener"
+&gt;@proxb&lt;/a&gt;), myself  and others will be looking for your PowerShell problems and try to assist you over Twitter with the same care and grace as Sqlhelp.&lt;/p&gt;</description></item><item><title>Spinach and Database Development- SQLSatExeter Keynote</title><link>https://blog.robsewell.com/blog/spinach-and-database-development-sqlsatexeter-keynote/</link><pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/spinach-and-database-development-sqlsatexeter-keynote/</guid><description>&lt;p&gt;Last weekend, we held our SQL Saturday event in Exeter. It was a brilliant event for many reasons but we were delighted to have a world exclusive keynote video by Phil Factor about Spinach and Database Development. With many thanks to those that made it possible and particularly to Phil Factor I have linked to the video here and also transcribed it. Please watch and read and understand the message&lt;/p&gt;</description></item><item><title>Checking SQL Server User Role Membership with PowerShell</title><link>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</link><pubDate>Tue, 14 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</guid><description>&lt;p&gt;Please  go and check the New SQL Bloggers posting here &lt;a class="link" href="https://twitter.com/search?q=%23sqlnewblogger" title="https://twitter.com/search?q=%23sqlnewblogger"
+target="_blank" rel="noopener"
+&gt;https://twitter.com/search?q=%23sqlnewblogger&lt;/a&gt; There are some brilliant new and older bloggers adding great value to the SQL Community&lt;/p&gt;
+&lt;p&gt;This is my most viewed post so I thought it made a good candidate to be updated and reblogged&lt;/p&gt;</description></item><item><title>PowerShelling SQL Saturday Sessions to the Guidebook app</title><link>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</link><pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershelling-sql-saturday-sessions-to-the-guidebook-app/</guid><description>&lt;p&gt;Following on from my &lt;a class="link" href="http://sqldbawithabeard.com/2015/03/21/parsing-xml-child-nodes-and-converting-to-datetime-with-PowerShell/" title="Parsing XML Child Nodes and Converting to DateTime with PowerShell"
+target="_blank" rel="noopener"
+&gt;previous pos&lt;/a&gt;t about parsing XML where I used the information from &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+&gt;Steve Jones blog post&lt;/a&gt; to get information from the &lt;a class="link" href="https://www.sqlsaturday.com/" target="_blank" rel="noopener"
+&gt;SQL Saturday web site&lt;/a&gt; I thought that this information and script may be useful for others performing the same task.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Edit - This post was written prior to the updates to the SQL Saturday website over the weekend. When it can back up the script worked perfectly but the website is unavailable at the moment again so I will check and update as needed once it is back.&lt;/p&gt;</description></item><item><title>Parsing XML Child Nodes and Converting to DateTime with PowerShell</title><link>https://blog.robsewell.com/blog/parsing-xml-child-nodes-and-converting-to-datetime-with-powershell/</link><pubDate>Sat, 21 Mar 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/parsing-xml-child-nodes-and-converting-to-datetime-with-powershell/</guid><description>&lt;p&gt;As part of my organiser role for SQLSaturday Exeter (&lt;a class="link" href="http://sqlsatexeter.azurewebsites.net" target="_blank" rel="noopener"
+&gt;Training Day Information here&lt;/a&gt; and &lt;a class="link" href="https://www.sqlsaturday.com/372/" target="_blank" rel="noopener"
+&gt;Saturday Information here&lt;/a&gt;) I needed to get some schedule information to input into a database.&lt;/p&gt;
+&lt;p&gt;I had read &lt;a class="link" href="https://voiceofthedba.wordpress.com/2015/01/26/downloading-sql-saturday-data/" target="_blank" rel="noopener"
+&gt;Steve Jones blog posts on Downloading SQL Saturday Data&lt;/a&gt; and followed the steps there to download the data from the SQL Saturday website for our event.&lt;/p&gt;
+&lt;p&gt;A typical session is held in the XML like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;event&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;importID&amp;gt;27608&amp;lt;/importID&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;speakers&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;speaker&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;id&amp;gt;27608&amp;lt;/id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;name&amp;gt;William Durkin&amp;lt;/name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/speaker&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/speakers&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;track&amp;gt;Track 2&amp;lt;/track&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;location&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;name&amp;gt;Buccaneer&amp;#39;s Refuge &amp;lt;/name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/location&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;title&amp;gt;Stories from the Trenches: Upgrading SQL with Minimal Downtime&amp;lt;/title&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;description&amp;gt;SQL Server has come a long way in the last few years, with Microsoft investing heavily in High Availability features. This session will show you how to use these features to enable you to safely upgrade a SQL Server, while ensuring you have a return path if things should go wrong. You will leave the session knowing what features you can use to upgrade either the OS, Hardware or SQL Server version while keeping your maintenance window to a minimum. The session will apply to Standard Edition as well as Enterprise Edition, so doesn&amp;#39;t only apply to &amp;#39;High Rollers&amp;#39;!&amp;lt;/description&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;startTime&amp;gt;4/25/2015 3:20:00 PM&amp;lt;/startTime&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;endTime&amp;gt;4/25/2015 4:10:00 PM&amp;lt;/endTime&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/event&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; &lt;/p&gt;</description></item><item><title>Speaking at PowerShell Virtual Chapter and SQL Cardiff User Group this month</title><link>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</link><pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/speaking-at-powershell-virtual-chapter-and-sql-cardiff-user-group-this-month/</guid><description>&lt;p&gt;Just a quick post to say that I will be speaking at the PowerShell Virtual Chapter meeting this Thursday at 4pm GMT 12pm EDT and also at the Cardiff SQL User Group on Tuesday 31st March&lt;/p&gt;
+&lt;p&gt;I will be giving my Making PowerShell Useful for your Team presentation&lt;/p&gt;
+&lt;p&gt;You have heard about PowerShell and may be spent a little bit of time exploring some of the ways in which it will benefit you at work. You want to be able to perform tasks more specific to your organisation and need to share them with your team. I will show you how you can achieve this by demonstrating&lt;/p&gt;</description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;p&gt;&lt;img src="https://i0.wp.com/blog.waynesheffield.com/wayne/wp-content/uploads/2012/04/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;) and is now starting its 6th year, is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme. This month it is hosted by Wayne Sheffield &lt;a class="link" href="http://blog.waynesheffield.com/wayne/archive/2014/12/t-sql-tuesday-61-giving-back/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://www.twitter.com/#/DBAWayne" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; and in the spirit of the holiday season it is about giving. This is my post on giving back, in the little ways as well as the bigger ones, how you can give back and why it not only benefits others but also yourself&lt;/p&gt;</description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+&gt;SQL Saturday Exeter&lt;/a&gt;. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+&gt;@SQLSatExeter&lt;/a&gt; and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+&gt;#SQLSatExeter&lt;/a&gt; on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p&gt;
+&lt;p&gt;In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p&gt;</description></item></channel></rss>

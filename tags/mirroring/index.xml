@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mirroring on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/mirroring/</link><description>Recent content in Mirroring on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 22 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/mirroring/index.xml" rel="self" type="application/rss+xml"/><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Refreshing A SQL Mirrored Database Using Powershell</title><link>https://blog.robsewell.com/blog/refreshing-a-sql-mirrored-database-using-powershell/</link><pubDate>Mon, 25 Aug 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/refreshing-a-sql-mirrored-database-using-powershell/</guid><description>&lt;p&gt;SQL mirroring is a means of providing high availability for your SQL database. It is available in Standard Edition and although the feature is deprecated it is still widely utilised. &lt;a class="link" href="http://msdn.microsoft.com/en-gb/library/ms189852.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;You can read more about it on MSDN here&lt;/a&gt; and &lt;a class="link" href="http://www.brentozar.com/archive/2013/07/database-mirroring-faq/" target="_blank" rel="noopener"
+&gt;Jes Borland wrote a useful post answering many questions here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There are situations where you may need to refresh these databases. Disaster Recovery is an obvious one but also during development to provide testing or development environments to test your High Availability implementations, run through disaster scenarios, create run books or ensure that the code changes still work with mirroring. There are other scenarios but this post covers the automation of restoring a mirrored database from a backup.&lt;/p&gt;</description></item><item><title>Alter SQL Mirroring Endpoint Owner with Powershell</title><link>https://blog.robsewell.com/blog/alter-sql-mirroring-endpoint-owner-with-powershell/</link><pubDate>Sun, 08 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/alter-sql-mirroring-endpoint-owner-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Login domain\user’ has granted one or more permissions. Revoke the permission before dropping the login (Microsoft SQL Server, Error: 15173)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/mirroring-endpoitn-check.jpg"
+loading="lazy"
+alt="mirroring endpoitn check"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/alter-endpoint.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/alter-endpoint.jpg"
+loading="lazy"
+alt="alter endpoint"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/alterendpointps.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/alterendpointps.jpg"
+loading="lazy"
+alt="alterendpointPS"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$svrs = ## list of servers Get-Content from text fiel etc
+foreach ($svr in $svrs) {
+$server = New-Object Microsoft.SQLServer.Management.Smo.Server $svrs
+foreach ($endpoint in $server.Endpoints['Mirroring']) {
+if ($endpoint.Owner = 'Domain\User') {
+$endpoint.Owner = 'Domain\NEWUser'
+$endpoint.Alter()
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

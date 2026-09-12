@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Presentations on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/presentations/</link><description>Recent content in Presentations on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Aug 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/presentations/index.xml" rel="self" type="application/rss+xml"/><item><title>Presentation Nerves</title><link>https://blog.robsewell.com/blog/presentation-nerves/</link><pubDate>Tue, 08 Aug 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/presentation-nerves/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Pester for Presentations – Ensuring it goes ok</title><link>https://blog.robsewell.com/blog/pester-for-presentations-ensuring-it-goes-ok/</link><pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/pester-for-presentations-ensuring-it-goes-ok/</guid><description>&lt;p&gt;Whilst I was at &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PSCONFEU&lt;/a&gt; I presented a session on writing pester tests instead of using checklists.
+&lt;div class="video-wrapper"&gt;
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/uvT57pt8"
+allowfullscreen
+title="YouTube Video"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;You can see it here.&lt;/p&gt;
+&lt;p&gt;During the talk I showed the pester test that I use to make sure that everything is ready for my presentation. A couple of people have asked me about this and wanted to know more so I thought that I would blog about it.&lt;/p&gt;
+&lt;p&gt;Some have said that I might be being a little OCD about it 😉 I agree that it could seem like that but there is nothing worse than having things go wrong during your presentation. It makes your heart beat faster and removes the emphasis from the presentation that you give.&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Event Log on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/event-log/</link><description>Recent content in Event Log on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 18 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/event-log/index.xml" rel="self" type="application/rss+xml"/><item><title>Displaying the Windows Event Log with PowerShell</title><link>https://blog.robsewell.com/blog/displaying-the-windows-event-log-with-powershell/</link><pubDate>Wed, 18 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/displaying-the-windows-event-log-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I’ll start by saying this is a bit of a cheat. PowerShell has a perfectly good cmdlet called &lt;a class="link" href="http://technet.microsoft.com/en-us/library/hh849834.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Get-EventLog&lt;/a&gt; and plenty of &lt;a class="link" href="http://technet.microsoft.com/en-us/library/ee176846.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;ways to use it&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#####################################################################
+#
+# NAME: Show-EventLog.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing the windows event logs on a server
+# ————————————————————————
+# Define a server an event log the number of events and display
+# pipe to this and then to out-gridview to only show Errors - where {$_. entryType -match &amp;quot;Error&amp;quot;}
+Function Show-EventLog ($Server, $log, $Latest) {
+Get-EventLog -computername $server -log $log -newest $latest | Out-GridView
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

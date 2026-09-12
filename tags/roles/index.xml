@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Roles on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/roles/</link><description>Recent content in Roles on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 05 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/roles/index.xml" rel="self" type="application/rss+xml"/><item><title>Quickly Creating Test Users in SQL Server using dbatools</title><link>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-using-dbatools/</link><pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-using-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png" alt="Featured image of post Quickly Creating Test Users in SQL Server using dbatools" /&gt;</description></item><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools</title><link>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/</link><pubDate>Mon, 06 Mar 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/02/remove-them-all.png" alt="Featured image of post Quickly Creating Test Users in SQL Server with PowerShell using the sqlserver module and dbatools" /&gt;&lt;p&gt;One of the most visited posts on my blog is nearly two and half years old now – &lt;!-- raw HTML omitted --&gt;Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users&lt;!-- raw HTML omitted --&gt;. I thought it was time to update it and use the &lt;!-- raw HTML omitted --&gt;latest sqlserver module&lt;!-- raw HTML omitted --&gt; and the &lt;!-- raw HTML omitted --&gt;dbatools module&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;</description></item><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p&gt;There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+&gt;up to date version of this post here&lt;/a&gt; using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools module&lt;/a&gt; and the sqlserver module&lt;/p&gt;
+&lt;p&gt;But if you want to continue with this way read on!!&lt;/p&gt;
+&lt;p&gt;Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Windows Users&lt;/a&gt; or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;SQL Users&lt;/a&gt; using the last two days posts, today we shall add them to a role on a database.&lt;/p&gt;
+&lt;p&gt;As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+&gt;previously&lt;/a&gt; I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p&gt;</description></item><item><title>Creating SQL User and adding to Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</link><pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</guid><description>&lt;p&gt;Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;In yesterdays post &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Creating a Windows User and Adding to SQL Role&lt;/a&gt; we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.&lt;/p&gt;
+&lt;p&gt;It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified&lt;/p&gt;</description></item><item><title>Creating a Windows User and adding to a SQL Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</link><pubDate>Fri, 20 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image67.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image67.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The function does some simple error checking. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the Role object is Null for the Roles and the Contains Method for the Logins&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image98.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image98.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;Add-WindowsAccountToSQLRole FADE2BLACK ‘FADE2BLACK\Test’ public
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;###########################################################
+#
+# NAME: Add-WindowsAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a windows user and add them to a server role
+#
+# USAGE: Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' dbcreator
+# Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' public
+Function Add-WindowsAccountToSQLRole ([String]$Server, [String] $User, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Output &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'WindowsUser'
+$SqlUser.Create()
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Checking Drive Sizes with PowerShell</title><link>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</link><pubDate>Fri, 06 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-drive-sizes-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image31.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image32.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image32.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;and here are the results from my Azure VM. (See &lt;a class="link" href="https://blog.robsewell.com/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+&gt;My previous posts on how to create your own Azure VMs with PowerShell&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image33.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image33.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#############################################################################
+#
+# NAME: Show-DriveSizes.ps1
+# AUTHOR: Rob Sewell http://sqldbawiththebeard.com
+# DATE:22/07/2013
+#
+# COMMENTS: Load function for displaying drivesizes
+# USAGE: Show-DriveSizes server1
+###########################################
+Function Show-DriveSizes ([string]$Server) {
+$Date = Get-Date
+Write-Host -foregroundcolor DarkBlue -backgroundcolor yellow &amp;quot;$Server - - $Date&amp;quot;
+#interogate wmi service and return disk information
+$disks = Get-WmiObject -Class Win32_logicaldisk -Filter &amp;quot;Drivetype=3&amp;quot; -ComputerName $Server
+$diskData = $disks | Select DeviceID, VolumeName ,
+# select size in Gbs as int and label it SizeGb
+@{Name = &amp;quot;SizeGB&amp;quot;; Expression = {$_.size / 1GB -as [int]}},
+# select freespace in Gbs and label it FreeGb and two deciaml places
+@{Name = &amp;quot;FreeGB&amp;quot;; Expression = {&amp;quot;{0:N2}&amp;quot; -f ($_.Freespace / 1GB)}},
+# select freespace as percentage two deciaml places and label it PercentFree
+@{Name = &amp;quot;PercentFree&amp;quot;; Expression = {&amp;quot;{0:P2}&amp;quot; -f ($_.Freespace / $_. Size)}}
+$diskdata
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>SQL login object permissions via PowerShell</title><link>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</link><pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-login-object-permissions-via-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLServerPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Enumerating Server and Database Role permissions or object permissions
+#
+# USAGE Show-SQLServerPermissions Server1
+# ————————————————————————
+Function Show-SQLServerPermissions ($SQLServer) {
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$selected = &amp;quot;&amp;quot;
+$selected = Read-Host &amp;quot;Enter Selection
+1.) Role Membership or
+2.) Object Permissions&amp;quot;
+Switch ($Selected) {
+1 {
+Write-Host &amp;quot;#### Server Role Membership on $Server ############################################## `n`n&amp;quot;
+foreach ($Role in $Server.Roles) {
+if ($Role.EnumServerRoleMembers().count -ne 0) {
+Write-Host &amp;quot;############### Server Role Membership for $role on $Server #########################`n&amp;quot;
+$Role.EnumServerRoleMembers()
+}
+}
+Write-Host &amp;quot;################################################################ ######################&amp;quot;
+Write-Host &amp;quot;################################################################ ######################`n `n `n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### $Database Permissions on $Server ###############################################`n&amp;quot;
+foreach ($role in $Database.Roles) {
+if ($Role.EnumMembers().count -ne 0) {
+Write-Host &amp;quot;########### Database Role Permissions for $Database $Role on $Server ################`n&amp;quot;
+$Role.EnumMembers()
+}
+}
+}
+}
+2 {
+Write-Host &amp;quot;################## Object Permissions on $Server ################################`n&amp;quot;
+foreach ($Database in $Server.Databases) {
+Write-Host &amp;quot;`n#### Object Permissions on $Database on $Server #################################`n&amp;quot;
+foreach ($user in $database.Users) {
+foreach ($databasePermission in $database. EnumDatabasePermissions($user.Name)) {
+Write-Host $databasePermission.PermissionState $databasePermission.PermissionType &amp;quot;TO&amp;quot; $databasePermission.Grantee
+}
+foreach ($objectPermission in $database. EnumObjectPermissions($user.Name)) {
+Write-Host $objectPermission.PermissionState $objectPermission.PermissionType &amp;quot;ON&amp;quot; $objectPermission.ObjectName &amp;quot;TO&amp;quot; $objectPermission. Grantee
+}
+}
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Checking SQL Server User Role Membership with PowerShell</title><link>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</link><pubDate>Mon, 02 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/checking-sql-server-user-role-membership-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLUserPermissions.ps1
+# AUTHOR: Rob Sewell http://newsqldbawiththebeard.wordpress.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function to Display the permissions a user has across the estate
+# NOTE - Will not show permissions granted through AD Group Membership
+#
+# USAGE Show-SQLUserPermissions DBAwithaBeard
+Function Show-SQLUserPermissions ($user)
+{
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.SMO') | out-null
+# Suppress Error messages - They will be displayed at the end
+$ErrorActionPreference = &amp;quot;SilentlyContinue&amp;quot;
+#cls
+$Query = @&amp;quot;
+SELECT
+IL.ServerName
+FROM [dbo].[InstanceList] IL
+WHERE NotContactable = 0
+AND Inactive = 0
+AND DatabaseEngine = 'Microsoft SQL Server'
+&amp;quot;@
+Try
+{
+$Results = (Invoke-Sqlcmd -ServerInstance HMDBS02 -Database DBADatabase -Query $query -ErrorAction Stop).ServerName
+}
+catch
+{
+Write-Error &amp;quot;Unable to Connect to the DBADatabase - Please Check&amp;quot;
+}
+# Create an array for the username and each domain slash username
+$logins = @(&amp;quot;DOMAIN1\$user&amp;quot;,&amp;quot;DOMAIN3\$user&amp;quot;, &amp;quot;DOMAIN4\$user&amp;quot; ,&amp;quot;$user&amp;quot; )
+Write-Output &amp;quot;#################################&amp;quot;
+Write-Output &amp;quot;Logins for `n $logins displayed below&amp;quot;
+Write-Output &amp;quot;################################# `n&amp;quot;
+#loop through each server and each database and display usernames, servers and databases
+Write-Output &amp;quot; Server Logins&amp;quot;
+foreach($server in $Results)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($login in $logins)
+{
+if($srv.Logins.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $login &amp;quot;
+foreach ($Role in $Srv.Roles)
+{
+$RoleMembers = $Role. EnumServerRoleMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role on $Server&amp;quot;
+}
+}
+}
+else
+{
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;`n Database Logins&amp;quot;
+foreach($server in $servers)
+{
+$srv = New-Object ('Microsoft.SqlServer.Management.Smo.Server') $server
+foreach($database in $srv.Databases)
+{
+foreach($login in $logins)
+{
+if($database.Users.Contains($login))
+{
+Write-Output &amp;quot;`n $server , $database , $login &amp;quot;
+foreach($role in $Database.Roles)
+{
+$RoleMembers = $Role.EnumMembers()
+if($RoleMembers -contains $login)
+{
+Write-Output &amp;quot; $login is a member of $Role Role on $Database on $Server&amp;quot;
+}
+}
+}
+else
+{
+continue
+}
+}
+}
+}
+Write-Output &amp;quot;`n#########################################&amp;quot;
+Write-Output &amp;quot;Finished - If there are no logins displayed above then no logins were found!&amp;quot;
+Write-Output &amp;quot;#########################################&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
