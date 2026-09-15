@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learning on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/learning/</link><description>Recent content in Learning on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Festive 500: Learning through Hobbies</title><link>https://blog.robsewell.com/blog/festive-500-learning-through-hobbies/</link><pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/festive-500-learning-through-hobbies/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2025/dashboard-front.png" alt="Featured image of post Festive 500: Learning through Hobbies" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;As the year draws to a close, it&amp;rsquo;s a time for reflection and setting new goals. It&amp;rsquo;s also a time to over consume calories!&lt;/p&gt;
+&lt;p&gt;For the last few years in our house we (My wife Traci &lt;a class="link" href="https://bsky.app/profile/tracisewell.com" target="_blank" rel="noopener"
+&gt;(S)&lt;/a&gt; &lt;a class="link" href="https://www.linkedin.com/in/traci-sewell-5450452bb" target="_blank" rel="noopener"
+&gt;(L)&lt;/a&gt; and I) have been participating in the &lt;a class="link" href="https://content.rapha.cc/us/en/story/festive500" target="_blank" rel="noopener"
+&gt;Festive 500&lt;/a&gt;, a cycling challenge that encourages riders to cover 500 kilometers between Christmas Eve and New Year&amp;rsquo;s Eve.&lt;/p&gt;
+&lt;p&gt;There are a couple of reasons that we enjoy this challenge so much. It helps to counterbalance the indulgent eating and drinking that often accompanies the holiday season. (As Jess Pomfret &lt;a class="link" href="https://jesspomfret.com" target="_blank" rel="noopener"
+&gt;(B)&lt;/a&gt; &lt;a class="link" href="https://bsky.app/profile/jpomfret.co.uk" target="_blank" rel="noopener"
+&gt;(S)&lt;/a&gt; &lt;a class="link" href="https://www.linkedin.com/in/jpomfret" target="_blank" rel="noopener"
+&gt;(L)&lt;/a&gt; and I often say, we exercise so that we can eat more nice food.) It provides a fun and motivating way to stay active during a time of year when it&amp;rsquo;s easy to become sedentary. Finally, it is a challenge that we can do together, that requires some planning and organising and provides a great sense of achievement.&lt;/p&gt;</description></item><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p&gt;Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p&gt;
+&lt;p&gt;I have an InstanceList table which looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;dbo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceList&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;IDENTITY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ServerName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AG&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt; &lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DF_InstanceList_Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;DEFAULT&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PK_InstanceList_ID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;PRIMARY&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;CLUSTERED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ASC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PAD_INDEX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;STATISTICS_NORECOMPUTE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IGNORE_DUP_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_ROW_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_PAGE_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p&gt;</description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p&gt;This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+&gt;described here&lt;/a&gt; to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a&gt; so was surprised to see this screen&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>#tsql2sday #60 – Something New Learned – Problem Step Recorder</title><link>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</link><pubDate>Tue, 11 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-60-something-new-learned-problem-step-recorder/</guid><description>&lt;h3 id="what-is-t-sql-tuesday"&gt;What is T-SQL Tuesday?
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://chrisyatessql.wordpress.com/2014/11/05/t-sql-tuesday-60-something-new-learned/" target="_blank" rel="noopener"
+&gt;&lt;img src="https://chrisyatessql.files.wordpress.com/2012/10/sql-tuesday1.jpg"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday is a monthly blog party hosted by a different blogger each month. This blog party was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;). You can take part by posting your own participating post that fits the topic of the month and follows the requirements Additionally, if you are interested in hosting a future T-SQL Tuesday, contact Adam Machanic on his blog.&lt;/p&gt;</description></item><item><title>Generating T-SQL Randomly with Powershell</title><link>https://blog.robsewell.com/blog/generating-t-sql-randomly-with-powershell/</link><pubDate>Wed, 05 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/generating-t-sql-randomly-with-powershell/</guid><description>&lt;p&gt;I have a lab on my laptop running various servers so that I can problem solve and learn and recently I wanted to add several months of data into a database. I had created a stored procedure to take some parameters perform some logic and insert the data.&lt;/p&gt;
+&lt;p&gt;To execute the stored procedure in T-SQL I simply run this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;EXECUTE [dbo].[usp_Insert_DriveSpace] 'Server1','C','2014-11-05','100','25'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which uses the server name, drive letter, date, capacity and free space to add the data&lt;/p&gt;</description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+&gt;SQL Saturday Exeter&lt;/a&gt;. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+&gt;@SQLSatExeter&lt;/a&gt; and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+&gt;#SQLSatExeter&lt;/a&gt; on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p&gt;
+&lt;p&gt;In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p&gt;</description></item><item><title>12 Things I learnt at SQLBits XI</title><link>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</guid><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="the-quality-of-the-speakers-and-sessions-is-exceptional"&gt;The quality of the speakers and sessions is exceptional
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://sqlbits.com/information/Agenda.aspx" target="_blank" rel="noopener"
+&gt;http://sqlbits.com/information/Agenda.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id="the-helpers-are-awesome"&gt;The Helpers are awesome
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001_thumb.jpg?resize=313%2C502"
+loading="lazy"
+alt="clip_image001"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="often-sessions-fill-up-very-quickly--get-there-early"&gt;Often Sessions fill up very quickly – Get there early
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="http://t.co/y2S9IDnama" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image002.jpg?resize=372%2C211"
+loading="lazy"
+alt="clip_image002"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="the-guidebook-app-is-pretty-good-but-with-a-map-it-would-be-better"&gt;The GuideBook app is pretty good but with a map it would be better
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://guidebook.com/" target="_blank" rel="noopener"
+&gt;http://guidebook.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id="you-can-learn-as-much-outside-of-the-sessions-as-you-can-in-them"&gt;You can learn as much outside of the sessions as you can in them
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i2.wp.com/lh6.googleusercontent.com/-3d8PCx0AlFA/UYfqxH0fHhI/AAAAAAAAd-E/k_EnX5cpOZY/w960-h641-no/DSC_5670.JPG?resize=622%2C415&amp;amp;ssl=1"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="there-are-amazing-prizes"&gt;There are amazing prizes
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.facebook.com/photo.php?fbid=599765410034832&amp;amp;set=pb.330145840330125.-2207520000.1367904819.&amp;amp;type=3&amp;amp;theater" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i0.wp.com/fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-snc6/602577_599765410034832_674054200_n.jpg?resize=616%2C392&amp;amp;ssl=1"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
