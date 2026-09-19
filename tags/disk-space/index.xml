@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Disk Space on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/disk-space/</link><description>Recent content in Disk Space on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 04 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/disk-space/index.xml" rel="self" type="application/rss+xml"/><item><title>Emailing Disk Space Alerting With Powershell</title><link>https://blog.robsewell.com/blog/emailing-disk-space-alerting-with-powershell/</link><pubDate>Tue, 04 Nov 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/emailing-disk-space-alerting-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/11/image_thumb.png" alt="Featured image of post Emailing Disk Space Alerting With Powershell" /&gt;&lt;p&gt;A DBA doesn’t want to run out of space on their servers, even in their labs! To avoid this happening I wrote a Powershell script to provide some alerts by email.&lt;/p&gt;
+&lt;p&gt;This is the script and how I worked my way through the solution. I hope it is of benefit to others.&lt;/p&gt;
+&lt;p&gt;The script works in the following way&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Iterates through a list of servers&lt;/li&gt;
+&lt;li&gt;Runs a WMI query to gather disk information&lt;/li&gt;
+&lt;li&gt;If the free space has fallen below a threshold, checks to see if it has emailed before and if not emails a warning&lt;/li&gt;
+&lt;li&gt;Resets if free space has risen above the threshold&lt;/li&gt;
+&lt;li&gt;Logs what it does but manages the space the logs use&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As you will have seen before I use a Servers text file in my scripts. This is a text file with a single server name on each line. You could also use a query against a DBA or MDW database using Invoke-SQLCMD2, which ever is the most suitable for you.&lt;/p&gt;</description></item></channel></rss>

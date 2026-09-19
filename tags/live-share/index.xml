@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Live Share on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/live-share/</link><description>Recent content in Live Share on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/live-share/index.xml" rel="self" type="application/rss+xml"/><item><title>Visual Studio Code Live Sharing Set-Up</title><link>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/07-sign-in.png" alt="Featured image of post Visual Studio Code Live Sharing Set-Up" /&gt;&lt;p&gt;There was an &lt;a class="link" href="https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview" target="_blank" rel="noopener"
+&gt;announcement on the Visual Studio Code blog&lt;/a&gt; about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.&lt;/p&gt;
+&lt;p&gt;It is remarkably easy to set up 🙂&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation
+&lt;/h2&gt;&lt;p&gt;Open Visual Studio Code, open the Extensions side bar (CTRL + SHIFT + X)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/01-open-extensions.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-open-extensions.png"
+loading="lazy"
+alt="01 - open extensions"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Search for Live Share&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/02-search.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/02-search.png"
+loading="lazy"
+alt="02 - search.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click Install and then reload when it has done&lt;/p&gt;</description></item></channel></rss>
