@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Extensions on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/extensions/</link><description>Recent content in Extensions on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/extensions/index.xml" rel="self" type="application/rss+xml"/><item><title>My current VS Code Extensions and using a workspace file</title><link>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" /&gt;&lt;p&gt;I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p&gt;
+&lt;h2 id="listing-extensions"&gt;Listing Extensions
+&lt;/h2&gt;&lt;p&gt;From the command line you can list your extensions using&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;code --list-extensions
+code-insiders --list-extensions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My list looks like this&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p&gt;</description></item></channel></rss>

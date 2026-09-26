@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Paperwork on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/paperwork/</link><description>Recent content in Paperwork on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Feb 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/paperwork/index.xml" rel="self" type="application/rss+xml"/><item><title>Those Pesky ‘s</title><link>https://blog.robsewell.com/blog/those-pesky-s/</link><pubDate>Mon, 11 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/those-pesky-s/</guid><description>&lt;h3 id="changing-domain-names-in-a-column"&gt;Changing Domain Names in a Column
+&lt;/h3&gt;&lt;p&gt;A quick little post for today. Not particularly SQL related but the points at the end are relevant.&lt;/p&gt;
+&lt;p&gt;I had a task when moving a service to a new development area to change the domain name within columns in several tables from “DOMAIN1\USER” to “DOMAIN2\USER”&lt;/p&gt;
+&lt;p&gt;In SQL I was able to do this quite easily as follows&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;USE [DATABASENAME]
+GO
+-- Declare variables
+DECLARE @Live nvarchar(10)
+DECLARE @Dev nvarchar(10)
+-- Set the variable to the Domains
+Set @Live = 'Live Domain'
+Set @Dev = 'Dev Domain'
+--Update tables
+UPDATE [TABLENAME]
+SET [User] = REPLACE([User], @Live, @Dev)
+GO
+UPDATE [TABLENAME]
+SET [Group] = REPLACE([Group], @Live, @Dev)
+GO
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I also had to do the same for some Oracle databases too and this is where the fun started!&lt;/p&gt;</description></item></channel></rss>

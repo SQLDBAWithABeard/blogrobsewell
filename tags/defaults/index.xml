@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Defaults on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/defaults/</link><description>Recent content in Defaults on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 24 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/defaults/index.xml" rel="self" type="application/rss+xml"/><item><title>Setting the default file type for a new file in VS Code</title><link>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</guid><description>&lt;p&gt;Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.&lt;/p&gt;
+&lt;p&gt;To change the language for the file use CTRL +K, M.&lt;/p&gt;
+&lt;p&gt;That’s CTRL and K together and then M afterwards separately.&lt;/p&gt;
+&lt;p&gt;then you can choose the language for the file. It looks like this&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-change-language.gif"
+loading="lazy"
+alt="01 - Change language"
+&gt;&lt;/p&gt;
+&lt;p&gt;However, if you just want your new file to open as a particular language every time you can change this in the settings.&lt;/p&gt;</description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p&gt;When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+&gt;click here&lt;/a&gt; and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+&gt;slides and code here&lt;/a&gt;) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+&gt;Irwin Strachans Active Directory Operations Test&lt;/a&gt; which got me thinking.&lt;/p&gt;
+&lt;p&gt;I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p&gt;
+&lt;p&gt;I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p&gt;</description></item></channel></rss>
