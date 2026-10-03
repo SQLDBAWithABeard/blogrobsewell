@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Audit on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/audit/</link><description>Recent content in Audit on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 14 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/audit/index.xml" rel="self" type="application/rss+xml"/><item><title>Listing the SQL Server SysAdmins With PowerShell</title><link>https://blog.robsewell.com/blog/listing-the-sql-server-sysadmins-with-powershell/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/listing-the-sql-server-sysadmins-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg" alt="Featured image of post Listing the SQL Server SysAdmins With PowerShell" /&gt;&lt;p&gt;A very short blog today just to pass on this little script.&lt;/p&gt;
+&lt;p&gt;I was required to list all of the SysAdmins across a large estate. Obviously I turned to PowerShell 🙂&lt;/p&gt;
+&lt;p&gt;I iterated through my server list collection and then created a server SMO object and used the EnumServerRoleMembers method to display all of the sysadmin members&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2014/04/2014-04-12_152433.jpg"
+loading="lazy"
+alt="2014-04-12_152433"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This will work on SQL2000 – SQL2012. You can see how you can easily change the rolename in the script to enumerate other server roles.&lt;/p&gt;</description></item></channel></rss>

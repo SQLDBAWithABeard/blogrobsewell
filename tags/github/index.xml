@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitHub on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/github/</link><description>Recent content in GitHub on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET PowerShell Notebooks – Using Pester</title><link>https://blog.robsewell.com/blog/net-powershell-notebooks-using-pester/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/net-powershell-notebooks-using-pester/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post .NET PowerShell Notebooks – Using Pester" /&gt;&lt;p&gt;&lt;a class="link" href="http://localhost:4001/blog/jupyter%20notebooks/azure%20data%20studio/powershell/pwsh/dbatools/dbachecks/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+&gt;My last post&lt;/a&gt; had a lot of information about the new .NET PowerShell notebooks including installation instructions.&lt;/p&gt;
+&lt;p&gt;.NET Notebooks are Jupyter Notebooks that use .NET core to enable C#, F# and PowerShell kernels.&lt;/p&gt;
+&lt;h2 id="use-cases"&gt;Use Cases
+&lt;/h2&gt;&lt;p&gt;One of the main benefits that I see for Jupyter Notebooks for Ops folk is that the results of the query are saved with the notebook. This makes them fantastic for Incident resolution.&lt;/p&gt;
+&lt;p&gt;If you have an incident at 3am and you know that you will need that information in the wash up meeting the next day instead of copying and pasting results into a OneNote document or a text file, you can simply run the queries in a notebook and save it.&lt;/p&gt;</description></item><item><title>How to fork a GitHub repository and contribute to an open source project</title><link>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</link><pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/CreatePR.png" alt="Featured image of post How to fork a GitHub repository and contribute to an open source project" /&gt;&lt;p&gt;I enjoy maintaining open source GitHub repositories such as &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; and &lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+&gt;ADSNotebook&lt;/a&gt;. I absolutely love it when people add more functionality to them.&lt;/p&gt;
+&lt;p&gt;To collaborate with a repository in GitHub you need to follow these steps&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/GitHub.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fork the repository into your own GitHub&lt;/li&gt;
+&lt;li&gt;Clone the repository to your local machine&lt;/li&gt;
+&lt;li&gt;Create a new branch for your changes&lt;/li&gt;
+&lt;li&gt;Make some changes and commit them with useful messages&lt;/li&gt;
+&lt;li&gt;Push the changes to your repository&lt;/li&gt;
+&lt;li&gt;Create a Pull Request from your repository back to the original one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You will need to have &lt;code&gt;git.exe&lt;/code&gt; available which you can download and install from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+&gt;https://git-scm.com/downloads&lt;/a&gt; if required&lt;/p&gt;</description></item><item><title>Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps</title><link>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</link><pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-40.png" alt="Featured image of post Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps" /&gt;&lt;h1 id="fixing-the-failed-to-generate-the-compressed-file-for-module-cprogram-filesdotnetdotnetexe-error-when-deploying-to-the-powershell-gallery-using-azure-devops"&gt;Fixing the Failed to generate the compressed file for module C:\Program Files\dotnet\dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps
+&lt;/h1&gt;&lt;p&gt;The PowerShell module for validating your SQL Server estate &lt;a class="link" href="http://beard.media/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; is deployed via &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&amp;amp;view=mine&amp;amp;definitionId=2" target="_blank" rel="noopener"
+&gt;Azure DevOps, you can see how it is working (or not) via this link&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="grrr-automation-for-the-lose"&gt;Grrr Automation for the Lose!
+&lt;/h2&gt;&lt;p&gt;Until recently, this had worked successfully. In the last few weeks I have been receiving errors&lt;/p&gt;</description></item><item><title>Adding a Folder of Scripts to GitHub with Azure Data Studio</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</link><pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</guid><description>&lt;p&gt;In my last post I showed how to &lt;a class="link" href="https://blog.robsewell.com/10501/" target="_blank" rel="noopener"
+&gt;add a folder of scripts to GitHub&lt;/a&gt; using Visual Studio Code.&lt;/p&gt;
+&lt;p&gt;You can do it with Azure Data Studio as well. It’s exactly the same steps!&lt;/p&gt;
+&lt;p&gt;The blog post could end here but read on for some screen shots 😉&lt;/p&gt;
+&lt;p&gt;Follow the previous post for details of setting up a new GitHub account&lt;/p&gt;
+&lt;p&gt;Create a repository in GitHub&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-27.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;Open the folder in Azure Data Studio with CTRL K CTRL O (Or File –&amp;gt; Open Folder)&lt;/p&gt;</description></item><item><title>Adding a Folder of Scripts to GitHub</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</link><pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</guid><description>&lt;p&gt;Yesterday there was a tweet from Allen White.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/SQLRunr/status/1113862196201758720" target="_blank" rel="noopener"
+&gt;https://twitter.com/SQLRunr/status/1113862196201758720&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Allen wanted to add his scripts folder to source control but didn&amp;rsquo;t have a how to do it handy. So I thought I would write one. Hopefully this will enable someone new to GitHub and to source control get a folder of scripts under source control&lt;/p&gt;
+&lt;h2 id="github-account"&gt;GitHub account
+&lt;/h2&gt;&lt;p&gt;If you do not have a GitHub account go to &lt;a class="link" href="https://github.com" target="_blank" rel="noopener"
+&gt;https://github.com&lt;/a&gt; and create a new account&lt;/p&gt;</description></item><item><title>Whats a SQL Notebook in Azure Data Studio?</title><link>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</link><pubDate>Wed, 13 Mar 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/whats-a-sql-notebook-in-azure-data-studio/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/03/image-7.png" alt="Featured image of post Whats a SQL Notebook in Azure Data Studio?" /&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; is a cross-platform database tool for data professionals using the Microsoft family of on-premises and cloud data platforms on Windows, MacOS, and Linux.&lt;/p&gt;
+&lt;p&gt;Recently Vicky Harp tweeted&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We&amp;rsquo;re getting very close to release of SQL Notebooks in &lt;a class="link" href="https://twitter.com/AzureDataStudio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@AzureDataStudio&lt;/a&gt;! You can give the feature an early spin today with the insider build. &lt;a class="link" href="https://t.co/SEZp7ZdxCp" target="_blank" rel="noopener"
+&gt;pic.twitter.com/SEZp7ZdxCp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Vicky Harp (@vickyharp) &lt;a class="link" href="https://twitter.com/vickyharp/status/1104127412944551936?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;March 8, 2019&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;By the way, you can watch a recording from SQLBits of Vicky’s session&lt;/p&gt;</description></item><item><title>Using Docker to run Integration Tests for dbachecks</title><link>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</link><pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-docker-to-run-integration-tests-for-dbachecks/</guid><description>&lt;p&gt;My wonderful friend &lt;a class="link" href="https://twitter.com/AndreKamman" target="_blank" rel="noopener"
+&gt;André Kamman&lt;/a&gt; wrote a fantastic blog post this week &lt;a class="link" href="https://andrekamman.com/sql-server-container-instances-via-cloudshell/" target="_blank" rel="noopener"
+&gt;SQL Server Container Instances via Cloudshell&lt;/a&gt; about how he uses containers in Azure to test code against different versions of SQL Server.&lt;/p&gt;
+&lt;p&gt;It reminded me that I do something very similar to test &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; code changes. I thought this might make a good blog post. I will talk through how I do this locally as I merge a PR from another great friend &lt;a class="link" href="https://github.com/ClaudioESSilva" target="_blank" rel="noopener"
+&gt;Cláudio Silva&lt;/a&gt; who has added &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks/pull/582" target="_blank" rel="noopener"
+&gt;agent job history checks.&lt;/a&gt;&lt;/p&gt;</description></item><item><title>SQL Server Availability Group FailoverDetection Utility PowerShell Function Improvements – Named Instances, Archiving Data, Speed</title><link>https://blog.robsewell.com/blog/sql-server-availability-group-failoverdetection-utility-powershell-function-improvements-named-instances-archiving-data-speed/</link><pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-server-availability-group-failoverdetection-utility-powershell-function-improvements-named-instances-archiving-data-speed/</guid><description>&lt;p&gt;In &lt;a class="link" href="https://blog.robsewell.com/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/" target="_blank" rel="noopener"
+&gt;my last post I wrote about a new function&lt;/a&gt; for gathering the data and running the &lt;a class="link" href="https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy/" target="_blank" rel="noopener"
+&gt;FailoverDetection utility&lt;/a&gt; by the &lt;a class="link" href="https://twitter.com/mssqltiger" target="_blank" rel="noopener"
+&gt;Tiger Team&lt;/a&gt; to analyse availability group failovers. I have updated it following some comments and using it for a day.&lt;/p&gt;
+&lt;h3 id="dont-forget-the-named-instances-rob"&gt;Don’t forget the named instances Rob!
+&lt;/h3&gt;&lt;p&gt;Michael Karpenko wrote a comment pointing out that I had not supported named instances, which was correct as it had not been written for that. Thank you Michael 🙂 I have updated the code to deal with named instances.&lt;/p&gt;</description></item><item><title>Gathering all the Logs and Running the Availability Group Failover Detection Utility with PowerShell</title><link>https://blog.robsewell.com/blog/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/</link><pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/gathering-all-the-logs-and-running-the-availability-group-failover-detection-utility-with-powershell/</guid><description>&lt;p&gt;30/11/2018 – Function has been updated to deal with named instances.&lt;/p&gt;
+&lt;p&gt;Last week the Tiger Team released their Availability Group Failover Detection Utility which will provide root cause analysis on Cluster Logs, SQL Error Logs, and the Availability groups extended events logs. There is a &lt;a class="link" href="https://blogs.msdn.microsoft.com/sql_server_team/failover-detection-utility-availability-group-failover-analysis-made-easy" target="_blank" rel="noopener"
+&gt;blog post here&lt;/a&gt; and the tool can be downloaded from the &lt;a class="link" href="https://github.com/Microsoft/tigertoolbox/tree/master/Always-On/FailoverDetection" target="_blank" rel="noopener"
+&gt;Tiger Team GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="a-bit-of-faffing"&gt;A Bit of Faffing*
+&lt;/h3&gt;&lt;p&gt;It states on the &lt;a class="link" href="https://github.com/Microsoft/tigertoolbox/blob/master/README.md" target="_blank" rel="noopener"
+&gt;readme&lt;/a&gt; for the Tiger Team GitHub Repository.&lt;/p&gt;</description></item><item><title>dbachecks – Which Configuration Item For Which Check ?</title><link>https://blog.robsewell.com/blog/dbachecks-which-configuration-item-for-which-check/</link><pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dbachecks-which-configuration-item-for-which-check/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/03-New-dbccheck.png" alt="Featured image of post dbachecks – Which Configuration Item For Which Check ?" /&gt;&lt;p&gt;I love showing &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; to people. It’s really cool seeing how people will use it and listening to their experiences. I was showing it to a production DBA a month or so ago and he said&lt;/p&gt;
+&lt;h2 id="how-do-i-know-which-checks-there-are"&gt;How Do I Know Which Checks There Are?
+&lt;/h2&gt;&lt;p&gt;OK you just need to run&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-DbcCheck&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;and it will show you&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/01-get-dbcchecks.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-get-dbcchecks.png"
+loading="lazy"
+alt="01 - get-dbcchecks.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It will show you the group, the type (does it need a computer name or an instance name), The description, the unique tag for running just that check and all the tags that will run that check&lt;/p&gt;</description></item><item><title>Version Update, Code Signing and publishing to the PowerShell Gallery with VSTS</title><link>https://blog.robsewell.com/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/</link><pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/version-update-code-signing-and-publishing-to-the-powershell-gallery-with-vsts/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/32-Dashboard.png" alt="Featured image of post Version Update, Code Signing and publishing to the PowerShell Gallery with VSTS" /&gt;&lt;p&gt;At the fabulous &lt;a class="link" href="http://psconf.eu" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; I presented about Continuous Delivery to the PowerShell Gallery with VSTS and explained how we use VSTS to enable CD for &lt;a class="link" href="http://dbachecks.io" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt;. We even released a new version during the session 🙂&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;So how do we achieve this?&lt;/p&gt;
+&lt;p&gt;We have a few steps&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a project and link to our GitHub&lt;/li&gt;
+&lt;li&gt;Run unit uests with Pester to make sure that our code is doing what we expect.&lt;/li&gt;
+&lt;li&gt;Update our module version and commit the change to GitHub&lt;/li&gt;
+&lt;li&gt;Sign our code with a code signing certificate&lt;/li&gt;
+&lt;li&gt;Publish to the PowerShell Gallery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="create-project-and-link-to-github"&gt;Create Project and link to GitHub
+&lt;/h2&gt;&lt;p&gt;First you need to create a VSTS project by going to &lt;a class="link" href="https://www.visualstudio.com/" target="_blank" rel="noopener"
+&gt;https://www.visualstudio.com/&lt;/a&gt; This is free for up to 5 users with 1 concurrent CI/CD queue limited to a maximum of 60 minutes run time which should be more than enough for your PowerShell module.&lt;/p&gt;</description></item><item><title>VS Code – Terminal crashes when formatting script</title><link>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</link><pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" alt="Featured image of post VS Code – Terminal crashes when formatting script" /&gt;&lt;p&gt;I love VS Code. I love being able to press ALT + SHIFT + F and format my code.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif"
+loading="lazy"
+alt="formatting.gif"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="the-problem"&gt;The Problem
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png"
+loading="lazy"
+alt="format error.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I could reproduce it will. This was very frustrating.&lt;/p&gt;
+&lt;h2 id="turning-on-verbose-logging"&gt;Turning on Verbose Logging
+&lt;/h2&gt;&lt;p&gt;To turn on verbose logging for the PowerShell Editor Services go the Cog in the bottom left, click it and then click User Settings.&lt;/p&gt;
+&lt;p&gt;Search for powershell.developer.editorServicesLogLevel&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png"
+loading="lazy"
+alt="powershell.developer.editorServicesLogLevel.png"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>How I created PowerShell.cool using Flow, Azure SQL DB, Cognitive Services &amp; PowerBi</title><link>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</link><pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-created-powershell.cool-using-flow-azure-sql-db-cognitive-services-powerbi/</guid><description>&lt;p&gt;Last weekend I was thinking about how to save the tweets for PowerShell Conference Europe. This annual event occurs in Hanover and this year it is on April 17-20, 2018. The agenda has just been released and you can find it on the website &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;http://www.psconf.eu/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ended up creating an interactive PowerBi report to which my good friend and Data Platform MVP Paul Andrew &lt;a class="link" href="https://mrpaulandrew.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/mrpaulandrew" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; added a bit of magic and I published it. The magnificent Tobias Weltner &lt;a class="link" href="http://www.powertheshell.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/TobiasPSP" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; who organises PSConfEU pointed the domain name &lt;a class="link" href="http://powershell.cool" target="_blank" rel="noopener"
+&gt;http://powershell.cool&lt;/a&gt; at the link. It looks like this.&lt;/p&gt;</description></item><item><title>#TSQL2sDay – Get-PostRoundup</title><link>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</link><pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-get-postroundup/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Writing Dynamic and Random Tests Cases for Pester</title><link>https://blog.robsewell.com/blog/writing-dynamic-and-random-tests-cases-for-pester/</link><pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/writing-dynamic-and-random-tests-cases-for-pester/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Creating a PowerShell Module and TDD for Get-SQLDiagRecommendations</title><link>https://blog.robsewell.com/blog/creating-a-powershell-module-and-tdd-for-get-sqldiagrecommendations/</link><pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-powershell-module-and-tdd-for-get-sqldiagrecommendations/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>PowerShell Module for the SQL Server Diagnostics API – 1st Command Get-SQLDiagRecommendations</title><link>https://blog.robsewell.com/blog/powershell-module-for-the-sql-server-diagnostics-api-1st-command-get-sqldiagrecommendations/</link><pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-module-for-the-sql-server-diagnostics-api-1st-command-get-sqldiagrecommendations/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>The SQL Server Community Collaborative GitHub Organisation is born</title><link>https://blog.robsewell.com/blog/the-sql-server-community-collaborative-github-organisation-is-born/</link><pubDate>Wed, 14 Sep 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-sql-server-community-collaborative-github-organisation-is-born/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/09/wp_20160910_10_14_58_pro.jpg" alt="Featured image of post The SQL Server Community Collaborative GitHub Organisation is born" /&gt;&lt;p&gt;My wonderful friend &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+&gt;Chrissy LeMaire&lt;/a&gt; and I are the creators of two GitHub repositories for SQL Server and PowerShell called &lt;a class="link" href="https://dbatools.io/" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; and &lt;a class="link" href="https://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you are working with SQL Server I highly recommend that you take a look at the vast number of commands available to you at &lt;a class="link" href="https://dbatools.io/" target="_blank" rel="noopener"
+&gt;dbatools&lt;/a&gt; which will help you complete tasks within SQL Server especially for Instance migrations and also a growing number of best practice implementations&lt;/p&gt;</description></item><item><title>Remove-SQLDatabaseSafely My First Contribution to DBATools</title><link>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</link><pubDate>Wed, 20 Jul 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/remove-sqldatabasesafely-my-first-contribution-to-dbatools/</guid><description>&lt;p&gt;What is DBA Tools?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A collection of modules for SQL Server DBAs. It initially started out as ‘sqlmigration’, but has now grown into a collection of various commands that help automate DBA tasks and encourage best practices.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can read more about &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt; and it is &lt;a class="link" href="https://github.com/ctrlbold/dbatools" target="_blank" rel="noopener"
+&gt;freely available for download on GitHub&lt;/a&gt; I thoroughly recommend that [you watch this quick video]&lt;/p&gt;
+&lt;div class="video-wrapper"&gt;
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/PciYdDEBiDM"
+allowfullscreen
+title="YouTube Video"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;to see just how easy it is to migrate an entire SQL instance in one command Longer session here&lt;/p&gt;</description></item><item><title>Some Pester Tests for SQL Defaults</title><link>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</link><pubDate>Tue, 24 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/some-pester-tests-for-sql-defaults/</guid><description>&lt;p&gt;When I was at &lt;a class="link" href="http://www.psconf.eu/" target="_blank" rel="noopener"
+&gt;PowerShell Conference EU&lt;/a&gt; in Hannover last month (The videos are available now – &lt;a class="link" href="https://www.youtube.com/c/powershellconferenceeu" target="_blank" rel="noopener"
+&gt;click here&lt;/a&gt; and the &lt;a class="link" href="https://github.com/psconfeu/2016" target="_blank" rel="noopener"
+&gt;slides and code here&lt;/a&gt;) I found out about &lt;a class="link" href="https://pshirwin.wordpress.com/2016/04/08/active-directory-operations-test/" target="_blank" rel="noopener"
+&gt;Irwin Strachans Active Directory Operations Test&lt;/a&gt; which got me thinking.&lt;/p&gt;
+&lt;p&gt;I decided to do the same for my usual SQL Set-up. Treating all of your servers to the same defaults makes it even easier to manage at scale remotely.&lt;/p&gt;
+&lt;p&gt;I am comfortable with using SMO to gather and change properties on SQL Instances so I started by doing this&lt;/p&gt;</description></item></channel></rss>

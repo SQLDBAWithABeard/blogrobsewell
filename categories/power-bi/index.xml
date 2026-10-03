@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Bi on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/power-bi/</link><description>Recent content in Power Bi on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/power-bi/index.xml" rel="self" type="application/rss+xml"/><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p&gt;Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+&gt;Installing and upgrading default scripts automation - part one - Introduction&lt;/a&gt; which is a series I will continue later.&lt;/p&gt;</description></item></channel></rss>

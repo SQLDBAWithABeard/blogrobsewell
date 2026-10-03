@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSIS on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/ssis/</link><description>Recent content in SSIS on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/ssis/index.xml" rel="self" type="application/rss+xml"/><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" /&gt;&lt;h1 id="automation"&gt;Automation
+&lt;/h1&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted --&gt;blog&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;twitter&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Elizabeth&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/p&gt;
+&lt;p&gt;Elizabeth asks&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My invitation to you is I want to know what you have automated to make your life easier?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="from-the-past"&gt;From the Past
+&lt;/h2&gt;&lt;p&gt;I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+&gt;You have to start somewhere&lt;/a&gt; In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;The Best Database Administrators Automate Everything&lt;/a&gt; which I am pleased to see is still available nearly a decade later&lt;/p&gt;</description></item></channel></rss>
