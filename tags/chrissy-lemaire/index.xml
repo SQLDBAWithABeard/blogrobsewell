@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chrissy LeMaire on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/chrissy-lemaire/</link><description>Recent content in Chrissy LeMaire on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/chrissy-lemaire/index.xml" rel="self" type="application/rss+xml"/><item><title>The first page with GitHub Pages</title><link>https://blog.robsewell.com/blog/the-first-page-with-github-pages/</link><pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-first-page-with-github-pages/</guid><description>&lt;p&gt;Last night I started the experiment that has been in my head for a while now, to move from SQL Dba With A Beard to RobSewell.com&lt;/p&gt;
+&lt;p&gt;Thank you Chrissy &lt;a class="link" href="https://blog.netnerds.net/" target="_blank" rel="noopener"
+&gt;Blog&lt;/a&gt; &lt;a class="link" href="https://twitter.com/cl" target="_blank" rel="noopener"
+&gt;Twitter&lt;/a&gt; for the push!&lt;/p&gt;
+&lt;p&gt;I followed the instructions from her blog post &lt;a class="link" href="https://blog.netnerds.net/2020/08/migrating-my-wordpress-sites-to-github-pages/" target="_blank" rel="noopener"
+&gt;Migrating my WordPress sites to GitHub Pages&lt;/a&gt; but chose to use the &lt;a class="link" href="https://github.com/mmistakes/minimal-mistakes" target="_blank" rel="noopener"
+&gt;Minimal Mistakes theme&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I like the search at the top and the &lt;a class="link" href="https://blog.robsewell.com/404.html" target="_blank" rel="noopener"
+&gt;404 page :-)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now I need to export the wordpress from SQLDbaWithABeard.com (Its currently running)&lt;/p&gt;</description></item></channel></rss>

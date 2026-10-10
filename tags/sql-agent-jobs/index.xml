@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQL Agent Jobs on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-agent-jobs/</link><description>Recent content in SQL Agent Jobs on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-agent-jobs/index.xml" rel="self" type="application/rss+xml"/><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" /&gt;&lt;h1 id="automation"&gt;Automation
+&lt;/h1&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted --&gt;blog&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;twitter&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Elizabeth&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/p&gt;
+&lt;p&gt;Elizabeth asks&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My invitation to you is I want to know what you have automated to make your life easier?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="from-the-past"&gt;From the Past
+&lt;/h2&gt;&lt;p&gt;I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+&gt;You have to start somewhere&lt;/a&gt; In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;The Best Database Administrators Automate Everything&lt;/a&gt; which I am pleased to see is still available nearly a decade later&lt;/p&gt;</description></item><item><title>Running Jupyter Notebooks as Agent Jobs</title><link>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</link><pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-22.png" alt="Featured image of post Running Jupyter Notebooks as Agent Jobs" /&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; is a great tool for connecting with your data platform whether it is in Azure or on your hardware. &lt;a class="link" href="https://blog.robsewell.com/?s=notebooks" target="_blank" rel="noopener"
+&gt;Jupyter Notebooks&lt;/a&gt; are fantastic, you can have words, pictures, code and code results all saved in one document.&lt;/p&gt;
+&lt;p&gt;I have created a repository in my GitHub &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/Notebooks&lt;/a&gt; where I have stored a number of Jupyter notebooks both for Azure Data Studio and the &lt;a class="link" href="https://blog.robsewell.com/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+&gt;new .NET interactive&lt;/a&gt; notebooks.&lt;/p&gt;</description></item><item><title>.NET PowerShell Notebooks – Using Pester</title><link>https://blog.robsewell.com/blog/net-powershell-notebooks-using-pester/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/net-powershell-notebooks-using-pester/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post .NET PowerShell Notebooks – Using Pester" /&gt;&lt;p&gt;&lt;a class="link" href="http://localhost:4001/blog/jupyter%20notebooks/azure%20data%20studio/powershell/pwsh/dbatools/dbachecks/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+&gt;My last post&lt;/a&gt; had a lot of information about the new .NET PowerShell notebooks including installation instructions.&lt;/p&gt;
+&lt;p&gt;.NET Notebooks are Jupyter Notebooks that use .NET core to enable C#, F# and PowerShell kernels.&lt;/p&gt;
+&lt;h2 id="use-cases"&gt;Use Cases
+&lt;/h2&gt;&lt;p&gt;One of the main benefits that I see for Jupyter Notebooks for Ops folk is that the results of the query are saved with the notebook. This makes them fantastic for Incident resolution.&lt;/p&gt;
+&lt;p&gt;If you have an incident at 3am and you know that you will need that information in the wash up meeting the next day instead of copying and pasting results into a OneNote document or a text file, you can simply run the queries in a notebook and save it.&lt;/p&gt;</description></item><item><title>Use Jupyter Notebooks to Help People on StackOverFlow</title><link>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/use-jupyter-notebooks-to-help-people-on-stackoverflow/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-16.png" alt="Featured image of post Use Jupyter Notebooks to Help People on StackOverFlow" /&gt;&lt;p&gt;I am sat in the PowerShell Saturday in Hamburg. You can see me on the right of this picture writing &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/pester/net-powershell-notebooks-using-pester/" target="_blank" rel="noopener"
+&gt;my previous blog post!&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/JanDamaschke?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@JanDamaschke&lt;/a&gt; spricht über Asynchrones Logging in &lt;a class="link" href="https://twitter.com/hashtag/powershell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#powershell&lt;/a&gt; mit Classes und Runspaces &lt;img src="https://pbs.twimg.com/media/ERYdg-6XUAAbwBk?format=jpg"
+loading="lazy"
+&gt; (&lt;a class="link" href="https://twitter.com/hhpsug?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;https://twitter.com/hhpsug?ref_src=twsrc%5Etfw&lt;/a&gt;) &lt;a class="link" href="https://twitter.com/hashtag/pssaturday?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#pssaturday&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;— Christoph Burmeister (@chrburmeister) &lt;a class="link" href="https://twitter.com/chrburmeister/status/1231204011270909954?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;February 22, 2020&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was talking with my friend Mathias Jessen &lt;a class="link" href="https://twitter.com/IISResetMe" target="_blank" rel="noopener"
+&gt;@IISResetMe on Twitter&lt;/a&gt; about notebooks and he said that another great use case was to use them on Stack OverFlow&lt;/p&gt;</description></item><item><title>How to run a PowerShell script file with Verbose, Confirm or WhatIf</title><link>https://blog.robsewell.com/blog/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/</link><pubDate>Tue, 23 Jan 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-run-a-powershell-script-file-with-verbose-confirm-or-whatif/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/01/02-Showing-the-results.png" alt="Featured image of post How to run a PowerShell script file with Verbose, Confirm or WhatIf" /&gt;&lt;p&gt;Before you run a PowerShell command that makes a change to something you should check that it is going to do what you expect. You can do this by using the WhatIf parameter for commands that support it. For example, if you wanted to create a New SQL Agent Job Category you would use the &lt;a class="link" href="http://dbatools.io" target="_blank" rel="noopener"
+&gt;awesome dbatools module&lt;/a&gt; and write some code like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;New-DbaAgentJobCategory -SqlInstance ROB-XPS -Category 'Backup'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;before you run it, you can check what it is going to do using&lt;/p&gt;</description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p&gt;&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+&gt;The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a&gt; made me jump out of my seat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In one release there are &lt;strong&gt;twenty-five&lt;/strong&gt; new CMDLets for the new sqlserver module&lt;/p&gt;</description></item><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p&gt;Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p&gt;
+&lt;p&gt;I have an InstanceList table which looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;dbo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceList&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;IDENTITY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ServerName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AG&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt; &lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DF_InstanceList_Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;DEFAULT&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PK_InstanceList_ID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;PRIMARY&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;CLUSTERED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ASC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PAD_INDEX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;STATISTICS_NORECOMPUTE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IGNORE_DUP_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_ROW_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_PAGE_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p&gt;</description></item><item><title>Installing and upgrading default scripts automation - part one - Introduction</title><link>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</link><pubDate>Mon, 08 Jun 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</guid><description>&lt;p&gt;First I must say thank you to all of the wonderful people who have put time and effort into providing free tools and scripts to enable not only myself but all SQL DBAs to ease their work. For this series I especially thank&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Brent Ozar - &lt;a class="link" href="http://www.brentozar.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/BrentO" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ola Hallengren - &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adam Mechanic - &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jared Zagelbaum - &lt;a class="link" href="https://jaredzagelbaum.wordpress.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/JaredZagelbaum" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aim of this series is to share the methodology and the scripts that I have used to resolve this issue.&lt;/p&gt;</description></item><item><title>Scheduling Ola Hallengrens Maintenance Solution Default Jobs with PowerShell</title><link>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</link><pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/scheduling-ola-hallengrens-maintenance-solution-default-jobs-with-powershell/</guid><description>&lt;p&gt;If you are a SQL Server DBA you should know about Ola Hallengren and will probably have investigated his Maintenance Solution.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;rsquo;t please start here &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;https://ola.hallengren.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also watch his presentation at SQLBits at this link&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution" target="_blank" rel="noopener"
+&gt;http://sqlbits.com/Sessions/Event9/Inside_Ola_Hallengrens_Maintenance_Solution&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;where he talks about and demonstrates the solution.&lt;/p&gt;
+&lt;p&gt;It is possible to just run his script to install the solution and schedule the jobs and know that you have made a good start in keeping your databases safe. You should be more proactive than that and set specific jobs for your own special requirements but you can and should find that information in other places including the FAQ on Ola&amp;rsquo;s site&lt;/p&gt;</description></item><item><title>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</title><link>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</link><pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png" alt="Featured image of post How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell" /&gt;&lt;h2 id="editors-note"&gt;Editors Note
+&lt;/h2&gt;&lt;p&gt;This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)&lt;/p&gt;
+&lt;h1 id="original-post"&gt;Original Post
+&lt;/h1&gt;&lt;p&gt;Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked. In a large estate this can be very time consuming and if done manually prone to human error. I have repeatedly mentioned &lt;!-- raw HTML omitted --&gt;John Sansoms Blog Post entitled “The Best DBAs Automate Everything” &lt;!-- raw HTML omitted --&gt;and I follow that advice. Today I will share with you one fo the first scripts that I wrote.&lt;/p&gt;</description></item></channel></rss>
