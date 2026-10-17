@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Operators on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/operators/</link><description>Recent content in Operators on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 05 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/operators/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL Server Operators and Notifications with Powershell – Strange Enumerate issue fixed by @napalmgram</title><link>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</link><pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-server-operators-and-notifications-with-powershell-strange-enumerate-issue-fixed-by-@napalmgram/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$server | Get-Member
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer|gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;$Server.JobServer.Operators | gm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_125717.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_130052.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_174005.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-04_173953.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174056.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://i0.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/09/2013-09-04_174112.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_113931.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/2013-09-05_114601.jpg"
+loading="lazy"
+alt="alt"
+&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;############################################################################# ################
+#
+# NAME: Show-SQLServerOperators.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:03/09/2013
+#
+# COMMENTS: Load function for Enumerating Operators and Notifications
+# ————————————————————————
+Function Show-SQLServerOperators ($SQLServer) {
+Write-Output &amp;quot;############### $SQLServer ##########################&amp;quot;
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+foreach ($Operator in $server.JobServer.Operators) {
+$Operator = New-Object (&amp;quot;$SMO.Agent.Operator&amp;quot;) ($server.JobServer, $Operator)
+$OpName = $Operator.Name
+Write-Output &amp;quot;Operator $OpName&amp;quot;
+Write-Output &amp;quot;`n###### Job Notifications ######&amp;quot;
+$Operator.EnumJobNotifications()| Select JobName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+Write-Output &amp;quot;`n###### Alert Notifications #######&amp;quot;
+$Operator.EnumNotifications() | Select AlertName | Format-Table
+Write-Output &amp;quot;#####################################################`n&amp;quot;
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
