@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PowerShell-Vc on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/powershell-vc/</link><description>Recent content in PowerShell-Vc on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 02 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/powershell-vc/index.xml" rel="self" type="application/rss+xml"/><item><title>2016 - That was a Year :-)</title><link>https://blog.robsewell.com/blog/2016-that-was-a-year-/</link><pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2016-that-was-a-year-/</guid><description>&lt;p&gt;Its the time of year for reflection and I have had the most amazing 2016, I am blessed that I love what I do so much. I thoroughly enjoy writing and talking and sharing and commenting and supporting and cherishing all the SQL and PowerShell things. &lt;a class="link" href="http://sqldbawithabeard.com/2016/10/29/powerbi-and-api-visualising-my-checkins/" target="_blank" rel="noopener"
+&gt;I wrote about using Power Bi to display my checkins&lt;/a&gt;. I only started this in June and this is where I have been :-)&lt;/p&gt;</description></item><item><title>PSConfAsia 2016</title><link>https://blog.robsewell.com/blog/psconfasia-2016/</link><pubDate>Mon, 24 Oct 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/psconfasia-2016/</guid><description>&lt;p&gt;I have just got back to the UK from Singapore following the amazing &lt;a class="link" href="http://www.psconf.asia/" target="_blank" rel="noopener"
+&gt;PSConfAsia&lt;/a&gt; conference. I must say that Matt, Milton, Sebastian and Ben did a fantastic job organising this conference and were proud that there was a notable increase in attendees from last year.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5csebastians-photo.jpg"
+loading="lazy"
+alt="sebastians-photo"
+&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;The conference began (unofficially) with a PowerShell User group session in the Microsoft Offices on Wednesday where &lt;a class="link" href="http://www.ravichaganti.com/blog/" target="_blank" rel="noopener"
+&gt;Ravi Chaganti&lt;/a&gt; spoke about DSC&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/..%5cassets%5cuploads%5c2016%5c10%5cwp_20161019_19_56_07_pro-2.jpg"
+loading="lazy"
+alt="WP_20161019_19_56_07_Pro (2).jpg"
+&gt;&lt;/p&gt;</description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p&gt;&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+&gt;The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a&gt; made me jump out of my seat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In one release there are &lt;strong&gt;twenty-five&lt;/strong&gt; new CMDLets for the new sqlserver module&lt;/p&gt;</description></item></channel></rss>
