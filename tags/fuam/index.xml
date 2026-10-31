@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FUAM on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/fuam/</link><description>Recent content in FUAM on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/fuam/index.xml" rel="self" type="application/rss+xml"/><item><title>FUAM - Fabric Unified Admin Monitoring</title><link>https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/</link><pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fuam-fabric-unified-admin-monitoring/</guid><description>&lt;img src="https://raw.githubusercontent.com/microsoft/fabric-toolbox/refs/heads/main/monitoring/fabric-unified-admin-monitoring/media/general/fuam_cover_flow.png" alt="Featured image of post FUAM - Fabric Unified Admin Monitoring" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Yesterday I &lt;a class="link" href="https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/" target="_blank" rel="noopener"
+&gt;introduced fabric-toolbox&lt;/a&gt; — Microsoft&amp;rsquo;s community-driven repository of Fabric accelerators. Today we look at one of its flagship solutions: &lt;strong&gt;FUAM, the Fabric Unified Admin Monitoring&lt;/strong&gt; solution.&lt;/p&gt;
+&lt;p&gt;When you are responsible for a Microsoft Fabric tenant, it will not be very long before you are facing many questions.&lt;/p&gt;
+&lt;p&gt;Questions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How is my capacity being used?&lt;/li&gt;
+&lt;li&gt;Which workspaces are consuming the most resources?&lt;/li&gt;
+&lt;li&gt;What are my users actually doing?&lt;/li&gt;
+&lt;li&gt;When are my peak usage times?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can scabble around in the Admin portal and try to piece together the answers, but it is a bit like trying to navigate a city with a paper map — you can get there eventually, but it is slow and painful, and you will probably miss some things along the way.&lt;/p&gt;</description></item></channel></rss>
