@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sql Server on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/sql-server/</link><description>Recent content in Sql Server on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/sql-server/index.xml" rel="self" type="application/rss+xml"/><item><title>How to deploy an Azure Arc Enabled SQL Managed Instance in AKS</title><link>https://blog.robsewell.com/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</link><pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-deploy-an-azure-arc-enabled-sql-managed-instance-in-aks/</guid><description>&lt;img src="https://raw.githubusercontent.com/SQLDBAWithABeard/Beard-Aks-AEDS/main/images/connecteddc.png" alt="Featured image of post How to deploy an Azure Arc Enabled SQL Managed Instance in AKS" /&gt;&lt;h1 id="want-to-play-before-ga-"&gt;Want to play before GA ?
+&lt;/h1&gt;&lt;p&gt;Azure SQL enabled by Azure Arc will be generally available at the end of the month following the announcement &lt;a class="link" href="https://azure.microsoft.com/en-us/blog/bring-cloud-experiences-to-data-workloads-anywhere-with-azure-sql-enabled-by-azure-arc?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can read more about &lt;a class="link" href="https://azure.microsoft.com/en-us/services/azure-arc/hybrid-data-services?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Arc-enabled Data Services &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have been playing with it for a few months, mainly in a Kubernetes cluster running on my NUCs in my office but Azure Arc is available in so many places, all the public clouds, your own data center (or NUCs in your office :-) ) so if you want to try it out and you do not want to build your own Kubernetes cluster then you can use &lt;a class="link" href="https://azure.microsoft.com/en-gb/services/kubernetes-service?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;AKS&lt;/a&gt; in Azure.&lt;/p&gt;</description></item><item><title>Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server" /&gt;&lt;h1 id="reusable-code"&gt;Reusable code
+&lt;/h1&gt;&lt;p&gt;We looked at a simple deployment of an Azure SQL Server and a database in the last blog post. You would like to reuse this code though, you will want to create more SQL Instances and SQL databases in the future. With Bicep, you can use modules and parameters to do this.&lt;/p&gt;
+&lt;p&gt;You can create a module for your SQL Instance. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;the resource information from the documentation&lt;/a&gt; and create a file named SQLInstance.bicep. I put it in a Resources directory.&lt;/p&gt;</description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" /&gt;&lt;h1 id="an-error"&gt;An Error
+&lt;/h1&gt;&lt;p&gt;Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unfortunately that was all that I had. I had to find the inner error for details&lt;/p&gt;
+&lt;h1 id="try-the-deployment-log-on-the-resource-group"&gt;Try the deployment log on the Resource Group
+&lt;/h1&gt;&lt;p&gt;As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p&gt;</description></item><item><title>Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</link><pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC" /&gt;&lt;h1 id="starting-working-out"&gt;Starting working out?
+&lt;/h1&gt;&lt;p&gt;It is important to keep a healthy body and mind, especially when my life is so sedentary these days. Getting exercise is good for both. This blog post has nothing to do with exercise though (apart from maybe exercising the mind)&lt;/p&gt;
+&lt;h1 id="project-bicep"&gt;Project Bicep
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Bicep&lt;/a&gt; is a language for declaring and deploying Azure Resources. Like &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+&gt;Terraform&lt;/a&gt; it enables you to define your infrastructure as code.&lt;/p&gt;
+&lt;h2 id="why-use-bicep-instead"&gt;WHy use Bicep instead?
+&lt;/h2&gt;&lt;p&gt;I really like being able to control infrastructure with code. I have used &lt;a class="link" href="https://blog.robsewell.com/tags/#terraform" target="_blank" rel="noopener"
+&gt;Terraform to deploy infrastructure&lt;/a&gt; and almost exclusively on Azure. I have created and altered many environments for clients over the past couple of years using Terraform. I have also used ARM templates but found them confusing and unwieldly to use.&lt;/p&gt;</description></item><item><title>#tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information</title><link>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</link><pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/tsql2sday-130-automate-your-stress-away-getting-more-ssis-agent-job-information/</guid><description>&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg" alt="Featured image of post #tsql2sday #130 - Automate your stress away - Getting more SSIS Agent Job information" /&gt;&lt;h1 id="automation"&gt;Automation
+&lt;/h1&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This month it is hosted by Elizabeth Noble &lt;!-- raw HTML omitted --&gt;blog&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;twitter&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Elizabeth&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/images/TSQL2sDay150x150.jpg"
+loading="lazy"
+alt="tsql2sday"
+&gt;&lt;/p&gt;
+&lt;p&gt;Elizabeth asks&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My invitation to you is I want to know what you have automated to make your life easier?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="from-the-past"&gt;From the Past
+&lt;/h2&gt;&lt;p&gt;I am in the process of migrating my blog to GitHub pages and whilst doing so, I read my first ever technical blog post &lt;a class="link" href="https://blog.robsewell.com/blog/you-have-to-start-somewhere/" target="_blank" rel="noopener"
+&gt;You have to start somewhere&lt;/a&gt; In it I mention this blog post by John Sansom &lt;a class="link" href="http://www.johnsansom.com/the-best-database-administrators-automate-everything/" target="_blank" rel="noopener"
+&gt;The Best Database Administrators Automate Everything&lt;/a&gt; which I am pleased to see is still available nearly a decade later&lt;/p&gt;</description></item><item><title>Getting SQL Server installation date with PowerShell using dbatools</title><link>https://blog.robsewell.com/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</link><pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/getting-sql-server-installation-date-with-powershell-using-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/10/image-7.png" alt="Featured image of post Getting SQL Server installation date with PowerShell using dbatools" /&gt;&lt;p&gt;Most of my writing time at the moment is devoted to  &lt;em&gt;&lt;a class="link" href="https://dbatools.io/book" target="_blank" rel="noopener"
+&gt;Learn dbatools in a Month of Lunches&lt;/a&gt;&lt;/em&gt; which is now available but here is a short post following a question someone asked me.&lt;/p&gt;
+&lt;h2 id="how-can-i-get-the-installation-date-for-sql-server-on-my-estate-into-a-database-with-dbatools-"&gt;How can I get the Installation Date for SQL Server on my estate into a database with dbatools ?
+&lt;/h2&gt;&lt;p&gt;You can get the date that SQL Server was installed using the creation date of the NT Authority\System login using T-SQL&lt;/p&gt;</description></item><item><title>Generating a Workload against AdventureWorks with PowerShell</title><link>https://blog.robsewell.com/blog/generating-a-workload-against-adventureworks-with-powershell/</link><pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/generating-a-workload-against-adventureworks-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-51.png" alt="Featured image of post Generating a Workload against AdventureWorks with PowerShell" /&gt;&lt;p&gt;For a later blog post I have been trying to generate some workload against an AdventureWorks database.&lt;/p&gt;
+&lt;p&gt;I found this excellent blog post by Pieter Vanhove &lt;a class="link" href="https://twitter.com/Pieter_Vanhove" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; &lt;a class="link" href="https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;https://blogs.technet.microsoft.com/msftpietervanhove/2016/01/08/generate-workload-on-your-azure-sql-database/&lt;/a&gt; which references this 2011 post by Jonathan Kehayias &lt;a class="link" href="https://twitter.com/SQLPoolBoy" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;br&gt;
+&lt;a class="link" href="https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/" target="_blank" rel="noopener"
+&gt;https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Both of these run a random query in a single thread so I thought I would use &lt;a class="link" href="https://www.powershellgallery.com/packages/PoshRSJob/1.7.4.4" target="_blank" rel="noopener"
+&gt;PoshRSJob&lt;/a&gt; by Boe Prox &lt;a class="link" href="https://learn-powershell.net/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt; | &lt;a class="link" href="https://twitter.com/proxb" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; to run multiple queries at the same time 🙂&lt;/p&gt;</description></item><item><title>Running SQL Queries with Visual Studio Code</title><link>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</guid><description>&lt;p&gt;Reading this blog post by &lt;a class="link" href="http://www.sqlshack.com/introduction-visual-studio-code-dbas/" target="_blank" rel="noopener"
+&gt;Shawn Melton Introduction of Visual Studio Code for DBAs&lt;/a&gt; reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code&lt;/p&gt;</description></item><item><title>Speaking? You? Go on. #tsql2sday #84</title><link>https://blog.robsewell.com/blog/speaking-you-go-on.-tsql2sday-84/</link><pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/speaking-you-go-on.-tsql2sday-84/</guid><description>&lt;p&gt;This is a blog post for &lt;a class="link" href="https://sqlbek.wordpress.com/2016/10/25/t-sql-tuesday-84-growing-new-speakers/" target="_blank" rel="noopener"
+&gt;this month&amp;rsquo;s T-SQL Tuesday post&lt;/a&gt;, hosted by Andy Yun (&lt;a class="link" href="https://sqlbek.wordpress.com/author/sqlbek/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/SQLBek" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;). &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;T-SQL Tuesday&lt;/a&gt; is a monthly blog event started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;). The T-SQL Tuesday topic this month was about advice for new speakers. Thanks Andy for hosting. I have created a channel in the &lt;a class="link" href="https://sqlps.io/slack" target="_blank" rel="noopener"
+&gt;SQL Server Community Slack&lt;/a&gt; for presenting which everyone can make use of to ask and to answer questions&lt;/p&gt;</description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p&gt;&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+&gt;The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a&gt; made me jump out of my seat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In one release there are &lt;strong&gt;twenty-five&lt;/strong&gt; new CMDLets for the new sqlserver module&lt;/p&gt;</description></item><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p&gt;Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+&gt;Installing and upgrading default scripts automation - part one - Introduction&lt;/a&gt; which is a series I will continue later.&lt;/p&gt;</description></item><item><title>Setting Up and Using Azure VM SQL Automated Backup (and Restore)</title><link>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</link><pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-up-and-using-azure-vm-sql-automated-backup-and-restore/</guid><description>&lt;p&gt;This weekend I was creating some Azure VMs to test and was required to use the GUI for some screenshots. I have always used my PowerShell scripts &lt;a class="link" href="http://sqldbawithabeard.com/2013/05/14/spinning-up-and-shutting-down-windows-azure-lab-with-PowerShell/" target="_blank" rel="noopener"
+&gt;described here&lt;/a&gt; to create my test systems and with a new job taking up a lot of my time had missed the &lt;a class="link" href="http://blogs.technet.com/b/dataplatforminsider/archive/2015/01/29/automated-backup-and-automated-patching-for-sql-server-in-azure-portal-and-PowerShell.aspx?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;announcement about Azure SQL Automated Backup and Azure SQL Automated Patching&lt;/a&gt; so was surprised to see this screen&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/07/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Installing and upgrading default scripts automation - part one - Introduction</title><link>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</link><pubDate>Mon, 08 Jun 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/installing-and-upgrading-default-scripts-automation-part-one-introduction/</guid><description>&lt;p&gt;First I must say thank you to all of the wonderful people who have put time and effort into providing free tools and scripts to enable not only myself but all SQL DBAs to ease their work. For this series I especially thank&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Brent Ozar - &lt;a class="link" href="http://www.brentozar.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/BrentO" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ola Hallengren - &lt;a class="link" href="https://ola.hallengren.com/" target="_blank" rel="noopener"
+&gt;w&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adam Mechanic - &lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Jared Zagelbaum - &lt;a class="link" href="https://jaredzagelbaum.wordpress.com/" target="_blank" rel="noopener"
+&gt;b&lt;/a&gt;|&lt;a class="link" href="https://twitter.com/JaredZagelbaum" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aim of this series is to share the methodology and the scripts that I have used to resolve this issue.&lt;/p&gt;</description></item><item><title>Show AutoGrowth Events with PowerShell to CSV</title><link>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</link><pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/show-autogrowth-events-with-powershell-to-csv/</guid><description>&lt;p&gt;This week I was reading Pinal Daves post about Autogrowth Events&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/" target="_blank" rel="noopener"
+&gt;http://blog.sqlauthority.com/2015/02/03/sql-server-script-whenwho-did-auto-grow-for-the-database/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;as it happened I had a requirement to make use of the script only a few days later. I was asked to provide the information in a CSV so that the person who required the information could manipulate it in Excel.&lt;/p&gt;
+&lt;p&gt;I am a great believer in Automation. If you are going to do something more than once then automate it so I wrote two functions, added them to TFS and now they will be available to all of my team members next time they load PowerShell.&lt;/p&gt;</description></item><item><title>How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell</title><link>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</link><pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-i-check-hundreds-of-sql-agent-jobs-in-60-seconds-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2014/03/033114_2017_howicheckhu6.png" alt="Featured image of post How I Check Hundreds of SQL Agent Jobs in 60 Seconds with Powershell" /&gt;&lt;h2 id="editors-note"&gt;Editors Note
+&lt;/h2&gt;&lt;p&gt;This is still all valid but nowadays you would be much better off using dbatools to gather the information and the ImportExcel module to add it to an Excel sheet :-)&lt;/p&gt;
+&lt;h1 id="original-post"&gt;Original Post
+&lt;/h1&gt;&lt;p&gt;Checking that your Agent Jobs have completed successfully is a vital part of any DBA’s responsibility. It is essential to ensure that all of the hard work you have put into setting up the jobs can be quickly and easily checked. In a large estate this can be very time consuming and if done manually prone to human error. I have repeatedly mentioned &lt;!-- raw HTML omitted --&gt;John Sansoms Blog Post entitled “The Best DBAs Automate Everything” &lt;!-- raw HTML omitted --&gt;and I follow that advice. Today I will share with you one fo the first scripts that I wrote.&lt;/p&gt;</description></item><item><title>Using PowerShell to get Azure Endpoint Ports</title><link>https://blog.robsewell.com/blog/using-powershell-to-get-azure-endpoint-ports/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-powershell-to-get-azure-endpoint-ports/</guid><description>&lt;p&gt;A quick blog today. I was reading &lt;a class="link" href="http://www.mssqltips.com/sqlservertip/3076/how-to-read-the-sql-server-database-transaction-log/" target="_blank" rel="noopener"
+&gt;this blog post about How to read the SQL Error Log&lt;/a&gt; and I thought I would try some of the examples. I started my Azure VM using &lt;a class="link" href="https://blog.robsewell.com/?p=534" target="_blank" rel="noopener"
+&gt;the steps in my previous post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ran&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Get-AzureVM -ServiceName TheBestBeard -Name Fade2black
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; Get-AzureVM -ServiceName TheBestBeard -Name Fade2black|Get-AzureEndpoint |Format-Table -AutoSize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and bingo I had my SQL Port to put in SSMS and can go and play some more with SQL&lt;/p&gt;</description></item><item><title>Dropping All Tables From A SQL Database with PowerShell</title><link>https://blog.robsewell.com/blog/dropping-all-tables-from-a-sql-database-with-powershell/</link><pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dropping-all-tables-from-a-sql-database-with-powershell/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/11/image7.png" alt="Featured image of post Dropping All Tables From A SQL Database with PowerShell" /&gt;&lt;p&gt;This post could also have been titled confusion with &lt;code&gt;foreach&lt;/code&gt; or &lt;code&gt;For-EachObject&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The scenario – Having created a blank database a number of users and permissions for an external consultant to create a test database for an application I got a phone call.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Please can you drop all the tables from the database as we need to re-run the installer with some different parameters&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Sure, I thought. No problem. I will use PowerShell. A simple script is all I need&lt;/p&gt;</description></item><item><title>What Runs on the SQL Server when you run a PowerShell script?–Question from #SQLRelay</title><link>https://blog.robsewell.com/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-%23sqlrelay/</link><pubDate>Sat, 23 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/what-runs-on-the-sql-server-when-you-run-a-powershell-scriptquestion-from-%23sqlrelay/</guid><description>&lt;p&gt;Last week I ran a PowerShell lab at SQL Relay in Cardiff. There are still a few places available for SQL Relay week 2. &lt;a class="link" href="http://www.sqlrelay.co.uk/" target="_blank" rel="noopener"
+&gt;Take a look here for more details&lt;/a&gt; and follow the twitter &lt;a class="link" href="https://twitter.com/search?q=%23sqlrelay" target="_blank" rel="noopener"
+&gt;hashtag #SQLRelay&lt;/a&gt; for up to date information&lt;/p&gt;
+&lt;p&gt;The link for my slides and demos from the second part are here &lt;a class="link" href="https://t.co/Fik2odyUMA" title="https://t.co/Fik2odyUMA"
+target="_blank" rel="noopener"
+&gt;https://t.co/Fik2odyUMA&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whilst we were discussing &lt;a class="link" href="https://blog.robsewell.com/checking-for-a-database-backup-with-powershell/" target="_blank" rel="noopener"
+&gt;Show-LastDatabaseBackup&lt;/a&gt; Kev Chant &lt;a class="link" href="https://twitter.com/KevChant" target="_blank" rel="noopener"
+&gt;@KevChant&lt;/a&gt; asked where it was getting the information from and I answered that PowerShell was running SQL commands under the hood against the server and if you ran profiler that is what you would see. We didn’t have time to do that in Cardiff but I thought I would do it today to show what happens&lt;/p&gt;</description></item><item><title>Finding Text In All Files In A Folder With PowerShell</title><link>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</link><pubDate>Wed, 25 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/finding-text-in-all-files-in-a-folder-with-powershell/</guid><description>&lt;p&gt;Whilst writing my &lt;a class="link" href="https://blog.robsewell.com/?p=434" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks GUI&lt;/a&gt; I realised that I had hard-coded the path to the sqlservers.txt file in several functions and I wanted one place where I could set this. At the top of the GUI script I added a variable and in the ReadMe explained this needed to be set but I needed to change it in all of the functions where it was referenced.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="http://blogs.technet.com/b/heyscriptingguy/archive/2011/08/04/use-an-easy-powershell-command-to-search-files-for-information.aspx" target="_blank" rel="noopener"
+&gt;The Hey Scripting Guy Blog came to the rescue&lt;/a&gt;&lt;/p&gt;</description></item><item><title>The PowerShell Box Of Tricks GUI</title><link>https://blog.robsewell.com/blog/the-powershell-box-of-tricks-gui/</link><pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/the-powershell-box-of-tricks-gui/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image86.png" alt="Featured image of post The PowerShell Box Of Tricks GUI" /&gt;&lt;p&gt;When I started as a DBA at MyWork I faced a challenge. Many hundreds of databases, dozens of servers and no idea what was on where. It was remembering this situation when new team members were appointed that lead me to write the &lt;a class="link" href="https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/" target="_blank" rel="noopener"
+&gt;Find-Database script&lt;/a&gt; and I had written a simple GUI using &lt;code&gt;Read-Host&lt;/code&gt; to enable the newbies to see the functions I had created&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image85.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image85.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whilst writing this series of posts I decided that I would create a new GUI&lt;/p&gt;</description></item><item><title>Add User to SQL Server Database Role with PowerShell and Quickly Creating Test Users</title><link>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</link><pubDate>Mon, 23 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/add-user-to-sql-server-database-role-with-powershell-and-quickly-creating-test-users/</guid><description>&lt;p&gt;There is a newer &lt;a class="link" href="https://blog.robsewell.com/blog/quickly-creating-test-users-in-sql-server-with-powershell-using-the-sqlserver-module-and-dbatools/" target="_blank" rel="noopener"
+&gt;up to date version of this post here&lt;/a&gt; using the &lt;a class="link" href="https://dbatools.io" target="_blank" rel="noopener"
+&gt;dbatools module&lt;/a&gt; and the sqlserver module&lt;/p&gt;
+&lt;p&gt;But if you want to continue with this way read on!!&lt;/p&gt;
+&lt;p&gt;Having created &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Windows Users&lt;/a&gt; or &lt;a class="link" href="https://blog.robsewell.com/creating-sql-user-and-adding-to-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;SQL Users&lt;/a&gt; using the last two days posts, today we shall add them to a role on a database.&lt;/p&gt;
+&lt;p&gt;As I discussed &lt;a class="link" href="https://blog.robsewell.com/checking-sql-server-user-role-membership-with-powershell/" target="_blank" rel="noopener"
+&gt;previously&lt;/a&gt; I believe that to follow good practice I try to ensure that database permissions are granted by role membership and each role is created with the minimum amount of permissions required for successful execution of the task involved.&lt;/p&gt;</description></item><item><title>Creating SQL User and adding to Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</link><pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-sql-user-and-adding-to-server-role-with-powershell/</guid><description>&lt;p&gt;Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;In yesterdays post &lt;a class="link" href="https://blog.robsewell.com/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/" target="_blank" rel="noopener"
+&gt;Creating a Windows User and Adding to SQL Role&lt;/a&gt; we created a Windows User, today it’s a SQL User. Again it is nice and simple and allows you to pipe input from other sources enabling you to easily and quickly repeat any process that needs SQL Users.&lt;/p&gt;
+&lt;p&gt;It is pretty similar as you would expect. We create a Login Object, set the Logintype to  SqlLogin add the Password and create it with the Create Method. It is then added to the Role Specified&lt;/p&gt;</description></item><item><title>Creating a Windows User and adding to a SQL Server Role with PowerShell</title><link>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</link><pubDate>Fri, 20 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-a-windows-user-and-adding-to-a-sql-server-role-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image67.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image67.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The function does some simple error checking. If the login already exists on the server it will just add it to the role and if the role has been mistyped it will let you know. It does this by checking if the Role object is Null for the Roles and the Contains Method for the Logins&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2013/09/image98.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2013/09/image98.png"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;Add-WindowsAccountToSQLRole FADE2BLACK ‘FADE2BLACK\Test’ public
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;###########################################################
+#
+# NAME: Add-WindowsAccountToSQLRole.ps1
+# AUTHOR: Rob Sewell https://blog.robsewell.com
+# DATE:11/09/2013
+#
+# COMMENTS: Load function to create a windows user and add them to a server role
+#
+# USAGE: Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' dbcreator
+# Add-WindowsAccountToSQLRole FADE2BLACK 'FADE2BLACK\Test' public
+Function Add-WindowsAccountToSQLRole ([String]$Server, [String] $User, [String]$Role) {
+$Svr = New-Object ('Microsoft.SqlServer.Management.Smo. Server') $server
+# Check if Role entered Correctly
+$SVRRole = $svr.Roles[$Role]
+if ($SVRRole -eq $null) {
+Write-Output &amp;quot; $Role is not a valid Role on $Server&amp;quot;
+}
+else {
+#Check if User already exists
+if ($svr.Logins.Contains($User)) {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+else {
+$SqlUser = New-Object -TypeName Microsoft. SqlServer.Management.Smo.Login $Server, $User
+$SqlUser.LoginType = 'WindowsUser'
+$SqlUser.Create()
+$LoginName = $SQLUser.Name
+if ($Role -notcontains &amp;quot;public&amp;quot;) {
+$svrole = $svr.Roles | where {$_.Name -eq $Role}
+$svrole.AddMember(&amp;quot;$LoginName&amp;quot;)
+}
+}
+}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;!-- raw HTML omitted --&gt;</description></item><item><title>List Databases (and Properties) on SQL Server with PowerShell</title><link>https://blog.robsewell.com/blog/list-databases-and-properties-on-sql-server-with-powershell/</link><pubDate>Wed, 11 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/list-databases-and-properties-on-sql-server-with-powershell/</guid><description>&lt;p&gt;Another post in the &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt; series. Here is another script which I use to save me time and effort during my daily workload enabling me to spend more time on more important (to me) things!&lt;/p&gt;
+&lt;p&gt;Todays question which I often get asked is What databases are on that server?&lt;/p&gt;
+&lt;p&gt;This is often a follow up to a question that requires the &lt;a class="link" href="https://blog.robsewell.com/using-powershell-to-find-a-database-amongst-hundreds/" target="_blank" rel="noopener"
+&gt;Find-Database script&lt;/a&gt;. It is often asked by support teams investigating issues. It can also be asked by developers checking the impact of other services on their DEV/UAT environments, by change managers investigating impact of changes, by service managers investigating the impact of downtime, when capacity planning for a new service and numerous other situations.&lt;/p&gt;</description></item><item><title>Dropping SQL Users with PowerShell</title><link>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</link><pubDate>Tue, 10 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/dropping-sql-users-with-powershell/</guid><description>&lt;p&gt;As you may have noticed, I love PowerShell!&lt;/p&gt;
+&lt;p&gt;I have developed a series of functions over time which save me time and effort whilst still enabling me to provide a good service to my customers. I keep them all in a functions folder and call them whenever. I call it my &lt;a class="link" href="https://blog.robsewell.com/tags/#box-of-tricks" target="_blank" rel="noopener"
+&gt;PowerShell Box of Tricks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I am going to write a short post about each one over the next few weeks as I write my presentation on the same subject which I will be presenting to SQL User Groups.&lt;/p&gt;</description></item><item><title>You Have To Start Somewhere</title><link>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</link><pubDate>Sun, 10 Feb 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/you-have-to-start-somewhere/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2013/02/medium_33194896_thumb.jpg" alt="Featured image of post You Have To Start Somewhere" /&gt;&lt;p&gt;![medium_33194896]({{ &amp;ldquo;/assets/uploads/2013/02/medium_33194896_thumb.jpg&amp;rdquo; | relative_url }})&lt;/p&gt;
+&lt;p&gt;The hardest part is looking at the blank page and beginning to type. It’s much easier to go and play with the settings of the site, to look at plugins and other cool things. The only other blog I have written was &lt;a class="link" href="http://wombatsdojogle.wordpress.com" target="_blank" rel="noopener"
+&gt;http://wombatsdojogle.wordpress.com&lt;/a&gt;. This was a little easer as there was always ‘something’ that needed to be written about. Whether it was training or route planning or every day on the road I had material and an obvious thing to write.&lt;/p&gt;</description></item></channel></rss>

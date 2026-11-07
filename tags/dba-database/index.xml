@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DBA Database on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/dba-database/</link><description>Recent content in DBA Database on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/dba-database/index.xml" rel="self" type="application/rss+xml"/><item><title>Power Bi, PowerShell and SQL Agent Jobs</title><link>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</link><pubDate>Mon, 28 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/power-bi-powershell-and-sql-agent-jobs/</guid><description>&lt;p&gt;Continuing &lt;a class="link" href="https://blog.robsewell.com/tags/#dba-database" target="_blank" rel="noopener"
+&gt;my series on using Power Bi with my DBA Database&lt;/a&gt; I am going to show in this post how I create the most useful daily report for DBAs - The SQL Agent Job report. &lt;a class="link" href="https://1drv.ms/f/s!Ah9eXQJC3wLIh8BKfjiXBs7g6m7hfw" target="_blank" rel="noopener"
+&gt;You can get the scripts and reports here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note this project became &lt;a class="link" href="http://dbareports.io" target="_blank" rel="noopener"
+&gt;dbareports.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/ag1.jpg?w=300"
+loading="lazy"
+alt="AG1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives a quick overview of the status of the Agent Jobs across the estate and also quickly identifies recent failed jobs enabling the DBA to understand their focus and prioritise their morning efforts.&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Databases</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</link><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-databases/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db1.png?w=300"
+loading="lazy"
+alt="db1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/db2.png?w=300"
+loading="lazy"
+alt="db2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - SQL Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</link><pubDate>Mon, 07 Sep 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-sql-info/</guid><description>&lt;p&gt;Following my post about &lt;a class="link" href="http://wp.me/p3aio8-gj" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database.&lt;/p&gt;
+&lt;p&gt;In this post I will show how to create the following report&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/1.png?w=300"
+loading="lazy"
+alt="1"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://sqldbawithabeard.com/wp-content/uploads/2015/09/2.png?w=300"
+loading="lazy"
+alt="2"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Although you will find so many items of data that I expect that you will want to create different reports for your own requirements. You will also want to put the report onto PowerBi.com and explore the natural language querying as I show at the end of this post&lt;/p&gt;</description></item><item><title>Populating My DBA Database for Power Bi with PowerShell - Server Info</title><link>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/populating-my-dba-database-for-power-bi-with-powershell-server-info/</guid><description>&lt;p&gt;Following my last post about &lt;a class="link" href="https://blog.robsewell.com/sql%20server/using-power-bi-with-my-dba-database/" target="_blank" rel="noopener"
+&gt;using Power Bi with my DBA Database&lt;/a&gt; I have been asked if I would share the PowerShell scripts which I use to populate my database. They are the secondary part to my DBADatabase which I also use to automate the installation and upgrade of all of my DBA scripts as I started to blog about in this post &lt;a class="link" href="https://blog.robsewell.com/powershell/sql%20server/installing-and-upgrading-default-scripts-automation-part-one-introduction/" target="_blank" rel="noopener"
+&gt;Installing and upgrading default scripts automation - part one - Introduction&lt;/a&gt; which is a series I will continue later.&lt;/p&gt;</description></item><item><title>Using Power Bi with my DBA Database</title><link>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</link><pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-power-bi-with-my-dba-database/</guid><description>&lt;p&gt;Every good DBA should have a DBA database. A place to store information about all of their instances and databases.&lt;/p&gt;
+&lt;p&gt;I have an InstanceList table which looks like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CREATE&lt;/span&gt; &lt;span class="n"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;dbo&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceList&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;IDENTITY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ServerName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NOT&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;AG&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;bit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt; &lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;DF_InstanceList_Inactive&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;DEFAULT&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ne"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nvarchar&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;CONSTRAINT&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PK_InstanceList_ID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;PRIMARY&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;CLUSTERED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;InstanceID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ASC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PAD_INDEX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;STATISTICS_NORECOMPUTE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IGNORE_DUP_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OFF&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_ROW_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ALLOW_PAGE_LOCKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;PRIMARY&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I use this as the basis for all of my information gathering. By adding Server name, Instance Name , Port, Environment and Location to the table I use overnight Agent jobs to run PowerShell scripts to gather information about all of the instances. This way the information is dynamic and gathered from the server, so when we add RAM and change Max memory this is updated the next time the script runs. You can also automate your installation and decommission procedures (using PowerShell scripts) to add the information to the DBA database automatically&lt;/p&gt;</description></item></channel></rss>

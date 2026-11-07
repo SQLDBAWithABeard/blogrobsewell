@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SQLBits on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/sqlbits/</link><description>Recent content in SQLBits on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/sqlbits/index.xml" rel="self" type="application/rss+xml"/><item><title>SQLBits 2023 in Newport - A beards viewpoint</title><link>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</link><pubDate>Sun, 19 Mar 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-2023-in-newport-a-beards-viewpoint/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits 2023 in Newport - A beards viewpoint" /&gt;&lt;h1 id="what-is-sqlbits"&gt;What is SQLBits?
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits&lt;/a&gt; is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+&gt;written about SQLBits&lt;/a&gt;, it is close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p&gt;
+&lt;h2 id="committee"&gt;Committee
+&lt;/h2&gt;&lt;p&gt;The SQLBits committee is responsible for the running of the conference, the selection of general sessions and training days, helpers, sponsors, venue, dates, child care, theme, logo, the party, the website, charity support, hotels, bars, delegate app, helpers app, sponsors app, food, drinks, entertainment, prizes, swag, t-shirts, mugs, code of conduct, badges, printing, freight, stickers, lanyards, bags,on-site therapist, pens, notepads&amp;hellip; and everything else that goes into making SQLBits the best conference it can be!!&lt;/p&gt;</description></item><item><title>SQLBits Agenda and PowerShell, displaying and searching</title><link>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</link><pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sqlbits-agenda-and-powershell-displaying-and-searching/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/dragonsqlbitslogo.png" alt="Featured image of post SQLBits Agenda and PowerShell, displaying and searching" /&gt;&lt;h1 id="what-is-sqlbits"&gt;What is SQLBits?
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits&lt;/a&gt; is the largest data platform conference in Europe. It has been running every year since 2007 in a different city in the UK providing sessions into all things data platform. I have frequently &lt;a class="link" href="https://blog.robsewell.com/tags/#sqlbits" target="_blank" rel="noopener"
+&gt;written about SQLBits&lt;/a&gt;, it is a conference close to my heart and has had a significant impact on my life, my career and my circle of friends.&lt;/p&gt;
+&lt;h2 id="where-and-when"&gt;Where and when?
+&lt;/h2&gt;&lt;p&gt;This year it is in Newport, Wales at the International Convention Centre Wales (ICC) Tuesday 14th to Saturday 18th of March, 2023&lt;/p&gt;</description></item><item><title>#NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits</title><link>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</link><pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/newstarnovember-getting-into-speaking-it-was-fatherjack-and-sqlbits/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2017/newstars1.jpg" alt="Featured image of post #NewStarNovember - Getting into Speaking - It was fatherjack and SQLBits" /&gt;&lt;p&gt;Thank you to the ever wonderful Ben &lt;a class="link" href="https://www.newstarsofdata.com/tell-us-your-story/" target="_blank" rel="noopener"
+&gt;for the suggestion to blog&lt;/a&gt;. Check out #NewStarNovember for more blog posts.&lt;/p&gt;
+&lt;h1 id="in-the-beginning"&gt;In the beginning
+&lt;/h1&gt;&lt;p&gt;It was around May of 2013 that I had written a blog post about spinning up and shutting down an Azure lab with PowerShell after being inspired at my first &lt;a class="link" href="https://sqlbits.com" target="_blank" rel="noopener"
+&gt;SQLBits Conference&lt;/a&gt; (On a side note, I have attended, volunteered or spoken at every one since and this year I was delighted to become a Committee Member - If you have comments/questions/advice please feel free to email me at rob at sqlbits.com). That blog post still exists &lt;a class="link" href="https://blog.robsewell.com/azure/spinning-up-and-shutting-down-windows-azure-lab-with-powershell/" target="_blank" rel="noopener"
+&gt;here&lt;/a&gt;&lt;/p&gt;</description></item><item><title>2 Ways to Loop through collections in Pester</title><link>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</link><pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/2-ways-to-loop-through-collections-in-pester/</guid><description>&lt;p&gt;In my last post I showed you &lt;a class="link" href="https://blog.robsewell.com/write-your-first-pester-test-today/" target="_blank" rel="noopener"
+&gt;how to write your first Pester test&lt;/a&gt; to validate something. Here’s a recap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decide the information you wish to test&lt;/li&gt;
+&lt;li&gt;Understand how to get it with PowerShell&lt;/li&gt;
+&lt;li&gt;Understand what makes it pass and what makes it fail&lt;/li&gt;
+&lt;li&gt;Write a Pester Test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You probably have more than one instance that you want to test, so how do you loop through a collection of instances? There are a couple of ways.&lt;/p&gt;</description></item><item><title>Why Volunteer at SQLBits ?</title><link>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</link><pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/why-volunteer-at-sqlbits/</guid><description>&lt;p&gt;WARNING – Contains Orange and light-hearted photos 😉&lt;/p&gt;
+&lt;p&gt;I have returned home from SQLBits 2017 The Disco Edition. I am exhausted, my body is pointing out to me in a variety of ways that this is the only week of the year that I spend so much time on my feet. Why would anyone do it?&lt;/p&gt;
+&lt;h2 id="many-months-of-work"&gt;Many months of work
+&lt;/h2&gt;&lt;p&gt;First though, you need to know that the SQLBits conference is organised and run by volunteers. All of the committee spend many, many long hours, out of their own free time, for many months before and after the event to ensure that the attendees, sponsors, speakers and volunteers experience is trouble free. I think that they do an amazing and fantastic job and repeatedly pull off the best, most enjoyable conference that I have been to.&lt;/p&gt;</description></item><item><title>A Day In The Life of a SQLBits Volunteer</title><link>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</link><pubDate>Tue, 10 May 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/a-day-in-the-life-of-a-sqlbits-volunteer/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" alt="Featured image of post A Day In The Life of a SQLBits Volunteer" /&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2016/05/dscn0286-3.jpg"
+loading="lazy"
+alt="image"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So SQLBits has finished for another year. About 1500 people registered for the largest SQL Conference in Europe held over 4 days in Liverpool last week. 2 days of full day sessions and 2 days of shorter sessions, a pub quiz, a party (literally) out of this world.&lt;/p&gt;
+&lt;p&gt;It is organised and run by volunteers&lt;/p&gt;
+&lt;p&gt;Yes, you’re right.&lt;/p&gt;
+&lt;p&gt;Wow.&lt;/p&gt;
+&lt;p&gt;Of course we must pay special thanks to Simon, Darren, Chris, Jonathan, Annette, Allan and Alex without forgetting all that JRJ has done. They ensured that the venue, sessions, speakers, sponsors, audio visual and not forgetting the amazing party by &lt;!-- raw HTML omitted --&gt;Sneaky Experience (Thank you Julia),&lt;!-- raw HTML omitted --&gt; all occurred at the right time in the right place with the right people and the work and effort they have put in cannot be over-estimated but this post isn’t about those generous, inspiring, amazing folk
+Several people asked me what a volunteer does and how they can become one and hopefully this post will answer both of those questions. More than 40 people volunteered to help at SQL Bits&lt;/p&gt;</description></item><item><title>Giving Back – #TSQL2sday</title><link>https://blog.robsewell.com/blog/giving-back-tsql2sday/</link><pubDate>Tue, 09 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/giving-back-tsql2sday/</guid><description>&lt;p&gt;&lt;img src="https://i0.wp.com/blog.waynesheffield.com/wayne/wp-content/uploads/2012/04/TSQL2sDay150x150.jpg"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;T-SQL Tuesday, which was started by Adam Machanic (&lt;a class="link" href="http://sqlblog.com/blogs/adam_machanic/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://twitter.com/adammachanic" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt;) and is now starting its 6th year, is hosted by a different person each month. The host selects the theme, and then the blogging begins. Worldwide, on the second Tuesday of the month (all day, based on GMT time), bloggers attend this party by blogging about the theme. This month it is hosted by Wayne Sheffield &lt;a class="link" href="http://blog.waynesheffield.com/wayne/archive/2014/12/t-sql-tuesday-61-giving-back/" target="_blank" rel="noopener"
+&gt;blog&lt;/a&gt;|&lt;a class="link" href="http://www.twitter.com/#/DBAWayne" target="_blank" rel="noopener"
+&gt;twitter&lt;/a&gt; and in the spirit of the holiday season it is about giving. This is my post on giving back, in the little ways as well as the bigger ones, how you can give back and why it not only benefits others but also yourself&lt;/p&gt;</description></item><item><title>SQL Saturday Exeter&amp;ndash;What&amp;rsquo;s the Point? My Experience of 2013 SQLSatExeter</title><link>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</link><pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/sql-saturday-exeterndashwhatrsquos-the-point-my-experience-of-2013-sqlsatexeter/</guid><description>&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Disclaimer – I am on the committee organising the next &lt;a class="link" href="http://sqlsouthwest.co.uk/sqlsat269/" target="_blank" rel="noopener"
+&gt;SQL Saturday Exeter&lt;/a&gt;. To be kept up to date about SQL Saturday #269 in the South West, follow &lt;a class="link" href="https://twitter.com/sqlsatexeter" target="_blank" rel="noopener"
+&gt;@SQLSatExeter&lt;/a&gt; and&lt;a class="link" href="https://twitter.com/search?q=%23sqlsatexeter&amp;amp;src=hash&amp;amp;f=realtime" target="_blank" rel="noopener"
+&gt;#SQLSatExeter&lt;/a&gt; on twitter and see details at the bottom. This post is about my experience at this years event.&lt;/p&gt;
+&lt;p&gt;In March this year the SQL South West User Group hosted SQL Saturday #194 in Exeter. I was a new member to the User Group having finally been able to join them for the first time in January. At that meeting Chris Testa O’Neill presented a session and was very passionate about the SQL Community and the benefit of the SQL Saturdays and other events.  I am always keen to learn new things and find ways of developing my skills. As I haven’t won the lottery I also look out for good deals as well!!&lt;/p&gt;</description></item><item><title>12 Things I learnt at SQLBits XI</title><link>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/12-things-i-learnt-at-sqlbits-xi/</guid><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="the-quality-of-the-speakers-and-sessions-is-exceptional"&gt;The quality of the speakers and sessions is exceptional
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://sqlbits.com/information/Agenda.aspx" target="_blank" rel="noopener"
+&gt;http://sqlbits.com/information/Agenda.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id="the-helpers-are-awesome"&gt;The Helpers are awesome
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001.jpg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i1.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image001_thumb.jpg?resize=313%2C502"
+loading="lazy"
+alt="clip_image001"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="often-sessions-fill-up-very-quickly--get-there-early"&gt;Often Sessions fill up very quickly – Get there early
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="http://t.co/y2S9IDnama" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i2.wp.com/sqldbawithabeard.com/wp-content/uploads/2013/05/clip_image002.jpg?resize=372%2C211"
+loading="lazy"
+alt="clip_image002"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="the-guidebook-app-is-pretty-good-but-with-a-map-it-would-be-better"&gt;The GuideBook app is pretty good but with a map it would be better
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="http://guidebook.com/" target="_blank" rel="noopener"
+&gt;http://guidebook.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id="you-can-learn-as-much-outside-of-the-sessions-as-you-can-in-them"&gt;You can learn as much outside of the sessions as you can in them
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://plus.google.com/photos/109984741094039234638/albums/5874913179986208577" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i2.wp.com/lh6.googleusercontent.com/-3d8PCx0AlFA/UYfqxH0fHhI/AAAAAAAAd-E/k_EnX5cpOZY/w960-h641-no/DSC_5670.JPG?resize=622%2C415&amp;amp;ssl=1"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id="there-are-amazing-prizes"&gt;There are amazing prizes
+&lt;/h3&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.facebook.com/photo.php?fbid=599765410034832&amp;amp;set=pb.330145840330125.-2207520000.1367904819.&amp;amp;type=3&amp;amp;theater" target="_blank" rel="noopener"
+&gt;&lt;img src="https://i0.wp.com/fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-snc6/602577_599765410034832_674054200_n.jpg?resize=616%2C392&amp;amp;ssl=1"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Powershell won’t save when running as a scheduled job</title><link>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</link><pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-wont-save-when-running-as-a-scheduled-job/</guid><description>&lt;h3 id="or-how-sqlbits-put-me-in-touch-with-laerte-and-solved-a-problem"&gt;Or, How SQLBits put me in touch with Laerte and solved a problem
+&lt;/h3&gt;&lt;p&gt;I have a scheduled Powershell job which I use to create an Excel file colour coded for backup checks. (I will blog about it another time) It works brilliantly on my desktop and saves the file to a UNC path and emails the team the location. It works brilliantly when run in Powershell on the server. When I schedule it to run though it doesn’t do so well. The job completes without errors but no file is saved.&lt;/p&gt;</description></item></channel></rss>

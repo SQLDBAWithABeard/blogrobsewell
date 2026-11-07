@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Source on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/open-source/</link><description>Recent content in Open Source on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 19 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/open-source/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction to fabric-toolbox - Microsoft Fabric's Community Accelerator Hub</title><link>https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/</link><pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/introduction-to-fabric-toolbox-microsoft-fabrics-community-accelerator-hub/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2026/02/fabric-toolbox-introduction.png" alt="Featured image of post Introduction to fabric-toolbox - Microsoft Fabric's Community Accelerator Hub" /&gt;&lt;h2 id="introduction"&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Today I want to talk about &lt;a class="link" href="https://github.com/microsoft/fabric-toolbox" target="_blank" rel="noopener"
+&gt;fabric-toolbox&lt;/a&gt;, the Microsoft-sponsored, community-driven repository of accelerators, tools, and utilities that exists specifically to help Fabric users get further, faster.&lt;/p&gt;
+&lt;h2 id="what-is-fabric-toolbox"&gt;What Is fabric-toolbox?
+&lt;/h2&gt;&lt;p&gt;fabric-toolbox is a GitHub repository maintained under the Microsoft organisation, led by the Microsoft Customer Acceleration Team (CAT) for Fabric and community contributors. It&amp;rsquo;s a community toolkit, a collection of solutions that go beyond the core product to solve real-world operational, governance, and automation problems.&lt;/p&gt;</description></item><item><title>How to fork a GitHub repository and contribute to an open source project</title><link>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</link><pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/CreatePR.png" alt="Featured image of post How to fork a GitHub repository and contribute to an open source project" /&gt;&lt;p&gt;I enjoy maintaining open source GitHub repositories such as &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; and &lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+&gt;ADSNotebook&lt;/a&gt;. I absolutely love it when people add more functionality to them.&lt;/p&gt;
+&lt;p&gt;To collaborate with a repository in GitHub you need to follow these steps&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/GitHub.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fork the repository into your own GitHub&lt;/li&gt;
+&lt;li&gt;Clone the repository to your local machine&lt;/li&gt;
+&lt;li&gt;Create a new branch for your changes&lt;/li&gt;
+&lt;li&gt;Make some changes and commit them with useful messages&lt;/li&gt;
+&lt;li&gt;Push the changes to your repository&lt;/li&gt;
+&lt;li&gt;Create a Pull Request from your repository back to the original one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You will need to have &lt;code&gt;git.exe&lt;/code&gt; available which you can download and install from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+&gt;https://git-scm.com/downloads&lt;/a&gt; if required&lt;/p&gt;</description></item></channel></rss>
