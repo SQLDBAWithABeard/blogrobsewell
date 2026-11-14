@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ssms on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/ssms/</link><description>Recent content in Ssms on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 20 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/ssms/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</title><link>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</link><pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png" alt="Featured image of post Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user" /&gt;&lt;p&gt;Following on from &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+&gt;my last post about the Secret Management module&lt;/a&gt;. I was asked another question.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Can I use this to run applications as my admin account?&lt;/p&gt;
+&lt;p&gt;A user with a beard&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It is good practice to not log into your work station with an account with admin privileges. In many shops, you will need to open applications that can do administration tasks with another set of account credentials.&lt;/p&gt;
+&lt;p&gt;Unfortunately, people being people, they will often store their admin account credentials in a less than ideal manner (OneNote, Notepad ++ etc) to make it easier for them, so that when they right click and run as a different user, they can copy and paste the password.&lt;/p&gt;</description></item><item><title>PowerShell CMDLets added for SQL2016 Always Encrypted</title><link>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</link><pubDate>Thu, 30 Jun 2016 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/powershell-cmdlets-added-for-sql2016-always-encrypted/</guid><description>&lt;p&gt;&lt;a class="link" href="https://blogs.technet.microsoft.com/dataplatforminsider/2016/06/30/sql-PowerShell-july-2016-update/" target="_blank" rel="noopener"
+&gt;The post on the SQLServer blog at TechNet by the SQL Server Tools Team today&lt;/a&gt; made me jump out of my seat.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The July update for SSMS includes the first substantial improvement in SQL PowerShell in many years. We owe a lot of thanks for this effort to the great collaboration with our community. We have several new CMDLETs to share with you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In one release there are &lt;strong&gt;twenty-five&lt;/strong&gt; new CMDLets for the new sqlserver module&lt;/p&gt;</description></item><item><title>Using PowerShell to get Azure Endpoint Ports</title><link>https://blog.robsewell.com/blog/using-powershell-to-get-azure-endpoint-ports/</link><pubDate>Mon, 02 Dec 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-powershell-to-get-azure-endpoint-ports/</guid><description>&lt;p&gt;A quick blog today. I was reading &lt;a class="link" href="http://www.mssqltips.com/sqlservertip/3076/how-to-read-the-sql-server-database-transaction-log/" target="_blank" rel="noopener"
+&gt;this blog post about How to read the SQL Error Log&lt;/a&gt; and I thought I would try some of the examples. I started my Azure VM using &lt;a class="link" href="https://blog.robsewell.com/?p=534" target="_blank" rel="noopener"
+&gt;the steps in my previous post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I ran&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Get-AzureVM -ServiceName TheBestBeard -Name Fade2black
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; Get-AzureVM -ServiceName TheBestBeard -Name Fade2black|Get-AzureEndpoint |Format-Table -AutoSize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and bingo I had my SQL Port to put in SSMS and can go and play some more with SQL&lt;/p&gt;</description></item></channel></rss>

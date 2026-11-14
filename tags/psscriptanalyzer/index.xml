@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PSScriptAnalyzer on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/psscriptanalyzer/</link><description>Recent content in PSScriptAnalyzer on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 Feb 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/psscriptanalyzer/index.xml" rel="self" type="application/rss+xml"/><item><title>VS Code – Terminal crashes when formatting script</title><link>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</link><pubDate>Sat, 10 Feb 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/vs-code-terminal-crashes-when-formatting-script/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" alt="Featured image of post VS Code – Terminal crashes when formatting script" /&gt;&lt;p&gt;I love VS Code. I love being able to press ALT + SHIFT + F and format my code.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/formatting.gif"
+loading="lazy"
+alt="formatting.gif"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="the-problem"&gt;The Problem
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/format-error.png"
+loading="lazy"
+alt="format error.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I could reproduce it will. This was very frustrating.&lt;/p&gt;
+&lt;h2 id="turning-on-verbose-logging"&gt;Turning on Verbose Logging
+&lt;/h2&gt;&lt;p&gt;To turn on verbose logging for the PowerShell Editor Services go the Cog in the bottom left, click it and then click User Settings.&lt;/p&gt;
+&lt;p&gt;Search for powershell.developer.editorServicesLogLevel&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/02/powershell.developer.editorServicesLogLevel.png"
+loading="lazy"
+alt="powershell.developer.editorServicesLogLevel.png"
+&gt;&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

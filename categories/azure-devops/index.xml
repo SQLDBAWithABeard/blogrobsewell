@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure DevOps on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/azure-devops/</link><description>Recent content in Azure DevOps on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/azure-devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Azure DevOps Pipeline Template Job Names and single quotes</title><link>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</link><pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/azure-devops-pipeline-template-job-names-and-single-quotes/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Azure DevOps Pipeline Template Job Names and single quotes" /&gt;&lt;h1 id="the-job-name-deploy_function_app-appears-more-than-once"&gt;The job name Deploy_Function_App appears more than once
+&lt;/h1&gt;&lt;p&gt;This was the error I was notified about in a Azure DevOps pipeline when they tried to run it. The error message continued to say that Job Names must be unique within a pipeline.&lt;/p&gt;
+&lt;h2 id="set-up"&gt;Set Up
+&lt;/h2&gt;&lt;p&gt;There is a centralised repository of Azure DevOps Pipeline Template Jobs that call the Bicep modules with the required values in the same repo to deploy Azure Infrastructure.&lt;/p&gt;</description></item><item><title>What does JS_InvalidFilePath error mean in Azure DevOps?</title><link>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</link><pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/what-does-js_invalidfilepath-error-mean-in-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post What does JS_InvalidFilePath error mean in Azure DevOps? " /&gt;&lt;h1 id="cant-find-loc-string-for-key-js_invalidfilepath"&gt;Can't find loc string for key: JS_InvalidFilePath
+&lt;/h1&gt;&lt;p&gt;This was the error I received in my Azure DevOps pipeline when I tried to run it.&lt;/p&gt;
+&lt;p&gt;When I investigated further it said&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]workingDirectory=/home/vsts/work/1/s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]check path : /home/vsts/work/1/s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[warning]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]Processed: ##vso[task.issue type=warning;]Can\&amp;#39;t find loc string for key: JS_InvalidFilePath
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]task result: Failed
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[error]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]Processed: ##vso[task.issue type=error;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##[debug]Processed: ##vso[task.complete result=Failed;]JS_InvalidFilePath /home/vsts/work/1/s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id="what-is-going-on"&gt;What is going on?
+&lt;/h1&gt;&lt;p&gt;I was trying to run a simple Azure PowerShell task and had defined it like this (I used VS Code with the Azure Pipelines extension and made use of the intellisense). I had defined it like this.&lt;/p&gt;</description></item><item><title>When you REALLY want to see your Azure DevOps Secret Variable Values</title><link>https://blog.robsewell.com/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</link><pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/when-you-really-want-to-see-your-azure-devops-secret-variable-values/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/michael-dziedzic-1bjsASjhfkE-unsplash.jpg" alt="Featured image of post When you REALLY want to see your Azure DevOps Secret Variable Values" /&gt;&lt;h1 id="i-really-needed-to-see-the-values"&gt;I REALLY needed to see the values
+&lt;/h1&gt;&lt;p&gt;The problem was that I had code in an Azure DevOps PowerShell task which was using a Service Principal to do some things in Azure and it was failing.&lt;/p&gt;
+&lt;p&gt;The pipeline had some things a little like this, it got a number of values from a key vault, set them to variables and used them in a custom function&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$somevalue = (Get-AzKeyVaultSecret -vaultName $KeyVaultName -name &amp;#39;AGeneratedName&amp;#39;).SecretValue
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$somecredential = New-Object System.Management.Automation.PSCredential (&amp;#39;dummy&amp;#39;, $somevalue )
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$something = $somecredential.GetNetworkCredential().Password
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Do-SomethingSpecial -MyThing $something
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;I was getting an error saying &amp;ldquo;forbidden - *** does not have access&amp;rdquo; or similar&lt;/p&gt;</description></item><item><title>Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools</title><link>https://blog.robsewell.com/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</link><pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/creating-azure-sql-database-aad-contained-database-users-with-an-spn-using-powershell-secrets-management-azure-key-vault-and-dbatools/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/08/image-16.png" alt="Featured image of post Creating Azure SQL Database AAD Contained Database Users with an SPN using PowerShell, Secrets Management, Azure Key Vault, and dbatools" /&gt;&lt;p&gt;Following on from my posts about using Secret Management &lt;a class="link" href="https://blog.robsewell.com/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+&gt;Good bye Import-CliXml&lt;/a&gt; and &lt;a class="link" href="https://blog.robsewell.com/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/" target="_blank" rel="noopener"
+&gt;running programmes as a different user&lt;/a&gt;, I have another use case.&lt;/p&gt;
+&lt;p&gt;After creating Azure SQL Databases in an Elastic Pool using a process pretty similar to this one &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-using-azure-devops/" target="_blank" rel="noopener"
+&gt;I blogged about last year&lt;/a&gt;, I needed to be able to programmatically create users and assign permissions.&lt;/p&gt;
+&lt;h2 id="i-need-a-user-to-login-with"&gt;I need a user to login with
+&lt;/h2&gt;&lt;p&gt;When I created my Azure SQL Server with Terraform, I set the Azure Admin to be a SPN as you can see in the image from the portal and set it to have an identity using the documentation for &lt;a class="link" href="https://www.terraform.io/docs/providers/azurerm/r/sql_server.html" target="_blank" rel="noopener"
+&gt;azurerm_mssql_server&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Building Azure SQL Db with Terraform using Azure DevOps</title><link>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-using-azure-devops/</link><pubDate>Sat, 20 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-using-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-49.png" alt="Featured image of post Building Azure SQL Db with Terraform using Azure DevOps" /&gt;&lt;p&gt;In &lt;a class="link" href="https://blog.robsewell.com/building-azure-sql-db-with-terraform-with-visual-studio-code/" target="_blank" rel="noopener"
+&gt;my last post&lt;/a&gt; I showed how to create a Resource Group and an Azure SQL Database with Terraform using Visual Studio Code to deploy.&lt;/p&gt;
+&lt;p&gt;Of course, I haven&amp;rsquo;t stopped there, who wants to manually run code to create things. There was a lot of install this and set up that. I would rather give the code to a build system and get it to run it. I can then even set it to automatically deploy new infrastructure when I commit some code to alter the configuration.&lt;/p&gt;</description></item></channel></rss>
