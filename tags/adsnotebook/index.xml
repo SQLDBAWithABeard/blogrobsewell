@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Adsnotebook on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/adsnotebook/</link><description>Recent content in Adsnotebook on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 20 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/adsnotebook/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user</title><link>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</link><pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-secret-management-module-to-run-ssms-vs-code-and-azure-data-studio-as-another-user/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/runas.png" alt="Featured image of post Using Secret Management module to run SSMS, VS Code and Azure Data Studio as another user" /&gt;&lt;p&gt;Following on from &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/" target="_blank" rel="noopener"
+&gt;my last post about the Secret Management module&lt;/a&gt;. I was asked another question.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Can I use this to run applications as my admin account?&lt;/p&gt;
+&lt;p&gt;A user with a beard&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It is good practice to not log into your work station with an account with admin privileges. In many shops, you will need to open applications that can do administration tasks with another set of account credentials.&lt;/p&gt;
+&lt;p&gt;Unfortunately, people being people, they will often store their admin account credentials in a less than ideal manner (OneNote, Notepad ++ etc) to make it easier for them, so that when they right click and run as a different user, they can copy and paste the password.&lt;/p&gt;</description></item><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" /&gt;&lt;p&gt;Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/dotnetnotebooks&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="jaap-is-awesome"&gt;Jaap is awesome
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; blog post&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+&gt;https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="joel-is-also-awesome"&gt;Joel is also awesome!
+&lt;/h2&gt;&lt;p&gt;When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; module BetterCredentials which uses the Windows Credential Manager&lt;/p&gt;</description></item><item><title>Running Jupyter Notebooks as Agent Jobs</title><link>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</link><pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-jupyter-notebooks-as-agent-jobs/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/03/image-22.png" alt="Featured image of post Running Jupyter Notebooks as Agent Jobs" /&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Azure Data Studio&lt;/a&gt; is a great tool for connecting with your data platform whether it is in Azure or on your hardware. &lt;a class="link" href="https://blog.robsewell.com/?s=notebooks" target="_blank" rel="noopener"
+&gt;Jupyter Notebooks&lt;/a&gt; are fantastic, you can have words, pictures, code and code results all saved in one document.&lt;/p&gt;
+&lt;p&gt;I have created a repository in my GitHub &lt;a class="link" href="https://beard.media/Notebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/Notebooks&lt;/a&gt; where I have stored a number of Jupyter notebooks both for Azure Data Studio and the &lt;a class="link" href="https://blog.robsewell.com/new-net-notebooks-are-here-powershell-7-notebooks-are-here/" target="_blank" rel="noopener"
+&gt;new .NET interactive&lt;/a&gt; notebooks.&lt;/p&gt;</description></item><item><title>New .NET Notebooks are here – PowerShell 7 notebooks are here.</title><link>https://blog.robsewell.com/blog/new-net-notebooks-are-here-powershell-7-notebooks-are-here/</link><pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/new-net-notebooks-are-here-powershell-7-notebooks-are-here/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/02/image-13.png" alt="Featured image of post New .NET Notebooks are here – PowerShell 7 notebooks are here." /&gt;&lt;p&gt;Data Science folk used Notebooks for documentation and to show re-runnable research. Azure Data Studio included this notebook functionality and &lt;a class="link" href="https://blog.robsewell.com/dbatools/dbachecks/blog/jupyter%20notebooks/azure%20data%20studio/powershell/whats-a-sql-notebook-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;added SQL&lt;/a&gt; kernel where &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbachecks/dbatools/powershell-in-sql-notebooks-in-azure-data-studio//" target="_blank" rel="noopener"
+&gt;with a little bit of faffing you could run PowerShell&lt;/a&gt; and then a &lt;a class="link" href="https://blog.robsewell.com/blog/jupyter%20notebooks/azure%20data%20studio/powershell/dbatools/powershell-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;Python kernel that enabled PowerShell&lt;/a&gt;. It seems that notebooks are so cool that everyone is creating them these days! I was browsing twitter when I saw this tweet.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.NET Notebooks Preview 2 is here! Preview 2 includes 🎉&lt;a class="link" href="https://twitter.com/PowerShell_Team?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@PowerShell_Team&lt;/a&gt;, &lt;a class="link" href="https://twitter.com/nteractio?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@nteractio&lt;/a&gt;, and a new tool. Check out our blog to learn more. Congratulations to &lt;a class="link" href="https://twitter.com/jonsequitur?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@jonsequitur&lt;/a&gt; &lt;a class="link" href="https://twitter.com/colombod?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@colombod&lt;/a&gt; and our entire team&lt;a class="link" href="https://t.co/WqNWQWR3Bo" target="_blank" rel="noopener"
+&gt;https://t.co/WqNWQWR3Bo&lt;/a&gt;&lt;a class="link" href="https://twitter.com/dotnet?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;@dotnet&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/jupyter?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#jupyter&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/PowerShell?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#PowerShell&lt;/a&gt; &lt;a class="link" href="https://twitter.com/hashtag/interactiveprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw" target="_blank" rel="noopener"
+&gt;#interactiveprogramming&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>How to fork a GitHub repository and contribute to an open source project</title><link>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</link><pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/how-to-fork-a-github-repository-and-contribute-to-an-open-source-project/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/CreatePR.png" alt="Featured image of post How to fork a GitHub repository and contribute to an open source project" /&gt;&lt;p&gt;I enjoy maintaining open source GitHub repositories such as &lt;a class="link" href="https://github.com/sqlcollaborative/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; and &lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+&gt;ADSNotebook&lt;/a&gt;. I absolutely love it when people add more functionality to them.&lt;/p&gt;
+&lt;p&gt;To collaborate with a repository in GitHub you need to follow these steps&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/GitHub.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fork the repository into your own GitHub&lt;/li&gt;
+&lt;li&gt;Clone the repository to your local machine&lt;/li&gt;
+&lt;li&gt;Create a new branch for your changes&lt;/li&gt;
+&lt;li&gt;Make some changes and commit them with useful messages&lt;/li&gt;
+&lt;li&gt;Push the changes to your repository&lt;/li&gt;
+&lt;li&gt;Create a Pull Request from your repository back to the original one&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You will need to have &lt;code&gt;git.exe&lt;/code&gt; available which you can download and install from &lt;a class="link" href="https://git-scm.com/downloads" target="_blank" rel="noopener"
+&gt;https://git-scm.com/downloads&lt;/a&gt; if required&lt;/p&gt;</description></item><item><title>Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps</title><link>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</link><pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/fixing-the-failed-to-generate-the-compressed-file-for-module-dotnet.exe-error-when-deploying-to-the-powershell-gallery-using-azure-devops/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-40.png" alt="Featured image of post Fixing the Failed to generate the compressed file for module dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps" /&gt;&lt;h1 id="fixing-the-failed-to-generate-the-compressed-file-for-module-cprogram-filesdotnetdotnetexe-error-when-deploying-to-the-powershell-gallery-using-azure-devops"&gt;Fixing the Failed to generate the compressed file for module C:\Program Files\dotnet\dotnet.exe error when deploying to the PowerShell Gallery using Azure DevOps
+&lt;/h1&gt;&lt;p&gt;The PowerShell module for validating your SQL Server estate &lt;a class="link" href="http://beard.media/dbachecks" target="_blank" rel="noopener"
+&gt;dbachecks&lt;/a&gt; is deployed via &lt;a class="link" href="https://dev.azure.com/sqlcollaborative/dbachecks/_release?_a=releases&amp;amp;view=mine&amp;amp;definitionId=2" target="_blank" rel="noopener"
+&gt;Azure DevOps, you can see how it is working (or not) via this link&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="grrr-automation-for-the-lose"&gt;Grrr Automation for the Lose!
+&lt;/h2&gt;&lt;p&gt;Until recently, this had worked successfully. In the last few weeks I have been receiving errors&lt;/p&gt;</description></item><item><title>Create a PowerShell Notebook for Azure Data Studio with PowerShell</title><link>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</link><pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-a-powershell-notebook-for-azure-data-studio-with-powershell/</guid><description>&lt;p&gt;The latest update to the ADSNotebook PowerShell module &lt;a class="link" href="https://blog.robsewell.com/create-azure-data-studio-sql-notebooks-with-powershell/" target="_blank" rel="noopener"
+&gt;I blogged about here&lt;/a&gt; now enables the creation of PowerShell notebooks with PowerShell.&lt;/p&gt;
+&lt;p&gt;You can install the module with&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Install-Module ADSNotebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you have already installed it you can use&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Update-Module ADSNotebook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the latest release, there is an extra parameter for &lt;code&gt;New-AdsWorkBook&lt;/code&gt; of &lt;code&gt;-Type&lt;/code&gt; which will accept either SQL or PowerShell&lt;/p&gt;
+&lt;h2 id="create-a-powershell-notebook-with-powershell-rob"&gt;Create a PowerShell Notebook with PowerShell Rob
+&lt;/h2&gt;&lt;p&gt;OK!&lt;/p&gt;</description></item><item><title>Create Azure Data Studio SQL Notebooks with PowerShell</title><link>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</link><pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/create-azure-data-studio-sql-notebooks-with-powershell/</guid><description>&lt;p&gt;At PASS Summit today I gave a presentation about SQL Notebooks in Azure Data Studio for the DBA. I demo’d the &lt;a class="link" href="https://www.powershellgallery.com/packages/ADSNotebook" target="_blank" rel="noopener"
+&gt;PowerShell module ADSNotebook&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-32.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/sqlcollaborative/ADSNotebook" target="_blank" rel="noopener"
+&gt;which you can also find on GitHub&lt;/a&gt; (where I will be glad to take PR’s to improve it 🙂 )&lt;/p&gt;
+&lt;p&gt;This module has 3 functions&lt;/p&gt;
+&lt;p&gt;This module contains only 3 commands at present&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Convert-ADSPowerShellForMarkdown&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will create the markdown link for embedding PowerShell code in a Text Cell for a SQL Notebook as described &lt;a class="link" href="https://blog.robsewell.com/powershell-in-sql-notebooks-in-azure-data-studio/" target="_blank" rel="noopener"
+&gt;in this blog post&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

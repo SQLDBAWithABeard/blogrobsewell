@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Change Log on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/change-log/</link><description>Recent content in Change Log on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/change-log/index.xml" rel="self" type="application/rss+xml"/><item><title>Making a Change Log Easier With PowerShell</title><link>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</link><pubDate>Mon, 08 Dec 2014 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/making-a-change-log-easier-with-powershell/</guid><description>&lt;p&gt;Having a Change Log is a good thing. A quick and simple place to find out what has changed on a server and when. This can be invaluable when troubleshooting, matching a change to a symptom especially when assessed alongside your performance counter collection. Here is a simple way to make use of a change log and automate it&lt;/p&gt;
+&lt;p&gt;Create a simple table&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;USE [MDW]
+GO
+CREATE TABLE [dbo].[ChangeLog](
+[ChangeID] [int] IDENTITY(1,1) PRIMARY KEY ,
+[Date] [datetime] NOT NULL,
+[Server] [varchar](50) NOT NULL,
+[UserName] [nvarchar](50) NOT NULL,
+[Change] [nvarchar](max) NOT NULL,
+)
+GO
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can keep this on a central server or create a database on each server, whichever fits your needs best. You can add other columns if you want your information in a different format&lt;/p&gt;</description></item></channel></rss>

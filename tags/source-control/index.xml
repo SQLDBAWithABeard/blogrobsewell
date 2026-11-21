@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Source-Control on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/source-control/</link><description>Recent content in Source-Control on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/source-control/index.xml" rel="self" type="application/rss+xml"/><item><title>Adding a Folder of Scripts to GitHub with Azure Data Studio</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</link><pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github-with-azure-data-studio/</guid><description>&lt;p&gt;In my last post I showed how to &lt;a class="link" href="https://blog.robsewell.com/10501/" target="_blank" rel="noopener"
+&gt;add a folder of scripts to GitHub&lt;/a&gt; using Visual Studio Code.&lt;/p&gt;
+&lt;p&gt;You can do it with Azure Data Studio as well. It’s exactly the same steps!&lt;/p&gt;
+&lt;p&gt;The blog post could end here but read on for some screen shots 😉&lt;/p&gt;
+&lt;p&gt;Follow the previous post for details of setting up a new GitHub account&lt;/p&gt;
+&lt;p&gt;Create a repository in GitHub&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-27.png"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;Open the folder in Azure Data Studio with CTRL K CTRL O (Or File –&amp;gt; Open Folder)&lt;/p&gt;</description></item><item><title>Adding a Folder of Scripts to GitHub</title><link>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</link><pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/adding-a-folder-of-scripts-to-github/</guid><description>&lt;p&gt;Yesterday there was a tweet from Allen White.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://twitter.com/SQLRunr/status/1113862196201758720" target="_blank" rel="noopener"
+&gt;https://twitter.com/SQLRunr/status/1113862196201758720&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Allen wanted to add his scripts folder to source control but didn&amp;rsquo;t have a how to do it handy. So I thought I would write one. Hopefully this will enable someone new to GitHub and to source control get a folder of scripts under source control&lt;/p&gt;
+&lt;h2 id="github-account"&gt;GitHub account
+&lt;/h2&gt;&lt;p&gt;If you do not have a GitHub account go to &lt;a class="link" href="https://github.com" target="_blank" rel="noopener"
+&gt;https://github.com&lt;/a&gt; and create a new account&lt;/p&gt;</description></item></channel></rss>

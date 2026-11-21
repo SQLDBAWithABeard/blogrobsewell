@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Processes on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/processes/</link><description>Recent content in Processes on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 17 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/processes/index.xml" rel="self" type="application/rss+xml"/><item><title>Showing and Killing SQL Server Processes with PowerShell</title><link>https://blog.robsewell.com/blog/showing-and-killing-sql-server-processes-with-powershell/</link><pubDate>Tue, 17 Sep 2013 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/showing-and-killing-sql-server-processes-with-powershell/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Create a Server Object and notice that there is a Method named EnumProcesses by piping it to &lt;code&gt;Get-Member&lt;/code&gt; and then look at the Properties and Methods of EnumProcesses&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;#######################################################################
+#
+# NAME: Show-SQLProcesses.ps1
+# AUTHOR: Rob Sewell http://sqldbawithabeard.com
+# DATE:06/08/2013
+#
+# COMMENTS: Load function for Showing Processes on a SQL Server
+####################################
+Function Show-SQLProcesses ($SQLServer)
+{
+$server = new-object &amp;quot;Microsoft.SqlServer.Management.Smo.Server&amp;quot; $SQLServer
+$Server.EnumProcesses()|Select Spid,BlockingSpid, Login, Host,Status,Program, Command,Database,Cpu,MemUsage |Format-Table -wrap -auto
+$OUTPUT= [System.Windows.Forms.MessageBox]::Show(&amp;quot;Do you want to Kill a process?&amp;quot; , &amp;quot;Question&amp;quot; , 4)
+if ($OUTPUT -eq &amp;quot;YES&amp;quot; )
+{
+$spid = Read-Host &amp;quot;Which SPID?&amp;quot;
+$Server.KillProcess($Spid)
+}
+else
+{
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
