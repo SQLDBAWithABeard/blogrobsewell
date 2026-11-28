@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Joel Bennett on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/joel-bennett/</link><description>Recent content in Joel Bennett on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/joel-bennett/index.xml" rel="self" type="application/rss+xml"/><item><title>Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos</title><link>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/good-bye-import-clixml-use-the-secrets-management-module-for-your-labs-and-demos/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2020/07/image-1.png" alt="Featured image of post Good Bye Import-CliXML – Use the Secrets Management module for your labs and demos" /&gt;&lt;p&gt;Don’t want to read all this? There are two dotnet interactive notebooks here with the relevant information for you to use.&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://beard.media/dotnetnotebooks" target="_blank" rel="noopener"
+&gt;https://beard.media/dotnetnotebooks&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="jaap-is-awesome"&gt;Jaap is awesome
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://pbs.twimg.com/media/DBbP9lHXYAAopb3?format=jpg&amp;amp;name=4096x4096"
+loading="lazy"
+&gt;&lt;/p&gt;
+&lt;p&gt;I have to start here. For the longest time, whenever anyone has asked me how I store my credentials for use in my demos and labs I have always referred them to Jaap Brassers &lt;a class="link" href="https://twitter.com/Jaap_Brasser" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; blog post&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/" target="_blank" rel="noopener"
+&gt;https://www.jaapbrasser.com/quickly-and-securely-storing-your-credentials-powershell/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="joel-is-also-awesome"&gt;Joel is also awesome!
+&lt;/h2&gt;&lt;p&gt;When people wanted a method of storing credentials that didn&amp;rsquo;t involve files on disk I would suggest Joel Bennett’s &lt;a class="link" href="https://twitter.com/jaykul" target="_blank" rel="noopener"
+&gt;t&lt;/a&gt; module BetterCredentials which uses the Windows Credential Manager&lt;/p&gt;</description></item></channel></rss>

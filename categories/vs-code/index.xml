@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VS Code on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/categories/vs-code/</link><description>Recent content in VS Code on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/categories/vs-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Changing to Upper Case in VS Code</title><link>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</link><pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/changing-to-upper-case-in-vs-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2023/uppercase.png" alt="Featured image of post Changing to Upper Case in VS Code" /&gt;&lt;h1 id="now-i-know-this"&gt;Now I know this!
+&lt;/h1&gt;&lt;p&gt;I was using some code that I had written for Azure Pipelines for a Windows agent which had &lt;code&gt;$(System.AgentToken)&lt;/code&gt; as the variable name and all other pre-defined variables were the same PascalCase and separated by &lt;code&gt;.&lt;/code&gt; but the Linux agent needed all upper case and separated by &lt;code&gt;_&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In VS Code &lt;code&gt;CTRL SHIFT P&lt;/code&gt; to open the command pallette and then search for uppercase :-)&lt;/p&gt;
+&lt;div class="video-wrapper"&gt;
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/0Hkh46dnC7Y"
+allowfullscreen
+title="YouTube Video"
+&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;Simples&lt;/p&gt;</description></item><item><title>Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-reusable-code-with-modules-for-deploying-an-azure-sql-server/</guid><description>&lt;img src="https://datasaturdays.com/assets/design/twitter/c.twitter%201r.png" alt="Featured image of post Flexing My Bicep - Reusable code with modules for deploying an Azure SQL Server" /&gt;&lt;h1 id="reusable-code"&gt;Reusable code
+&lt;/h1&gt;&lt;p&gt;We looked at a simple deployment of an Azure SQL Server and a database in the last blog post. You would like to reuse this code though, you will want to create more SQL Instances and SQL databases in the future. With Bicep, you can use modules and parameters to do this.&lt;/p&gt;
+&lt;p&gt;You can create a module for your SQL Instance. I look up &lt;a class="link" href="https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?tabs=bicep?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;the resource information from the documentation&lt;/a&gt; and create a file named SQLInstance.bicep. I put it in a Resources directory.&lt;/p&gt;</description></item><item><title>Invalid Template Deployment with my Bicep</title><link>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</link><pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/invalid-template-deployment-with-my-bicep/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Invalid Template Deployment with my Bicep" /&gt;&lt;h1 id="an-error"&gt;An Error
+&lt;/h1&gt;&lt;p&gt;Did I tear my bicep? No but I got an error. Whilst trying to deploy a network with Bicep using Azure DevOps I received the error&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error: Code=InvalidTemplateDeployment; Message=The template deployment &amp;lsquo;deploy_bicep003_20210505094331&amp;rsquo; is not valid according to the validation procedure. The tracking id is &amp;lsquo;4bdec1fe-915d-4735-a1c1-7b56fbba0dc2&amp;rsquo;. See inner errors for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unfortunately that was all that I had. I had to find the inner error for details&lt;/p&gt;
+&lt;h1 id="try-the-deployment-log-on-the-resource-group"&gt;Try the deployment log on the Resource Group
+&lt;/h1&gt;&lt;p&gt;As I know that the Bicep deployments are logged in Azure under the Resource Groups deployment I looked there first but there were no entries (obviously Rob, there had been no deployment)&lt;/p&gt;</description></item><item><title>Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC</title><link>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</link><pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/flexing-my-bicep-deploy-an-azure-sql-database-intro-to-azure-bicep-iac/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2021/Bicep/xavier-von-erlach-ooR1jY2yFr4-unsplash.jpg" alt="Featured image of post Flexing My Bicep - Deploy an Azure SQL Database -Intro to Azure Bicep IaC" /&gt;&lt;h1 id="starting-working-out"&gt;Starting working out?
+&lt;/h1&gt;&lt;p&gt;It is important to keep a healthy body and mind, especially when my life is so sedentary these days. Getting exercise is good for both. This blog post has nothing to do with exercise though (apart from maybe exercising the mind)&lt;/p&gt;
+&lt;h1 id="project-bicep"&gt;Project Bicep
+&lt;/h1&gt;&lt;p&gt;&lt;a class="link" href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/bicep-overview?WT.mc_id=DP-MVP-5002693" target="_blank" rel="noopener"
+&gt;Bicep&lt;/a&gt; is a language for declaring and deploying Azure Resources. Like &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+&gt;Terraform&lt;/a&gt; it enables you to define your infrastructure as code.&lt;/p&gt;
+&lt;h2 id="why-use-bicep-instead"&gt;WHy use Bicep instead?
+&lt;/h2&gt;&lt;p&gt;I really like being able to control infrastructure with code. I have used &lt;a class="link" href="https://blog.robsewell.com/tags/#terraform" target="_blank" rel="noopener"
+&gt;Terraform to deploy infrastructure&lt;/a&gt; and almost exclusively on Azure. I have created and altered many environments for clients over the past couple of years using Terraform. I have also used ARM templates but found them confusing and unwieldly to use.&lt;/p&gt;</description></item><item><title>My current VS Code Extensions and using a workspace file</title><link>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/my-current-vs-code-extensions-and-using-a-workspace-file/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image-26.png" alt="Featured image of post My current VS Code Extensions and using a workspace file" /&gt;&lt;p&gt;I have been asked a couple of times recently what my Visual Studio Code extensions are at the moment so I thought I would write a quick post and also look at workspaces and how you can enable and disable extensions within them&lt;/p&gt;
+&lt;h2 id="listing-extensions"&gt;Listing Extensions
+&lt;/h2&gt;&lt;p&gt;From the command line you can list your extensions using&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;code --list-extensions
+code-insiders --list-extensions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My list looks like this&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://blog.robsewell.com/assets/uploads/2019/11/image.png?ssl=1" target="_blank" rel="noopener"
+&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2019/11/image.png"
+loading="lazy"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can also see them in the view on the left of default Visual Studio Code and open them with CTRL + SHIFT + X (unless like me you have Snagit installed and it has taken that shortcut&lt;/p&gt;</description></item><item><title>Building Azure SQL Db with Terraform with Visual Studio Code</title><link>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</link><pubDate>Wed, 17 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/building-azure-sql-db-with-terraform-with-visual-studio-code/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2019/04/image-42.png" alt="Featured image of post Building Azure SQL Db with Terraform with Visual Studio Code" /&gt;&lt;p&gt;I have been using &lt;a class="link" href="https://www.terraform.io/" target="_blank" rel="noopener"
+&gt;Terraform&lt;/a&gt; for the last week or so to create some infrastructure and decided to bring that knowledge back to a problem that I and others suffer from – building environments for presentations, all for the sake of doing some learning.&lt;/p&gt;
+&lt;h2 id="what-is-terraform"&gt;What is Terraform?
+&lt;/h2&gt;&lt;p&gt;According to the website&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HashiCorp Terraform enables you to safely and predictably create, change, and improve infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned&lt;/p&gt;</description></item><item><title>Visual Studio Code Live Sharing Set-Up</title><link>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/visual-studio-code-live-sharing-set-up/</guid><description>&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/07-sign-in.png" alt="Featured image of post Visual Studio Code Live Sharing Set-Up" /&gt;&lt;p&gt;There was an &lt;a class="link" href="https://code.visualstudio.com/blogs/2018/05/07/live-share-public-preview" target="_blank" rel="noopener"
+&gt;announcement on the Visual Studio Code blog&lt;/a&gt; about the public preview of Live Share. This enables you to easily collaborate on code by securely sharing your coding session.&lt;/p&gt;
+&lt;p&gt;It is remarkably easy to set up 🙂&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation
+&lt;/h2&gt;&lt;p&gt;Open Visual Studio Code, open the Extensions side bar (CTRL + SHIFT + X)&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/01-open-extensions.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/01-open-extensions.png"
+loading="lazy"
+alt="01 - open extensions"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Search for Live Share&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="assets/uploads/2018/05/02-search.png" &gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2018/05/02-search.png"
+loading="lazy"
+alt="02 - search.png"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click Install and then reload when it has done&lt;/p&gt;</description></item><item><title>Setting the default file type for a new file in VS Code</title><link>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/setting-the-default-file-type-for-a-new-file-in-vs-code/</guid><description>&lt;p&gt;Just a short post today. When you open a new file in VS Code (Using CTRL + N) it opens by default as a plain text file.&lt;/p&gt;
+&lt;p&gt;To change the language for the file use CTRL +K, M.&lt;/p&gt;
+&lt;p&gt;That’s CTRL and K together and then M afterwards separately.&lt;/p&gt;
+&lt;p&gt;then you can choose the language for the file. It looks like this&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.robsewell.com/assets/uploads/2017/04/01-change-language.gif"
+loading="lazy"
+alt="01 - Change language"
+&gt;&lt;/p&gt;
+&lt;p&gt;However, if you just want your new file to open as a particular language every time you can change this in the settings.&lt;/p&gt;</description></item><item><title>Using Twitter with VS Code</title><link>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</link><pubDate>Wed, 19 Apr 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/using-twitter-with-vs-code/</guid><description>&lt;!-- raw HTML omitted --&gt;</description></item><item><title>Running SQL Queries with Visual Studio Code</title><link>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/running-sql-queries-with-visual-studio-code/</guid><description>&lt;p&gt;Reading this blog post by &lt;a class="link" href="http://www.sqlshack.com/introduction-visual-studio-code-dbas/" target="_blank" rel="noopener"
+&gt;Shawn Melton Introduction of Visual Studio Code for DBAs&lt;/a&gt; reminded me that whilst I use Visual Studio Code (which I shall refer to as Code from here on) for writing PowerShell and Markdown and love how easily it interacts with Github I hadn’t tried T-SQL. If you are new to Code (or if you are not) go and read Shawns blog post but here are the steps I took to running T-SQL code using Code&lt;/p&gt;</description></item></channel></rss>

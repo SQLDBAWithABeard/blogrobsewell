@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Psdayuk on Rob Sewell (aka SQL DBA With A Beard)</title><link>https://blog.robsewell.com/tags/psdayuk/</link><description>Recent content in Psdayuk on Rob Sewell (aka SQL DBA With A Beard)</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.robsewell.com/tags/psdayuk/index.xml" rel="self" type="application/rss+xml"/><item><title>Automatically updating the version number in a PowerShell Module – How I do regex</title><link>https://blog.robsewell.com/blog/automatically-updating-the-version-number-in-a-powershell-module-how-i-do-regex/</link><pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate><guid>https://blog.robsewell.com/blog/automatically-updating-the-version-number-in-a-powershell-module-how-i-do-regex/</guid><description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;[version]$Version = [regex]::matches($file, &amp;ldquo;\s&lt;em&gt;ModuleVersion\s=\s&amp;rsquo;(\d&lt;/em&gt;.\d*.\d*)&amp;rsquo;\s*&amp;rdquo;).groups[1].value&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h1 id="use-regex-to-get-the-version-number-and-set-it-as-a-version-datatype"&gt;Use RegEx to get the Version Number and set it as a version datatype
+&lt;/h1&gt;&lt;h1 id="s---between-0-and-many-whitespace"&gt;\s* - between 0 and many whitespace
+&lt;/h1&gt;&lt;h1 id="moduleversion---literal"&gt;ModuleVersion - literal
+&lt;/h1&gt;&lt;h1 id="s---1-whitespace"&gt;\s - 1 whitespace
+&lt;/h1&gt;&lt;h1 id="---literal"&gt;= - literal
+&lt;/h1&gt;&lt;h1 id="s---1-whitespace-1"&gt;\s - 1 whitespace
+&lt;/h1&gt;&lt;h1 id="---literal-1"&gt;&amp;rsquo; - literal
+&lt;/h1&gt;&lt;h1 id="---capture-group"&gt;() - capture Group
+&lt;/h1&gt;&lt;h1 id="d---between-0-and-many-digits"&gt;\d* - between 0 and many digits
+&lt;/h1&gt;&lt;h1 id="---literal-2"&gt;&amp;rsquo; - literal
+&lt;/h1&gt;&lt;h1 id="s-between-0-and-many-whitespace"&gt;\s* between 0 and many whitespace
+&lt;/h1&gt;&lt;p&gt;[version]$Version = [regex]::matches($file, &amp;ldquo;\s&lt;em&gt;ModuleVersion\s=\s&amp;rsquo;(\d&lt;/em&gt;.\d*.\d*)&amp;rsquo;\s*&amp;rdquo;).groups[1].value
+Write-Output &amp;ldquo;Old Version - $Version&amp;rdquo;&lt;/p&gt;</description></item></channel></rss>
